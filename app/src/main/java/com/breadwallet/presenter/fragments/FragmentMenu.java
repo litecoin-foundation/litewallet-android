@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.breadwallet.R.id.menu_listview;
+import static com.breadwallet.R.string.MenuButton_lock;
 
 /**
  * BreadWallet
@@ -133,7 +134,7 @@ public class FragmentMenu extends Fragment {
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.fade_down);
             }
         }));
-        itemList.add(new BRMenuItem(getString(R.string.MenuButton_lock), R.drawable.ic_lock, new View.OnClickListener() {
+        itemList.add(new BRMenuItem(getString(MenuButton_lock), R.drawable.ic_lock, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Activity from = getActivity();
