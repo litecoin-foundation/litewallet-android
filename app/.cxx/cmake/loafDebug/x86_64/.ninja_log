@@ -1,0 +1,23 @@
+# ninja log v5
+0	121	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBase58.c.o	642c35ca91aa239a
+2	136	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBloomFilter.c.o	a8b6a4776e1e7eb7
+1	138	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP39Mnemonic.c.o	1e9ea2387752fdfd
+0	141	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRAddress.c.o	902700f932a938e0
+4	168	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRMerkleBlock.c.o	83c9f2d4ff96588d
+0	174	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP32Sequence.c.o	6b7231a0c195d4e8
+1	232	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP38Key.c.o	6f7c2c13c3c8e640
+138	244	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRSet.c.o	d9c3bc8c28940e05
+174	288	0	CMakeFiles/core-lib.dir/src/main/jni/transition/core.c.o	56430f365333a523
+232	298	0	CMakeFiles/core-lib.dir/src/main/jni/transition/JNIBase58.c.o	f83bb4692e5328fa
+244	316	0	CMakeFiles/core-lib.dir/src/main/jni/transition/JNIBIP32Sequence.c.o	44ef02b35bd6b10c
+288	382	0	CMakeFiles/core-lib.dir/src/main/jni/transition/JNIKey.c.o	c6b500593044e737
+141	422	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRTransaction.c.o	e5cf63614c3842f3
+2	433	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRCrypto.c.o	25ad4365c890a451
+298	444	0	CMakeFiles/core-lib.dir/src/main/jni/transition/PeerManager.c.o	18d55595bacab268
+168	488	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRWallet.c.o	f8c2ea8cfd0ab78
+5	541	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPaymentProtocol.c.o	700435a59fd7362c
+121	747	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPeer.c.o	bf92701a270545fb
+316	758	0	CMakeFiles/core-lib.dir/src/main/jni/transition/wallet.c.o	5adc1bf5f81f366
+3	872	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRKey.c.o	d91744e189a37186
+136	946	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPeerManager.c.o	5006b2ca2069ae8c
+947	992	0	../../../../build/intermediates/cmake/loafDebug/obj/x86_64/libcore-lib.so	5a8fc7ba05f47d79

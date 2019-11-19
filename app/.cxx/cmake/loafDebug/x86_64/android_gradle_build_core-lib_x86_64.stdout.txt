@@ -1,0 +1,72 @@
+[1/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRAddress.c.o
+[2/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBase58.c.o
+[3/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP32Sequence.c.o
+[4/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP38Key.c.o
+[5/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP39Mnemonic.c.o
+[6/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBloomFilter.c.o
+[7/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRCrypto.c.o
+[8/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRKey.c.o
+[9/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRMerkleBlock.c.o
+[10/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPaymentProtocol.c.o
+[11/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPeer.c.o
+[12/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPeerManager.c.o
+[13/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRSet.c.o
+[14/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRTransaction.c.o
+[15/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRWallet.c.o
+[16/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/transition/core.c.o
+[17/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/transition/JNIBase58.c.o
+[18/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/transition/JNIBIP32Sequence.c.o
+[19/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/transition/JNIKey.c.o
+[20/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/transition/PeerManager.c.o
+[21/22] Building C object CMakeFiles/core-lib.dir/src/main/jni/transition/wallet.c.o
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/PeerManager.c:350:15: warning: implicitly declaring library function 'calloc' with type 'void *(unsigned long, unsigned long)' [-Wimplicit-function-declaration]
+    _blocks = calloc(blockCount, sizeof(*_blocks));
+              ^
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/PeerManager.c:350:15: note: include the header <stdlib.h> or explicitly provide a declaration for 'calloc'
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/PeerManager.c:486:9: warning: implicit declaration of function 'free' is invalid in C99 [-Wimplicit-function-declaration]
+        free(_blocks);
+        ^
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/PeerManager.c:491:9: warning: implicit declaration of function 'free' is invalid in C99 [-Wimplicit-function-declaration]
+        free(_peers);
+        ^
+3 warnings generated.
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:259:13: warning: implicit declaration of function 'free' is invalid in C99 [-Wimplicit-function-declaration]
+            free(_transactions);
+            ^
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:332:21: warning: implicitly declaring library function 'calloc' with type 'void *(unsigned long, unsigned long)' [-Wimplicit-function-declaration]
+    _transactions = calloc((size_t) txCount, sizeof(*_transactions));
+                    ^
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:332:21: note: include the header <stdlib.h> or explicitly provide a declaration for 'calloc'
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:453:9: warning: implicit declaration of function 'free' is invalid in C99 [-Wimplicit-function-declaration]
+        free(transactions_sqlite);
+        ^
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:554:20: warning: implicitly declaring library function 'malloc' with type 'void *(unsigned long)' [-Wimplicit-function-declaration]
+    uint8_t *buf = malloc(len);
+                   ^
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:554:20: note: include the header <stdlib.h> or explicitly provide a declaration for 'malloc'
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:561:5: warning: implicit declaration of function 'free' is invalid in C99 [-Wimplicit-function-declaration]
+    free(buf);
+    ^
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:594:73: warning: format specifies type 'long long' but the argument has type 'jlong' (aka 'long') [-Wformat]
+                        "bitcoinAmount: localAmount: %lli, price: %lf", localAmount, price);
+                                                     ~~~~               ^~~~~~~~~~~
+                                                     %li
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:602:66: warning: format specifies type 'long long' but the argument has type 'jlong' (aka 'long') [-Wformat]
+                        "localAmount: amount: %lli, price: %lf", amount, price);
+                                              ~~~~               ^~~~~~
+                                              %li
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:710:33: warning: format specifies type 'long long' but the argument has type 'jlong' (aka 'long') [-Wformat]
+                        ignore, fee);
+                                ^~~
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:905:11: warning: initializing 'char *' with an expression of type 'const char [65]' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+    char *result = u256_hex_encode(sha256Hash);
+          ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c:1086:5: warning: implicit declaration of function 'free' is invalid in C99 [-Wimplicit-function-declaration]
+    free(buf);
+    ^
+10 warnings generated.
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRKey.c:51:32: warning: unknown warning group '-Wmaybe-uninitialized', ignored [-Wunknown-warning-option]
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+                               ^
+1 warning generated.
+[22/22] Linking C shared library ../../../../build/intermediates/cmake/loafDebug/obj/x86_64/libcore-lib.so

@@ -1,0 +1,161 @@
+
+{
+	"buildFiles" : 
+	[
+		"/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/CMakeLists.txt"
+	],
+	"cFileExtensions" : [ "c" ],
+	"cleanCommands" : 
+	[
+		"/Users/grunt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86 --target clean"
+	],
+	"libraries" : 
+	{
+		"core-lib-Debug-x86" : 
+		{
+			"abi" : "x86",
+			"artifactName" : "core-lib",
+			"buildCommand" : "/Users/grunt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86 --target core-lib",
+			"buildType" : "debug",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRAddress.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRBase58.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRBIP32Sequence.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRBIP38Key.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRBIP39Mnemonic.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRBloomFilter.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRCrypto.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRKey.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRMerkleBlock.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRPaymentProtocol.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRPeer.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRPeerManager.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRSet.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRTransaction.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/loafwallet-core/BRWallet.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/core.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/JNIBase58.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/JNIBIP32Sequence.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/JNIKey.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/PeerManager.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				},
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_lib_EXPORTS -I../../../../src/main/jni/loafwallet-core -I../../../../src/main/secp/secp256k1/include -I../../../../src/main/secp/secp256k1/src -I../../../../src/main/secp/secp256k1 -I../../../../src/main/secp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -DBITCOIN_TESTNET=0 -DANDROID_STL=gnustl_static -DANDROID_TOOLCHAIN=clang -O0 -fno-limit-debug-info  -fPIC      -c ",
+					"src" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/src/main/jni/transition/wallet.c",
+					"workingDirectory" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafDebug/x86"
+				}
+			],
+			"output" : "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/build/intermediates/cmake/loafDebug/obj/x86/libcore-lib.so",
+			"toolchain" : "17759019855300142287"
+		}
+	},
+	"toolchains" : 
+	{
+		"17759019855300142287" : 
+		{
+			"cCompilerExecutable" : "/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+			"cppCompilerExecutable" : "/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+		}
+	}
+}
