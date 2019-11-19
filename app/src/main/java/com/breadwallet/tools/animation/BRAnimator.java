@@ -31,6 +31,7 @@ import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.TxItem;
 import com.breadwallet.presenter.fragments.FragmentGreetings;
 import com.breadwallet.presenter.fragments.FragmentMenu;
+import com.breadwallet.presenter.fragments.FragmentBuy;
 import com.breadwallet.presenter.fragments.FragmentSignal;
 import com.breadwallet.presenter.fragments.FragmentReceive;
 import com.breadwallet.presenter.fragments.FragmentRequestAmount;
@@ -79,6 +80,8 @@ public class BRAnimator {
     public static float t1Size;
     public static float t2Size;
     public static boolean supportIsShowing;
+    public static boolean buyIsShowing;
+
 
     public static void showBreadSignal(Activity activity, String title, String iconDescription, int drawableId, BROnSignalCompletion completion) {
         fragmentSignal = new FragmentSignal();
@@ -117,6 +120,8 @@ public class BRAnimator {
                 showReceiveFragment(app, true);
             } else if (tag.equalsIgnoreCase(FragmentRequestAmount.class.getName())) {
                 showRequestFragment(app, BRSharedPrefs.getReceiveAddress(app));
+            } else if (tag.equalsIgnoreCase(FragmentBuy.class.getName())) {
+                showBuyFragment(app);
             } else if (tag.equalsIgnoreCase(FragmentMenu.class.getName())) {
                 showMenuFragment(app);
             } else {
@@ -154,6 +159,36 @@ public class BRAnimator {
                     .setCustomAnimations(0, 0, 0, R.animator.plain_300)
                     .add(android.R.id.content, fragmentSend, FragmentSend.class.getName())
                     .addToBackStack(FragmentSend.class.getName()).commit();
+        } finally {
+
+        }
+
+    }
+
+    public static void showBuyFragment(Activity app, String articleId) {
+        if (buyIsShowing) return;
+        buyIsShowing = true;
+        if (app == null) {
+            Log.e(TAG, "showBuyFragment: app is null");
+            return;
+        }
+        FragmentBuy fragmentBuy = (FragmentBuy) app.getFragmentManager().findFragmentByTag(FragmentBuy.class.getName());
+        if (fragmentBuy != null && fragmentBuy.isAdded()) {
+            app.getFragmentManager().popBackStack();
+            return;
+        }
+        try {
+            FragmentBuy = new FragmentBuy();
+            if (articleId != null && !articleId.isEmpty()) {
+                Bundle bundle = new Bundle();
+                bundle.putString("articleId", articleId);
+                FragmentBuy.setArguments(bundle);
+            }
+            app.getFragmentManager().beginTransaction()
+                    .setCustomAnimations(0, 0, 0, R.animator.plain_300)
+                    .add(android.R.id.content, FragmentBuy, FragmentSend.class.getName())// is this needed here?
+                    .addToBackStack(FragmentSend.class.getName()).commit();
+
         } finally {
 
         }
@@ -330,6 +365,19 @@ public class BRAnimator {
                 .setCustomAnimations(0, 0, 0, R.animator.plain_300)
                 .add(android.R.id.content, fragmentReceive, FragmentReceive.class.getName())
                 .addToBackStack(FragmentReceive.class.getName()).commit();
+
+    }
+
+    public static void showBuyFragment(Activity app) {
+        if (app == null) {
+            Log.e(TAG, "showBuyFragment: app is null");
+            return;
+        }
+        FragmentTransaction transaction = app.getFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
+        transaction.add(android.R.id.content, new FragmentBuy(), FragmentBuy.class.getName());
+        transaction.addToBackStack(FragmentBuy.class.getName());
+        transaction.commit();
 
     }
 
