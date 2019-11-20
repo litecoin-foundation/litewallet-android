@@ -178,15 +178,15 @@ public class BRAnimator {
             return;
         }
         try {
-            FragmentBuy = new FragmentBuy();
+            fragmentBuy = new FragmentBuy();
             if (articleId != null && !articleId.isEmpty()) {
                 Bundle bundle = new Bundle();
                 bundle.putString("articleId", articleId);
-                FragmentBuy.setArguments(bundle);
+                fragmentBuy.setArguments(bundle);
             }
             app.getFragmentManager().beginTransaction()
                     .setCustomAnimations(0, 0, 0, R.animator.plain_300)
-                    .add(android.R.id.content, FragmentBuy, FragmentSend.class.getName())// is this needed here?
+                    .add(android.R.id.content, fragmentBuy, FragmentSend.class.getName())// is this needed here?
                     .addToBackStack(FragmentSend.class.getName()).commit();
 
         } finally {

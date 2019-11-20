@@ -30,6 +30,7 @@ import com.platform.HTTPServer;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import static com.platform.HTTPServer.URL_BUY;
 import static com.platform.HTTPServer.URL_SUPPORT;
 
 
@@ -105,8 +106,8 @@ public class FragmentBuy extends Fragment {
             }
         });
 
-        theUrl = URL_SUPPORT;
-        HTTPServer.mode = HTTPServer.ServerMode.SUPPORT;
+        theUrl = URL_BUY;
+        HTTPServer.mode = HTTPServer.ServerMode.BUY;
         String articleId = getArguments() == null ? null : getArguments().getString("articleId");
         if (Utils.isNullOrEmpty(theUrl)) throw new IllegalArgumentException("No url extra!");
 
@@ -188,7 +189,7 @@ public class FragmentBuy extends Fragment {
     public void onPause() {
         super.onPause();
         Utils.hideKeyboard(getActivity());
-        BRAnimator.supportIsShowing = false;
+        BRAnimator.buyIsShowing = false;
     }
 
 }

@@ -110,9 +110,11 @@
   <string name="Button.receive">receive</string>
   <!-- send button -->
   <string name="Button.send">send</string>
+  <!-- buy button -->
+  <string name="Button.buy">buy</string>
   <!-- Settings button label -->
   <string name="Button.settings">Settings</string>
-  <!-- Settings button label -->
+  <!-- Submit button label -->
   <string name="Button.submit">Submit</string>
   <!-- Yes button -->
   <string name="Button.yes">Yes</string>

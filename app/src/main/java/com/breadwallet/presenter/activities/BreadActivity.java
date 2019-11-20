@@ -88,7 +88,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
     private LinearLayout sendButton;
     private LinearLayout receiveButton;
+    private LinearLayout buyButton;
     private LinearLayout menuButton;
+
     public static final Point screenParametersPoint = new Point();
 
     private InternetManager mConnectionReceiver;
@@ -210,6 +212,14 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
                 BRAnimator.showReceiveFragment(BreadActivity.this, true);
+            }
+        });
+
+        buyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!BRAnimator.isClickAllowed()) return;
+                BRAnimator.showBuyFragment(BreadActivity.this);
             }
         });
 
@@ -385,6 +395,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         receiveButton = (LinearLayout) findViewById(R.id.receive_layout);
         manageText = (TextView) findViewById(R.id.manage_text);
 //        walletName = (TextView) findViewById(R.id.wallet_name_text);
+        buyButton = (LinearLayout) findViewById(R.id.buy_layout);
         menuButton = (LinearLayout) findViewById(R.id.menu_layout);
         primaryPrice = (TextView) findViewById(R.id.primary_price);
         secondaryPrice = (TextView) findViewById(R.id.secondary_price);
