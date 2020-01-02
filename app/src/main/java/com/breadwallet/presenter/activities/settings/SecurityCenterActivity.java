@@ -143,7 +143,7 @@ public class SecurityCenterActivity extends BRActivity {
 
         @Override
         public int getCount() {
-            return items == null ? 0 : items.size();
+            return (items == null) ? 0 : items.size();
         }
     }
 
@@ -166,10 +166,11 @@ public class SecurityCenterActivity extends BRActivity {
             }
         }));
 
-        int resId = Utils.isFingerprintEnrolled(SecurityCenterActivity.this)
-                && BRSharedPrefs.getUseFingerprint(SecurityCenterActivity.this)
-                ? R.drawable.ic_check_mark_blue
-                : R.drawable.ic_check_mark_grey;
+        int resId;
+        if (Utils.isFingerprintEnrolled(SecurityCenterActivity.this)
+                && BRSharedPrefs.getUseFingerprint(SecurityCenterActivity.this))
+            resId = R.drawable.ic_check_mark_blue;
+        else resId = R.drawable.ic_check_mark_grey;
 
         if (Utils.isFingerprintAvailable(this)) {
             itemList.add(new BRSecurityCenterItem(getString(R.string.SecurityCenter_touchIdTitle_android), getString(R.string.SecurityCenter_touchIdDescription),
