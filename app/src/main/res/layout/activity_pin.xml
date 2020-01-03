@@ -6,7 +6,7 @@
     android:id="@+id/activity_pit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bread_gradient"
+    android:background="@color/litecoin_litewallet_blue"
     tools:context="com.breadwallet.presenter.activities.LoginActivity">
 
     <ImageView
