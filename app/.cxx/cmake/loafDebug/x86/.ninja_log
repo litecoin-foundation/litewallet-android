@@ -1,4 +1,5 @@
 # ninja log v5
+<<<<<<< HEAD
 1	167	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBase58.c.o	8657a31ed5b6d6c7
 2	170	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP39Mnemonic.c.o	54ebce5afd9677c8
 1	262	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP32Sequence.c.o	44ce7d284ec8a001
@@ -21,3 +22,27 @@
 7	1678	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRKey.c.o	175fe554ed9d0916
 170	1689	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPeerManager.c.o	23c05c2a0639cd81
 1690	1763	0	../../../../build/intermediates/cmake/loafDebug/obj/x86/libcore-lib.so	a5b2159eee31248
+=======
+4	498	0	CMakeFiles/core-lib.dir/src/main/jni/transition/JNIBase58.c.o	2aca38adffa08a76
+5	501	0	CMakeFiles/core-lib.dir/src/main/jni/transition/JNIBIP32Sequence.c.o	f9f1d241a1ced97e
+17	519	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBase58.c.o	8657a31ed5b6d6c7
+7	528	0	CMakeFiles/core-lib.dir/src/main/jni/transition/JNIKey.c.o	e73573d5dacb077a
+18	569	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP32Sequence.c.o	44ce7d284ec8a001
+499	591	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP39Mnemonic.c.o	54ebce5afd9677c8
+15	631	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRAddress.c.o	b5e7b28124cf5e91
+2	646	0	CMakeFiles/core-lib.dir/src/main/jni/transition/core.c.o	d0673274b91cb73
+501	661	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBloomFilter.c.o	c49fa4056b49e8eb
+20	721	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP38Key.c.o	f4218446d392c1f4
+662	836	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRSet.c.o	874485afc0f3a173
+10	843	0	CMakeFiles/core-lib.dir/src/main/jni/transition/PeerManager.c.o	8422e15882a2f27b
+569	852	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRMerkleBlock.c.o	aa8db2365be01a56
+721	1187	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRTransaction.c.o	5284c89b13f42917
+519	1245	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRCrypto.c.o	add9def8995726b
+836	1421	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRWallet.c.o	ea2ac2c15b53e159
+591	1509	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPaymentProtocol.c.o	596de397cdf3018f
+13	1691	0	CMakeFiles/core-lib.dir/src/main/jni/transition/wallet.c.o	fe7d98a2ef7427d8
+632	1950	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPeer.c.o	74c8adf297a40b19
+528	2312	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRKey.c.o	175fe554ed9d0916
+646	2314	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPeerManager.c.o	23c05c2a0639cd81
+2314	2388	0	../../../../build/intermediates/cmake/loafDebug/obj/x86/libcore-lib.so	a5b2159eee31248
+>>>>>>> b0592e90... replaced logo with new logo and added litewallet blue and removed some gradient views
