@@ -44,7 +44,6 @@ public class AboutActivity extends BRActivity {
         setContentView(R.layout.activity_about);
 
         infoText = (TextView) findViewById(R.id.info_text);
-//        termsText = (TextView) findViewById(R.id.terms_text);
         policyText = (TextView) findViewById(R.id.policy_text);
 
         PackageInfo pInfo = null;
