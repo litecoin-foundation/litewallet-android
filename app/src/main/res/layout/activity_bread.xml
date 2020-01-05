@@ -31,7 +31,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/bread_bar"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="110dp"
                 android:background="@color/litecoin_litewallet_blue"
                 android:clipChildren="false"
                 android:clipToPadding="false"
@@ -47,7 +47,7 @@
                     android:layout_height="match_parent"
                     android:animateLayoutChanges="true"
                     android:clipChildren="false"
-                    android:clipToPadding="false">  
+                    android:clipToPadding="false">
 
                     <com.breadwallet.presenter.customviews.BRText
                         android:id="@+id/primary_price"
