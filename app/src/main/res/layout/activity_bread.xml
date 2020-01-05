@@ -47,21 +47,7 @@
                     android:layout_height="match_parent"
                     android:animateLayoutChanges="true"
                     android:clipChildren="false"
-                    android:clipToPadding="false">
-
-                    <ImageView
-                        android:id="@+id/wallet_name_text"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:src="@drawable/ltc_logo"
-                        android:textColor="@color/white"
-                        android:textSize="36sp"
-                        android:textStyle="bold"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
+                    android:clipToPadding="false">  
 
                     <com.breadwallet.presenter.customviews.BRText
                         android:id="@+id/primary_price"
