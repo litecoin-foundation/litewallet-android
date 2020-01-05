@@ -4,6 +4,7 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import com.breadwallet.wallet.BRWalletManager;
 import com.platform.APIClient;
 
 
+import static com.breadwallet.R.color.litecoin_silver;
 import static com.breadwallet.R.color.white;
 import static com.breadwallet.tools.util.BRConstants.PLATFORM_ON;
 import static com.breadwallet.tools.util.BRConstants.SCANNER_REQUEST;
@@ -87,6 +89,16 @@ public class LoginActivity extends BRActivity {
             return;
         }
 
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        int verCode;
+        verCode = pInfo != null ? pInfo.versionCode : 0;
+
+
         if (BRKeyStore.getPinCode(this).length() == 4) pinLimit = 4;
 
         keyboard = (BRKeyboard) findViewById(R.id.brkeyboard);
@@ -111,10 +123,9 @@ public class LoginActivity extends BRActivity {
                 handleClick(key);
             }
         });
-        keyboard.setBRButtonBackgroundResId(R.drawable.keyboard_trans_button);
         keyboard.setBRButtonTextColor(R.color.white);
         keyboard.setShowDot(false);
-        keyboard.setBreadground(getDrawable(R.drawable.bread_gradient));
+
         keyboard.setCustomButtonBackgroundColor(10, getColor(android.R.color.transparent));
         keyboard.setDeleteImage(getDrawable(R.drawable.ic_delete_white));
 
