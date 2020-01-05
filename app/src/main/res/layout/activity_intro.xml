@@ -14,12 +14,26 @@
         android:layout_height="64dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="96dp"
-
         android:layout_marginRight="8dp"
         android:src="@drawable/ltc_logo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.breadwallet.presenter.customviews.BRText
+        android:id="@+id/version_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/About.appVersion"
+        android:textColor="@color/white_trans"
+        android:textSize="@dimen/sub_header"
+        app:customTFont="CircularPro-Book.otf"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BRText"
+        tools:layout_editor_absoluteY="196dp" />
 
     <com.breadwallet.presenter.customviews.BRButton
         android:id="@+id/button_new_wallet"
@@ -70,19 +84,4 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
-    <com.breadwallet.presenter.customviews.BRText
-        android:id="@+id/version_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/About.appVersion"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sub_header"
-        app:customTFont="CircularPro-Book.otf"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BRText"
-        tools:layout_editor_absoluteY="196dp" />
-
 </com.breadwallet.presenter.customviews.BRLockScreenConstraintLayout>
