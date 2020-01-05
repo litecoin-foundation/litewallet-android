@@ -7,7 +7,7 @@
   <!-- About screen footer -->
   <string name="About.footer">Made by the global LoafWallet team. Version %1$s</string>
   <!-- About app version -->
-  <string name="About.appVersion">v%1$s</string>
+  <string name="About.appVersion">%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">Privacy Policy</string>
   <!-- About screen reddit label -->

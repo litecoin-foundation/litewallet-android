@@ -2,6 +2,8 @@
 package com.breadwallet.presenter.activities.intro;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +34,7 @@ import com.jniwrappers.BRKey;
 import com.platform.APIClient;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 
 /**
@@ -100,7 +103,15 @@ public class IntroActivity extends BRActivity implements Serializable {
         introActivity = this;
 
         getWindowManager().getDefaultDisplay().getSize(screenParametersPoint);
-        versionText.setText("frfrfrffrfrffrrfrf");
+
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        String verName = pInfo != null ? pInfo.versionName : " ";
+        versionText.setText(String.format(Locale.getDefault(), getString(R.string.About_appVersion), verName));
 
         if (Utils.isEmulatorOrDebug(this))
             Utils.printPhoneSpecs();
