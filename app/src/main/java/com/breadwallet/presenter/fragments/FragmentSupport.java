@@ -4,8 +4,8 @@ import android.app.Fragment;
 import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.webkit.ConsoleMessage;
 import android.webkit.JsResult;
-import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -26,9 +25,6 @@ import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.SlideDetector;
 import com.breadwallet.tools.util.Utils;
 import com.platform.HTTPServer;
-
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import static com.platform.HTTPServer.URL_SUPPORT;
 

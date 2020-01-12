@@ -2,18 +2,16 @@ package com.breadwallet.presenter.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
-import android.support.transition.AutoTransition;
-import android.support.transition.TransitionManager;
-import android.text.Editable;
-import android.text.TextWatcher;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.transition.AutoTransition;
+import androidx.transition.TransitionManager;
+
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -29,10 +27,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.breadwallet.R;
-import com.breadwallet.presenter.activities.settings.WebViewActivity;
 import com.breadwallet.presenter.customviews.BRButton;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.customviews.BRKeyboard;
@@ -224,30 +220,30 @@ public class FragmentSend extends Fragment {
 
                     AutoTransition tr = new AutoTransition();
                     tr.setInterpolator(new OvershootInterpolator());
-                    tr.addListener(new android.support.transition.Transition.TransitionListener() {
+                    tr.addListener(new androidx.transition.Transition.TransitionListener() {
                         @Override
-                        public void onTransitionStart(@NonNull android.support.transition.Transition transition) {
+                        public void onTransitionStart(@NonNull androidx.transition.Transition transition) {
 
                         }
 
                         @Override
-                        public void onTransitionEnd(@NonNull android.support.transition.Transition transition) {
+                        public void onTransitionEnd(@NonNull androidx.transition.Transition transition) {
                             amountEdit.requestLayout();
                             amountEdit.animate().setDuration(100).scaleX(scaleX);
                         }
 
                         @Override
-                        public void onTransitionCancel(@NonNull android.support.transition.Transition transition) {
+                        public void onTransitionCancel(@NonNull androidx.transition.Transition transition) {
 
                         }
 
                         @Override
-                        public void onTransitionPause(@NonNull android.support.transition.Transition transition) {
+                        public void onTransitionPause(@NonNull androidx.transition.Transition transition) {
 
                         }
 
                         @Override
-                        public void onTransitionResume(@NonNull android.support.transition.Transition transition) {
+                        public void onTransitionResume(@NonNull androidx.transition.Transition transition) {
 
                         }
                     });
