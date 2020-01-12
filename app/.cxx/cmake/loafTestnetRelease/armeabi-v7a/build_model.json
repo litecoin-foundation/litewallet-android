@@ -1,0 +1,76 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android",
+      "sdkFolder": "/Users/grunt/Library/Android/sdk",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/build/intermediates",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app",
+      "makeFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "compilerSettingsCacheFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/.cxx",
+      "cxxFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx",
+      "ndkFolder": "/Users/grunt/Library/Android/sdk/ndk/20.1.5948944",
+      "ndkVersion": "20.1.5948944",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [
+      "-DANDROID_TOOLCHAIN\u003dclang"
+    ],
+    "cFlagList": [
+      "-DBITCOIN_TESTNET\u003d1"
+    ],
+    "cppFlagsList": [],
+    "variantName": "loafTestnetRelease",
+    "soFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/build/intermediates/cmake/loafTestnetRelease/lib",
+    "objFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/build/intermediates/cmake/loafTestnetRelease/obj",
+    "jsonFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetRelease",
+    "gradleBuildOutputFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafTestnetRelease",
+    "isDebuggableEnabled": false,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": [
+      "core-lib"
+    ]
+  },
+  "abi": "ARMEABI_V7A",
+  "abiPlatformVersion": 23,
+  "cxxBuildFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetRelease/armeabi-v7a",
+  "jsonFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetRelease/armeabi-v7a/android_gradle_build.json",
+  "gradleBuildOutputFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafTestnetRelease/armeabi-v7a",
+  "objFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/build/intermediates/cmake/loafTestnetRelease/obj/armeabi-v7a",
+  "buildCommandFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetRelease/armeabi-v7a/build_command.txt",
+  "buildOutputFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetRelease/armeabi-v7a/build_output.txt",
+  "modelOutputFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetRelease/armeabi-v7a/build_model.json",
+  "cmake": {
+    "cmakeListsWrapperFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafTestnetRelease/armeabi-v7a/CMakeLists.txt",
+    "toolchainWrapperFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafTestnetRelease/armeabi-v7a/android_gradle_build.toolchain.cmake",
+    "buildGenerationStateFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafTestnetRelease/armeabi-v7a/build_generation_state.json",
+    "cacheKeyFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafTestnetRelease/armeabi-v7a/compiler_cache_key.json",
+    "compilerCacheUseFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafTestnetRelease/armeabi-v7a/compiler_cache_use.json",
+    "compilerCacheWriteFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafTestnetRelease/armeabi-v7a/compiler_cache_write.json",
+    "toolchainSettingsFromCacheFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafTestnetRelease/armeabi-v7a/compiler_settings_cache.cmake",
+    "cmakeWrappingBaseFolder": "."
+  },
+  "jsonGenerationLoggingRecordFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetRelease/armeabi-v7a/json_generation_record.json",
+  "compileCommandsJsonFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetRelease/armeabi-v7a/compile_commands.json"
+}
