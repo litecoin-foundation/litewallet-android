@@ -1,0 +1,3 @@
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafRelease/x86/CMakeFiles/edit_cache.dir
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafRelease/x86/CMakeFiles/rebuild_cache.dir
+/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafRelease/x86/CMakeFiles/core-lib.dir

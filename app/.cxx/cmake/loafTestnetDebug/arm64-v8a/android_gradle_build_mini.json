@@ -1,0 +1,16 @@
+{
+  "buildFiles": [
+    "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/grunt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetDebug/arm64-v8a --target clean"
+  ],
+  "libraries": {
+    "core-lib-Debug-arm64-v8a": {
+      "artifactName": "core-lib",
+      "buildCommand": "/Users/grunt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetDebug/arm64-v8a --target core-lib",
+      "abi": "arm64-v8a",
+      "output": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/build/intermediates/cmake/loafTestnetDebug/obj/arm64-v8a/libcore-lib.so"
+    }
+  }
+}

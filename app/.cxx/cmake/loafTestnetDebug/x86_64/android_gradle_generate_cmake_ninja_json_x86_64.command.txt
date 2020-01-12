@@ -1,0 +1,16 @@
+Executable : /Users/grunt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake
+arguments : 
+-H/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app
+-B/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetDebug/x86_64
+-DANDROID_ABI=x86_64
+-DANDROID_PLATFORM=android-23
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/build/intermediates/cmake/loafTestnetDebug/obj/x86_64
+-DCMAKE_BUILD_TYPE=Debug
+-DANDROID_NDK=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944
+-DCMAKE_C_FLAGS=-DBITCOIN_TESTNET=1
+-DCMAKE_TOOLCHAIN_FILE=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944/build/cmake/android.toolchain.cmake
+-DCMAKE_MAKE_PROGRAM=/Users/grunt/Library/Android/sdk/cmake/3.6.4111459/bin/ninja
+-GAndroid Gradle - Ninja
+-DANDROID_TOOLCHAIN=clang
+jvmArgs : 
+
