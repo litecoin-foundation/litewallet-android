@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion = 26
-    buildToolsVersion = '26.0.3'
     defaultConfig {
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
@@ -162,5 +161,5 @@ dependencies {
     implementation 'androidx.test:rules:1.1.1'
     implementation 'junit:junit:4.12'
     implementation 'androidx.test.espresso:espresso-core:3.1.0'
-    androidTestCompile 'tools.fastlane:screengrab:1.1.0'
+
 }
