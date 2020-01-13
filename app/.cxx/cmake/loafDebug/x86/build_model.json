@@ -5,6 +5,7 @@
       "sdkFolder": "/Users/grunt/Library/Android/sdk",
       "isNativeCompilerSettingsCacheEnabled": false,
       "isBuildOnlyTargetAbiEnabled": true,
+      "ideBuildTargetAbi": "x86",
       "splitsAbiFilterSet": [],
       "intermediatesFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/build/intermediates",
       "gradleModulePathName": ":app",
@@ -43,10 +44,7 @@
     "gradleBuildOutputFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafDebug",
     "isDebuggableEnabled": true,
     "validAbiList": [
-      "ARMEABI_V7A",
-      "ARM64_V8A",
-      "X86",
-      "X86_64"
+      "X86"
     ],
     "buildTargetSet": [
       "core-lib"
