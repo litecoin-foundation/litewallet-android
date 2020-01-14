@@ -233,7 +233,7 @@
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Manage Wallet</string>
   <!-- Buy litecoin title -->
-  <string name="MenuButton.buy">Buy Litecoin</string>
+  <string name="MenuButton.buy">Buy</string>
   <!-- Menu button title -->
   <string name="MenuButton.lock">Lock Wallet</string>
   <!-- Menu button title -->

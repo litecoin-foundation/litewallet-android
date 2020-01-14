@@ -58,7 +58,6 @@ import java.util.Date;
 public class FragmentBuy extends Fragment {
     private static final String TAG = FragmentBuy.class.getName();
     public LinearLayout backgroundLayout;
-    public CardView signalLayout;
     WebView webView;
     String baseUrl;
     public static boolean appVisible = false;
@@ -70,12 +69,6 @@ public class FragmentBuy extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_buy, container, false);
         backgroundLayout = (LinearLayout) rootView.findViewById(R.id.background_layout);
-//        signalLayout = (CardView) rootView.findViewById(R.id.signal_layout);
-//
-//        signalLayout.setOnTouchListener(new SlideDetector(getContext(), signalLayout));
-//
-//        signalLayout.setLayoutTransition(BRAnimator.getDefaultTransition());
-
         webView = (WebView) rootView.findViewById(R.id.web_view);
 //https://www.tanelikorri.com/tutorial/android/communication-between-application-and-webview/
         webView.setWebChromeClient(new BRWebChromeClient());
