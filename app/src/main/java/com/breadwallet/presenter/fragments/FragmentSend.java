@@ -91,12 +91,14 @@ public class FragmentSend extends Fragment {
     private Button scan;
     private Button paste;
     private Button send;
+    private Button donate;
     private EditText commentEdit;
     private StringBuilder amountBuilder;
     private TextView isoText;
     private EditText amountEdit;
     private TextView balanceText;
     private TextView feeText;
+    private TextView donateText;
     private ImageView edit;
     private long curBalance;
     private String selectedIso;
@@ -134,10 +136,12 @@ public class FragmentSend extends Fragment {
         scan = (Button) rootView.findViewById(R.id.scan);
         paste = (Button) rootView.findViewById(R.id.paste_button);
         send = (Button) rootView.findViewById(R.id.send_button);
+        donate = (Button) rootView.findViewById(R.id.donate_button);
         commentEdit = (EditText) rootView.findViewById(R.id.comment_edit);
         amountEdit = (EditText) rootView.findViewById(R.id.amount_edit);
         balanceText = (TextView) rootView.findViewById(R.id.balance_text);
         feeText = (TextView) rootView.findViewById(R.id.fee_text);
+        donateText = (TextView) rootView.findViewById(R.id.donateLabel);
         edit = (ImageView) rootView.findViewById(R.id.edit);
         isoButton = (Button) rootView.findViewById(R.id.iso_button);
         keyboardLayout = (LinearLayout) rootView.findViewById(R.id.keyboard_layout);
@@ -157,8 +161,16 @@ public class FragmentSend extends Fragment {
         isoText.setTextSize(18);
         isoText.setTextColor(getContext().getColor(R.color.light_gray));
         isoText.requestLayout();
-        signalLayout.setOnTouchListener(new SlideDetector(getContext(), signalLayout));
 
+//iOS Code imported to embed the donation amount
+//        if let rate  = store.state.currentRate, store.state.isLtcSwapped {
+//            buttonText = String(format:"%.2f", rate.rate * kDonationAmountInDouble) + " \(rate.code)(\(rate.currencySymbol))"
+//        } else {
+//            buttonText = "\(kDonationAmountInDouble) "  + S.Symbols.currencyButtonTitle(maxDigits: store.state.maxDigits)
+//        }
+
+
+        signalLayout.setOnTouchListener(new SlideDetector(getContext(), signalLayout));
         signalLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,6 +223,7 @@ public class FragmentSend extends Fragment {
                     amountEdit.setTextSize(24);
                     balanceText.setVisibility(View.VISIBLE);
                     feeText.setVisibility(View.VISIBLE);
+                    donateText.setVisibility(View.VISIBLE);
                     edit.setVisibility(View.VISIBLE);
                     isoText.setTextColor(getContext().getColor(R.color.almost_black));
                     isoText.setText(BRCurrency.getSymbolByIso(getActivity(), selectedIso));
