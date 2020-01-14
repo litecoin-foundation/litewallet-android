@@ -235,7 +235,7 @@
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Administrer pung</string>
   <!-- Buy bitcoin title -->
-  <string name="MenuButton.buy">Køb Litecoin</string>
+  <string name="MenuButton.buy">Køb</string>
   <!-- Menu button title -->
   <string name="MenuButton.lock">Lås pung</string>
   <!-- Menu button title -->
