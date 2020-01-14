@@ -21,7 +21,7 @@ ANDROID_ABI:UNINITIALIZED=x86
 ANDROID_NDK:UNINITIALIZED=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944
 
 //No help, variable specified on the command line.
-ANDROID_PLATFORM:UNINITIALIZED=android-23
+ANDROID_PLATFORM:UNINITIALIZED=android-26
 
 //No help, variable specified on the command line.
 ANDROID_TOOLCHAIN:UNINITIALIZED=clang
