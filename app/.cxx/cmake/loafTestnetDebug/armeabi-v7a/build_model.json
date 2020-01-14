@@ -53,7 +53,7 @@
     ]
   },
   "abi": "ARMEABI_V7A",
-  "abiPlatformVersion": 23,
+  "abiPlatformVersion": 26,
   "cxxBuildFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetDebug/armeabi-v7a",
   "jsonFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetDebug/armeabi-v7a/android_gradle_build.json",
   "gradleBuildOutputFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafTestnetDebug/armeabi-v7a",
