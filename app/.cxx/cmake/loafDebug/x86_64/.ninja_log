@@ -21,3 +21,4 @@
 2	692	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRKey.c.o	94e63fb3ffd76f1
 106	758	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPeerManager.c.o	7e1f545d855d9df6
 758	817	0	../../../../build/intermediates/cmake/loafDebug/obj/x86_64/libcore-lib.so	3457e9a6a42f0ee1
+1	44	0	build.ninja	45e8aff612ffad53
