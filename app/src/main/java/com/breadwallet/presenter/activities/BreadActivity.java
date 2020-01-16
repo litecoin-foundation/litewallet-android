@@ -87,7 +87,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
     private LinearLayout sendButton;
     private LinearLayout receiveButton;
-    private LinearLayout buyButton;
+    //TODO: Add back when server can handle the buy
+    //private LinearLayout buyButton;
     private LinearLayout menuButton;
     public static final Point screenParametersPoint = new Point();
 
@@ -212,14 +213,14 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 BRAnimator.showReceiveFragment(BreadActivity.this, true);
             }
         });
-
-        buyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showBuyFragment(BreadActivity.this);
-            }
-        });
+        //TODO: Add back when server can handle the buy
+//        buyButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!BRAnimator.isClickAllowed()) return;
+//                BRAnimator.showBuyFragment(BreadActivity.this);
+//            }
+//        });
 
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -391,7 +392,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         toolBar = (Toolbar) findViewById(R.id.bread_bar);
         sendButton = (LinearLayout) findViewById(R.id.send_layout);
         receiveButton = (LinearLayout) findViewById(R.id.receive_layout);
-        buyButton = (LinearLayout) findViewById(R.id.buy_layout);
+
+        //TODO: Add back when server can handle the buy
+        //buyButton = (LinearLayout) findViewById(R.id.buy_layout);
 //        walletName = (TextView) findViewById(R.id.wallet_name_text);
         menuButton = (LinearLayout) findViewById(R.id.menu_layout);
         manageText = (TextView) findViewById(R.id.manage_text);
