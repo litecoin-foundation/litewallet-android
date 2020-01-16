@@ -339,7 +339,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_receive"/>
+                android:src="@drawable/ic_litecoin_logo"/>
 
             <com.breadwallet.presenter.customviews.BRText
                 android:layout_width="wrap_content"
