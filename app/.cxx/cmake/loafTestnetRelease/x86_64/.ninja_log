@@ -1,0 +1,23 @@
+# ninja log v5
+2	202	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBloomFilter.c.o	78c4afbcf77dda4f
+1	231	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP39Mnemonic.c.o	dd66f4993904bf4a
+1	259	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP32Sequence.c.o	f2612a8ae8634198
+0	320	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBase58.c.o	8b2cb9a3289c14ba
+0	476	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRAddress.c.o	28ef28030d25ba2d
+259	508	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRSet.c.o	4134989750823a75
+5	522	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRMerkleBlock.c.o	66f77a7704c29cc3
+522	591	0	CMakeFiles/core-lib.dir/src/main/jni/transition/JNIBase58.c.o	cba5d3e98b1cd24b
+592	674	0	CMakeFiles/core-lib.dir/src/main/jni/transition/JNIBIP32Sequence.c.o	a0e68ee1c41fe51d
+508	680	0	CMakeFiles/core-lib.dir/src/main/jni/transition/core.c.o	849d916dd9a33097
+1	782	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRBIP38Key.c.o	39e9d1dc0c716fee
+674	824	0	CMakeFiles/core-lib.dir/src/main/jni/transition/JNIKey.c.o	a4122a50f0106b71
+681	980	0	CMakeFiles/core-lib.dir/src/main/jni/transition/PeerManager.c.o	47d61524cad0aabf
+320	1348	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRTransaction.c.o	1ec2c85887a88709
+476	1697	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRWallet.c.o	9de221fa5bfdc84f
+3	1844	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRCrypto.c.o	e326a5b409e08862
+7	1948	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPaymentProtocol.c.o	f3b9c2c3a638c434
+782	2229	0	CMakeFiles/core-lib.dir/src/main/jni/transition/wallet.c.o	c6b26ef291e7d2a0
+202	2707	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPeer.c.o	f74b56c1f945a093
+232	2851	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRPeerManager.c.o	6feab9aa87bb96b0
+3	4615	0	CMakeFiles/core-lib.dir/src/main/jni/loafwallet-core/BRKey.c.o	3680ebd8c81118cf
+4615	4685	0	../../../../build/intermediates/cmake/loafTestnetRelease/obj/x86_64/libcore-lib.so	d58c4a61a4f8f09d
