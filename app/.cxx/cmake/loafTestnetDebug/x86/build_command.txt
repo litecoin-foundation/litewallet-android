@@ -3,7 +3,7 @@ arguments :
 -H/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app
 -B/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetDebug/x86
 -DANDROID_ABI=x86
--DANDROID_PLATFORM=android-26
+-DANDROID_PLATFORM=android-24
 -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/build/intermediates/cmake/loafTestnetDebug/obj/x86
 -DCMAKE_BUILD_TYPE=Debug
 -DANDROID_NDK=/Users/grunt/Library/Android/sdk/ndk/20.1.5948944

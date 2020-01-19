@@ -1,11 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-signing/loafwallet-key')
+            storePassword 'litecoinfoundation'
+            keyAlias = 'loafwallet-key'
+            keyPassword 'litecoinfoundation'
+        }
+    }
     compileSdkVersion = 29
     defaultConfig {
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
-        minSdkVersion 26
+        minSdkVersion 25
         targetSdkVersion 29
         versionCode 1180
         versionName "v1.18.0"

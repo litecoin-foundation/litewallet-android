@@ -53,7 +53,7 @@
     ]
   },
   "abi": "X86_64",
-  "abiPlatformVersion": 26,
+  "abiPlatformVersion": 24,
   "cxxBuildFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetRelease/x86_64",
   "jsonFile": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cmake/loafTestnetRelease/x86_64/android_gradle_build.json",
   "gradleBuildOutputFolder": "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-android/app/.cxx/cxx/loafTestnetRelease/x86_64",

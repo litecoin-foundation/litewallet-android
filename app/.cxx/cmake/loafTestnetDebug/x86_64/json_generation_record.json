@@ -1,7 +1,11 @@
 [
   {
     "level": "INFO",
-    "message": "Start JSON generation. Platform version: 26 min SDK version: x86_64"
+    "message": "Version minSdkVersion\u003d\u002725\u0027 is mapped to \u002724\u0027."
+  },
+  {
+    "level": "INFO",
+    "message": "Start JSON generation. Platform version: 24 min SDK version: x86_64"
   },
   {
     "level": "INFO",
