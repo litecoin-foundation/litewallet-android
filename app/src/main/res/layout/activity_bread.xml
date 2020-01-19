@@ -67,21 +67,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:layout_marginBottom="15dp"
                         android:text="="
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:customTFont="CircularPro-Book.otf"
-                        app:layout_constraintBottom_toTopOf="@+id/price_change_text"
                         app:layout_constraintLeft_toRightOf="@+id/primary_price"
-                        app:layout_constraintTop_toTopOf="@id/secondary_price"
-                        app:layout_constraintVertical_bias="0.492" />
+                        app:layout_constraintTop_toTopOf="@id/secondary_price" />
 
                     <com.breadwallet.presenter.customviews.BRText
                         android:id="@+id/secondary_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
                         android:text="b0"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -89,19 +86,6 @@
                         app:layout_constraintLeft_toRightOf="@+id/equals"
                         app:layout_constraintTop_toTopOf="@id/primary_price"
                         tools:layout_editor_absoluteY="56dp" />
-
-                    <com.breadwallet.presenter.customviews.BRText
-                        android:id="@+id/price_change_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="EEEEEEEEEE"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        app:customTFont="CircularPro-Book.otf"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
 
                     <com.breadwallet.presenter.customviews.BRText
                         android:id="@+id/manage_text"
@@ -314,7 +298,7 @@
                 android:textColor="@color/pin_pad_text"
                 app:customTFont="CircularPro-Medium.otf" />
         </LinearLayout>
-
+<!-- Leaving here for the Buy Tab-->
 <!--        <LinearLayout-->
 <!--            android:id="@+id/buy_layout"-->
 <!--            android:layout_width="wrap_content"-->
