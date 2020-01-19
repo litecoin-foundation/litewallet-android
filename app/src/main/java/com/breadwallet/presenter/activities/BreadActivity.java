@@ -93,21 +93,15 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     public static final Point screenParametersPoint = new Point();
 
     private InternetManager mConnectionReceiver;
-
     private TextView primaryPrice;
     private TextView secondaryPrice;
     private TextView equals;
-    private TextView priceChange;
-
+    private int progress = 0;
     private TextView manageText;
     //    private TextView walletName;
-    private TextView emptyTip;
     private ConstraintLayout walletProgressLayout;
 
-    private RelativeLayout mainLayout;
     private LinearLayout toolbarLayout;
-    private Toolbar toolBar;
-    private int progress = 0;
     public static boolean appVisible = false;
     private ImageButton searchIcon;
     public ViewFlipper barFlipper;
@@ -142,7 +136,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         getWindowManager().getDefaultDisplay().getSize(screenParametersPoint);
 
         initializeViews();
-
         setListeners();
 
         toolbarLayout.removeView(walletProgressLayout);
@@ -389,31 +382,28 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
     private void initializeViews() {
         // Always cast your custom Toolbar here, and set it as the ActionBar.
-        toolBar = (Toolbar) findViewById(R.id.bread_bar);
+        Toolbar toolBar = (Toolbar) findViewById(R.id.bread_bar);
         sendButton = (LinearLayout) findViewById(R.id.send_layout);
         receiveButton = (LinearLayout) findViewById(R.id.receive_layout);
 
         //TODO: Add back when server can handle the buy
         //buyButton = (LinearLayout) findViewById(R.id.buy_layout);
-//        walletName = (TextView) findViewById(R.id.wallet_name_text);
+        //walletName = (TextView) findViewById(R.id.wallet_name_text);
+
+
+
         menuButton = (LinearLayout) findViewById(R.id.menu_layout);
         manageText = (TextView) findViewById(R.id.manage_text);
         primaryPrice = (TextView) findViewById(R.id.primary_price);
         secondaryPrice = (TextView) findViewById(R.id.secondary_price);
         equals = (TextView) findViewById(R.id.equals);
-        priceChange = (TextView) findViewById(R.id.price_change_text);
-        emptyTip = (TextView) findViewById(R.id.empty_tx_tip);
-//        syncLabel = (TextView) findViewById(R.id.syncing_label);
-//        syncDate = (TextView) findViewById(R.id.sync_date);
-//        loadProgressBar = (ProgressBar) findViewById(R.id.load_wallet_progress);
-//        syncProgressBar = (ProgressBar) findViewById(R.id.sync_progress);
+       // TextView priceChange = (TextView) findViewById(R.id.price_change_text);
+        TextView emptyTip = (TextView) findViewById(R.id.empty_tx_tip);
         toolBarConstraintLayout = (ConstraintLayout) findViewById(R.id.bread_toolbar);
         walletProgressLayout = (ConstraintLayout) findViewById(R.id.loading_wallet_layout);
 
-        mainLayout = (RelativeLayout) findViewById(R.id.main_layout);
+        RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.main_layout);
         toolbarLayout = (LinearLayout) findViewById(R.id.toolbar_layout);
-//        syncingLayout = (ConstraintLayout) findViewById(R.id.syncing_layout);
-//        recyclerLayout = (LinearLayout) findViewById(R.id.recycler_layout);
         searchIcon = (ImageButton) findViewById(R.id.search_icon);
         barFlipper = (ViewFlipper) findViewById(R.id.tool_bar_flipper);
         searchBar = (BRSearchBar) findViewById(R.id.search_bar);
