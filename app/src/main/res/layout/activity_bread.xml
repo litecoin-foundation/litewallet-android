@@ -30,7 +30,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/bread_bar"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:background="@color/litecoin_litewallet_blue"
                 android:clipChildren="false"
                 android:clipToPadding="false"
@@ -52,26 +52,27 @@
                         android:id="@+id/primary_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="42dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
                         android:text="$0"
                         android:textColor="@color/white"
                         android:textSize="16sp"
+                        android:visibility="visible"
                         app:customTFont="CircularPro-Book.otf"
-                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.breadwallet.presenter.customviews.BRText
                         android:id="@+id/equals"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="15dp"
                         android:text="="
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:customTFont="CircularPro-Book.otf"
+                        app:layout_constraintBottom_toTopOf="@+id/price_change_text"
                         app:layout_constraintLeft_toRightOf="@+id/primary_price"
                         app:layout_constraintTop_toTopOf="@id/secondary_price"
                         app:layout_constraintVertical_bias="0.492" />
@@ -93,12 +94,14 @@
                         android:id="@+id/price_change_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/almost_black"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="EEEEEEEEEE"
+                        android:textColor="#FFFFFF"
                         android:textSize="16sp"
                         app:customTFont="CircularPro-Book.otf"
-                        app:layout_constraintLeft_toLeftOf="@+id/primary_price"
-                        app:layout_constraintTop_toBottomOf="@+id/primary_price" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <com.breadwallet.presenter.customviews.BRText
                         android:id="@+id/manage_text"

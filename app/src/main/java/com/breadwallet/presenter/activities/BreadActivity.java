@@ -214,13 +214,13 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             }
         });
         //TODO: Add back when server can handle the buy
-//        buyButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!BRAnimator.isClickAllowed()) return;
-//                BRAnimator.showBuyFragment(BreadActivity.this);
-//            }
-//        });
+        //        buyButton.setOnClickListener(new View.OnClickListener() {
+        //            @Override
+        //            public void onClick(View v) {
+        //                if (!BRAnimator.isClickAllowed()) return;
+        //                BRAnimator.showBuyFragment(BreadActivity.this);
+        //            }
+        //        });
 
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
