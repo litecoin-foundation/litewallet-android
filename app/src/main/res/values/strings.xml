@@ -31,7 +31,7 @@
   <!-- Error alert title -->
   <string name="Alert.error">Error</string>
   <!-- Keystore error -->
-  <string name="Alert.keystore.generic.android">There is a problem with your Android OS keystore, please contact litewallet@litecoinfoundation.net/string>
+  <string name="Alert.keystore.generic.android">There is a problem with your Android OS keystore, please contact litewallet@litecoinfoundation.net</string>
   <!-- KeyStore error, keys are invalidated -->
   <string name="Alert.keystore.invalidated.android">Your Bread encrypted data was recently invalidated because your Android lock screen was disabled.</string>
   <!-- Keystore error title -->
@@ -742,7 +742,5 @@
   <string name="Donate.titleLabel">Tap to Donate to the Litecoin Foundation!</string>
 
   <string name="Donate.tapLabel">%1 %2($s)</string>
-
-  Donate.
 
 </resources>
