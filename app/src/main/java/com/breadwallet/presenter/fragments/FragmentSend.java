@@ -95,6 +95,7 @@ public class FragmentSend extends Fragment {
     private EditText commentEdit;
     private StringBuilder amountBuilder;
     private TextView isoText;
+    private TextView donate_isoText;
     private EditText amountEdit;
     private TextView balanceText;
     private TextView feeText;
@@ -132,6 +133,7 @@ public class FragmentSend extends Fragment {
         keyboard.setBRButtonBackgroundResId(R.drawable.keyboard_white_button);
         keyboard.setBRKeyboardColor(R.color.white);
         isoText = (TextView) rootView.findViewById(R.id.iso_text);
+
         addressEdit = (EditText) rootView.findViewById(R.id.address_edit);
         scan = (Button) rootView.findViewById(R.id.scan);
         paste = (Button) rootView.findViewById(R.id.paste_button);
