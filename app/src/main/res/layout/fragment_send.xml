@@ -99,7 +99,7 @@
                 android:ems="10"
                 android:hint="@string/Send.toLabel"
                 android:inputType="textPersonName"
-                android:maxLines="1" />
+                android:singleLine="true" />
 
             <com.breadwallet.presenter.customviews.BRButton
                 android:id="@+id/paste_button"
@@ -404,7 +404,8 @@
                 android:layout_weight="0.6"
                 android:background="@android:color/transparent"
                 android:ellipsize="middle"
-                android:textSize="@dimen/bread_margin"
+                android:textSize="18sp"
+                android:textColor="@color/light_gray"
                 android:ems="10"
                 android:hint="@string/Donate.titleLabel"/>
 
@@ -421,13 +422,12 @@
                 android:paddingBottom="12dp"
                 android:background="@android:color/transparent"
                 android:minHeight="50dp"
-                android:text="@string/Donate.tapLabel"
+                android:text="Donate"
                 android:textColor="@color/light_gray"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:customTFont="CircularPro-Regular.otf"
                 app:buttonType="2"
                 app:isBreadButton="true" />
-
         </LinearLayout>
 
         <View
