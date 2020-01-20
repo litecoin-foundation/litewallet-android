@@ -40,7 +40,7 @@ public class BRNotificationBar extends androidx.appcompat.widget.Toolbar {
 
     private static final String TAG = BRNotificationBar.class.getName();
 
-    private BreadActivity breadActivity;
+    private BreadActivity breadActivity = (BreadActivity) getContext();
     private BRText description;
     private BRButton close;
 
