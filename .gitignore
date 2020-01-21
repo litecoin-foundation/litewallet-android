@@ -10,6 +10,9 @@ app/src/main/jni/transition/testingStuff.c
 # Java class files
 *.class
 
+# Generated C++ make files
+.cxx/
+
 # Generated files
 bin/
 gen/
