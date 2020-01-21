@@ -269,22 +269,44 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     private void setPriceTags(boolean btcPreferred, boolean animate) {
-        secondaryPrice.setTextSize(!btcPreferred ? t1Size : t2Size);
-        primaryPrice.setTextSize(!btcPreferred ? t2Size : t1Size);
+        primaryPrice.setTextSize(btcPreferred ? t1Size : t2Size);
+        secondaryPrice.setTextSize(btcPreferred ? t2Size : t1Size);
+
         ConstraintSet set = new ConstraintSet();
         set.clone(toolBarConstraintLayout);
-        if (animate)
+
+        if (animate) {
             TransitionManager.beginDelayedTransition(toolBarConstraintLayout);
-        int px4 = Utils.getPixelsFromDps(this, 4);
-        int px16 = Utils.getPixelsFromDps(this, 16);
-        //align to parent left
-        set.connect(!btcPreferred ? R.id.secondary_price : R.id.primary_price, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.END, px16);
-        //align equals after the first item
-        set.connect(R.id.equals, ConstraintSet.START, !btcPreferred ? secondaryPrice.getId() : primaryPrice.getId(), ConstraintSet.END, px4);
-        //align second item after equals
-        set.connect(!btcPreferred ? R.id.primary_price : R.id.secondary_price, ConstraintSet.START, equals.getId(), ConstraintSet.END, px4);
-//        align the second item to the baseline of the first
-//        set.connect(!btcPreferred ? R.id.primary_price : R.id.secondary_price, ConstraintSet.BASELINE, btcPreferred ? R.id.primary_price : R.id.secondary_price, ConstraintSet.BASELINE, 0);
+        }
+
+        int[] ids = {primaryPrice.getId(), secondaryPrice.getId(), equals.getId()};
+        // Clear views constraints
+        for (int id : ids) {
+            set.clear(id);
+            set.constrainWidth(id, ConstraintSet.WRAP_CONTENT);
+            set.constrainHeight(id, ConstraintSet.WRAP_CONTENT);
+        }
+
+        int dp16 = Utils.getPixelsFromDps(this, 16);
+        int dp8 = Utils.getPixelsFromDps(this, 4);
+
+        int leftId = btcPreferred ? primaryPrice.getId() : secondaryPrice.getId();
+        int rightId = btcPreferred ? secondaryPrice.getId() : primaryPrice.getId();
+
+        int[] chainViews = {leftId, equals.getId(), rightId};
+
+        set.connect(leftId, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp16);
+        set.connect(leftId, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
+        set.connect(leftId, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM);
+
+        set.connect(rightId, ConstraintSet.BASELINE, leftId, ConstraintSet.BASELINE);
+        set.connect(equals.getId(), ConstraintSet.BASELINE, leftId, ConstraintSet.BASELINE);
+
+        set.connect(equals.getId(), ConstraintSet.START, leftId, ConstraintSet.END, dp8);
+        set.connect(equals.getId(), ConstraintSet.END, rightId, ConstraintSet.START, dp8);
+
+        set.createHorizontalChain(leftId, ConstraintSet.LEFT, equals.getId(), ConstraintSet.RIGHT, chainViews, null, ConstraintSet.CHAIN_PACKED);
+
         // Apply the changes
         set.applyTo(toolBarConstraintLayout);
 
@@ -389,7 +411,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         //TODO: Add back when server can handle the buy
         //buyButton = (LinearLayout) findViewById(R.id.buy_layout);
         //walletName = (TextView) findViewById(R.id.wallet_name_text);
-
 
 
         menuButton = (LinearLayout) findViewById(R.id.menu_layout);
