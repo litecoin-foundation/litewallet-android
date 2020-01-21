@@ -10,12 +10,6 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.transition.TransitionManager;
-import androidx.appcompat.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
@@ -24,6 +18,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.transition.TransitionManager;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.BRActivity;
@@ -143,8 +143,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         setUpBarFlipper();
 
         BRAnimator.init(this);
-        primaryPrice.setTextSize(TypedValue.COMPLEX_UNIT_PX, t1Size);//make it the size it should be after animation to get the X
-        secondaryPrice.setTextSize(TypedValue.COMPLEX_UNIT_PX, t2Size);//make it the size it should be after animation to get the X
+        primaryPrice.setTextSize(t1Size);
+        secondaryPrice.setTextSize(t2Size);
 
         if (introSetPitActivity != null) introSetPitActivity.finish();
         if (introActivity != null) introActivity.finish();
