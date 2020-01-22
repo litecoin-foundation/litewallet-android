@@ -99,8 +99,8 @@ public class BRAnimator {
 
     public static void init(Activity app) {
         if (app == null) return;
-        primaryTextSize = 30;
-        secondaryTextSize = 16;
+        primaryTextSize = 24f;
+        secondaryTextSize = 12.8f;
     }
 
     public static void showFragmentByTag(Activity app, String tag) {
