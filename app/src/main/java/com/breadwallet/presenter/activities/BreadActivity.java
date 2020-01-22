@@ -263,14 +263,14 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
     private void swap() {
         if (!BRAnimator.isClickAllowed()) return;
-        boolean b = !BRSharedPrefs.getPreferredBTC(this);
+        boolean b = !BRSharedPrefs.getPreferredLTC(this);
         setPriceTags(b, true);
-        BRSharedPrefs.putPreferredBTC(this, b);
+        BRSharedPrefs.putPreferredLTC(this, b);
     }
 
-    private void setPriceTags(boolean btcPreferred, boolean animate) {
-        primaryPrice.setTextSize(btcPreferred ? t1Size : t2Size);
-        secondaryPrice.setTextSize(btcPreferred ? t2Size : t1Size);
+    private void setPriceTags(boolean ltcPreferred, boolean animate) {
+        primaryPrice.setTextSize(ltcPreferred ? t1Size : t2Size);
+        secondaryPrice.setTextSize(ltcPreferred ? t2Size : t1Size);
 
         ConstraintSet set = new ConstraintSet();
         set.clone(toolBarConstraintLayout);
@@ -290,8 +290,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         int dp16 = Utils.getPixelsFromDps(this, 16);
         int dp8 = Utils.getPixelsFromDps(this, 4);
 
-        int leftId = btcPreferred ? primaryPrice.getId() : secondaryPrice.getId();
-        int rightId = btcPreferred ? secondaryPrice.getId() : primaryPrice.getId();
+        int leftId = ltcPreferred ? primaryPrice.getId() : secondaryPrice.getId();
+        int rightId = ltcPreferred ? secondaryPrice.getId() : primaryPrice.getId();
 
         int[] chainViews = {leftId, equals.getId(), rightId};
 
@@ -437,7 +437,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                     observer.removeOnGlobalLayoutListener(this);
                 if (uiIsDone) return;
                 uiIsDone = true;
-                setPriceTags(BRSharedPrefs.getPreferredBTC(BreadActivity.this), false);
+                setPriceTags(BRSharedPrefs.getPreferredLTC(BreadActivity.this), false);
             }
         });
 
