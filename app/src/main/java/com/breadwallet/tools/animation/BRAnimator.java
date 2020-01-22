@@ -99,8 +99,6 @@ public class BRAnimator {
 
     public static void init(Activity app) {
         if (app == null) return;
-//        primaryTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 30, app.getResources().getDisplayMetrics());
-//        secondaryTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, app.getResources().getDisplayMetrics());
         primaryTextSize = 30;
         secondaryTextSize = 16;
     }
