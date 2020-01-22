@@ -50,8 +50,8 @@ import java.math.BigDecimal;
 import static com.breadwallet.presenter.activities.intro.IntroActivity.introActivity;
 import static com.breadwallet.presenter.activities.ReEnterPinActivity.reEnterPinActivity;
 import static com.breadwallet.presenter.activities.SetPinActivity.introSetPitActivity;
-import static com.breadwallet.tools.animation.BRAnimator.t1Size;
-import static com.breadwallet.tools.animation.BRAnimator.t2Size;
+import static com.breadwallet.tools.animation.BRAnimator.primaryTextSize;
+import static com.breadwallet.tools.animation.BRAnimator.secondaryTextSize;
 import static com.breadwallet.tools.util.BRConstants.PLATFORM_ON;
 
 /**
@@ -143,8 +143,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         setUpBarFlipper();
 
         BRAnimator.init(this);
-        primaryPrice.setTextSize(t1Size);
-        secondaryPrice.setTextSize(t2Size);
+        primaryPrice.setTextSize(primaryTextSize);
+        secondaryPrice.setTextSize(secondaryTextSize);
 
         if (introSetPitActivity != null) introSetPitActivity.finish();
         if (introActivity != null) introActivity.finish();
@@ -269,8 +269,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     private void setPriceTags(boolean ltcPreferred, boolean animate) {
-        primaryPrice.setTextSize(ltcPreferred ? t1Size : t2Size);
-        secondaryPrice.setTextSize(ltcPreferred ? t2Size : t1Size);
+        primaryPrice.setTextSize(ltcPreferred ? primaryTextSize : secondaryTextSize);
+        secondaryPrice.setTextSize(ltcPreferred ? secondaryTextSize : primaryTextSize);
 
         ConstraintSet set = new ConstraintSet();
         set.clone(toolBarConstraintLayout);
