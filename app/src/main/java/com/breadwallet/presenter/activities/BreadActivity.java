@@ -297,7 +297,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
         set.connect(leftId, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp16);
         set.connect(leftId, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
-        set.connect(leftId, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM);
+        set.connect(leftId, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, dp16);
+        set.setVerticalBias(leftId, 1.0f);
 
         set.connect(rightId, ConstraintSet.BASELINE, leftId, ConstraintSet.BASELINE);
         set.connect(equals.getId(), ConstraintSet.BASELINE, leftId, ConstraintSet.BASELINE);
