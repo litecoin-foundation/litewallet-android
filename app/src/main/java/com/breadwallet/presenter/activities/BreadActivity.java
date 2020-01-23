@@ -10,12 +10,6 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.transition.TransitionManager;
-import androidx.appcompat.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
@@ -24,6 +18,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.transition.TransitionManager;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.BRActivity;
@@ -50,8 +50,8 @@ import java.math.BigDecimal;
 import static com.breadwallet.presenter.activities.intro.IntroActivity.introActivity;
 import static com.breadwallet.presenter.activities.ReEnterPinActivity.reEnterPinActivity;
 import static com.breadwallet.presenter.activities.SetPinActivity.introSetPitActivity;
-import static com.breadwallet.tools.animation.BRAnimator.t1Size;
-import static com.breadwallet.tools.animation.BRAnimator.t2Size;
+import static com.breadwallet.tools.animation.BRAnimator.primaryTextSize;
+import static com.breadwallet.tools.animation.BRAnimator.secondaryTextSize;
 import static com.breadwallet.tools.util.BRConstants.PLATFORM_ON;
 
 /**
@@ -143,8 +143,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         setUpBarFlipper();
 
         BRAnimator.init(this);
-        primaryPrice.setTextSize(TypedValue.COMPLEX_UNIT_PX, t1Size);//make it the size it should be after animation to get the X
-        secondaryPrice.setTextSize(TypedValue.COMPLEX_UNIT_PX, t2Size);//make it the size it should be after animation to get the X
+        primaryPrice.setTextSize(primaryTextSize);
+        secondaryPrice.setTextSize(secondaryTextSize);
 
         if (introSetPitActivity != null) introSetPitActivity.finish();
         if (introActivity != null) introActivity.finish();
@@ -263,28 +263,51 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
     private void swap() {
         if (!BRAnimator.isClickAllowed()) return;
-        boolean b = !BRSharedPrefs.getPreferredBTC(this);
+        boolean b = !BRSharedPrefs.getPreferredLTC(this);
         setPriceTags(b, true);
-        BRSharedPrefs.putPreferredBTC(this, b);
+        BRSharedPrefs.putPreferredLTC(this, b);
     }
 
-    private void setPriceTags(boolean btcPreferred, boolean animate) {
-        secondaryPrice.setTextSize(!btcPreferred ? t1Size : t2Size);
-        primaryPrice.setTextSize(!btcPreferred ? t2Size : t1Size);
+    private void setPriceTags(boolean ltcPreferred, boolean animate) {
+        primaryPrice.setTextSize(ltcPreferred ? primaryTextSize : secondaryTextSize);
+        secondaryPrice.setTextSize(ltcPreferred ? secondaryTextSize : primaryTextSize);
+
         ConstraintSet set = new ConstraintSet();
         set.clone(toolBarConstraintLayout);
-        if (animate)
+
+        if (animate) {
             TransitionManager.beginDelayedTransition(toolBarConstraintLayout);
-        int px4 = Utils.getPixelsFromDps(this, 4);
-        int px16 = Utils.getPixelsFromDps(this, 16);
-        //align to parent left
-        set.connect(!btcPreferred ? R.id.secondary_price : R.id.primary_price, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.END, px16);
-        //align equals after the first item
-        set.connect(R.id.equals, ConstraintSet.START, !btcPreferred ? secondaryPrice.getId() : primaryPrice.getId(), ConstraintSet.END, px4);
-        //align second item after equals
-        set.connect(!btcPreferred ? R.id.primary_price : R.id.secondary_price, ConstraintSet.START, equals.getId(), ConstraintSet.END, px4);
-//        align the second item to the baseline of the first
-//        set.connect(!btcPreferred ? R.id.primary_price : R.id.secondary_price, ConstraintSet.BASELINE, btcPreferred ? R.id.primary_price : R.id.secondary_price, ConstraintSet.BASELINE, 0);
+        }
+
+        int[] ids = {primaryPrice.getId(), secondaryPrice.getId(), equals.getId()};
+        // Clear views constraints
+        for (int id : ids) {
+            set.clear(id);
+            set.constrainWidth(id, ConstraintSet.WRAP_CONTENT);
+            set.constrainHeight(id, ConstraintSet.WRAP_CONTENT);
+        }
+
+        int dp16 = Utils.getPixelsFromDps(this, 16);
+        int dp8 = Utils.getPixelsFromDps(this, 4);
+
+        int leftId = ltcPreferred ? primaryPrice.getId() : secondaryPrice.getId();
+        int rightId = ltcPreferred ? secondaryPrice.getId() : primaryPrice.getId();
+
+        int[] chainViews = {leftId, equals.getId(), rightId};
+
+        set.connect(leftId, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp16);
+        set.connect(leftId, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
+        set.connect(leftId, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, dp16);
+        set.setVerticalBias(leftId, 1.0f);
+
+        set.connect(rightId, ConstraintSet.BASELINE, leftId, ConstraintSet.BASELINE);
+        set.connect(equals.getId(), ConstraintSet.BASELINE, leftId, ConstraintSet.BASELINE);
+
+        set.connect(equals.getId(), ConstraintSet.START, leftId, ConstraintSet.END, dp8);
+        set.connect(equals.getId(), ConstraintSet.END, rightId, ConstraintSet.START, dp8);
+
+        set.createHorizontalChain(leftId, ConstraintSet.LEFT, equals.getId(), ConstraintSet.RIGHT, chainViews, null, ConstraintSet.CHAIN_PACKED);
+
         // Apply the changes
         set.applyTo(toolBarConstraintLayout);
 
@@ -391,7 +414,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         //walletName = (TextView) findViewById(R.id.wallet_name_text);
 
 
-
         menuButton = (LinearLayout) findViewById(R.id.menu_layout);
         manageText = (TextView) findViewById(R.id.manage_text);
         primaryPrice = (TextView) findViewById(R.id.primary_price);
@@ -416,7 +438,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                     observer.removeOnGlobalLayoutListener(this);
                 if (uiIsDone) return;
                 uiIsDone = true;
-                setPriceTags(BRSharedPrefs.getPreferredBTC(BreadActivity.this), false);
+                setPriceTags(BRSharedPrefs.getPreferredLTC(BreadActivity.this), false);
             }
         });
 
