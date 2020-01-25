@@ -15,8 +15,8 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 25
         targetSdkVersion 29
-        versionCode 1181
-        versionName "v1.18.1"
+        versionCode 290
+        versionName "v1.18.0"
         multiDexEnabled true
 
         // Similar to other properties in the defaultConfig block,
@@ -100,7 +100,20 @@ android {
         checkReleaseBuilds false
 
         disable 'MissingTranslation'
+
+        disable 'InvalidPackage'
+
+        // Turns off checks for the issue IDs you specify.
+        //example: disable 'TypographyFractions','TypographyQuotes'
+        // Turns on checks for the issue IDs you specify. These checks are in
+        // addition to the default lint checks.
+        //example: enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+        // To enable checks for only a subset of issue IDs and ignore all others,
+        // list the issue IDs with the 'check' property instead. This property overrides
+        // any issue IDs you enable or disable using the properties above.
+        check 'NewApi', 'InlinedApi'
     }
+
     buildTypes {
 //        gitUpdateModules()
 //        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
