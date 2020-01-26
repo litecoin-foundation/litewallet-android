@@ -93,7 +93,7 @@ android {
         quiet false
         explainIssues true
         // if true, stop the gradle build if errors are found
-        abortOnError true
+        abortOnError false
         // if true, only report errors
         ignoreWarnings false
 
