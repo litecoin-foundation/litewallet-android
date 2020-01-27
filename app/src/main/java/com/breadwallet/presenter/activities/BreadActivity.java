@@ -210,7 +210,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showBuyFragment(BreadActivity.this);
+                BRAnimator.showBuyTabFragment(BreadActivity.this);
             }
         });
 
