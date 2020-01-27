@@ -244,7 +244,7 @@
         android:background="@color/extra_light_blue_background"
         android:elevation="9dp"
         android:orientation="horizontal"
-        android:weightSum="3"
+        android:weightSum="4"
         tools:layout_conversion_absoluteHeight="0dp"
         tools:layout_conversion_absoluteWidth="411dp"
         tools:layout_conversion_absoluteX="0dp"
