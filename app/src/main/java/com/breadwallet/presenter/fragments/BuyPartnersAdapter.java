@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.breadwallet.R;
@@ -39,7 +41,7 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PartnerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final PartnerViewHolder holder, int position) {
         Partner partner = partners.get(position);
         holder.logo.setImageResource(partner.getLogo());
         holder.title.setText(partner.getTitle());
@@ -48,9 +50,24 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
         holder.buyPartnerWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BRAnimator.showBuyFragment((Activity) v.getContext());
+                int currencyResId = getCurrencyResId(holder.fiatOptions.getCheckedRadioButtonId());
+                String currency = v.getContext().getString(currencyResId);
+                BRAnimator.showBuyFragment((Activity) v.getContext(), currency);
             }
         });
+    }
+
+    @StringRes
+    private int getCurrencyResId(int checkedOption) {
+        int currency = R.string.usd_currency_code;
+        if (checkedOption == R.id.cad_fiat) {
+            currency = R.string.cad_currency_code;
+        } else if (checkedOption == R.id.eur_fiat) {
+            currency = R.string.eur_currency_code;
+        } else if (checkedOption == R.id.jpy_fiat) {
+            currency = R.string.jpy_currency_code;
+        }
+        return currency;
     }
 
     @Override
@@ -63,6 +80,7 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
         final ImageView logo;
         final TextView title;
         final TextView detail;
+        final RadioGroup fiatOptions;
         final View buyPartnerWrapper;
 
         PartnerViewHolder(@NonNull View itemView) {
@@ -71,6 +89,7 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
             logo = itemView.findViewById(R.id.logo);
             title = itemView.findViewById(R.id.titleLbl);
             detail = itemView.findViewById(R.id.detailLbl);
+            fiatOptions = itemView.findViewById(R.id.fiat_option);
             buyPartnerWrapper = itemView.findViewById(R.id.buyPartnerWrapper);
         }
     }

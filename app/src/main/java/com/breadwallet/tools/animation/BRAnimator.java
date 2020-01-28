@@ -335,14 +335,14 @@ public class BRAnimator {
 
     }
 
-    public static void showBuyFragment(Activity app) {
+    public static void showBuyFragment(Activity app, String currency) {
         if (app == null) {
             Log.e(TAG, "showBuyFragment: app is null");
             return;
         }
         FragmentTransaction transaction = app.getFragmentManager().beginTransaction();
         transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
-        transaction.add(android.R.id.content, new FragmentBuy(), FragmentBuy.class.getName());
+        transaction.add(android.R.id.content, FragmentBuy.newInstance(currency), FragmentBuy.class.getName());
         transaction.addToBackStack(FragmentBuy.class.getName());
         transaction.commit();
     }
