@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.webkit.ConsoleMessage;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
@@ -20,16 +19,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-
 import com.breadwallet.R;
 import com.breadwallet.tools.animation.BRAnimator;
-import com.breadwallet.tools.animation.SlideDetector;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.util.Utils;
 
 import java.util.Date;
+
 /**
  * BreadWallet
  * <p>
@@ -68,9 +64,8 @@ public class FragmentBuy extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_buy, container, false);
-        backgroundLayout = (LinearLayout) rootView.findViewById(R.id.background_layout);
-        webView = (WebView) rootView.findViewById(R.id.web_view);
-//https://www.tanelikorri.com/tutorial/android/communication-between-application-and-webview/
+        backgroundLayout = rootView.findViewById(R.id.background_layout);
+        webView = rootView.findViewById(R.id.web_view);
         webView.setWebChromeClient(new BRWebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -93,11 +88,6 @@ public class FragmentBuy extends Fragment {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 Log.d(TAG, "onPageStarted: " + url);
                 super.onPageStarted(view, url, favicon);
-
-//                if (url == "https://buy.laofwallet.org/close") {
-//                    Utils.hideKeyboard(getActivity());
-//                    BRAnimator.buyIsShowing = false;
-//                }
             }
 
             @Override
@@ -107,11 +97,8 @@ public class FragmentBuy extends Fragment {
             }
         });
 
-        webView.addJavascriptInterface(this, "Android          ");
+        webView.addJavascriptInterface(this, "Android");
 
-
-        //"https://buy.loafwallet.org/?address=\(currentWalletAddress)&code=\(currencyCode)&idate=\(timestamp)&uid=\(uuidString)"
-        //https://buy.loafwallet.org/?address=LRG6pZZbJAd62Y8fbnBypk6Qd38oiSNCBf&code=USD&idate=1578021500&uid=3955B06D-69BD-4CAD-95D1-B151BD3FA0EA
         baseUrl = URL_BUY_LTC;
         WebSettings webSettings = webView.getSettings();
         if (0 != (getActivity().getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)) {
@@ -132,42 +119,11 @@ public class FragmentBuy extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-//        final ViewTreeObserver observer = signalLayout.getViewTreeObserver();
-//        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                observer.removeGlobalOnLayoutListener(this);
-//                BRAnimator.animateBackgroundDim(backgroundLayout, false);
-//                BRAnimator.animateSignalSlide(signalLayout, false, new BRAnimator.OnSlideAnimationEnd() {
-//                    @Override
-//                    public void onAnimationEnd() {
-//                    }
-//                });
-//            }
-//        });
-
-    }
 
     @Override
     public void onStop() {
         super.onStop();
         BRAnimator.animateBackgroundDim(backgroundLayout, true);
-//        BRAnimator.animateSignalSlide(signalLayout, true, new BRAnimator.OnSlideAnimationEnd() {
-//            @Override
-//            public void onAnimationEnd() {
-//                if (getActivity() != null) {
-//                    try {
-//                        getActivity().getFragmentManager().popBackStack();
-//                    } catch (Exception ignored) {
-//
-//                    }
-//                }
-//            }
-//        });
     }
 
     private class BRWebChromeClient extends WebChromeClient {
@@ -187,17 +143,6 @@ public class FragmentBuy extends Fragment {
     @JavascriptInterface
     public void handleMessage(String message) {
         Log.e(TAG, "handle message: " + message);
-        //webkit.messageHandlers.callback.postMessage('${[encoded]}')
-
-       //version=1&partner=litecoinfoundation&payment_flow_type=wallet&return_url=https%3A%2F%2Fbuy.loafwallet.org%2Fsuccess%2F&payment_id=b19e1e8b-3422-42f8-a68f-e7cbfedd2218&user_id=B7936F17-82E8-409D-9E80-BF24DC0FF4AE&destination_wallet%5Baddress%5D=LRG6pZZbJAd62Y8fbnBypk6Qd38oiSNCBf&destination_wallet%5Bcurrency%5D=LTC&fiat_total_amount%5Bamount%5D=274.95&fiat_total_amount%5Bcurrency%5D=USD&digital_total_amount%5Bamount%5D=5.45687994864113&digital_total_amount%5Bcurrency%5D=LTC&quote_id=ad207991-f5a8-4f5c-b75f-c9c138e67517
-//        guard let response = message.body as? String else { return }
-//        print(response)
-//        guard let url = URL(string: "https://checkout.simplexcc.com/payments/new") else { return }
-//
-//        var req = URLRequest(url: url)
-//        req.httpBody = Data(response.utf8)
-//        req.httpMethod = "POST"
-
     }
 
     @JavascriptInterface
@@ -207,9 +152,8 @@ public class FragmentBuy extends Fragment {
 
     @JavascriptInterface
     public void onData(String value) {
-        //.. do something with the data
+        //TODO: do something with the data
     }
-
 
 
     @Override
@@ -221,7 +165,5 @@ public class FragmentBuy extends Fragment {
     public void onPause() {
         super.onPause();
         Utils.hideKeyboard(getActivity());
-        
     }
-
 }
