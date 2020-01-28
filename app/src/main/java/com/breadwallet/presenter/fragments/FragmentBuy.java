@@ -55,10 +55,9 @@ public class FragmentBuy extends Fragment {
     private static final String TAG = FragmentBuy.class.getName();
     public LinearLayout backgroundLayout;
     WebView webView;
-    String baseUrl;
     public static boolean appVisible = false;
     private String onCloseUrl;
-    public static String URL_BUY_LTC = "https://buy.loafwallet.org";
+    private static String URL_BUY_LTC = "https://buy.loafwallet.org";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -99,7 +98,6 @@ public class FragmentBuy extends Fragment {
 
         webView.addJavascriptInterface(this, "Android");
 
-        baseUrl = URL_BUY_LTC;
         WebSettings webSettings = webView.getSettings();
         if (0 != (getActivity().getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)) {
             WebView.setWebContentsDebuggingEnabled(true);
@@ -108,15 +106,19 @@ public class FragmentBuy extends Fragment {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
-        String currentWalletAddress = BRSharedPrefs.getReceiveAddress(getContext());
-        String currencyCode = "USD";
+        String walletAddress = BRSharedPrefs.getReceiveAddress(getContext());
+        String currency = "USD";
         Long timestamp = new Date().getTime();
-        String uuidString = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String buyUrl = baseUrl + "/?address=" +
-                currentWalletAddress + "&code=" + currencyCode + "&idate=" + timestamp + "&uid=" + uuidString;
+        String uuid = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        String buyUrl = url(walletAddress, currency, timestamp, uuid);
         Log.d("BASEURL", "onCreate: theUrl: " + buyUrl);
         webView.loadUrl(buyUrl);
         return rootView;
+    }
+
+    private String url(Object... args) {
+        return String.format(URL_BUY_LTC + "/?address=%s&code=%s&idate=%s&uid=%s", args);
     }
 
 
