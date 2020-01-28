@@ -1,5 +1,6 @@
 package com.breadwallet.presenter.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.entities.Partner;
+import com.breadwallet.tools.animation.BRAnimator;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
     private final LayoutInflater inflater;
     private List<Partner> partners;
 
-    public BuyPartnersAdapter(Context context, @NonNull List<Partner> partners) {
+    BuyPartnersAdapter(Context context, @NonNull List<Partner> partners) {
         inflater = LayoutInflater.from(context);
         this.partners = partners;
     }
@@ -42,6 +44,13 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
         holder.logo.setImageResource(partner.getLogo());
         holder.title.setText(partner.getTitle());
         holder.detail.setText(partner.getDetails());
+
+        holder.buyPartnerWrapper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BRAnimator.showBuyFragment((Activity) v.getContext());
+            }
+        });
     }
 
     @Override
@@ -49,12 +58,12 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
         return partners.size();
     }
 
-
     class PartnerViewHolder extends RecyclerView.ViewHolder {
 
         final ImageView logo;
         final TextView title;
         final TextView detail;
+        final View buyPartnerWrapper;
 
         PartnerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,6 +71,7 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
             logo = itemView.findViewById(R.id.logo);
             title = itemView.findViewById(R.id.titleLbl);
             detail = itemView.findViewById(R.id.detailLbl);
+            buyPartnerWrapper = itemView.findViewById(R.id.buyPartnerWrapper);
         }
     }
 }
