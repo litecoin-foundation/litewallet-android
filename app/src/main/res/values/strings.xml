@@ -746,4 +746,10 @@
     <string name="BuyCenter.simplex.Title" tools:ignore="ExtraTranslation">Simplex</string>
     <string name="BuyCenter.simplex.FinancialDetails" tools:ignore="ExtraTranslation">"• Get Litecoin in 5 mins!\n• Buy Litecoin via credit card\n• Passport or State ID"</string>
 
+    <string name="cad_currency_code" translatable="false">CAD</string>
+    <string name="eur_currency_code" translatable="false">EUR</string>
+    <string name="jpy_currency_code" translatable="false">JPY</string>
+    <string name="usd_currency_code" translatable="false">USD</string>
+    <string name="choose_fiat">Choose Fiat:</string>
+
 </resources>

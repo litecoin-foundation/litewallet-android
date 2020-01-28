@@ -58,6 +58,15 @@ public class FragmentBuy extends Fragment {
     public static boolean appVisible = false;
     private String onCloseUrl;
     private static String URL_BUY_LTC = "https://buy.loafwallet.org";
+    static final String CURRENCY_KEY = "currency_code_key";
+
+    public static Fragment newInstance(String currency) {
+        Bundle bundle = new Bundle();
+        bundle.putString(CURRENCY_KEY, currency);
+        Fragment fragment = new FragmentBuy();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -107,7 +116,7 @@ public class FragmentBuy extends Fragment {
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
         String walletAddress = BRSharedPrefs.getReceiveAddress(getContext());
-        String currency = "USD";
+        String currency = getArguments().getString(CURRENCY_KEY);
         Long timestamp = new Date().getTime();
         String uuid = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
