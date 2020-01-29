@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.google.firebase.crashlytics'
+
 android {
     signingConfigs {
         release {
@@ -125,6 +127,14 @@ android {
                 minifyEnabled = false
                 debuggable = false
             }
+
+            firebaseCrashlytics {
+                // Enable processing and uploading of native symbols to Crashlytics
+                // servers. By default, this is disabled to improve build speeds.
+                // This flag must be enabled to see properly-symbolicated native
+                // stack traces in the Crashlytics dashboard.
+                nativeSymbolUploadEnabled true
+            }
         }
         debug {
             debuggable = true
@@ -166,21 +176,25 @@ dependencies {
     implementation 'org.eclipse.jetty.websocket:websocket-server:9.2.19.v20160908'
     implementation 'org.eclipse.jetty:jetty-continuation:9.2.19.v20160908'
     implementation 'org.slf4j:slf4j-api:1.7.22'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
-    implementation 'com.google.firebase:firebase-core:11.8.0'
-    implementation 'com.google.firebase:firebase-crash:11.8.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
     implementation 'io.sigpipe:jbsdiff:1.0'
     implementation 'com.google.zxing:core:3.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.test.ext:junit:1.1.1'
-    implementation 'androidx.test:rules:1.1.1'
+    implementation 'androidx.test:rules:1.2.0'
     implementation 'junit:junit:4.12'
-    implementation 'androidx.test.espresso:espresso-core:3.1.0'
+    implementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Firebase Crashlytics.
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
+
+    // Firebase Crashlytics NDK
+    implementation 'com.google.firebase:firebase-crashlytics-ndk:17.0.0-beta01'
 
 }
