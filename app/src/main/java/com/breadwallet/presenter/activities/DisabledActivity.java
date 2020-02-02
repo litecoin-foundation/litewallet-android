@@ -43,14 +43,8 @@ public class DisabledActivity extends BRActivity {
         resetButton = (Button) findViewById(R.id.reset_button);
 
         ImageButton faq = (ImageButton) findViewById(R.id.faq_button);
-
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(DisabledActivity.this, BRConstants.walletDisabled);
-            }
-        });
+        //TODO: all views are using the layout of this button. Views should be refactored without it
+        // Hiding until layouts are built.
 
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
