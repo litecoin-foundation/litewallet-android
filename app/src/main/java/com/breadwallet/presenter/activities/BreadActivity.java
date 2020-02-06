@@ -169,7 +169,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         onConnectionChanged(InternetManager.getInstance().isConnected(this));
 
         updateUI();
-
     }
 
     @Override

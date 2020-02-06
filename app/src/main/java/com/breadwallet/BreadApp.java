@@ -20,7 +20,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
 /**
  * BreadWallet
  * <p/>
@@ -50,7 +49,7 @@ public class BreadApp extends Application {
     private static final String TAG = BreadApp.class.getName();
     public static int DISPLAY_HEIGHT_PX;
     FingerprintManager mFingerprintManager;
-    public static String HOST = "api.breadwallet.com";
+    public static String HOST = "api.loafwallet.org";
     private static List<OnAppBackgrounded> listeners;
     private static Timer isBackgroundChecker;
     public static AtomicInteger activityCounter = new AtomicInteger();
@@ -64,7 +63,6 @@ public class BreadApp extends Application {
         boolean enableCrashlytics = true;
         if (Utils.isEmulatorOrDebug(this)) {
 //            BRKeyStore.putFailCount(0, this);
-            HOST = "stage2.breadwallet.com";
             enableCrashlytics = false;
         }
 
