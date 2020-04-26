@@ -131,7 +131,7 @@ public class BRConstants {
      * Donation
      */
     public static final Pair[] DONATION_ADDRESSES = new Pair[]
-            {
+            { 
                     Pair.create("Litewallet Hardware Fundraiser", "MJ4W7NZya4SzE7R6xpEVdamGCimaQYPiWu"),
                     Pair.create("Litecoin Foundation", "MVZj7gBRwcVpa9AAWdJm8A3HqTst112eJe")
             };
@@ -166,9 +166,9 @@ public class BRConstants {
     public static final String REDDIT_LINK = "https://www.reddit.com/r/litecoin";
     public static final String WEB_LINK = "https://loafwallet.org";
     public static final String TOS_LINK = "https://loafwallet.org/tos";
-
+ 
     public static final String BLOCK_EXPLORER_BASE_URL = BuildConfig.LITECOIN_TESTNET ? "https://testnet.litecore.io/tx/" : "https://insight.litecore.io/tx/";
-
+  
     private BRConstants() {
     }
 
