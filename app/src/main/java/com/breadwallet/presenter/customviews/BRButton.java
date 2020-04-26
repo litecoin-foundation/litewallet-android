@@ -19,10 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 
-<<<<<<< HEAD
 import androidx.annotation.ColorRes;
-=======
->>>>>>> resolution-conflicts
 import androidx.annotation.Nullable;
 
 import com.breadwallet.R;
@@ -57,11 +54,7 @@ import timber.log.Timber;
  */
 @SuppressLint("AppCompatCustomView") // we don't need to support older versions
 public class BRButton extends Button {
-<<<<<<< HEAD
     private static final int ANIMATION_DURATION = 30;
-=======
-    private static int ANIMATION_DURATION = 30;
->>>>>>> resolution-conflicts
     private Bitmap shadow;
     private Rect shadowRect;
     private RectF bRect;
@@ -154,16 +147,6 @@ public class BRButton extends Button {
         }
 
         return super.onTouchEvent(event);
-<<<<<<< HEAD
-=======
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        width = w;
-        height = h;
->>>>>>> resolution-conflicts
     }
 
     private void correctTextSizeIfNeeded() {
