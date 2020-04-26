@@ -29,15 +29,9 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 23
         targetSdkVersion 29
-<<<<<<< HEAD
         versionCode 610
         versionName "v1.19.2"
         multiDexEnabled true
-=======
-         versionCode 609
-        versionName "v1.19.1"
-         multiDexEnabled true
->>>>>>> origin/kcw-grunt/v1.19.1
 
         // Similar to other properties in the defaultConfig block,
         // you can configure the ndk block for each product flavor
