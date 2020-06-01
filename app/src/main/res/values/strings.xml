@@ -751,4 +751,7 @@
   <string name="FeeSelector.luxuryTime">2.5 - 5+ minutes</string>
   <string name="FeeSelector.luxuryMessage">This option virtually guarantees acceptance of your transaction though you are paying a premium.</string>
 
+  <string name="BottomNavItem.History.title">History</string>
+  <string name="BottomNavItem.Spend.title">Spend</string>
+
 </resources>
