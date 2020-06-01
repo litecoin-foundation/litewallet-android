@@ -37,7 +37,6 @@ import com.breadwallet.tools.util.Utils;
  */
 @SuppressLint("AppCompatCustomView") // we don't need to support older versions
 public class BRText extends TextView {
-    private static final String TAG = BRText.class.getName();
 
     public BRText(Context context) {
         super(context);
