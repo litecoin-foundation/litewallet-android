@@ -235,7 +235,7 @@
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Gérer le portefeuille</string>
   <!-- Buy bitcoin title -->
-  <string name="MenuButton.buy">Acheter des Litecoins</string>
+  <string name="MenuButton.buy">Acheter</string>
   <!-- Menu button title -->
   <string name="MenuButton.lock">Verrouiller le portefeuille</string>
   <!-- Menu button title -->
