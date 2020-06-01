@@ -2,7 +2,9 @@ package com.breadwallet.presenter.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -116,7 +118,7 @@ public class FragmentManage extends Fragment {
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                if(observer.isAlive()) {
+                if (observer.isAlive()) {
                     observer.removeOnGlobalLayoutListener(this);
                 }
                 BRAnimator.animateBackgroundDim(layout, false);
@@ -153,7 +155,6 @@ public class FragmentManage extends Fragment {
     }
 
     public interface OnNameChanged {
-
         void onNameChanged(String name);
     }
 

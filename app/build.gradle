@@ -183,7 +183,7 @@ dependencies {
     implementation 'org.eclipse.jetty:jetty-continuation:9.2.19.v20160908'
     implementation 'org.slf4j:slf4j-api:1.7.22'
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
