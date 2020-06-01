@@ -58,4 +58,11 @@
         <item name="android:background">@drawable/fee_selector_bg_end</item>
     </style>
 
+    <style name="BottomNavTheme" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorOnSurface">@color/blue_grey</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

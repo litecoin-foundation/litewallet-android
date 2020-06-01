@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_history"
+        android:enabled="true"
+        android:icon="@drawable/ic_nav_history"
+        android:title="History" />
+
+    <item
+        android:id="@+id/nav_send"
+        android:enabled="true"
+        android:icon="@drawable/ic_send"
+        android:title="Send" />
+
+    <item
+        android:id="@+id/nav_spend"
+        android:enabled="true"
+        android:icon="@drawable/ic_nav_spend"
+        android:title="Spend" />
+
+    <item
+        android:id="@+id/nav_receive"
+        android:enabled="true"
+        android:icon="@drawable/ic_receive"
+        android:title="Receive" />
+
+    <item
+        android:id="@+id/nav_buy"
+        android:enabled="true"
+        android:icon="@drawable/ic_nav_buy"
+        android:title="Buy" />
+
+</menu>

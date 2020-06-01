@@ -10,12 +10,12 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -47,6 +47,7 @@ import com.breadwallet.tools.util.BRExchange;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRPeerManager;
 import com.breadwallet.wallet.BRWalletManager;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.platform.APIClient;
 
 import java.math.BigDecimal;
@@ -89,22 +90,13 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         BRPeerManager.OnTxStatusUpdate, BRSharedPrefs.OnIsoChangedListener,
         TransactionDataSource.OnTxAddedListener, FragmentManage.OnNameChanged, InternetManager.ConnectionReceiverListener {
 
-    private static final String TAG = BreadActivity.class.getName();
-
-    private LinearLayout sendButton;
-    private LinearLayout receiveButton;
-    //TODO: Add back when server can handle the buy
-    //private LinearLayout buyButton;
-    private LinearLayout menuButton;
     public static final Point screenParametersPoint = new Point();
 
     private InternetManager mConnectionReceiver;
     private TextView primaryPrice;
     private TextView secondaryPrice;
     private TextView equals;
-    private int progress = 0;
     private TextView manageText;
-    //    private TextView walletName;
     private ConstraintLayout walletProgressLayout;
 
     private LinearLayout toolbarLayout;
@@ -112,17 +104,16 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     private ImageButton searchIcon;
     public ViewFlipper barFlipper;
     private BRSearchBar searchBar;
-    //    private boolean isSwapped;
     private ConstraintLayout toolBarConstraintLayout;
     private String savedFragmentTag;
     private boolean uiIsDone;
 
     private static BreadActivity app;
+    private BottomNavigationView bottomNav;
 
     public static BreadActivity getApp() {
         return app;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,12 +121,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         setContentView(R.layout.activity_bread);
         BRWalletManager.getInstance().addBalanceChangedListener(this);
         BRPeerManager.getInstance().addStatusUpdateListener(this);
-        BRPeerManager.setOnSyncFinished(new BRPeerManager.OnSyncSucceeded() {
-            @Override
-            public void onFinished() {
-                //put some here
-            }
-        });
         BRSharedPrefs.addIsoChangedListener(this);
 
         app = this;
@@ -167,7 +152,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 }
             }, 1000);
 
-
         onConnectionChanged(InternetManager.getInstance().isConnected(this));
 
         updateUI();
@@ -195,40 +179,34 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     private void setListeners() {
-        sendButton.setOnClickListener(new View.OnClickListener() {
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSendFragment(BreadActivity.this, null);
-
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_history:
+                        break;
+                    case R.id.nav_send:
+                        if (BRAnimator.isClickAllowed()) {
+                            BRAnimator.showSendFragment(BreadActivity.this, null);
+                        }
+                        break;
+                    case R.id.nav_spend:
+                        break;
+                    case R.id.nav_receive:
+                        if (BRAnimator.isClickAllowed()) {
+                            BRAnimator.showReceiveFragment(BreadActivity.this, true);
+                        }
+                        break;
+                    case R.id.nav_buy:
+                        if (BRAnimator.isClickAllowed()) {
+                            BRAnimator.showMenuFragment(BreadActivity.this);
+                        }
+                        break;
+                }
+                return true;
             }
         });
 
-        receiveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showReceiveFragment(BreadActivity.this, true);
-            }
-        });
-        //TODO: Add back when server can handle the buy
-        //        buyButton.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View v) {
-        //                if (!BRAnimator.isClickAllowed()) return;
-        //                BRAnimator.showBuyFragment(BreadActivity.this);
-        //            }
-        //        });
-
-        menuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                //start the server for Buy Bitcoin
-                BRAnimator.showMenuFragment(BreadActivity.this);
-
-            }
-        });
         manageText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -242,6 +220,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 transaction.commit();
             }
         });
+
         primaryPrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,7 +242,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 searchBar.onShow(true);
             }
         });
-
     }
 
     private void swap() {
@@ -274,7 +252,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     private void setPriceTags(boolean ltcPreferred, boolean animate) {
-
         ConstraintSet set = new ConstraintSet();
         set.clone(toolBarConstraintLayout);
 
@@ -376,7 +353,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         BRAnimator.showFragmentByTag(this, savedFragmentTag);
         savedFragmentTag = null;
         TxManager.getInstance().onResume(BreadActivity.this);
-
     }
 
     private void setupNetworking() {
@@ -392,13 +368,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         super.onPause();
         appVisible = false;
         saveVisibleFragment();
-
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
     }
 
     @Override
@@ -416,35 +385,22 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 }
             });
         }
-
     }
 
     private void initializeViews() {
-        // Always cast your custom Toolbar here, and set it as the ActionBar.
-        Toolbar toolBar = (Toolbar) findViewById(R.id.bread_bar);
-        sendButton = (LinearLayout) findViewById(R.id.send_layout);
-        receiveButton = (LinearLayout) findViewById(R.id.receive_layout);
+        bottomNav = findViewById(R.id.bottomNav);
+        manageText = findViewById(R.id.manage_text);
+        primaryPrice = findViewById(R.id.primary_price);
+        secondaryPrice = findViewById(R.id.secondary_price);
+        equals = findViewById(R.id.equals);
+        TextView emptyTip = findViewById(R.id.empty_tx_tip);
+        toolBarConstraintLayout = findViewById(R.id.bread_toolbar);
+        walletProgressLayout = findViewById(R.id.loading_wallet_layout);
 
-        //TODO: Add back when server can handle the buy
-        //buyButton = (LinearLayout) findViewById(R.id.buy_layout);
-        //walletName = (TextView) findViewById(R.id.wallet_name_text);
-
-
-        menuButton = (LinearLayout) findViewById(R.id.menu_layout);
-        manageText = (TextView) findViewById(R.id.manage_text);
-        primaryPrice = (TextView) findViewById(R.id.primary_price);
-        secondaryPrice = (TextView) findViewById(R.id.secondary_price);
-        equals = (TextView) findViewById(R.id.equals);
-        // TextView priceChange = (TextView) findViewById(R.id.price_change_text);
-        TextView emptyTip = (TextView) findViewById(R.id.empty_tx_tip);
-        toolBarConstraintLayout = (ConstraintLayout) findViewById(R.id.bread_toolbar);
-        walletProgressLayout = (ConstraintLayout) findViewById(R.id.loading_wallet_layout);
-
-        RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.main_layout);
-        toolbarLayout = (LinearLayout) findViewById(R.id.toolbar_layout);
-        searchIcon = (ImageButton) findViewById(R.id.search_icon);
-        barFlipper = (ViewFlipper) findViewById(R.id.tool_bar_flipper);
-        searchBar = (BRSearchBar) findViewById(R.id.search_bar);
+        toolbarLayout = findViewById(R.id.toolbar_layout);
+        searchIcon = findViewById(R.id.search_icon);
+        barFlipper = findViewById(R.id.tool_bar_flipper);
+        searchBar = findViewById(R.id.search_bar);
 
         final ViewTreeObserver observer = primaryPrice.getViewTreeObserver();
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -458,7 +414,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 setPriceTags(BRSharedPrefs.getPreferredLTC(BreadActivity.this), false);
             }
         });
-
     }
 
     private void saveVisibleFragment() {
@@ -468,34 +423,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         savedFragmentTag = getFragmentManager().getBackStackEntryAt(0).getName();
     }
 
-    //returns x-pos relative to root layout
-    private float getRelativeX(View myView) {
-        if (myView.getParent() == myView.getRootView())
-            return myView.getX();
-        else
-            return myView.getX() + getRelativeX((View) myView.getParent());
-    }
-
-    //returns y-pos relative to root layout
-    private float getRelativeY(View myView) {
-        if (myView.getParent() == myView.getRootView())
-            return myView.getY();
-        else
-            return myView.getY() + getRelativeY((View) myView.getParent());
-    }
-
-    //0 crypto is left, 1 crypto is right
-    private int getSwapPosition() {
-        if (primaryPrice == null || secondaryPrice == null) {
-            return 0;
-        }
-        return getRelativeX(primaryPrice) < getRelativeX(secondaryPrice) ? 0 : 1;
-    }
-
     @Override
     public void onBalanceChanged(final long balance) {
         updateUI();
-
     }
 
     @Override
@@ -542,7 +472,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 TxManager.getInstance().updateTxList(BreadActivity.this);
             }
         });
-
     }
 
     @Override
@@ -606,13 +535,10 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                     }
                 }
             });
-
         } else {
             if (barFlipper != null)
                 barFlipper.setDisplayedChild(2);
             SyncManager.getInstance().stopSyncingProgressThread();
         }
-
     }
-
 }
