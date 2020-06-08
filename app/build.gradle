@@ -10,7 +10,7 @@ android {
     signingConfigs {
         release
     }
-    def Properties props = new Properties()
+    Properties props = new Properties()
     def propFile = file('../release.properties')
     if (propFile.canRead()){
         props.load(new FileInputStream(propFile))
@@ -200,13 +200,13 @@ dependencies {
     implementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // add the Firebase SDK for Google Analytics
-    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-analytics:17.4.2'
 
     // Firebase Crashlytics.
-    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0'
 
     // Firebase Crashlytics NDK
-    implementation 'com.google.firebase:firebase-crashlytics-ndk:17.0.0-beta01'
+    implementation 'com.google.firebase:firebase-crashlytics-ndk:17.0.0'
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
