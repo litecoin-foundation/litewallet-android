@@ -30,6 +30,7 @@ import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRNotificationBar;
 import com.breadwallet.presenter.entities.CurrencyEntity;
+import com.breadwallet.presenter.spend.AuthBottomSheetDialogFragment;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.TextSizeTransition;
 import com.breadwallet.tools.manager.BRSharedPrefs;
@@ -47,6 +48,7 @@ import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRPeerManager;
 import com.breadwallet.wallet.BRWalletManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.platform.APIClient;
 
 import java.math.BigDecimal;
@@ -189,6 +191,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                         }
                         break;
                     case R.id.nav_spend:
+                        BottomSheetDialogFragment fragment = new AuthBottomSheetDialogFragment();
+                        fragment.show(getSupportFragmentManager(), fragment.getTag());
                         break;
                     case R.id.nav_receive:
                         if (BRAnimator.isClickAllowed()) {
