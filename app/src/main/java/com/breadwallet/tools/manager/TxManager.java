@@ -134,7 +134,6 @@ public class TxManager {
                 });
             }
         });
-
     }
 
     public void showPrompt(Activity app, PromptManager.PromptItem item) {
@@ -161,9 +160,7 @@ public class TxManager {
         } else {
             if (item != null)
                 BREventManager.getInstance().pushEvent("prompt." + PromptManager.getInstance().getPromptName(item) + ".dismissed");
-
         }
-
     }
 
     private void showNextPrompt(Activity app) {
@@ -216,14 +213,12 @@ public class TxManager {
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-//                Toast.makeText(BreadActivity.this, "on Move ", Toast.LENGTH_SHORT).show();
                 return false;
             }
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 hidePrompt(app, null);
-                //Remove swiped item from list and notify the RecyclerView
             }
 
             @Override
