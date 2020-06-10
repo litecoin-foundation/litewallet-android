@@ -17,7 +17,7 @@
     <dimen name="header">18sp</dimen>
     <dimen name="sub_header">16sp</dimen>
     <dimen name="register_margin">16dp</dimen>
-    <dimen name="register_field_margin_top">10dp</dimen>
+    <dimen name="register_field_margin_top">5dp</dimen>
 
 
 </resources>
