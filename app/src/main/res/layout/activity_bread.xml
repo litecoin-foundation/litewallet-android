@@ -26,8 +26,8 @@
 
         <ViewFlipper
             android:id="@+id/tool_bar_flipper"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:clipChildren="false"
             android:clipToPadding="false">
 
@@ -38,9 +38,7 @@
                 android:background="@color/litecoin_litewallet_blue"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:contentInsetStart="0dp"
-                android:contentInsetLeft="0dp"
-                app:contentInsetLeft="0dp"
+                app:contentInsetEnd="0dp"
                 app:contentInsetStart="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,182 +50,121 @@
                     android:clipToPadding="false"
                     android:layoutDirection="ltr">
 
-                    <com.breadwallet.presenter.customviews.BRText
+                    <Button
                         android:id="@+id/primary_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:fontFamily="@font/barlowsemicondensed_medium"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
                         android:textColor="@color/white"
                         android:textSize="30sp"
-                        app:customTFont="BarlowSemiCondensed-Medium.ttf"
                         tools:ignore="MissingConstraints"
                         tools:text="$1000.00" />
 
-                    <com.breadwallet.presenter.customviews.BRText
+                    <TextView
                         android:id="@+id/equals"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlowsemicondensed_medium"
                         android:text="="
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        app:customTFont="BarlowSemiCondensed-Medium.ttf"
                         tools:ignore="MissingConstraints" />
 
-                    <com.breadwallet.presenter.customviews.BRText
+                    <Button
                         android:id="@+id/secondary_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:fontFamily="@font/barlowsemicondensed_medium"
                         android:gravity="left"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
-                        app:customTFont="BarlowSemiCondensed-Medium.ttf"
                         tools:ignore="MissingConstraints"
                         tools:text="L100" />
 
-                    <com.breadwallet.presenter.customviews.BRText
+                    <ImageButton
+                        android:id="@+id/menuBut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_menu"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
                         android:id="@+id/price_change_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        app:customTFont="BarlowSemiCondensed-Medium.ttf"
-                        app:layout_constraintLeft_toLeftOf="@+id/primary_price"
-                        app:layout_constraintTop_toBottomOf="@+id/primary_price" />
-
-                    <com.breadwallet.presenter.customviews.BRText
-                        android:id="@+id/manage_text"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/barlowsemicondensed_medium"
                         android:textColor="@color/white"
                         android:textSize="18sp"
-                        android:visibility="gone"
-                        app:customTFont="BarlowSemiCondensed-Bold.ttf"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintBottom_toTopOf="@+id/priceDateLbl"
+                        app:layout_constraintEnd_toStartOf="@+id/menuBut"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tools:text="$44.11" />
 
-                    <ImageButton
-                        android:id="@+id/search_icon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginRight="16dp"
-                        android:background="@drawable/ic_search_black_24dp"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/priceDateLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/barlowsemicondensed_light"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/price_change_text"
+                        app:layout_constraintTop_toBottomOf="@+id/price_change_text"
+                        tools:text="as of May 20,8:53PM" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.Toolbar>
 
-            <com.breadwallet.presenter.customviews.BRSearchBar
-                android:id="@+id/search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:background="@color/litecoin_litewallet_blue"
-                android:contentInsetStart="0dp"
-                android:contentInsetLeft="0dp"
-                app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp"
-                tools:layout_constraintTop_creator="1" />
-
-            <com.breadwallet.presenter.customviews.BRNotificationBar
-                android:id="@+id/notification_bar"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:background="@color/litecoin_litewallet_blue"
-                android:contentInsetStart="0dp"
-                android:contentInsetLeft="0dp"
-                app:breadText="No internet connection found.\nCheck your connection and try again."
-                app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp"
-                tools:layout_constraintTop_creator="1" />
-
         </ViewFlipper>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/loading_wallet_layout"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="1px"
-            android:animateLayoutChanges="true"
-            android:background="@drawable/loading_wallet_layout"
-            android:visibility="visible"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintTop_creator="1">
-
-            <com.breadwallet.presenter.customviews.BRText
-                android:id="@+id/loading_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/Account.loadingMessage"
-                android:textColor="@color/white"
-                app:customTFont="BarlowSemiCondensed-Bold.ttf"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35000002"
-                tools:layout_constraintLeft_creator="1" />
-
-            <ProgressBar
-                android:id="@+id/load_wallet_progress"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                android:layout_height="4dp"
-                android:layout_marginStart="96dp"
-                android:layout_marginLeft="96dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="96dp"
-                android:layout_marginRight="96dp"
-                android:progressDrawable="@drawable/load_wallet_progress"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loading_label" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/recycler_layout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/bottomNav"
         android:layout_below="@+id/toolbar_layout"
-        android:animateLayoutChanges="true"
-        android:orientation="vertical">
+        android:animateLayoutChanges="true">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tx_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:clipToPadding="false"
             android:paddingStart="8dp"
             android:paddingTop="16dp"
             android:paddingEnd="8dp"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            tools:listitem="@layout/tx_item" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/empty_tx_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/barlowsemicondensed_regular"
+            android:text="@string/TransactionDetails.emptyMessage"
+            android:textColor="@color/light_gray"
+            android:textSize="18sp"
+            android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/empty_tx_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/TransactionDetails.emptyMessage"
-        android:textColor="@color/light_gray"
-        android:textSize="18sp" />
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
