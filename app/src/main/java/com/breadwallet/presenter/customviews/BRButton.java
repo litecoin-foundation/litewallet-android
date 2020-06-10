@@ -96,8 +96,11 @@ public class BRButton extends Button {
         shadowRect = new Rect(0, 0, 100, 100);
         bRect = new RectF(0, 0, 100, 100);
         TypedArray a = ctx.obtainStyledAttributes(attrs, R.styleable.BRButton);
-        String customFont = a.getString(R.styleable.BRButton_customBFont);
-        FontManager.setCustomFont(ctx, this, Utils.isNullOrEmpty(customFont) ? "BarlowSemiCondensed-Medium.ttf" : customFont);
+
+        if (!isInEditMode()) {
+            String customFont = a.getString(R.styleable.BRButton_customBFont);
+            FontManager.setCustomFont(ctx, this, Utils.isNullOrEmpty(customFont) ? "BarlowSemiCondensed-Medium.ttf" : customFont);
+        }
         int px16 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
 
         isBreadButton = a.getBoolean(R.styleable.BRButton_isBreadButton, false);
