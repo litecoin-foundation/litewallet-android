@@ -77,5 +77,9 @@
     <color name="white_30_alpha">#b3ffffff</color>
 
     <color name="blue_grey">#7c98c7</color>
+    <color name="white_two">#f5f5f5</color>
+    <color name="jade_green">#27ae60</color>
+    <color name="very_light_pink">#bdbdbd</color>
+    <color name="very_light_pink_two">#f2f2f2</color>
 
 </resources>
