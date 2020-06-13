@@ -18,6 +18,7 @@
     <dimen name="sub_header">16sp</dimen>
     <dimen name="register_margin">16dp</dimen>
     <dimen name="register_field_margin_top">5dp</dimen>
+    <dimen name="transfer_fiat_options_radius">10dp</dimen>
 
 
 </resources>
