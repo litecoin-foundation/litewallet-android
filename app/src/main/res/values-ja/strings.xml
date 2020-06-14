@@ -748,4 +748,5 @@
     <string name="FeeSelector.luxury">ぜいたく</string>
     <string name="FeeSelector.luxuryMessage">このオプションは、プレミアムを支払っていますが、トランザクションの受け入れを事実上保証します。</string>
     <string name="FeeSelector.luxuryTime">2.5～5+分</string>
+    <string name="BottomNavItem.History.title">歴史</string>
 </resources>
