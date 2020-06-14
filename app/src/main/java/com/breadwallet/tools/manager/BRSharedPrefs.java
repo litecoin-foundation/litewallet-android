@@ -44,28 +44,20 @@ import static com.breadwallet.tools.util.BRConstants.GEO_PERMISSIONS_REQUESTED;
 
 public class BRSharedPrefs {
 
-    public static List<OnIsoChangedListener> isoChangedListeners = new ArrayList<>();
+    private static final List<OnIsoChangedListener> isoChangedListeners = new ArrayList<>();
 
     public interface OnIsoChangedListener {
         void onIsoChanged(String iso);
     }
 
     public static void addIsoChangedListener(OnIsoChangedListener listener) {
-        if (isoChangedListeners == null) {
-            isoChangedListeners = new ArrayList<>();
-        }
-        if (!isoChangedListeners.contains(listener))
-            isoChangedListeners.add(listener);
+        if (isoChangedListeners.contains(listener)) return;
+        isoChangedListeners.add(listener);
     }
 
     public static void removeListener(OnIsoChangedListener listener) {
-        if (isoChangedListeners == null) {
-            isoChangedListeners = new ArrayList<>();
-        }
         isoChangedListeners.remove(listener);
-
     }
-
 
     public static String getIso(Context context) {
         SharedPreferences settingsToGet = context.getSharedPreferences(BRConstants.PREFS_NAME, 0);
@@ -94,7 +86,6 @@ public class BRSharedPrefs {
     public static boolean getPhraseWroteDown(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(BRConstants.PHRASE_WRITTEN, false);
-
     }
 
     public static void putPhraseWroteDown(Context context, boolean check) {
@@ -107,7 +98,6 @@ public class BRSharedPrefs {
     public static boolean getGreetingsShown(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean("greetingsShown", false);
-
     }
 
     public static void putGreetingsShown(Context context, boolean shown) {
