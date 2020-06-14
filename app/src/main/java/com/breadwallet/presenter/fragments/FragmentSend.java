@@ -101,7 +101,6 @@ public class FragmentSend extends Fragment {
     private EditText commentEdit;
     private StringBuilder amountBuilder;
     private TextView isoText;
-    private TextView donate_isoText;
     private EditText amountEdit;
     private TextView balanceText;
     private TextView feeText;
@@ -129,31 +128,31 @@ public class FragmentSend extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_send, container, false);
-        backgroundLayout = (ScrollView) rootView.findViewById(R.id.background_layout);
-        signalLayout = (LinearLayout) rootView.findViewById(R.id.signal_layout);
-        keyboard = (BRKeyboard) rootView.findViewById(R.id.keyboard);
+        backgroundLayout = rootView.findViewById(R.id.background_layout);
+        signalLayout = rootView.findViewById(R.id.signal_layout);
+        keyboard = rootView.findViewById(R.id.keyboard);
         keyboard.setBRButtonBackgroundResId(R.drawable.keyboard_white_button);
         keyboard.setBRKeyboardColor(R.color.white);
-        isoText = (TextView) rootView.findViewById(R.id.iso_text);
+        isoText = rootView.findViewById(R.id.iso_text);
 
-        addressEdit = (EditText) rootView.findViewById(R.id.address_edit);
-        scan = (Button) rootView.findViewById(R.id.scan);
-        paste = (Button) rootView.findViewById(R.id.paste_button);
-        send = (Button) rootView.findViewById(R.id.send_button);
-        donate = (Button) rootView.findViewById(R.id.donate_button);
-        commentEdit = (EditText) rootView.findViewById(R.id.comment_edit);
-        amountEdit = (EditText) rootView.findViewById(R.id.amount_edit);
-        balanceText = (TextView) rootView.findViewById(R.id.balance_text);
-        feeText = (TextView) rootView.findViewById(R.id.fee_text);
-        edit = (ImageView) rootView.findViewById(R.id.edit);
-        isoButton = (Button) rootView.findViewById(R.id.iso_button);
-        keyboardLayout = (LinearLayout) rootView.findViewById(R.id.keyboard_layout);
-        amountLayout = (ConstraintLayout) rootView.findViewById(R.id.amount_layout);
-        feeLayout = (BRLinearLayoutWithCaret) rootView.findViewById(R.id.fee_buttons_layout);
-        feeDescription = (BRText) rootView.findViewById(R.id.fee_description);
-        warningText = (BRText) rootView.findViewById(R.id.warning_text);
+        addressEdit = rootView.findViewById(R.id.address_edit);
+        scan = rootView.findViewById(R.id.scan);
+        paste = rootView.findViewById(R.id.paste_button);
+        send = rootView.findViewById(R.id.send_button);
+        donate = rootView.findViewById(R.id.donate_button);
+        commentEdit = rootView.findViewById(R.id.comment_edit);
+        amountEdit = rootView.findViewById(R.id.amount_edit);
+        balanceText = rootView.findViewById(R.id.balance_text);
+        feeText = rootView.findViewById(R.id.fee_text);
+        edit = rootView.findViewById(R.id.edit);
+        isoButton = rootView.findViewById(R.id.iso_button);
+        keyboardLayout = rootView.findViewById(R.id.keyboard_layout);
+        amountLayout = rootView.findViewById(R.id.amount_layout);
+        feeLayout = rootView.findViewById(R.id.fee_buttons_layout);
+        feeDescription = rootView.findViewById(R.id.fee_description);
+        warningText = rootView.findViewById(R.id.warning_text);
 
-        close = (ImageButton) rootView.findViewById(R.id.close_button);
+        close = rootView.findViewById(R.id.close_button);
         selectedIso = BRSharedPrefs.getPreferredLTC(getContext()) ? "LTC" : BRSharedPrefs.getIso(getContext());
 
         amountBuilder = new StringBuilder(0);
@@ -181,7 +180,7 @@ public class FragmentSend extends Fragment {
         keyboardIndex = signalLayout.indexOfChild(keyboardLayout);
         //TODO: all views are using the layout of this button. Views should be refactored without it
         // Hiding until layouts are built.
-        ImageButton faq = (ImageButton) rootView.findViewById(R.id.faq_button);
+        ImageButton faq = rootView.findViewById(R.id.faq_button);
 
         showKeyboard(false);
 
@@ -312,9 +311,6 @@ public class FragmentSend extends Fragment {
                 return false;
             }
         });
-
-//        commentEdit.addTextChangedListener(new BRTextWatcher());
-//        addressEdit.addTextChangedListener(new BRTextWatcher());
 
         paste.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -612,7 +608,7 @@ public class FragmentSend extends Fragment {
         if (new BigDecimal(currAmount.concat(String.valueOf(dig))).doubleValue()
                 <= BRExchange.getMaxAmount(getActivity(), iso).doubleValue()) {
             //do not insert 0 if the balance is 0 now
-            if (currAmount.equalsIgnoreCase("0")) amountBuilder = new StringBuilder("");
+            if (currAmount.equalsIgnoreCase("0")) amountBuilder = new StringBuilder();
             if ((currAmount.contains(".") && (currAmount.length() - currAmount.indexOf(".") > BRCurrency.getMaxDecimalPlaces(iso))))
                 return;
             amountBuilder.append(dig);

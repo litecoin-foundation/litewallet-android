@@ -748,4 +748,5 @@
     <string name="FeeSelector.luxury">Luxo</string>
     <string name="FeeSelector.luxuryMessage">Essa opção praticamente garante a aceitação de sua transação, embora você esteja pagando um prêmio.</string>
     <string name="FeeSelector.luxuryTime">2.5 - 5+ minutos</string>
+    <string name="BottomNavItem.History.title">HISTORY</string>
 </resources>
