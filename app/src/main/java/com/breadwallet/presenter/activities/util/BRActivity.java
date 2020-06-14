@@ -77,7 +77,7 @@ public class BRActivity extends FragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
-        // 123 is the qrCode result
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case BRConstants.PAY_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
