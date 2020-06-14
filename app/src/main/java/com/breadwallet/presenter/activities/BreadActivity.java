@@ -394,6 +394,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 setPriceTags(BRSharedPrefs.getPreferredLTC(BreadActivity.this), false);
             }
         });
+
+        ltcPriceLbl.setTextSize(PRIMARY_TEXT_SIZE);
     }
 
     private void saveVisibleFragment() {
