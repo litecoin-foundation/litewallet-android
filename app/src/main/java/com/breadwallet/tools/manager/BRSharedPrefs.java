@@ -130,17 +130,6 @@ public class BRSharedPrefs {
         editor.apply();
     }
 
-    public static String getWalletName(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        return prefs.getString(BRConstants.WALLET_NAME, "My Loaf");
-    }
-
-    public static void putWalletName(Context ctx, String name) {
-        SharedPreferences.Editor editor = ctx.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE).edit();
-        editor.putString(BRConstants.WALLET_NAME, name);
-        editor.apply();
-    }
-
     public static String getFirstAddress(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getString(BRConstants.FIRST_ADDRESS, "");
@@ -200,11 +189,6 @@ public class BRSharedPrefs {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putLong(BRConstants.SECURE_TIME_PREFS, date);
         editor.apply();
-    }
-
-    public static long getLastSyncTime(Context activity) {
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        return prefs.getLong("lastSyncTime", 0);
     }
 
     public static void putLastSyncTime(Context activity, long time) {
@@ -296,13 +280,6 @@ public class BRSharedPrefs {
     public static boolean getFeatureEnabled(Context activity, String feature) {
         SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(feature, false);
-    }
-
-    public static void putFeatureEnabled(Context activity, boolean enabled, String feature) {
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean(feature, enabled);
-        editor.apply();
     }
 
     public static boolean getGeoPermissionsRequested(Context activity) {
