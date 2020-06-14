@@ -93,8 +93,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         TransactionDataSource.OnTxAddedListener, InternetManager.ConnectionReceiverListener {
 
     public static final Point screenParametersPoint = new Point();
-    private static final float primaryTextSize = 24f;
-    private static final float secondaryTextSize = 12.8f;
+    private static final float PRIMARY_TEXT_SIZE = 24f;
+    private static final float SECONDARY_TEXT_SIZE = 12.8f;
 
     private InternetManager mConnectionReceiver;
     private Button primaryPrice;
@@ -133,8 +133,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
         setUpBarFlipper();
 
-        primaryPrice.setTextSize(primaryTextSize);
-        secondaryPrice.setTextSize(secondaryTextSize);
+        primaryPrice.setTextSize(PRIMARY_TEXT_SIZE);
+        secondaryPrice.setTextSize(SECONDARY_TEXT_SIZE);
 
         if (introSetPitActivity != null) introSetPitActivity.finish();
         if (introActivity != null) introActivity.finish();
@@ -252,8 +252,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             TransitionManager.beginDelayedTransition(toolBarConstraintLayout, transition);
         }
 
-        primaryPrice.setTextSize(ltcPreferred ? primaryTextSize : secondaryTextSize);
-        secondaryPrice.setTextSize(ltcPreferred ? secondaryTextSize : primaryTextSize);
+        primaryPrice.setTextSize(ltcPreferred ? PRIMARY_TEXT_SIZE : SECONDARY_TEXT_SIZE);
+        secondaryPrice.setTextSize(ltcPreferred ? SECONDARY_TEXT_SIZE : PRIMARY_TEXT_SIZE);
 
         int[] ids = {primaryPrice.getId(), secondaryPrice.getId(), equals.getId()};
         // Clear views constraints
