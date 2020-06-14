@@ -748,4 +748,5 @@
     <string name="FeeSelector.luxury">豪华</string>
     <string name="FeeSelector.luxuryMessage">尽管您要支付一定的费用，但此选项实际上可以保证您接受交易。</string>
     <string name="FeeSelector.luxuryTime">2.5 - 5+ 分钟</string>
+    <string name="BottomNavItem.History.title">历史</string>
 </resources>

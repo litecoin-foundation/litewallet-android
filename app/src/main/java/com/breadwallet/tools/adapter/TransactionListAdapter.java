@@ -78,8 +78,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private boolean updatingReverseTxHash;
     private boolean updatingData;
 
-//    private boolean updatingMetadata;
-
     public TransactionListAdapter(Context mContext, List<TxItem> items) {
         this.txResId = R.layout.tx_item;
         this.syncingResId = R.layout.syncing_item;
@@ -87,7 +85,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.mContext = mContext;
         items = new ArrayList<>();
         init(items);
-//        updateMetadata();
     }
 
     public void setItems(List<TxItem> items) {
@@ -98,14 +95,9 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if (items == null) items = new ArrayList<>();
         if (itemFeed == null) itemFeed = new ArrayList<>();
         if (backUpFeed == null) backUpFeed = new ArrayList<>();
-//        if (mds == null) mds = new HashMap<>();
-//        boolean updateMetadata = items.size() != 0 && backUpFeed.size() != items.size() && BRSharedPrefs.getAllowSpend(mContext);
         this.itemFeed = items;
         this.backUpFeed = items;
         updateTxHashes();
-
-//        if (updateMetadata)
-//            updateMetadata();
     }
 
     public void updateData() {
@@ -132,32 +124,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if (updatingReverseTxHash) return;
         updatingReverseTxHash = true;
 
-//        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                for (int i = 0; i < itemFeed.size(); i++)
-//                    itemFeed.get(i).txReversed = Utils.reverseHex(Utils.bytesToHex(itemFeed.get(i).getTxHash()));
-//                for (int i = 0; i < backUpFeed.size(); i++)
-//                    backUpFeed.get(i).txReversed = Utils.reverseHex(Utils.bytesToHex(backUpFeed.get(i).getTxHash()));
-//                updatingReverseTxHash = false;
-//            }
-//        });
     }
-
-    //update metadata ONLY when the feed is different than the new one
-//    private void updateMetadata() {
-//        if (updatingMetadata) return;
-//        updatingMetadata = true;
-//        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                long start = System.currentTimeMillis();
-//                mds = KVStoreManager.getInstance().getAllTxMD(mContext);
-//                updatingMetadata = false;
-//                TxManager.getInstance().updateTxList(mContext);
-//            }
-//        });
-//    }
 
     public List<TxItem> getItems() {
         return itemFeed;
@@ -165,7 +132,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // inflate the layout
         LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
         if (viewType == txType)
             return new TxHolder(inflater.inflate(txResId, parent, false));
