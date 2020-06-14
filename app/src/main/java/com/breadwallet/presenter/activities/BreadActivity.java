@@ -61,8 +61,6 @@ import timber.log.Timber;
 import static com.breadwallet.presenter.activities.ReEnterPinActivity.reEnterPinActivity;
 import static com.breadwallet.presenter.activities.SetPinActivity.introSetPitActivity;
 import static com.breadwallet.presenter.activities.intro.IntroActivity.introActivity;
-import static com.breadwallet.tools.animation.BRAnimator.primaryTextSize;
-import static com.breadwallet.tools.animation.BRAnimator.secondaryTextSize;
 import static com.breadwallet.tools.util.BRConstants.PLATFORM_ON;
 
 /**
@@ -95,6 +93,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         TransactionDataSource.OnTxAddedListener, InternetManager.ConnectionReceiverListener {
 
     public static final Point screenParametersPoint = new Point();
+    private static final float primaryTextSize = 24f;
+    private static final float secondaryTextSize = 12.8f;
 
     private InternetManager mConnectionReceiver;
     private Button primaryPrice;
@@ -133,7 +133,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
         setUpBarFlipper();
 
-        BRAnimator.init(this);
         primaryPrice.setTextSize(primaryTextSize);
         secondaryPrice.setTextSize(secondaryTextSize);
 
