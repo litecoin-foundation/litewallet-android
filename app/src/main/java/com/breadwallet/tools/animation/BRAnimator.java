@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
@@ -99,40 +100,13 @@ public class BRAnimator {
             transaction.commit();
     }
 
-    public static void showFragmentByTag(Activity app, String tag) {
-        Timber.d("showFragmentByTag: %s", tag);
-        if (tag == null) return;
-        //catch animation duration, make it 0 for no animation, then restore it.
-        final int slideAnimation = SLIDE_ANIMATION_DURATION;
-        try {
-            SLIDE_ANIMATION_DURATION = 0;
-            if (tag.equalsIgnoreCase(FragmentSend.class.getName())) {
-                showSendFragment(app, null);
-            } else if (tag.equalsIgnoreCase(FragmentReceive.class.getName())) {
-                showReceiveFragment(app, true);
-            } else if (tag.equalsIgnoreCase(FragmentRequestAmount.class.getName())) {
-                showRequestFragment(app, BRSharedPrefs.getReceiveAddress(app));
-            } else if (tag.equalsIgnoreCase(FragmentMenu.class.getName())) {
-                showMenuFragment(app);
-            } else {
-                Timber.d("showFragmentByTag: error, no such tag: %s", tag);
-            }
-        } finally {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    SLIDE_ANIMATION_DURATION = slideAnimation;
-                }
-            }, 800);
-        }
-    }
-
-    public static void showSendFragment(Activity app, final String bitcoinUrl) {
+    public static void showSendFragment(FragmentActivity app, final String bitcoinUrl) {
         if (app == null) {
             Timber.i("showSendFragment: app is null");
             return;
         }
-        FragmentSend fragmentSend = (FragmentSend) app.getFragmentManager().findFragmentByTag(FragmentSend.class.getName());
+        androidx.fragment.app.FragmentManager fragmentManager = app.getSupportFragmentManager();
+        FragmentSend fragmentSend = (FragmentSend) fragmentManager.findFragmentByTag(FragmentSend.class.getName());
         if (fragmentSend != null && fragmentSend.isAdded()) {
             fragmentSend.setUrl(bitcoinUrl);
             return;
@@ -144,12 +118,11 @@ public class BRAnimator {
                 bundle.putString("url", bitcoinUrl);
                 fragmentSend.setArguments(bundle);
             }
-            app.getFragmentManager().beginTransaction()
+            fragmentManager.beginTransaction()
                     .setCustomAnimations(0, 0, 0, R.animator.plain_300)
                     .add(android.R.id.content, fragmentSend, FragmentSend.class.getName())
                     .addToBackStack(FragmentSend.class.getName()).commit();
         } finally {
-
         }
     }
 

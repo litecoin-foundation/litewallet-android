@@ -41,6 +41,14 @@ fun FragmentActivity.addFragment(
     addFragment(this.supportFragmentManager, fragment, null, addToBackStack, containerId)
 }
 
+fun FragmentActivity.replaceFragment(
+        fragment: Fragment,
+        addToBackStack: Boolean = true,
+        containerId: Int = R.id.fragment_container
+) {
+    replaceFragment(this.supportFragmentManager, fragment, null, addToBackStack, containerId)
+}
+
 /**
  * Fragment extension
  */
@@ -61,6 +69,20 @@ private fun addFragment(fragmentManager: FragmentManager,
     val transaction = fragmentManager.beginTransaction()
     transition?.let { transaction.setTransition(it) }
     transaction.add(containerId, fragment)
+    if (addToBackStack) {
+        transaction.addToBackStack(fragment.tag)
+    }
+    transaction.commit()
+}
+
+private fun replaceFragment(fragmentManager: FragmentManager,
+                            fragment: Fragment,
+                            transition: Int?,
+                            addToBackStack: Boolean = true,
+                            containerId: Int = R.id.fragment_container) {
+    val transaction = fragmentManager.beginTransaction()
+    transition?.let { transaction.setTransition(it) }
+    transaction.replace(containerId, fragment)
     if (addToBackStack) {
         transaction.addToBackStack(fragment.tag)
     }
