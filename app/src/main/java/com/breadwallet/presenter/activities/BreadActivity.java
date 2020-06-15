@@ -30,13 +30,13 @@ import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRNotificationBar;
 import com.breadwallet.presenter.entities.CurrencyEntity;
-import com.breadwallet.presenter.spend.AuthBottomSheetDialogFragment;
+import com.breadwallet.presenter.history.HistoryFragment;
+import com.breadwallet.presenter.transfer.TransferFragment;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.TextSizeTransition;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.InternetManager;
 import com.breadwallet.tools.manager.SyncManager;
-import com.breadwallet.tools.manager.TxManager;
 import com.breadwallet.tools.security.BitcoinUrlHandler;
 import com.breadwallet.tools.sqlite.CurrencyDataSource;
 import com.breadwallet.tools.sqlite.TransactionDataSource;
@@ -44,11 +44,11 @@ import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
+import com.breadwallet.tools.util.ExtensionKt;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRPeerManager;
 import com.breadwallet.wallet.BRWalletManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.platform.APIClient;
 
 import java.math.BigDecimal;
@@ -88,13 +88,13 @@ import static com.breadwallet.tools.util.BRConstants.PLATFORM_ON;
  * THE SOFTWARE.
  */
 
-public class BreadActivity extends BRActivity implements BRWalletManager.OnBalanceChanged,
-        BRPeerManager.OnTxStatusUpdate, BRSharedPrefs.OnIsoChangedListener,
+public class BreadActivity extends BRActivity implements BRWalletManager.OnBalanceChanged, BRSharedPrefs.OnIsoChangedListener,
         TransactionDataSource.OnTxAddedListener, InternetManager.ConnectionReceiverListener {
 
     public static final Point screenParametersPoint = new Point();
     private static final float PRIMARY_TEXT_SIZE = 24f;
     private static final float SECONDARY_TEXT_SIZE = 12.8f;
+    private int mSelectedBottomNavItem = -1;
 
     private InternetManager mConnectionReceiver;
     private Button primaryPrice;
@@ -107,11 +107,12 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     public static boolean appVisible = false;
     public ViewFlipper barFlipper;
     private ConstraintLayout toolBarConstraintLayout;
-    private String savedFragmentTag;
     private boolean uiIsDone;
 
     private static BreadActivity app;
     private BottomNavigationView bottomNav;
+
+    private Handler mHandler = new Handler();
 
     public static BreadActivity getApp() {
         return app;
@@ -121,9 +122,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bread);
-        BRWalletManager.getInstance().addBalanceChangedListener(this);
-        BRPeerManager.getInstance().addStatusUpdateListener(this);
-        BRSharedPrefs.addIsoChangedListener(this);
 
         app = this;
         getWindowManager().getDefaultDisplay().getSize(screenParametersPoint);
@@ -140,10 +138,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         if (introActivity != null) introActivity.finish();
         if (reEnterPinActivity != null) reEnterPinActivity.finish();
 
-        TxManager.getInstance().init(this);
-
         if (!BRSharedPrefs.getGreetingsShown(BreadActivity.this))
-            new Handler().postDelayed(new Runnable() {
+            mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     BRAnimator.showGreetingsMessage(BreadActivity.this);
@@ -154,6 +150,19 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         onConnectionChanged(InternetManager.getInstance().isConnected(this));
 
         updateUI();
+        if (savedInstanceState == null) {
+            bottomNav.setSelectedItemId(R.id.nav_history);
+        }
+    }
+
+    private void addObservers() {
+        BRWalletManager.getInstance().addBalanceChangedListener(this);
+        BRSharedPrefs.addIsoChangedListener(this);
+    }
+
+    private void removeObservers() {
+        BRWalletManager.getInstance().removeListener(this);
+        BRSharedPrefs.removeListener(this);
     }
 
     @Override
@@ -181,8 +190,11 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (mSelectedBottomNavItem == item.getItemId()) return true;
+
                 switch (item.getItemId()) {
                     case R.id.nav_history:
+                        ExtensionKt.replaceFragment(BreadActivity.this, new HistoryFragment(), false, R.id.fragment_container);
                         break;
                     case R.id.nav_send:
                         if (BRAnimator.isClickAllowed()) {
@@ -190,8 +202,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                         }
                         break;
                     case R.id.nav_spend:
-                        BottomSheetDialogFragment fragment = new AuthBottomSheetDialogFragment();
-                        fragment.show(getSupportFragmentManager(), fragment.getTag());
+                        /*BottomSheetDialogFragment fragment = new AuthBottomSheetDialogFragment();
+                        fragment.show(getSupportFragmentManager(), fragment.getTag());*/
+                        ExtensionKt.replaceFragment(BreadActivity.this, new TransferFragment(), false, R.id.fragment_container);
                         break;
                     case R.id.nav_receive:
                         if (BRAnimator.isClickAllowed()) {
@@ -201,6 +214,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                     case R.id.nav_buy:
                         break;
                 }
+                mSelectedBottomNavItem = item.getItemId();
                 return true;
             }
         });
@@ -232,6 +246,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         boolean b = !BRSharedPrefs.getPreferredLTC(this);
         setPriceTags(b, true);
         BRSharedPrefs.putPreferredLTC(this, b);
+        BRSharedPrefs.notifyIsoChanged("");
     }
 
     private void setPriceTags(boolean ltcPreferred, boolean animate) {
@@ -287,7 +302,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         // Apply the changes
         set.applyTo(toolBarConstraintLayout);
 
-        new Handler().postDelayed(new Runnable() {
+        mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateUI();
@@ -311,8 +326,10 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         super.onResume();
         appVisible = true;
         app = this;
-        if (PLATFORM_ON)
+        addObservers();
+        if (PLATFORM_ON) {
             APIClient.getInstance(this).updatePlatform();
+        }
 
         setupNetworking();
 
@@ -324,7 +341,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 }
             });
         }
-        new Handler().postDelayed(new Runnable() {
+        mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateUI();
@@ -332,10 +349,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         }, 1000);
 
         BRWalletManager.getInstance().refreshBalance(this);
-
-        BRAnimator.showFragmentByTag(this, savedFragmentTag);
-        savedFragmentTag = null;
-        TxManager.getInstance().onResume(BreadActivity.this);
     }
 
     private void setupNetworking() {
@@ -349,7 +362,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     protected void onPause() {
         super.onPause();
         appVisible = false;
-        saveVisibleFragment();
+        removeObservers();
     }
 
     @Override
@@ -398,21 +411,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         ltcPriceLbl.setTextSize(PRIMARY_TEXT_SIZE);
     }
 
-    private void saveVisibleFragment() {
-        if (getFragmentManager().getBackStackEntryCount() == 0) {
-            return;
-        }
-        savedFragmentTag = getFragmentManager().getBackStackEntryAt(0).getName();
-    }
-
     @Override
     public void onBalanceChanged(final long balance) {
         updateUI();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 
     public void updateUI() {
@@ -447,18 +448,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                         ltcPriceDateLbl.setText("as of " + android.text.format.DateFormat.format(pattern, new Date()));
                     }
                 });
-
-                TxManager.getInstance().updateTxList(BreadActivity.this);
-            }
-        });
-    }
-
-    @Override
-    public void onStatusUpdate() {
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
-            @Override
-            public void run() {
-                TxManager.getInstance().updateTxList(BreadActivity.this);
             }
         });
     }
@@ -470,12 +459,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
     @Override
     public void onTxAdded() {
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
-            @Override
-            public void run() {
-                TxManager.getInstance().updateTxList(BreadActivity.this);
-            }
-        });
         BRWalletManager.getInstance().refreshBalance(BreadActivity.this);
     }
 
