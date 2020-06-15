@@ -33,6 +33,7 @@ import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
 import com.breadwallet.R;
+import com.breadwallet.presenter.base.BaseFragment;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.customviews.BRKeyboard;
 import com.breadwallet.presenter.customviews.BRLinearLayoutWithCaret;
@@ -89,7 +90,7 @@ import static com.breadwallet.tools.security.BitcoinUrlHandler.getRequestFromStr
  * THE SOFTWARE.
  */
 
-public class FragmentSend extends Fragment {
+public class FragmentSend extends BaseFragment {
     public ScrollView backgroundLayout;
     public LinearLayout signalLayout;
     private BRKeyboard keyboard;
@@ -391,13 +392,13 @@ public class FragmentSend extends Fragment {
         isoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedIso.equalsIgnoreCase(BRSharedPrefs.getIso(getContext()))) {
+                String iso = BRSharedPrefs.getIso(getContext());
+                if (selectedIso.equalsIgnoreCase(iso)) {
                     selectedIso = "LTC";
                 } else {
-                    selectedIso = BRSharedPrefs.getIso(getContext());
+                    selectedIso = iso;
                 }
                 updateText();
-
             }
         });
 
@@ -451,7 +452,6 @@ public class FragmentSend extends Fragment {
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //not allowed now
                 if (!BRAnimator.isClickAllowed()) {
                     return;
                 }
@@ -470,9 +470,7 @@ public class FragmentSend extends Fragment {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Activity app = getActivity();
-                if (app != null)
-                    app.getFragmentManager().popBackStack();
+                getFragmentManager().popBackStack();
             }
         });
 
@@ -486,7 +484,6 @@ public class FragmentSend extends Fragment {
                             showKeyboard(true);
                         }
                     }, 500);
-
                 }
                 return false;
             }
@@ -498,8 +495,6 @@ public class FragmentSend extends Fragment {
                 handleClick(key);
             }
         });
-
-//        updateText();
     }
 
     private void showKeyboard(boolean b) {

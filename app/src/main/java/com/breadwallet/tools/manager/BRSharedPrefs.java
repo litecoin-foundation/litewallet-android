@@ -77,10 +77,13 @@ public class BRSharedPrefs {
         editor.putString(BRConstants.CURRENT_CURRENCY, code.equalsIgnoreCase(Locale.getDefault().getISO3Language()) ? null : code);
         editor.apply();
 
-        for (OnIsoChangedListener listener : isoChangedListeners) {
-            if (listener != null) listener.onIsoChanged(code);
-        }
+        notifyIsoChanged(code);
+    }
 
+    public static void notifyIsoChanged(String iso) {
+        for (OnIsoChangedListener listener : isoChangedListeners) {
+            if (listener != null) listener.onIsoChanged(iso);
+        }
     }
 
     public static boolean getPhraseWroteDown(Context context) {
