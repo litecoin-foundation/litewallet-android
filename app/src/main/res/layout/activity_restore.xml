@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_intro_recover"
@@ -26,7 +25,7 @@
         app:isBreadButton="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         style="@style/BRTextStyle"
@@ -41,7 +40,7 @@
         android:textSize="@dimen/sub_header"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
     <TextView
         style="@style/BRTextStyle"
@@ -60,7 +59,7 @@
         app:layout_constraintLeft_toRightOf="@+id/imageView8"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.100000024"/>
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -73,7 +72,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView12"
         android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView12"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -100,7 +99,7 @@
             android:text="@string/Settings.wipe"
             android:textColor="@color/white"
             android:textSize="16sp"
-            tools:layout_constraintTop_creator="1"/>
+            tools:layout_constraintTop_creator="1" />
 
         <ImageView
             android:id="@+id/imageView10"
@@ -108,7 +107,7 @@
             android:layout_height="160dp"
             android:layout_below="@+id/textView2"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/restore_image"/>
+            android:src="@drawable/restore_image" />
 
         <ImageButton
             android:id="@+id/faq_button"
@@ -118,7 +117,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="15dp"
             android:visibility="invisible"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop" />
 
         <ImageButton
             android:id="@+id/close_button"
@@ -129,7 +128,7 @@
             android:layout_alignTop="@+id/textView2"
             android:layout_marginStart="16dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_close_white_24dp"/>
+            android:src="@drawable/ic_close_white_24dp" />
 
     </RelativeLayout>
 
