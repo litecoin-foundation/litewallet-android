@@ -16,7 +16,8 @@
         android:background="@drawable/menu_layout"
         android:orientation="vertical">
 
-        <com.breadwallet.presenter.customviews.BRText
+        <TextView
+            style="@style/BRBoldTextStyle"
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +28,6 @@
             android:text="Manage Wallet"
             android:textColor="@color/almost_black"
             android:textSize="22sp"
-            app:customTFont="BarlowSemiCondensed-Bold.ttf"
             />
 
         <View
@@ -47,7 +47,8 @@
             android:textSize="18sp"
             />
 
-        <com.breadwallet.presenter.customviews.BREdit
+        <EditText
+            style="@style/BREditStyle"
             android:id="@+id/wallet_name_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +64,8 @@
             android:layout_marginTop="16dp"
             android:background="@color/separator_gray"/>
 
-        <com.breadwallet.presenter.customviews.BRText
+        <TextView
+            style="@style/BRTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -73,7 +75,8 @@
             android:textSize="16sp"
             />
 
-        <com.breadwallet.presenter.customviews.BRText
+        <TextView
+            style="@style/BRTextStyle"
             android:id="@+id/wallet_creation_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
