@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_intro_set_pit"
@@ -21,7 +20,7 @@
         android:textColor="@color/almost_black"
         android:textSize="@dimen/header"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         style="@style/BRBoldTextStyle"
@@ -36,7 +35,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/title"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"/>
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         style="@style/BRTextStyle"
@@ -52,7 +51,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/description"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description"/>
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <TextView
         style="@style/BRBoldTextStyle"
@@ -68,7 +67,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/node_text"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/node_text"/>
+        app:layout_constraintTop_toBottomOf="@+id/node_text" />
 
     <TextView
         style="@style/BRTextStyle"
@@ -85,7 +84,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/textView13"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <com.breadwallet.presenter.customviews.BRButton
         android:id="@+id/button_switch"
@@ -104,7 +103,7 @@
         app:isBreadButton="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/node_status"/>
+        app:layout_constraintTop_toBottomOf="@+id/node_status" />
 
     <ImageButton
         android:id="@+id/faq_button"
@@ -116,7 +115,6 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/title"
-        />
+        app:layout_constraintTop_toTopOf="@+id/title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
@@ -27,7 +26,7 @@
         android:textColor="@color/button_secondary_text"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         style="@style/BRTextStyle"
@@ -45,7 +44,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"/>
+        app:layout_constraintVertical_bias="0.499" />
 
     <TextView
         style="@style/BRTextStyle"
@@ -59,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintLeft_toLeftOf="@+id/disabled"
         app:layout_constraintRight_toRightOf="@+id/disabled"
-        app:layout_constraintTop_toBottomOf="@+id/disabled"/>
+        app:layout_constraintTop_toBottomOf="@+id/disabled" />
 
     <TextView
         style="@style/BRTextStyle"
@@ -71,7 +70,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toLeftOf="@+id/disabled"
         app:layout_constraintRight_toRightOf="@+id/disabled"
-        app:layout_constraintTop_toBottomOf="@+id/until_label"/>
+        app:layout_constraintTop_toBottomOf="@+id/until_label" />
 
     <ImageButton
         android:id="@+id/faq_button"
@@ -81,5 +80,5 @@
         android:layout_marginTop="16dp"
         android:visibility="invisible"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

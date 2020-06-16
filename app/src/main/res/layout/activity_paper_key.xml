@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_write_down"
@@ -35,7 +34,7 @@
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/close_button"
@@ -49,7 +48,7 @@
             android:src="@drawable/ic_close_white_24dp"
             app:layout_constraintBottom_toBottomOf="@+id/title"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/title"/>
+            app:layout_constraintTop_toTopOf="@+id/title" />
 
         <TextView
             style="@style/BRTextStyle"
@@ -72,7 +71,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title"
-            app:layout_constraintVertical_bias="0.506"/>
+            app:layout_constraintVertical_bias="0.506" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -81,8 +80,7 @@
         android:layout_height="160dp"
         android:layout_below="@+id/gradient_layout"
         android:focusable="false"
-        android:orientation="horizontal"
-        />
+        android:orientation="horizontal" />
 
     <LinearLayout
         android:id="@+id/buttons_layout"
@@ -111,8 +109,7 @@
             android:text="@string/WritePaperPhrase.previous"
             android:textColor="@color/extra_light_gray"
             android:textSize="18sp"
-            app:isBreadButton="true"
-            />
+            app:isBreadButton="true" />
 
         <com.breadwallet.presenter.customviews.BRButton
             style="@style/BRButtonStyle"
@@ -132,7 +129,7 @@
             android:text="@string/RecoverWallet.next"
             android:textColor="@color/button_secondary_text"
             android:textSize="18sp"
-            app:isBreadButton="true"/>
+            app:isBreadButton="true" />
 
     </LinearLayout>
 
@@ -145,7 +142,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="1 of 12"
-        android:textColor="@color/light_gray"/>
+        android:textColor="@color/light_gray" />
 
 
 </RelativeLayout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_intro_set_pit"
@@ -21,7 +20,7 @@
         android:textSize="@dimen/header"
         app:layout_constraintEnd_toStartOf="@+id/faq_button"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -36,7 +35,7 @@
         android:text="@string/TouchIdSpendingLimit.body"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"/>
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ListView
         android:id="@+id/limit_list"
@@ -46,8 +45,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <ImageButton
         android:id="@+id/faq_button"
@@ -59,6 +57,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
