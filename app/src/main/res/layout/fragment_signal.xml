@@ -15,18 +15,17 @@
         android:background="@drawable/signal_layout"
         android:orientation="vertical">
 
-        <com.breadwallet.presenter.customviews.BRText
+        <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            style="@style/BRBoldTextStyle"
             android:layout_gravity="center_horizontal"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:textColor="@color/white"
             android:textSize="@dimen/header"
-            app:customTFont="BarlowSemiCondensed-Bold.ttf"
             />
 
         <View
@@ -48,7 +47,8 @@
             android:src="@drawable/ic_check_mark_white"
             />
 
-        <com.breadwallet.presenter.customviews.BRText
+        <TextView
+            style="@style/BRTextStyle"
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

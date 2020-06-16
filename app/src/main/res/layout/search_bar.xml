@@ -20,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.breadwallet.presenter.customviews.BREdit
+        <EditText
+            style="@style/BREditStyle"
             android:id="@+id/search_edit"
             android:layout_width="0dp"
             android:layout_height="40dp"
@@ -59,6 +60,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
             <com.breadwallet.presenter.customviews.BRButton
+                style="@style/BRButtonStyle"
                 android:id="@+id/sent_filter"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
@@ -72,10 +74,10 @@
                 android:textColor="@color/light_gray"
                 android:textSize="@dimen/paragraph"
                 app:buttonType="2"
-                app:customBFont="BarlowSemiCondensed-Medium.ttf"
                 app:isBreadButton="true"/>
 
             <com.breadwallet.presenter.customviews.BRButton
+                style="@style/BRButtonStyle"
                 android:id="@+id/received_filter"
                 android:layout_width="85dp"
                 android:layout_height="50dp"
@@ -89,10 +91,10 @@
                 android:textColor="@color/light_gray"
                 android:textSize="@dimen/paragraph"
                 app:buttonType="2"
-                app:customBFont="BarlowSemiCondensed-Medium.ttf"
                 app:isBreadButton="true"/>
 
             <com.breadwallet.presenter.customviews.BRButton
+                style="@style/BRButtonStyle"
                 android:id="@+id/pending_filter"
                 android:layout_width="85dp"
                 android:layout_height="50dp"
@@ -106,10 +108,10 @@
                 android:textColor="@color/light_gray"
                 android:textSize="@dimen/paragraph"
                 app:buttonType="2"
-                app:customBFont="BarlowSemiCondensed-Medium.ttf"
                 app:isBreadButton="true"/>
 
             <com.breadwallet.presenter.customviews.BRButton
+                style="@style/BRButtonStyle"
                 android:id="@+id/complete_filter"
                 android:layout_width="85dp"
                 android:layout_height="50dp"
@@ -123,12 +125,12 @@
                 android:textColor="@color/light_gray"
                 android:textSize="@dimen/paragraph"
                 app:buttonType="2"
-                app:customBFont="BarlowSemiCondensed-Medium.ttf"
                 app:isBreadButton="true"/>
 
         </LinearLayout>
 
         <com.breadwallet.presenter.customviews.BRButton
+            style="@style/BRButtonStyle"
             android:id="@+id/cancel_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
