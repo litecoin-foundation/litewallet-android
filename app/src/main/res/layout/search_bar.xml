@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.appcompat.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/search_bar"
@@ -44,7 +43,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/cancel_button"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"/>
+            app:layout_constraintVertical_bias="0.5" />
 
         <LinearLayout
             android:id="@+id/filter_buttons_layout"
@@ -74,7 +73,7 @@
                 android:textColor="@color/light_gray"
                 android:textSize="@dimen/paragraph"
                 app:buttonType="2"
-                app:isBreadButton="true"/>
+                app:isBreadButton="true" />
 
             <com.breadwallet.presenter.customviews.BRButton
                 style="@style/BRButtonStyle"
@@ -91,7 +90,7 @@
                 android:textColor="@color/light_gray"
                 android:textSize="@dimen/paragraph"
                 app:buttonType="2"
-                app:isBreadButton="true"/>
+                app:isBreadButton="true" />
 
             <com.breadwallet.presenter.customviews.BRButton
                 style="@style/BRButtonStyle"
@@ -108,7 +107,7 @@
                 android:textColor="@color/light_gray"
                 android:textSize="@dimen/paragraph"
                 app:buttonType="2"
-                app:isBreadButton="true"/>
+                app:isBreadButton="true" />
 
             <com.breadwallet.presenter.customviews.BRButton
                 style="@style/BRButtonStyle"
@@ -125,7 +124,7 @@
                 android:textColor="@color/light_gray"
                 android:textSize="@dimen/paragraph"
                 app:buttonType="2"
-                app:isBreadButton="true"/>
+                app:isBreadButton="true" />
 
         </LinearLayout>
 
@@ -143,7 +142,7 @@
             app:isBreadButton="false"
             app:layout_constraintBottom_toBottomOf="@+id/search_edit"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/search_edit"/>
+            app:layout_constraintTop_toTopOf="@+id/search_edit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.Toolbar>

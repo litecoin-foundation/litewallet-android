@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:filterTouchesWhenObscured="true"
-                android:orientation="horizontal">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:filterTouchesWhenObscured="true"
+    android:orientation="horizontal">
 
     <TextView
         style="@style/BRTextStyle"
@@ -18,6 +18,6 @@
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/sub_header"/>
+        android:textSize="@dimen/sub_header" />
 
 </RelativeLayout>
