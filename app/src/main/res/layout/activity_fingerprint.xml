@@ -28,7 +28,8 @@
             >
 
 
-            <com.breadwallet.presenter.customviews.BRText
+            <TextView
+                style="@style/BRBoldTextStyle"
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,8 +37,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/TouchIdSettings.title.android"
                 android:textColor="@color/white"
-                android:textSize="@dimen/header"
-                app:customTFont="BarlowSemiCondensed-Bold.ttf"/>
+                android:textSize="@dimen/header"/>
 
             <ImageButton
                 android:id="@+id/faq_button"
@@ -60,7 +60,8 @@
 
     </LinearLayout>
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
+        style="@style/BRTextStyle"
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,7 +73,8 @@
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"/>
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
+        style="@style/BRBoldTextStyle"
         android:id="@+id/enable_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,8 +85,7 @@
         android:paddingStart="16dp"
         android:text="@string/TouchIdSettings.switchLabel.android"
         android:textColor="@color/almost_black"
-        android:textSize="@dimen/paragraph"
-        app:customTFont="BarlowSemiCondensed-Bold.ttf"/>
+        android:textSize="@dimen/paragraph"/>
 
     <ToggleButton
         android:id="@+id/toggleButton"
@@ -107,7 +108,8 @@
         android:layout_marginTop="16dp"
         android:background="@color/extra_light_gray"/>
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
+        style="@style/BRTextStyle"
         android:id="@+id/limit_exchange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -117,7 +119,8 @@
         android:textSize="18sp"
         />
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
+        style="@style/BRTextStyle"
         android:id="@+id/limit_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -10,6 +10,7 @@
     tools:context="com.breadwallet.presenter.activities.intro.RecoverActivity">
 
     <com.breadwallet.presenter.customviews.BRButton
+        style="@style/BRButtonStyle"
         android:id="@+id/scan_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/big_button_height"
@@ -20,18 +21,17 @@
         android:textColor="@color/white"
         app:isBreadButton="true"
         android:textSize="18sp"
-        app:customBFont="BarlowSemiCondensed-Medium.ttf"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
+        style="@style/BRTextStyle"
         android:id="@+id/textView8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:lineSpacingMultiplier="1.3"
         android:layout_marginTop="16dp"
         android:text="@string/Import.message"
         android:textColor="@color/almost_black"
@@ -41,7 +41,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout"/>
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
+        style="@style/BRTextStyle"
         android:id="@+id/textView12"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -51,7 +52,6 @@
         android:text="@string/Import.warning"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/paragraph"
-        android:lineSpacingMultiplier="1.3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/imageView8"
         app:layout_constraintRight_toRightOf="parent"
@@ -79,7 +79,8 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1">
 
-        <com.breadwallet.presenter.customviews.BRText
+        <TextView
+            style="@style/BRBoldTextStyle"
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,7 +89,6 @@
             android:text="@string/Settings.importTitle"
             android:textColor="@color/white"
             android:textSize="@dimen/header"
-            app:customTFont="BarlowSemiCondensed-Bold.ttf"
             tools:layout_constraintTop_creator="1"/>
 
         <ImageButton
