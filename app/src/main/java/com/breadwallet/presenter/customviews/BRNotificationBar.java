@@ -3,6 +3,7 @@ package com.breadwallet.presenter.customviews;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -57,7 +58,7 @@ public class BRNotificationBar extends androidx.appcompat.widget.Toolbar {
         setContentInsetsRelative(0, 0);
 
         inflate(getContext(), R.layout.notification_bar, this);
-        BRText description = findViewById(R.id.description);
+        TextView description = findViewById(R.id.description);
         BRButton close = findViewById(R.id.cancel_button);
 
         description.setText("No internet connection found.\nCheck your connection and try again.");

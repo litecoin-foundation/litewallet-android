@@ -45,7 +45,8 @@
                 android:layout_marginStart="16dp"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
-            <com.breadwallet.presenter.customviews.BRText
+            <TextView
+                style="@style/BRBoldTextStyle"
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,7 +56,6 @@
                 android:text="@string/MenuViewController.modalTitle"
                 android:textColor="@color/almost_black"
                 android:textSize="@dimen/header"
-                app:customTFont="BarlowSemiCondensed-Bold.ttf"
                 android:layout_marginRight="8dp"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginLeft="8dp"

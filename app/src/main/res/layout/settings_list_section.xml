@@ -8,8 +8,8 @@
                 android:orientation="horizontal"
     >
 
-    <com.breadwallet.presenter.customviews.BRText
-        app:customTFont="BarlowSemiCondensed-Bold.ttf"
+    <TextView
+        style="@style/BRBoldTextStyle"
         android:id="@+id/item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -9,7 +9,8 @@
     android:background="@color/extra_light_blue_background"
     tools:context="com.breadwallet.presenter.activities.SetPinActivity">
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
+        style="@style/BRBoldTextStyle"
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,11 +19,11 @@
         android:text="@string/Settings.currency"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/header"
-        app:customTFont="BarlowSemiCondensed-Bold.ttf"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
+        style="@style/BRBoldTextStyle"
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,13 +32,13 @@
         android:text="@string/DefaultCurrency.rateLabel"
         android:textColor="@color/light_gray"
         android:textSize="@dimen/sub_header"
-        app:customTFont="BarlowSemiCondensed-Bold.ttf"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/title"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"/>
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
+        style="@style/BRBoldTextStyle"
         android:id="@+id/BRText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,7 +47,6 @@
         android:text="@string/DefaultCurrency.litecoinLabel"
         android:textColor="@color/light_gray"
         android:textSize="@dimen/sub_header"
-        app:customTFont="BarlowSemiCondensed-Bold.ttf"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/title"
         app:layout_constraintRight_toRightOf="parent"
@@ -67,6 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/BRText2">
 
         <com.breadwallet.presenter.customviews.BRButton
+            style="@style/BRButtonStyle"
             android:id="@+id/left_button"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -76,11 +77,11 @@
             android:textColor="@color/white"
             android:textSize="14sp"
             android:padding="0dp"
-            app:customBFont="BarlowSemiCondensed-Medium.ttf"
             app:isBreadButton="false"
             />
 
         <com.breadwallet.presenter.customviews.BRButton
+            style="@style/BRButtonStyle"
             android:id="@+id/right_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,11 +92,11 @@
             android:textColor="@color/dark_blue"
             android:textSize="14sp"
             app:isBreadButton="false"
-            app:customBFont="BarlowSemiCondensed-Medium.ttf"
             />
     </LinearLayout>
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
+        style="@style/BRTextStyle"
         android:id="@+id/exchange_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

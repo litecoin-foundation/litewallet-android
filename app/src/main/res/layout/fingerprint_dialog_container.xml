@@ -30,8 +30,8 @@
         android:background="@drawable/pin_round_corner"
         android:orientation="vertical">
 
-        <com.breadwallet.presenter.customviews.BRText
-            app:customTFont="BarlowSemiCondensed-Bold.ttf"
+        <TextView
+            style="@style/BRBoldTextStyle"
             android:id="@+id/fingerprint_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,7 +46,8 @@
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="20sp"/>
 
-        <com.breadwallet.presenter.customviews.BRText
+        <TextView
+            style="@style/BRTextStyle"
             android:id="@+id/fingerprint_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,9 +77,11 @@
                 android:filterTouchesWhenObscured="true"
                 android:src="@drawable/ic_fp_40px"/>
 
-            <com.breadwallet.presenter.customviews.BRText
+            <TextView
                 android:id="@+id/fingerprint_status"
                 style="@android:style/TextAppearance.Material.Body1"
+                android:fontFamily="@font/barlowsemicondensed_medium"
+                android:lineSpacingMultiplier="1.3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/fingerprint_icon"
@@ -115,6 +118,7 @@
             <com.breadwallet.presenter.customviews.BRButton
                 android:id="@+id/cancel_button"
                 style="?android:attr/buttonBarNegativeButtonStyle"
+                android:fontFamily="@font/barlowsemicondensed_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:filterTouchesWhenObscured="true"/>
@@ -122,6 +126,7 @@
             <com.breadwallet.presenter.customviews.BRButton
                 android:id="@+id/second_dialog_button"
                 style="?android:attr/buttonBarPositiveButtonStyle"
+                android:fontFamily="@font/barlowsemicondensed_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:filterTouchesWhenObscured="true"/>

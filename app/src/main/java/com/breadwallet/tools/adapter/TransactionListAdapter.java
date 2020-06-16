@@ -2,7 +2,6 @@ package com.breadwallet.tools.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.breadwallet.R;
-import com.breadwallet.presenter.customviews.BRText;
 import com.breadwallet.presenter.entities.TxItem;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.PromptManager;
@@ -413,16 +411,16 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public class PromptHolder extends RecyclerView.ViewHolder {
         public RelativeLayout mainLayout;
         public ConstraintLayout constraintLayout;
-        public BRText title;
-        public BRText description;
+        public TextView title;
+        public TextView description;
         public ImageButton close;
 
         public PromptHolder(View view) {
             super(view);
             mainLayout = (RelativeLayout) view.findViewById(R.id.main_layout);
             constraintLayout = (ConstraintLayout) view.findViewById(R.id.prompt_layout);
-            title = (BRText) view.findViewById(R.id.info_title);
-            description = (BRText) view.findViewById(R.id.info_description);
+            title = view.findViewById(R.id.info_title);
+            description = view.findViewById(R.id.info_description);
             close = (ImageButton) view.findViewById(R.id.info_close_button);
         }
     }
@@ -430,16 +428,16 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public class SyncingHolder extends RecyclerView.ViewHolder {
         public RelativeLayout mainLayout;
         public ConstraintLayout constraintLayout;
-        public BRText date;
-        public BRText label;
+        public TextView date;
+        public TextView label;
         public ProgressBar progress;
 
         public SyncingHolder(View view) {
             super(view);
             mainLayout = (RelativeLayout) view.findViewById(R.id.main_layout);
             constraintLayout = (ConstraintLayout) view.findViewById(R.id.syncing_layout);
-            date = (BRText) view.findViewById(R.id.sync_date);
-            label = (BRText) view.findViewById(R.id.syncing_label);
+            date = view.findViewById(R.id.sync_date);
+            label = view.findViewById(R.id.syncing_label);
             progress = (ProgressBar) view.findViewById(R.id.sync_progress);
         }
     }

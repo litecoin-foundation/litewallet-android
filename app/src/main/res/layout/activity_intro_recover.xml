@@ -10,6 +10,7 @@
     tools:context="com.breadwallet.presenter.activities.intro.RecoverActivity">
 
     <com.breadwallet.presenter.customviews.BRButton
+        style="@style/BRButtonStyle"
         android:id="@+id/send_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/big_button_height"
@@ -40,7 +41,8 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1">
 
-        <com.breadwallet.presenter.customviews.BRText
+        <TextView
+            style="@style/BRBoldTextStyle"
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +53,6 @@
             android:text="@string/RecoverWallet.header"
             android:textColor="@color/white"
             android:textSize="@dimen/header"
-            app:customTFont="BarlowSemiCondensed-Bold.ttf"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -99,7 +100,8 @@
             app:layout_constraintTop_toTopOf="@+id/imageView4"/>
 
 
-        <com.breadwallet.presenter.customviews.BRText
+        <TextView
+            style="@style/BRTextStyle"
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,7 +114,6 @@
             android:text="@string/RecoverWallet.header"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:customTFont="BarlowSemiCondensed-Medium.ttf"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +133,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
+        style="@style/BRTextStyle"
         android:id="@+id/textView8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -140,7 +142,6 @@
         android:layout_marginEnd="@dimen/bread_margin"
         android:layout_marginTop="@dimen/bread_margin"
         android:text="@string/RecoverWallet.intro"
-        android:lineSpacingMultiplier="1.3"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
         app:layout_constraintLeft_toLeftOf="parent"

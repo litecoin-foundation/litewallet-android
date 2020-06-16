@@ -1,7 +1,6 @@
 package com.breadwallet.presenter.fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -37,7 +35,6 @@ import com.breadwallet.presenter.base.BaseFragment;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.customviews.BRKeyboard;
 import com.breadwallet.presenter.customviews.BRLinearLayoutWithCaret;
-import com.breadwallet.presenter.customviews.BRText;
 import com.breadwallet.presenter.entities.PaymentItem;
 import com.breadwallet.presenter.entities.RequestObject;
 import com.breadwallet.tools.animation.BRAnimator;
@@ -48,7 +45,6 @@ import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRClipboardManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.FeeManager;
-import com.breadwallet.tools.manager.FontManager;
 import com.breadwallet.tools.security.BRSender;
 import com.breadwallet.tools.security.BitcoinUrlHandler;
 import com.breadwallet.tools.threads.BRExecutor;
@@ -115,8 +111,8 @@ public class FragmentSend extends BaseFragment {
     private ConstraintLayout amountLayout;
     private BRLinearLayoutWithCaret feeLayout;
     private boolean feeButtonsShown = false;
-    private BRText feeDescription;
-    private BRText warningText;
+    private TextView feeDescription;
+    private TextView warningText;
     private boolean amountLabelOn = true;
 
     private static String savedMemo;
@@ -192,9 +188,6 @@ public class FragmentSend extends BaseFragment {
 
     private void setupFeesSelector(View rootView) {
         RadioGroup feesSegment = rootView.findViewById(R.id.fees_segment);
-        for (int i = 0; i < feesSegment.getChildCount(); i++) {
-            FontManager.setCustomFont(getContext(), (RadioButton) feesSegment.getChildAt(i), "BarlowSemiCondensed-Medium.ttf");
-        }
         feesSegment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
