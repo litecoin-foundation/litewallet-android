@@ -16,12 +16,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/barlowsemicondensed_semibold"
-            android:text="Register your Litewallet Card"
+            android:text="Get your LitecoinCard"
             android:textColor="@color/litecoin_litewallet_blue"
             android:textSize="22sp"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -117,63 +116,7 @@
                 style="@style/RegisterFieldStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/socialNumberField"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/register_field_margin_top"
-            android:hint="Social Security number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/firstNameField">
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/RegisterFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/dlPassportField"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/register_field_margin_top"
-            android:hint="DL or Passport Number"
-            app:layout_constraintEnd_toStartOf="@+id/idTypeField"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/socialNumberField">
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/RegisterFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/idTypeField"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:hint="ID Type"
-            app:layout_constraintBaseline_toBaselineOf="@+id/dlPassportField"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/dlPassportField">
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/RegisterFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -182,10 +125,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/register_field_margin_top"
-            android:hint="Address"
+            android:hint="Address 1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dlPassportField">
+            app:layout_constraintTop_toBottomOf="@id/lastNameField">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/RegisterFieldStyle"
@@ -193,6 +136,21 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/address2Field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/register_field_margin_top"
+            android:hint="Address 2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addressField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/RegisterFieldStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/cityField"
@@ -204,7 +162,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addressField">
+            app:layout_constraintTop_toBottomOf="@+id/address2Field">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/RegisterFieldStyle"
@@ -237,7 +195,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/register_field_margin_top"
             android:hint="Country"
-            app:layout_constraintEnd_toStartOf="@+id/zipCodeField"
+            app:layout_constraintEnd_toStartOf="@+id/postalCodeField"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
@@ -252,11 +210,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/zipCodeField"
+            android:id="@+id/postalCodeField"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:hint="Zip Code"
+            android:hint="Postal code"
             app:layout_constraintBaseline_toBaselineOf="@+id/countryField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -264,6 +222,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/RegisterFieldStyle"
+                android:inputType="textPostalAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -274,7 +233,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/register_field_margin_top"
-            android:hint="Mobile Number"
+            android:hint="Mobile number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -285,6 +244,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/RegisterFieldStyle"
                 android:layout_width="match_parent"
+                android:inputType="phone"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
