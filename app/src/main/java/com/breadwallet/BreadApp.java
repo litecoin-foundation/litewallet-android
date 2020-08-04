@@ -133,7 +133,7 @@ public class BreadApp extends Application {
         void onBackgrounded();
     }
 
-    private class CrashReportingTree extends Timber.Tree {
+    private static class CrashReportingTree extends Timber.Tree {
         private static final String CRASHLYTICS_KEY_PRIORITY = "priority";
         private static final String CRASHLYTICS_KEY_TAG = "tag";
         private static final String CRASHLYTICS_KEY_MESSAGE = "message";
