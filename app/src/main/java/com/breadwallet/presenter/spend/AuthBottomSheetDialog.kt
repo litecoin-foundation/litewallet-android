@@ -10,9 +10,20 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
  * email: mosadialiou@gmail.com
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
-class AuthBottomSheetDialog(context: Context, @StyleRes theme: Int, private val backPressedCallback: () -> Unit) : BottomSheetDialog(context, theme) {
+class AuthBottomSheetDialog(
+    context: Context,
+    @StyleRes theme: Int,
+    private val backPressedCallback: () -> Unit,
+    private var dismissCallback: (() -> Unit)? = null
+) : BottomSheetDialog(context, theme) {
 
     override fun onBackPressed() {
         backPressedCallback()
+    }
+
+    override fun dismiss() {
+        super.dismiss()
+        dismissCallback?.invoke()
+        dismissCallback = null
     }
 }

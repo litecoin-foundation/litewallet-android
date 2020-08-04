@@ -24,11 +24,15 @@ import kotlinx.android.synthetic.main.fragment_history.*
  * email: mosadialiou@gmail.com
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
-class HistoryFragment : BaseFragment(), OnBalanceChanged,
-        OnTxStatusUpdate, OnIsoChangedListener,
-        OnTxAddedListener {
+class HistoryFragment : BaseFragment<HistoryPresenter>(), OnBalanceChanged,
+    OnTxStatusUpdate, OnIsoChangedListener,
+    OnTxAddedListener, HistoryView {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_history, container, false)
     }
 
@@ -86,4 +90,6 @@ class HistoryFragment : BaseFragment(), OnBalanceChanged,
             TxManager.getInstance().updateTxList(requireActivity() as BreadActivity)
         }
     }
+
+    override fun initPresenter() = HistoryPresenter(this)
 }
