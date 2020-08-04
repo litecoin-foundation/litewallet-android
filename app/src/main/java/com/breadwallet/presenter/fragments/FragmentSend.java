@@ -32,6 +32,8 @@ import androidx.transition.TransitionManager;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.base.BaseFragment;
+import com.breadwallet.presenter.base.BasePresenter;
+import com.breadwallet.presenter.base.BaseView;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.customviews.BRKeyboard;
 import com.breadwallet.presenter.customviews.BRLinearLayoutWithCaret;
@@ -53,6 +55,8 @@ import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 
@@ -760,5 +764,11 @@ public class FragmentSend extends BaseFragment {
                 }
             }, 500);
         }
+    }
+
+    @NotNull
+    @Override
+    public BasePresenter<? extends BaseView> initPresenter() {
+        return null;
     }
 }

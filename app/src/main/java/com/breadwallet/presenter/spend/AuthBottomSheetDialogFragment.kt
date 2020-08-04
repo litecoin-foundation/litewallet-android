@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import com.breadwallet.R
+import com.breadwallet.presenter.activities.BreadActivity
 import com.breadwallet.tools.util.Utils
 import com.breadwallet.tools.util.addFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -20,7 +21,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
  */
 class AuthBottomSheetDialogFragment : RoundedBottomSheetDialogFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_authentication, container, false)
     }
 
@@ -32,17 +37,22 @@ class AuthBottomSheetDialogFragment : RoundedBottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         (requireDialog() as BottomSheetDialog).dismissWithAnimation = true
-        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                childFragmentManager.popBackStack()
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    onBackPressed()
+                }
+            })
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = AuthBottomSheetDialog(requireContext(), theme) {
+        val dialog = AuthBottomSheetDialog(requireContext(), theme, {
             onBackPressed()
-        }
+        }, {
+            //(activity as BreadActivity?)?.handleNavigationItemSelected(R.id.nav_spend)
+            (activity as BreadActivity?)?.showTransferView()
+        })
         dialog.setCanceledOnTouchOutside(false)
         dialog.setCancelable(false)
         val behavior = dialog.behavior

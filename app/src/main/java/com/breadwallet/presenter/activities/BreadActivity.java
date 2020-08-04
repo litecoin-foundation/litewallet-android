@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -31,6 +32,7 @@ import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRNotificationBar;
 import com.breadwallet.presenter.entities.CurrencyEntity;
 import com.breadwallet.presenter.history.HistoryFragment;
+import com.breadwallet.presenter.spend.AuthBottomSheetDialogFragment;
 import com.breadwallet.presenter.transfer.TransferFragment;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.TextSizeTransition;
@@ -49,6 +51,7 @@ import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRPeerManager;
 import com.breadwallet.wallet.BRWalletManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.platform.APIClient;
 
 import java.math.BigDecimal;
@@ -190,32 +193,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (mSelectedBottomNavItem == item.getItemId()) return true;
-
-                switch (item.getItemId()) {
-                    case R.id.nav_history:
-                        ExtensionKt.replaceFragment(BreadActivity.this, new HistoryFragment(), false, R.id.fragment_container);
-                        break;
-                    case R.id.nav_send:
-                        if (BRAnimator.isClickAllowed()) {
-                            BRAnimator.showSendFragment(BreadActivity.this, null);
-                        }
-                        break;
-                    case R.id.nav_spend:
-                        /*BottomSheetDialogFragment fragment = new AuthBottomSheetDialogFragment();
-                        fragment.show(getSupportFragmentManager(), fragment.getTag());*/
-                        ExtensionKt.replaceFragment(BreadActivity.this, new TransferFragment(), false, R.id.fragment_container);
-                        break;
-                    case R.id.nav_receive:
-                        if (BRAnimator.isClickAllowed()) {
-                            BRAnimator.showReceiveFragment(BreadActivity.this, true);
-                        }
-                        break;
-                    case R.id.nav_buy:
-                        break;
-                }
-                mSelectedBottomNavItem = item.getItemId();
-                return true;
+                return handleNavigationItemSelected(item.getItemId());
             }
         });
 
@@ -239,6 +217,40 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 }
             }
         });
+    }
+
+    public boolean handleNavigationItemSelected(int menuItemId) {
+        if (mSelectedBottomNavItem == menuItemId) return true;
+        mSelectedBottomNavItem = menuItemId;
+        switch (menuItemId) {
+            case R.id.nav_history:
+                ExtensionKt.replaceFragment(BreadActivity.this, new HistoryFragment(), false, R.id.fragment_container);
+                break;
+            case R.id.nav_send:
+                if (BRAnimator.isClickAllowed()) {
+                    BRAnimator.showSendFragment(BreadActivity.this, null);
+                }
+                mSelectedBottomNavItem = 0;
+                break;
+            case R.id.nav_spend:
+                if (TextUtils.isEmpty(BRSharedPrefs.getLitecoinCardId(BreadActivity.this))) {
+                    BottomSheetDialogFragment fragment = new AuthBottomSheetDialogFragment();
+                    fragment.show(getSupportFragmentManager(), fragment.getTag());
+                    mSelectedBottomNavItem = 0;
+                } else {
+                    ExtensionKt.replaceFragment(BreadActivity.this, new TransferFragment(), false, R.id.fragment_container);
+                }
+                break;
+            case R.id.nav_receive:
+                if (BRAnimator.isClickAllowed()) {
+                    BRAnimator.showReceiveFragment(BreadActivity.this, true);
+                }
+                mSelectedBottomNavItem = 0;
+                break;
+            case R.id.nav_buy:
+                break;
+        }
+        return true;
     }
 
     private void swap() {
