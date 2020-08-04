@@ -13,9 +13,15 @@ import com.breadwallet.presenter.base.BaseFragment
  * email: mosadialiou@gmail.com
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
-class TransferFragment : BaseFragment() {
+class TransferFragment : BaseFragment<TransferPresenter>(), TransferView {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_transfer, container, false)
     }
+
+    override fun initPresenter() = TransferPresenter(this)
 }

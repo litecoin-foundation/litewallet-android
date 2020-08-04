@@ -1,10 +1,12 @@
 package com.breadwallet.tools.util
 
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.breadwallet.R
+import com.google.android.material.textfield.TextInputLayout
 
 /** Litewallet
  * Created by Mohamed Barry on 5/1/20
@@ -12,6 +14,14 @@ import com.breadwallet.R
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
 
+/** Int extension
+ *
+ */
+
+fun Int.noError() = this == Int.NO_ERROR
+
+val Int.Companion.NO_ERROR: Int
+    get() = 0
 
 /**
  * String extension
@@ -28,6 +38,15 @@ fun String.Companion.join(array: Array<String>, separator: Char?): String {
     stringBuilder.append(array[array.size - 1])
     return stringBuilder.toString()
 }
+
+/** TextInputLayout extension
+ *
+ */
+fun TextInputLayout.onError(@StringRes error: Int) {
+    this.error = if (error.noError()) null else resources.getString(error)
+}
+
+fun TextInputLayout.text(): CharSequence = this.editText?.text ?: ""
 
 
 /**
@@ -60,6 +79,26 @@ fun Fragment.addFragment(
 ) {
     addFragment(this.childFragmentManager, fragment, transition, addToBackStack, containerId)
 }
+
+fun Fragment.replaceChildFragment(
+    fragment: Fragment,
+    addToBackStack: Boolean = true,
+    containerId: Int = R.id.fragment_container,
+    transition: Int? = null
+) {
+    replaceFragment(this.childFragmentManager, fragment, transition, addToBackStack, containerId)
+}
+
+fun Fragment.replaceFragment(
+    fragment: Fragment,
+    addToBackStack: Boolean = true,
+    containerId: Int = R.id.fragment_container,
+    transition: Int? = null
+) {
+    replaceFragment(this.requireFragmentManager(), fragment, transition, addToBackStack, containerId)
+}
+
+
 
 private fun addFragment(fragmentManager: FragmentManager,
                         fragment: Fragment,

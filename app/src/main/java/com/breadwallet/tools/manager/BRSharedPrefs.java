@@ -45,6 +45,7 @@ import static com.breadwallet.tools.util.BRConstants.GEO_PERMISSIONS_REQUESTED;
 public class BRSharedPrefs {
 
     private static final List<OnIsoChangedListener> isoChangedListeners = new ArrayList<>();
+    public static final String TERNIO_USER_ID = "ternio_user_id";
 
     public interface OnIsoChangedListener {
         void onIsoChanged(String iso);
@@ -431,5 +432,15 @@ public class BRSharedPrefs {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("trustNode", trustNode);
         editor.apply();
+    }
+
+    public static void putLitecoinCardId(Context context, String id) {
+        context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
+                .edit().putString(TERNIO_USER_ID, id).apply();
+    }
+
+    public static String getLitecoinCardId(Context context) {
+        return context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
+                .getString(TERNIO_USER_ID, null);
     }
 }
