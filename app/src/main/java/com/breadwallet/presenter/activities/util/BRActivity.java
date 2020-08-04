@@ -182,8 +182,8 @@ public class BRActivity extends FragmentActivity {
 
         BreadApp.activityCounter.incrementAndGet();
         BreadApp.setBreadContext(app);
-        //lock wallet if 3 minutes passed
-        if (BreadApp.backgroundedTime != 0 && (System.currentTimeMillis() - BreadApp.backgroundedTime >= 180 * 1000) && !(app instanceof DisabledActivity)) {
+        //lock wallet if 3 minutes passed (180 * 1000)
+        if (BreadApp.backgroundedTime != 0 && hasTimeElapsedSinceInBackground(180 * 1000) && !(app instanceof DisabledActivity)) {
             if (!BRKeyStore.getPinCode(app).isEmpty()) {
                 BRAnimator.startBreadActivity(app, true);
             }
@@ -195,5 +195,9 @@ public class BRActivity extends FragmentActivity {
             }
         });
         BreadApp.backgroundedTime = System.currentTimeMillis();
+    }
+
+    private static boolean hasTimeElapsedSinceInBackground(long timeInMillis) {
+        return System.currentTimeMillis() - BreadApp.backgroundedTime >= timeInMillis;
     }
 }
