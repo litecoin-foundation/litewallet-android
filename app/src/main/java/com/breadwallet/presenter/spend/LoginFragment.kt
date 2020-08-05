@@ -77,7 +77,6 @@ class LoginFragment : BaseFragment<LoginPresenter>(), LoginView {
     }
 
     override fun show2faView() {
-
     }
 
     override fun showTransferView() {

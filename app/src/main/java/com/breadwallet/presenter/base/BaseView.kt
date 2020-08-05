@@ -1,6 +1,5 @@
 package com.breadwallet.presenter.base
 
-
 /** Litewallet
  * Created by Mohamed Barry on 6/30/20
  * email: mosadialiou@gmail.com

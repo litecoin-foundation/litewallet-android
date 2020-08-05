@@ -5,7 +5,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import timber.log.Timber
 
-
 /** Litewallet
  * Created by Mohamed Barry on 6/1/20
  * email: mosadialiou@gmail.com

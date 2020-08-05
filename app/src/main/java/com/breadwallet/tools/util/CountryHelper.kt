@@ -1,8 +1,7 @@
 package com.breadwallet.tools.util
 
 import com.breadwallet.entities.Country
-import java.util.*
-
+import java.util.Locale
 
 /** Litewallet
  * Created by Mohamed Barry on 8/5/20

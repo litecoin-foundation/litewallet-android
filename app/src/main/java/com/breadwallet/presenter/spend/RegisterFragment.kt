@@ -132,6 +132,5 @@ class RegisterFragment : BaseFragment<RegisterPresenter>(), RegisterView {
         }.show()
     }
 
-
     override fun initPresenter() = RegisterPresenter(this)
 }

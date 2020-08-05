@@ -7,7 +7,6 @@ import org.litecoin.partnerapi.callback.LoginCallback
 import org.litecoin.partnerapi.network.AuthClient
 import javax.inject.Inject
 
-
 /** Litewallet
  * Created by Mohamed Barry on 6/30/20
  * email: mosadialiou@gmail.com
@@ -26,50 +25,53 @@ class LoginPresenter(view: LoginView) : BasePresenter<LoginView>(view) {
 
     fun login(email: String, password: String) {
         view?.showProgress()
-        authClient.login(email, password, object : LoginCallback {
-            override fun on2faRequired() {
-                view?.hideProgress()
-                (view as LoginView?)?.show2faView()
-            }
+        authClient.login(
+            email, password,
+            object : LoginCallback {
+                override fun on2faRequired() {
+                    view?.hideProgress()
+                    (view as LoginView?)?.show2faView()
+                }
 
-            override fun onEmailNotVerified() {
-                view?.hideProgress()
-                view?.showError("You need to verify your email address before you can login.")
-            }
+                override fun onEmailNotVerified() {
+                    view?.hideProgress()
+                    view?.showError("You need to verify your email address before you can login.")
+                }
 
-            override fun onUserNotFound(message: String) {
-                view?.hideProgress()
-                view?.showError(message)
-            }
+                override fun onUserNotFound(message: String) {
+                    view?.hideProgress()
+                    view?.showError(message)
+                }
 
-            override fun onLoggedIn(id: String) {
-                view?.hideProgress()
-                BRSharedPrefs.putLitecoinCardId(BreadApp.getBreadContext(), id)
-                (view as LoginView?)?.showTransferView()
-            }
+                override fun onLoggedIn(id: String) {
+                    view?.hideProgress()
+                    BRSharedPrefs.putLitecoinCardId(BreadApp.getBreadContext(), id)
+                    (view as LoginView?)?.showTransferView()
+                }
 
-            override fun onWrong2faTokenProvided() {
-                view?.hideProgress()
-                view?.showError("Wrong 2FA provided")
-            }
+                override fun onWrong2faTokenProvided() {
+                    view?.hideProgress()
+                    view?.showError("Wrong 2FA provided")
+                }
 
-            override fun onValidationError(message: String) {
-                view?.hideProgress()
-                view?.showError(message)
-            }
+                override fun onValidationError(message: String) {
+                    view?.hideProgress()
+                    view?.showError(message)
+                }
 
-            override fun onUnknownSystemError() {
-                view?.hideProgress()
-                view?.showError("Oops something wrong happened. Please try again later")
-            }
+                override fun onUnknownSystemError() {
+                    view?.hideProgress()
+                    view?.showError("Oops something wrong happened. Please try again later")
+                }
 
-            override fun onTokenExpired() {
-                view?.hideProgress()
-            }
+                override fun onTokenExpired() {
+                    view?.hideProgress()
+                }
 
-            override fun onFailure(error: Int) {
-                view?.hideProgress()
+                override fun onFailure(error: Int) {
+                    view?.hideProgress()
+                }
             }
-        })
+        )
     }
 }

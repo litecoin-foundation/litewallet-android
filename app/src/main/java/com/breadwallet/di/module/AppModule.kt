@@ -5,7 +5,6 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-
 /** Litewallet
  * Created by Mohamed Barry on 6/30/20
  * email: mosadialiou@gmail.com
