@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.breadwallet.R
 import com.breadwallet.presenter.base.BaseFragment
 
-
 /** Litewallet
  * Created by Mohamed Barry on 6/14/20
  * email: mosadialiou@gmail.com
