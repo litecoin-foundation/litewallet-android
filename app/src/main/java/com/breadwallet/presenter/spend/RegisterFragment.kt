@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import com.breadwallet.R
+import com.breadwallet.entities.Country
 import com.breadwallet.presenter.base.BaseFragment
+import com.breadwallet.tools.util.CountryHelper
 import com.breadwallet.tools.util.onError
 import com.breadwallet.tools.util.text
 import com.github.razir.progressbutton.bindProgressButton
@@ -33,11 +36,21 @@ class RegisterFragment : BaseFragment<RegisterPresenter>(), RegisterView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolBar.setNavigationOnClickListener {
-            (parentFragment as AuthBottomSheetDialogFragment?)?.onBackPressed()
+            goToLogin()
         }
         countryField.editText?.keyListener = null
+        countryField.editText?.run {
+            val country = CountryHelper.countries.find { it.name == "United States" }
+            setText(country?.name)
+            tag = country
+        }
+
         submitBut.setOnClickListener { handleSubmit() }
         bindProgressButton(submitBut)
+    }
+
+    fun goToLogin() {
+        (parentFragment as AuthBottomSheetDialogFragment?)?.onBackPressed()
     }
 
     private fun handleSubmit() {
@@ -52,7 +65,7 @@ class RegisterFragment : BaseFragment<RegisterPresenter>(), RegisterView {
             cityField.text(),
             stateField.text(),
             postalCodeField.text(),
-            countryField.text(),
+            countryField.editText?.tag as Country,
             mobileNumberField.text()
         )
     }
@@ -110,6 +123,15 @@ class RegisterFragment : BaseFragment<RegisterPresenter>(), RegisterView {
         submitBut.hideProgress("Register")
         submitBut.isEnabled = true
     }
+
+    override fun onRegisteredSuccessful() {
+        AlertDialog.Builder(requireContext()).setMessage("You have been registered. Please confirm by visiting your email inbox and clicking on the confirmation button").setPositiveButton(
+            android.R.string.ok
+        ) { _, _ ->
+            goToLogin()
+        }.show()
+    }
+
 
     override fun initPresenter() = RegisterPresenter(this)
 }
