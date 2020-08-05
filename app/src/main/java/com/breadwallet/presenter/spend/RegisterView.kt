@@ -20,4 +20,6 @@ interface RegisterView : BaseView {
     fun onWrongEmail(errorResId: Int)
     fun onWrongPassword(errorResId: Int)
     fun onWrongConfirmPassword(errorResId: Int)
+
+    fun onRegisteredSuccessful()
 }
