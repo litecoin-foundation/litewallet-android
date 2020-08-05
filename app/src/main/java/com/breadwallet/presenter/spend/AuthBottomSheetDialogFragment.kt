@@ -50,8 +50,7 @@ class AuthBottomSheetDialogFragment : RoundedBottomSheetDialogFragment() {
         val dialog = AuthBottomSheetDialog(requireContext(), theme, {
             onBackPressed()
         }, {
-            //(activity as BreadActivity?)?.handleNavigationItemSelected(R.id.nav_spend)
-            (activity as BreadActivity?)?.showTransferView()
+            (activity as BreadActivity?)?.handleNavigationItemSelected(R.id.nav_spend)
         })
         dialog.setCanceledOnTouchOutside(false)
         dialog.setCancelable(false)
