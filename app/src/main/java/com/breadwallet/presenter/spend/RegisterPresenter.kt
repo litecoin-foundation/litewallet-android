@@ -10,7 +10,6 @@ import org.litecoin.partnerapi.model.User
 import org.litecoin.partnerapi.network.UserClient
 import javax.inject.Inject
 
-
 /** Litewallet
  * Created by Mohamed Barry on 6/30/20
  * email: mosadialiou@gmail.com
@@ -42,18 +41,19 @@ class RegisterPresenter(view: RegisterView) : BasePresenter<RegisterView>(view) 
         phone: CharSequence
     ) {
         if (validateFields(
-                    firstname,
-                    lastname,
-                    email,
-                    password,
-                    passwordConfirmation,
-                    address1,
-                    city,
-                    state,
-                    postalCode,
-                    country.name,
-                    phone
-                )) {
+            firstname,
+            lastname,
+            email,
+            password,
+            passwordConfirmation,
+            address1,
+            city,
+            state,
+            postalCode,
+            country.name,
+            phone
+        )
+        ) {
             view?.showProgress()
             userClient.register(
                 firstname.toString(),
@@ -145,9 +145,9 @@ class RegisterPresenter(view: RegisterView) : BasePresenter<RegisterView>(view) 
         }
 
         return firstNameResId.noError() && lastNameResId.noError() &&
-                address1ResId.noError() && cityResId.noError() && stateResId.noError() && postalCodeResId.noError() &&
-                countryResId.noError() && phoneResId.noError() &&
-                emailResId.noError() && pwdResId.noError() && confirmPasswordResId.noError()
+            address1ResId.noError() && cityResId.noError() && stateResId.noError() && postalCodeResId.noError() &&
+            countryResId.noError() && phoneResId.noError() &&
+            emailResId.noError() && pwdResId.noError() && confirmPasswordResId.noError()
     }
 
     private fun confirmPasswordErrorId(password: CharSequence, confirmPassword: CharSequence): Int {
@@ -179,5 +179,5 @@ class RegisterPresenter(view: RegisterView) : BasePresenter<RegisterView>(view) 
     }
 
     private fun errorResId(field: CharSequence) =
-            if (field.isEmpty()) R.string.required else Int.NO_ERROR
+        if (field.isEmpty()) R.string.required else Int.NO_ERROR
 }

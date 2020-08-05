@@ -4,7 +4,6 @@ import com.breadwallet.di.component.DaggerPresenterComponent
 import com.breadwallet.presenter.spend.LoginPresenter
 import com.breadwallet.presenter.spend.RegisterPresenter
 
-
 /** Litewallet
  * Created by Mohamed Barry on 6/30/20
  * email: mosadialiou@gmail.com
