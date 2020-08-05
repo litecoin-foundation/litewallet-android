@@ -1,6 +1,7 @@
 package com.breadwallet.presenter.spend
 
 import com.breadwallet.R
+import com.breadwallet.entities.Country
 import com.breadwallet.presenter.base.BasePresenter
 import com.breadwallet.tools.util.NO_ERROR
 import com.breadwallet.tools.util.noError
@@ -37,7 +38,7 @@ class RegisterPresenter(view: RegisterView) : BasePresenter<RegisterView>(view) 
         city: CharSequence,
         state: CharSequence,
         postalCode: CharSequence,
-        country: CharSequence,
+        country: Country,
         phone: CharSequence
     ) {
         if (validateFields(
@@ -50,7 +51,7 @@ class RegisterPresenter(view: RegisterView) : BasePresenter<RegisterView>(view) 
                     city,
                     state,
                     postalCode,
-                    country,
+                    country.name,
                     phone
                 )) {
             view?.showProgress()
@@ -65,11 +66,12 @@ class RegisterPresenter(view: RegisterView) : BasePresenter<RegisterView>(view) 
                 city.toString(),
                 state.toString(),
                 postalCode.toString(),
-                country.toString(),
+                country.code,
                 phone.toString(),
                 callback = object : RegisterCallback {
                     override fun onRegistered(user: User) {
                         view?.hideProgress()
+                        (view as RegisterView?)?.onRegisteredSuccessful()
                     }
 
                     override fun onEmailAlreadyUsed(message: String) {
