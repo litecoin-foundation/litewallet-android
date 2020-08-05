@@ -2,7 +2,6 @@ package com.breadwallet.presenter.spend
 
 import com.breadwallet.presenter.base.BaseView
 
-
 /** Litewallet
  * Created by Mohamed Barry on 6/30/20
  * email: mosadialiou@gmail.com

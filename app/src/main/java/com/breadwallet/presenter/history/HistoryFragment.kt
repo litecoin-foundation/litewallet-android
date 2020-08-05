@@ -18,15 +18,18 @@ import com.breadwallet.wallet.BRWalletManager
 import com.breadwallet.wallet.BRWalletManager.OnBalanceChanged
 import kotlinx.android.synthetic.main.fragment_history.*
 
-
 /** Litewallet
  * Created by Mohamed Barry on 6/1/20
  * email: mosadialiou@gmail.com
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
-class HistoryFragment : BaseFragment<HistoryPresenter>(), OnBalanceChanged,
-    OnTxStatusUpdate, OnIsoChangedListener,
-    OnTxAddedListener, HistoryView {
+class HistoryFragment :
+    BaseFragment<HistoryPresenter>(),
+    OnBalanceChanged,
+    OnTxStatusUpdate,
+    OnIsoChangedListener,
+    OnTxAddedListener,
+    HistoryView {
 
     override fun onCreateView(
         inflater: LayoutInflater,

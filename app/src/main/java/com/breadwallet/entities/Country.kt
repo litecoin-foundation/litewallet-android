@@ -1,6 +1,5 @@
 package com.breadwallet.entities
 
-
 /** Litewallet
  * Created by Mohamed Barry on 8/5/20
  * email: mosadialiou@gmail.com

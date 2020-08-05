@@ -43,15 +43,20 @@ class AuthBottomSheetDialogFragment : RoundedBottomSheetDialogFragment() {
                 override fun handleOnBackPressed() {
                     onBackPressed()
                 }
-            })
+            }
+        )
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = AuthBottomSheetDialog(requireContext(), theme, {
-            onBackPressed()
-        }, {
-            (activity as BreadActivity?)?.handleNavigationItemSelected(R.id.nav_spend)
-        })
+        val dialog = AuthBottomSheetDialog(
+            requireContext(), theme,
+            {
+                onBackPressed()
+            },
+            {
+                (activity as BreadActivity?)?.handleNavigationItemSelected(R.id.nav_spend)
+            }
+        )
         dialog.setCanceledOnTouchOutside(false)
         dialog.setCancelable(false)
         val behavior = dialog.behavior
