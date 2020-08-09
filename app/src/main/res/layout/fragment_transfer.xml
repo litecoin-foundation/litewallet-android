@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/barlowsemicondensed_medium"
-            android:text="Desposit to Litecoin Card"
+            android:text="Deposit to Litecoin Card"
             android:textColor="@color/litecoin_litewallet_blue"
             android:textSize="18sp" />
 
