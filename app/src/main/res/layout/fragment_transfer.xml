@@ -16,6 +16,7 @@
         android:paddingEnd="16dp">
 
         <ImageView
+            android:id="@+id/cardImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -23,6 +24,7 @@
             android:src="@drawable/ic_litecoin_card_pivot" />
 
         <TextView
+            android:id="@+id/transferDirectionLbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -32,6 +34,7 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/cardBalanceAmountLbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -41,6 +44,7 @@
             tools:text="1.026513" />
 
         <TextView
+            android:id="@+id/cardBalanceLbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
@@ -50,6 +54,7 @@
             android:textSize="16sp" />
 
         <LinearLayout
+            android:id="@+id/transferUpDownButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="33dp"
@@ -100,6 +105,7 @@
         </RadioGroup>
 
         <LinearLayout
+            android:id="@+id/amountFieldContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="35dp"
@@ -109,7 +115,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailField"
+                android:id="@+id/amountField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
