@@ -1,6 +1,8 @@
 package com.breadwallet.presenter.transfer
 
+import com.breadwallet.BreadApp
 import com.breadwallet.presenter.base.BasePresenter
+import com.breadwallet.tools.manager.BRSharedPrefs
 
 /** Litewallet
  * Created by Mohamed Barry on 6/30/20
@@ -12,5 +14,9 @@ class TransferPresenter(view: TransferView) : BasePresenter<TransferView>(view) 
     }
 
     override fun unsubscribe() {
+    }
+
+    fun logout() {
+        BRSharedPrefs.logoutFromLitecoinCard(BreadApp.getBreadContext())
     }
 }

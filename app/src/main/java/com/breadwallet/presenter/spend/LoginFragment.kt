@@ -10,6 +10,7 @@ import androidx.core.text.underline
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import com.breadwallet.R
+import com.breadwallet.presenter.activities.BreadActivity
 import com.breadwallet.presenter.base.BaseFragment
 import com.breadwallet.tools.util.addFragment
 import com.github.razir.progressbutton.bindProgressButton
@@ -81,6 +82,7 @@ class LoginFragment : BaseFragment<LoginPresenter>(), LoginView {
 
     override fun showTransferView() {
         (parentFragment as BottomSheetDialogFragment?)?.dismiss()
+        (activity as BreadActivity?)?.handleNavigationItemSelected(R.id.nav_spend)
     }
 
     private fun validateFields(): Boolean {

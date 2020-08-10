@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import com.breadwallet.R
-import com.breadwallet.presenter.activities.BreadActivity
 import com.breadwallet.tools.util.Utils
 import com.breadwallet.tools.util.addFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -48,15 +47,7 @@ class AuthBottomSheetDialogFragment : RoundedBottomSheetDialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = AuthBottomSheetDialog(
-            requireContext(), theme,
-            {
-                onBackPressed()
-            },
-            {
-                (activity as BreadActivity?)?.handleNavigationItemSelected(R.id.nav_spend)
-            }
-        )
+        val dialog = AuthBottomSheetDialog(requireContext(), theme) { onBackPressed() }
         dialog.setCanceledOnTouchOutside(false)
         dialog.setCancelable(false)
         val behavior = dialog.behavior
