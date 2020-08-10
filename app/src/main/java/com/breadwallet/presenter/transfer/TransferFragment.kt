@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.breadwallet.R
+import com.breadwallet.presenter.activities.BreadActivity
 import com.breadwallet.presenter.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_transfer.*
 
 /** Litewallet
  * Created by Mohamed Barry on 6/14/20
@@ -20,6 +22,14 @@ class TransferFragment : BaseFragment<TransferPresenter>(), TransferView {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_transfer, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        logoutBut.setOnClickListener {
+            presenter.logout()
+            (requireActivity() as BreadActivity?)?.recreate()
+        }
     }
 
     override fun initPresenter() = TransferPresenter(this)

@@ -153,9 +153,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         onConnectionChanged(InternetManager.getInstance().isConnected(this));
 
         updateUI();
-        if (savedInstanceState == null) {
-            bottomNav.setSelectedItemId(R.id.nav_history);
-        }
+        bottomNav.setSelectedItemId(R.id.nav_history);
     }
 
     private void addObservers() {

@@ -443,4 +443,9 @@ public class BRSharedPrefs {
         return context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
                 .getString(TERNIO_USER_ID, null);
     }
+
+    public static void logoutFromLitecoinCard(Context context) {
+        context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
+                .edit().remove(TERNIO_USER_ID).apply();
+    }
 }
