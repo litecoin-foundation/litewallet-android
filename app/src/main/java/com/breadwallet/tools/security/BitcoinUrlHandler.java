@@ -2,6 +2,8 @@ package com.breadwallet.tools.security;
 
 import android.app.Activity;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.PaymentItem;
@@ -52,7 +54,7 @@ import timber.log.Timber;
 public class BitcoinUrlHandler {
     private static final Object lockObject = new Object();
 
-    public static synchronized boolean processRequest(Activity app, String url) {
+    public static synchronized boolean processRequest(FragmentActivity app, String url) {
         if (url == null) {
             Timber.d("processRequest: url is null");
             return false;
@@ -183,7 +185,7 @@ public class BitcoinUrlHandler {
         return true;
     }
 
-    private static boolean tryBitcoinURL(final String url, final Activity app) {
+    private static boolean tryBitcoinURL(final String url, final FragmentActivity app) {
         RequestObject requestObject = getRequestFromString(url);
         if (requestObject == null || requestObject.address == null || requestObject.address.isEmpty())
             return false;

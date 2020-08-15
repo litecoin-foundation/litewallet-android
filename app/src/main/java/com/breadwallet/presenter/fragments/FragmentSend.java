@@ -1,7 +1,6 @@
 package com.breadwallet.presenter.fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -33,10 +31,12 @@ import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
 import com.breadwallet.R;
+import com.breadwallet.presenter.base.BaseFragment;
+import com.breadwallet.presenter.base.BasePresenter;
+import com.breadwallet.presenter.base.BaseView;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.customviews.BRKeyboard;
 import com.breadwallet.presenter.customviews.BRLinearLayoutWithCaret;
-import com.breadwallet.presenter.customviews.BRText;
 import com.breadwallet.presenter.entities.PaymentItem;
 import com.breadwallet.presenter.entities.RequestObject;
 import com.breadwallet.tools.animation.BRAnimator;
@@ -47,7 +47,6 @@ import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRClipboardManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.FeeManager;
-import com.breadwallet.tools.manager.FontManager;
 import com.breadwallet.tools.security.BRSender;
 import com.breadwallet.tools.security.BitcoinUrlHandler;
 import com.breadwallet.tools.threads.BRExecutor;
@@ -56,6 +55,8 @@ import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 
@@ -89,7 +90,7 @@ import static com.breadwallet.tools.security.BitcoinUrlHandler.getRequestFromStr
  * THE SOFTWARE.
  */
 
-public class FragmentSend extends Fragment {
+public class FragmentSend extends BaseFragment {
     public ScrollView backgroundLayout;
     public LinearLayout signalLayout;
     private BRKeyboard keyboard;
@@ -114,8 +115,8 @@ public class FragmentSend extends Fragment {
     private ConstraintLayout amountLayout;
     private BRLinearLayoutWithCaret feeLayout;
     private boolean feeButtonsShown = false;
-    private BRText feeDescription;
-    private BRText warningText;
+    private TextView feeDescription;
+    private TextView warningText;
     private boolean amountLabelOn = true;
 
     private static String savedMemo;
@@ -191,9 +192,6 @@ public class FragmentSend extends Fragment {
 
     private void setupFeesSelector(View rootView) {
         RadioGroup feesSegment = rootView.findViewById(R.id.fees_segment);
-        for (int i = 0; i < feesSegment.getChildCount(); i++) {
-            FontManager.setCustomFont(getContext(), (RadioButton) feesSegment.getChildAt(i), "BarlowSemiCondensed-Medium.ttf");
-        }
         feesSegment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -391,13 +389,13 @@ public class FragmentSend extends Fragment {
         isoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedIso.equalsIgnoreCase(BRSharedPrefs.getIso(getContext()))) {
+                String iso = BRSharedPrefs.getIso(getContext());
+                if (selectedIso.equalsIgnoreCase(iso)) {
                     selectedIso = "LTC";
                 } else {
-                    selectedIso = BRSharedPrefs.getIso(getContext());
+                    selectedIso = iso;
                 }
                 updateText();
-
             }
         });
 
@@ -451,7 +449,6 @@ public class FragmentSend extends Fragment {
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //not allowed now
                 if (!BRAnimator.isClickAllowed()) {
                     return;
                 }
@@ -470,9 +467,7 @@ public class FragmentSend extends Fragment {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Activity app = getActivity();
-                if (app != null)
-                    app.getFragmentManager().popBackStack();
+                getFragmentManager().popBackStack();
             }
         });
 
@@ -486,7 +481,6 @@ public class FragmentSend extends Fragment {
                             showKeyboard(true);
                         }
                     }, 500);
-
                 }
                 return false;
             }
@@ -498,8 +492,6 @@ public class FragmentSend extends Fragment {
                 handleClick(key);
             }
         });
-
-//        updateText();
     }
 
     private void showKeyboard(boolean b) {
@@ -772,5 +764,11 @@ public class FragmentSend extends Fragment {
                 }
             }, 500);
         }
+    }
+
+    @NotNull
+    @Override
+    public BasePresenter<? extends BaseView> initPresenter() {
+        return null;
     }
 }
