@@ -23,7 +23,6 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.Nullable;
 
 import com.breadwallet.R;
-import com.breadwallet.tools.manager.FontManager;
 import com.breadwallet.tools.util.Utils;
 
 import timber.log.Timber;
@@ -97,10 +96,6 @@ public class BRButton extends Button {
         bRect = new RectF(0, 0, 100, 100);
         TypedArray a = ctx.obtainStyledAttributes(attrs, R.styleable.BRButton);
 
-        if (!isInEditMode()) {
-            String customFont = a.getString(R.styleable.BRButton_customBFont);
-            FontManager.setCustomFont(ctx, this, Utils.isNullOrEmpty(customFont) ? "BarlowSemiCondensed-Medium.ttf" : customFont);
-        }
         int px16 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
 
         isBreadButton = a.getBoolean(R.styleable.BRButton_isBreadButton, false);

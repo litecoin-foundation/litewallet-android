@@ -134,37 +134,11 @@
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNav"
-        android:layout_below="@+id/toolbar_layout"
-        android:animateLayoutChanges="true">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tx_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:clipToPadding="false"
-            android:paddingStart="8dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="8dp"
-            tools:listitem="@layout/tx_item" />
-
-        <TextView
-            android:id="@+id/empty_tx_tip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/barlowsemicondensed_regular"
-            android:text="@string/TransactionDetails.emptyMessage"
-            android:textColor="@color/light_gray"
-            android:textSize="18sp"
-            android:visibility="gone" />
-
-    </FrameLayout>
+        android:layout_below="@+id/toolbar_layout" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
