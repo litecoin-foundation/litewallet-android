@@ -165,7 +165,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-    ndkVersion '21.1.6352462'
+    //ndkVersion '21.1.6352462'
 }
 
 task copyResDirectoryToClasses(type: Copy) {
