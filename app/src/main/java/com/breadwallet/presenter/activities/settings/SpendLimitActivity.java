@@ -31,11 +31,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import timber.log.Timber;
+
 import static com.breadwallet.tools.util.BRConstants.ONE_BITCOIN;
 
 
 public class SpendLimitActivity extends BRActivity {
-    private static final String TAG = SpendLimitActivity.class.getName();
     public static boolean appVisible = false;
     private static SpendLimitActivity app;
     private ListView listView;
@@ -54,15 +55,9 @@ public class SpendLimitActivity extends BRActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spend_limit);
 
+        //TODO: all views are using the layout of this button. Views should be refactored without it
+        // Hiding until layouts are built.
         ImageButton faq = findViewById(R.id.faq_button);
-
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.fingerprintSpendingLimit);
-            }
-        });
 
         listView = findViewById(R.id.limit_list);
         listView.setFooterDividersEnabled(true);
@@ -80,7 +75,7 @@ public class SpendLimitActivity extends BRActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Log.e(TAG, "onItemClick: " + position);
+                Timber.d("onItemClick: %s", position);
                 int limit = adapter.getItem(position);
                 BRKeyStore.putSpendLimit(limit, app);
 
@@ -88,11 +83,9 @@ public class SpendLimitActivity extends BRActivity {
                         + BRKeyStore.getSpendLimit(app));
                 adapter.notifyDataSetChanged();
             }
-
         });
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
     }
 
     //satoshis
@@ -145,7 +138,6 @@ public class SpendLimitActivity extends BRActivity {
         super.onResume();
         appVisible = true;
         app = this;
-
     }
 
     @Override
@@ -167,16 +159,13 @@ public class SpendLimitActivity extends BRActivity {
         private TextView textViewItem;
 
         public LimitAdaptor(Context mContext) {
-
             super(mContext, R.layout.currency_list_item);
-
             this.layoutResourceId = R.layout.currency_list_item;
             this.mContext = mContext;
         }
 
         @Override
         public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-
             final long limit = BRKeyStore.getSpendLimit(app);
             if (convertView == null) {
                 // inflate the layout
@@ -199,19 +188,11 @@ public class SpendLimitActivity extends BRActivity {
                 checkMark.setVisibility(View.GONE);
             }
             return convertView;
-
-        }
-
-        @Override
-        public int getCount() {
-            return super.getCount();
         }
 
         @Override
         public int getItemViewType(int position) {
             return IGNORE_ITEM_VIEW_TYPE;
         }
-
     }
-
 }

@@ -47,6 +47,7 @@
                     android:id="@+id/bread_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layoutDirection="ltr"
                     android:animateLayoutChanges="true"
                     android:clipChildren="false"
                     android:clipToPadding="false">
@@ -327,7 +328,7 @@
                 android:text="@string/MenuButton.buy"
                 android:textAllCaps="true"
                 android:textColor="@color/pin_pad_text"
-                app:customTFont="CircularPro-Medium.otf" />
+                app:customTFont="BarlowSemiCondensed-Medium.ttf" />
         </LinearLayout>
 
         <LinearLayout
