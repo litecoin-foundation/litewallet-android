@@ -21,6 +21,8 @@ import com.breadwallet.tools.animation.BRAnimator;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 
 /**
  * BreadWallet
@@ -48,7 +50,6 @@ import java.util.List;
  */
 
 public class FragmentTransactionDetails extends Fragment {
-    private static final String TAG = FragmentTransactionDetails.class.getName();
 
     public TextView mTitle;
     public LinearLayout backgroundLayout;
@@ -95,7 +96,9 @@ public class FragmentTransactionDetails extends Fragment {
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                observer.removeGlobalOnLayoutListener(this);
+                if(observer.isAlive()) {
+                    observer.removeOnGlobalLayoutListener(this);
+                }
                 BRAnimator.animateBackgroundDim(backgroundLayout, false);
                 BRAnimator.animateSignalSlide(txViewPager, false, null);
             }
@@ -114,7 +117,7 @@ public class FragmentTransactionDetails extends Fragment {
                 if (app != null && !app.isDestroyed())
                     app.getFragmentManager().popBackStack();
                 else
-                    Log.e(TAG, "onAnimationEnd: app is null");
+                    Timber.d("onAnimationEnd: app is null");
             }
         });
     }

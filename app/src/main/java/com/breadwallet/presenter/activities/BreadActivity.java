@@ -51,9 +51,11 @@ import com.platform.APIClient;
 
 import java.math.BigDecimal;
 
-import static com.breadwallet.presenter.activities.intro.IntroActivity.introActivity;
+import timber.log.Timber;
+
 import static com.breadwallet.presenter.activities.ReEnterPinActivity.reEnterPinActivity;
 import static com.breadwallet.presenter.activities.SetPinActivity.introSetPitActivity;
+import static com.breadwallet.presenter.activities.intro.IntroActivity.introActivity;
 import static com.breadwallet.tools.animation.BRAnimator.primaryTextSize;
 import static com.breadwallet.tools.animation.BRAnimator.secondaryTextSize;
 import static com.breadwallet.tools.util.BRConstants.PLATFORM_ON;
@@ -168,7 +170,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         onConnectionChanged(InternetManager.getInstance().isConnected(this));
 
         updateUI();
-
     }
 
     @Override
@@ -423,10 +424,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         sendButton = (LinearLayout) findViewById(R.id.send_layout);
         receiveButton = (LinearLayout) findViewById(R.id.receive_layout);
 
-        //TODO: Add back when server can handle the buy
         buyButton = (LinearLayout) findViewById(R.id.buy_layout);
-        //walletName = (TextView) findViewById(R.id.wallet_name_text);
-
 
         menuButton = (LinearLayout) findViewById(R.id.menu_layout);
         manageText = (TextView) findViewById(R.id.manage_text);
@@ -448,8 +446,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                if (observer.isAlive())
+                if (observer.isAlive()) {
                     observer.removeOnGlobalLayoutListener(this);
+                }
                 if (uiIsDone) return;
                 uiIsDone = true;
                 setPriceTags(BRSharedPrefs.getPreferredLTC(BreadActivity.this), false);
@@ -597,7 +596,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 @Override
                 public void run() {
                     final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(BreadActivity.this));
-//                    Log.e(TAG, "run: " + progress);
+                    Timber.d("Sync Progress: %s", progress);
                     if (progress < 1 && progress > 0) {
                         SyncManager.getInstance().startSyncingProgressThread();
                     }

@@ -31,9 +31,10 @@ import com.breadwallet.tools.util.BRCurrency;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+import timber.log.Timber;
+
 
 public class DisplayCurrencyActivity extends BRActivity {
-    private static final String TAG = DisplayCurrencyActivity.class.getName();
     private TextView exchangeText;
     private ListView listView;
     private CurrencyListAdapter adapter;
@@ -57,15 +58,9 @@ public class DisplayCurrencyActivity extends BRActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_currency);
 
+        //TODO: all views are using the layout of this button. Views should be refactored without it
+        // Hiding until layouts are built.
         ImageButton faq = findViewById(R.id.faq_button);
-
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.displayCurrency);
-            }
-        });
 
         exchangeText = findViewById(R.id.exchange_text);
         listView = findViewById(R.id.currency_list_view);
@@ -105,13 +100,10 @@ public class DisplayCurrencyActivity extends BRActivity {
                 BRSharedPrefs.putCurrencyListPosition(DisplayCurrencyActivity.this, position);
 
                 updateExchangeRate();
-
             }
-
         });
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
     }
 
     private void updateExchangeRate() {
@@ -141,7 +133,6 @@ public class DisplayCurrencyActivity extends BRActivity {
             rightButton.setBackground(getDrawable(R.drawable.b_half_right_blue));
         }
         updateExchangeRate();
-
     }
 
     @Override
@@ -172,13 +163,11 @@ public class DisplayCurrencyActivity extends BRActivity {
         private final Point displayParameters = new Point();
 
         public CurrencyListAdapter(Context mContext) {
-
             super(mContext, R.layout.currency_list_item);
 
             this.layoutResourceId = R.layout.currency_list_item;
             this.mContext = mContext;
             ((Activity) mContext).getWindowManager().getDefaultDisplay().getSize(displayParameters);
-//        currencyListAdapter = this;
         }
 
         @Override
@@ -202,8 +191,8 @@ public class DisplayCurrencyActivity extends BRActivity {
             }
             textViewItem.setText(c == null ? iso : String.format("%s (%s)", iso, c.getSymbol()));
             ImageView checkMark = convertView.findViewById(R.id.currency_checkmark);
-            Log.d("TMP", "Value of TMP " + tmp);
-            Log.d("TMP", "Value of position " + position);
+            Timber.d( "Value of TMP %s", tmp);
+            Timber.d( "Value of position %s", position);
             if (position == tmp) {
                 checkMark.setVisibility(View.VISIBLE);
             } else {
@@ -211,12 +200,6 @@ public class DisplayCurrencyActivity extends BRActivity {
             }
             normalizeTextView();
             return convertView;
-
-        }
-
-        @Override
-        public int getCount() {
-            return super.getCount();
         }
 
         @Override
@@ -233,19 +216,13 @@ public class DisplayCurrencyActivity extends BRActivity {
 
         private boolean normalizeTextView() {
             int count = 0;
-//        Log.d(TAG, "Normalizing the text view !!!!!!");
             while (!isTextSizeAcceptable(textViewItem)) {
                 count++;
                 float textSize = textViewItem.getTextSize();
-//            Log.e(TAG, "The text size is: " + String.valueOf(textSize));
                 textViewItem.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize - 2);
                 this.notifyDataSetChanged();
             }
             return (count > 0);
         }
-
     }
-
-
-
 }

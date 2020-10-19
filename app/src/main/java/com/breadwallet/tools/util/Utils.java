@@ -10,13 +10,12 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import androidx.core.app.ActivityCompat;
-import androidx.core.hardware.fingerprint.FingerprintManagerCompat;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
 
 import com.breadwallet.presenter.activities.intro.IntroActivity;
 
@@ -26,6 +25,8 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+
+import timber.log.Timber;
 
 import static android.content.Context.FINGERPRINT_SERVICE;
 
@@ -55,7 +56,6 @@ import static android.content.Context.FINGERPRINT_SERVICE;
  */
 
 public class Utils {
-    public static final String TAG = Utils.class.getName();
 
     public static boolean isUsingCustomInputMethod(Activity context) {
         if (context == null) return false;
@@ -82,16 +82,11 @@ public class Utils {
 
     @SuppressWarnings("deprecation")
     public static void printPhoneSpecs() {
-        String specsTag = "PHONE SPECS";
-        Log.e(specsTag, "");
-        Log.e(specsTag, "***************************PHONE SPECS***************************");
-        Log.e(specsTag, "* screen X: " + IntroActivity.screenParametersPoint.x + " , screen Y: " + IntroActivity.screenParametersPoint.y);
-        Log.e(specsTag, "* Build.CPU_ABI: " + Build.CPU_ABI);
-        Runtime rt = Runtime.getRuntime();
-        long maxMemory = rt.maxMemory();
-        Log.e(specsTag, "* maxMemory:" + Long.toString(maxMemory));
-        Log.e(specsTag, "----------------------------PHONE SPECS----------------------------");
-        Log.e(specsTag, "");
+        Timber.d("***************************PHONE SPECS***************************");
+        Timber.d("* screen X: %d , screen Y: %s", IntroActivity.screenParametersPoint.x, IntroActivity.screenParametersPoint.y);
+        Timber.d("* Build.CPU_ABI: %s", Build.CPU_ABI);
+        Timber.d("* maxMemory:%s", Runtime.getRuntime().maxMemory());
+        Timber.d("----------------------------PHONE SPECS----------------------------");
     }
 
     public static boolean isEmulatorOrDebug(Context app) {
@@ -104,7 +99,6 @@ public class Utils {
     }
 
     public static String getFormattedDateFromLong(Context app, long time) {
-
         SimpleDateFormat formatter = new SimpleDateFormat("M/d@ha", Locale.getDefault());
         boolean is24HoursFormat = false;
         if (app != null) {
@@ -121,9 +115,6 @@ public class Utils {
     }
 
     public static String formatTimeStamp(long time, String pattern) {
-//        SimpleDateFormat formatter = new SimpleDateFormat(pattern, Locale.getDefault());
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTimeInMillis(time);
         return android.text.format.DateFormat.format(pattern, time).toString();
     }
 
@@ -183,6 +174,7 @@ public class Utils {
 
     public static boolean isFingerprintEnrolled(Context app) {
         FingerprintManager fingerprintManager = (FingerprintManager) app.getSystemService(FINGERPRINT_SERVICE);
+        if (fingerprintManager == null) return false;
         // Device doesn't support fingerprint authentication
         return ActivityCompat.checkSelfPermission(app, Manifest.permission.USE_FINGERPRINT) == PackageManager.PERMISSION_GRANTED && fingerprintManager.isHardwareDetected() && fingerprintManager.hasEnrolledFingerprints();
     }
@@ -211,21 +203,16 @@ public class Utils {
     }
 
     public static String getAgentString(Context app, String cfnetwork) {
-
         int versionNumber = 0;
         if (app != null) {
             try {
-                PackageInfo pInfo = null;
-                pInfo = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
+                PackageInfo pInfo = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
                 versionNumber = pInfo.versionCode;
-
             } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
-        String release = Build.VERSION.RELEASE;
-//        return String.format("%s/%d %s %s/%s", "Bread", versionNumber, cfnetwork, "Android", release);
-        return "Loaf/" + String.valueOf(versionNumber) + " " + cfnetwork + " Android/" + release;
+        return String.format(Locale.ENGLISH, "%s/%d %s Android/%s", "Litewallet", versionNumber, cfnetwork, Build.VERSION.RELEASE);
     }
 
     public static String reverseHex(String hex) {
@@ -235,6 +222,19 @@ public class Utils {
             result.append(new StringBuilder(hex.substring(i, i + 2)).reverse());
         }
         return result.reverse().toString();
+    }
+
+    public static String join(String[] array, CharSequence separator) {
+        if (array.length == 0) {
+            return "";
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < array.length - 1; i++) {
+            stringBuilder.append(array[i]);
+            stringBuilder.append(separator);
+        }
+        stringBuilder.append(array[array.length - 1]);
+        return stringBuilder.toString();
     }
 
 }
