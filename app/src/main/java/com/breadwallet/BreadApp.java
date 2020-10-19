@@ -1,23 +1,20 @@
 package com.breadwallet;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Application;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.graphics.Point;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.tools.listeners.SyncReceiver;
-import com.breadwallet.tools.security.BRKeyStore;
+import com.breadwallet.tools.manager.AnalyticsManager;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
-import com.google.firebase.crash.FirebaseCrash;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import timber.log.Timber;
 
 /**
  * BreadWallet
@@ -52,44 +50,39 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 
 public class BreadApp extends Application {
-    private static final String TAG = BreadApp.class.getName();
     public static int DISPLAY_HEIGHT_PX;
     FingerprintManager mFingerprintManager;
-    // host is the server(s) on which the API is hosted
-    public static String HOST = "api.breadwallet.com";
+    public static String HOST = "api.loafwallet.org";
     private static List<OnAppBackgrounded> listeners;
     private static Timer isBackgroundChecker;
     public static AtomicInteger activityCounter = new AtomicInteger();
     public static long backgroundedTime;
-    public static boolean appInBackground;
 
     private static Activity currentActivity;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        boolean enableCrashlytics = true;
         if (Utils.isEmulatorOrDebug(this)) {
 //            BRKeyStore.putFailCount(0, this);
-            HOST = "stage2.breadwallet.com";
-            FirebaseCrash.setCrashCollectionEnabled(false);
-//            FirebaseCrash.report(new RuntimeException("test with new json file"));
+            enableCrashlytics = false;
         }
+
+        // setup Timber
+        Timber.plant(BuildConfig.DEBUG ? new Timber.DebugTree() : new CrashReportingTree());
+
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
+        AnalyticsManager.init(this);
+
+        AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int DISPLAY_WIDTH_PX = size.x;
         DISPLAY_HEIGHT_PX = size.y;
         mFingerprintManager = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
-
-//        addOnBackgroundedListener(new OnAppBackgrounded() {
-//            @Override
-//            public void onBackgrounded() {
-//
-//            }
-//        });
-
     }
 
 
@@ -124,7 +117,7 @@ public class BreadApp extends Application {
             public void run() {
                 if (isAppInBackground(app)) {
                     backgroundedTime = System.currentTimeMillis();
-                    Log.e(TAG, "App went in background!");
+                    Timber.d("App went in background!");
                     // APP in background, do something
                     isBackgroundChecker.cancel();
                     fireListeners();
@@ -138,5 +131,28 @@ public class BreadApp extends Application {
 
     public interface OnAppBackgrounded {
         void onBackgrounded();
+    }
+
+    private class CrashReportingTree extends Timber.Tree {
+        private static final String CRASHLYTICS_KEY_PRIORITY = "priority";
+        private static final String CRASHLYTICS_KEY_TAG = "tag";
+        private static final String CRASHLYTICS_KEY_MESSAGE = "message";
+
+        @Override
+        protected void log(int priority, String tag, String message, Throwable throwable) {
+            if (priority == Log.VERBOSE || priority == Log.DEBUG) {
+                return;
+            }
+
+            Throwable t = throwable != null ? throwable : new Exception(message);
+
+            // Firebase Crash Reporting
+            FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
+            crashlytics.setCustomKey(CRASHLYTICS_KEY_PRIORITY, priority);
+            crashlytics.setCustomKey(CRASHLYTICS_KEY_TAG, tag);
+            crashlytics.setCustomKey(CRASHLYTICS_KEY_MESSAGE, message);
+
+            crashlytics.recordException(t);
+        }
     }
 }

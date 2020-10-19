@@ -37,6 +37,8 @@ import com.breadwallet.wallet.BRWalletManager;
 
 import java.math.BigDecimal;
 
+import timber.log.Timber;
+
 import static com.platform.HTTPServer.URL_SUPPORT;
 
 
@@ -66,7 +68,6 @@ import static com.platform.HTTPServer.URL_SUPPORT;
  */
 
 public class FragmentRequestAmount extends Fragment {
-    private static final String TAG = FragmentRequestAmount.class.getName();
     private BRKeyboard keyboard;
     private StringBuilder amountBuilder;
     private TextView isoText;
@@ -125,21 +126,9 @@ public class FragmentRequestAmount extends Fragment {
         close = (ImageButton) rootView.findViewById(R.id.close_button);
         keyboardIndex = signalLayout.indexOfChild(keyboardLayout);
 
+        //TODO: all views are using the layout of this button. Views should be refactored without it
+        // Hiding until layouts are built.
         ImageButton faq = (ImageButton) rootView.findViewById(R.id.faq_button);
-
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                Activity app = getActivity();
-                if (app == null) {
-                    Log.e(TAG, "onClick: app is null, can't start the webview with url: " + URL_SUPPORT);
-                    return;
-                }
-
-                BRAnimator.showSupportFragment(app, BRConstants.requestAmount);
-            }
-        });
 
         mTitle.setText(getString(R.string.Receive_request));
         setListeners();
@@ -272,7 +261,6 @@ public class FragmentRequestAmount extends Fragment {
                 updateText();
             }
         });
-
     }
 
     private void copyText() {
@@ -281,7 +269,6 @@ public class FragmentRequestAmount extends Fragment {
     }
 
     private void toggleShareButtonsVisibility() {
-
         if (shareButtonsShown) {
             signalLayout.removeView(shareButtonsLayout);
             shareButtonsShown = false;
@@ -289,7 +276,6 @@ public class FragmentRequestAmount extends Fragment {
             signalLayout.addView(shareButtonsLayout, signalLayout.getChildCount());
             shareButtonsShown = true;
         }
-
     }
 
     @Override
@@ -300,7 +286,9 @@ public class FragmentRequestAmount extends Fragment {
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                observer.removeGlobalOnLayoutListener(this);
+                if(observer.isAlive()) {
+                    observer.removeOnGlobalLayoutListener(this);
+                }
                 BRAnimator.animateBackgroundDim(backgroundLayout, false);
                 BRAnimator.animateSignalSlide(signalLayout, false, null);
                 toggleShareButtonsVisibility();
@@ -326,7 +314,6 @@ public class FragmentRequestAmount extends Fragment {
                 });
             }
         });
-
     }
 
     @Override
@@ -340,27 +327,16 @@ public class FragmentRequestAmount extends Fragment {
                     try {
                         getActivity().getFragmentManager().popBackStack();
                     } catch (Exception ignored) {
-
+                        Timber.e(ignored);
                     }
                 }
             }
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-
     private void handleClick(String key) {
         if (key == null) {
-            Log.e(TAG, "handleClick: key is null! ");
+            Timber.d("handleClick: key is null! ");
             return;
         }
 
@@ -404,7 +380,6 @@ public class FragmentRequestAmount extends Fragment {
             amountBuilder.deleteCharAt(currAmount.length() - 1);
             updateText();
         }
-
     }
 
     private void updateText() {
@@ -413,7 +388,6 @@ public class FragmentRequestAmount extends Fragment {
         amountEdit.setText(tmpAmount);
         isoText.setText(BRCurrency.getSymbolByIso(getActivity(), selectedIso));
         isoButton.setText(String.format("%s(%s)", BRCurrency.getCurrencyName(getActivity(), selectedIso), BRCurrency.getSymbolByIso(getActivity(), selectedIso)));
-
     }
 
     private void showKeyboard(boolean b) {
@@ -489,6 +463,4 @@ public class FragmentRequestAmount extends Fragment {
 
     private void showCurrencyList(boolean b) {
     }
-
-
 }

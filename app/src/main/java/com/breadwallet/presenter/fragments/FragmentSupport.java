@@ -2,17 +2,11 @@ package com.breadwallet.presenter.fragments;
 
 import android.app.Fragment;
 import android.content.pm.ApplicationInfo;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.webkit.ConsoleMessage;
-import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -20,11 +14,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+
 import com.breadwallet.R;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.SlideDetector;
 import com.breadwallet.tools.util.Utils;
 import com.platform.HTTPServer;
+
+import timber.log.Timber;
 
 import static com.platform.HTTPServer.URL_SUPPORT;
 
@@ -55,33 +54,28 @@ import static com.platform.HTTPServer.URL_SUPPORT;
  */
 
 public class FragmentSupport extends Fragment {
-    private static final String TAG = FragmentSupport.class.getName();
     public LinearLayout backgroundLayout;
     public CardView signalLayout;
     WebView webView;
-    String theUrl;
     public static boolean appVisible = false;
     private String onCloseUrl;
 
     @Override
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_support, container, false);
-        backgroundLayout = (LinearLayout) rootView.findViewById(R.id.background_layout);
-        signalLayout = (CardView) rootView.findViewById(R.id.signal_layout);
+        backgroundLayout = rootView.findViewById(R.id.background_layout);
+        signalLayout = rootView.findViewById(R.id.signal_layout);
 
         signalLayout.setOnTouchListener(new SlideDetector(getContext(), signalLayout));
 
         signalLayout.setLayoutTransition(BRAnimator.getDefaultTransition());
 
-        webView = (WebView) rootView.findViewById(R.id.web_view);
-        webView.setWebChromeClient(new BRWebChromeClient());
+        webView = rootView.findViewById(R.id.web_view);
+        webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                Log.d(TAG, "shouldOverrideUrlLoading: " + request.getUrl());
-                Log.d(TAG, "shouldOverrideUrlLoading: " + request.getMethod());
+                Timber.d("shouldOverrideUrlLoading: %s %s", request.getUrl(), request.getMethod());
                 if (onCloseUrl != null && request.getUrl().toString().equalsIgnoreCase(onCloseUrl)) {
                     getActivity().onBackPressed();
                     onCloseUrl = null;
@@ -93,18 +87,10 @@ public class FragmentSupport extends Fragment {
 
                 return true;
             }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                Log.d(TAG, "onPageStarted: " + url);
-                super.onPageStarted(view, url, favicon);
-            }
         });
 
-        theUrl = URL_SUPPORT;
         HTTPServer.mode = HTTPServer.ServerMode.SUPPORT;
         String articleId = getArguments() == null ? null : getArguments().getString("articleId");
-        if (Utils.isNullOrEmpty(theUrl)) throw new IllegalArgumentException("No url extra!");
 
         WebSettings webSettings = webView.getSettings();
 
@@ -114,10 +100,11 @@ public class FragmentSupport extends Fragment {
         webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
 
-        if (articleId != null && !articleId.isEmpty())
-            theUrl = theUrl + "/article?slug=" + articleId;
+        String theUrl = URL_SUPPORT;
+        if (articleId != null && !articleId.isEmpty()) {
+            theUrl += "/article?slug=" + articleId;
+        }
 
-        Log.d(TAG, "onCreate: theUrl: " + theUrl + ", articleId: " + articleId);
         webView.loadUrl(theUrl);
 
         return rootView;
@@ -131,16 +118,13 @@ public class FragmentSupport extends Fragment {
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                observer.removeGlobalOnLayoutListener(this);
+                if (observer.isAlive()) {
+                    observer.removeOnGlobalLayoutListener(this);
+                }
                 BRAnimator.animateBackgroundDim(backgroundLayout, false);
-                BRAnimator.animateSignalSlide(signalLayout, false, new BRAnimator.OnSlideAnimationEnd() {
-                    @Override
-                    public void onAnimationEnd() {
-                    }
-                });
+                BRAnimator.animateSignalSlide(signalLayout, false, null);
             }
         });
-
     }
 
     @Override
@@ -154,30 +138,11 @@ public class FragmentSupport extends Fragment {
                     try {
                         getActivity().getFragmentManager().popBackStack();
                     } catch (Exception ignored) {
-
+                        Timber.e(ignored);
                     }
                 }
             }
         });
-    }
-
-    private class BRWebChromeClient extends WebChromeClient {
-        @Override
-        public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
-            Log.e(TAG, "onConsoleMessage: consoleMessage: " + consoleMessage.message());
-            return super.onConsoleMessage(consoleMessage);
-        }
-
-        @Override
-        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-            Log.e(TAG, "onJsAlert: " + message + ", url: " + url);
-            return super.onJsAlert(view, url, message, result);
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -186,5 +151,4 @@ public class FragmentSupport extends Fragment {
         Utils.hideKeyboard(getActivity());
         BRAnimator.supportIsShowing = false;
     }
-
 }

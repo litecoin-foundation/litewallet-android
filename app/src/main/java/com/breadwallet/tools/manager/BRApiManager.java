@@ -2,18 +2,13 @@ package com.breadwallet.tools.manager;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Handler;
-import android.util.Log;
 
 import com.breadwallet.BreadApp;
 import com.breadwallet.presenter.entities.CurrencyEntity;
 import com.breadwallet.tools.sqlite.CurrencyDataSource;
 import com.breadwallet.tools.threads.BRExecutor;
-import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
-import com.breadwallet.wallet.BRWalletManager;
-import com.google.firebase.crash.FirebaseCrash;
 import com.platform.APIClient;
 
 import org.json.JSONArray;
@@ -33,9 +28,9 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.breadwallet.presenter.fragments.FragmentSend.isEconomyFee;
 import okhttp3.Request;
 import okhttp3.Response;
+import timber.log.Timber;
 
 /**
  * BreadWallet
@@ -63,8 +58,6 @@ import okhttp3.Response;
  */
 
 public class BRApiManager {
-    private static final String TAG = BRApiManager.class.getName();
-
     private static BRApiManager instance;
     private Timer timer;
 
@@ -77,7 +70,6 @@ public class BRApiManager {
     }
 
     public static BRApiManager getInstance() {
-
         if (instance == null) {
             instance = new BRApiManager();
         }
@@ -99,23 +91,20 @@ public class BRApiManager {
                         tmp.code = tmpObj.getString("code");
                         tmp.rate = (float) tmpObj.getDouble("n");
                         String selectedISO = BRSharedPrefs.getIso(context);
-//                        Log.e(TAG,"selectedISO: " + selectedISO);
                         if (tmp.code.equalsIgnoreCase(selectedISO)) {
-//                            Log.e(TAG, "theIso : " + theIso);
-//                                Log.e(TAG, "Putting the shit in the shared preffs");
                             BRSharedPrefs.putIso(context, tmp.code);
                             BRSharedPrefs.putCurrencyListPosition(context, i - 1);
                         }
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                     set.add(tmp);
                 }
             } else {
-                Log.e(TAG, "getCurrencies: failed to get currencies, response string: " + arr);
+                Timber.d("getCurrencies: failed to get currencies");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
         List tempList = new ArrayList<>(set);
         Collections.reverse(tempList);
@@ -133,7 +122,7 @@ public class BRApiManager {
                             @Override
                             public void run() {
                                 if (!BreadApp.isAppInBackground(context)) {
-                                    Log.e(TAG, "doInBackground: Stopping timer, no activity on.");
+                                    Timber.d("doInBackground: Stopping timer, no activity on.");
                                     BRApiManager.getInstance().stopTimerTask();
                                 }
                                 Set<CurrencyEntity> tmp = getCurrencies((Activity) context);
@@ -173,8 +162,8 @@ public class BRApiManager {
         if (jsonString == null) return null;
         try {
             jsonArray = new JSONArray(jsonString);
-
-        } catch (JSONException ignored) {
+        } catch (JSONException ex) {
+            Timber.e(ex);
         }
         return jsonArray == null ? backupFetchRates(activity) : jsonArray;
     }
@@ -188,7 +177,7 @@ public class BRApiManager {
             jsonArray = new JSONArray(jsonString);
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
         return jsonArray;
     }
@@ -196,36 +185,23 @@ public class BRApiManager {
     public static void updateFeePerKb(Context app) {
         String jsonString = urlGET(app, "https://api.loafwallet.org/fee-per-kb");
         if (jsonString == null || jsonString.isEmpty()) {
-            Log.e(TAG, "updateFeePerKb: failed to update fee, response string: " + jsonString);
+            Timber.i("updateFeePerKb: failed to update fee, response string: %s", jsonString);
             return;
         }
-        long fee;
-        long economyFee;
         try {
             JSONObject obj = new JSONObject(jsonString);
-            fee = obj.getLong("fee_per_kb");
-            economyFee = obj.getLong("fee_per_kb_economy");
-            if (fee != 0 && fee < BRWalletManager.getInstance().maxFee()) {
-                BRSharedPrefs.putFeePerKb(app, fee);
-                BRWalletManager.getInstance().setFeePerKb(fee, isEconomyFee); //todo improve that logic
-                BRSharedPrefs.putFeeTime(app, System.currentTimeMillis()); //store the time of the last successful fee fetch
-            } else {
-                FirebaseCrash.report(new NullPointerException("Fee is weird:" + fee));
-            }
-            if (economyFee != 0 && economyFee < BRWalletManager.getInstance().maxFee()) {
-                BRSharedPrefs.putEconomyFeePerKb(app, economyFee);
-            } else {
-                FirebaseCrash.report(new NullPointerException("Economy fee is weird:" + economyFee));
-            }
+            // TODO: Refactor when mobile-api v0.4.0 is in prod
+            long regularFee = obj.optLong("fee_per_kb");
+            long economyFee = obj.optLong("fee_per_kb_economy");
+            long luxuryFee = obj.optLong("fee_per_kb_luxury");
+            FeeManager.getInstance().setFees(luxuryFee, regularFee, economyFee);
+            BRSharedPrefs.putFeeTime(app, System.currentTimeMillis()); //store the time of the last successful fee fetch
         } catch (JSONException e) {
-            Log.e(TAG, "updateFeePerKb: FAILED: " + jsonString, e);
-            BRReportsManager.reportBug(e);
-            BRReportsManager.reportBug(new IllegalArgumentException("JSON ERR: " + jsonString));
+            Timber.e(new IllegalArgumentException("updateFeePerKb: FAILED: " + jsonString, e));
         }
     }
 
     private static String urlGET(Context app, String myURL) {
-//        System.out.println("Requested URL_EA:" + myURL);
         Request request = new Request.Builder()
                 .url(myURL)
                 .header("Content-Type", "application/json")
@@ -237,13 +213,13 @@ public class BRApiManager {
 
         try {
             if (resp == null) {
-                Log.e(TAG, "urlGET: " + myURL + ", resp is null");
+                Timber.i("urlGET: %s resp is null", myURL);
                 return null;
             }
             response = resp.body().string();
             String strDate = resp.header("date");
             if (strDate == null) {
-                Log.e(TAG, "urlGET: strDate is null!");
+                Timber.i("urlGET: strDate is null!");
                 return response;
             }
             SimpleDateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
@@ -251,13 +227,10 @@ public class BRApiManager {
             long timeStamp = date.getTime();
             BRSharedPrefs.putSecureTime(app, timeStamp);
         } catch (ParseException | IOException e) {
-            e.printStackTrace();
+            Timber.e(e);
         } finally {
             if (resp != null) resp.close();
-
         }
         return response;
     }
-
-
 }

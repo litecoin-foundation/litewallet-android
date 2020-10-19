@@ -17,6 +17,8 @@ import com.breadwallet.tools.util.BRConstants;
 
 import java.util.Locale;
 
+import timber.log.Timber;
+
 public class AboutActivity extends BRActivity {
     private static final String TAG = AboutActivity.class.getName();
 //    private TextView termsText;
@@ -50,11 +52,10 @@ public class AboutActivity extends BRActivity {
         try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
-        int verCode = pInfo != null ? pInfo.versionCode : 0;
-
-        infoText.setText(String.format(Locale.getDefault(), getString(R.string.About_footer), verCode));
+        String verName = pInfo != null ? pInfo.versionName : " ";
+        infoText.setText(getString(R.string.About_footer, verName));
 
         redditShare = (ImageView) findViewById(R.id.reddit_share_button);
         twitterShare = (ImageView) findViewById(R.id.twitter_share_button);

@@ -5,7 +5,7 @@
   <!-- About screen blog label -->
   <string name="About.blog">블로그</string>
   <!-- About screen footer -->
-  <string name="About.footer">글로벌 Loaf 팀 제작. 버전 %1$s</string>
+  <string name="About.footer">라이트 코인 재단 라이트 월렛 팀\n%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">개인정보 보호정책</string>
   <!-- About screen reddit label -->
@@ -157,7 +157,7 @@
   <!-- Economy fee -->
   <string name="FeeSelector.economy">경제</string>
   <!-- E.g. [This transaction is predicted to complete in] 1-24 hours -->
-  <string name="FeeSelector.economyTime">1~24시간</string>
+  <string name="FeeSelector.economyTime">10분 이상</string>
   <!-- Warning message for economy fee -->
   <string name="FeeSelector.economyWarning">이 옵션은 시간에 민감한 거래에는 추천하지 않습니다.</string>
   <!-- E.g. Estimated delivery: 10-60 minutes -->
@@ -165,7 +165,7 @@
   <!-- Regular fee -->
   <string name="FeeSelector.regular">일반</string>
   <!-- E.g. [This transaction is predicted to complete in] 10-60 minutes -->
-  <string name="FeeSelector.regularTime">10~60분</string>
+  <string name="FeeSelector.regularTime">2.5~5+분</string>
   <!-- Fee Selector title -->
   <string name="FeeSelector.title">처리 속도</string>
   <!-- Checking private key balance progress view text -->
@@ -243,7 +243,7 @@
   <!-- Menu button title -->
   <string name="MenuButton.settings">설정</string>
   <!-- Menu button title -->
-  <string name="MenuButton.support">고객지원</string>
+  <string name="MenuButton.support">고객지원:      litewallet@litecoinfoundation.net</string>
   <!-- button label -->
   <string name="MenuViewController.createButton">새 지갑 만들기</string>
   <!-- Menu modal title -->
@@ -525,7 +525,7 @@
   <!-- Argument is date -->
   <string name="StartPaperPhrase.date">%1$s에 마지막으로 페이퍼 키를 작성하셨습니다.</string>
   <!-- Start view message -->
-  <string name="StartViewController.message">라이트코인을 사용하는 가장 안정되고 안전한 방법.</string>
+  <string name="StartViewController.message">Litecoin을 사용하는 가장 안정되고 안전한 방법.</string>
   <!-- Syncing view connectiong state header text -->
   <string name="SyncingView.connecting">연결 중</string>
   <!-- Syncing view header text -->
@@ -738,4 +738,14 @@
   <string name="WritePaperPhrase.previous">이전</string>
   <!-- 1 of 3 -->
   <string name="WritePaperPhrase.step">%2$d의 %1$d</string>
+    <string name="Donate.title">라이트 코인 재단에 기부하려면 탭하세요 (%1$s)</string>
+  <string name="Donate.title.confirmation">기부 확인</string>
+  <string name="Confirmation.processingAndDonationTime">처리 시간 :이 거래는 %1$s 분이 소요됩니다.</string>
+  <string name="Confirmation.donateLabel">기부 금액</string>
+  <string name="Confirmation.staticAddressLabel">주소</string>
+  <string name="Donate.word">기부</string>
+  <string name="Donate.toThe">"에 기부 "</string>
+    <string name="FeeSelector.luxury">사치</string>
+    <string name="FeeSelector.luxuryMessage">이 옵션은 귀하가 보험료를 지불하더라도 사실상 거래 수락을 보장합니다.</string>
+    <string name="FeeSelector.luxuryTime">2.5~5+분</string>
 </resources>

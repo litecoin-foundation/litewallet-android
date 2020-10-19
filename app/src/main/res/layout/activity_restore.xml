@@ -116,7 +116,7 @@
             android:layout_alignBottom="@+id/textView2"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="15dp"
-            android:background="@drawable/faq_question_white"
+            android:visibility="invisible"
             android:scaleType="centerCrop"/>
 
         <ImageButton
