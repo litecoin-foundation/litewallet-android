@@ -7,34 +7,28 @@ import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.activities.SetPinActivity;
-import com.breadwallet.presenter.activities.util.ActivityUTILS;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRText;
 import com.breadwallet.tools.animation.BRAnimator;
-import com.breadwallet.tools.manager.BRReportsManager;
 import com.breadwallet.tools.security.BRKeyStore;
 import com.breadwallet.tools.security.PostAuth;
 import com.breadwallet.tools.security.SmartValidator;
 import com.breadwallet.tools.threads.BRExecutor;
-import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
-import com.google.firebase.crash.FirebaseCrash;
-import com.jniwrappers.BRKey;
 import com.platform.APIClient;
 
 import java.io.Serializable;
 import java.util.Locale;
+
+import timber.log.Timber;
 
 
 /**
@@ -63,13 +57,11 @@ import java.util.Locale;
  */
 
 public class IntroActivity extends BRActivity implements Serializable {
-    private static final String TAG = IntroActivity.class.getName();
     public Button newWalletButton;
     public Button recoverWalletButton;
     public static IntroActivity introActivity;
     public static boolean appVisible = false;
     private static IntroActivity app;
-    private View splashScreen;
     private BRText versionText;
 
 
@@ -90,15 +82,15 @@ public class IntroActivity extends BRActivity implements Serializable {
         setContentView(R.layout.activity_intro);
         newWalletButton = (Button) findViewById(R.id.button_new_wallet);
         recoverWalletButton = (Button) findViewById(R.id.button_recover_wallet);
-        splashScreen = findViewById(R.id.splash_screen);
         versionText = findViewById(R.id.version_text);
         setListeners();
         updateBundles();
 //        SyncManager.getInstance().updateAlarms(this);
 
         if (!BuildConfig.DEBUG && BRKeyStore.AUTH_DURATION_SEC != 300) {
-            Log.e(TAG, "onCreate: BRKeyStore.AUTH_DURATION_SEC != 300");
-            BRReportsManager.reportBug(new RuntimeException("AUTH_DURATION_SEC should be 300"), true);
+            RuntimeException ex = new RuntimeException("onCreate: AUTH_DURATION_SEC should be 300");
+            Timber.e(ex);
+            throw ex;
         }
         introActivity = this;
 
@@ -108,10 +100,10 @@ public class IntroActivity extends BRActivity implements Serializable {
         try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
         String verName = pInfo != null ? pInfo.versionName : " ";
-        versionText.setText(String.format(Locale.getDefault(), getString(R.string.About_appVersion), verName));
+        versionText.setText(String.format(Locale.US, "%1$s", verName));
 
         if (Utils.isEmulatorOrDebug(this))
             Utils.printPhoneSpecs();
@@ -126,13 +118,6 @@ public class IntroActivity extends BRActivity implements Serializable {
         }
 
         PostAuth.getInstance().onCanaryCheck(this, false);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                splashScreen.setVisibility(View.GONE);
-            }
-        }, 1000);
-
     }
 
     private void updateBundles() {
@@ -144,7 +129,7 @@ public class IntroActivity extends BRActivity implements Serializable {
                 APIClient apiClient = APIClient.getInstance(IntroActivity.this);
                 apiClient.updateBundle();
                 long endTime = System.currentTimeMillis();
-                Log.d(TAG, "updateBundle DONE in " + (endTime - startTime) + "ms");
+                Timber.d("updateBundle DONE in %sms",endTime - startTime);
             }
         });
     }

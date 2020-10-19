@@ -1,22 +1,36 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'com.google.firebase.crashlytics'
+
 android {
     signingConfigs {
-        release {
-            storeFile file('/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-signing/loafwallet-key')
-            storePassword 'litecoinfoundation'
-            keyAlias = 'loafwallet-key'
-            keyPassword 'litecoinfoundation'
+        release
+    }
+    def Properties props = new Properties()
+    def propFile = file('../release.properties')
+    if (propFile.canRead()){
+        props.load(new FileInputStream(propFile))
+
+        if (props!=null && props.containsKey('storeFile') && props.containsKey('storePassword') &&
+                props.containsKey('keyAlias') && props.containsKey('keyPassword')) {
+
+            android.signingConfigs.release.storeFile = file(props['storeFile'])
+            android.signingConfigs.release.storePassword = props['storePassword']
+            android.signingConfigs.release.keyAlias = props['keyAlias']
+            android.signingConfigs.release.keyPassword = props['keyPassword']
         }
     }
+
     compileSdkVersion = 29
     defaultConfig {
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
-        minSdkVersion 25
+        minSdkVersion 23
         targetSdkVersion 29
-        versionCode 290
-        versionName "v1.18.0"
+        versionCode 612
+        versionName "v1.19.3"
         multiDexEnabled true
 
         // Similar to other properties in the defaultConfig block,
@@ -55,15 +69,15 @@ android {
         loaf {
             applicationId "com.loafwallet"
             dimension "mode"
-            resValue "string", "app_name", "LoafWallet"
-            buildConfigField "boolean", "BITCOIN_TESTNET", "false"
+            resValue "string", "app_name", "Litewallet"
+            buildConfigField "boolean", "LITECOIN_TESTNET", "false"
 
             externalNativeBuild {
                 cmake {
                     // When you specify a version of CMake, as shown below,
                     // the Android plugin searches for its binary within your
                     // PATH environmental variable.
-                    cFlags "-DBITCOIN_TESTNET=0"
+                    cFlags "-DLITECOIN_TESTNET=0"
                     targets "core-lib"
                 }
             }
@@ -72,36 +86,29 @@ android {
         loafTestnet {
             applicationId "com.loafwallet.testnet"
             dimension "mode"
-            resValue "string", "app_name", "LoafWallet-testnet"
-            buildConfigField "boolean", "BITCOIN_TESTNET", "true"
+            resValue "string", "app_name", "Litewallet-testnet"
+            buildConfigField "boolean", "LITECOIN_TESTNET", "true"
 
             externalNativeBuild {
                 cmake {
                     // When you specify a version of CMake, as shown below,
                     // the Android plugin searches for its binary within your
                     // PATH environmental variable.
-                    cFlags "-DBITCOIN_TESTNET=1"
+                    cFlags "-DLITECOIN_TESTNET=1"
                     targets "core-lib"
                 }
             }
-
         }
-
     }
     lintOptions {
         // set to true to turn off analysis progress reporting by lint
         quiet false
         explainIssues true
-        // if true, stop the gradle build if errors are found
-        abortOnError false
+
         // if true, only report errors
         ignoreWarnings false
 
         checkReleaseBuilds false
-
-        disable 'MissingTranslation'
-
-        disable 'InvalidPackage'
 
         // Turns off checks for the issue IDs you specify.
         //example: disable 'TypographyFractions','TypographyQuotes'
@@ -118,12 +125,21 @@ android {
 //        gitUpdateModules()
 //        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         release {
+            signingConfig signingConfigs.release
             minifyEnabled = false
             debuggable = false
 
             ndk {
                 minifyEnabled = false
                 debuggable = false
+            }
+
+            firebaseCrashlytics {
+                // Enable processing and uploading of native symbols to Crashlytics
+                // servers. By default, this is disabled to improve build speeds.
+                // This flag must be enabled to see properly-symbolicated native
+                // stack traces in the Crashlytics dashboard.
+                nativeSymbolUploadEnabled true
             }
         }
         debug {
@@ -173,8 +189,6 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.squareup.okhttp3:okhttp:4.3.1'
-    implementation 'com.google.firebase:firebase-core:17.2.2'
-    implementation 'com.google.firebase:firebase-crash:16.2.1'
     implementation 'io.sigpipe:jbsdiff:1.0'
     implementation 'com.google.zxing:core:3.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -183,4 +197,15 @@ dependencies {
     implementation 'junit:junit:4.12'
     implementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    // add the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+
+    // Firebase Crashlytics.
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
+
+    // Firebase Crashlytics NDK
+    implementation 'com.google.firebase:firebase-crashlytics-ndk:17.0.0-beta01'
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
