@@ -1,6 +1,5 @@
 package com.breadwallet.presenter.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.breadwallet.R;
@@ -52,7 +52,7 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
             public void onClick(View v) {
                 int currencyResId = getCurrencyResId(holder.fiatOptions.getCheckedRadioButtonId());
                 String currency = v.getContext().getString(currencyResId);
-                BRAnimator.showBuyFragment((Activity) v.getContext(), currency);
+                BRAnimator.showBuyFragment((FragmentActivity) v.getContext(), currency);
             }
         });
     }

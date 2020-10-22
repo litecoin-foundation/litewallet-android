@@ -1,6 +1,5 @@
 package com.breadwallet.presenter.fragments;
 
-import android.app.Fragment;
 import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -17,6 +16,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.breadwallet.R;
 import com.breadwallet.tools.animation.BRAnimator;
@@ -53,10 +56,8 @@ import timber.log.Timber;
  */
 
 public class FragmentBuy extends Fragment {
-    private static final String TAG = FragmentBuy.class.getName();
     public LinearLayout backgroundLayout;
-    WebView webView;
-    public static boolean appVisible = false;
+    private WebView webView;
     private String onCloseUrl;
     private static String URL_BUY_LTC = "https://buy.loafwallet.org";
     static final String CURRENCY_KEY = "currency_code_key";
@@ -70,8 +71,19 @@ public class FragmentBuy extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (webView.canGoBack()) webView.goBack();
+                else requireActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_buy, container, false);
         backgroundLayout = rootView.findViewById(R.id.background_layout);
         webView = rootView.findViewById(R.id.web_view);
