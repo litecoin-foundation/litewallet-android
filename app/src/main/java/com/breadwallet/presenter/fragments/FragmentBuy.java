@@ -5,7 +5,6 @@ import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,8 @@ import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.util.Utils;
 
 import java.util.Date;
+
+import timber.log.Timber;
 
 /**
  * BreadWallet
@@ -78,8 +79,7 @@ public class FragmentBuy extends Fragment {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                Log.d(TAG, "shouldOverrideUrlLoading: " + request.getUrl());
-                Log.d(TAG, "shouldOverrideUrlLoading: " + request.getMethod());
+                Timber.d("shouldOverrideUrlLoading: URL=%s\nMethod=%s", request.getUrl(), request.getMethod());
                 if (onCloseUrl != null && request.getUrl().toString().equalsIgnoreCase(onCloseUrl)) {
                     getActivity().onBackPressed();
                     onCloseUrl = null;
@@ -94,14 +94,14 @@ public class FragmentBuy extends Fragment {
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                Log.d(TAG, "onPageStarted: " + url);
+                Timber.d("onPageStarted: %s", url);
                 super.onPageStarted(view, url, favicon);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                Log.d("TEST", url);
+                Timber.d("onPageFinished %s", url);
             }
         });
 
@@ -121,7 +121,7 @@ public class FragmentBuy extends Fragment {
         String uuid = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
         String buyUrl = url(walletAddress, currency, timestamp, uuid);
-        Log.d("BASEURL", "onCreate: theUrl: " + buyUrl);
+        Timber.d("URL %s", buyUrl);
         webView.loadUrl(buyUrl);
         return rootView;
     }
@@ -140,36 +140,31 @@ public class FragmentBuy extends Fragment {
     private class BRWebChromeClient extends WebChromeClient {
         @Override
         public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
-            Log.e(TAG, "onConsoleMessage: consoleMessage: " + consoleMessage.message());
+            Timber.e("onConsoleMessage: %s: ", consoleMessage);
             return super.onConsoleMessage(consoleMessage);
         }
 
         @Override
         public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-            Log.e(TAG, "onJsAlert: " + message + ", url: " + url);
+            Timber.e("onJsAlert: message=%s \nURL=%s", message, url);
             return super.onJsAlert(view, url, message, result);
         }
     }
 
     @JavascriptInterface
     public void handleMessage(String message) {
-        Log.e(TAG, "handle message: " + message);
+        Timber.e("handle message: %s", message);
     }
 
     @JavascriptInterface
     public void postMessage(String json) {
-        Log.d("TEST", json);
+        Timber.d("postMessage %s", json);
     }
 
     @JavascriptInterface
     public void onData(String value) {
+        Timber.d("onData %s", value);
         //TODO: do something with the data
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
