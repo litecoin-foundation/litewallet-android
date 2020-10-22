@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
@@ -331,16 +332,17 @@ public class BRAnimator {
 
     }
 
-    public static void showBuyFragment(Activity app, String currency) {
+    public static void showBuyFragment(FragmentActivity app, String currency) {
         if (app == null) {
             Timber.i("showBuyFragment: app is null");
             return;
         }
-        FragmentTransaction transaction = app.getFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
-        transaction.add(android.R.id.content, FragmentBuy.newInstance(currency), FragmentBuy.class.getName());
-        transaction.addToBackStack(FragmentBuy.class.getName());
-        transaction.commit();
+        app.getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(0, 0, 0, R.animator.plain_300)
+                .add(android.R.id.content, FragmentBuy.newInstance(currency), FragmentBuy.class.getName())
+                .addToBackStack(FragmentBuy.class.getName())
+                .commit();
     }
 
     public static void showBuyTabFragment(@NonNull Activity app) {
