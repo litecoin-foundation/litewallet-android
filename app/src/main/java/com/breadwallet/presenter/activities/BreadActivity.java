@@ -89,8 +89,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         BRPeerManager.OnTxStatusUpdate, BRSharedPrefs.OnIsoChangedListener,
         TransactionDataSource.OnTxAddedListener, FragmentManage.OnNameChanged, InternetManager.ConnectionReceiverListener {
 
-    private static final String TAG = BreadActivity.class.getName();
-
     private LinearLayout sendButton;
     private LinearLayout receiveButton;
     private LinearLayout buyButton;
@@ -103,7 +101,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     private TextView equals;
     private int progress = 0;
     private TextView manageText;
-    //    private TextView walletName;
     private ConstraintLayout walletProgressLayout;
 
     private LinearLayout toolbarLayout;
@@ -111,7 +108,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     private ImageButton searchIcon;
     public ViewFlipper barFlipper;
     private BRSearchBar searchBar;
-    //    private boolean isSwapped;
     private ConstraintLayout toolBarConstraintLayout;
     private String savedFragmentTag;
     private boolean uiIsDone;
@@ -121,7 +117,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     public static BreadActivity getApp() {
         return app;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
