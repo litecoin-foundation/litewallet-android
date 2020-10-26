@@ -20,7 +20,7 @@ import com.breadwallet.tools.animation.BRAnimator;
 import java.util.List;
 
 /**
- * Movo
+ * Litewallet
  * Created by sadia on 2020-January-27
  * email: mosadialiou@gmail.com
  */
@@ -59,13 +59,47 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
 
     @StringRes
     private int getCurrencyResId(int checkedOption) {
-        int currency = R.string.usd_currency_code;
-        if (checkedOption == R.id.cad_fiat) {
-            currency = R.string.cad_currency_code;
-        } else if (checkedOption == R.id.eur_fiat) {
-            currency = R.string.eur_currency_code;
-        } else if (checkedOption == R.id.jpy_fiat) {
-            currency = R.string.jpy_currency_code;
+        int currency;
+        switch (checkedOption) {
+            case R.id.cad_fiat:
+                currency = R.string.cad_currency_code;
+                break;
+                
+            case R.id.eur_fiat:
+                currency = R.string.eur_currency_code;
+                break;
+
+            case R.id.jpy_fiat:
+                currency = R.string.jpy_currency_code;
+                break;
+
+            case R.id.aud_fiat:
+                currency = R.string.aud_currency_code;
+                break;
+
+            case R.id.gbp_fiat:
+                currency = R.string.gbp_currency_code;
+                break;
+
+            case R.id.hkd_fiat:
+                currency = R.string.hkd_currency_code;
+                break;
+
+            case R.id.idr_fiat:
+                currency = R.string.idr_currency_code;
+                break;
+
+            case R.id.rub_fiat:
+                currency = R.string.rub_currency_code;
+                break;
+
+            case R.id.sgd_fiat:
+                currency = R.string.sgd_currency_code;
+                break;
+
+            default:
+                currency = R.string.usd_currency_code;
+                break;
         }
         return currency;
     }
