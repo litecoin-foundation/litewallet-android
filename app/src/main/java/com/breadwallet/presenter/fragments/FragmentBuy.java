@@ -77,7 +77,7 @@ public class FragmentBuy extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 if (webView.canGoBack()) webView.goBack();
-                else requireActivity().getSupportFragmentManager().popBackStack();
+                else closePayment();
             }
         });
     }
@@ -93,10 +93,10 @@ public class FragmentBuy extends Fragment {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 Timber.d("shouldOverrideUrlLoading: URL=%s\nMethod=%s", request.getUrl(), request.getMethod());
                 if (onCloseUrl != null && request.getUrl().toString().equalsIgnoreCase(onCloseUrl)) {
-                    getActivity().onBackPressed();
+                    closePayment();
                     onCloseUrl = null;
                 } else if (request.getUrl().toString().contains("close")) {
-                    getActivity().onBackPressed();
+                    closePayment();
                 } else {
                     view.loadUrl(request.getUrl().toString());
                 }
@@ -140,6 +140,10 @@ public class FragmentBuy extends Fragment {
 
     private String url(Object... args) {
         return String.format(URL_BUY_LTC + "/?address=%s&code=%s&idate=%s&uid=%s", args);
+    }
+
+    private void closePayment() {
+        requireActivity().getSupportFragmentManager().popBackStack();
     }
 
 

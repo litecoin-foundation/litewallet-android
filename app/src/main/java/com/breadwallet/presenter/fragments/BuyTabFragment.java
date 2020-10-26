@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Movo
+ * Litewallet
  * Created by sadia on 2020-January-27
  * email: mosadialiou@gmail.com
  */
