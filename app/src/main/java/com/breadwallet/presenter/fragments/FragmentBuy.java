@@ -1,15 +1,18 @@
 package com.breadwallet.presenter.fragments;
 
-import android.content.pm.ApplicationInfo;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.ConsoleMessage;
-import android.webkit.JavascriptInterface;
-import android.webkit.JsResult;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -21,6 +24,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.manager.BRSharedPrefs;
@@ -56,11 +60,14 @@ import timber.log.Timber;
  */
 
 public class FragmentBuy extends Fragment {
+    private static final int FILE_CHOOSER_REQUEST_CODE = 15423;
     public LinearLayout backgroundLayout;
     private WebView webView;
     private String onCloseUrl;
-    private static String URL_BUY_LTC = "https://buy.loafwallet.org";
+    private static final String URL_BUY_LTC = BuildConfig.DEBUG ? "https://api-stage.lite-wallet.org" : "http://api-prod.lite-wallet.org";
     static final String CURRENCY_KEY = "currency_code_key";
+    private ValueCallback<Uri> uploadMessage;
+    private ValueCallback<Uri[]> uploadMessageAboveL;
 
     public static Fragment newInstance(String currency) {
         Bundle bundle = new Bundle();
@@ -76,8 +83,11 @@ public class FragmentBuy extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (webView.canGoBack()) webView.goBack();
-                else closePayment();
+                if (webView.canGoBack()) {
+                    webView.goBack();
+                } else {
+                    closePayment();
+                }
             }
         });
     }
@@ -87,45 +97,15 @@ public class FragmentBuy extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_buy, container, false);
         backgroundLayout = rootView.findViewById(R.id.background_layout);
         webView = rootView.findViewById(R.id.web_view);
-        webView.setWebChromeClient(new BRWebChromeClient());
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                Timber.d("shouldOverrideUrlLoading: URL=%s\nMethod=%s", request.getUrl(), request.getMethod());
-                if (onCloseUrl != null && request.getUrl().toString().equalsIgnoreCase(onCloseUrl)) {
-                    closePayment();
-                    onCloseUrl = null;
-                } else if (request.getUrl().toString().contains("close")) {
-                    closePayment();
-                } else {
-                    view.loadUrl(request.getUrl().toString());
-                }
-
-                return true;
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                Timber.d("onPageStarted: %s", url);
-                super.onPageStarted(view, url, favicon);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                Timber.d("onPageFinished %s", url);
-            }
-        });
-
-        webView.addJavascriptInterface(this, "Android");
+        webView.setWebChromeClient(mWebChromeClient);
+        webView.setWebViewClient(mWebViewClient);
 
         WebSettings webSettings = webView.getSettings();
-        if (0 != (getActivity().getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)) {
+        if (BuildConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
         webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
         String walletAddress = BRSharedPrefs.getReceiveAddress(getContext());
         String currency = getArguments().getString(CURRENCY_KEY);
@@ -139,13 +119,12 @@ public class FragmentBuy extends Fragment {
     }
 
     private String url(Object... args) {
-        return String.format(URL_BUY_LTC + "/?address=%s&code=%s&idate=%s&uid=%s", args);
+        return String.format(URL_BUY_LTC + "?address=%s&code=%s&idate=%s&uid=%s", args);
     }
 
     private void closePayment() {
         requireActivity().getSupportFragmentManager().popBackStack();
     }
-
 
     @Override
     public void onStop() {
@@ -153,34 +132,98 @@ public class FragmentBuy extends Fragment {
         BRAnimator.animateBackgroundDim(backgroundLayout, true);
     }
 
-    private class BRWebChromeClient extends WebChromeClient {
+    private WebChromeClient mWebChromeClient = new WebChromeClient() {
+        // For Android API < 11 (3.0 OS)
+        public void openFileChooser(ValueCallback<Uri> valueCallback) {
+            uploadMessage = valueCallback;
+            openImageChooserActivity();
+        }
+
+        // For Android API >= 11 (3.0 OS)
+        public void openFileChooser(ValueCallback<Uri> valueCallback, String acceptType, String capture) {
+            uploadMessage = valueCallback;
+            openImageChooserActivity();
+        }
+
+        // For Android API >= 21 (5.0 OS)
         @Override
-        public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
-            Timber.e("onConsoleMessage: %s: ", consoleMessage);
-            return super.onConsoleMessage(consoleMessage);
+        public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
+            uploadMessageAboveL = filePathCallback;
+            openImageChooserActivity();
+            return true;
+        }
+    };
+
+    private WebViewClient mWebViewClient = new WebViewClient() {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            String url = request.getUrl().toString();
+            Timber.d("shouldOverrideUrlLoading: URL=%s\nMethod=%s", url, request.getMethod());
+            if (url.equalsIgnoreCase(onCloseUrl)) {
+                closePayment();
+                onCloseUrl = null;
+            } else if (url.contains("close")) {
+                closePayment();
+            } else {
+                view.loadUrl(url);
+            }
+
+            return true;
         }
 
         @Override
-        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-            Timber.e("onJsAlert: message=%s \nURL=%s", message, url);
-            return super.onJsAlert(view, url, message, result);
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            Timber.d("onPageStarted: %s", url);
+            super.onPageStarted(view, url, favicon);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            Timber.d("onPageFinished %s", url);
+        }
+    };
+
+    private void openImageChooserActivity() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "Image Chooser"), FILE_CHOOSER_REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == FILE_CHOOSER_REQUEST_CODE) {
+            if (uploadMessageAboveL != null) {
+                Uri[] results = getResultAboveL(resultCode, data);
+                uploadMessageAboveL.onReceiveValue(results);
+            } else if (uploadMessage != null) {
+                Uri result = data != null && resultCode == Activity.RESULT_OK ? data.getData() : null;
+                uploadMessage.onReceiveValue(result);
+            }
+            uploadMessageAboveL = null;
+            uploadMessage = null;
         }
     }
 
-    @JavascriptInterface
-    public void handleMessage(String message) {
-        Timber.e("handle message: %s", message);
-    }
-
-    @JavascriptInterface
-    public void postMessage(String json) {
-        Timber.d("postMessage %s", json);
-    }
-
-    @JavascriptInterface
-    public void onData(String value) {
-        Timber.d("onData %s", value);
-        //TODO: do something with the data
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private Uri[] getResultAboveL(int resultCode, Intent intent) {
+        Uri[] results = null;
+        if (intent != null && resultCode == Activity.RESULT_OK) {
+            String dataString = intent.getDataString();
+            ClipData clipData = intent.getClipData();
+            if (clipData != null) {
+                results = new Uri[clipData.getItemCount()];
+                for (int i = 0; i < clipData.getItemCount(); i++) {
+                    ClipData.Item item = clipData.getItemAt(i);
+                    results[i] = item.getUri();
+                }
+            } else if (dataString != null) {
+                results = new Uri[]{Uri.parse(dataString)};
+            }
+        }
+        return results;
     }
 
     @Override
