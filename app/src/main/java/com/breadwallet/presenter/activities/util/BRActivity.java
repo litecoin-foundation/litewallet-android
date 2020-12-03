@@ -164,6 +164,9 @@ public class BRActivity extends FragmentActivity {
                     finish();
                 }
                 break;
+
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
