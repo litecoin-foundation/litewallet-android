@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -46,6 +47,14 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
         holder.logo.setImageResource(partner.getLogo());
         holder.title.setText(partner.getTitle());
         holder.detail.setText(partner.getDetails());
+        holder.fiatOptionHScrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                int checkId = holder.fiatOptions.getCheckedRadioButtonId();
+                View option = holder.fiatOptions.findViewById(checkId);
+                holder.fiatOptionHScrollView.scrollTo((int) option.getX(), (int) option.getY());
+            }
+        });
 
         holder.buyPartnerWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +73,7 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
             case R.id.cad_fiat:
                 currency = R.string.cad_currency_code;
                 break;
-                
+
             case R.id.eur_fiat:
                 currency = R.string.eur_currency_code;
                 break;
@@ -109,13 +118,14 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
         return partners.size();
     }
 
-    class PartnerViewHolder extends RecyclerView.ViewHolder {
+    static class PartnerViewHolder extends RecyclerView.ViewHolder {
 
         final ImageView logo;
         final TextView title;
         final TextView detail;
         final RadioGroup fiatOptions;
         final View buyPartnerWrapper;
+        final HorizontalScrollView fiatOptionHScrollView;
 
         PartnerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -124,6 +134,7 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
             title = itemView.findViewById(R.id.titleLbl);
             detail = itemView.findViewById(R.id.detailLbl);
             fiatOptions = itemView.findViewById(R.id.fiat_option);
+            fiatOptionHScrollView = itemView.findViewById(R.id.fiat_option_h_scroll);
             buyPartnerWrapper = itemView.findViewById(R.id.buyPartnerWrapper);
         }
     }
