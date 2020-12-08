@@ -80,7 +80,7 @@ public class BRConstants {
     public static final String ECONOMY_FEE_KB_PREFS = "EconomyFeeKb";
     public static final String LITTLE_CIRCLE = "\u2022";
 
-    public static String SUPPORT_EMAIL = "litewallet@litecoinfoundation.net";
+    public static String SUPPORT_EMAIL = "support@litecoinfoundation.zendesk.com";
 
     public static final int ONE_BITCOIN = 100000000;
     public static final int HUNDRED_BITS = 10000000;
