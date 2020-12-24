@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -101,7 +100,6 @@ public class FragmentSend extends Fragment {
     private EditText commentEdit;
     private StringBuilder amountBuilder;
     private TextView isoText;
-    private TextView donate_isoText;
     private EditText amountEdit;
     private TextView balanceText;
     private TextView feeText;
@@ -313,9 +311,6 @@ public class FragmentSend extends Fragment {
             }
         });
 
-//        commentEdit.addTextChangedListener(new BRTextWatcher());
-//        addressEdit.addTextChangedListener(new BRTextWatcher());
-
         paste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -338,7 +333,7 @@ public class FragmentSend extends Fragment {
                     final String finalAddress = address;
                     final Activity app = getActivity();
                     if (app == null) {
-                        Log.e(TAG, "paste onClick: app is null");
+                        Timber.e("paste onClick: app is null");
                         return;
                     }
                     BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
@@ -401,7 +396,6 @@ public class FragmentSend extends Fragment {
                     selectedIso = BRSharedPrefs.getIso(getContext());
                 }
                 updateText();
-
             }
         });
 
@@ -490,7 +484,6 @@ public class FragmentSend extends Fragment {
                             showKeyboard(true);
                         }
                     }, 500);
-
                 }
                 return false;
             }
@@ -502,8 +495,6 @@ public class FragmentSend extends Fragment {
                 handleClick(key);
             }
         });
-
-//        updateText();
     }
 
     private void showKeyboard(boolean b) {
