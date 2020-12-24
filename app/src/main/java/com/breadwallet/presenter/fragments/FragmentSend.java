@@ -1,7 +1,6 @@
 package com.breadwallet.presenter.fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.fragment.app.Fragment;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
