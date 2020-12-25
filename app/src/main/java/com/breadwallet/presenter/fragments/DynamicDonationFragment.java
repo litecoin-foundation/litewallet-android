@@ -1,6 +1,5 @@
 package com.breadwallet.presenter.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.entities.PaymentItem;
