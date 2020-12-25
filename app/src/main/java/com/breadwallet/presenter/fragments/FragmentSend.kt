@@ -17,6 +17,7 @@ import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.transition.AutoTransition
 import androidx.transition.Transition
 import androidx.transition.TransitionManager
@@ -33,11 +34,11 @@ import com.breadwallet.tools.manager.*
 import com.breadwallet.tools.security.BRSender
 import com.breadwallet.tools.security.BitcoinUrlHandler
 import com.breadwallet.tools.threads.BRExecutor
-import com.breadwallet.tools.util.BRConstants
-import com.breadwallet.tools.util.BRCurrency
-import com.breadwallet.tools.util.BRExchange
-import com.breadwallet.tools.util.Utils
+import com.breadwallet.tools.util.*
 import com.breadwallet.wallet.BRWalletManager
+import com.github.razir.progressbutton.bindProgressButton
+import com.github.razir.progressbutton.hideProgress
+import com.github.razir.progressbutton.showProgress
 import timber.log.Timber
 import java.math.BigDecimal
 import java.util.regex.Pattern
@@ -100,6 +101,9 @@ class FragmentSend : Fragment() {
     private var amountLabelOn = true
     private var ignoreCleanup = false
 
+    private lateinit var udDomainEdit: EditText
+    private lateinit var udLookupButton: Button
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_send, container, false)
         backgroundLayout = rootView.findViewById(R.id.background_layout)
@@ -111,6 +115,10 @@ class FragmentSend : Fragment() {
         addressEdit = rootView.findViewById<View>(R.id.address_edit) as EditText
         scan = rootView.findViewById<View>(R.id.scan) as Button
         paste = rootView.findViewById<View>(R.id.paste_button) as Button
+
+        udDomainEdit = rootView.findViewById(R.id.ud_address_edit)
+        udLookupButton = rootView.findViewById(R.id.ud_lookup_button)
+
         send = rootView.findViewById<View>(R.id.send_button) as Button
         donate = rootView.findViewById<View>(R.id.donate_button) as Button
         commentEdit = rootView.findViewById<View>(R.id.comment_edit) as EditText
@@ -147,6 +155,11 @@ class FragmentSend : Fragment() {
         showKeyboard(false)
         signalLayout.layoutTransition = BRAnimator.getDefaultTransition()
         return rootView
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        bindProgressButton(udLookupButton)
     }
 
     private fun setupFeesSelector(rootView: View) {
@@ -296,6 +309,30 @@ class FragmentSend : Fragment() {
             saveMetaData()
             BRAnimator.openScanner(activity, BRConstants.SCANNER_REQUEST)
         })
+
+        udLookupButton.setOnClickListener {
+            lifecycleScope.executeAsyncTask(
+                    onPreExecute = {
+                        udLookupButton.showProgress {
+                            buttonText = null
+                            progressColorRes = R.color.litecoin_litewallet_blue
+                        }
+                        udLookupButton.isEnabled = false
+                    },
+                    doInBackground = { UDResolution().resolve(udDomainEdit.text.toString(), "LTC") },
+                    onPostExecute = {
+                        if (it.error == null) {
+                            addressEdit.setText(it.address)
+                        } else {
+                            Timber.d(it.error)
+                            Toast.makeText(requireContext(), it.error.localizedMessage, Toast.LENGTH_LONG).show()
+                        }
+                        udLookupButton.isEnabled = true
+                        udLookupButton.hideProgress("Lookup")
+                    }
+            )
+        }
+
         send.setOnClickListener(View.OnClickListener { //not allowed now
             if (!BRAnimator.isClickAllowed()) {
                 return@OnClickListener
