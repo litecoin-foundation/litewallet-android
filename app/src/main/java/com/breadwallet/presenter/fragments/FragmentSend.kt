@@ -319,7 +319,7 @@ class FragmentSend : Fragment() {
                         }
                         udLookupButton.isEnabled = false
                     },
-                    doInBackground = { UDResolution().resolve(udDomainEdit.text.toString(), "LTC") },
+                    doInBackground = { UDResolution().resolve(udDomainEdit.text.toString()) },
                     onPostExecute = {
                         if (it.error == null) {
                             addressEdit.setText(it.address)
