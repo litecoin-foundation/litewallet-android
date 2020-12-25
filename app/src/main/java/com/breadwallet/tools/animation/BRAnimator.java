@@ -353,12 +353,12 @@ public class BRAnimator {
         transaction.commit();
     }
 
-    public static void showDynamicDonationFragment(@NonNull Activity app) {
-        FragmentTransaction transaction = app.getFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
-        transaction.add(android.R.id.content, new DynamicDonationFragment(), DynamicDonationFragment.class.getName());
-        transaction.addToBackStack(DynamicDonationFragment.class.getName());
-        transaction.commit();
+    public static void showDynamicDonationFragment(@NonNull FragmentActivity app) {
+        app.getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(0, 0, 0, R.animator.plain_300)
+                .add(android.R.id.content, new DynamicDonationFragment(), DynamicDonationFragment.class.getName())
+                .addToBackStack(DynamicDonationFragment.class.getName())
+                .commit();
     }
 
     public static void showMenuFragment(Activity app) {
