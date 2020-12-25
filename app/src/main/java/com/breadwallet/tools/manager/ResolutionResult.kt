@@ -21,9 +21,9 @@ class UDResolution {
             .infura(NamingServiceType.CNS, Network.MAINNET, BuildConfig.INFURA_KEY)
             .build()
 
-    fun resolve(domain: String, currency: String): ResolutionResult {
+    fun resolve(domain: String): ResolutionResult {
         return try {
-            ResolutionResult(null, tool.getAddress(domain, currency))
+            ResolutionResult(null, tool.getAddress(domain, "LTC"))
         } catch (err: NamingServiceException) {
             Timber.e(err)
             ResolutionResult(err, null)
