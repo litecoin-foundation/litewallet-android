@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:text="Or" />
+                android:text="@string/Send.or" />
 
             <View
                 android:layout_width="0dp"
@@ -165,7 +165,7 @@
                 android:background="@android:color/transparent"
                 android:ellipsize="middle"
                 android:ems="10"
-                android:hint="Enter a .crypto or .zil domain"
+                android:hint="@string/Send.UnstoppableDomains.placeholder"
                 android:inputType="textPersonName"
                 android:singleLine="true" />
 
