@@ -71,41 +71,42 @@ import java.util.regex.Pattern
  * THE SOFTWARE.
  */
 class FragmentSend : Fragment() {
-    var backgroundLayout: ScrollView? = null
-    var signalLayout: LinearLayout? = null
-    private var keyboard: BRKeyboard? = null
-    private var addressEdit: EditText? = null
-    private var scan: Button? = null
-    private var paste: Button? = null
-    private var send: Button? = null
-    private var donate: Button? = null
-    private var commentEdit: EditText? = null
-    private var amountBuilder: StringBuilder? = null
-    private var isoText: TextView? = null
-    private var amountEdit: EditText? = null
-    private var balanceText: TextView? = null
-    private var feeText: TextView? = null
-    private var edit: ImageView? = null
+    private lateinit var backgroundLayout: ScrollView
+    private lateinit var signalLayout: LinearLayout
+    private lateinit var keyboard: BRKeyboard
+    private lateinit var addressEdit: EditText
+    private lateinit var scan: Button
+    private lateinit var paste: Button
+    private lateinit var send: Button
+    private lateinit var donate: Button
+    private lateinit var commentEdit: EditText
+    private lateinit var amountBuilder: StringBuilder
+    private lateinit var isoText: TextView
+    private lateinit var amountEdit: EditText
+    private lateinit var balanceText: TextView
+    private lateinit var feeText: TextView
+    private lateinit var edit: ImageView
     private var curBalance: Long = 0
     private var selectedIso: String? = null
-    private var isoButton: Button? = null
+    private lateinit var isoButton: Button
     private var keyboardIndex = 0
-    private var keyboardLayout: LinearLayout? = null
-    private var close: ImageButton? = null
-    private var amountLayout: ConstraintLayout? = null
-    private var feeLayout: BRLinearLayoutWithCaret? = null
+    private lateinit var keyboardLayout: LinearLayout
+    private lateinit var close: ImageButton
+    private lateinit var amountLayout: ConstraintLayout
+    private lateinit var feeLayout: BRLinearLayoutWithCaret
     private var feeButtonsShown = false
-    private var feeDescription: BRText? = null
-    private var warningText: BRText? = null
+    private lateinit var feeDescription: BRText
+    private lateinit var warningText: BRText
     private var amountLabelOn = true
     private var ignoreCleanup = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_send, container, false)
-        backgroundLayout = rootView.findViewById<View>(R.id.background_layout) as ScrollView
+        backgroundLayout = rootView.findViewById(R.id.background_layout)
         signalLayout = rootView.findViewById<View>(R.id.signal_layout) as LinearLayout
         keyboard = rootView.findViewById<View>(R.id.keyboard) as BRKeyboard
-        keyboard!!.setBRButtonBackgroundResId(R.drawable.keyboard_white_button)
-        keyboard!!.setBRKeyboardColor(R.color.white)
+        keyboard.setBRButtonBackgroundResId(R.drawable.keyboard_white_button)
+        keyboard.setBRKeyboardColor(R.color.white)
         isoText = rootView.findViewById<View>(R.id.iso_text) as TextView
         addressEdit = rootView.findViewById<View>(R.id.address_edit) as EditText
         scan = rootView.findViewById<View>(R.id.scan) as Button
@@ -127,24 +128,24 @@ class FragmentSend : Fragment() {
         selectedIso = if (BRSharedPrefs.getPreferredLTC(context)) "LTC" else BRSharedPrefs.getIso(context)
         amountBuilder = StringBuilder(0)
         setListeners()
-        isoText!!.text = getString(R.string.Send_amountLabel)
-        isoText!!.textSize = 18f
-        isoText!!.setTextColor(context!!.getColor(R.color.light_gray))
-        isoText!!.requestLayout()
-        signalLayout!!.setOnTouchListener(SlideDetector(context, signalLayout))
+        isoText.text = getString(R.string.Send_amountLabel)
+        isoText.textSize = 18f
+        isoText.setTextColor(context!!.getColor(R.color.light_gray))
+        isoText.requestLayout()
+        signalLayout.setOnTouchListener(SlideDetector(context, signalLayout))
         AnalyticsManager.logCustomEvent(BRConstants._20191105_VSC)
         setupFeesSelector(rootView)
         showFeeSelectionButtons(feeButtonsShown)
-        edit!!.setOnClickListener {
+        edit.setOnClickListener {
             feeButtonsShown = !feeButtonsShown
             showFeeSelectionButtons(feeButtonsShown)
         }
-        keyboardIndex = signalLayout!!.indexOfChild(keyboardLayout)
+        keyboardIndex = signalLayout.indexOfChild(keyboardLayout)
         //TODO: all views are using the layout of this button. Views should be refactored without it
         // Hiding until layouts are built.
         val faq = rootView.findViewById<View>(R.id.faq_button) as ImageButton
         showKeyboard(false)
-        signalLayout!!.layoutTransition = BRAnimator.getDefaultTransition()
+        signalLayout.layoutTransition = BRAnimator.getDefaultTransition()
         return rootView
     }
 
@@ -153,7 +154,7 @@ class FragmentSend : Fragment() {
         for (i in 0 until feesSegment.childCount) {
             FontManager.setCustomFont(context, feesSegment.getChildAt(i) as RadioButton, "BarlowSemiCondensed-Medium.ttf")
         }
-        feesSegment.setOnCheckedChangeListener { group, checkedId -> onFeeTypeSelected(checkedId) }
+        feesSegment.setOnCheckedChangeListener { _, checkedId -> onFeeTypeSelected(checkedId) }
         onFeeTypeSelected(R.id.regular_fee_but)
     }
 
@@ -182,38 +183,38 @@ class FragmentSend : Fragment() {
     }
 
     private fun setFeeInformation(@StringRes deliveryTime: Int, @StringRes warningStringId: Int, @ColorRes warningColorId: Int, visibility: Int) {
-        feeDescription!!.text = getString(R.string.FeeSelector_estimatedDeliver, getString(deliveryTime))
+        feeDescription.text = getString(R.string.FeeSelector_estimatedDeliver, getString(deliveryTime))
         if (warningStringId != 0) {
-            warningText!!.setText(warningStringId)
+            warningText.setText(warningStringId)
         }
         if (warningColorId != 0) {
-            warningText!!.setTextColor(resources.getColor(warningColorId, null))
+            warningText.setTextColor(resources.getColor(warningColorId, null))
         }
-        warningText!!.visibility = visibility
+        warningText.visibility = visibility
     }
 
     private fun setListeners() {
-        amountEdit!!.setOnClickListener {
+        amountEdit.setOnClickListener {
             showKeyboard(true)
             if (amountLabelOn) { //only first time
                 amountLabelOn = false
-                amountEdit!!.hint = "0"
-                amountEdit!!.textSize = 24f
-                balanceText!!.visibility = View.VISIBLE
-                feeText!!.visibility = View.VISIBLE
-                edit!!.visibility = View.VISIBLE
-                isoText!!.setTextColor(context!!.getColor(R.color.almost_black))
-                isoText!!.text = BRCurrency.getSymbolByIso(activity, selectedIso)
-                isoText!!.textSize = 28f
-                val scaleX = amountEdit!!.scaleX
-                amountEdit!!.scaleX = 0f
+                amountEdit.hint = "0"
+                amountEdit.textSize = 24f
+                balanceText.visibility = View.VISIBLE
+                feeText.visibility = View.VISIBLE
+                edit.visibility = View.VISIBLE
+                isoText.setTextColor(context!!.getColor(R.color.almost_black))
+                isoText.text = BRCurrency.getSymbolByIso(activity, selectedIso)
+                isoText.textSize = 28f
+                val scaleX = amountEdit.scaleX
+                amountEdit.scaleX = 0f
                 val tr = AutoTransition()
                 tr.interpolator = OvershootInterpolator()
                 tr.addListener(object : Transition.TransitionListener {
                     override fun onTransitionStart(transition: Transition) {}
                     override fun onTransitionEnd(transition: Transition) {
-                        amountEdit!!.requestLayout()
-                        amountEdit!!.animate().setDuration(100).scaleX(scaleX)
+                        amountEdit.requestLayout()
+                        amountEdit.animate().setDuration(100).scaleX(scaleX)
                     }
 
                     override fun onTransitionCancel(transition: Transition) {}
@@ -222,26 +223,26 @@ class FragmentSend : Fragment() {
                 })
                 val set = ConstraintSet()
                 set.clone(amountLayout)
-                TransitionManager.beginDelayedTransition(amountLayout!!, tr)
+                TransitionManager.beginDelayedTransition(amountLayout, tr)
                 val px4 = Utils.getPixelsFromDps(context, 4)
-                set.connect(balanceText!!.id, ConstraintSet.TOP, isoText!!.id, ConstraintSet.BOTTOM, px4)
-                set.connect(feeText!!.id, ConstraintSet.TOP, balanceText!!.id, ConstraintSet.BOTTOM, px4)
-                set.connect(feeText!!.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, px4)
-                set.connect(isoText!!.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, px4)
-                set.connect(isoText!!.id, ConstraintSet.BOTTOM, -1, ConstraintSet.TOP, -1)
+                set.connect(balanceText.id, ConstraintSet.TOP, isoText.id, ConstraintSet.BOTTOM, px4)
+                set.connect(feeText.id, ConstraintSet.TOP, balanceText.id, ConstraintSet.BOTTOM, px4)
+                set.connect(feeText.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, px4)
+                set.connect(isoText.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, px4)
+                set.connect(isoText.id, ConstraintSet.BOTTOM, -1, ConstraintSet.TOP, -1)
                 set.applyTo(amountLayout)
             }
         }
 
         //needed to fix the overlap bug
-        commentEdit!!.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+        commentEdit.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                amountLayout!!.requestLayout()
+                amountLayout.requestLayout()
                 return@OnKeyListener true
             }
             false
         })
-        paste!!.setOnClickListener(View.OnClickListener {
+        paste.setOnClickListener(View.OnClickListener {
             if (!BRAnimator.isClickAllowed()) return@OnClickListener
             val bitcoinUrl = BRClipboardManager.getClipboard(activity)
             if (Utils.isNullOrEmpty(bitcoinUrl) || !isInputValid(bitcoinUrl)) {
@@ -249,7 +250,7 @@ class FragmentSend : Fragment() {
                 return@OnClickListener
             }
             val obj = BitcoinUrlHandler.getRequestFromString(bitcoinUrl)
-            if (obj == null || obj.address == null) {
+            if (obj?.address == null) {
                 showClipboardError()
                 return@OnClickListener
             }
@@ -271,18 +272,18 @@ class FragmentSend : Fragment() {
                         app.runOnUiThread(Runnable {
                             BRDialog.showCustomDialog(activity!!, getString(R.string.Send_UsedAddress_firstLine), getString(R.string.Send_UsedAddress_secondLIne), "Ignore", "Cancel", { brDialogView ->
                                 brDialogView.dismiss()
-                                addressEdit!!.setText(address)
+                                addressEdit.setText(address)
                             }, { brDialogView -> brDialogView.dismiss() }, null, 0)
                         })
                     } else {
-                        app.runOnUiThread(Runnable { addressEdit!!.setText(address) })
+                        app.runOnUiThread(Runnable { addressEdit.setText(address) })
                     }
                 }
             } else {
                 showClipboardError()
             }
         })
-        isoButton!!.setOnClickListener {
+        isoButton.setOnClickListener {
             selectedIso = if (selectedIso.equals(BRSharedPrefs.getIso(context), ignoreCase = true)) {
                 "LTC"
             } else {
@@ -290,20 +291,20 @@ class FragmentSend : Fragment() {
             }
             updateText()
         }
-        scan!!.setOnClickListener(View.OnClickListener {
+        scan.setOnClickListener(View.OnClickListener {
             if (!BRAnimator.isClickAllowed()) return@OnClickListener
             saveMetaData()
             BRAnimator.openScanner(activity, BRConstants.SCANNER_REQUEST)
         })
-        send!!.setOnClickListener(View.OnClickListener { //not allowed now
+        send.setOnClickListener(View.OnClickListener { //not allowed now
             if (!BRAnimator.isClickAllowed()) {
                 return@OnClickListener
             }
             var allFilled = true
-            val address = addressEdit!!.text.toString()
+            val address = addressEdit.text.toString()
             val amountStr = amountBuilder.toString()
             val iso = selectedIso
-            val comment = commentEdit!!.text.toString()
+            val comment = commentEdit.text.toString()
 
             //get amount in satoshis from any isos
             val bigAmount = BigDecimal(if (Utils.isNullOrEmpty(amountStr)) "0" else amountStr)
@@ -325,37 +326,36 @@ class FragmentSend : Fragment() {
                 AnalyticsManager.logCustomEvent(BRConstants._20191105_DSL)
             }
         })
-        donate!!.setOnClickListener(View.OnClickListener { //not allowed now
+        donate.setOnClickListener(View.OnClickListener { //not allowed now
             if (!BRAnimator.isClickAllowed()) {
                 return@OnClickListener
             }
             BRAnimator.showDynamicDonationFragment(activity!!)
         })
-        backgroundLayout!!.setOnClickListener(View.OnClickListener {
+        backgroundLayout.setOnClickListener(View.OnClickListener {
             if (!BRAnimator.isClickAllowed()) return@OnClickListener
             activity!!.onBackPressed()
         })
-        close!!.setOnClickListener {
-            val app: Activity? = activity
-            app?.fragmentManager?.popBackStack()
+        close.setOnClickListener {
+            activity?.onBackPressed()
         }
-        addressEdit!!.setOnEditorActionListener { v, actionId, event ->
+        addressEdit.setOnEditorActionListener { _, actionId, event ->
             if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
                 Utils.hideKeyboard(activity)
                 Handler().postDelayed({ showKeyboard(true) }, 500)
             }
             false
         }
-        keyboard!!.addOnInsertListener { key -> handleClick(key) }
+        keyboard.addOnInsertListener { key -> handleClick(key) }
     }
 
     private fun showKeyboard(b: Boolean) {
         val curIndex = keyboardIndex
         if (!b) {
-            signalLayout!!.removeView(keyboardLayout)
+            signalLayout.removeView(keyboardLayout)
         } else {
             Utils.hideKeyboard(activity)
-            if (signalLayout!!.indexOfChild(keyboardLayout) == -1) signalLayout!!.addView(keyboardLayout, curIndex) else signalLayout!!.removeView(keyboardLayout)
+            if (signalLayout.indexOfChild(keyboardLayout) == -1) signalLayout.addView(keyboardLayout, curIndex) else signalLayout.removeView(keyboardLayout)
         }
     }
 
@@ -366,7 +366,7 @@ class FragmentSend : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val observer = signalLayout!!.viewTreeObserver
+        val observer = signalLayout.viewTreeObserver
         observer.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 if (observer.isAlive) {
@@ -375,7 +375,7 @@ class FragmentSend : Fragment() {
                 BRAnimator.animateBackgroundDim(backgroundLayout, false)
                 BRAnimator.animateSignalSlide(signalLayout, false) {
                     val bundle = arguments
-                    if (bundle != null && bundle.getString("url") != null) setUrl(bundle.getString("url"))
+                    if (bundle?.getString("url") != null) setUrl(bundle.getString("url"))
                 }
             }
         })
@@ -415,12 +415,16 @@ class FragmentSend : Fragment() {
             Timber.d("handleClick: key is null! ")
             return
         }
-        if (key.isEmpty()) {
-            handleDeleteClick()
-        } else if (Character.isDigit(key[0])) {
-            handleDigitClick(key.substring(0, 1).toInt())
-        } else if (key[0] == '.') {
-            handleSeparatorClick()
+        when {
+            key.isEmpty() -> {
+                handleDeleteClick()
+            }
+            Character.isDigit(key[0]) -> {
+                handleDigitClick(key.substring(0, 1).toInt())
+            }
+            key[0] == '.' -> {
+                handleSeparatorClick()
+            }
         }
     }
 
@@ -432,7 +436,7 @@ class FragmentSend : Fragment() {
             //do not insert 0 if the balance is 0 now
             if (currAmount.equals("0", ignoreCase = true)) amountBuilder = StringBuilder("")
             if (currAmount.contains(".") && currAmount.length - currAmount.indexOf(".") > BRCurrency.getMaxDecimalPlaces(iso)) return
-            amountBuilder!!.append(dig)
+            amountBuilder.append(dig)
             updateText()
         }
     }
@@ -440,14 +444,14 @@ class FragmentSend : Fragment() {
     private fun handleSeparatorClick() {
         val currAmount = amountBuilder.toString()
         if (currAmount.contains(".") || BRCurrency.getMaxDecimalPlaces(selectedIso) == 0) return
-        amountBuilder!!.append(".")
+        amountBuilder.append(".")
         updateText()
     }
 
     private fun handleDeleteClick() {
         val currAmount = amountBuilder.toString()
-        if (currAmount.length > 0) {
-            amountBuilder!!.deleteCharAt(currAmount.length - 1)
+        if (currAmount.isNotEmpty()) {
+            amountBuilder.deleteCharAt(currAmount.length - 1)
             updateText()
         }
     }
@@ -459,8 +463,8 @@ class FragmentSend : Fragment() {
         val iso = selectedIso
         val currencySymbol = BRCurrency.getSymbolByIso(activity, selectedIso)
         curBalance = BRWalletManager.getInstance().getBalance(activity)
-        if (!amountLabelOn) isoText!!.text = currencySymbol
-        isoButton!!.text = String.format("%s(%s)", BRCurrency.getCurrencyName(activity, selectedIso), currencySymbol)
+        if (!amountLabelOn) isoText.text = currencySymbol
+        isoButton.text = String.format("%s(%s)", BRCurrency.getCurrencyName(activity, selectedIso), currencySymbol)
         //Balance depending on ISO
         val satoshis = if (Utils.isNullOrEmpty(tmpAmount) || tmpAmount.equals(".", ignoreCase = true)) 0 else if (selectedIso.equals("btc", ignoreCase = true)) BRExchange.getSatoshisForBitcoin(activity, BigDecimal(tmpAmount)).toLong() else BRExchange.getSatoshisFromAmount(activity, selectedIso, BigDecimal(tmpAmount)).toLong()
         val balanceForISO = BRExchange.getAmountFromSatoshis(activity, iso, BigDecimal(curBalance))
@@ -476,7 +480,7 @@ class FragmentSend : Fragment() {
             fee = BRWalletManager.getInstance().feeForTransactionAmount(satoshis).toLong()
             if (fee == 0L) {
                 Timber.i("updateText: fee is 0, trying the estimate")
-                fee = BRWalletManager.getInstance().feeForTransaction(addressEdit!!.text.toString(), satoshis).toLong()
+                fee = BRWalletManager.getInstance().feeForTransaction(addressEdit.text.toString(), satoshis).toLong()
             }
         }
         val feeForISO = BRExchange.getAmountFromSatoshis(activity, iso, BigDecimal(if (curBalance == 0L) 0 else fee))
@@ -485,30 +489,30 @@ class FragmentSend : Fragment() {
         val aproxFee = BRCurrency.getFormattedCurrencyString(activity, iso, feeForISO)
         Timber.d("updateText: aproxFee: %s", aproxFee)
         if (BigDecimal(if (tmpAmount.isEmpty() || tmpAmount.equals(".", ignoreCase = true)) "0" else tmpAmount).toDouble() > balanceForISO.toDouble()) {
-            balanceText!!.setTextColor(context!!.getColor(R.color.warning_color))
-            feeText!!.setTextColor(context!!.getColor(R.color.warning_color))
-            amountEdit!!.setTextColor(context!!.getColor(R.color.warning_color))
-            if (!amountLabelOn) isoText!!.setTextColor(context!!.getColor(R.color.warning_color))
+            balanceText.setTextColor(context!!.getColor(R.color.warning_color))
+            feeText.setTextColor(context!!.getColor(R.color.warning_color))
+            amountEdit.setTextColor(context!!.getColor(R.color.warning_color))
+            if (!amountLabelOn) isoText.setTextColor(context!!.getColor(R.color.warning_color))
         } else {
-            balanceText!!.setTextColor(context!!.getColor(R.color.light_gray))
-            feeText!!.setTextColor(context!!.getColor(R.color.light_gray))
-            amountEdit!!.setTextColor(context!!.getColor(R.color.almost_black))
-            if (!amountLabelOn) isoText!!.setTextColor(context!!.getColor(R.color.almost_black))
+            balanceText.setTextColor(context!!.getColor(R.color.light_gray))
+            feeText.setTextColor(context!!.getColor(R.color.light_gray))
+            amountEdit.setTextColor(context!!.getColor(R.color.almost_black))
+            if (!amountLabelOn) isoText.setTextColor(context!!.getColor(R.color.almost_black))
         }
-        balanceText!!.text = getString(R.string.Send_balance, formattedBalance)
-        feeText!!.text = String.format(getString(R.string.Send_fee), aproxFee)
-        donate!!.text = getString(R.string.Donate_title, currencySymbol)
-        donate!!.isEnabled = curBalance >= BRConstants.DONATION_AMOUNT * 2
-        amountLayout!!.requestLayout()
+        balanceText.text = getString(R.string.Send_balance, formattedBalance)
+        feeText.text = String.format(getString(R.string.Send_fee), aproxFee)
+        donate.text = getString(R.string.Donate_title, currencySymbol)
+        donate.isEnabled = curBalance >= BRConstants.DONATION_AMOUNT * 2
+        amountLayout.requestLayout()
     }
 
     fun setUrl(url: String?) {
         val obj = BitcoinUrlHandler.getRequestFromString(url) ?: return
-        if (obj.address != null && addressEdit != null) {
-            addressEdit!!.setText(obj.address.trim { it <= ' ' })
+        if (obj.address != null) {
+            addressEdit.setText(obj.address.trim { it <= ' ' })
         }
-        if (obj.message != null && commentEdit != null) {
-            commentEdit!!.setText(obj.message)
+        if (obj.message != null) {
+            commentEdit.setText(obj.message)
         }
         if (obj.amount != null) {
             val iso = selectedIso
@@ -520,9 +524,9 @@ class FragmentSend : Fragment() {
 
     private fun showFeeSelectionButtons(b: Boolean) {
         if (!b) {
-            signalLayout!!.removeView(feeLayout)
+            signalLayout.removeView(feeLayout)
         } else {
-            signalLayout!!.addView(feeLayout, signalLayout!!.indexOfChild(amountLayout) + 1)
+            signalLayout.addView(feeLayout, signalLayout.indexOfChild(amountLayout) + 1)
         }
     }
 
@@ -533,13 +537,13 @@ class FragmentSend : Fragment() {
             divider = tmpAmount.indexOf(".")
         }
         val newAmount = StringBuilder()
-        for (i in 0 until tmpAmount.length) {
+        for (i in tmpAmount.indices) {
             newAmount.append(tmpAmount[i])
             if (divider > 3 && divider - 1 != i && divider > i && (divider - i - 1) % 3 == 0) {
                 newAmount.append(",")
             }
         }
-        amountEdit!!.setText(newAmount.toString())
+        amountEdit.setText(newAmount.toString())
     }
 
     private fun isInputValid(input: String): Boolean {
@@ -561,20 +565,20 @@ class FragmentSend : Fragment() {
     }
 
     private fun saveMetaData() {
-        if (!commentEdit!!.text.toString().isEmpty()) savedMemo = commentEdit!!.text.toString()
-        if (!amountBuilder.toString().isEmpty()) savedAmount = amountBuilder.toString()
+        if (commentEdit.text.toString().isNotEmpty()) savedMemo = commentEdit.text.toString()
+        if (amountBuilder.toString().isNotEmpty()) savedAmount = amountBuilder.toString()
         savedIso = selectedIso
         ignoreCleanup = true
     }
 
     private fun loadMetaData() {
         ignoreCleanup = false
-        if (!Utils.isNullOrEmpty(savedMemo)) commentEdit!!.setText(savedMemo)
+        if (!Utils.isNullOrEmpty(savedMemo)) commentEdit.setText(savedMemo)
         if (!Utils.isNullOrEmpty(savedIso)) selectedIso = savedIso
         if (!Utils.isNullOrEmpty(savedAmount)) {
             amountBuilder = StringBuilder(savedAmount!!)
             Handler().postDelayed({
-                amountEdit!!.performClick()
+                amountEdit.performClick()
                 updateText()
             }, 500)
         }
