@@ -477,6 +477,8 @@
   <string name="Send.UnstoppableDomains.placeholder">.cryptoまたは.zilドメインを入力してください</string>
   <!-- Or -->
   <string name="Send.or">或いは</string>
+  <!-- Lookup -->
+  <string name="Send.UnstoppableDomains.lookup">調べる</string>
 
   <!-- Adress already used alert message - first part -->
   <string name="Send.UsedAddress.firstLine">ライトコインアドレスは、個人利用のみを想定しています。</string>
