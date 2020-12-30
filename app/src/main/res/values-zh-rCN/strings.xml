@@ -477,6 +477,8 @@
   <string name="Send.UnstoppableDomains.placeholder">输入.crypto或.zil域</string>
   <!-- Or -->
   <string name="Send.or">要么</string>
+  <!-- Lookup -->
+  <string name="Send.UnstoppableDomains.lookup">抬头</string>
 
   <!-- Adress already used alert message - first part -->
   <string name="Send.UsedAddress.firstLine">莱特币地址仅供一次性使用。</string>

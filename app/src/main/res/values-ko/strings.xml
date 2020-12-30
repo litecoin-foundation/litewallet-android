@@ -477,6 +477,8 @@
   <string name="Send.UnstoppableDomains.placeholder">.crypto 또는 .zil 도메인을 입력하세요.</string>
   <!-- Or -->
   <string name="Send.or">또는</string>
+  <!-- Lookup -->
+  <string name="Send.UnstoppableDomains.lookup">조회</string>
 
   <!-- Adress already used alert message - first part -->
   <string name="Send.UsedAddress.firstLine">라이트코인 주소는 일회용입니다.</string>

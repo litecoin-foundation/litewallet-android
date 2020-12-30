@@ -477,6 +477,8 @@
   <string name="Send.UnstoppableDomains.placeholder">Indtast et .crypto- eller .zil-domæne</string>
   <!-- Or -->
   <string name="Send.or">eller</string>
+  <!-- Lookup -->
+  <string name="Send.UnstoppableDomains.lookup">Kig op</string>
 
   <!-- Adress already used alert message - first part -->
   <string name="Send.UsedAddress.firstLine">Litecoin adresser er kun beregnet til en enkelt anvendelse.</string>

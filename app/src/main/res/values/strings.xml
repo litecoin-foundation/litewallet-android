@@ -475,6 +475,8 @@
   <string name="Send.UnstoppableDomains.placeholder">Enter a .crypto or .zil domain</string>
   <!-- Or -->
   <string name="Send.or">Or</string>
+  <!-- Lookup -->
+  <string name="Send.UnstoppableDomains.lookup">Lookup</string>
 
   <!-- Address already used alert message - first part -->
   <string name="Send.UsedAddress.firstLine">Litecoin addresses are intended for single use only.</string>
