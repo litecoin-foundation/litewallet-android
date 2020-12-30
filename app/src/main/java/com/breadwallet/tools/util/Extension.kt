@@ -12,6 +12,11 @@ import kotlinx.coroutines.withContext
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
 
+
+/**
+ * Extension to create and execute an asynchronous task
+ * as we previously did it with the deprecated class [android.os.AsyncTask]
+ */
 fun <R> CoroutineScope.executeAsyncTask(
         onPreExecute: () -> Unit,
         doInBackground: () -> R,
