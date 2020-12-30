@@ -1,7 +1,5 @@
 package com.breadwallet.tools.security;
 
-import android.app.Activity;
-
 import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.R;
@@ -91,7 +89,7 @@ public class BitcoinUrlHandler {
         if (requestObject.r != null) {
             return tryPaymentRequest(requestObject);
         } else if (requestObject.address != null) {
-            return tryBitcoinURL(url, app);
+            return tryLitecoinURL(url, app);
         } else {
             if (app != null) {
                 BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title),
@@ -185,7 +183,7 @@ public class BitcoinUrlHandler {
         return true;
     }
 
-    private static boolean tryBitcoinURL(final String url, final FragmentActivity app) {
+    private static boolean tryLitecoinURL(final String url, final FragmentActivity app) {
         RequestObject requestObject = getRequestFromString(url);
         if (requestObject == null || requestObject.address == null || requestObject.address.isEmpty())
             return false;
@@ -206,7 +204,7 @@ public class BitcoinUrlHandler {
                 BRAnimator.killAllFragments(app);
                 BRSender.getInstance().sendTransaction(app, new PaymentItem(addresses, null, new BigDecimal(amount).longValue(), null, true));
             } else {
-                Timber.e(new NullPointerException("tryBitcoinURL, app is null!"));
+                Timber.e(new NullPointerException("tryLitecoinURL, app is null!"));
             }
         }
 
