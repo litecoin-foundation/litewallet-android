@@ -328,7 +328,7 @@ class FragmentSend : Fragment() {
                             Toast.makeText(requireContext(), it.error.localizedMessage, Toast.LENGTH_LONG).show()
                         }
                         udLookupButton.isEnabled = true
-                        udLookupButton.hideProgress("Lookup")
+                        udLookupButton.hideProgress(R.string.Send_UnstoppableDomains_lookup)
                     }
             )
         }
