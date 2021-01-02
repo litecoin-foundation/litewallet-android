@@ -64,7 +64,7 @@ public class FragmentBuy extends Fragment {
     public LinearLayout backgroundLayout;
     private WebView webView;
     private String onCloseUrl;
-    private static final String URL_BUY_LTC = BuildConfig.DEBUG ? "https://api-stage.lite-wallet.org" : "http://api-prod.lite-wallet.org";
+    private static final String URL_BUY_LTC = BuildConfig.DEBUG ? "https://api-stage.lite-wallet.org" : "https://api-prod.lite-wallet.org";
     static final String CURRENCY_KEY = "currency_code_key";
     private ValueCallback<Uri> uploadMessage;
     private ValueCallback<Uri[]> uploadMessageAboveL;
