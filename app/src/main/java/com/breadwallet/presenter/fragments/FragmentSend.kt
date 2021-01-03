@@ -325,7 +325,6 @@ class FragmentSend : Fragment() {
                             addressEdit.setText(it.address)
                         } else {
                             Timber.d(it.error)
-                            Toast.makeText(requireContext(), it.error.localizedMessage, Toast.LENGTH_LONG).show()
                         }
                         udLookupButton.isEnabled = true
                         udLookupButton.hideProgress(R.string.Send_UnstoppableDomains_lookup)
