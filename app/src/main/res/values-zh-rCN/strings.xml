@@ -479,6 +479,8 @@
   <string name="Send.or">要么</string>
   <!-- Lookup -->
   <string name="Send.UnstoppableDomains.lookup">抬头</string>
+  <!-- Your address was resolved! -->
+  <string name="Send.UnstoppableDomains.domainResolved">您的地址已解决！</string>
 
   <!-- Adress already used alert message - first part -->
   <string name="Send.UsedAddress.firstLine">莱特币地址仅供一次性使用。</string>

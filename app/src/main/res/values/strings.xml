@@ -477,6 +477,8 @@
   <string name="Send.or">Or</string>
   <!-- Lookup -->
   <string name="Send.UnstoppableDomains.lookup">Lookup</string>
+  <!-- Your address was resolved! -->
+  <string name="Send.UnstoppableDomains.domainResolved">Your address was resolved!</string>
 
   <!-- Address already used alert message - first part -->
   <string name="Send.UsedAddress.firstLine">Litecoin addresses are intended for single use only.</string>
