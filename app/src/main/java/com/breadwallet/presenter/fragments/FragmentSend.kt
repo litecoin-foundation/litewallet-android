@@ -318,6 +318,7 @@ class FragmentSend : Fragment() {
                             progressColorRes = R.color.litecoin_litewallet_blue
                         }
                         udLookupButton.isEnabled = false
+                        addressEdit.text = null
                     },
                     doInBackground = { UDResolution().resolve(udDomainEdit.text.toString()) },
                     onPostExecute = {
