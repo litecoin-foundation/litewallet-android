@@ -479,6 +479,8 @@
   <string name="Send.or">o</string>
   <!-- Lookup -->
   <string name="Send.UnstoppableDomains.lookup">Buscar</string>
+  <!-- Your address was resolved! -->
+  <string name="Send.UnstoppableDomains.domainResolved">¡Tu dirección fue resuelta!</string>
 
   <!-- Adress already used alert message - first part -->
   <string name="Send.UsedAddress.firstLine">Las direcciones Litecoin están diseñadas para un solo uso.</string>

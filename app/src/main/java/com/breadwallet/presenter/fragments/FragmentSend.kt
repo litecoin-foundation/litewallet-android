@@ -324,6 +324,7 @@ class FragmentSend : Fragment() {
                     onPostExecute = {
                         if (it.error == null) {
                             addressEdit.setText(it.address)
+                            BRAnimator.showBreadSignal(requireActivity(), getString(R.string.Send_UnstoppableDomains_domainResolved), null, R.drawable.ic_check_mark_white, null)
                         } else {
                             Timber.d(it.error)
                         }
