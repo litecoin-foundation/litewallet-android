@@ -479,6 +479,8 @@
   <string name="Send.or">或いは</string>
   <!-- Lookup -->
   <string name="Send.UnstoppableDomains.lookup">調べる</string>
+  <!-- Your address was resolved! -->
+  <string name="Send.UnstoppableDomains.domainResolved">あなたの住所は解決されました！</string>
 
   <!-- Adress already used alert message - first part -->
   <string name="Send.UsedAddress.firstLine">ライトコインアドレスは、個人利用のみを想定しています。</string>

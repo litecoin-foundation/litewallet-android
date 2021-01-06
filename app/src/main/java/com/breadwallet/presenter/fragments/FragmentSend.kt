@@ -16,6 +16,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.text.trimmedLength
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.transition.AutoTransition
@@ -311,6 +312,8 @@ class FragmentSend : Fragment() {
         })
 
         udLookupButton.setOnClickListener {
+            // Disable the button until the domain string is at least 4 chars long (e.g a.zil)
+            if (udDomainEdit.text.trimmedLength() < 4) return@setOnClickListener
             lifecycleScope.executeAsyncTask(
                     onPreExecute = {
                         udLookupButton.showProgress {
@@ -318,14 +321,21 @@ class FragmentSend : Fragment() {
                             progressColorRes = R.color.litecoin_litewallet_blue
                         }
                         udLookupButton.isEnabled = false
+                        addressEdit.text = null
+                        AnalyticsManager.logCustomEventWithParams(BRConstants._20201121_SIL, Bundle().apply { putLong(BRConstants.START_TIME, System.currentTimeMillis()) })
                     },
-                    doInBackground = { UDResolution().resolve(udDomainEdit.text.toString()) },
+                    doInBackground = { UDResolution().resolve(udDomainEdit.text.trim().toString()) },
                     onPostExecute = {
                         if (it.error == null) {
+                            AnalyticsManager.logCustomEventWithParams(BRConstants._20201121_DRIA, Bundle().apply { putLong(BRConstants.SUCCESS_TIME, System.currentTimeMillis()) })
                             addressEdit.setText(it.address)
+                            BRAnimator.showBreadSignal(requireActivity(), getString(R.string.Send_UnstoppableDomains_domainResolved), null, R.drawable.ic_check_mark_white, null)
                         } else {
+                            AnalyticsManager.logCustomEventWithParams(BRConstants._20201121_FRIA, Bundle().apply {
+                                putLong(BRConstants.FAILURE_TIME, System.currentTimeMillis())
+                                putString(BRConstants.ERROR, it.error.localizedMessage)
+                            })
                             Timber.d(it.error)
-                            Toast.makeText(requireContext(), it.error.localizedMessage, Toast.LENGTH_LONG).show()
                         }
                         udLookupButton.isEnabled = true
                         udLookupButton.hideProgress(R.string.Send_UnstoppableDomains_lookup)
