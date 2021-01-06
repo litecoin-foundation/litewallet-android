@@ -479,6 +479,8 @@
   <string name="Send.or">или</string>
   <!-- Lookup -->
   <string name="Send.UnstoppableDomains.lookup">Искать</string>
+  <!-- Your address was resolved! -->
+  <string name="Send.UnstoppableDomains.domainResolved">Ваш адрес решен!</string>
 
   <!-- Adress already used alert message - first part -->
   <string name="Send.UsedAddress.firstLine">Биткойн-адреса предназначены исключительно для однократного использования.</string>
