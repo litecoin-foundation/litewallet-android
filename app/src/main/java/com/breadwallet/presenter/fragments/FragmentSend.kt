@@ -319,13 +319,19 @@ class FragmentSend : Fragment() {
                         }
                         udLookupButton.isEnabled = false
                         addressEdit.text = null
+                        AnalyticsManager.logCustomEventWithParams(BRConstants._20201121_SIL, Bundle().apply { putLong(BRConstants.START_TIME, System.currentTimeMillis()) })
                     },
                     doInBackground = { UDResolution().resolve(udDomainEdit.text.toString()) },
                     onPostExecute = {
                         if (it.error == null) {
+                            AnalyticsManager.logCustomEventWithParams(BRConstants._20201121_DRIA, Bundle().apply { putLong(BRConstants.SUCCESS_TIME, System.currentTimeMillis()) })
                             addressEdit.setText(it.address)
                             BRAnimator.showBreadSignal(requireActivity(), getString(R.string.Send_UnstoppableDomains_domainResolved), null, R.drawable.ic_check_mark_white, null)
                         } else {
+                            AnalyticsManager.logCustomEventWithParams(BRConstants._20201121_FRIA, Bundle().apply {
+                                putLong(BRConstants.FAILURE_TIME, System.currentTimeMillis())
+                                putString(BRConstants.ERROR, it.error.localizedMessage)
+                            })
                             Timber.d(it.error)
                         }
                         udLookupButton.isEnabled = true
