@@ -479,6 +479,8 @@
   <string name="Send.or">또는</string>
   <!-- Lookup -->
   <string name="Send.UnstoppableDomains.lookup">조회</string>
+  <!-- Your address was resolved! -->
+  <string name="Send.UnstoppableDomains.domainResolved">주소가 확인되었습니다!</string>
 
   <!-- Adress already used alert message - first part -->
   <string name="Send.UsedAddress.firstLine">라이트코인 주소는 일회용입니다.</string>
