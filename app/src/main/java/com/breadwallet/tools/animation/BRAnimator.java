@@ -83,8 +83,6 @@ public class BRAnimator {
     private static FragmentSignal fragmentSignal;
     private static boolean clickAllowed = true;
     public static int SLIDE_ANIMATION_DURATION = 300;
-    public static float primaryTextSize;
-    public static float secondaryTextSize;
     public static boolean supportIsShowing;
 
     public static void showBreadSignal(Activity activity, String title, String iconDescription, int drawableId, BROnSignalCompletion completion) {
@@ -103,46 +101,13 @@ public class BRAnimator {
             transaction.commit();
     }
 
-    public static void init(Activity app) {
-        if (app == null) return;
-        primaryTextSize = 24f;
-        secondaryTextSize = 12.8f;
-    }
-
-    public static void showFragmentByTag(FragmentActivity app, String tag) {
-        Timber.d("showFragmentByTag: %s", tag);
-        if (tag == null) return;
-        //catch animation duration, make it 0 for no animation, then restore it.
-        final int slideAnimation = SLIDE_ANIMATION_DURATION;
-        try {
-            SLIDE_ANIMATION_DURATION = 0;
-            if (tag.equalsIgnoreCase(FragmentSend.class.getName())) {
-                showSendFragment(app, null);
-            } else if (tag.equalsIgnoreCase(FragmentReceive.class.getName())) {
-                showReceiveFragment(app, true);
-            } else if (tag.equalsIgnoreCase(FragmentRequestAmount.class.getName())) {
-                showRequestFragment(app, BRSharedPrefs.getReceiveAddress(app));
-            } else if (tag.equalsIgnoreCase(FragmentMenu.class.getName())) {
-                showMenuFragment(app);
-            } else {
-                Timber.d("showFragmentByTag: error, no such tag: %s", tag);
-            }
-        } finally {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    SLIDE_ANIMATION_DURATION = slideAnimation;
-                }
-            }, 800);
-        }
-    }
-
     public static void showSendFragment(FragmentActivity app, final String bitcoinUrl) {
         if (app == null) {
             Timber.i("showSendFragment: app is null");
             return;
         }
-        FragmentSend fragmentSend = (FragmentSend) app.getSupportFragmentManager().findFragmentByTag(FragmentSend.class.getName());
+        androidx.fragment.app.FragmentManager fragmentManager = app.getSupportFragmentManager();
+        FragmentSend fragmentSend = (FragmentSend) fragmentManager.findFragmentByTag(FragmentSend.class.getName());
         if (fragmentSend != null && fragmentSend.isAdded()) {
             fragmentSend.setUrl(bitcoinUrl);
             return;
@@ -154,12 +119,11 @@ public class BRAnimator {
                 bundle.putString("url", bitcoinUrl);
                 fragmentSend.setArguments(bundle);
             }
-            app.getSupportFragmentManager().beginTransaction()
+            fragmentManager.beginTransaction()
                     .setCustomAnimations(0, 0, 0, R.animator.plain_300)
                     .add(android.R.id.content, fragmentSend, FragmentSend.class.getName())
                     .addToBackStack(FragmentSend.class.getName()).commit();
         } finally {
-
         }
     }
 
