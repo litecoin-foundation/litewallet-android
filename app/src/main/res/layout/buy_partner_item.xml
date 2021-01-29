@@ -29,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.breadwallet.presenter.customviews.BRText
+        <TextView
             android:id="@+id/titleLbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             android:layout_marginEnd="10dp"
             android:textColor="@color/white"
             android:textSize="16sp"
-            app:customTFont="BarlowSemiCondensed-Bold.ttf"
+            android:fontFamily="@font/barlowsemicondensed_bold"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@+id/imageView6"
             app:layout_constraintHorizontal_bias="0.0"
@@ -46,7 +46,7 @@
             app:layout_constraintTop_toTopOf="@id/logo"
             tools:text="@string/BuyCenter.simplex.Title" />
 
-        <com.breadwallet.presenter.customviews.BRText
+        <TextView
             android:id="@+id/detailLbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:layout_marginBottom="10dp"
             android:textColor="@color/white"
             android:textSize="15sp"
-            app:customTFont="BarlowSemiCondensed-Medium.ttf"
+            android:fontFamily="@font/barlowsemicondensed_medium"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView6"
@@ -79,7 +79,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <com.breadwallet.presenter.customviews.BRText
+    <TextView
         android:id="@+id/BRText5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
         android:text="@string/choose_fiat"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:customTFont="BarlowSemiCondensed-Medium.ttf"
+        android:fontFamily="@font/barlowsemicondensed_medium"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fiat_option_h_scroll"
