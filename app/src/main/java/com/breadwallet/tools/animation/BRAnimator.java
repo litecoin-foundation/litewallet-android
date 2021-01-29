@@ -14,7 +14,6 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
@@ -32,7 +31,6 @@ import com.breadwallet.presenter.activities.LoginActivity;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.TxItem;
-import com.breadwallet.presenter.fragments.BuyTabFragment;
 import com.breadwallet.presenter.fragments.DynamicDonationFragment;
 import com.breadwallet.presenter.fragments.FragmentBuy;
 import com.breadwallet.presenter.fragments.FragmentGreetings;
@@ -44,7 +42,6 @@ import com.breadwallet.presenter.fragments.FragmentSignal;
 import com.breadwallet.presenter.fragments.FragmentSupport;
 import com.breadwallet.presenter.fragments.FragmentTransactionDetails;
 import com.breadwallet.presenter.interfaces.BROnSignalCompletion;
-import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
@@ -307,14 +304,6 @@ public class BRAnimator {
                 .add(android.R.id.content, FragmentBuy.newInstance(currency), FragmentBuy.class.getName())
                 .addToBackStack(FragmentBuy.class.getName())
                 .commit();
-    }
-
-    public static void showBuyTabFragment(@NonNull Activity app) {
-        FragmentTransaction transaction = app.getFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
-        transaction.add(android.R.id.content, new BuyTabFragment(), BuyTabFragment.class.getName());
-        transaction.addToBackStack(BuyTabFragment.class.getName());
-        transaction.commit();
     }
 
     public static void showDynamicDonationFragment(@NonNull FragmentActivity app) {
