@@ -31,6 +31,7 @@ import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRNotificationBar;
 import com.breadwallet.presenter.entities.CurrencyEntity;
+import com.breadwallet.presenter.fragments.BuyTabFragment;
 import com.breadwallet.presenter.history.HistoryFragment;
 import com.breadwallet.presenter.spend.AuthBottomSheetDialogFragment;
 import com.breadwallet.presenter.transfer.TransferFragment;
@@ -246,6 +247,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 mSelectedBottomNavItem = 0;
                 break;
             case R.id.nav_buy:
+                ExtensionKt.replaceFragment(BreadActivity.this, new BuyTabFragment(), false, R.id.fragment_container);
                 break;
         }
         return true;
