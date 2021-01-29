@@ -44,8 +44,8 @@
                 tools:layout_editor_absoluteY="81dp" />
 
             <TextView
-                style="@style/BRBoldTextStyle"
                 android:id="@+id/title"
+                style="@style/BRBoldTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -84,8 +84,8 @@
             android:orientation="horizontal">
 
             <EditText
-                style="@style/BREditStyle"
                 android:id="@+id/address_edit"
+                style="@style/BREditStyle"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center_vertical"
@@ -102,10 +102,10 @@
             <com.breadwallet.presenter.customviews.BRButton
                 android:id="@+id/paste_button"
                 style="@style/Send_ActionButStyle"
-                android:fontFamily="@font/barlowsemicondensed_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
+                android:fontFamily="@font/barlowsemicondensed_medium"
                 android:text="@string/Send.pasteLabel"
                 app:buttonType="2"
                 app:isBreadButton="true" />
@@ -113,10 +113,10 @@
             <com.breadwallet.presenter.customviews.BRButton
                 android:id="@+id/scan"
                 style="@style/Send_ActionButStyle"
-                android:fontFamily="@font/barlowsemicondensed_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/bread_margin"
+                android:fontFamily="@font/barlowsemicondensed_medium"
                 android:text="@string/Send.scanLabel"
                 app:buttonType="2"
                 app:isBreadButton="true" />
@@ -137,7 +137,8 @@
                 android:layout_weight="2"
                 android:background="@color/extra_light_gray" />
 
-            <com.breadwallet.presenter.customviews.BRText
+            <TextView
+                style="@style/BRTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -157,8 +158,9 @@
             android:layout_height="70dp"
             android:orientation="horizontal">
 
-            <com.breadwallet.presenter.customviews.BREdit
+            <EditText
                 android:id="@+id/ud_address_edit"
+                style="@style/BREditStyle"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center_vertical"
@@ -201,8 +203,8 @@
             app:layout_constraintTop_toBottomOf="@+id/separator">
 
             <TextView
-                style="@style/BRTextStyle"
                 android:id="@+id/iso_text"
+                style="@style/BRTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -215,8 +217,8 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                style="@style/BREditStyle"
                 android:id="@+id/amount_edit"
+                style="@style/BREditStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -239,8 +241,8 @@
                 app:layout_constraintVertical_bias="0.5" />
 
             <TextView
-                style="@style/BRTextStyle"
                 android:id="@+id/balance_text"
+                style="@style/BRTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iso_text"
@@ -252,8 +254,8 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                style="@style/BRTextStyle"
                 android:id="@+id/fee_text"
+                style="@style/BRTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/balance_text"
@@ -267,12 +269,12 @@
             <com.breadwallet.presenter.customviews.BRButton
                 android:id="@+id/iso_button"
                 style="@style/Send_ActionButStyle"
-                android:fontFamily="@font/barlowsemicondensed_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
+                android:fontFamily="@font/barlowsemicondensed_medium"
                 android:text="iso"
                 android:textSize="18sp"
                 app:buttonType="2"
@@ -317,8 +319,8 @@
                 android:textStyle="bold" />
 
             <TextView
-                style="@style/BRTextStyle"
                 android:id="@+id/fee_description"
+                style="@style/BRTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -364,8 +366,8 @@
             </RadioGroup>
 
             <TextView
-                style="@style/BRTextStyle"
                 android:id="@+id/warning_text"
+                style="@style/BRTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -409,21 +411,21 @@
             android:orientation="vertical">
 
             <com.breadwallet.presenter.customviews.BRButton
-                style="@style/BRButtonStyle"
                 android:id="@+id/donate_button"
+                style="@style/BRButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:background="@android:color/transparent"
+                android:fontFamily="@font/barlowsemicondensed_regular"
                 android:minHeight="80dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:textColor="@color/light_gray"
                 android:textSize="18sp"
                 app:buttonType="2"
-                android:fontFamily="@font/barlowsemicondensed_regular"
                 app:isBreadButton="true"
                 tools:text="@string/Donate.title" />
         </LinearLayout>
@@ -439,8 +441,8 @@
             android:layout_height="70dp">
 
             <EditText
-                style="@style/BREditStyle"
                 android:id="@+id/comment_edit"
+                style="@style/BREditStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -461,8 +463,8 @@
             android:background="@color/extra_light_gray" />
 
         <com.breadwallet.presenter.customviews.BRButton
-            style="@style/BRButtonStyle"
             android:id="@+id/send_button"
+            style="@style/BRButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginStart="24dp"
