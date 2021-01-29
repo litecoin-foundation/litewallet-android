@@ -758,4 +758,5 @@
     <string name="FeeSelector.luxury">Luxe</string>
     <string name="FeeSelector.luxuryMessage">Deze optie garandeert vrijwel acceptatie van uw transactie, hoewel u een premie betaalt.</string>
     <string name="FeeSelector.luxuryTime">2.5 - 5+ minuten</string>
+    <string name="BottomNavItem.History.title">GESCHIEDENIS</string>
 </resources>

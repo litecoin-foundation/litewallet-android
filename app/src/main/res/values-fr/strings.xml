@@ -235,7 +235,7 @@
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Gérer le portefeuille</string>
   <!-- Buy bitcoin title -->
-  <string name="MenuButton.buy">Acheter des Litecoins</string>
+  <string name="MenuButton.buy">Acheter</string>
   <!-- Menu button title -->
   <string name="MenuButton.lock">Verrouiller le portefeuille</string>
   <!-- Menu button title -->
@@ -758,4 +758,5 @@
     <string name="FeeSelector.luxury">Luxe</string>
     <string name="FeeSelector.luxuryMessage">Cette option garantit pratiquement l\'acceptation de votre transaction même si vous payez une prime.</string>
     <string name="FeeSelector.luxuryTime">2.5 à 5+ minutes</string>
+    <string name="BottomNavItem.History.title">HISTORIQUE</string>
 </resources>

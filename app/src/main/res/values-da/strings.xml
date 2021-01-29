@@ -758,4 +758,5 @@
     <string name="FeeSelector.luxury">Luksus</string>
     <string name="FeeSelector.luxuryMessage">Denne mulighed garanterer næsten accept af din transaktion, selvom du betaler en præmie.</string>
     <string name="FeeSelector.luxuryTime">2.5 - 5+ minutter</string>
+    <string name="BottomNavItem.History.title">HISTORIE</string>
 </resources>
