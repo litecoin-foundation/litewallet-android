@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp">
+
+        <Button
+            android:id="@+id/logoutBut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="@font/barlowsemicondensed_bold"
+            android:text="Logout"
+            android:textColor="@color/litecoin_litewallet_blue" />
+
+        <ImageView
+            android:id="@+id/cardImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_litecoin_card_pivot" />
+
+        <TextView
+            android:id="@+id/transferDirectionLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/barlowsemicondensed_medium"
+            android:text="Deposit to Litecoin Card"
+            android:textColor="@color/litecoin_litewallet_blue"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/cardBalanceAmountLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/barlowsemicondensed_bold"
+            android:textColor="@color/litecoin_litewallet_blue"
+            android:textSize="26sp"
+            tools:text="1.026513" />
+
+        <TextView
+            android:id="@+id/cardBalanceLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/barlowsemicondensed_medium"
+            android:text="Card Balance"
+            android:textColor="@color/litecoin_litewallet_blue"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/transferUpDownButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:background="@drawable/transfer_up_down_circle"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_litecard_deposit_hover" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_litecard_withdraw" />
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/currencyOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/transfer_fiat_options_bg"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/inLtcValue"
+                style="@style/TransferFiatOptionStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="LTC" />
+
+            <RadioButton
+                android:id="@+id/inFiatValue"
+                style="@style/TransferFiatOptionStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="USD" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/amountFieldContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="35dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/amountField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white_two"
+                android:hint="Enter the amount"
+                app:hintAnimationEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/maxAmountBut"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/transfer_amount_max_shape"
+                android:fontFamily="@font/barlowsemicondensed_medium"
+                android:minWidth="10dp"
+                android:padding="10dp"
+                android:text="max"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/availableBalanceLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/barlowsemicondensed_medium"
+            android:letterSpacing="-0.02"
+            android:lineSpacingExtra="2sp"
+            android:textColor="@color/litecoin_litewallet_blue"
+            android:textSize="16sp"
+            tools:text="Available Balance: Ł 1.026513" />
+
+        <Button
+            android:id="@+id/transferBut"
+            style="@style/LoginButStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_16_jade_green"
+            android:text="Transfer" />
+
+    </LinearLayout>
+
+</ScrollView>

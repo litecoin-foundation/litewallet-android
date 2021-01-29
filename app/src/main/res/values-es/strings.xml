@@ -758,4 +758,5 @@
     <string name="FeeSelector.luxury">Lujo</string>
     <string name="FeeSelector.luxuryMessage">Esta opción prácticamente garantiza la aceptación de su transacción aunque esté pagando una prima.</string>
     <string name="FeeSelector.luxuryTime">2.5 - 5+ minutos</string>
+    <string name="BottomNavItem.History.title">HISTORIA</string>
 </resources>
