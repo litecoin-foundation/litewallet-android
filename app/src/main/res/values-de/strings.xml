@@ -496,7 +496,7 @@
   <string name="Settings.currency">Anzeigewährung</string>
   <!-- Join Early access label -->
   <string name="Settings.earlyAccess">Zum Early Access anmelden</string>
-  <!-- Are you enjoying bread alert message body -->
+  <!-- Are you enjoying litewallet alert message body -->
   <string name="Settings.enjoying">Gefällt dir Loaf?</string>
   <!-- Import wallet label -->
   <string name="Settings.importTitle">Wallet importieren</string>
@@ -568,7 +568,7 @@
   <string name="TouchIdSettings.spendingLimit">Ausgabelimit: %1$s  (%2$s)</string>
   <!-- Touch id switch label. -->
   <string name="TouchIdSettings.switchLabel">Touch ID für Loaf aktivieren</string>
-  <!-- Enable fingerprint for this wallet called Bread -->
+  <!-- Enable fingerprint for this wallet called Litewallet -->
   <string name="TouchIdSettings.switchLabel.android">Fingerabdruck-Authentifizierung aktivieren</string>
   <!-- Touch ID settings view title -->
   <string name="TouchIdSettings.title">Touch ID</string>
