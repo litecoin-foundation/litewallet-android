@@ -1,10 +1,13 @@
 package com.breadwallet.presenter.spend
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.text.buildSpannedString
 import androidx.core.text.underline
 import androidx.fragment.app.DialogFragment
@@ -19,12 +22,16 @@ import com.github.razir.progressbutton.showProgress
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.view_login.*
+import timber.log.Timber
 
 /** Litewallet
  * Created by Mohamed Barry on 6/10/20
  * email: mosadialiou@gmail.com
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
+
+const val RESET_PWD_LINK = "https://litecoin.dashboard.getblockcard.com/password/forgot"
+
 class LoginFragment : BaseFragment<LoginPresenter>(), LoginView {
 
     override fun onDetach() {
@@ -48,7 +55,33 @@ class LoginFragment : BaseFragment<LoginPresenter>(), LoginView {
         forgetPwdBut.text = buildSpannedString {
             underline { append(forgetPwdBut.text) }
         }
+        forgetPwdBut.setOnClickListener { handleForgotPassword() }
         bindProgressButton(loginBut)
+    }
+
+    private fun handleForgotPassword() {
+        AlertDialog.Builder(requireContext())
+                .setTitle("Reset password")
+                .setMessage("Visit $RESET_PWD_LINK to reset your password")
+                .setPositiveButton("Visit")
+                { _, _ -> openWebPage() }
+                .setNegativeButton(
+                    android.R.string.cancel,
+                    null
+                )
+                .show()
+    }
+
+    private fun openWebPage() {
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(RESET_PWD_LINK)
+        )
+        if (intent.resolveActivity(requireContext().packageManager) != null) {
+            startActivity(intent)
+        } else {
+            Timber.w("Web Browser is not installed")
+        }
     }
 
     private fun handleRegister() {
