@@ -231,11 +231,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 }
                 mSelectedBottomNavItem = 0;
                 break;
-            case R.id.nav_spend:
+            case R.id.nav_card:
                 if (TextUtils.isEmpty(BRSharedPrefs.getLitecoinCardId(BreadActivity.this))) {
-                    BottomSheetDialogFragment fragment = new AuthBottomSheetDialogFragment();
-                    fragment.show(getSupportFragmentManager(), fragment.getTag());
-                    mSelectedBottomNavItem = 0;
+                    showAuthModal();
                 } else {
                     ExtensionKt.replaceFragment(BreadActivity.this, new TransferFragment(), false, R.id.fragment_container);
                 }
@@ -251,6 +249,12 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 break;
         }
         return true;
+    }
+
+    public void showAuthModal() {
+        BottomSheetDialogFragment fragment = new AuthBottomSheetDialogFragment();
+        fragment.show(getSupportFragmentManager(), fragment.getTag());
+        mSelectedBottomNavItem = 0;
     }
 
     private void swap() {
@@ -439,10 +443,10 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 CurrencyEntity currency = CurrencyDataSource.getInstance(BreadActivity.this).getCurrencyByIso(iso);
                 final String formattedCurrency = BRCurrency.getFormattedCurrencyString(BreadActivity.this, iso, new BigDecimal(currency.rate));
 
-                //current amount in satoshis
+                //current amount in litoshis
                 final BigDecimal amount = new BigDecimal(BRSharedPrefs.getCatchedBalance(BreadActivity.this));
 
-                //amount in BTC units
+                //amount in LTC units
                 BigDecimal btcAmount = BRExchange.getBitcoinForSatoshis(BreadActivity.this, amount);
                 final String formattedBTCAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, "LTC", btcAmount);
 
