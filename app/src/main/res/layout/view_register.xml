@@ -24,6 +24,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/firstNameField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/register_field_margin_top"
+            android:hint="First name"
+            app:layout_constraintEnd_toStartOf="@+id/lastNameField"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerLbl">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/RegisterFieldStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lastNameField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:hint="Last name"
+            app:layout_constraintBaseline_toBaselineOf="@+id/firstNameField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/firstNameField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/RegisterFieldStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailField"
             android:layout_width="0dp"
@@ -32,7 +70,7 @@
             android:hint="Email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/headerLbl">
+            app:layout_constraintTop_toBottomOf="@id/firstNameField">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/RegisterFieldStyle"
@@ -67,7 +105,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:hint="Confirmed password"
+            android:hint="Confirm password"
             app:layout_constraintBaseline_toBaselineOf="@+id/passwordField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -81,45 +119,6 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/firstNameField"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/register_field_margin_top"
-            android:hint="First name"
-            app:layout_constraintEnd_toStartOf="@+id/lastNameField"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordField">
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/RegisterFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/lastNameField"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:hint="Last name"
-            app:layout_constraintBaseline_toBaselineOf="@+id/firstNameField"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/firstNameField">
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/RegisterFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/addressField"
             android:layout_width="0dp"
@@ -128,7 +127,7 @@
             android:hint="Address 1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lastNameField">
+            app:layout_constraintTop_toBottomOf="@id/mobileNumberField">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/RegisterFieldStyle"
@@ -176,7 +175,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:hint="State"
+            android:hint="State / Province"
             app:layout_constraintBaseline_toBaselineOf="@+id/cityField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -214,7 +213,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:hint="Postal code"
+            android:hint="Zip / Postal code"
             app:layout_constraintBaseline_toBaselineOf="@+id/countryField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -235,11 +234,8 @@
             android:layout_marginTop="@dimen/register_field_margin_top"
             android:hint="Mobile number"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/countryField"
-            app:layout_constraintWidth_default="percent"
-            app:layout_constraintWidth_percent="0.475">
+            app:layout_constraintTop_toBottomOf="@id/passwordField">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/RegisterFieldStyle"
@@ -260,7 +256,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mobileNumberField" />
+            app:layout_constraintTop_toBottomOf="@id/postalCodeField" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
