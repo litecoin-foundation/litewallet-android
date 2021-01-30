@@ -17,6 +17,15 @@
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
     </style>
 
+    <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="AppTheme.ProgressBarTheme">
+        <item name="colorAccent">@color/dark_blue</item>
+    </style>
+
     <!-- ActionBar styles -->
     <style name="BreadActionBar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:background">@color/white_trans</item>
@@ -29,7 +38,6 @@
     <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textColor">@color/dark_blue</item>
-
     </style>
 
     <style name="Send_ActionButStyle">
