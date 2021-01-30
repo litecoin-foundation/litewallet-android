@@ -61,7 +61,7 @@ class RegisterFragment : BaseFragment<RegisterPresenter>(), RegisterView {
             passwordField.text(),
             confirmPasswordField.text(),
             addressField.text(),
-            address2Field.text(),
+            null,
             cityField.text(),
             stateField.text(),
             postalCodeField.text(),
