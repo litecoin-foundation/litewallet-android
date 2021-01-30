@@ -124,26 +124,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/register_field_margin_top"
-            android:hint="Address 1"
+            android:hint="Address"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mobileNumberField">
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/RegisterFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/address2Field"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/register_field_margin_top"
-            android:hint="Address 2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/addressField">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/RegisterFieldStyle"
@@ -161,7 +145,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/address2Field">
+            app:layout_constraintTop_toBottomOf="@+id/addressField">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/RegisterFieldStyle"
