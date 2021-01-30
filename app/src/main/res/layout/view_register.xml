@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/barlowsemicondensed_semibold"
-            android:text="Get your LitecoinCard"
+            android:text="Register for Litecoin Card"
             android:textColor="@color/litecoin_litewallet_blue"
             android:textSize="22sp"
             app:layout_constrainedWidth="true"
@@ -222,9 +222,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/RegisterFieldStyle"
-                android:inputType="textPostalAddress"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -244,8 +244,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/RegisterFieldStyle"
                 android:layout_width="match_parent"
-                android:inputType="phone"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
