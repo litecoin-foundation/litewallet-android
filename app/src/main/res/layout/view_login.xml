@@ -12,29 +12,15 @@
         android:paddingStart="@dimen/register_margin"
         android:paddingEnd="@dimen/register_margin">
 
-        <TextView
-            android:id="@+id/headerLbl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/barlowsemicondensed_semibold"
-            android:text="LitecoinCard"
-            android:textColor="@color/litecoin_litewallet_blue"
-            android:textSize="22sp"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageView
             android:id="@+id/cardImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_litecoin_card"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/passwordField"
-            app:layout_constraintTop_toBottomOf="@id/headerLbl" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailField"
