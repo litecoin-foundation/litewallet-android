@@ -778,11 +778,11 @@
   <string name="choose_fiat">Choose Fiat:</string>
 
   <string name="BottomNavItem.History.title">History</string>
-  <string name="BottomNavItem.Spend.title">Spend</string>
+  <string name="BottomNavItem.Card.title">Card</string>
 
   <string name="required">Required</string>
   <string name="wrong_email_format">Not a valid email</string>
-  <string name="error_pwd_8chars_min">Security is our Priority ! Password should be 8 characters or more</string>
+  <string name="error_pwd_8chars_min">Security is our Priority! Password should be 8 characters or more</string>
   <string name="mismatch_password">Mismatch password</string>
 
 </resources>

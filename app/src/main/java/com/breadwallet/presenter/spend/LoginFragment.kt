@@ -82,7 +82,7 @@ class LoginFragment : BaseFragment<LoginPresenter>(), LoginView {
 
     override fun showTransferView() {
         (parentFragment as BottomSheetDialogFragment?)?.dismiss()
-        (activity as BreadActivity?)?.handleNavigationItemSelected(R.id.nav_spend)
+        (activity as BreadActivity?)?.handleNavigationItemSelected(R.id.nav_card)
     }
 
     private fun validateFields(): Boolean {
