@@ -426,15 +426,6 @@ class FragmentSend : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        BRAnimator.animateBackgroundDim(backgroundLayout, true)
-        BRAnimator.animateSignalSlide(signalLayout, true) {
-            if (activity != null) {
-                try {
-                    activity!!.fragmentManager.popBackStack()
-                } catch (ignored: Exception) {
-                }
-            }
-        }
         FeeManager.getInstance().resetFeeType()
     }
 
