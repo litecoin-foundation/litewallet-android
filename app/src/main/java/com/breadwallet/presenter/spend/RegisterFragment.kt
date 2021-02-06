@@ -49,7 +49,7 @@ class RegisterFragment : BaseFragment<RegisterPresenter>(), RegisterView {
         bindProgressButton(submitBut)
     }
 
-    fun goToLogin() {
+    private fun goToLogin() {
         (parentFragment as AuthBottomSheetDialogFragment?)?.onBackPressed()
     }
 
@@ -120,12 +120,12 @@ class RegisterFragment : BaseFragment<RegisterPresenter>(), RegisterView {
     }
 
     override fun hideProgress() {
-        submitBut.hideProgress("Register")
+        submitBut.hideProgress(R.string.Button_submit)
         submitBut.isEnabled = true
     }
 
     override fun onRegisteredSuccessful() {
-        AlertDialog.Builder(requireContext()).setMessage("You have been registered. Please confirm by visiting your email inbox and clicking on the confirmation button").setPositiveButton(
+        AlertDialog.Builder(requireContext()).setMessage(R.string.Register_Dialog_registeredSuccessMessage).setPositiveButton(
             android.R.string.ok
         ) { _, _ ->
             goToLogin()

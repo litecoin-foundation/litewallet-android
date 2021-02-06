@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.breadwallet.R
 import com.breadwallet.presenter.activities.BreadActivity
 import com.breadwallet.presenter.base.BaseFragment
+import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.tools.util.addFragment
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
@@ -29,8 +30,6 @@ import timber.log.Timber
  * email: mosadialiou@gmail.com
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
-
-const val RESET_PWD_LINK = "https://litecoin.dashboard.getblockcard.com/password/forgot"
 
 class LoginFragment : BaseFragment<LoginPresenter>(), LoginView {
 
@@ -61,9 +60,9 @@ class LoginFragment : BaseFragment<LoginPresenter>(), LoginView {
 
     private fun handleForgotPassword() {
         AlertDialog.Builder(requireContext())
-                .setTitle("Reset password")
-                .setMessage("Visit $RESET_PWD_LINK to reset your password")
-                .setPositiveButton("Visit")
+                .setTitle(R.string.Login_Dialog_forgotPassword_reset)
+                .setMessage(R.string.Login_Dialog_forgotPasswordMessage)
+                .setPositiveButton(R.string.Login_Dialog_forgotPassword_visit)
                 { _, _ -> openWebPage() }
                 .setNegativeButton(
                     android.R.string.cancel,
@@ -75,7 +74,7 @@ class LoginFragment : BaseFragment<LoginPresenter>(), LoginView {
     private fun openWebPage() {
         val intent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse(RESET_PWD_LINK)
+            Uri.parse(BRConstants.RESET_CARD_PWD_LINK)
         )
         if (intent.resolveActivity(requireContext().packageManager) != null) {
             startActivity(intent)
@@ -106,7 +105,7 @@ class LoginFragment : BaseFragment<LoginPresenter>(), LoginView {
     }
 
     override fun hideProgress() {
-        loginBut.hideProgress("Login")
+        loginBut.hideProgress( R.string.Login_login)
         loginBut.isEnabled = true
     }
 
