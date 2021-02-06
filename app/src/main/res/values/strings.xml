@@ -775,7 +775,6 @@
   <string name="eur_currency_code" translatable="false">EUR</string>
   <string name="jpy_currency_code" translatable="false">JPY</string>
   <string name="usd_currency_code" translatable="false">USD</string>
-  <string name="choose_fiat">Choose Fiat:</string>
 
   <string name="BottomNavItem.History.title">History</string>
   <string name="BottomNavItem.Card.title">Card</string>
