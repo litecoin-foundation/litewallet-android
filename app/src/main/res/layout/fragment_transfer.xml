@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -21,7 +22,7 @@
             android:layout_gravity="end"
             android:background="?attr/selectableItemBackground"
             android:fontFamily="@font/barlowsemicondensed_bold"
-            android:text="Logout"
+            android:text="@string/LitecoinCard.logout"
             android:textColor="@color/litecoin_litewallet_blue" />
 
         <ImageView
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:fontFamily="@font/barlowsemicondensed_bold"
-            android:text="Card Balance"
+            android:text="@string/LitecoinCard.cardBalance"
             android:textColor="@color/litecoin_litewallet_blue"
             android:textSize="26sp" />
 
@@ -54,7 +55,8 @@
             android:fontFamily="@font/barlowsemicondensed_bold"
             android:text="$"
             android:textColor="@color/dark_gray"
-            android:textSize="26sp" />
+            android:textSize="26sp"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 
