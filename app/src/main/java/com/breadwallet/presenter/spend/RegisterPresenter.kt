@@ -86,7 +86,7 @@ class RegisterPresenter(view: RegisterView) : BasePresenter<RegisterView>(view) 
 
                     override fun onUnknownSystemError() {
                         view?.hideProgress()
-                        view?.showError("Oops something wrong happened. Please try again later")
+                        view?.showError(R.string.Error_unknownSystem)
                     }
 
                     override fun onTokenExpired() {
@@ -173,7 +173,7 @@ class RegisterPresenter(view: RegisterView) : BasePresenter<RegisterView>(view) 
         if (pwd.isEmpty()) {
             resId = R.string.required
         } else if (!pwd.hasPwdMinLength()) {
-            resId = R.string.error_pwd_8chars_min
+            resId = R.string.error_pwd_6chars_min
         }
         return resId
     }
