@@ -1,6 +1,7 @@
 package com.breadwallet.presenter.spend
 
 import com.breadwallet.BreadApp
+import com.breadwallet.R
 import com.breadwallet.presenter.base.BasePresenter
 import com.breadwallet.tools.manager.BRSharedPrefs
 import org.litecoin.partnerapi.callback.LoginCallback
@@ -35,7 +36,7 @@ class LoginPresenter(view: LoginView) : BasePresenter<LoginView>(view) {
 
                 override fun onEmailNotVerified() {
                     view?.hideProgress()
-                    view?.showError("You need to verify your email address before you can login.")
+                    view?.showError(R.string.Error_emailNotVerified)
                 }
 
                 override fun onUserNotFound(message: String) {
@@ -51,7 +52,7 @@ class LoginPresenter(view: LoginView) : BasePresenter<LoginView>(view) {
 
                 override fun onWrong2faTokenProvided() {
                     view?.hideProgress()
-                    view?.showError("Wrong 2FA provided")
+                    view?.showError(R.string.Error_wrong2faTokenProvided)
                 }
 
                 override fun onValidationError(message: String) {
@@ -61,7 +62,7 @@ class LoginPresenter(view: LoginView) : BasePresenter<LoginView>(view) {
 
                 override fun onUnknownSystemError() {
                     view?.hideProgress()
-                    view?.showError("Oops something wrong happened. Please try again later")
+                    view?.showError(R.string.Error_unknownSystem)
                 }
 
                 override fun onTokenExpired() {
