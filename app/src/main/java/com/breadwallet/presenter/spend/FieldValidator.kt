@@ -22,4 +22,4 @@ fun CharSequence.isEmail(): Boolean {
     return emailRegex.matcher(this).matches()
 }
 
-fun CharSequence.hasPwdMinLength() = this.length >= 8
+fun CharSequence.hasPwdMinLength() = this.length >= 6
