@@ -441,7 +441,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 String iso = BRSharedPrefs.getIso(BreadActivity.this);
 
                 CurrencyEntity currency = CurrencyDataSource.getInstance(BreadActivity.this).getCurrencyByIso(iso);
-                final String formattedCurrency = BRCurrency.getFormattedCurrencyString(BreadActivity.this, iso, new BigDecimal(currency.rate));
+                final BigDecimal roundedPriceAmount = new BigDecimal(currency.rate).multiply(new BigDecimal(100))
+                        .divide(new BigDecimal(100), 2, BRConstants.ROUNDING_MODE);
+                final String formattedCurrency = BRCurrency.getFormattedCurrencyString(BreadActivity.this, iso, roundedPriceAmount);
 
                 //current amount in litoshis
                 final BigDecimal amount = new BigDecimal(BRSharedPrefs.getCatchedBalance(BreadActivity.this));
