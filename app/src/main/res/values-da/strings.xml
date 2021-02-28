@@ -243,7 +243,7 @@
   <!-- Menu button title -->
   <string name="MenuButton.settings">Indstillinger</string>
   <!-- Menu button title -->
-  <string name="MenuButton.support">Support:       litewallet@litecoinfoundation.net</string>
+  <string name="MenuButton.support">Kunde support</string>
   <!-- button label -->
   <string name="MenuViewController.createButton">Opret ny pung</string>
   <!-- Menu modal title -->
