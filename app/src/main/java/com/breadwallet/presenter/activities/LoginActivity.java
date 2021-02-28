@@ -92,15 +92,15 @@ public class LoginActivity extends BRActivity {
         }
         if (BRKeyStore.getPinCode(this).length() == 4) pinLimit = 4;
 
-        keyboard = (BRKeyboard) findViewById(R.id.brkeyboard);
-        pinLayout = (LinearLayout) findViewById(R.id.pinLayout);
-        fingerPrint = (ImageButton) findViewById(R.id.fingerprint_icon);
+        keyboard = findViewById(R.id.brkeyboard);
+        pinLayout = findViewById(R.id.pinLayout);
+        fingerPrint = findViewById(R.id.fingerprint_icon);
         versionText = findViewById(R.id.version_text);
 
-        unlockedImage = (ImageView) findViewById(R.id.unlocked_image);
-        unlockedText = (TextView) findViewById(R.id.unlocked_text);
-        enterPinLabel = (TextView) findViewById(R.id.enter_pin_label);
-        offlineButtonsLayout = (LinearLayout) findViewById(R.id.buttons_layout);
+        unlockedImage = findViewById(R.id.unlocked_image);
+        unlockedText = findViewById(R.id.unlocked_text);
+        enterPinLabel = findViewById(R.id.enter_pin_label);
+        offlineButtonsLayout = findViewById(R.id.buttons_layout);
 
         dot1 = findViewById(R.id.dot1);
         dot2 = findViewById(R.id.dot2);
@@ -109,20 +109,15 @@ public class LoginActivity extends BRActivity {
         dot5 = findViewById(R.id.dot5);
         dot6 = findViewById(R.id.dot6);
 
-        keyboard.addOnInsertListener(new BRKeyboard.OnInsertListener() {
-            @Override
-            public void onClick(String key) {
-                handleClick(key);
-            }
-        });
+        keyboard.addOnInsertListener(key -> handleClick(key));
         keyboard.setBRButtonTextColor(R.color.white);
         keyboard.setShowDot(false);
 
         keyboard.setCustomButtonBackgroundColor(10, getColor(android.R.color.transparent));
         keyboard.setDeleteImage(getDrawable(R.drawable.ic_delete_white));
 
-        leftButton = (Button) findViewById(R.id.left_button);
-        rightButton = (Button) findViewById(R.id.right_button);
+        leftButton = findViewById(R.id.left_button);
+        rightButton = findViewById(R.id.right_button);
 
         PackageInfo pInfo = null;
         try {
@@ -135,48 +130,37 @@ public class LoginActivity extends BRActivity {
 
         setUpOfflineButtons();
 
-        leftButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showReceiveFragment(LoginActivity.this, false);
-            }
+        leftButton.setOnClickListener(v -> {
+            if (!BRAnimator.isClickAllowed()) return;
+            BRAnimator.showReceiveFragment(LoginActivity.this, false);
         });
 
-        rightButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                try {
-                    // Check if the camera permission is granted
-                    if (ContextCompat.checkSelfPermission(app,
-                            Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // Should we show an expgetString(R.string.ConfirmPaperPhrase_word)lanation?
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(app,
-                                Manifest.permission.CAMERA)) {
-                            BRDialog.showCustomDialog(app, getString(R.string.Send_cameraUnavailabeTitle_android),
-                                    getString(R.string.Send_cameraUnavailabeMessage_android), getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
-                                        @Override
-                                        public void onClick(BRDialogView brDialogView) {
-                                            brDialogView.dismiss();
-                                        }
-                                    }, null, null, 0);
-                        } else {
-                            // No explanation needed, we can request the permission.
-                            ActivityCompat.requestPermissions(app,
-                                    new String[]{Manifest.permission.CAMERA},
-                                    BRConstants.CAMERA_REQUEST_ID);
-                        }
+        rightButton.setOnClickListener(v -> {
+            if (!BRAnimator.isClickAllowed()) return;
+            try {
+                // Check if the camera permission is granted
+                if (ContextCompat.checkSelfPermission(app,
+                        Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    // Should we show an expgetString(R.string.ConfirmPaperPhrase_word)lanation?
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(app,
+                            Manifest.permission.CAMERA)) {
+                        BRDialog.showCustomDialog(app, getString(R.string.Send_cameraUnavailabeTitle_android),
+                                getString(R.string.Send_cameraUnavailabeMessage_android), getString(R.string.AccessibilityLabels_close), null, brDialogView -> brDialogView.dismiss(), null, null, 0);
                     } else {
-                        // Permission is granted, open camera
-                        Intent intent = new Intent(app, ScanQRActivity.class);
-                        app.startActivityForResult(intent, SCANNER_REQUEST);
-                        app.overridePendingTransition(R.anim.fade_up, 0);
+                        // No explanation needed, we can request the permission.
+                        ActivityCompat.requestPermissions(app,
+                                new String[]{Manifest.permission.CAMERA},
+                                BRConstants.CAMERA_REQUEST_ID);
                     }
-                } catch (Exception e) {
-                    Timber.e(e);
+                } else {
+                    // Permission is granted, open camera
+                    Intent intent = new Intent(app, ScanQRActivity.class);
+                    app.startActivityForResult(intent, SCANNER_REQUEST);
+                    app.overridePendingTransition(R.anim.fade_up, 0);
                 }
+            } catch (Exception e) {
+                Timber.e(e);
             }
         });
 
@@ -184,30 +168,22 @@ public class LoginActivity extends BRActivity {
         fingerPrint.setVisibility(useFingerprint ? View.VISIBLE : View.GONE);
 
         if (useFingerprint)
-            fingerPrint.setOnClickListener(new View.OnClickListener() {
+            fingerPrint.setOnClickListener(v -> AuthManager.getInstance().authPrompt(LoginActivity.this, "", "", false, true, new BRAuthCompletion() {
                 @Override
-                public void onClick(View v) {
-                    AuthManager.getInstance().authPrompt(LoginActivity.this, "", "", false, true, new BRAuthCompletion() {
-                        @Override
-                        public void onComplete() {
-                            unlockWallet();
-                            AnalyticsManager.logCustomEvent(BRConstants._20200217_DLWB);
-                        }
-
-                        @Override
-                        public void onCancel() {
-
-                        }
-                    });
+                public void onComplete() {
+                    unlockWallet();
+                    AnalyticsManager.logCustomEvent(BRConstants._20200217_DLWB);
                 }
-            });
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (fingerPrint != null && useFingerprint)
-                    fingerPrint.performClick();
-            }
+                @Override
+                public void onCancel() {
+
+                }
+            }));
+
+        new Handler().postDelayed(() -> {
+            if (fingerPrint != null && useFingerprint)
+                fingerPrint.performClick();
         }, 500);
 
     }
@@ -221,12 +197,7 @@ public class LoginActivity extends BRActivity {
         app = this;
         inputAllowed = true;
         if (!BRWalletManager.getInstance().isCreated()) {
-            BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
-                @Override
-                public void run() {
-                    BRWalletManager.getInstance().initWallet(LoginActivity.this);
-                }
-            });
+            BRExecutor.getInstance().forBackgroundTasks().execute(() -> BRWalletManager.getInstance().initWallet(LoginActivity.this));
         }
         if (PLATFORM_ON)
             APIClient.getInstance(this).updatePlatform();
@@ -280,7 +251,7 @@ public class LoginActivity extends BRActivity {
     }
 
     private void unlockWallet() {
-        pin = new StringBuilder("");
+        pin = new StringBuilder();
         offlineButtonsLayout.animate().translationY(-600).setInterpolator(new AccelerateInterpolator());
         pinLayout.animate().translationY(-2000).setInterpolator(new AccelerateInterpolator());
         enterPinLabel.animate().translationY(-1800).setInterpolator(new AccelerateInterpolator());
@@ -289,16 +260,13 @@ public class LoginActivity extends BRActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(LoginActivity.this, BreadActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fade_up, R.anim.fade_down);
-                        if (!LoginActivity.this.isDestroyed()) {
-                            LoginActivity.this.finish();
+                new Handler().postDelayed(() -> {
+                    Intent intent = new Intent(LoginActivity.this, BreadActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fade_up, R.anim.fade_down);
+                    if (!LoginActivity.this.isDestroyed()) {
+                        LoginActivity.this.finish();
 
-                        }
                     }
                 }, 400);
             }
@@ -308,30 +276,24 @@ public class LoginActivity extends BRActivity {
 
     private void showFailedToUnlock() {
         SpringAnimator.failShakeAnimation(LoginActivity.this, pinLayout);
-        pin = new StringBuilder("");
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                inputAllowed = true;
-                updateDots();
-            }
+        pin = new StringBuilder();
+        new Handler().postDelayed(() -> {
+            inputAllowed = true;
+            updateDots();
         }, 1000);
     }
 
     private void updateDots() {
         AuthManager.getInstance().updateDots(this, pinLimit, pin.toString(), dot1, dot2, dot3, dot4, dot5, dot6, R.drawable.ic_pin_dot_white,
-                new AuthManager.OnPinSuccess() {
-                    @Override
-                    public void onSuccess() {
-                        inputAllowed = false;
-                        if (AuthManager.getInstance().checkAuth(pin.toString(), LoginActivity.this)) {
-                            AuthManager.getInstance().authSuccess(LoginActivity.this);
-                            unlockWallet();
-                            AnalyticsManager.logCustomEvent(BRConstants._20200217_DLWP);
-                        } else {
-                            AuthManager.getInstance().authFail(LoginActivity.this);
-                            showFailedToUnlock();
-                        }
+                () -> {
+                    inputAllowed = false;
+                    if (AuthManager.getInstance().checkAuth(pin.toString(), LoginActivity.this)) {
+                        AuthManager.getInstance().authSuccess(LoginActivity.this);
+                        unlockWallet();
+                        AnalyticsManager.logCustomEvent(BRConstants._20200217_DLWP);
+                    } else {
+                        AuthManager.getInstance().authFail(LoginActivity.this);
+                        showFailedToUnlock();
                     }
                 });
     }
