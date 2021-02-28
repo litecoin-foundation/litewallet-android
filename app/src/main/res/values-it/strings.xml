@@ -243,7 +243,7 @@
   <!-- Menu button title -->
   <string name="MenuButton.settings">Impostazioni</string>
   <!-- Menu button title -->
-  <string name="MenuButton.support">Assistenza:      litewallet@litecoinfoundation.net</string>
+  <string name="MenuButton.support">Servizio clienti</string>
   <!-- button label -->
   <string name="MenuViewController.createButton">Crea Nuovo Portafoglio</string>
   <!-- Menu modal title -->

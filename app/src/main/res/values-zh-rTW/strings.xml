@@ -243,7 +243,7 @@
   <!-- Menu button title -->
   <string name="MenuButton.settings">設定</string>
   <!-- Menu button title -->
-  <string name="MenuButton.support">支援:      litewallet@litecoinfoundation.net</string>
+  <string name="MenuButton.support">客戶支持</string>
   <!-- button label -->
   <string name="MenuViewController.createButton">建立新的電子錢包</string>
   <!-- Menu modal title -->
