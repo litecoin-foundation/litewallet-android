@@ -24,7 +24,6 @@ import androidx.core.content.ContextCompat;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.activities.util.BRActivity;
-import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.customviews.BRKeyboard;
 import com.breadwallet.presenter.interfaces.BRAuthCompletion;
 import com.breadwallet.tools.animation.BRAnimator;
@@ -71,9 +70,6 @@ public class LoginActivity extends BRActivity {
     public static boolean appVisible = false;
     private boolean inputAllowed = true;
 
-    private Button leftButton;
-    private Button rightButton;
-
     public static LoginActivity getApp() {
         return app;
     }
@@ -116,9 +112,6 @@ public class LoginActivity extends BRActivity {
         keyboard.setCustomButtonBackgroundColor(10, getColor(android.R.color.transparent));
         keyboard.setDeleteImage(getDrawable(R.drawable.ic_delete_white));
 
-        leftButton = findViewById(R.id.left_button);
-        rightButton = findViewById(R.id.right_button);
-
         PackageInfo pInfo = null;
         try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -128,33 +121,23 @@ public class LoginActivity extends BRActivity {
         String verName = pInfo != null ? pInfo.versionName : " ";
         versionText.setText(String.format(Locale.US, "%1$s", verName));
 
-        setUpOfflineButtons();
-
-        leftButton.setOnClickListener(v -> {
-            if (!BRAnimator.isClickAllowed()) return;
-            BRAnimator.showReceiveFragment(LoginActivity.this, false);
-        });
-
-        rightButton.setOnClickListener(v -> {
+        findViewById(R.id.scanQRCodeImgBut).setOnClickListener(v -> {
             if (!BRAnimator.isClickAllowed()) return;
             try {
                 // Check if the camera permission is granted
                 if (ContextCompat.checkSelfPermission(app,
                         Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
-                    // Should we show an expgetString(R.string.ConfirmPaperPhrase_word)lanation?
                     if (ActivityCompat.shouldShowRequestPermissionRationale(app,
                             Manifest.permission.CAMERA)) {
                         BRDialog.showCustomDialog(app, getString(R.string.Send_cameraUnavailabeTitle_android),
                                 getString(R.string.Send_cameraUnavailabeMessage_android), getString(R.string.AccessibilityLabels_close), null, brDialogView -> brDialogView.dismiss(), null, null, 0);
                     } else {
-                        // No explanation needed, we can request the permission.
                         ActivityCompat.requestPermissions(app,
                                 new String[]{Manifest.permission.CAMERA},
                                 BRConstants.CAMERA_REQUEST_ID);
                     }
                 } else {
-                    // Permission is granted, open camera
                     Intent intent = new Intent(app, ScanQRActivity.class);
                     app.startActivityForResult(intent, SCANNER_REQUEST);
                     app.overridePendingTransition(R.anim.fade_up, 0);
@@ -177,7 +160,6 @@ public class LoginActivity extends BRActivity {
 
                 @Override
                 public void onCancel() {
-
                 }
             }));
 
@@ -185,7 +167,6 @@ public class LoginActivity extends BRActivity {
             if (fingerPrint != null && useFingerprint)
                 fingerPrint.performClick();
         }, 500);
-
     }
 
     @Override
@@ -296,23 +277,6 @@ public class LoginActivity extends BRActivity {
                         showFailedToUnlock();
                     }
                 });
-    }
-
-    private void setUpOfflineButtons() {
-        int activeColor = getColor(white);
-        GradientDrawable leftDrawable = (GradientDrawable) leftButton.getBackground().getCurrent();
-        GradientDrawable rightDrawable = (GradientDrawable) rightButton.getBackground().getCurrent();
-
-        int rad = Utils.getPixelsFromDps(this, (int) getResources().getDimension(R.dimen.radius) / 2);
-        int stoke = 2;
-
-        leftDrawable.setCornerRadii(new float[]{rad, rad, 0, 0, 0, 0, rad, rad});
-        rightDrawable.setCornerRadii(new float[]{0, 0, rad, rad, rad, rad, 0, 0});
-
-        leftDrawable.setStroke(stoke, activeColor, 0, 0);
-        rightDrawable.setStroke(stoke, activeColor, 0, 0);
-        leftButton.setTextColor(activeColor);
-        rightButton.setTextColor(activeColor);
     }
 
     @Override
