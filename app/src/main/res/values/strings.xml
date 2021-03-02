@@ -817,5 +817,8 @@
   <string name="Error.emailNotVerified">You need to verify your email address before you can login.</string>
   <string name="Error.wrong2faTokenProvided">Wrong 2FA provided</string>
 
+  /* Balance */
+  <string name="ManageWallet.balance">Balance</string>
+
 
 </resources>
