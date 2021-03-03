@@ -788,4 +788,5 @@
   <string name="Error.emailNotVerified">Sie müssen Ihre E-Mail-Adresse überprüfen, bevor Sie sich anmelden können.</string>
   <string name="Error.wrong2faTokenProvided">Falsche 2FA zur Verfügung gestellt</string>
   <string name="BuyCenter.simplex.FinancialDetails">• Holen Sie sich Litecoin in 5 Minuten!\\n• Kaufen Sie Litecoin per Kreditkarte\\n• Reisepass oder Staatsausweis.</string>
+  <string name="ManageWallet.balance">Kontostand</string>
 </resources>
