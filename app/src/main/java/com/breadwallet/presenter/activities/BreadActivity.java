@@ -107,6 +107,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     private ImageButton menuBut;
     private TextView ltcPriceLbl;
     private TextView ltcPriceDateLbl;
+    private TextView balanceTxtV;
 
     public static boolean appVisible = false;
     public ViewFlipper barFlipper;
@@ -131,6 +132,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         getWindowManager().getDefaultDisplay().getSize(screenParametersPoint);
 
         initializeViews();
+        setPriceTags(BRSharedPrefs.getPreferredLTC(BreadActivity.this), false);
         setListeners();
 
         setUpBarFlipper();
@@ -403,6 +405,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         bottomNav = findViewById(R.id.bottomNav);
         ltcPriceLbl = findViewById(R.id.price_change_text);
         ltcPriceDateLbl = findViewById(R.id.priceDateLbl);
+        balanceTxtV = findViewById(R.id.balanceTxtV);
 
         primaryPrice = findViewById(R.id.primary_price);
         secondaryPrice = findViewById(R.id.secondary_price);
@@ -425,6 +428,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         });
 
         ltcPriceLbl.setTextSize(PRIMARY_TEXT_SIZE);
+        balanceTxtV.append(":");
     }
 
     @Override
