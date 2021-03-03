@@ -440,10 +440,17 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 //sleep a little in order to make sure all the commits are finished (like SharePreferences commits)
                 String iso = BRSharedPrefs.getIso(BreadActivity.this);
 
+                String formattedCurrency = null;
                 CurrencyEntity currency = CurrencyDataSource.getInstance(BreadActivity.this).getCurrencyByIso(iso);
-                final BigDecimal roundedPriceAmount = new BigDecimal(currency.rate).multiply(new BigDecimal(100))
-                        .divide(new BigDecimal(100), 2, BRConstants.ROUNDING_MODE);
-                final String formattedCurrency = BRCurrency.getFormattedCurrencyString(BreadActivity.this, iso, roundedPriceAmount);
+                if (currency != null) {
+                    final BigDecimal roundedPriceAmount = new BigDecimal(currency.rate).multiply(new BigDecimal(100))
+                            .divide(new BigDecimal(100), 2, BRConstants.ROUNDING_MODE);
+                    formattedCurrency = BRCurrency.getFormattedCurrencyString(BreadActivity.this, iso, roundedPriceAmount);
+                } else {
+                    Timber.w("The currency related to %s is NULL", iso);
+                }
+
+                final String ltcPrice = formattedCurrency;
 
                 //current amount in litoshis
                 final BigDecimal amount = new BigDecimal(BRSharedPrefs.getCatchedBalance(BreadActivity.this));
@@ -460,10 +467,12 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                     public void run() {
                         primaryPrice.setText(formattedBTCAmount);
                         secondaryPrice.setText(String.format("%s", formattedCurAmount));
-                        ltcPriceLbl.setText(formattedCurrency);
-                        SimpleDateFormat df = (SimpleDateFormat) DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT);
-                        String pattern = df.toPattern().replaceAll("\\W?[Yy]+\\W?", " ");
-                        ltcPriceDateLbl.setText("as of " + android.text.format.DateFormat.format(pattern, new Date()));
+                        if (ltcPrice != null) {
+                            ltcPriceLbl.setText(ltcPrice);
+                            SimpleDateFormat df = (SimpleDateFormat) DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT);
+                            String pattern = df.toPattern().replaceAll("\\W?[Yy]+\\W?", " ");
+                            ltcPriceDateLbl.setText("as of " + android.text.format.DateFormat.format(pattern, new Date()));
+                        }
                     }
                 });
             }
