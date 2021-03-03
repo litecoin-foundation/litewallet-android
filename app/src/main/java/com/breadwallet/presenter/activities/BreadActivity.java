@@ -446,6 +446,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                     final BigDecimal roundedPriceAmount = new BigDecimal(currency.rate).multiply(new BigDecimal(100))
                             .divide(new BigDecimal(100), 2, BRConstants.ROUNDING_MODE);
                     formattedCurrency = BRCurrency.getFormattedCurrencyString(BreadActivity.this, iso, roundedPriceAmount);
+                } else {
+                    Timber.w("The currency related to %s is NULL", iso);
                 }
 
                 final String ltcPrice = formattedCurrency;
