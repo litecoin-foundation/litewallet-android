@@ -68,13 +68,15 @@ public class FragmentBuy extends Fragment {
     private WebView webView;
     private String onCloseUrl;
     private static final String URL_BUY_LTC = BuildConfig.DEBUG ? "https://api-stage.lite-wallet.org" : "https://api-prod.lite-wallet.org";
-    static final String CURRENCY_KEY = "currency_code_key";
+    private static final String CURRENCY_KEY = "currency_code_key";
+    private static final String PARTNER_KEY = "partner_key";
     private ValueCallback<Uri> uploadMessage;
     private ValueCallback<Uri[]> uploadMessageAboveL;
 
-    public static Fragment newInstance(String currency) {
+    public static Fragment newInstance(String currency, Partner partner) {
         Bundle bundle = new Bundle();
         bundle.putString(CURRENCY_KEY, currency);
+        bundle.putSerializable(PARTNER_KEY, partner);
         Fragment fragment = new FragmentBuy();
         fragment.setArguments(bundle);
         return fragment;
@@ -115,17 +117,19 @@ public class FragmentBuy extends Fragment {
 
         String walletAddress = BRSharedPrefs.getReceiveAddress(getContext());
         String currency = getArguments().getString(CURRENCY_KEY);
+        Partner partner = (Partner) getArguments().getSerializable(PARTNER_KEY);
         Long timestamp = new Date().getTime();
         String uuid = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        String buyUrl = url(walletAddress, currency, timestamp, uuid);
+        String buyUrl = url(partner, walletAddress, currency, timestamp, uuid);
         Timber.d("URL %s", buyUrl);
         webView.loadUrl(buyUrl);
         return rootView;
     }
 
-    private String url(Object... args) {
-        return String.format(URL_BUY_LTC + "?address=%s&code=%s&idate=%s&uid=%s", args);
+    private String url(Partner partner, Object... args) {
+        String prefix = partner == Partner.MOONPAY ? "/moonpay/buy" : "";
+        return String.format(URL_BUY_LTC + prefix + "?address=%s&code=%s&idate=%s&uid=%s", args);
     }
 
     private void closePayment() {
@@ -246,5 +250,9 @@ public class FragmentBuy extends Fragment {
     public void onPause() {
         super.onPause();
         Utils.hideKeyboard(getActivity());
+    }
+
+    public enum Partner {
+        SIMPLEX, MOONPAY
     }
 }
