@@ -43,7 +43,7 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
 
     @Override
     public void onBindViewHolder(@NonNull final PartnerViewHolder holder, int position) {
-        Partner partner = partners.get(position);
+        final Partner partner = partners.get(position);
         holder.logo.setImageResource(partner.getLogo());
         holder.title.setText(partner.getTitle());
         holder.detail.setText(partner.getDetails());
@@ -56,7 +56,7 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
         holder.buyPartnerWrapper.setOnClickListener(v -> {
             int currencyResId = getCurrencyResId(holder.fiatOptions.getCheckedRadioButtonId());
             String currency = v.getContext().getString(currencyResId);
-            BRAnimator.showBuyFragment((FragmentActivity) v.getContext(), currency);
+            BRAnimator.showBuyFragment((FragmentActivity) v.getContext(), currency, partner.getCode());
         });
     }
 
