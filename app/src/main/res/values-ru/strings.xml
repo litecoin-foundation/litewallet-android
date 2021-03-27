@@ -793,4 +793,5 @@
   <string name="LitecoinCard.Disclaimer.description">Litecoin Card в настоящее время имеет ограниченную функциональность в Litewallet.</string>
   <string name="LitecoinCard.Disclaimer.referral">Посетите litecoin.getblockcard.com для полного доступа</string>
   <string name="LitecoinCard.Disclaimer.title">Бета-версия карты Litecoin</string>
+  <string name="BuyCenter.moonpay.FinancialDetails">"• Покупайте LTC с помощью множества фиатных пар\n• Оплачивайте несколькими способами\n• Глобальный платежный провайдер"</string>
 </resources>
