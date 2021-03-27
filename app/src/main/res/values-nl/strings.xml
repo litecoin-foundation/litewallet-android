@@ -793,4 +793,5 @@
   <string name="LitecoinCard.Disclaimer.description">Litecoin Card heeft momenteel beperkte functionaliteit in Litewallet.</string>
   <string name="LitecoinCard.Disclaimer.referral">Bezoek litecoin.getblockcard.com voor volledige toegang</string>
   <string name="LitecoinCard.Disclaimer.title">Litecoin Card Beta</string>
+  <string name="BuyCenter.moonpay.FinancialDetails">"• Koop LTC met veel fiat-paren\n• Betaal met meerdere methoden\n• Wereldwijde betalingsprovider"</string>
 </resources>
