@@ -339,7 +339,7 @@ class FragmentSend : Fragment() {
             )
         }
 
-        send.setOnClickListener(View.OnClickListener { //not allowed now
+        send.setOnClickListener(View.OnClickListener {
             if (!BRAnimator.isClickAllowed()) {
                 return@OnClickListener
             }
@@ -369,7 +369,7 @@ class FragmentSend : Fragment() {
                 AnalyticsManager.logCustomEvent(BRConstants._20191105_DSL)
             }
         })
-        donate.setOnClickListener(View.OnClickListener { //not allowed now
+        donate.setOnClickListener(View.OnClickListener {
             if (!BRAnimator.isClickAllowed()) {
                 return@OnClickListener
             }
