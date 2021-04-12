@@ -28,6 +28,7 @@ import androidx.transition.TransitionManager;
 import androidx.transition.TransitionSet;
 
 import com.breadwallet.R;
+import com.breadwallet.presenter.activities.intro.IntroActivity;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRNotificationBar;
 import com.breadwallet.presenter.entities.CurrencyEntity;
@@ -65,11 +66,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import timber.log.Timber;
-
-import static com.breadwallet.presenter.activities.ReEnterPinActivity.reEnterPinActivity;
-import static com.breadwallet.presenter.activities.SetPinActivity.introSetPitActivity;
-import static com.breadwallet.presenter.activities.intro.IntroActivity.introActivity;
-import static com.breadwallet.tools.util.BRConstants.PLATFORM_ON;
 
 /**
  * BreadWallet
@@ -144,9 +140,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         primaryPrice.setTextSize(PRIMARY_TEXT_SIZE);
         secondaryPrice.setTextSize(SECONDARY_TEXT_SIZE);
 
-        if (introSetPitActivity != null) introSetPitActivity.finish();
-        if (introActivity != null) introActivity.finish();
-        if (reEnterPinActivity != null) reEnterPinActivity.finish();
+        finishActivities(SetPinActivity.introSetPitActivity, IntroActivity.introActivity, ReEnterPinActivity.reEnterPinActivity);
 
         if (!BRSharedPrefs.getGreetingsShown(BreadActivity.this)) {
             mHandler.postDelayed(() -> {
@@ -161,6 +155,12 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         bottomNav.setSelectedItemId(R.id.nav_history);
 
         showInAppReviewDialogIfNeeded();
+    }
+
+    private void finishActivities(BRActivity... activities) {
+        for (BRActivity activity : activities) {
+            if (activity != null) activity.finish();
+        }
     }
 
     private void showInAppReviewDialogIfNeeded() {
@@ -373,7 +373,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         appVisible = true;
         app = this;
         addObservers();
-        if (PLATFORM_ON) {
+        if (BRConstants.PLATFORM_ON) {
             APIClient.getInstance(this).updatePlatform();
         }
 
@@ -418,7 +418,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         unregisterReceiver(mConnectionReceiver);
 
         //sync the kv stores
-        if (PLATFORM_ON) {
+        if (BRConstants.PLATFORM_ON) {
             BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
                 @Override
                 public void run() {
