@@ -148,14 +148,12 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         if (introActivity != null) introActivity.finish();
         if (reEnterPinActivity != null) reEnterPinActivity.finish();
 
-        if (!BRSharedPrefs.getGreetingsShown(BreadActivity.this))
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    BRAnimator.showGreetingsMessage(BreadActivity.this);
-                    BRSharedPrefs.putGreetingsShown(BreadActivity.this, true);
-                }
+        if (!BRSharedPrefs.getGreetingsShown(BreadActivity.this)) {
+            mHandler.postDelayed(() -> {
+                BRAnimator.showGreetingsMessage(BreadActivity.this);
+                BRSharedPrefs.putGreetingsShown(BreadActivity.this, true);
             }, 1000);
+        }
 
         onConnectionChanged(InternetManager.getInstance().isConnected(this));
 
