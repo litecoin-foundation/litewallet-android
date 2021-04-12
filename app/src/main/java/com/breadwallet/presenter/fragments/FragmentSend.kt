@@ -367,6 +367,7 @@ class FragmentSend : Fragment() {
             if (allFilled) {
                 BRSender.getInstance().sendTransaction(context, PaymentItem(arrayOf(address), null, satoshiAmount.toLong(), null, false, comment))
                 AnalyticsManager.logCustomEvent(BRConstants._20191105_DSL)
+                BRSharedPrefs.incrementSendTransactionCount(context)
             }
         })
         donate.setOnClickListener(View.OnClickListener {
