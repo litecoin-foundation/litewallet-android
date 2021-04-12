@@ -53,6 +53,10 @@ import com.breadwallet.wallet.BRPeerManager;
 import com.breadwallet.wallet.BRWalletManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.tasks.Task;
 import com.platform.APIClient;
 
 import java.math.BigDecimal;
@@ -157,6 +161,32 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
         updateUI();
         bottomNav.setSelectedItemId(R.id.nav_history);
+
+        showInAppReviewDialogIfNeeded();
+    }
+
+    private void showInAppReviewDialogIfNeeded() {
+        if (!BRSharedPrefs.isInAppReviewDone(this) && BRSharedPrefs.getSendTransactionCount(this) > 3) {
+            ReviewManager manager = ReviewManagerFactory.create(this);
+            Task<ReviewInfo> request = manager.requestReviewFlow();
+            request.addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ReviewInfo reviewInfo = task.getResult();
+                    Task<Void> flow = manager.launchReviewFlow(BreadActivity.this, reviewInfo);
+                    flow.addOnCompleteListener(task1 -> {
+                        // The flow has finished. The API does not indicate whether the user
+                        // reviewed or not, or even whether the review dialog was shown. Thus, no
+                        // matter the result, we continue our app flow.
+                        Timber.i("In-app LaunchReviewFlow completed successful (%s)", task1.isSuccessful());
+                        if (task1.isSuccessful()) {
+                            BRSharedPrefs.inAppReviewDone(BreadActivity.this);
+                        }
+                    });
+                } else {
+                    Timber.e(task.getException(), "In-app request review flow failed");
+                }
+            });
+        }
     }
 
     private void addObservers() {
