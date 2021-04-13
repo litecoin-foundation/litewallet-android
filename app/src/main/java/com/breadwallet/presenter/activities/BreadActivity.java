@@ -162,7 +162,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     private void showInAppReviewDialogIfNeeded() {
-        if (!BRSharedPrefs.isInAppReviewDone(this) && BRSharedPrefs.getSendTransactionCount(this) > 3) {
+        if (!BRSharedPrefs.isInAppReviewDone(this) && BRSharedPrefs.getSendTransactionCount(this) > 4) {
             ReviewManager manager = ReviewManagerFactory.create(this);
             Task<ReviewInfo> request = manager.requestReviewFlow();
             request.addOnCompleteListener(task -> {
