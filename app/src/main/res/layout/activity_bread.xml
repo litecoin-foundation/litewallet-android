@@ -171,6 +171,6 @@
         app:backgroundTint="@color/litecoin_litewallet_blue"
         app:itemIconTint="@color/bottom_nav_icon_tint_selector"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
+        tools:menu="@menu/bottom_nav_menu_us" />
 
 </RelativeLayout>
