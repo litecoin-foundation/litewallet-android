@@ -6,12 +6,11 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +24,7 @@ import com.breadwallet.R;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRKeyboard;
+import com.breadwallet.presenter.entities.CurrencyEntity;
 import com.breadwallet.presenter.interfaces.BRAuthCompletion;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
@@ -33,17 +33,18 @@ import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.security.AuthManager;
 import com.breadwallet.tools.security.BRKeyStore;
+import com.breadwallet.tools.sqlite.CurrencyDataSource;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
-import com.breadwallet.tools.util.Utils;
+import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.wallet.BRWalletManager;
 import com.platform.APIClient;
 
+import java.math.BigDecimal;
 import java.util.Locale;
 
 import timber.log.Timber;
 
-import static com.breadwallet.R.color.white;
 import static com.breadwallet.tools.util.BRConstants.PLATFORM_ON;
 import static com.breadwallet.tools.util.BRConstants.SCANNER_REQUEST;
 
@@ -64,7 +65,10 @@ public class LoginActivity extends BRActivity {
     private TextView unlockedText;
     private TextView enterPinLabel;
     private TextView versionText;
-    private LinearLayout offlineButtonsLayout;
+    private ViewGroup ltcPriceConstraintLayout;
+
+    private TextView ltcPriceTextView;
+    private TextView ltcPriceDescTextView;
 
     private ImageButton fingerPrint;
     public static boolean appVisible = false;
@@ -93,10 +97,13 @@ public class LoginActivity extends BRActivity {
         fingerPrint = findViewById(R.id.fingerprint_icon);
         versionText = findViewById(R.id.version_text);
 
+        ltcPriceTextView = findViewById(R.id.ltcPriceTextView);
+        ltcPriceDescTextView = findViewById(R.id.ltcPriceDescTextView);
+
         unlockedImage = findViewById(R.id.unlocked_image);
         unlockedText = findViewById(R.id.unlocked_text);
         enterPinLabel = findViewById(R.id.enter_pin_label);
-        offlineButtonsLayout = findViewById(R.id.buttons_layout);
+        ltcPriceConstraintLayout = findViewById(R.id.ltcPriceConstraintLayout);
 
         dot1 = findViewById(R.id.dot1);
         dot2 = findViewById(R.id.dot2);
@@ -150,7 +157,7 @@ public class LoginActivity extends BRActivity {
         final boolean useFingerprint = AuthManager.isFingerPrintAvailableAndSetup(this) && BRSharedPrefs.getUseFingerprint(this);
         fingerPrint.setVisibility(useFingerprint ? View.VISIBLE : View.GONE);
 
-        if (useFingerprint)
+        if (useFingerprint) {
             fingerPrint.setOnClickListener(v -> AuthManager.getInstance().authPrompt(LoginActivity.this, "", "", false, true, new BRAuthCompletion() {
                 @Override
                 public void onComplete() {
@@ -162,11 +169,33 @@ public class LoginActivity extends BRActivity {
                 public void onCancel() {
                 }
             }));
+        }
 
         new Handler().postDelayed(() -> {
             if (fingerPrint != null && useFingerprint)
                 fingerPrint.performClick();
         }, 500);
+
+        setCurrentLtcPrice();
+    }
+
+    private void setCurrentLtcPrice() {
+        String iso = BRSharedPrefs.getIso(this);
+
+        String formattedCurrency = null;
+        CurrencyEntity currency = CurrencyDataSource.getInstance(this).getCurrencyByIso(iso);
+        if (currency != null) {
+            final BigDecimal roundedPriceAmount = new BigDecimal(currency.rate).multiply(new BigDecimal(100))
+                    .divide(new BigDecimal(100), 2, BRConstants.ROUNDING_MODE);
+            formattedCurrency = BRCurrency.getFormattedCurrencyString(this, iso, roundedPriceAmount);
+        } else {
+            Timber.w("The currency related to %s is NULL", iso);
+        }
+
+        if (formattedCurrency != null) {
+            ltcPriceTextView.setText(getString(R.string.Login_ltcPrice, formattedCurrency));
+            ltcPriceDescTextView.setText(getString(R.string.Login_currentLtcPrice, iso));
+        }
     }
 
     @Override
@@ -233,7 +262,7 @@ public class LoginActivity extends BRActivity {
 
     private void unlockWallet() {
         pin = new StringBuilder();
-        offlineButtonsLayout.animate().translationY(-600).setInterpolator(new AccelerateInterpolator());
+        ltcPriceConstraintLayout.animate().translationY(-600).setInterpolator(new AccelerateInterpolator());
         pinLayout.animate().translationY(-2000).setInterpolator(new AccelerateInterpolator());
         enterPinLabel.animate().translationY(-1800).setInterpolator(new AccelerateInterpolator());
         keyboard.animate().translationY(2000).setInterpolator(new AccelerateInterpolator());
