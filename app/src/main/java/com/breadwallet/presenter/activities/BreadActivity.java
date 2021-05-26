@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
@@ -391,6 +392,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     private void initializeViews() {
         menuBut = findViewById(R.id.menuBut);
         bottomNav = findViewById(R.id.bottomNav);
+        bottomNav.getMenu().clear();
+        bottomNav.inflateMenu(isInUsa() ? R.menu.bottom_nav_menu_us : R.menu.bottom_nav_menu);
         ltcPriceLbl = findViewById(R.id.price_change_text);
         ltcPriceDateLbl = findViewById(R.id.priceDateLbl);
         balanceTxtV = findViewById(R.id.balanceTxtV);
@@ -417,6 +420,11 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
         ltcPriceLbl.setTextSize(PRIMARY_TEXT_SIZE);
         balanceTxtV.append(":");
+    }
+
+    private boolean isInUsa() {
+        TelephonyManager telManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        return "us".equals(telManager.getSimCountryIso());
     }
 
     @Override
