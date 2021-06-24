@@ -792,7 +792,7 @@
   <string name="Error.emailNotVerified">Anda perlu memverifikasi alamat email Anda sebelum Anda dapat masuk.</string>
   <string name="Error.wrong2faTokenProvided">2FA yang diberikan salah</string>
   <string name="ManageWallet.balance">Saldo Kartu</string>
-  <string name="LitecoinCard.Disclaimer.bullets">- Pendaftaran Baru\n- Masuk (akun yang ada)\n- Tidak ada saldo yang ditampilkan\n- Tidak ada transfer\n- Khusus AS</string>
+  <string name="LitecoinCard.Disclaimer.bullets">- Pendaftaran &amp; Login\n- Saldo kartu yang tersedia\n- Reset kata sandi\n- Tidak ada transfer ke Litewallet\n- AS Sudah</string>
   <string name="LitecoinCard.Disclaimer.description">Kartu Litecoin saat ini memiliki fungsi terbatas di Litewallet.</string>
   <string name="LitecoinCard.Disclaimer.referral">Kunjungi litecoin.getblockcard.com untuk akses penuh</string>
   <string name="LitecoinCard.Disclaimer.title">Kartu Litecoin Beta</string>
