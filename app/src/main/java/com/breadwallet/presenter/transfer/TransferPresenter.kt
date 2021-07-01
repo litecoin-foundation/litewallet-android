@@ -1,6 +1,7 @@
 package com.breadwallet.presenter.transfer
 
 import com.breadwallet.BreadApp
+import com.breadwallet.R
 import com.breadwallet.presenter.base.BasePresenter
 import com.breadwallet.tools.manager.BRSharedPrefs
 import org.litecoin.partnerapi.callback.WalletCallback
@@ -39,7 +40,7 @@ class TransferPresenter(view: TransferView) : BasePresenter<TransferView>(view) 
 
             override fun onUnknownSystemError() {
                 view?.hideProgress()
-                view?.showError("Oops something wrong happened. Please try again later")
+                view?.showError(R.string.Error_unknownSystem)
             }
 
             override fun onTokenExpired() {
