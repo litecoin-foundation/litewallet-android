@@ -73,6 +73,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+<<<<<<< HEAD
         app:layout_constraintTop_toBottomOf="@+id/ltcPriceConstraintLayout"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -90,6 +91,10 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/ltcPriceConstraintLayout" />
+=======
+        app:layout_constraintTop_toBottomOf="@+id/buttons_layout"
+        app:layout_constraintVertical_bias="0.120000005" />
+>>>>>>> master
 
     <LinearLayout
         android:id="@+id/pinLayout"
@@ -157,6 +162,10 @@
         app:showAlphabet="true" />
 
     <TextView
+<<<<<<< HEAD
+=======
+        style="@style/BRTextStyle"
+>>>>>>> master
         android:id="@+id/enter_pin_label"
         style="@style/BRTextStyle"
         android:layout_width="wrap_content"
@@ -168,6 +177,53 @@
         app:layout_constraintBottom_toTopOf="@+id/pinLayout"
         app:layout_constraintLeft_toLeftOf="@+id/pinLayout"
         app:layout_constraintRight_toRightOf="@+id/pinLayout" />
+<<<<<<< HEAD
+=======
+
+    <LinearLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2.0"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.breadwallet.presenter.customviews.BRButton
+            style="@style/BRButtonStyle"
+            android:id="@+id/left_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="@drawable/b_half_left_white"
+            android:paddingTop="8dp"
+            android:paddingBottom="0dp"
+            android:text="@string/UnlockScreen.myAddress"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:isBreadButton="false" />
+
+        <com.breadwallet.presenter.customviews.BRButton
+            style="@style/BRButtonStyle"
+            android:id="@+id/right_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="@drawable/b_half_right_white"
+            android:paddingTop="8dp"
+            android:paddingBottom="0dp"
+            android:text="@string/UnlockScreen.scan"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+>>>>>>> master
 
     <ImageView
         android:id="@+id/unlocked_image"
@@ -185,6 +241,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+<<<<<<< HEAD
+=======
+        style="@style/BRTextStyle"
+>>>>>>> master
         android:id="@+id/unlocked_text"
         style="@style/BRTextStyle"
         android:layout_width="wrap_content"
@@ -197,10 +257,30 @@
         android:text="@string/UnlockScreen.unlocked"
         android:textColor="@color/white"
         android:textSize="18sp"
+<<<<<<< HEAD
+=======
+        android:layout_marginTop="10dp"
+>>>>>>> master
         app:layout_constraintBottom_toTopOf="@+id/unlocked_image"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintLeft_toLeftOf="@+id/unlocked_image"
         app:layout_constraintRight_toRightOf="@+id/unlocked_image" />
+<<<<<<< HEAD
+=======
+
+    <TextView
+        style="@style/BRTextStyle"
+        android:id="@+id/version_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/About.appVersion"
+        android:textColor="@color/white_trans"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttons_layout" />
+>>>>>>> master
 
     <ImageButton
         android:id="@+id/fingerprint_icon"
