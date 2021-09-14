@@ -37,6 +37,6 @@ abstract class BaseFragment<P : BasePresenter<BaseView>> : Fragment() {
     fun showError(errorId: Int) {
         showError(getString(errorId))
     }
-
+	
     abstract fun initPresenter(): P
 }
