@@ -48,6 +48,7 @@
             android:layout_marginTop="15dp"
             android:background="@color/dark_gray" />
 
+<<<<<<< HEAD
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
@@ -57,6 +58,9 @@
 
         <TextView
             android:id="@+id/cardBalanceAmountLbl"
+=======
+        <TextView
+>>>>>>> master
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -64,9 +68,13 @@
             android:text="$"
             android:textColor="@color/dark_gray"
             android:textSize="26sp"
+<<<<<<< HEAD
             android:visibility="gone"
             tools:ignore="HardcodedText"
             tools:visibility="visible" />
+=======
+            tools:ignore="HardcodedText" />
+>>>>>>> master
 
     </LinearLayout>
 
