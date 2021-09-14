@@ -49,6 +49,7 @@
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     android:layoutDirection="ltr">
+<<<<<<< HEAD
 
                     <TextView
                         android:id="@+id/balanceTxtV"
@@ -66,6 +67,25 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0" />
 
+=======
+
+                    <TextView
+                        android:id="@+id/balanceTxtV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/barlowsemicondensed_medium"
+                        android:text="@string/ManageWallet.balance"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toTopOf="@+id/primary_price"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+>>>>>>> master
                     <Button
                         android:id="@+id/primary_price"
                         android:layout_width="wrap_content"
@@ -105,6 +125,7 @@
 
                     <ImageButton
                         android:id="@+id/menuBut"
+<<<<<<< HEAD
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
@@ -113,6 +134,50 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+=======
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_menu"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/price_change_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/barlowsemicondensed_medium"
+                        android:textColor="@color/white"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizeMinTextSize="9sp"
+                        app:autoSizeMaxTextSize="22sp"
+                        app:autoSizeStepGranularity="1sp"
+                        app:layout_constraintBottom_toTopOf="@+id/priceDateLbl"
+                        app:layout_constraintEnd_toStartOf="@+id/menuBut"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tools:text="$44.11" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/priceDateLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/barlowsemicondensed_light"
+                        android:textColor="@color/white"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizeMinTextSize="7sp"
+                        app:autoSizeMaxTextSize="12sp"
+                        app:autoSizeStepGranularity="1sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/price_change_text"
+                        app:layout_constraintTop_toBottomOf="@+id/price_change_text"
+                        tools:text="as of May 20,8:53PM" />
+>>>>>>> master
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.Toolbar>
@@ -137,6 +202,10 @@
         app:backgroundTint="@color/litecoin_litewallet_blue"
         app:itemIconTint="@color/bottom_nav_icon_tint_selector"
         app:labelVisibilityMode="labeled"
+<<<<<<< HEAD
         tools:menu="@menu/bottom_nav_menu_us" />
+=======
+        app:menu="@menu/bottom_nav_menu" />
+>>>>>>> master
 
 </RelativeLayout>
