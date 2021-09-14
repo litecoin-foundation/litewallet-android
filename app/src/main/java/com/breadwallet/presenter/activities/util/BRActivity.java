@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-
-import androidx.annotation.Nullable;
+ 
+import androidx.annotation.Nullable; 
 import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.BreadApp;
@@ -60,7 +60,7 @@ public class BRActivity extends FragmentActivity {
         System.loadLibrary(BRConstants.NATIVE_LIB_NAME);
     }
 
-    @Override
+    @Override 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         LocaleHelper.Companion.getInstance().setLocale(this);
         super.onCreate(savedInstanceState);
@@ -71,7 +71,7 @@ public class BRActivity extends FragmentActivity {
         super.attachBaseContext(LocaleHelper.Companion.getInstance().setLocale(newBase));
     }
 
-    @Override
+    @Override 
     protected void onStop() {
         super.onStop();
         BreadApp.activityCounter.decrementAndGet();

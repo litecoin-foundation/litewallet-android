@@ -3,7 +3,7 @@ package com.breadwallet.presenter.base
 import com.breadwallet.di.component.DaggerPresenterComponent
 import com.breadwallet.presenter.spend.LoginPresenter
 import com.breadwallet.presenter.spend.RegisterPresenter
-import com.breadwallet.presenter.transfer.TransferPresenter
+import com.breadwallet.presenter.transfer.TransferPresenter 
 
 /** Litewallet
  * Created by Mohamed Barry on 6/30/20
@@ -22,7 +22,7 @@ abstract class BasePresenter<out V : BaseView>(var view: BaseView?) {
         when (this) {
             is LoginPresenter -> injector.inject(this)
             is RegisterPresenter -> injector.inject(this)
-            is TransferPresenter -> injector.inject(this)
+            is TransferPresenter -> injector.inject(this) 
         }
     }
 

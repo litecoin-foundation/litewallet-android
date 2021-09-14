@@ -37,7 +37,8 @@ import static com.breadwallet.tools.util.BRConstants.ROUNDING_MODE;
  * THE SOFTWARE.
  */
 public class BRExchange {
-    public static final long ONE_LITECOIN = 100000000L;
+
+    public static final long ONE_LITECOIN = 100000000L; 
 
     public static BigDecimal getMaxAmount(Context context, String iso) {
         final long MAX_BTC = 84000000;

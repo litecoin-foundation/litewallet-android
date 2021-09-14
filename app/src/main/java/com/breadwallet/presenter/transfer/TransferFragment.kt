@@ -11,7 +11,7 @@ import com.breadwallet.tools.util.BRCurrency
 import com.breadwallet.tools.util.BRExchange
 import kotlinx.android.synthetic.main.fragment_transfer.*
 import org.litecoin.partnerapi.model.Wallet
-import java.math.BigDecimal
+import java.math.BigDecimal 
 
 /** Litewallet
  * Created by Mohamed Barry on 6/14/20
@@ -19,9 +19,9 @@ import java.math.BigDecimal
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
 class TransferFragment : BaseFragment<TransferPresenter>(), TransferView {
-
+ 
     private var mWallet: Wallet? = null
-
+ 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,6 +36,7 @@ class TransferFragment : BaseFragment<TransferPresenter>(), TransferView {
             presenter.logout()
             (requireActivity() as BreadActivity?)?.recreate()
         }
+
         presenter.getWalletDetails()
     }
 
@@ -70,5 +71,5 @@ class TransferFragment : BaseFragment<TransferPresenter>(), TransferView {
 
     companion object {
         const val LTC_ISO = "LTC"
-    }
+    } 
 }

@@ -118,6 +118,7 @@ fun Fragment.replaceFragment(
     containerId: Int = R.id.fragment_container,
     transition: Int? = null
 ) {
+
     replaceFragment(
         this.requireFragmentManager(),
         fragment,
