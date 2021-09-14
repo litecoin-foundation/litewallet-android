@@ -68,7 +68,7 @@ public class LoginActivity extends BRActivity {
     private ViewGroup ltcPriceConstraintLayout;
 
     private TextView ltcPriceTextView;
-    private TextView ltcPriceDescTextView;
+    private TextView ltcPriceDescTextView; 
 
     private ImageButton fingerPrint;
     public static boolean appVisible = false;
