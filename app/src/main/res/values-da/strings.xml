@@ -789,9 +789,11 @@
   <string name="Error.wrong2faTokenProvided">Forkert 2FA leveret</string>
   <string name="BuyCenter.simplex.FinancialDetails">"• Få Litecoin inden for 5 minutter! \n • Køb Litecoin via kreditkort \n • Pas eller stats-ID"</string>
   <string name="ManageWallet.balance">Balance</string>
-  <string name="LitecoinCard.Disclaimer.bullets">"- Ny registrering\n- Login (eksisterende konto)\n- Ingen balance vist\n- Ingen overførsel\n- Kun USA"</string>
+  <string name="LitecoinCard.Disclaimer.bullets">"- Registrering og login\n- Tilgængelig kortsaldo\n- Nulstil adgangskode\n- Ingen overførsel til Litewallet\n- Kun USA"</string>
   <string name="LitecoinCard.Disclaimer.description">Litecoin Card har i øjeblikket begrænset funktionalitet i Litewallet.</string>
   <string name="LitecoinCard.Disclaimer.referral">Besøg litecoin.getblockcard.com for fuld adgang</string>
   <string name="LitecoinCard.Disclaimer.title">Litecoin-kort Beta</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Køb LTC med mange fiat-par\n• Betal med flere metoder\n• Global betalingsudbyder"</string>
+  <string name="Login.currentLtcPrice">Aktuel LTC-værdi i %1$s</string>
+  <string name="Settings.languages">Sprog</string>
 </resources>
