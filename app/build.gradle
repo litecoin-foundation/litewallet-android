@@ -46,9 +46,10 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 638
-        versionName "v2.2.0"
+        versionCode 641
+        versionName "v2.4.0"
         multiDexEnabled true
+        archivesBaseName = "${versionName}(${versionCode})"
 
         buildConfigField "String", "INFURA_KEY", "\"set the infura key here\""
 
@@ -257,6 +258,9 @@ dependencies {
     // Play Core KTX
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
+    // Preference
+    implementation 'androidx.preference:preference-ktx:1.1.1' 
+	
     // Ktlint
     ktlint "com.pinterest:ktlint:0.37.2"
 }

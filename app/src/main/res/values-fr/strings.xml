@@ -789,9 +789,11 @@
   <string name="Error.wrong2faTokenProvided">Mauvais 2FA fourni</string>
   <string name="BuyCenter.simplex.FinancialDetails">"• Obtenez du Litecoin en 5 minutes! \n • Achetez du Litecoin par carte de crédit \n • Passeport ou identifiant d\'État"</string>
   <string name="ManageWallet.balance">Solde</string>
-  <string name="LitecoinCard.Disclaimer.bullets">"- Nouvelle inscription\n- Connexion (compte existant)\n- Aucun solde affiché\n- Pas de transfert\n- États-Unis uniquement"</string>
+  <string name="LitecoinCard.Disclaimer.bullets">"- Inscription et connexion\n- Solde de la carte disponible\n- Réinitialiser le mot de passe\n- Aucun transfert vers Litewallet\n- États-Unis uniquement"</string>
   <string name="LitecoinCard.Disclaimer.description">La carte Litecoin a actuellement des fonctionnalités limitées dans Litewallet.</string>
   <string name="LitecoinCard.Disclaimer.referral">Visitez litecoin.getblockcard.com pour un accès complet</string>
   <string name="LitecoinCard.Disclaimer.title">Bêta de la carte Litecoin</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Achetez des LTC avec de nombreuses paires de fiat\n• Payez avec plusieurs méthodes\n• Fournisseur de paiement mondial"</string>
+  <string name="Login.currentLtcPrice">Valeur LTC actuelle en %1$s</string>
+  <string name="Settings.languages">Langues</string>
 </resources>
