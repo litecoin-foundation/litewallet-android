@@ -2,6 +2,8 @@ package com.breadwallet.di.component
 
 import com.breadwallet.presenter.spend.LoginPresenter
 import com.breadwallet.presenter.spend.RegisterPresenter
+import com.breadwallet.presenter.transfer.TransferPresenter
+
 import dagger.Component
 import org.litecoin.partnerapi.di.module.NetworkModule
 import javax.inject.Singleton
@@ -16,4 +18,5 @@ import javax.inject.Singleton
 interface PresenterComponent {
     fun inject(presenter: LoginPresenter)
     fun inject(presenter: RegisterPresenter)
+    fun inject(presenter: TransferPresenter)
 }
