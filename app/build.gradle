@@ -44,8 +44,8 @@ android {
     defaultConfig {
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
-        minSdkVersion 23
-        targetSdkVersion 29
+        minSdkVersion 26
+        targetSdkVersion 30
         versionCode 641
         versionName "v2.4.0"
         multiDexEnabled true
