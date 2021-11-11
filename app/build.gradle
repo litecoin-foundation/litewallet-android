@@ -13,6 +13,18 @@ configurations {
 
 android {
     signingConfigs {
+        debug {
+            storeFile file('/Users/grunt/crypto_projects/lf-projects/loafwallet-signing-binaries/new-upload/keystore.jks')
+            storePassword 'litewallet'
+            keyAlias 'upload'
+            keyPassword 'litewallet'
+        }
+        release {
+            keyAlias 'upload'
+            storeFile file('/Users/grunt/crypto_projects/lf-projects/loafwallet-signing-binaries/new-upload/keystore.jks')
+            storePassword 'litewallet'
+            keyPassword 'litewallet'
+        }
         release
     }
     Properties props = new Properties()
@@ -46,8 +58,8 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 641
-        versionName "v2.4.0"
+        versionCode 645
+        versionName "v2.4.1"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
 
