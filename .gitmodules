@@ -6,4 +6,4 @@
 	url = https://github.com/litecoin-foundation/loafwallet-core.git
 [submodule "partnerapi"]
 	path = partnerapi
-	url = https://github.com/litecoin-foundation/LitewalletPartnerAPI-android.git
+	url = https://github.com/litecoin-foundation/litewallet-partner-api-android.git

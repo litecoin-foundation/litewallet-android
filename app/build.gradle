@@ -2,18 +2,30 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'com.google.gms.google-services'
-
 apply plugin: 'com.google.firebase.crashlytics'
 
 configurations {
     ktlint
 }
 
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'org.jetbrains.kotlin' && requested.name == 'kotlin-reflect') {
+            details.useVersion kotlin_version
+        }
+    }
+}
+
 android {
     signingConfigs {
-        release
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
     }
     Properties props = new Properties()
     def propFile = file('../release.properties')
@@ -30,8 +42,6 @@ android {
         }
     }
 
-    compileSdkVersion = 29
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -41,13 +51,15 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
+    compileSdkVersion 30
+
     defaultConfig {
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
-        minSdkVersion 23
-        targetSdkVersion 29
-        versionCode 641
-        versionName "v2.4.0"
+        minSdkVersion 27
+        targetSdkVersion 30
+        versionCode 647
+        versionName "v2.4.2"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
 
@@ -120,30 +132,81 @@ android {
             }
         }
     }
-    lintOptions {
-        // set to true to turn off analysis progress reporting by lint
-        quiet false
-        explainIssues true
-
-        // if true, only report errors
-        ignoreWarnings false
-
-        checkReleaseBuilds false
-
-        // Turns off checks for the issue IDs you specify.
-        //example: disable 'TypographyFractions','TypographyQuotes'
-        // Turns on checks for the issue IDs you specify. These checks are in
-        // addition to the default lint checks.
-        //example: enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
-        // To enable checks for only a subset of issue IDs and ignore all others,
-        // list the issue IDs with the 'check' property instead. This property overrides
-        // any issue IDs you enable or disable using the properties above.
-        check 'NewApi', 'InlinedApi'
+    android {
+        lintOptions {
+            // set to true to turn off analysis progress reporting by lint
+            quiet true
+            // if true, stop the gradle build if errors are found
+            abortOnError false
+            // set to true to have all release builds run lint on issues with severity=fatal
+            // and abort the build (controlled by abortOnError above) if fatal issues are found
+            ignoreWarnings true
+            // if true, emit full/absolute paths to files with errors (true by default)
+            //absolutePaths true
+            // if true, check all issues, including those that are off by default
+            warningsAsErrors true
+            // turn off checking the given issue id's
+            disable 'TypographyFractions','TypographyQuotes'
+            // turn on the given issue id's
+            enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+            // check *only* the given issue id's
+            noLines true
+            // if true, show all locations for an error, do not truncate lists, etc.
+            showAll true
+            // whether lint should include full issue explanations in the text error output
+            explainIssues false
+            // Fallback lint configuration (default severities, etc.)
+            lintConfig file("default-lint.xml")
+            // if true, generate a text report of issues (false by default)
+            textReport true
+            // location to write the output; can be a file or 'stdout' or 'stderr'
+            //textOutput 'stdout'
+            textOutput file("lint-results.txt")
+            // if true, generate an XML report for use by for example Jenkins
+            xmlReport true
+            // file to write report to (if not specified, defaults to lint-results.xml)
+            xmlOutput file("lint-report.xml")
+            // if true, generate an HTML report (with issue explanations, sourcecode, etc)
+            htmlReport true
+            // optional path to report (default will be lint-results.html in the builddir)
+            htmlOutput file("lint-report.html")
+            // Set the severity of the given issues to fatal (which means they will be
+            // checked during release builds (even if the lint target is not included)
+            fatal 'NewApi', 'InlineApi'
+            // Set the severity of the given issues to error
+            error 'Wakelock', 'TextViewEdits'
+            // Set the severity of the given issues to warning
+            warning 'ResourceAsColor'
+            // Set the severity of the given issues to ignore (same as disabling the check)
+            ignore 'TypographyQuotes'
+            // Set the severity of the given issues to informational
+            informational 'StopShip'
+            // Use (or create) a baseline file for issues that should not be reported
+            baseline file("lint-baseline.xml")
+            // Normally most lint checks are not run on test sources (except the checks
+            // dedicated to looking for mistakes in unit or instrumentation tests, unless
+            // ignoreTestSources is true). You can turn on normal lint checking in all
+            // sources with the following flag, false by default:
+            checkTestSources true
+            // Like checkTestSources, but always skips analyzing tests -- meaning that it
+            // also ignores checks that have explicitly asked to look at test sources, such
+            // as the unused resource check.
+            ignoreTestSources true
+            // Normally lint will skip generated sources, but you can turn it on with this flag
+            checkGeneratedSources true
+            // Normally lint will analyze all dependencies along with each module; this ensures
+            // that lint can correctly (for example) determine if a resource declared in a library
+            // is unused; checking only the library in isolation would not be able to identify this
+            // problem. However, this leads to quite a bit of extra computation; a library is
+            // analyzed repeatedly, for each module that it is used in.
+            checkDependencies false
+        }
     }
 
     buildTypes {
 //        gitUpdateModules()
 //        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         release {
             signingConfig signingConfigs.release
             minifyEnabled = false
@@ -173,7 +236,6 @@ android {
         }
 
     }
-    compileSdkVersion 29
 }
 
 task copyResDirectoryToClasses(type: Copy) {
@@ -184,12 +246,6 @@ task copyResDirectoryToClasses(type: Copy) {
 gradle.projectsEvaluated {
     assembleDebug.dependsOn(copyResDirectoryToClasses)
 }
-
-
-//def gitUpdateModules() {
-//    ['sh', '-c', 'git submodule foreach git pull origin master'].execute().text.trim()
-//    getLogger().debug("gitUpdateModules done!")
-//}
 
 repositories {
     mavenCentral()
@@ -216,6 +272,8 @@ dependencies {
     implementation 'androidx.test:rules:1.2.0'
     implementation 'junit:junit:4.12'
     implementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.1.0"
+
 
     // add the Firebase SDK for Google Analytics
     implementation 'com.google.firebase:firebase-analytics:18.0.0'
@@ -279,3 +337,4 @@ task ktlintFormat(type: JavaExec, group: "formatting") {
     classpath = configurations.ktlint
     args "-F", "src/**/*.kt"
 }
+
