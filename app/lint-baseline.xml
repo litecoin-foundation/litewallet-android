@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.0.3" type="baseline" client="gradle" name="AGP (7.0.3)" variant="fatal" version="7.0.3">
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-da/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-de/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-fr/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-in/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-it/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-ja/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-ko/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-nl/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-pt/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-ru/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-sv/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-zh-rCN/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_equals&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-zh-rTW/strings.xml"
+            line="28"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-da/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-de/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-fr/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-in/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-it/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-ja/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-ko/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-nl/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-pt/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-ru/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-sv/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-zh-rCN/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;AccountHeader_manageButtonName&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-zh-rTW/strings.xml"
+            line="30"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;DefaultCurrency_g&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-zh-rTW/strings.xml"
+            line="144"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-da/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-de/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-fr/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-in/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-it/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-ja/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-ko/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-nl/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-pt/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-ru/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-sv/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-zh-rCN/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;JailbreakWarnings_wipe&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-zh-rTW/strings.xml"
+            line="224"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;ManageWallet_textFieldLabel&quot; is translated here but not found in default locale">
+        <location
+            file="src/main/res/values-in/strings.xml"
+            line="234"
+            column="11"/>
+    </issue>
+
+</issues>
