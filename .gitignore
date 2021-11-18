@@ -43,6 +43,7 @@ gradle.properties
 */out
 */*/build
 */*/production
+*/*/release
 *.iws
 *.ipr
 *~
@@ -61,6 +62,7 @@ gradle.properties
 .idea/caches/
 .idea/assetWizardSettings.xml
 .idea/codeStyles/Project.xml
+.idea/deploymentTargetDropDown.xml
 .navigation/
 
 # jniLibs files
