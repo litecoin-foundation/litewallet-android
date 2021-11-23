@@ -126,13 +126,11 @@ public class IntroActivity extends BRActivity implements Serializable {
                 Thread.currentThread().setName("updateBundle");
                 final long startTime = System.currentTimeMillis();
                 APIClient apiClient = APIClient.getInstance(IntroActivity.this);
-                apiClient.updateBundle();
                 long endTime = System.currentTimeMillis();
                 Timber.d("updateBundle DONE in %sms",endTime - startTime);
             }
         });
     }
-
 
     private void setListeners() {
         newWalletButton.setOnClickListener(new View.OnClickListener() {
