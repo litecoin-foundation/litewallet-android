@@ -15,8 +15,6 @@ import com.platform.middlewares.APIProxy;
 import com.platform.middlewares.HTTPFileMiddleware;
 import com.platform.middlewares.HTTPIndexMiddleware;
 import com.platform.middlewares.HTTPRouter;
-import com.platform.middlewares.plugins.KVStorePlugin;
-import com.platform.middlewares.plugins.LinkPlugin;
 import com.platform.middlewares.plugins.WalletPlugin;
 
 import org.eclipse.jetty.server.Request;
@@ -215,14 +213,6 @@ public class HTTPServer {
         // wallet plugin provides access to the wallet
         Plugin walletPlugin = new WalletPlugin();
         httpRouter.appendPlugin(walletPlugin);
-
-        // link plugin which allows opening links to other apps
-        Plugin linkPlugin = new LinkPlugin();
-        httpRouter.appendPlugin(linkPlugin);
-
-        // kvstore plugin provides access to the shared replicated kv store
-        Plugin kvStorePlugin = new KVStorePlugin();
-        httpRouter.appendPlugin(kvStorePlugin);
     }
 
 }
