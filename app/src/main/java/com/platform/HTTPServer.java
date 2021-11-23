@@ -15,7 +15,6 @@ import com.platform.middlewares.APIProxy;
 import com.platform.middlewares.HTTPFileMiddleware;
 import com.platform.middlewares.HTTPIndexMiddleware;
 import com.platform.middlewares.HTTPRouter;
-import com.platform.middlewares.plugins.CameraPlugin;
 import com.platform.middlewares.plugins.GeoLocationPlugin;
 import com.platform.middlewares.plugins.KVStorePlugin;
 import com.platform.middlewares.plugins.LinkPlugin;
@@ -217,10 +216,6 @@ public class HTTPServer {
         // geo plugin provides access to onboard geo location functionality
         Plugin geoLocationPlugin = new GeoLocationPlugin();
         httpRouter.appendPlugin(geoLocationPlugin);
-
-        // camera plugin
-        Plugin cameraPlugin = new CameraPlugin();
-        httpRouter.appendPlugin(cameraPlugin);
 
         // wallet plugin provides access to the wallet
         Plugin walletPlugin = new WalletPlugin();

@@ -120,8 +120,6 @@
   <string name="Button.submit">Kirimkan</string>
   <!-- Yes button -->
   <string name="Button.yes">Iya</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">Pusatkan ID Anda di dalam kotak</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">Jumlah yang akan dikirim:</string>
   <!-- Network Fee: ($1.00) -->
