@@ -16,7 +16,6 @@ import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.util.Utils;
 import com.platform.HTTPServer;
-import com.platform.middlewares.plugins.LinkPlugin;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -157,6 +156,7 @@ public class WebViewActivity extends BRActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -180,6 +180,5 @@ public class WebViewActivity extends BRActivity {
     protected void onPause() {
         super.onPause();
         appVisible = false;
-        LinkPlugin.hasBrowser = false;
     }
 }
