@@ -106,7 +106,7 @@ public class AuthManager {
     }
 
     public void authFail(Context app) {
-
+        //TODO: Check if this cruft from the BRD implementation
     }
 
     public boolean isWalletDisabled(Activity app) {

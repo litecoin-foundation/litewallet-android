@@ -62,31 +62,6 @@ import timber.log.Timber;
 
 import static com.breadwallet.tools.util.BRCompressor.gZipExtract;
 
-
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan on <mihail@breadwallet.com> 9/29/16.
- * Copyright (c) 2016 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 public class APIClient {
 
     // proto is the transport protocol to use for talking to the API (either http or https)
@@ -109,8 +84,6 @@ public class APIClient {
 
     private static final String BUNDLES_FOLDER = String.format("/%s", BUNDLES);
 
-    private static String BREAD_FILE;
-    private static String BREAD_EXTRACTED;
     private static final boolean PRINT_FILES = false;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
@@ -118,31 +91,7 @@ public class APIClient {
     private boolean platformUpdating = false;
     private AtomicInteger itemsLeftToUpdate = new AtomicInteger(0);
 
-    public static HTTPServer server;
-
     private Context ctx;
-
-    public enum FeatureFlags {
-        BUY_BITCOIN("buy-litecoin"),
-        EARLY_ACCESS("early-access");
-
-        private final String text;
-
-        /**
-         * @param text
-         */
-        private FeatureFlags(final String text) {
-            this.text = text;
-        }
-
-        /* (non-Javadoc)
-         * @see java.lang.Enum#toString()
-         */
-        @Override
-        public String toString() {
-            return text;
-        }
-    }
 
     public static synchronized APIClient getInstance(Context context) {
         if (ourInstance == null) ourInstance = new APIClient(context);
@@ -154,8 +103,6 @@ public class APIClient {
         itemsLeftToUpdate = new AtomicInteger(0);
         if (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)) {
             BREAD_POINT = "bread-frontend-staging";
-            BREAD_FILE = String.format("/%s.tar", BREAD_POINT);
-            BREAD_EXTRACTED = String.format("%s-extracted", BREAD_POINT);
         }
     }
 
@@ -427,74 +374,6 @@ public class APIClient {
         return request;
     }
 
-    public void updateBundle() {
-//         if (ActivityUTILS.isMainThread()) {
-//             throw new NetworkOnMainThreadException();
-//         }
-//         File bundleFile = new File(getBundleResource(ctx, BREAD_FILE));
-//         Log.d(TAG, "updateBundle: " + bundleFile);
-//         if (bundleFile.exists()) {
-//             Log.d(TAG, bundleFile + ": updateBundle: exists");
-//
-//             byte[] bFile = new byte[0];
-//             try {
-//                 FileInputStream in = new FileInputStream(bundleFile);
-//                 bFile = IOUtils.toByteArray(in);
-//                 in.close();
-//             } catch (IOException e) {
-//                 e.printStackTrace();
-//             }
-//
-//             String latestVersion = getLatestVersion();
-//             String currentTarVersion = null;
-//             byte[] hash = CryptoHelper.sha256(bFile);
-//
-//             currentTarVersion = Utils.bytesToHex(hash);
-//             Log.d(TAG, bundleFile + ": updateBundle: version of the current tar: " + currentTarVersion);
-// //            FileHelper.printDirectoryTree(new File(getExtractedPath(ctx, null)));
-//             if (latestVersion != null) {
-//                 if (latestVersion.equals(currentTarVersion)) {
-//                     Log.d(TAG, bundleFile + ": updateBundle: have the latest version");
-//                     tryExtractTar();
-//                 } else {
-//                     Log.d(TAG, bundleFile + ": updateBundle: don't have the most recent version, download diff");
-//                     downloadDiff(currentTarVersion);
-//                     tryExtractTar();
-//                 }
-//             } else {
-//                 Log.d(TAG, bundleFile + ": updateBundle: latestVersion is null");
-//             }
-// //            FileHelper.printDirectoryTree(new File(getExtractedPath(ctx, null)));
-//
-//         } else {
-//             Log.d(TAG, bundleFile + ": updateBundle: bundle doesn't exist, downloading new copy");
-//             long startTime = System.currentTimeMillis();
-//             Request request = new Request.Builder()
-//                     .url(String.format("%s/assets/bundles/%s/download", BASE_URL, BREAD_POINT))
-//                     .get().build();
-//             Response response = null;
-//             byte[] body;
-//             try {
-//                 response = sendRequest(request, false, 0);
-//                 Log.d(TAG, bundleFile + ": updateBundle: Downloaded, took: " + (System.currentTimeMillis() - startTime));
-//                 body = writeBundleToFile(response);
-//             } finally {
-//                 if (response != null) response.close();
-//             }
-//             if (Utils.isNullOrEmpty(body)) {
-//                 Log.e(TAG, "updateBundle: body is null, returning.");
-//                 return;
-//             }
-//
-//             boolean b = tryExtractTar();
-//             if (!b) {
-//                 Log.e(TAG, "updateBundle: Failed to extract tar");
-//             }
-//         }
-//
-//         logFiles("updateBundle after", ctx);
-    }
-
     public String getLatestVersion() {
         if (ActivityUTILS.isMainThread()) {
             throw new NetworkOnMainThreadException();
@@ -548,7 +427,6 @@ public class APIClient {
             Timber.d("downloadDiff: trying to write to file");
             FileUtils.writeByteArrayToFile(patchFile, patchBytes);
             tempFile = new File(getBundleResource(ctx, BREAD_POINT + "-2temp.tar"));
-            boolean a = tempFile.createNewFile();
             File bundleFile = new File(getBundleResource(ctx, BREAD_POINT + ".tar"));
             FileUI.patch(bundleFile, tempFile, patchFile);
             byte[] updatedBundleBytes = IOUtils.toByteArray(new FileInputStream(tempFile));
@@ -636,87 +514,13 @@ public class APIClient {
 
     }
 
-    public void updateFeatureFlag() {
-        // if (ActivityUTILS.isMainThread()) {
-        //     throw new NetworkOnMainThreadException();
-        // }
-        // String furl = "/me/features";
-        // Request req = new Request.Builder()
-        //         .url(buildUrl(furl))
-        //         .get().build();
-        // Response res = sendRequest(req, true, 0);
-        // if (res == null) {
-        //     Log.e(TAG, "updateFeatureFlag: error fetching features");
-        //     return;
-        // }
-        //
-        // if (!res.isSuccessful()) {
-        //     Log.e(TAG, "updateFeatureFlag: request was unsuccessful: " + res.code() + ":" + res.message());
-        //     return;
-        // }
-        //
-        // try {
-        //     String j = res.body().string();
-        //     if (j.isEmpty()) {
-        //         Log.e(TAG, "updateFeatureFlag: JSON empty");
-        //         return;
-        //     }
-        //
-        //     JSONArray arr = new JSONArray(j);
-        //     for (int i = 0; i < arr.length(); i++) {
-        //         try {
-        //             JSONObject obj = arr.getJSONObject(i);
-        //             String name = obj.getString("name");
-        //             String description = obj.getString("description");
-        //             boolean selected = obj.getBoolean("selected");
-        //             boolean enabled = obj.getBoolean("enabled");
-        //             boolean isPrivate = obj.getBoolean("private");
-        //             BRSharedPrefs.putFeatureEnabled(ctx, enabled, name);
-        //         } catch (Exception e) {
-        //             Log.e(TAG, "malformed feature at position: " + i + ", whole json: " + j, e);
-        //         }
-        //
-        //     }
-        // } catch (IOException | JSONException e) {
-        //     Log.e(TAG, "updateFeatureFlag: failed to pull up features");
-        //     e.printStackTrace();
-        // } finally {
-        //     res.close();
-        // }
-
-    }
-
     public boolean isBreadChallenge(Response resp) {
         String challenge = resp.header("www-authenticate");
         return challenge != null && challenge.startsWith("bread");
     }
 
-    public boolean isFeatureEnabled(String feature) {
-        boolean b = BRSharedPrefs.getFeatureEnabled(ctx, feature);
-        return b;
-    }
-
     public String buildUrl(String path) {
         return BASE_URL + path;
-    }
-
-    private class LoggingInterceptor implements Interceptor {
-        @Override
-        public Response intercept(Interceptor.Chain chain) throws IOException {
-            Request request = chain.request();
-
-            long t1 = System.nanoTime();
-            Timber.d("Sending request %s on %s%n%s",
-                    request.url(), chain.connection(), request.headers());
-
-            Response response = chain.proceed(request);
-
-            long t2 = System.nanoTime();
-            Timber.d("Received response for %s in %.1fms%n%s",
-                    response.request().url(), (t2 - t1) / 1e6d, response.headers());
-
-            return response;
-        }
     }
 
     public void updatePlatform() {
@@ -733,7 +537,6 @@ public class APIClient {
                 Thread.currentThread().setName("UpdateBundle");
                 final long startTime = System.currentTimeMillis();
                 APIClient apiClient = APIClient.getInstance(ctx);
-                apiClient.updateBundle();
                 long endTime = System.currentTimeMillis();
                 Timber.d("updateBundle %s: DONE in %sms", BREAD_POINT, endTime - startTime);
                 itemFinished();
@@ -752,7 +555,6 @@ public class APIClient {
                 Thread.currentThread().setName("updateFeatureFlag");
                 final long startTime = System.currentTimeMillis();
                 APIClient apiClient = APIClient.getInstance(ctx);
-                apiClient.updateFeatureFlag();
                 long endTime = System.currentTimeMillis();
                 Timber.d("updateFeatureFlag: DONE in %sms", endTime - startTime);
                 itemFinished();
@@ -821,7 +623,7 @@ public class APIClient {
 
     //returns the extracted folder or the path in it
     public String getExtractedPath(Context app, String path) {
-        String extracted = app.getFilesDir().getAbsolutePath() + "/" + BREAD_EXTRACTED;
+        String extracted = app.getFilesDir().getAbsolutePath();
         if (Utils.isNullOrEmpty(path)) {
             return extracted;
         } else {
