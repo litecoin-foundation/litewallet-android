@@ -11,7 +11,6 @@ import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.jniwrappers.BRKey;
 import com.platform.APIClient;
-import com.platform.tools.BRBitId;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
@@ -269,22 +268,6 @@ public class PlatformTests {
         Assert.assertNotNull(decompressedData);
         Assert.assertEquals(new String(decompressedData), data);
         Assert.assertNotEquals(compressedData.length, decompressedData.length);
-    }
-
-    @Test
-    public void testBitIdSignature() {
-        BRKey key = new BRKey("c4c9b99b714074736b65d9faab39145949894233a09d8100b91104750a82d31f");
-        String message = "https://breadwallet.com/bitid?nonce=123456789";
-        String expectedSig = "ICWek6XEVxu/1/x+TtWk178t6uFcToH019RWNnS+JEeJOr2XGkZKQwsSqEvJ7l3sfhUoX1jm4uWP7nmlyG5Y10E=";
-        String sig = BRBitId.signMessage(message, key);
-        Log.e(TAG, "sig: " + sig);
-        String expectedAddress = "mjBrDFeeX9moESGiRZZGeYrsUSNuvgwDVV";
-        String address = key.address();
-        Log.e(TAG, "address: " + address);
-        Assert.assertEquals(expectedAddress, address);
-        Assert.assertNotNull(sig);
-        Assert.assertEquals(expectedSig.length(), sig.length());
-        Assert.assertEquals(expectedSig, sig);
     }
 
 }

@@ -26,7 +26,6 @@ import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.LocaleHelper;
 import com.breadwallet.wallet.BRWalletManager;
 import com.platform.HTTPServer;
-import com.platform.tools.BRBitId;
 
 import timber.log.Timber;
 
@@ -99,13 +98,6 @@ public class BRActivity extends FragmentActivity {
                     });
                 }
                 break;
-            case BRConstants.REQUEST_PHRASE_BITID:
-                if (resultCode == RESULT_OK) {
-                    PostAuth.getInstance().onBitIDAuth(BRActivity.this, true);
-
-                }
-                break;
-
             case BRConstants.PAYMENT_PROTOCOL_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
                     PostAuth.getInstance().onPaymentProtocolRequest(this, true);
@@ -146,22 +138,8 @@ public class BRActivity extends FragmentActivity {
                             String result = data.getStringExtra("result");
                             if (BitcoinUrlHandler.isBitcoinUrl(result))
                                 BitcoinUrlHandler.processRequest(BRActivity.this, result);
-                            else if (BRBitId.isBitId(result))
-                                BRBitId.signBitID(BRActivity.this, result, null);
                             else
                                 Timber.i("onActivityResult: not litecoin address NOR bitID");
-                        }
-                    }, 500);
-
-                }
-                break;
-            case BRConstants.SCANNER_BCH_REQUEST:
-                if (resultCode == Activity.RESULT_OK) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            String result = data.getStringExtra("result");
-                            PostAuth.getInstance().onSendBch(BRActivity.this, true, result);
                         }
                     }, 500);
 

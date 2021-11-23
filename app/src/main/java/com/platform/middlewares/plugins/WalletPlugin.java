@@ -11,7 +11,6 @@ import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 import com.platform.BRHTTPHelper;
 import com.platform.interfaces.Plugin;
-import com.platform.tools.BRBitId;
 
 import org.apache.commons.compress.utils.IOUtils;
 import org.eclipse.jetty.continuation.Continuation;
@@ -165,7 +164,6 @@ public class WalletPlugin implements Plugin {
                 continuation = ContinuationSupport.getContinuation(request);
                 continuation.suspend(response);
                 globalBaseRequest = baseRequest;
-                BRBitId.signBitID(app, null, obj);
             } catch (JSONException e) {
                 Timber.e(e);
                 return BRHTTPHelper.handleError(400, "failed to parse json", baseRequest, response);
