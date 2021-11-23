@@ -12,7 +12,6 @@ import com.breadwallet.presenter.activities.PaperKeyActivity;
 import com.breadwallet.presenter.activities.PaperKeyProveActivity;
 import com.breadwallet.presenter.activities.SetPinActivity;
 import com.breadwallet.presenter.activities.intro.WriteDownActivity;
-import com.breadwallet.presenter.activities.settings.WithdrawBchActivity;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.PaymentItem;
@@ -27,7 +26,6 @@ import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 import com.platform.APIClient;
 import com.platform.entities.TxMetaData;
-import com.platform.tools.BRBitId;
 import com.platform.tools.KVStoreManager;
 
 import java.io.IOException;
@@ -138,10 +136,6 @@ public class PostAuth {
         intent.putExtra("phrase", cleanPhrase);
         app.startActivity(intent);
         app.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-    }
-
-    public void onBitIDAuth(Activity app, boolean authenticated) {
-        BRBitId.completeBitID(app, authenticated);
     }
 
     public void onRecoverWalletAuth(Activity app, boolean authAsked) {
@@ -312,10 +306,6 @@ public class PostAuth {
                         }
                     } finally {
                         if (response != null) response.close();
-                    }
-                    if (!success) {
-                        BRSharedPrefs.putBCHTxId(app, "");
-                        WithdrawBchActivity.updateUi(app);
                     }
 
                     final String finalTitle = title;

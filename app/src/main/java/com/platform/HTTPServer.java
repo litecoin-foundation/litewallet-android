@@ -89,16 +89,8 @@ public class HTTPServer {
 
         HandlerCollection handlerCollection = new HandlerCollection();
 
-        WebSocketHandler wsHandler = new WebSocketHandler() {
-            @Override
-            public void configure(WebSocketServletFactory factory) {
-                factory.register(BRGeoWebSocketHandler.class);
-            }
-        };
-
         ServerHandler serverHandler = new ServerHandler();
         handlerCollection.addHandler(serverHandler);
-        handlerCollection.addHandler(wsHandler);
 
         server.setHandler(handlerCollection);
 

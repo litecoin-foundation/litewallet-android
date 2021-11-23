@@ -46,7 +46,6 @@ public class BRConstants {
      * Permissions
      */
     public static final int CAMERA_REQUEST_ID = 34;
-    public static final int GEO_REQUEST_ID = 35;
 
     /**
      * Request codes for auth
@@ -57,7 +56,6 @@ public class BRConstants {
     public static final int PUT_PHRASE_NEW_WALLET_REQUEST_CODE = 114;
     public static final int PUT_PHRASE_RECOVERY_WALLET_REQUEST_CODE = 115;
     public static final int PAYMENT_PROTOCOL_REQUEST_CODE = 116;
-    public static final int REQUEST_PHRASE_BITID = 117;
     public static final int SEND_BCH_REQUEST = 118;
     public static final int PROVE_PHRASE_REQUEST = 119;
 
@@ -65,15 +63,12 @@ public class BRConstants {
      * Request codes for take picture
      */
     public static final int SCANNER_REQUEST = 201;
-    public static final int SCANNER_BCH_REQUEST = 202;
-    public static final int REQUEST_IMAGE_CAPTURE = 203;
 
     public static final String CANARY_STRING = "canary";
     public static final String FIRST_ADDRESS = "firstAddress";
     public static final String SECURE_TIME_PREFS = "secureTime";
     public static final String FEE_KB_PREFS = "feeKb";
     public static final String ECONOMY_FEE_KB_PREFS = "EconomyFeeKb";
-    public static final String LITTLE_CIRCLE = "\u2022";
 
     public static String SUPPORT_EMAIL = "support@litecoinfoundation.zendesk.com";
 
@@ -121,8 +116,6 @@ public class BRConstants {
     /**
      * Support Center article ids.
      */
-    public static final String receive = "receive-litecoin";
-    public static final String send = "send-litecoin";
     public static final String loopBug = "android-loop-bug";
 
     public static final String TWITTER_LINK = "https://twitter.com/Litewallet_App";
