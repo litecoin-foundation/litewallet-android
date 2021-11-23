@@ -120,8 +120,6 @@
   <string name="Button.submit">Överlämna</string>
   <!-- Yes button -->
   <string name="Button.yes">Ja</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">Centrera ditt ID i boxen</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">Belopp att skicka:</string>
   <!-- Network Fee: ($1.00) -->

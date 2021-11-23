@@ -120,8 +120,6 @@
   <string name="Button.submit">전송</string>
   <!-- Yes button -->
   <string name="Button.yes">예</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">박스안에 귀하의 ID를 중앙에 두세요</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">보낼 금액:</string>
   <!-- Network Fee: ($1.00) -->
