@@ -25,7 +25,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.settings.SecurityCenterActivity;
 import com.breadwallet.presenter.activities.settings.SettingsActivity;
-import com.breadwallet.presenter.activities.settings.WebViewActivity;
 import com.breadwallet.presenter.entities.BRMenuItem;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.SlideDetector;
@@ -35,31 +34,6 @@ import com.platform.HTTPServer;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * BreadWallet
- * <p>
- * Created by Mihail Gutan <mihail@breadwallet.com> on 6/29/15.
- * Copyright (c) 2016 breadwallet LLC
- * <p>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 
 public class FragmentMenu extends Fragment {
 
@@ -82,37 +56,34 @@ public class FragmentMenu extends Fragment {
         });
 
         itemList = new ArrayList<>();
-        boolean buyBitcoinEnabled = APIClient.getInstance(getActivity()).isFeatureEnabled(APIClient.FeatureFlags.BUY_BITCOIN.toString());
-        if (buyBitcoinEnabled) {
-            itemList.add(new BRMenuItem(getString(R.string.MenuButton_buy), R.drawable.buy_bitcoin, v -> {
-                Intent intent = new Intent(getActivity(), WebViewActivity.class);
-                intent.putExtra(WebViewActivity.URL_EXTRA, HTTPServer.URL_BUY);
-                launchActivity(intent);
-            }));
-        }
 
+        /* Security Center */
         itemList.add(new BRMenuItem(getString(R.string.MenuButton_security), R.drawable.ic_shield, v -> {
             Intent intent = new Intent(getActivity(), SecurityCenterActivity.class);
             launchActivity(intent);
         }));
 
+        /* Customer Support */
         itemList.add(new BRMenuItem(getString(R.string.MenuButton_support), R.drawable.faq_question_black, v -> {
             CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
             CustomTabsIntent customTabsIntent = builder.build();
             customTabsIntent.launchUrl(getContext(), Uri.parse(BRConstants.CUSTOMER_SUPPORT_LINK));
         }));
 
+        /* Settings */
         itemList.add(new BRMenuItem(getString(R.string.MenuButton_settings), R.drawable.ic_settings, v -> {
             Intent intent = new Intent(getActivity(), SettingsActivity.class);
             launchActivity(intent);
         }));
 
+        /* Lock Wallet */
         itemList.add(new BRMenuItem(getString(R.string.MenuButton_lock), R.drawable.ic_lock, v -> {
             final Activity from = getActivity();
             from.getFragmentManager().popBackStack();
             BRAnimator.startBreadActivity(from, true);
         }));
 
+        /* Close button*/
         rootView.findViewById(R.id.close_button).setOnClickListener(v -> {
             Activity app = getActivity();
             app.getFragmentManager().popBackStack();
