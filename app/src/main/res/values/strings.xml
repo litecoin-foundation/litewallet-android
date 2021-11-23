@@ -118,8 +118,6 @@
   <string name="Button.submit">Submit</string>
   <!-- Yes button -->
   <string name="Button.yes">Yes</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">Center your ID in the box</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">Amount to Send:</string>
   <!-- Network Fee: ($1.00) -->
