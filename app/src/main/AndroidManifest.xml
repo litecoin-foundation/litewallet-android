@@ -183,11 +183,6 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".presenter.activities.settings.WebViewActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
             android:name=".presenter.activities.DisabledActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
