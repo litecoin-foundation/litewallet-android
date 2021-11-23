@@ -118,8 +118,6 @@
   <string name="Button.submit">Sunmak</string>
   <!-- Yes button -->
   <string name="Button.yes">Evet</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">Kimliğinizi kutuda ortalayın</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">Gönderilecek tutar:</string>
   <!-- Network Fee: ($1.00) -->

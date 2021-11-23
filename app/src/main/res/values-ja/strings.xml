@@ -120,8 +120,6 @@
   <string name="Button.submit">提出</string>
   <!-- Yes button -->
   <string name="Button.yes">はい</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">ご自身のIDをこのボックス内で中央に配置してください</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">送金する数量：</string>
   <!-- Network Fee: ($1.00) -->

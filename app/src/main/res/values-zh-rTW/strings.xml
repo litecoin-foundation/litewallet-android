@@ -120,8 +120,6 @@
   <string name="Button.submit">提交</string>
   <!-- Yes button -->
   <string name="Button.yes">要</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">將您的 ID 在方塊置中</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">寄送金額：</string>
   <!-- Network Fee: ($1.00) -->

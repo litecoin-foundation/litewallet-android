@@ -120,8 +120,6 @@
   <string name="Button.submit">提交</string>
   <!-- Yes button -->
   <string name="Button.yes">是</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">将您的身份证号集中在方框中</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">发送金额：</string>
   <!-- Network Fee: ($1.00) -->

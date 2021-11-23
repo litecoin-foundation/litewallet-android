@@ -120,8 +120,6 @@
   <string name="Button.submit">Indienen</string>
   <!-- Yes button -->
   <string name="Button.yes">Ja</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">Centreer je ID in het vak</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">Bedrag om te Versturen:</string>
   <!-- Network Fee: ($1.00) -->

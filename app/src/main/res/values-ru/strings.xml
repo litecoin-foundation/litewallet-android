@@ -120,8 +120,6 @@
   <string name="Button.submit">Отправить</string>
   <!-- Yes button -->
   <string name="Button.yes">Да</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">Поместите ваш ID-номер в центр данного поля</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">Сумма для отправки:</string>
   <!-- Network Fee: ($1.00) -->
