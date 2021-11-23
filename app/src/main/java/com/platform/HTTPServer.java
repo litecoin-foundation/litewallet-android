@@ -15,7 +15,6 @@ import com.platform.middlewares.APIProxy;
 import com.platform.middlewares.HTTPFileMiddleware;
 import com.platform.middlewares.HTTPIndexMiddleware;
 import com.platform.middlewares.HTTPRouter;
-import com.platform.middlewares.plugins.GeoLocationPlugin;
 import com.platform.middlewares.plugins.KVStorePlugin;
 import com.platform.middlewares.plugins.LinkPlugin;
 import com.platform.middlewares.plugins.WalletPlugin;
@@ -212,10 +211,6 @@ public class HTTPServer {
         // middleware to always return index.html for any unknown GET request (facilitates window.history style SPAs)
         HTTPIndexMiddleware httpIndexMiddleware = new HTTPIndexMiddleware();
         middlewares.add(httpIndexMiddleware);
-
-        // geo plugin provides access to onboard geo location functionality
-        Plugin geoLocationPlugin = new GeoLocationPlugin();
-        httpRouter.appendPlugin(geoLocationPlugin);
 
         // wallet plugin provides access to the wallet
         Plugin walletPlugin = new WalletPlugin();
