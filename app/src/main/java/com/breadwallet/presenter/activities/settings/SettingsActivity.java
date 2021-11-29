@@ -23,7 +23,6 @@ import com.breadwallet.presenter.interfaces.BRAuthCompletion;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.security.AuthManager;
 import com.platform.APIClient;
-import com.platform.HTTPServer;
 
 import java.util.ArrayList;
 import java.util.List;
