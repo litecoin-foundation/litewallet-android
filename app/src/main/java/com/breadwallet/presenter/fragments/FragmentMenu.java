@@ -30,7 +30,6 @@ import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.SlideDetector;
 import com.breadwallet.tools.util.BRConstants;
 import com.platform.APIClient;
-import com.platform.HTTPServer;
 
 import java.util.ArrayList;
 import java.util.List;
