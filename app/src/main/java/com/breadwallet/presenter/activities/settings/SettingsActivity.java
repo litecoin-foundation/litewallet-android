@@ -23,7 +23,6 @@ import com.breadwallet.presenter.interfaces.BRAuthCompletion;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.security.AuthManager;
 import com.platform.APIClient;
-import com.platform.HTTPServer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +47,6 @@ public class SettingsActivity extends BRActivity {
 
         listView = findViewById(R.id.settings_list);
     }
-
 
     public class SettingsListAdapter extends ArrayAdapter<String> {
 
@@ -116,8 +114,11 @@ public class SettingsActivity extends BRActivity {
     }
 
     private void populateItems() {
+
+        /*Wallet Title*/
         items.add(new BRSettingsItem(getString(R.string.Settings_wallet), "", null, true));
 
+        /*Import Title*/
         items.add(new BRSettingsItem(getString(R.string.Settings_importTitle), "", v -> {
             Intent intent = new Intent(SettingsActivity.this, ImportActivity.class);
             startActivity(intent);
@@ -125,14 +126,17 @@ public class SettingsActivity extends BRActivity {
 
         }, false));
 
+        /*Wipe Start_Recover Wallet*/
         items.add(new BRSettingsItem(getString(R.string.Settings_wipe), "", v -> {
             Intent intent = new Intent(SettingsActivity.this, WipeActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
         }, false));
 
+        /*Manage Title*/
         items.add(new BRSettingsItem(getString(R.string.Settings_manage), "", null, true));
 
+        /*Fingerprint Limits*/
         if (AuthManager.isFingerPrintAvailableAndSetup(this)) {
             items.add(new BRSettingsItem(getString(R.string.Settings_touchIdLimit_android), "", v -> AuthManager.getInstance().authPrompt(SettingsActivity.this, null, getString(R.string.VerifyPin_continueBody), true, false, new BRAuthCompletion() {
                 @Override
@@ -149,61 +153,60 @@ public class SettingsActivity extends BRActivity {
             }), false));
         }
 
+        /*Languages*/
         items.add(new BRSettingsItem(getString(R.string.Settings_languages), null, v -> {
             ChangeLanguageBottomSheet fragment = new ChangeLanguageBottomSheet();
             fragment.show(getSupportFragmentManager(), fragment.getTag());
         }, false));
 
+        /*Display Currency*/
         items.add(new BRSettingsItem(getString(R.string.Settings_currency), BRSharedPrefs.getIso(this), v -> {
             Intent intent = new Intent(SettingsActivity.this, DisplayCurrencyActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }, false));
 
+        /*Sync Blockchain*/
         items.add(new BRSettingsItem(getString(R.string.Settings_sync), "", v -> {
             Intent intent = new Intent(SettingsActivity.this, SyncBlockchainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }, false));
 
+        /*SPACER*/
         items.add(new BRSettingsItem("", "", null, true));
 
+        /*Share Anonymous Data*/
         items.add(new BRSettingsItem(getString(R.string.Settings_shareData), "", v -> {
             Intent intent = new Intent(SettingsActivity.this, ShareDataActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }, false));
 
-        boolean eaEnabled = APIClient.getInstance(this).isFeatureEnabled(APIClient.FeatureFlags.EARLY_ACCESS.toString());
-        eaEnabled = false;
-        if (eaEnabled)
-            items.add(new BRSettingsItem(getString(R.string.Settings_earlyAccess), "", v -> {
-                Intent intent = new Intent(SettingsActivity.this, WebViewActivity.class);
-                intent.putExtra(WebViewActivity.URL_EXTRA, HTTPServer.URL_EA);
-                Activity app = SettingsActivity.this;
-                app.startActivity(intent);
-                app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
-            }, false));
-
+        /*About*/
         items.add(new BRSettingsItem(getString(R.string.Settings_about), "", v -> {
             Intent intent = new Intent(SettingsActivity.this, AboutActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }, false));
 
+        /*SPACER*/
         items.add(new BRSettingsItem("", "", null, true));
 
+        /*Advanced Settings*/
         items.add(new BRSettingsItem(getString(R.string.Settings_advancedTitle), "", v -> {
             Intent intent = new Intent(SettingsActivity.this, AdvancedActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }, false));
 
-        items.add(new BRSettingsItem("", "", null, true)); //just for a blank space
+        /*SPACER*/
+        items.add(new BRSettingsItem("", "", null, true));
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override

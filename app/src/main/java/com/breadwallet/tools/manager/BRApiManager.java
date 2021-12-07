@@ -32,31 +32,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import timber.log.Timber;
 
-/**
- * BreadWallet
- * <p>
- * Created by Mihail Gutan <mihail@breadwallet.com> on 7/22/15.
- * Copyright (c) 2016 breadwallet LLC
- * <p>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
 public class BRApiManager {
     private static BRApiManager instance;
     private Timer timer;
@@ -155,9 +130,8 @@ public class BRApiManager {
         }
     }
 
-
     public static JSONArray fetchRates(Activity activity) {
-        String jsonString = urlGET(activity, "https://api.loshan.co.uk/api/v1/rates");
+        String jsonString = createGETRequestURL(activity, "https://api.loshan.co.uk/api/v1/rates");
         JSONArray jsonArray = null;
         if (jsonString == null) return null;
         try {
@@ -169,7 +143,7 @@ public class BRApiManager {
     }
 
     public static JSONArray backupFetchRates(Activity activity) {
-        String jsonString = urlGET(activity, "https://api.loafwallet.org/api/v1/rates");
+        String jsonString = createGETRequestURL(activity, "https://api.loafwallet.org/api/v1/rates");
 
         JSONArray jsonArray = null;
         if (jsonString == null) return null;
@@ -183,7 +157,7 @@ public class BRApiManager {
     }
 
     public static void updateFeePerKb(Context app) {
-        String jsonString = urlGET(app, "https://api.loafwallet.org/fee-per-kb");
+        String jsonString = createGETRequestURL(app, "https://api.loafwallet.org/fee-per-kb");
         if (jsonString == null || jsonString.isEmpty()) {
             Timber.i("updateFeePerKb: failed to update fee, response string: %s", jsonString);
             return;
@@ -201,7 +175,9 @@ public class BRApiManager {
         }
     }
 
-    private static String urlGET(Context app, String myURL) {
+    // createGETRequestURL
+    // Creates the params and headers to make a GET Request
+    private static String createGETRequestURL(Context app, String myURL) {
         Request request = new Request.Builder()
                 .url(myURL)
                 .header("Content-Type", "application/json")

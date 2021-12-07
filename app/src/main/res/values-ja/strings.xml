@@ -66,40 +66,6 @@
   <string name="ApiClient.notReady">ウォレットの準備ができていません</string>
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">APIトークンを取得できません</string>
-  <!-- Send BCH view body. -->
-  <string name="BCH.body">送金先のBCHアドレスを入力してください。フォーク時（%1$s）にウォレット内にあった全てのBCHが送られます。</string>
-  <!-- Confirm sending <$5.00> to <address>? -->
-  <string name="BCH.confirmationMessage">%1$sを%2$sに送金することを確認する</string>
-  <!-- Confirmation alert title -->
-  <string name="BCH.confirmationTitle">承認</string>
-  <!-- Generic bch erorr message -->
-  <string name="BCH.genericError">アカウントにBCHがない、またはフォークの後にBCHを受け取っています。</string>
-  <!-- Transaction ID copied message -->
-  <string name="BCH.hashCopiedMessage">トランザクションIDをコピー済み</string>
-  <!-- No address error message -->
-  <string name="BCH.noAddressError">アドレスを入力してください</string>
-  <!-- Attempted to scan unsupported qr code error message. -->
-  <string name="BCH.paymentProtocolError">BCHのトランザクションでペイメントプロトコルリクエストはサポートされていません。</string>
-  <!-- BCH successfully sent alert message -->
-  <string name="BCH.successMessage">BCHの送金に成功しました。</string>
-  <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">BCHを引き出す</string>
-  <!-- Tx Hash button header -->
-  <string name="BCH.txHashHeader">BCHのトランザクションID</string>
-  <!-- Approve button label -->
-  <string name="BitID.approve">承認する</string>
-  <!-- <sitename> is requesting authentication using your bitcoin wallet -->
-  <string name="BitID.authenticationRequest">%1$sがライトコインウォレットを使っての認証を求めています</string>
-  <!-- Deny button label -->
-  <string name="BitID.deny">拒否する</string>
-  <!-- BitID error alert title -->
-  <string name="BitID.error">認証エラー</string>
-  <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
-  <string name="BitID.errorMessage">サービスを確認してください。やり直さなければいけない可能性もあります。</string>
-  <!-- BitID success alert title -->
-  <string name="BitID.success">認証成功</string>
-  <!-- BitID Authentication Request alert view title -->
-  <string name="BitID.title">BitID認証リクエスト</string>
   <!-- Cancel button label -->
   <string name="Button.cancel">キャンセル</string>
   <!-- Ignore button label -->
@@ -120,8 +86,6 @@
   <string name="Button.submit">提出</string>
   <!-- Yes button -->
   <string name="Button.yes">はい</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">ご自身のIDをこのボックス内で中央に配置してください</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">送金する数量：</string>
   <!-- Network Fee: ($1.00) -->

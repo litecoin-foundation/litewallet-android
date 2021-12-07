@@ -12,7 +12,6 @@ import com.breadwallet.presenter.activities.PaperKeyActivity;
 import com.breadwallet.presenter.activities.PaperKeyProveActivity;
 import com.breadwallet.presenter.activities.SetPinActivity;
 import com.breadwallet.presenter.activities.intro.WriteDownActivity;
-import com.breadwallet.presenter.activities.settings.WithdrawBchActivity;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.PaymentItem;
@@ -27,7 +26,6 @@ import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 import com.platform.APIClient;
 import com.platform.entities.TxMetaData;
-import com.platform.tools.BRBitId;
 import com.platform.tools.KVStoreManager;
 
 import java.io.IOException;
@@ -38,31 +36,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import timber.log.Timber;
-
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan <mihail@breadwallet.com> on 4/14/16.
- * Copyright (c) 2016 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 
 public class PostAuth {
     private String phraseForKeyStore;
@@ -138,10 +111,6 @@ public class PostAuth {
         intent.putExtra("phrase", cleanPhrase);
         app.startActivity(intent);
         app.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-    }
-
-    public void onBitIDAuth(Activity app, boolean authenticated) {
-        BRBitId.completeBitID(app, authenticated);
     }
 
     public void onRecoverWalletAuth(Activity app, boolean authAsked) {
@@ -236,103 +205,6 @@ public class PostAuth {
             }
         } finally {
             Arrays.fill(seed, (byte) 0);
-        }
-    }
-
-    public void onSendBch(final Activity app, boolean authAsked, String bchAddress) {
-        byte[] phrase;
-        try {
-            phrase = BRKeyStore.getPhrase(app, BRConstants.SEND_BCH_REQUEST);
-        } catch (UserNotAuthenticatedException e) {
-            if (authAsked) {
-                Timber.d("%s: WARNING!!!! LOOP", new Object() {
-                }.getClass().getEnclosingMethod().getName());
-                isStuckWithAuthLoop = true;
-            }
-            return;
-        }
-        if (Utils.isNullOrEmpty(phrase)) {
-            Timber.e(new RuntimeException("phrase is malformed: " + (phrase == null ? null : phrase.length)));
-            return;
-        }
-
-        byte[] nullTerminatedPhrase = TypesConverter.getNullTerminatedPhrase(phrase);
-        final byte[] serializedTx = BRWalletManager.sweepBCash(BRKeyStore.getMasterPublicKey(app), bchAddress, nullTerminatedPhrase);
-        assert (serializedTx != null);
-        if (serializedTx == null) {
-            Timber.d("onSendBch:serializedTx is null");
-            BRDialog.showCustomDialog(app, app.getString(R.string.Alert_error), app.getString(R.string.BCH_genericError), app.getString(R.string.AccessibilityLabels_close), null,
-                    new BRDialogView.BROnClickListener() {
-                        @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            brDialogView.dismissWithAnimation();
-                        }
-                    }, null, null, 0);
-        } else {
-            Timber.d("onSendBch:serializedTx is:%s", serializedTx.length);
-            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
-                @Override
-                public void run() {
-                    String title = "Failed";
-                    String message = "";
-                    String strUtl = "https://" + BreadApp.HOST + "/bch/publish-transaction";
-                    Timber.d("url: %s", strUtl);
-                    final MediaType type
-                            = MediaType.parse("application/bchdata");
-                    RequestBody requestBody = RequestBody.create(type, serializedTx);
-                    Request request = new Request.Builder()
-                            .url(strUtl)
-                            .header("Content-Type", "application/bchdata")
-                            .post(requestBody).build();
-                    Response response = APIClient.getInstance(app).sendRequest(request, true, 0);
-                    boolean success = true;
-                    try {
-                        String responseBody = null;
-                        try {
-                            responseBody = response == null ? null : response.body().string();
-                        } catch (IOException e) {
-                            Timber.e(e);
-                        }
-                        Timber.d("onSendBch:%s", (response == null ? "resp is null" : response.code() + ":" + response.message()));
-
-                        if (response != null) {
-                            title = app.getString(R.string.WipeWallet_failedTitle);
-                            if (response.isSuccessful()) {
-                                title = app.getString(R.string.Import_success);
-                                message = "";
-                            } else if (response.code() == 503) {
-                                message = app.getString(R.string.BCH_genericError);
-                            } else {
-                                success = false;
-                                message = "(" + response.code() + ")" + "[" + response.message() + "]" + responseBody;
-                            }
-                        } else {
-                            title = app.getString(R.string.Alerts_sendFailure);
-                            message = "Something went wrong";
-                        }
-                    } finally {
-                        if (response != null) response.close();
-                    }
-                    if (!success) {
-                        BRSharedPrefs.putBCHTxId(app, "");
-                        WithdrawBchActivity.updateUi(app);
-                    }
-
-                    final String finalTitle = title;
-                    final String finalMessage = message;
-                    BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            BRDialog.showCustomDialog(app, finalTitle, finalMessage, app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
-                                @Override
-                                public void onClick(BRDialogView brDialogView) {
-                                    brDialogView.dismissWithAnimation();
-                                }
-                            }, null, null, 0);
-                        }
-                    });
-                }
-            });
         }
     }
 

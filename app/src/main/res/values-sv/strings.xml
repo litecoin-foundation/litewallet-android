@@ -66,40 +66,6 @@
   <string name="ApiClient.notReady">Plånboken ej redo</string>
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">Kan inte ta emot API-symbol</string>
-  <!-- Send BCH view body. -->
-  <string name="BCH.body">Ange mottagarens BCH-adress nedan. Alla BCH i din plånbok vid nästa fork (%1$s) kommer skickas.</string>
-  <!-- Confirm sending <$5.00> to <address>? -->
-  <string name="BCH.confirmationMessage">Bekräfta skickar %1$s till %2$s</string>
-  <!-- Confirmation alert title -->
-  <string name="BCH.confirmationTitle">Bekräftelse</string>
-  <!-- Generic bch erorr message -->
-  <string name="BCH.genericError">Ditt konto har inte några BCH, eller så tar du emot BCH först efter nästa fork.</string>
-  <!-- Transaction ID copied message -->
-  <string name="BCH.hashCopiedMessage">Transaktions-ID kopierat</string>
-  <!-- No address error message -->
-  <string name="BCH.noAddressError">Var god ange en adress</string>
-  <!-- Attempted to scan unsupported qr code error message. -->
-  <string name="BCH.paymentProtocolError">Betalningsprotokollsbegäran stöds inte för BCH-transaktioner</string>
-  <!-- BCH successfully sent alert message -->
-  <string name="BCH.successMessage">BCH skickades.</string>
-  <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">Ta ut BCH</string>
-  <!-- Tx Hash button header -->
-  <string name="BCH.txHashHeader">BCH transaktions-ID</string>
-  <!-- Approve button label -->
-  <string name="BitID.approve">Godkänn</string>
-  <!-- <sitename> is requesting authentication using your bitcoin wallet -->
-  <string name="BitID.authenticationRequest">%1$s begär autentisering med hjälp av din Litecoin-plånbok</string>
-  <!-- Deny button label -->
-  <string name="BitID.deny">Avslå</string>
-  <!-- BitID error alert title -->
-  <string name="BitID.error">Autentiseringsfel</string>
-  <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
-  <string name="BitID.errorMessage">Var god kontrollera med tjänsten. Du kan behöva försöka igen.</string>
-  <!-- BitID success alert title -->
-  <string name="BitID.success">Autentiseringen lyckades</string>
-  <!-- BitID Authentication Request alert view title -->
-  <string name="BitID.title">BitId autentiseringsförfrågan</string>
   <!-- Cancel button label -->
   <string name="Button.cancel">Avbryt</string>
   <!-- Ignore button label -->
@@ -120,8 +86,6 @@
   <string name="Button.submit">Överlämna</string>
   <!-- Yes button -->
   <string name="Button.yes">Ja</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">Centrera ditt ID i boxen</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">Belopp att skicka:</string>
   <!-- Network Fee: ($1.00) -->
