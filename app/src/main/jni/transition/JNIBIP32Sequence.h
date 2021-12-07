@@ -1,6 +1,3 @@
-//
-// Created by Mihail Gutan on 1/24/17.
-//
 
 #ifndef BREADWALLET_JNIBIP32SEQUENCE_H
 #define BREADWALLET_JNIBIP32SEQUENCE_H

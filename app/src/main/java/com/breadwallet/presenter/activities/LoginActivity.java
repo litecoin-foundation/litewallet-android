@@ -209,8 +209,6 @@ public class LoginActivity extends BRActivity {
         if (!BRWalletManager.getInstance().isCreated()) {
             BRExecutor.getInstance().forBackgroundTasks().execute(() -> BRWalletManager.getInstance().initWallet(LoginActivity.this));
         }
-        if (PLATFORM_ON)
-            APIClient.getInstance(this).updatePlatform();
     }
 
     @Override

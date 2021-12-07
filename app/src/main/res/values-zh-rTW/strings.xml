@@ -66,40 +66,6 @@
   <string name="ApiClient.notReady">電子錢包尚未就緒</string>
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">無法擷取 API 權杖</string>
-  <!-- Send BCH view body. -->
-  <string name="BCH.body">在下方輸入目的地 BCH 地址。分叉（%1$s）之時錢包內所有的 BCH 都會送出。</string>
-  <!-- Confirm sending <$5.00> to <address>? -->
-  <string name="BCH.confirmationMessage">確定送出 %1$s 至 %2$s</string>
-  <!-- Confirmation alert title -->
-  <string name="BCH.confirmationTitle">確認</string>
-  <!-- Generic bch erorr message -->
-  <string name="BCH.genericError">您的帳戶內沒有任何 BCH，或您是在分叉後取得 BCH。</string>
-  <!-- Transaction ID copied message -->
-  <string name="BCH.hashCopiedMessage">已複制交易 ID</string>
-  <!-- No address error message -->
-  <string name="BCH.noAddressError">請輸入地位</string>
-  <!-- Attempted to scan unsupported qr code error message. -->
-  <string name="BCH.paymentProtocolError">BCH 交易不支援付款組合要求</string>
-  <!-- BCH successfully sent alert message -->
-  <string name="BCH.successMessage">BCH 已成功寄送。</string>
-  <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">提取 BCH</string>
-  <!-- Tx Hash button header -->
-  <string name="BCH.txHashHeader">BCH 交易 ID</string>
-  <!-- Approve button label -->
-  <string name="BitID.approve">許可</string>
-  <!-- <sitename> is requesting authentication using your bitcoin wallet -->
-  <string name="BitID.authenticationRequest">%1$s 要求認證使用您的比特幣錢包</string>
-  <!-- Deny button label -->
-  <string name="BitID.deny">拒絕</string>
-  <!-- BitID error alert title -->
-  <string name="BitID.error">認證錯誤</string>
-  <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
-  <string name="BitID.errorMessage">請檢查服務。您可能必須重試一次。</string>
-  <!-- BitID success alert title -->
-  <string name="BitID.success">認證成功。</string>
-  <!-- BitID Authentication Request alert view title -->
-  <string name="BitID.title">要求認證比特 ID</string>
   <!-- Cancel button label -->
   <string name="Button.cancel">取消</string>
   <!-- Ignore button label -->
@@ -120,8 +86,6 @@
   <string name="Button.submit">提交</string>
   <!-- Yes button -->
   <string name="Button.yes">要</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">將您的 ID 在方塊置中</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">寄送金額：</string>
   <!-- Network Fee: ($1.00) -->
