@@ -66,40 +66,6 @@
   <string name="ApiClient.notReady">지갑 준비 안됨</string>
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">API 토큰을 가져올 수 없습니다</string>
-  <!-- Send BCH view body. -->
-  <string name="BCH.body">아래의 목적지 BCH 주소를 입력하세요. 분기 시점(%1$s)에 귀하의 월렛에 있는 모든 BCH를 보냅니다.</string>
-  <!-- Confirm sending <$5.00> to <address>? -->
-  <string name="BCH.confirmationMessage">%1$s를 %2$s(으)로 보내기를 확인</string>
-  <!-- Confirmation alert title -->
-  <string name="BCH.confirmationTitle">확정</string>
-  <!-- Generic bch erorr message -->
-  <string name="BCH.genericError">귀하의 계정에는 BCH가 없거나, 분기 이후에 BCH를 받으셨습니다.</string>
-  <!-- Transaction ID copied message -->
-  <string name="BCH.hashCopiedMessage">Transaction ID 복사됨</string>
-  <!-- No address error message -->
-  <string name="BCH.noAddressError">주소를 입력해 주세요</string>
-  <!-- Attempted to scan unsupported qr code error message. -->
-  <string name="BCH.paymentProtocolError">Payment Protocol Request는 BCH 트랜잭션에서 지원되지 않습니다</string>
-  <!-- BCH successfully sent alert message -->
-  <string name="BCH.successMessage">BCH를 성공적으로 보냈습니다.</string>
-  <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">BCH 인출</string>
-  <!-- Tx Hash button header -->
-  <string name="BCH.txHashHeader">BCH Transaction ID</string>
-  <!-- Approve button label -->
-  <string name="BitID.approve">승인</string>
-  <!-- <sitename> is requesting authentication using your bitcoin wallet -->
-  <string name="BitID.authenticationRequest">%1$s(이)가 귀하의 라이트코인 월렛 이용에 대한 인증을 요청하고 있습니다.</string>
-  <!-- Deny button label -->
-  <string name="BitID.deny">거부</string>
-  <!-- BitID error alert title -->
-  <string name="BitID.error">인증 오류</string>
-  <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
-  <string name="BitID.errorMessage">서비스 측에 확인해 주세요. 다시 시도해야 할 수도 있습니다.</string>
-  <!-- BitID success alert title -->
-  <string name="BitID.success">성공적으로 인증됨</string>
-  <!-- BitID Authentication Request alert view title -->
-  <string name="BitID.title">BitID 인증 요청</string>
   <!-- Cancel button label -->
   <string name="Button.cancel">취소</string>
   <!-- Ignore button label -->
@@ -120,8 +86,6 @@
   <string name="Button.submit">전송</string>
   <!-- Yes button -->
   <string name="Button.yes">예</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">박스안에 귀하의 ID를 중앙에 두세요</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">보낼 금액:</string>
   <!-- Network Fee: ($1.00) -->

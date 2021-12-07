@@ -66,40 +66,6 @@
   <string name="ApiClient.notReady">Carteira não preparada</string>
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">Não foi possível obter o token API</string>
-  <!-- Send BCH view body. -->
-  <string name="BCH.body">Introduza abaixo um endereço de destino da BCH. Toda a BCH que estiver na sua conta no momento da divisão (%1$s) será enviada.</string>
-  <!-- Confirm sending <$5.00> to <address>? -->
-  <string name="BCH.confirmationMessage">Confirme o envio de %1$s para %2$s</string>
-  <!-- Confirmation alert title -->
-  <string name="BCH.confirmationTitle">Confirmação</string>
-  <!-- Generic bch erorr message -->
-  <string name="BCH.genericError">A sua conta não contém qualquer BCH, ou recebeu as BCH depois da divisão.</string>
-  <!-- Transaction ID copied message -->
-  <string name="BCH.hashCopiedMessage">ID da transação copiado</string>
-  <!-- No address error message -->
-  <string name="BCH.noAddressError">Por favor, introduza um endereço</string>
-  <!-- Attempted to scan unsupported qr code error message. -->
-  <string name="BCH.paymentProtocolError">Não são suportados pedidos de protocolo de pagamento para transações de BCH</string>
-  <!-- BCH successfully sent alert message -->
-  <string name="BCH.successMessage">A BCH foi enviada com sucesso</string>
-  <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">Levantar BCH</string>
-  <!-- Tx Hash button header -->
-  <string name="BCH.txHashHeader">ID da transação de BCH</string>
-  <!-- Approve button label -->
-  <string name="BitID.approve">Aprovar</string>
-  <!-- <sitename> is requesting authentication using your bitcoin wallet -->
-  <string name="BitID.authenticationRequest">%1$s está a solicitar autenticação utilizando a sua carteira de Litecoin</string>
-  <!-- Deny button label -->
-  <string name="BitID.deny">Recusar</string>
-  <!-- BitID error alert title -->
-  <string name="BitID.error">Erro de autenticação</string>
-  <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
-  <string name="BitID.errorMessage">Por favor, verifique o serviço. Pode ser que precise de tentar novamente.</string>
-  <!-- BitID success alert title -->
-  <string name="BitID.success">Autenticado com sucesso</string>
-  <!-- BitID Authentication Request alert view title -->
-  <string name="BitID.title">Pedido de autenticação BitID</string>
   <!-- Cancel button label -->
   <string name="Button.cancel">Cancelar</string>
   <!-- Ignore button label -->
@@ -120,8 +86,6 @@
   <string name="Button.submit">Submeter</string>
   <!-- Yes button -->
   <string name="Button.yes">Sim</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">Centre a sua ID na caixa</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">Montante a enviar:</string>
   <!-- Network Fee: ($1.00) -->
