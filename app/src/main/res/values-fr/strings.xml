@@ -66,40 +66,6 @@
   <string name="ApiClient.notReady">Le portefeuille n\'est pas prêt</string>
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">Impossible de récupérer le jeton de l\'API</string>
-  <!-- Send BCH view body. -->
-  <string name="BCH.body">Entrez une adresse BCH de destination ci-dessous. Tous les BCH dans votre portefeuille au moment où la fourchette (%1$s) seront envoyés.</string>
-  <!-- Confirm sending <$5.00> to <address>? -->
-  <string name="BCH.confirmationMessage">Confirmer l\'envoi de %1$s à %2$s</string>
-  <!-- Confirmation alert title -->
-  <string name="BCH.confirmationTitle">Confirmation</string>
-  <!-- Generic bch erorr message -->
-  <string name="BCH.genericError">Votre compte ne contient aucun BCH ou vous avez reçu le BCH après la fourchette.</string>
-  <!-- Transaction ID copied message -->
-  <string name="BCH.hashCopiedMessage">ID de transaction copiée</string>
-  <!-- No address error message -->
-  <string name="BCH.noAddressError">Veuillez entrer une adresse</string>
-  <!-- Attempted to scan unsupported qr code error message. -->
-  <string name="BCH.paymentProtocolError">Les demandes de protocole de paiement ne sont pas prises en charge pour les transactions BCH</string>
-  <!-- BCH successfully sent alert message -->
-  <string name="BCH.successMessage">BCH envoyés avec succès.</string>
-  <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">Retirer les BCH</string>
-  <!-- Tx Hash button header -->
-  <string name="BCH.txHashHeader">ID de transaction BCH</string>
-  <!-- Approve button label -->
-  <string name="BitID.approve">Approuver</string>
-  <!-- <sitename> is requesting authentication using your bitcoin wallet -->
-  <string name="BitID.authenticationRequest">%1$s requiert l\'authentification en utilisant le portefeuille Litecoin</string>
-  <!-- Deny button label -->
-  <string name="BitID.deny">Refuser</string>
-  <!-- BitID error alert title -->
-  <string name="BitID.error">Erreur d\'authentification</string>
-  <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
-  <string name="BitID.errorMessage">Veuillez vérifier avec le service. Vous pourriez avoir à essayer de nouveau.</string>
-  <!-- BitID success alert title -->
-  <string name="BitID.success">Authentification réussie</string>
-  <!-- BitID Authentication Request alert view title -->
-  <string name="BitID.title">Demande d\'authentification BitID</string>
   <!-- Cancel button label -->
   <string name="Button.cancel">Annuler</string>
   <!-- Ignore button label -->
