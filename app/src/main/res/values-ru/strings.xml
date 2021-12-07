@@ -66,40 +66,6 @@
   <string name="ApiClient.notReady">Кошелек не готов</string>
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">Не удалось извлечь токен API</string>
-  <!-- Send BCH view body. -->
-  <string name="BCH.body">Введите адрес адресата BCH ниже. Вся сумма BCH в вашем кошельке во время форка (%1$s) будет отправлена.</string>
-  <!-- Confirm sending <$5.00> to <address>? -->
-  <string name="BCH.confirmationMessage">Подтвердить отправку %1$s на %2$s</string>
-  <!-- Confirmation alert title -->
-  <string name="BCH.confirmationTitle">Подтверждение</string>
-  <!-- Generic bch erorr message -->
-  <string name="BCH.genericError">На Вашем аккаунте нет BCH, или вы получили BCH после форка.</string>
-  <!-- Transaction ID copied message -->
-  <string name="BCH.hashCopiedMessage">Идентификатор транзакции скопирован</string>
-  <!-- No address error message -->
-  <string name="BCH.noAddressError">Пожалуйста, введите и адрес</string>
-  <!-- Attempted to scan unsupported qr code error message. -->
-  <string name="BCH.paymentProtocolError">Запросы протокола платежей не поддерживаются для транзакций BCH</string>
-  <!-- BCH successfully sent alert message -->
-  <string name="BCH.successMessage">BCH был успешно отправлен.</string>
-  <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">Снять BCH</string>
-  <!-- Tx Hash button header -->
-  <string name="BCH.txHashHeader">Идентификатор транзакции BCH</string>
-  <!-- Approve button label -->
-  <string name="BitID.approve">Одобрить</string>
-  <!-- <sitename> is requesting authentication using your bitcoin wallet -->
-  <string name="BitID.authenticationRequest">%1$s запрашивает аутентификацию, используя ваш биткойн-кошелек</string>
-  <!-- Deny button label -->
-  <string name="BitID.deny">Отказаться</string>
-  <!-- BitID error alert title -->
-  <string name="BitID.error">Ошибка аутентификации</string>
-  <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
-  <string name="BitID.errorMessage">Пожалуйста, обратитесь в эту службу. Возможно, вам придется попробовать еще раз.</string>
-  <!-- BitID success alert title -->
-  <string name="BitID.success">Аутентификация пройдена успешно</string>
-  <!-- BitID Authentication Request alert view title -->
-  <string name="BitID.title">Запрос на аутентификацию BitID</string>
   <!-- Cancel button label -->
   <string name="Button.cancel">Отменить</string>
   <!-- Ignore button label -->
