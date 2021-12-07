@@ -1,6 +1,3 @@
-//
-// Created by Mihail Gutan on 10/9/16.
-//
 
 #ifndef BREADWALLET_JNIKEY_H
 #define BREADWALLET_JNIKEY_H

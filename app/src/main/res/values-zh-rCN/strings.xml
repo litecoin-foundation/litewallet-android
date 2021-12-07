@@ -66,40 +66,6 @@
   <string name="ApiClient.notReady">钱包尚未备好</string>
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">无法检索 API 令牌</string>
-  <!-- Send BCH view body. -->
-  <string name="BCH.body">在下方输入目标 BCH 地址。您钱包中此分叉 (%1$s) 时的所有 BCH 都将被发送。</string>
-  <!-- Confirm sending <$5.00> to <address>? -->
-  <string name="BCH.confirmationMessage">确认将 %1$s 发送到 %2$s</string>
-  <!-- Confirmation alert title -->
-  <string name="BCH.confirmationTitle">确认</string>
-  <!-- Generic bch erorr message -->
-  <string name="BCH.genericError">您的账户不包含任何 BCH，或您在分叉后才接收到 BCH。</string>
-  <!-- Transaction ID copied message -->
-  <string name="BCH.hashCopiedMessage">已拷贝交易 ID</string>
-  <!-- No address error message -->
-  <string name="BCH.noAddressError">请输入地址</string>
-  <!-- Attempted to scan unsupported qr code error message. -->
-  <string name="BCH.paymentProtocolError">支付协议请求不支持 BCH 交易</string>
-  <!-- BCH successfully sent alert message -->
-  <string name="BCH.successMessage">BCH 已成功发送。</string>
-  <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">取出 BCH</string>
-  <!-- Tx Hash button header -->
-  <string name="BCH.txHashHeader">BCH 交易 ID</string>
-  <!-- Approve button label -->
-  <string name="BitID.approve">批准</string>
-  <!-- <sitename> is requesting authentication using your bitcoin wallet -->
-  <string name="BitID.authenticationRequest">%1$s 正使用您的莱特币钱包请求验证</string>
-  <!-- Deny button label -->
-  <string name="BitID.deny">拒绝</string>
-  <!-- BitID error alert title -->
-  <string name="BitID.error">验证错误</string>
-  <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
-  <string name="BitID.errorMessage">请检查此服务。您可能需要重试。</string>
-  <!-- BitID success alert title -->
-  <string name="BitID.success">验证成功</string>
-  <!-- BitID Authentication Request alert view title -->
-  <string name="BitID.title">BitID 验证请求</string>
   <!-- Cancel button label -->
   <string name="Button.cancel">取消</string>
   <!-- Ignore button label -->

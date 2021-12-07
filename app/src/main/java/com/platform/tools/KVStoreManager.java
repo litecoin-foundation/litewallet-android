@@ -23,30 +23,6 @@ import java.util.Map;
 
 import timber.log.Timber;
 
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan on <mihail@breadwallet.com> 6/22/17.
- * Copyright (c) 2017 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 public class KVStoreManager {
     private static KVStoreManager instance;
     String walletInfoKey = "wallet-info";
@@ -60,89 +36,8 @@ public class KVStoreManager {
     }
 
     public WalletInfo getWalletInfo(Context app) {
-        WalletInfo result = new WalletInfo();
-        RemoteKVStore remoteKVStore = RemoteKVStore.getInstance(APIClient.getInstance(app));
-        ReplicatedKVStore kvStore = ReplicatedKVStore.getInstance(app, remoteKVStore);
-        long ver = kvStore.localVersion(walletInfoKey).version;
-        CompletionObject obj = kvStore.get(walletInfoKey, ver);
-        if (obj.kv == null) {
-            Timber.i("getWalletInfo: value is null for key: %s", obj.key);
-            return null;
-        }
-
-        JSONObject json;
-
-        try {
-            byte[] decompressed = BRCompressor.bz2Extract(obj.kv.value);
-            if (decompressed == null) {
-                Timber.i("getWalletInfo: decompressed value is null");
-                return null;
-            }
-            json = new JSONObject(new String(decompressed));
-        } catch (JSONException e) {
-            Timber.e(e);
-            return null;
-        }
-
-        try {
-            result.classVersion = json.getInt("classVersion");
-            result.creationDate = json.getInt("creationDate");
-            result.name = json.getString("name");
-            Timber.d("getWalletInfo: " + result.creationDate + ", name: " + result.name);
-        } catch (JSONException e) {
-            Timber.e(e);
-            Timber.d("getWalletInfo: FAILED to get json value");
-        }
-
-        Timber.d("getWalletInfo: %s", json);
-        return result;
-    }
-
-    public void putWalletInfo(Context app, WalletInfo info) {
-        WalletInfo old = getWalletInfo(app);
-        if (old == null) old = new WalletInfo(); //create new one if it's null
-
-        //add all the params that we want to change
-        if (info.classVersion != 0) old.classVersion = info.classVersion;
-        if (info.creationDate != 0) old.creationDate = info.creationDate;
-        if (info.name != null) old.name = info.name;
-
-        //sanity check
-        if (old.classVersion == 0) old.classVersion = 1;
-        if (old.name != null) old.name = "My Loaf";
-
-        JSONObject obj = new JSONObject();
-        byte[] result;
-        try {
-            obj.put("classVersion", old.classVersion);
-            obj.put("creationDate", old.creationDate);
-            obj.put("name", old.name);
-            result = obj.toString().getBytes();
-
-        } catch (JSONException e) {
-            Timber.e(e);
-            return;
-        }
-
-        if (result.length == 0) {
-            Timber.d("putWalletInfo: FAILED: result is empty");
-            return;
-        }
-        byte[] compressed;
-        try {
-            compressed = BRCompressor.bz2Compress(result);
-        } catch (IOException e) {
-            Timber.e(e);
-            return;
-        }
-        RemoteKVStore remoteKVStore = RemoteKVStore.getInstance(APIClient.getInstance(app));
-        ReplicatedKVStore kvStore = ReplicatedKVStore.getInstance(app, remoteKVStore);
-        long localVer = kvStore.localVersion(walletInfoKey).version;
-        long removeVer = kvStore.remoteVersion(walletInfoKey);
-        CompletionObject compObj = kvStore.set(localVer, removeVer, walletInfoKey, compressed, System.currentTimeMillis(), 0);
-        if (compObj.err != null) {
-            Timber.d("putWalletInfo: Error setting value for key: " + walletInfoKey + ", err: " + compObj.err);
-        }
+        Timber.i("Never initialized always null until WalletInfo struct to be removed");
+        return null;
     }
 
     public TxMetaData getTxMetaData(Context app, byte[] txHash) {

@@ -66,40 +66,6 @@
   <string name="ApiClient.notReady">Pung ikke klar</string>
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">Kunne ikke hente API-nøgle</string>
-  <!-- Send BCH view body. -->
-  <string name="BCH.body">Indtast en BCH destinationsadresse nedenfor. Alle BCH i din wallet ved fork-tidspunktet (%1$s) vil blive afsendt.</string>
-  <!-- Confirm sending <$5.00> to <address>? -->
-  <string name="BCH.confirmationMessage">Bekræft afsendelse af %1$s til %2$s</string>
-  <!-- Confirmation alert title -->
-  <string name="BCH.confirmationTitle">Bekræftelse</string>
-  <!-- Generic bch erorr message -->
-  <string name="BCH.genericError">Din konto indeholder ikke nogle BCH eller du modtog BCH efter fork.</string>
-  <!-- Transaction ID copied message -->
-  <string name="BCH.hashCopiedMessage">Transaktions-ID kopieret</string>
-  <!-- No address error message -->
-  <string name="BCH.noAddressError">Indtast venligst en adresse</string>
-  <!-- Attempted to scan unsupported qr code error message. -->
-  <string name="BCH.paymentProtocolError">Betalingsprotokolanmodninger er ikke understøttet for BCH-transaktioner</string>
-  <!-- BCH successfully sent alert message -->
-  <string name="BCH.successMessage">BCH blev afsendt uden problemer.</string>
-  <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">Tilbagetræk BCH</string>
-  <!-- Tx Hash button header -->
-  <string name="BCH.txHashHeader">BCH transaktions-ID</string>
-  <!-- Approve button label -->
-  <string name="BitID.approve">Godkend</string>
-  <!-- <sitename> is requesting authentication using your bitcoin wallet -->
-  <string name="BitID.authenticationRequest">%1$s anmoder om godkendelse ved hjælp af din Litecoin-wallet</string>
-  <!-- Deny button label -->
-  <string name="BitID.deny">Afvis</string>
-  <!-- BitID error alert title -->
-  <string name="BitID.error">Godkendelsesfejl</string>
-  <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
-  <string name="BitID.errorMessage">Tjek venligst tjenesten. Det kan være nødvendigt at prøve igen.</string>
-  <!-- BitID success alert title -->
-  <string name="BitID.success">Godkendt uden problemer</string>
-  <!-- BitID Authentication Request alert view title -->
-  <string name="BitID.title">BitID godkendelsesanmodning</string>
   <!-- Cancel button label -->
   <string name="Button.cancel">Annuller</string>
   <!-- Ignore button label -->
