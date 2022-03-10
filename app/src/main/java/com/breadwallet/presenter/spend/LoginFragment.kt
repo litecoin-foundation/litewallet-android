@@ -13,6 +13,7 @@ import androidx.core.text.underline
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import com.breadwallet.R
+import com.breadwallet.databinding.FragmentLoginBinding
 import com.breadwallet.presenter.activities.BreadActivity
 import com.breadwallet.presenter.base.BaseFragment
 import com.breadwallet.tools.util.BRConstants
@@ -21,8 +22,6 @@ import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.view_login.*
 import timber.log.Timber
 
 /** Litewallet
@@ -38,24 +37,27 @@ class LoginFragment : BaseFragment<LoginPresenter>(), LoginView {
         presenter.detach()
     }
 
+    lateinit var binding: FragmentLoginBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    ): View {
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toolBar.setNavigationOnClickListener { (parentFragment as DialogFragment?)?.dismiss() }
-        loginBut.setOnClickListener { handleLogin() }
-        registerBut.setOnClickListener { handleRegister() }
-        forgetPwdBut.text = buildSpannedString {
-            underline { append(forgetPwdBut.text) }
+        binding.toolBar.setNavigationOnClickListener { (parentFragment as DialogFragment?)?.dismiss() }
+        binding.loginViewContainer.loginBut.setOnClickListener { handleLogin() }
+        binding.loginViewContainer.registerBut.setOnClickListener { handleRegister() }
+        binding.loginViewContainer.forgetPwdBut.text = buildSpannedString {
+            underline { append(binding.loginViewContainer.forgetPwdBut.text) }
         }
-        forgetPwdBut.setOnClickListener { handleForgotPassword() }
-        bindProgressButton(loginBut)
+        binding.loginViewContainer.forgetPwdBut.setOnClickListener { handleForgotPassword() }
+        bindProgressButton(binding.loginViewContainer.loginBut)
 
         view.post { showDisclaimer() }
     }
@@ -102,20 +104,20 @@ class LoginFragment : BaseFragment<LoginPresenter>(), LoginView {
     private fun handleLogin() {
         if (validateFields()) {
             presenter.login(
-                emailField.editText!!.text.toString(),
-                passwordField.editText!!.text.toString()
+                binding.loginViewContainer.emailField.editText!!.text.toString(),
+                binding.loginViewContainer.passwordField.editText!!.text.toString()
             )
         }
     }
 
     override fun showProgress() {
-        loginBut.showProgress { progressColor = Color.WHITE }
-        loginBut.isEnabled = false
+        binding.loginViewContainer.loginBut.showProgress { progressColor = Color.WHITE }
+        binding.loginViewContainer.loginBut.isEnabled = false
     }
 
     override fun hideProgress() {
-        loginBut.hideProgress(R.string.Login_login)
-        loginBut.isEnabled = true
+        binding.loginViewContainer.loginBut.hideProgress(R.string.Login_login)
+        binding.loginViewContainer.loginBut.isEnabled = true
     }
 
     override fun show2faView() {

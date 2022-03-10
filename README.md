@@ -58,21 +58,24 @@ Simplicity and ease-of-use is **Litewallet**'s core design principle. A simple r
 [![GitHub issues](https://img.shields.io/github/issues/litecoin-foundation/loafwallet-android?style=plastic)](https://github.com/litecoin-foundation/loafwallet-android/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/litecoin-foundation/loafwallet-android?color=00ff00&style=plastic)](https://github.com/litecoin-foundation/loafwallet-android/pulls)
 
+
+### Prerequisites
+
+1. Android Studio (min version Arctic Fox 2020.3.1 patch 3)
+2. NDK version r24
+3. Java 8
+
 ### Building & Developing Litewallet for Android:
 
-1. Download and install Java 7 or up
-2. Download and install the latest Android studio
-3. Download NDK r15c from the [NDK Archives](https://developer.android.com/ndk/downloads/older_releases.html)
-4. Clone this repo & init submodules
+1. Clone this repo & update submodules
 ```bash
-$ git clone https://github.com/litecoin-foundation/loafwallet-android
+$ git clone git@github.com:litecoin-foundation/litewallet-android.git
 $ git submodule init
-$ git submodule update
+$ git submodule update --init --recursive
 ```
-5. Open the project with Android Studio, navigate to `File > Project Structure > SDK Location`
-6. Change `Android NDK Location` with the path to NDK r15c that you downloaded earlier
-7. Go to SDK Manager and download all the SDK Platforms and SDK Tools
-9. Build -> Rebuild Project
+2. Open the project with Android Studio
+3. Go to SDK Manager and download the latest SDK Platforms and SDK Tools
+4. Build -> Rebuild Project
 
 ### Litewallet Team:
 * [Development Code of Conduct](https://github.com/litecoin-foundation/litewallet/blob/master/DEVELOPMENT.md)
