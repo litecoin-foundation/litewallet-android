@@ -2,7 +2,7 @@ package com.breadwallet.tools.manager
 
 import com.breadwallet.BuildConfig
 import com.unstoppabledomains.config.network.model.Network
-import com.unstoppabledomains.exceptions.NamingServiceException
+import com.unstoppabledomains.exceptions.ns.NamingServiceException
 import com.unstoppabledomains.resolution.DomainResolution
 import com.unstoppabledomains.resolution.Resolution
 import com.unstoppabledomains.resolution.naming.service.NamingServiceType

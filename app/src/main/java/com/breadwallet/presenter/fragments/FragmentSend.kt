@@ -77,7 +77,11 @@ class FragmentSend : Fragment() {
     private lateinit var udDomainEdit: EditText
     private lateinit var udLookupButton: Button
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val rootView = inflater.inflate(R.layout.fragment_send, container, false)
         backgroundLayout = rootView.findViewById(R.id.background_layout)
         signalLayout = rootView.findViewById<View>(R.id.signal_layout) as LinearLayout
@@ -106,12 +110,13 @@ class FragmentSend : Fragment() {
         feeDescription = rootView.findViewById<View>(R.id.fee_description) as TextView
         warningText = rootView.findViewById<View>(R.id.warning_text) as TextView
         close = rootView.findViewById<View>(R.id.close_button) as ImageButton
-        selectedIso = if (BRSharedPrefs.getPreferredLTC(context)) "LTC" else BRSharedPrefs.getIso(context)
+        selectedIso =
+            if (BRSharedPrefs.getPreferredLTC(context)) "LTC" else BRSharedPrefs.getIso(context)
         amountBuilder = StringBuilder(0)
         setListeners()
         isoText.text = getString(R.string.Send_amountLabel)
         isoText.textSize = 18f
-        isoText.setTextColor(context!!.getColor(R.color.light_gray))
+        isoText.setTextColor(requireContext().getColor(R.color.light_gray))
         isoText.requestLayout()
         signalLayout.setOnTouchListener(SlideDetector(context, signalLayout))
         AnalyticsManager.logCustomEvent(BRConstants._20191105_VSC)
@@ -152,12 +157,22 @@ class FragmentSend : Fragment() {
             R.id.economy_fee_but -> {
                 feeManager.setFeeType(FeeManager.ECONOMY)
                 BRWalletManager.getInstance().setFeePerKb(feeManager.fees.economy)
-                setFeeInformation(R.string.FeeSelector_economyTime, R.string.FeeSelector_economyWarning, R.color.red_text, View.VISIBLE)
+                setFeeInformation(
+                    R.string.FeeSelector_economyTime,
+                    R.string.FeeSelector_economyWarning,
+                    R.color.red_text,
+                    View.VISIBLE
+                )
             }
             R.id.luxury_fee_but -> {
                 feeManager.setFeeType(FeeManager.LUXURY)
                 BRWalletManager.getInstance().setFeePerKb(feeManager.fees.luxury)
-                setFeeInformation(R.string.FeeSelector_luxuryTime, R.string.FeeSelector_luxuryMessage, R.color.light_gray, View.VISIBLE)
+                setFeeInformation(
+                    R.string.FeeSelector_luxuryTime,
+                    R.string.FeeSelector_luxuryMessage,
+                    R.color.light_gray,
+                    View.VISIBLE
+                )
             }
             else -> {
             }
@@ -165,8 +180,14 @@ class FragmentSend : Fragment() {
         updateText()
     }
 
-    private fun setFeeInformation(@StringRes deliveryTime: Int, @StringRes warningStringId: Int, @ColorRes warningColorId: Int, visibility: Int) {
-        feeDescription.text = getString(R.string.FeeSelector_estimatedDeliver, getString(deliveryTime))
+    private fun setFeeInformation(
+        @StringRes deliveryTime: Int,
+        @StringRes warningStringId: Int,
+        @ColorRes warningColorId: Int,
+        visibility: Int
+    ) {
+        feeDescription.text =
+            getString(R.string.FeeSelector_estimatedDeliver, getString(deliveryTime))
         if (warningStringId != 0) {
             warningText.setText(warningStringId)
         }
@@ -186,7 +207,7 @@ class FragmentSend : Fragment() {
                 balanceText.visibility = View.VISIBLE
                 feeText.visibility = View.VISIBLE
                 edit.visibility = View.VISIBLE
-                isoText.setTextColor(context!!.getColor(R.color.almost_black))
+                isoText.setTextColor(requireContext().getColor(R.color.almost_black))
                 isoText.text = BRCurrency.getSymbolByIso(activity, selectedIso)
                 isoText.textSize = 28f
                 val scaleX = amountEdit.scaleX
@@ -208,10 +229,34 @@ class FragmentSend : Fragment() {
                 set.clone(amountLayout)
                 TransitionManager.beginDelayedTransition(amountLayout, tr)
                 val px4 = Utils.getPixelsFromDps(context, 4)
-                set.connect(balanceText.id, ConstraintSet.TOP, isoText.id, ConstraintSet.BOTTOM, px4)
-                set.connect(feeText.id, ConstraintSet.TOP, balanceText.id, ConstraintSet.BOTTOM, px4)
-                set.connect(feeText.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, px4)
-                set.connect(isoText.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, px4)
+                set.connect(
+                    balanceText.id,
+                    ConstraintSet.TOP,
+                    isoText.id,
+                    ConstraintSet.BOTTOM,
+                    px4
+                )
+                set.connect(
+                    feeText.id,
+                    ConstraintSet.TOP,
+                    balanceText.id,
+                    ConstraintSet.BOTTOM,
+                    px4
+                )
+                set.connect(
+                    feeText.id,
+                    ConstraintSet.BOTTOM,
+                    ConstraintSet.PARENT_ID,
+                    ConstraintSet.BOTTOM,
+                    px4
+                )
+                set.connect(
+                    isoText.id,
+                    ConstraintSet.TOP,
+                    ConstraintSet.PARENT_ID,
+                    ConstraintSet.TOP,
+                    px4
+                )
                 set.connect(isoText.id, ConstraintSet.BOTTOM, -1, ConstraintSet.TOP, -1)
                 set.applyTo(amountLayout)
             }
@@ -248,15 +293,35 @@ class FragmentSend : Fragment() {
                 BRExecutor.getInstance().forLightWeightBackgroundTasks().execute {
                     if (wm.addressContainedInWallet(address)) {
                         app.runOnUiThread(Runnable {
-                            BRDialog.showCustomDialog(activity!!, "", resources.getString(R.string.Send_containsAddress), resources.getString(R.string.AccessibilityLabels_close), null, { brDialogView -> brDialogView.dismiss() }, null, null, 0)
+                            BRDialog.showCustomDialog(
+                                requireActivity(),
+                                "",
+                                resources.getString(R.string.Send_containsAddress),
+                                resources.getString(R.string.AccessibilityLabels_close),
+                                null,
+                                { brDialogView -> brDialogView.dismiss() },
+                                null,
+                                null,
+                                0
+                            )
                             BRClipboardManager.putClipboard(activity, "")
                         })
                     } else if (wm.addressIsUsed(address)) {
                         app.runOnUiThread(Runnable {
-                            BRDialog.showCustomDialog(activity!!, getString(R.string.Send_UsedAddress_firstLine), getString(R.string.Send_UsedAddress_secondLIne), "Ignore", "Cancel", { brDialogView ->
-                                brDialogView.dismiss()
-                                addressEdit.setText(address)
-                            }, { brDialogView -> brDialogView.dismiss() }, null, 0)
+                            BRDialog.showCustomDialog(
+                                requireActivity(),
+                                getString(R.string.Send_UsedAddress_firstLine),
+                                getString(R.string.Send_UsedAddress_secondLIne),
+                                "Ignore",
+                                "Cancel",
+                                { brDialogView ->
+                                    brDialogView.dismiss()
+                                    addressEdit.setText(address)
+                                },
+                                { brDialogView -> brDialogView.dismiss() },
+                                null,
+                                0
+                            )
                         })
                     } else {
                         app.runOnUiThread(Runnable { addressEdit.setText(address) })
@@ -267,11 +332,12 @@ class FragmentSend : Fragment() {
             }
         })
         isoButton.setOnClickListener {
-            selectedIso = if (selectedIso.equals(BRSharedPrefs.getIso(context), ignoreCase = true)) {
-                "LTC"
-            } else {
-                BRSharedPrefs.getIso(context)
-            }
+            selectedIso =
+                if (selectedIso.equals(BRSharedPrefs.getIso(context), ignoreCase = true)) {
+                    "LTC"
+                } else {
+                    BRSharedPrefs.getIso(context)
+                }
             updateText()
         }
         scan.setOnClickListener(View.OnClickListener {
@@ -284,31 +350,53 @@ class FragmentSend : Fragment() {
             // Disable the button until the domain string is at least 4 chars long (e.g a.zil)
             if (udDomainEdit.text.trimmedLength() < 4) return@setOnClickListener
             lifecycleScope.executeAsyncTask(
-                    onPreExecute = {
-                        udLookupButton.showProgress {
-                            buttonText = null
-                            progressColorRes = R.color.litecoin_litewallet_blue
-                        }
-                        udLookupButton.isEnabled = false
-                        addressEdit.text = null
-                        AnalyticsManager.logCustomEventWithParams(BRConstants._20201121_SIL, Bundle().apply { putLong(BRConstants.START_TIME, System.currentTimeMillis()) })
-                    },
-                    doInBackground = { UDResolution().resolve(udDomainEdit.text.trim().toString()) },
-                    onPostExecute = {
-                        if (it.error == null) {
-                            AnalyticsManager.logCustomEventWithParams(BRConstants._20201121_DRIA, Bundle().apply { putLong(BRConstants.SUCCESS_TIME, System.currentTimeMillis()) })
-                            addressEdit.setText(it.address)
-                            BRAnimator.showBreadSignal(requireActivity(), getString(R.string.Send_UnstoppableDomains_domainResolved), null, R.drawable.ic_check_mark_white, null)
-                        } else {
-                            AnalyticsManager.logCustomEventWithParams(BRConstants._20201121_FRIA, Bundle().apply {
+                onPreExecute = {
+                    udLookupButton.showProgress {
+                        buttonText = null
+                        progressColorRes = R.color.litecoin_litewallet_blue
+                    }
+                    udLookupButton.isEnabled = false
+                    addressEdit.text = null
+                    AnalyticsManager.logCustomEventWithParams(
+                        BRConstants._20201121_SIL,
+                        Bundle().apply {
+                            putLong(
+                                BRConstants.START_TIME,
+                                System.currentTimeMillis()
+                            )
+                        })
+                },
+                doInBackground = { UDResolution().resolve(udDomainEdit.text.trim().toString()) },
+                onPostExecute = {
+                    if (it.error == null) {
+                        AnalyticsManager.logCustomEventWithParams(
+                            BRConstants._20201121_DRIA,
+                            Bundle().apply {
+                                putLong(
+                                    BRConstants.SUCCESS_TIME,
+                                    System.currentTimeMillis()
+                                )
+                            })
+                        addressEdit.setText(it.address)
+                        BRAnimator.showBreadSignal(
+                            requireActivity(),
+                            getString(R.string.Send_UnstoppableDomains_domainResolved),
+                            null,
+                            R.drawable.ic_check_mark_white,
+                            null
+                        )
+                    } else {
+                        AnalyticsManager.logCustomEventWithParams(
+                            BRConstants._20201121_FRIA,
+                            Bundle().apply {
                                 putLong(BRConstants.FAILURE_TIME, System.currentTimeMillis())
                                 putString(BRConstants.ERROR, it.error.localizedMessage)
                             })
-                            Timber.d(it.error)
-                        }
-                        udLookupButton.isEnabled = true
-                        udLookupButton.hideProgress(R.string.Send_UnstoppableDomains_lookup)
+                        Timber.d(it.error)
                     }
+                    udLookupButton.isEnabled = true
+                    udLookupButton.hideProgress(R.string.Send_UnstoppableDomains_lookup)
+                }
             )
         }
 
@@ -338,7 +426,17 @@ class FragmentSend : Fragment() {
                 SpringAnimator.failShakeAnimation(activity, feeText)
             }
             if (allFilled) {
-                BRSender.getInstance().sendTransaction(context, PaymentItem(arrayOf(address), null, satoshiAmount.toLong(), null, false, comment))
+                BRSender.getInstance().sendTransaction(
+                    context,
+                    PaymentItem(
+                        arrayOf(address),
+                        null,
+                        satoshiAmount.toLong(),
+                        null,
+                        false,
+                        comment
+                    )
+                )
                 AnalyticsManager.logCustomEvent(BRConstants._20191105_DSL)
                 BRSharedPrefs.incrementSendTransactionCount(context)
             }
@@ -347,11 +445,11 @@ class FragmentSend : Fragment() {
             if (!BRAnimator.isClickAllowed()) {
                 return@OnClickListener
             }
-            BRAnimator.showDynamicDonationFragment(activity!!)
+            BRAnimator.showDynamicDonationFragment(requireActivity())
         })
         backgroundLayout.setOnClickListener(View.OnClickListener {
             if (!BRAnimator.isClickAllowed()) return@OnClickListener
-            activity!!.onBackPressed()
+            requireActivity().onBackPressed()
         })
         close.setOnClickListener {
             activity?.onBackPressed()
@@ -372,12 +470,25 @@ class FragmentSend : Fragment() {
             signalLayout.removeView(keyboardLayout)
         } else {
             Utils.hideKeyboard(activity)
-            if (signalLayout.indexOfChild(keyboardLayout) == -1) signalLayout.addView(keyboardLayout, curIndex) else signalLayout.removeView(keyboardLayout)
+            if (signalLayout.indexOfChild(keyboardLayout) == -1) signalLayout.addView(
+                keyboardLayout,
+                curIndex
+            ) else signalLayout.removeView(keyboardLayout)
         }
     }
 
     private fun showClipboardError() {
-        BRDialog.showCustomDialog(activity!!, getString(R.string.Send_emptyPasteboard), resources.getString(R.string.Send_invalidAddressTitle), getString(R.string.AccessibilityLabels_close), null, { brDialogView -> brDialogView.dismiss() }, null, null, 0)
+        BRDialog.showCustomDialog(
+            requireActivity(),
+            getString(R.string.Send_emptyPasteboard),
+            resources.getString(R.string.Send_invalidAddressTitle),
+            getString(R.string.AccessibilityLabels_close),
+            null,
+            { brDialogView -> brDialogView.dismiss() },
+            null,
+            null,
+            0
+        )
         BRClipboardManager.putClipboard(activity, "")
     }
 
@@ -440,10 +551,14 @@ class FragmentSend : Fragment() {
         val currAmount = amountBuilder.toString()
         val iso = selectedIso
         if (BigDecimal(currAmount + dig.toString()).toDouble()
-                <= BRExchange.getMaxAmount(activity, iso).toDouble()) {
+            <= BRExchange.getMaxAmount(activity, iso).toDouble()
+        ) {
             //do not insert 0 if the balance is 0 now
             if (currAmount.equals("0", ignoreCase = true)) amountBuilder = StringBuilder("")
-            if (currAmount.contains(".") && currAmount.length - currAmount.indexOf(".") > BRCurrency.getMaxDecimalPlaces(iso)) return
+            if (currAmount.contains(".") && currAmount.length - currAmount.indexOf(".") > BRCurrency.getMaxDecimalPlaces(
+                    iso
+                )
+            ) return
             amountBuilder.append(dig)
             updateText()
         }
@@ -472,9 +587,24 @@ class FragmentSend : Fragment() {
         val currencySymbol = BRCurrency.getSymbolByIso(activity, selectedIso)
         curBalance = BRWalletManager.getInstance().getBalance(activity)
         if (!amountLabelOn) isoText.text = currencySymbol
-        isoButton.text = String.format("%s(%s)", BRCurrency.getCurrencyName(activity, selectedIso), currencySymbol)
+        isoButton.text = String.format(
+            "%s(%s)",
+            BRCurrency.getCurrencyName(activity, selectedIso),
+            currencySymbol
+        )
         //Balance depending on ISO
-        val satoshis = if (Utils.isNullOrEmpty(tmpAmount) || tmpAmount.equals(".", ignoreCase = true)) 0 else if (selectedIso.equals("btc", ignoreCase = true)) BRExchange.getSatoshisForBitcoin(activity, BigDecimal(tmpAmount)).toLong() else BRExchange.getSatoshisFromAmount(activity, selectedIso, BigDecimal(tmpAmount)).toLong()
+        val satoshis = if (Utils.isNullOrEmpty(tmpAmount) || tmpAmount.equals(
+                ".",
+                ignoreCase = true
+            )
+        ) 0 else if (selectedIso.equals("btc", ignoreCase = true)) BRExchange.getSatoshisForBitcoin(
+            activity,
+            BigDecimal(tmpAmount)
+        ).toLong() else BRExchange.getSatoshisFromAmount(
+            activity,
+            selectedIso,
+            BigDecimal(tmpAmount)
+        ).toLong()
         val balanceForISO = BRExchange.getAmountFromSatoshis(activity, iso, BigDecimal(curBalance))
         Timber.d("updateText: balanceForISO: %s", balanceForISO)
 
@@ -488,24 +618,36 @@ class FragmentSend : Fragment() {
             fee = BRWalletManager.getInstance().feeForTransactionAmount(satoshis).toLong()
             if (fee == 0L) {
                 Timber.i("updateText: fee is 0, trying the estimate")
-                fee = BRWalletManager.getInstance().feeForTransaction(addressEdit.text.toString(), satoshis).toLong()
+                fee = BRWalletManager.getInstance()
+                    .feeForTransaction(addressEdit.text.toString(), satoshis).toLong()
             }
         }
-        val feeForISO = BRExchange.getAmountFromSatoshis(activity, iso, BigDecimal(if (curBalance == 0L) 0 else fee))
+        val feeForISO = BRExchange.getAmountFromSatoshis(
+            activity,
+            iso,
+            BigDecimal(if (curBalance == 0L) 0 else fee)
+        )
         Timber.d("updateText: feeForISO: %s", feeForISO)
         //formattedBalance
         val aproxFee = BRCurrency.getFormattedCurrencyString(activity, iso, feeForISO)
         Timber.d("updateText: aproxFee: %s", aproxFee)
-        if (BigDecimal(if (tmpAmount.isEmpty() || tmpAmount.equals(".", ignoreCase = true)) "0" else tmpAmount).toDouble() > balanceForISO.toDouble()) {
-            balanceText.setTextColor(context!!.getColor(R.color.warning_color))
-            feeText.setTextColor(context!!.getColor(R.color.warning_color))
-            amountEdit.setTextColor(context!!.getColor(R.color.warning_color))
-            if (!amountLabelOn) isoText.setTextColor(context!!.getColor(R.color.warning_color))
+        if (BigDecimal(
+                if (tmpAmount.isEmpty() || tmpAmount.equals(
+                        ".",
+                        ignoreCase = true
+                    )
+                ) "0" else tmpAmount
+            ).toDouble() > balanceForISO.toDouble()
+        ) {
+            balanceText.setTextColor(requireContext().getColor(R.color.warning_color))
+            feeText.setTextColor(requireContext().getColor(R.color.warning_color))
+            amountEdit.setTextColor(requireContext().getColor(R.color.warning_color))
+            if (!amountLabelOn) isoText.setTextColor(requireContext().getColor(R.color.warning_color))
         } else {
-            balanceText.setTextColor(context!!.getColor(R.color.light_gray))
-            feeText.setTextColor(context!!.getColor(R.color.light_gray))
-            amountEdit.setTextColor(context!!.getColor(R.color.almost_black))
-            if (!amountLabelOn) isoText.setTextColor(context!!.getColor(R.color.almost_black))
+            balanceText.setTextColor(requireContext().getColor(R.color.light_gray))
+            feeText.setTextColor(requireContext().getColor(R.color.light_gray))
+            amountEdit.setTextColor(requireContext().getColor(R.color.almost_black))
+            if (!amountLabelOn) isoText.setTextColor(requireContext().getColor(R.color.almost_black))
         }
         balanceText.text = getString(R.string.Send_balance, formattedBalance)
         feeText.text = String.format(getString(R.string.Send_fee), aproxFee)
@@ -525,7 +667,9 @@ class FragmentSend : Fragment() {
         if (obj.amount != null) {
             val iso = selectedIso
             val satoshiAmount = BigDecimal(obj.amount).multiply(BigDecimal(100000000))
-            amountBuilder = StringBuilder(BRExchange.getAmountFromSatoshis(activity, iso, satoshiAmount).toPlainString())
+            amountBuilder = StringBuilder(
+                BRExchange.getAmountFromSatoshis(activity, iso, satoshiAmount).toPlainString()
+            )
             updateText()
         }
     }
