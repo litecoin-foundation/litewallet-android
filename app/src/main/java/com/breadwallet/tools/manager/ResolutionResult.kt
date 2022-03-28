@@ -26,7 +26,7 @@ class UDResolution {
     }
 }
 
-
+//https://github.com/unstoppabledomains/resolution-java/blob/master/samples.md
 //data class ResolutionResult(val error: NamingServiceException?, val address: String?) {}
 //
 //class AsyncResolution : AsyncTask<String, String, ResolutionResult>() {
