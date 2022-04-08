@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.breadwallet.R
+import com.breadwallet.databinding.FragmentHistoryBinding
 import com.breadwallet.presenter.activities.BreadActivity
 import com.breadwallet.presenter.base.BaseFragment
 import com.breadwallet.tools.manager.BRSharedPrefs
@@ -16,7 +17,6 @@ import com.breadwallet.wallet.BRPeerManager
 import com.breadwallet.wallet.BRPeerManager.OnTxStatusUpdate
 import com.breadwallet.wallet.BRWalletManager
 import com.breadwallet.wallet.BRWalletManager.OnBalanceChanged
-import kotlinx.android.synthetic.main.fragment_history.*
 
 /** Litewallet
  * Created by Mohamed Barry on 6/1/20
@@ -31,17 +31,20 @@ class HistoryFragment :
     OnTxAddedListener,
     HistoryView {
 
+    lateinit var binding: FragmentHistoryBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_history, container, false)
+    ): View {
+        binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        TxManager.getInstance().init(requireActivity() as BreadActivity, recyclerView)
+        TxManager.getInstance().init(requireActivity() as BreadActivity, binding.recyclerView)
     }
 
     private fun addObservers() {
