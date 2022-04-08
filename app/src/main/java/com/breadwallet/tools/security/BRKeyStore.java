@@ -32,8 +32,6 @@ import com.breadwallet.wallet.BRWalletManager;
 import com.platform.entities.WalletInfo;
 import com.platform.tools.KVStoreManager;
 
-import org.junit.Assert;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -138,7 +136,6 @@ public class BRKeyStore {
         aliasObjectMap.put(PASS_TIME_ALIAS, new AliasObject(PASS_TIME_ALIAS, PASS_TIME_FILENAME, PASS_TIME_IV));
         aliasObjectMap.put(TOTAL_LIMIT_ALIAS, new AliasObject(TOTAL_LIMIT_ALIAS, TOTAL_LIMIT_FILENAME, TOTAL_LIMIT_IV));
 
-        Assert.assertEquals(aliasObjectMap.size(), 12);
     }
 
 
