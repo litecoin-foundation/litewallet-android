@@ -7,7 +7,7 @@
   <!-- About screen footer -->
   <string name="About.footer">Made by the Litewallet Team of the Litecoin Foundation\n%1$s</string>
   <!-- About app version -->
-  <string name="About.appVersion">%1$s</string>
+  <string name="About.appVersion" translatable="false">%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">Privacy Policy</string>
   <!-- About screen reddit label -->
@@ -175,7 +175,6 @@
   <!-- Wrong password alert message -->
   <string name="Import.wrongPassword">Wrong password, please try again.</string>
   <!-- Close app button -->
-  <string name="JailbreakWarnings.close">Close</string>
   <!-- Ignore jailbreak warning button -->
   <string name="JailbreakWarnings.ignore">Ignore</string>
   <!-- Jailbreak warning message -->
@@ -799,5 +798,6 @@
   <string name="Login.ltcPrice" translatable="false">1 LTC = %1$s</string>
   <string name="Login.currentLtcPrice">Current LTC value in %1$s</string>
   <string name="Settings.languages">Languages</string>
+  <string name="JailbreakWarnings.close">Close</string>
 
 </resources>
