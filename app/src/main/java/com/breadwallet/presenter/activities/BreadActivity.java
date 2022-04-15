@@ -61,31 +61,6 @@ import java.math.BigDecimal;
 
 import timber.log.Timber;
 
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan <mihail@breadwallet.com> on 8/4/15.
- * Copyright (c) 2016 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
 public class BreadActivity extends BRActivity implements BRWalletManager.OnBalanceChanged, BRSharedPrefs.OnIsoChangedListener,
         TransactionDataSource.OnTxAddedListener, InternetManager.ConnectionReceiverListener {
 
@@ -198,7 +173,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         Uri data = intent.getData();
         if (data == null) return;
         String scheme = data.getScheme();
-        if (scheme != null && (scheme.startsWith("litecoin") || scheme.startsWith("bitid"))) {
+        if (scheme != null && scheme.startsWith("litecoin")) {
             String str = intent.getDataString();
             BitcoinUrlHandler.processRequest(this, str);
         }
@@ -342,9 +317,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         appVisible = true;
         app = this;
         addObservers();
-        if (BRConstants.PLATFORM_ON) {
-            APIClient.getInstance(this).updatePlatform();
-        }
 
         setupNetworking();
 
@@ -373,13 +345,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         unregisterReceiver(mConnectionReceiver);
-
-        //sync the kv stores
-        if (BRConstants.PLATFORM_ON) {
-            BRExecutor.getInstance().forBackgroundTasks().execute(() -> APIClient.getInstance(BreadActivity.this).syncKvStore());
-        }
     }
 
     private void initializeViews() {

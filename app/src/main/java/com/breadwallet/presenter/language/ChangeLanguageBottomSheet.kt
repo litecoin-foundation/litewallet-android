@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.breadwallet.R
+import com.breadwallet.databinding.ChangeLanguageBottomSheetBinding
+import com.breadwallet.databinding.FragmentHistoryBinding
 import com.breadwallet.entities.Language
 import com.breadwallet.presenter.activities.intro.IntroActivity
 import com.breadwallet.presenter.spend.RoundedBottomSheetDialogFragment
@@ -16,7 +18,6 @@ import com.breadwallet.tools.util.Utils
 import com.breadwallet.tools.util.getString
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.change_language_bottom_sheet.*
 
 
 /** Litewallet
@@ -26,36 +27,38 @@ import kotlinx.android.synthetic.main.change_language_bottom_sheet.*
  */
 class ChangeLanguageBottomSheet : RoundedBottomSheetDialogFragment() {
 
+    lateinit var binding: ChangeLanguageBottomSheetBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.change_language_bottom_sheet, container, false)
+    ): View {
+        binding = ChangeLanguageBottomSheetBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toolbar.setNavigationOnClickListener { dismiss() }
+        binding.toolbar.setNavigationOnClickListener { dismiss() }
 
         val currentLanguage = LocaleHelper.instance.currentLocale
-        toolbar.title = currentLanguage.desc
+        binding.toolbar.title = currentLanguage.desc
 
         val adapter = LanguageAdapter(Language.values()).apply {
             selectedPosition = currentLanguage.ordinal
             onLanguageChecked = {
-                toolbar.title = it.desc
-                ok_button.text = getString(LocaleHelper.getLocale(it), R.string.Button_ok)
+                binding.toolbar.title = it.desc
+                binding.okButton.text = getString(LocaleHelper.getLocale(it), R.string.Button_ok)
             }
         }
-        recycler_view.adapter = adapter
+        binding.recyclerView.adapter = adapter
 
-        recycler_view.post {
-            recycler_view.scrollToPosition(adapter.selectedPosition)
+        binding.recyclerView.post {
+            binding.recyclerView.scrollToPosition(adapter.selectedPosition)
         }
 
-        ok_button.setOnClickListener {
+        binding.okButton.setOnClickListener {
             dismiss()
             if (LocaleHelper.instance.setLocaleIfNeeded(adapter.selectedLanguage())) {
                 val intent = Intent(requireContext(), IntroActivity::class.java)

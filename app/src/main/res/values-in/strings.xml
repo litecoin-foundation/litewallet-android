@@ -66,40 +66,6 @@
   <string name="ApiClient.notReady">Dompet belum siap</string>
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">Tidak dapat mengambil token API</string>
-  <!-- Send BCH view body. -->
-  <string name="BCH.body">Masukkan alamat BCH tujuan di bawah ini. Semua BCH di dompet Anda pada saat percabangan (%1$s) akan dikirim.</string>
-  <!-- Confirm sending <$5.00> to <address>? -->
-  <string name="BCH.confirmationMessage">Konfirmasikan pengiriman %1$s untuk %2$s</string>
-  <!-- Confirmation alert title -->
-  <string name="BCH.confirmationTitle">Konfirmasi</string>
-  <!-- Generic bch erorr message -->
-  <string name="BCH.genericError">Akun Anda tidak mengandung BCH, atau Anda menerima BCH setelah percabangan.</string>
-  <!-- Transaction ID copied message -->
-  <string name="BCH.hashCopiedMessage">ID Transaksi disalin</string>
-  <!-- No address error message -->
-  <string name="BCH.noAddressError">Harap masukkan alamat</string>
-  <!-- Attempted to scan unsupported qr code error message. -->
-  <string name="BCH.paymentProtocolError">Permintaan Protokol Pembayaran tidak didukung untuk transaksi BCH</string>
-  <!-- BCH successfully sent alert message -->
-  <string name="BCH.successMessage">BCH berhasil dikirim.</string>
-  <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">Tarik BCH</string>
-  <!-- Tx Hash button header -->
-  <string name="BCH.txHashHeader">ID Transaksi BCH</string>
-  <!-- Approve button label -->
-  <string name="BitID.approve">Menyetujui</string>
-  <!-- <sitename> is requesting authentication using your bitcoin wallet -->
-  <string name="BitID.authenticationRequest">%1$s meminta otentikasi menggunakan dompet Litecoin Anda</string>
-  <!-- Deny button label -->
-  <string name="BitID.deny">Menyangkal</string>
-  <!-- BitID error alert title -->
-  <string name="BitID.error">Kesalahan otentikasi</string>
-  <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
-  <string name="BitID.errorMessage">Silakan periksa dengan layanan. Anda mungkin perlu mencoba lagi.</string>
-  <!-- BitID success alert title -->
-  <string name="BitID.success">Berhasil Diotentikasi</string>
-  <!-- BitID Authentication Request alert view title -->
-  <string name="BitID.title">Permintaan Otentikasi BitID</string>
   <!-- Cancel button label -->
   <string name="Button.cancel">Membatalkan</string>
   <!-- Ignore button label -->
@@ -120,8 +86,6 @@
   <string name="Button.submit">Kirimkan</string>
   <!-- Yes button -->
   <string name="Button.yes">Iya</string>
-  <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">Pusatkan ID Anda di dalam kotak</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">Jumlah yang akan dikirim:</string>
   <!-- Network Fee: ($1.00) -->

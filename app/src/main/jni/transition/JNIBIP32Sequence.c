@@ -1,6 +1,3 @@
-//
-// Created by Mihail Gutan on 1/24/17.
-//
 
 #include <jni.h>
 #include <BRKey.h>
