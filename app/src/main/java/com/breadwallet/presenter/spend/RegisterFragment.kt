@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import com.breadwallet.R
+import com.breadwallet.databinding.FragmentRegisterBinding
 import com.breadwallet.entities.Country
 import com.breadwallet.presenter.base.BaseFragment
 import com.breadwallet.tools.util.CountryHelper
@@ -15,8 +16,6 @@ import com.breadwallet.tools.util.text
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
-import kotlinx.android.synthetic.main.fragment_register.*
-import kotlinx.android.synthetic.main.view_register.*
 
 /** Litewallet
  * Created by Mohamed Barry on 6/3/20
@@ -25,32 +24,34 @@ import kotlinx.android.synthetic.main.view_register.*
  */
 class RegisterFragment : BaseFragment<RegisterPresenter>(), RegisterView {
 
+    lateinit var binding: FragmentRegisterBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_register, container, false)
+    ): View {
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toolBar.setNavigationOnClickListener {
+        binding.toolBar.setNavigationOnClickListener {
             goToLogin()
         }
-        countryField.editText?.keyListener = null
-        countryField.editText?.run {
+        binding.registerViewContainer.countryField.editText?.keyListener = null
+        binding.registerViewContainer.countryField.editText?.run {
             // FIXME: on some devices CountryHelper.countries.find { it.name == "" } returns a NULL country.
             //  Don't yet know the real cause but since we only handle USA, let's just hardcode it for now.
             //  So it's a temporary fix.
             val country = CountryHelper.countries.find { it.name == CountryHelper.usaCountry.name }
-                    ?: CountryHelper.usaCountry
+                ?: CountryHelper.usaCountry
             setText(country.name)
             tag = country
         }
 
-        submitBut.setOnClickListener { handleSubmit() }
-        bindProgressButton(submitBut)
+        binding.registerViewContainer.submitBut.setOnClickListener { handleSubmit() }
+        bindProgressButton(binding.registerViewContainer.submitBut)
     }
 
     private fun goToLogin() {
@@ -58,78 +59,85 @@ class RegisterFragment : BaseFragment<RegisterPresenter>(), RegisterView {
     }
 
     private fun handleSubmit() {
-        presenter.register(
-            firstNameField.text(),
-            lastNameField.text(),
-            emailField.text(),
-            passwordField.text(),
-            confirmPasswordField.text(),
-            addressField.text(),
-            null,
-            cityField.text(),
-            stateField.text(),
-            postalCodeField.text(),
-            countryField.editText?.tag as Country,
-            mobileNumberField.text()
-        )
+        with(binding.registerViewContainer) {
+            presenter.register(
+                firstNameField.text(),
+                lastNameField.text(),
+                emailField.text(),
+                passwordField.text(),
+                confirmPasswordField.text(),
+                addressField.text(),
+                null,
+                cityField.text(),
+                stateField.text(),
+                postalCodeField.text(),
+                countryField.editText?.tag as Country,
+                mobileNumberField.text()
+            )
+        }
     }
 
     override fun onWrongFirstName(errorResId: Int) {
-        firstNameField.onError(errorResId)
+        binding.registerViewContainer.firstNameField.onError(errorResId)
     }
 
     override fun onWrongLastName(errorResId: Int) {
-        lastNameField.onError(errorResId)
+        binding.registerViewContainer.lastNameField.onError(errorResId)
     }
 
     override fun onWrongAddress1(errorResId: Int) {
-        addressField.onError(errorResId)
+        binding.registerViewContainer.addressField.onError(errorResId)
     }
 
     override fun onWrongCity(errorResId: Int) {
-        cityField.onError(errorResId)
+        binding.registerViewContainer.cityField.onError(errorResId)
     }
 
     override fun onWrongState(errorResId: Int) {
-        stateField.onError(errorResId)
+        binding.registerViewContainer.stateField.onError(errorResId)
     }
 
     override fun onWrongPostalCode(errorResId: Int) {
-        postalCodeField.onError(errorResId)
+        binding.registerViewContainer.postalCodeField.onError(errorResId)
     }
 
     override fun onWrongCountry(errorResId: Int) {
-        countryField.onError(errorResId)
+        binding.registerViewContainer.countryField.onError(errorResId)
     }
 
     override fun onWrongPhone(errorResId: Int) {
-        mobileNumberField.onError(errorResId)
+        binding.registerViewContainer.mobileNumberField.onError(errorResId)
     }
 
     override fun onWrongEmail(errorResId: Int) {
-        emailField.onError(errorResId)
+        binding.registerViewContainer.emailField.onError(errorResId)
     }
 
     override fun onWrongPassword(errorResId: Int) {
-        passwordField.onError(errorResId)
+        binding.registerViewContainer.passwordField.onError(errorResId)
     }
 
     override fun onWrongConfirmPassword(errorResId: Int) {
-        confirmPasswordField.onError(errorResId)
+        binding.registerViewContainer.confirmPasswordField.onError(errorResId)
     }
 
     override fun showProgress() {
-        submitBut.showProgress { progressColor = Color.WHITE }
-        submitBut.isEnabled = false
+        with(binding.registerViewContainer) {
+            submitBut.showProgress { progressColor = Color.WHITE }
+            submitBut.isEnabled = false
+        }
     }
 
     override fun hideProgress() {
-        submitBut.hideProgress(R.string.Button_submit)
-        submitBut.isEnabled = true
+        with(binding.registerViewContainer) {
+            submitBut.hideProgress(R.string.Button_submit)
+            submitBut.isEnabled = true
+        }
     }
 
     override fun onRegisteredSuccessful() {
-        AlertDialog.Builder(requireContext()).setMessage(R.string.Register_Dialog_registeredSuccessMessage).setPositiveButton(
+        AlertDialog.Builder(requireContext())
+            .setMessage(R.string.Register_Dialog_registeredSuccessMessage).setPositiveButton(
             android.R.string.ok
         ) { _, _ ->
             goToLogin()

@@ -7,7 +7,6 @@ import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.breadwallet.R
 import com.breadwallet.entities.Language
-import kotlinx.android.synthetic.main.change_language_item.view.*
 
 
 /** Litewallet
@@ -48,6 +47,6 @@ class LanguageAdapter(val languages: Array<Language>) : RecyclerView.Adapter<Lan
     fun selectedLanguage() = languages[selectedPosition]
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val lang: RadioButton = view.lang_radio_button
+        val lang: RadioButton = view.findViewById(R.id.lang_radio_button)
     }
 }
