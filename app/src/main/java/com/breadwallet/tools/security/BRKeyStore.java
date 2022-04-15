@@ -32,8 +32,6 @@ import com.breadwallet.wallet.BRWalletManager;
 import com.platform.entities.WalletInfo;
 import com.platform.tools.KVStoreManager;
 
-import org.junit.Assert;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -64,31 +62,6 @@ import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
 
 import timber.log.Timber;
-
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan <mihail@breadwallet.com> on 9/29/15.
- * Copyright (c) 2016 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 
 public class BRKeyStore {
 
@@ -163,7 +136,6 @@ public class BRKeyStore {
         aliasObjectMap.put(PASS_TIME_ALIAS, new AliasObject(PASS_TIME_ALIAS, PASS_TIME_FILENAME, PASS_TIME_IV));
         aliasObjectMap.put(TOTAL_LIMIT_ALIAS, new AliasObject(TOTAL_LIMIT_ALIAS, TOTAL_LIMIT_FILENAME, TOTAL_LIMIT_IV));
 
-        Assert.assertEquals(aliasObjectMap.size(), 12);
     }
 
 
@@ -184,6 +156,9 @@ public class BRKeyStore {
                 secretKey = createKeys(alias, auth_required);
                 inCipher.init(Cipher.ENCRYPT_MODE, secretKey);
             } else {
+
+                Timber.d("KeyStore: is initialized");
+
                 //see if the key is old format, create a new one if it is
                 try {
                     inCipher.init(Cipher.ENCRYPT_MODE, secretKey);
@@ -976,7 +951,6 @@ public class BRKeyStore {
                     @Override
                     public void run() {
                         BRDialog.hideDialog();
-                        BRAnimator.showSupportFragment((Activity) app, BRConstants.loopBug);
                     }
                 });
             }
