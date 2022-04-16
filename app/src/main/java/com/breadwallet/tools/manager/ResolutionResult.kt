@@ -7,13 +7,12 @@ import com.unstoppabledomains.resolution.DomainResolution
 import com.unstoppabledomains.resolution.Resolution
 import com.unstoppabledomains.resolution.naming.service.NamingServiceType
 import timber.log.Timber
-import android.os.AsyncTask
 
 data class ResolutionResult(val error: NamingServiceException?, val address: String?)
 
 class UDResolution {
     private val tool: DomainResolution = Resolution.builder()
-            .infura(NamingServiceType.CNS, Network.MAINNET, BuildConfig.INFURA_KEY)
+//            .infura(NamingServiceType.CNS, Network.MAINNET, BuildConfig.INFURA_KEY)
             .build()
 
     fun resolve(domain: String): ResolutionResult {
