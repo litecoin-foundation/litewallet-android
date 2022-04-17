@@ -470,7 +470,7 @@
   <string name="Send.toLabel">Bir Litecoin adresi girin</string>
 
   <!-- Enter to match domain name to LTC Address -->
-  <string name="Send.UnstoppableDomains.placeholder">Bir .crypto veya .zil alanı girin</string>
+  <string name="Send.UnstoppableDomains.placeholder">Bir .crypto, .wallet, .zil, .nft, .blockchain,\n.bitcoin, .coin, .888, .dao veya .x alan adı girin.</string>
   <!-- Or -->
   <string name="Send.or">Veya</string>
   <!-- Lookup -->
