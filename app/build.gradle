@@ -90,7 +90,9 @@ android {
         unitTests.returnDefaultValues = true
     }
     packagingOptions {
-        pickFirst 'protobuf.meta'
+        resources {
+            pickFirsts += ['protobuf.meta']
+        }
     }
     externalNativeBuild {
         cmake {
@@ -308,7 +310,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     // Unstoppable domain
-    implementation 'com.unstoppabledomains:resolution:2.0.0'
+    implementation 'com.unstoppabledomains:resolution:5.0.0'
 
     // Progress Button
     implementation 'com.github.razir.progressbutton:progressbutton:2.1.0'

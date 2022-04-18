@@ -8,17 +8,11 @@ import com.unstoppabledomains.resolution.Resolution
 import com.unstoppabledomains.resolution.naming.service.NamingServiceType
 import timber.log.Timber
 
-
-/** Litewallet
- * Created by Mohamed Barry on 12/23/20
- * email: mosadialiou@gmail.com
- * Copyright © 2020 Litecoin Foundation. All rights reserved.
- */
 data class ResolutionResult(val error: NamingServiceException?, val address: String?)
 
 class UDResolution {
     private val tool: DomainResolution = Resolution.builder()
-            .infura(NamingServiceType.CNS, Network.MAINNET, BuildConfig.INFURA_KEY)
+//            .infura(NamingServiceType.CNS, Network.MAINNET, BuildConfig.INFURA_KEY)
             .build()
 
     fun resolve(domain: String): ResolutionResult {
@@ -30,3 +24,22 @@ class UDResolution {
         }
     }
 }
+
+//https://github.com/unstoppabledomains/resolution-java/blob/master/samples.md
+//data class ResolutionResult(val error: NamingServiceException?, val address: String?) {}
+//
+//class AsyncResolution : AsyncTask<String, String, ResolutionResult>() {
+//    private val tool: DomainResolution = Resolution()
+//
+//    override fun doInBackground(vararg params: String?): ResolutionResult {
+//        val domain =  params[0]
+//        val currency = params[1]
+//        return try {
+//            val address = this.tool.addr(domain, currency)
+//            ResolutionResult(null, address)
+//        } catch(err: NamingServiceException) {
+//            err.printStackTrace();
+//            ResolutionResult(err, null)
+//        }
+//    }
+//}

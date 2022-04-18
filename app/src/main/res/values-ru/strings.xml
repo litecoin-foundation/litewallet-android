@@ -438,7 +438,7 @@
   <string name="Send.toLabel">Введите адрес Litecoin</string>
 
   <!-- Enter to match domain name to LTC Address -->
-  <string name="Send.UnstoppableDomains.placeholder">Введите домен .crypto или .zil</string>
+  <string name="Send.UnstoppableDomains.placeholder">Введите домен .crypto, .wallet, .zil, .nft, .blockchain,\n.bitcoin, .coin, .888, .dao или .x.</string>
   <!-- Or -->
   <string name="Send.or">или</string>
   <!-- Lookup -->
