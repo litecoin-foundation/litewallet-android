@@ -90,7 +90,9 @@ android {
         unitTests.returnDefaultValues = true
     }
     packagingOptions {
-        pickFirst 'protobuf.meta'
+        resources {
+            pickFirsts += ['protobuf.meta']
+        }
     }
     externalNativeBuild {
         cmake {
