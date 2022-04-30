@@ -29,6 +29,7 @@ public class SyncManager {
     }
 
     private void createAlarm(Context app, long time) {
+        //Add another flag
         AlarmManager alarmManager = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(app, SyncReceiver.class);
         intent.setAction(SyncReceiver.SYNC_RECEIVER);//my custom string action name
