@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.tools.listeners.SyncReceiver;
@@ -29,10 +30,13 @@ public class SyncManager {
     }
 
     private void createAlarm(Context app, long time) {
+        //Add another flag
         AlarmManager alarmManager = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(app, SyncReceiver.class);
         intent.setAction(SyncReceiver.SYNC_RECEIVER);//my custom string action name
-        PendingIntent pendingIntent = PendingIntent.getService(app, 1001, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ?
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
+        PendingIntent pendingIntent = PendingIntent.getService(app, 1001, intent, flags);
         alarmManager.setWindow(AlarmManager.RTC_WAKEUP, time, time + TimeUnit.MINUTES.toMillis(1), pendingIntent);//first start will start asap
     }
 
