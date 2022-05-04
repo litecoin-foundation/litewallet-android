@@ -45,7 +45,6 @@ public class BreadApp extends Application {
 
         boolean enableCrashlytics = true;
         if (Utils.isEmulatorOrDebug(this)) {
-//            BRKeyStore.putFailCount(0, this);
             enableCrashlytics = false;
         }
 
