@@ -64,8 +64,8 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 27
         targetSdkVersion 31
-        versionCode 671
-        versionName "v2.5.0"
+        versionCode 673
+        versionName "v2.6.0"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
 
@@ -90,7 +90,9 @@ android {
         unitTests.returnDefaultValues = true
     }
     packagingOptions {
-        pickFirst 'protobuf.meta'
+        resources {
+            pickFirsts += ['protobuf.meta']
+        }
     }
     externalNativeBuild {
         cmake {
@@ -300,15 +302,16 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.3.1'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-analytics:20.1.0'
-    implementation 'com.google.firebase:firebase-crashlytics:18.2.8'
-    implementation 'com.google.firebase:firebase-crashlytics-ndk:18.2.8'
+    implementation platform('com.google.firebase:firebase-bom:29.3.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-crashlytics-ndk'
 
     // Timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     // Unstoppable domain
-    implementation 'com.unstoppabledomains:resolution:2.0.0'
+    implementation 'com.unstoppabledomains:resolution:5.0.0'
 
     // Progress Button
     implementation 'com.github.razir.progressbutton:progressbutton:2.1.0'
