@@ -438,7 +438,7 @@
   <string name="Send.toLabel">라이트 코인 주소를 입력하세요</string>
 
   <!-- Enter to match domain name to LTC Address -->
-  <string name="Send.UnstoppableDomains.placeholder">.crypto 또는 .zil 도메인을 입력하세요.</string>
+  <string name="Send.UnstoppableDomains.placeholder">.crypto, .wallet, .zil, .nft, .blockchain,\n.bitcoin, .coin, .888, .dao 또는 .x 도메인을 입력하세요.</string>
   <!-- Or -->
   <string name="Send.or">또는</string>
   <!-- Lookup -->
