@@ -438,7 +438,7 @@
   <string name="Send.toLabel">Litecoinのアドレスを入力してください。</string>
 
   <!-- Enter to match domain name to LTC Address -->
-  <string name="Send.UnstoppableDomains.placeholder">.cryptoまたは.zilドメインを入力してください</string>
+  <string name="Send.UnstoppableDomains.placeholder">.crypto、.wallet、.zil、.nft、.blockchain、\ n.bitcoin、.coin、.888、.dao、または.xドメインを入力します。</string>
   <!-- Or -->
   <string name="Send.or">或いは</string>
   <!-- Lookup -->
