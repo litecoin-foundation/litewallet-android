@@ -438,7 +438,7 @@
   <string name="Send.toLabel">Masukkan alamat Litecoin</string>
 
   <!-- Enter to match domain name to LTC Address -->
-  <string name="Send.UnstoppableDomains.placeholder">Masukkan domain .crypto atau .zil</string>
+  <string name="Send.UnstoppableDomains.placeholder">Masukkan domain .crypto, .wallet, .zil, .nft, .blockchain,\n.bitcoin, .coin, .888, .dao, atau .x.</string>
   <!-- Or -->
   <string name="Send.or">Atau</string>
   <!-- Lookup -->
