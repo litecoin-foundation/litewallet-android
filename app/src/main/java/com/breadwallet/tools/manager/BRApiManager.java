@@ -157,11 +157,12 @@ public class BRApiManager {
     }
 
     public static void updateFeePerKb(Context app) {
-        String jsonString = createGETRequestURL(app, "https://api.loafwallet.org/fee-per-kb");
-        if (jsonString == null || jsonString.isEmpty()) {
-            Timber.i("updateFeePerKb: failed to update fee, response string: %s", jsonString);
-            return;
-        }
+
+        //Operationally, it makes more sense to review the fees than rely on a server.
+        // Especially, when the missing server causes a major disconnect
+        // Using this hard code for a bi-yearly review. This matches the architecture in iOS
+        // KCW: May 3, 2022
+        String jsonString = "{'fee_per_kb': 10000, 'fee_per_kb_economy': 2500, 'fee_per_kb_luxury': 66746}";
         try {
             JSONObject obj = new JSONObject(jsonString);
             // TODO: Refactor when mobile-api v0.4.0 is in prod
