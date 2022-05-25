@@ -427,7 +427,6 @@
   <string name="Send.title">Надіслати</string>
   <!-- Send money to label -->
   <string name="Send.toLabel">Введіть адресу Litecoin</string>
-
   <!-- Enter to match domain name to LTC Address -->
   <string name="Send.UnstoppableDomains.placeholder">Введіть домен .crypto, .wallet, .zil, .nft, .blockchain,\n.bitcoin, .coin, .888, .dao або .x.</string>
   <!-- Or -->
