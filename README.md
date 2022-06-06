@@ -77,6 +77,12 @@ $ git submodule update --init --recursive
 3. Go to SDK Manager and download the latest SDK Platforms and SDK Tools
 4. Build -> Rebuild Project
 
+### Point to a specific version of the loafwallet-core
+1. Navigate to the loafwallet-core dir (/app/src/main/jni/loafwallet-core)
+2. Find the commit in the submodule
+3. Checkout the commit: ``` git checkout ~2323j2~ ```
+4. Return to the main dir.  The head is in a detached state. 
+
 ### Litewallet Team:
 * [Development Code of Conduct](https://github.com/litecoin-foundation/litewallet/blob/master/DEVELOPMENT.md)
 ---
