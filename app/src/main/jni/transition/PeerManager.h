@@ -28,7 +28,7 @@ Java_com_breadwallet_wallet_BRPeerManager_putBlock(JNIEnv *env, jobject thiz,
 JNIEXPORT void JNICALL
 Java_com_breadwallet_wallet_BRPeerManager_createBlockArrayWithCount(JNIEnv *env,
                                                                     jobject thiz,
-                                                                    size_t blockCount);
+                                                                    jint blockCount);
 
 JNIEXPORT void JNICALL
 Java_com_breadwallet_wallet_BRPeerManager_putPeer(JNIEnv *env, jobject thiz,
@@ -39,20 +39,20 @@ Java_com_breadwallet_wallet_BRPeerManager_putPeer(JNIEnv *env, jobject thiz,
 JNIEXPORT void JNICALL
 Java_com_breadwallet_wallet_BRPeerManager_createPeerArrayWithCount(JNIEnv *env,
                                                                    jobject thiz,
-                                                                   size_t peerCount);
+                                                                   jint peerCount);
 
 JNIEXPORT jboolean JNICALL Java_com_breadwallet_wallet_BRPeerManager_isCreated(JNIEnv *env,
                                                                                jobject obj);
 
 JNIEXPORT jdouble JNICALL
-Java_com_breadwallet_wallet_BRPeerManager_syncProgress(JNIEnv *env, jobject thiz,
+Java_com_breadwallet_wallet_BRPeerManager_syncProgress(JNIEnv *env, jclass thiz,
                                                        int startHeight);
 
 JNIEXPORT jint JNICALL Java_com_breadwallet_wallet_BRPeerManager_getCurrentBlockHeight(JNIEnv *env,
-                                                                                       jobject thiz);
+                                                                                       jclass thiz);
 
 JNIEXPORT jint JNICALL Java_com_breadwallet_wallet_BRPeerManager_getEstimatedBlockHeight(
-        JNIEnv *env, jobject thiz);
+        JNIEnv *env, jclass thiz);
 
 JNIEXPORT jlong JNICALL Java_com_breadwallet_wallet_BRPeerManager_getLastBlockTimestamp(
         JNIEnv *env, jobject thiz);
@@ -67,7 +67,7 @@ JNIEXPORT jboolean JNICALL Java_com_breadwallet_wallet_BRPeerManager_isConnected
                                                                                  jobject obj);
 
 JNIEXPORT jint JNICALL Java_com_breadwallet_wallet_BRPeerManager_getRelayCount(JNIEnv *env,
-                                                                               jobject thiz,
+                                                                               jclass thiz,
                                                                                jbyteArray txHash);
 
 JNIEXPORT jboolean JNICALL Java_com_breadwallet_wallet_BRPeerManager_setFixedPeer(

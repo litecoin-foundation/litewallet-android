@@ -25,7 +25,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jniwrappers_BRKey_decryptNative(JNIEnv *en
                                                                       jbyteArray data,
                                                                       jbyteArray nonce);
 
-JNIEXPORT jbyteArray JNICALL Java_com_jniwrappers_BRKey_address(JNIEnv *env, jobject thiz);
+JNIEXPORT jstring JNICALL Java_com_jniwrappers_BRKey_address(JNIEnv *env, jobject thiz);
 
 #ifdef __cplusplus
 }

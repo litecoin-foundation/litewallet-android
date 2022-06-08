@@ -13,6 +13,7 @@
 #include <assert.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include <malloc.h>
 
 #define fprintf(...) __android_log_print(ANDROID_LOG_ERROR, "bread", _va_rest(__VA_ARGS__, NULL))
 
@@ -321,7 +322,7 @@ Java_com_breadwallet_wallet_BRPeerManager_putBlock(JNIEnv *env, jobject thiz, jb
 
 JNIEXPORT void JNICALL
 Java_com_breadwallet_wallet_BRPeerManager_createBlockArrayWithCount(JNIEnv *env, jobject thiz,
-                                                                    size_t blockCount) {
+                                                                    jint blockCount) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ",
                         "block array created with count: %zu", blockCount);
     _blocks = calloc(blockCount, sizeof(*_blocks));
@@ -355,7 +356,7 @@ Java_com_breadwallet_wallet_BRPeerManager_putPeer(JNIEnv *env, jobject thiz, jby
 
 JNIEXPORT void JNICALL
 Java_com_breadwallet_wallet_BRPeerManager_createPeerArrayWithCount(JNIEnv *env, jobject thiz,
-                                                                   size_t peerCount) {
+                                                                   jint peerCount) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "peer array created with count: %zu",
                         peerCount);
     _peers = calloc(peerCount, sizeof(BRPeer));

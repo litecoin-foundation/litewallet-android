@@ -101,7 +101,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jniwrappers_BRKey_decryptNative(JNIEnv *en
 }
 
 
-JNIEXPORT jbyteArray JNICALL Java_com_jniwrappers_BRKey_address(JNIEnv *env, jobject thiz) {
+JNIEXPORT jstring JNICALL Java_com_jniwrappers_BRKey_address(JNIEnv *env, jobject thiz) {
     BRAddress address = BR_ADDRESS_NONE;
     BRKeyAddress(&_key, address.s, sizeof(address));
     assert(address.s[0] != '\0');
