@@ -244,6 +244,7 @@ android {
         }
 
     }
+    namespace 'com.breadwallet'
 }
 
 task copyResDirectoryToClasses(type: Copy) {
@@ -328,6 +329,11 @@ dependencies {
 
     // Ktlint
     ktlint 'com.pinterest:ktlint:0.44.0'
+
+    //kotlin https://stackoverflow.com/questions/69817925/problem-duplicate-class-androidx-lifecycle-viewmodel-found-in-modules
+    def lifecycle_version = "2.4.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 }
 
 task ktlint(type: JavaExec, group: "verification") {
