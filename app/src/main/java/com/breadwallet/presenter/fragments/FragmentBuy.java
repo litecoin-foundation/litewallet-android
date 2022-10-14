@@ -230,6 +230,6 @@ public class FragmentBuy extends Fragment {
     }
 
     public enum Partner {
-        SIMPLEX, MOONPAY
+        SIMPLEX, MOONPAY, BITREFILL
     }
 }
