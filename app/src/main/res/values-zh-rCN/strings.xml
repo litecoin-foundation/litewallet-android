@@ -761,5 +761,5 @@
   <string name="Login.currentLtcPrice">当前的LTC值 %1$s</string>
   <string name="Settings.languages">语言能力</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">购买礼品卡\\n• 为预付费手机充值\\n• Steam、亚马逊、Hotels.com\\n• 适用于 170 个国家/地区</string>
+    <string name="BuyCenter.bitrefill.FinancialDetails">购买礼品卡\n• 为预付费手机充值\n• Steam、亚马逊、Hotels.com\n• 适用于 170 个国家/地区</string>
 </resources>

@@ -762,5 +762,5 @@
   <string name="Login.currentLtcPrice">現在のLTC値 %1$s</string>
   <string name="Settings.languages">言語</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">ギフトカードの購入\\n• プリペイド携帯電話の補充\\n• Steam、Amazon、Hotels.com\\n• 170 か国で利用可能</string>
+    <string name="BuyCenter.bitrefill.FinancialDetails">ギフトカードの購入\n• プリペイド携帯電話の補充\n• Steam、Amazon、Hotels.com\n• 170 か国で利用可能</string>
 </resources>
