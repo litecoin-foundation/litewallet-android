@@ -57,6 +57,11 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
             holder.fiatOptionHScrollView.scrollTo((int) option.getX(), (int) option.getY());
         });
 
+        if (partner.getCode() == FragmentBuy.Partner.BITREFILL) {
+            holder.fiatOptionHScrollView.setVisibility(View.GONE);
+            holder.fiatOptions.setVisibility(View.GONE);
+        }
+
         holder.buyPartnerWrapper.setOnClickListener(v -> {
             int currencyResId = getCurrencyResId(holder.fiatOptions.getCheckedRadioButtonId());
             final Context context = v.getContext();
