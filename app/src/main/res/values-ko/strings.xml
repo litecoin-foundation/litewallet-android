@@ -762,5 +762,5 @@
   <string name="Login.currentLtcPrice">현재 LTC 값 %1$s</string>
   <string name="Settings.languages">언어</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">기프트 카드 구매\\n• 선불 전화 충전\\n• Steam, Amazon, Hotels.com\\n• 170개국에서 작동</string>
+    <string name="BuyCenter.bitrefill.FinancialDetails">기프트 카드 구매\n• 선불 전화 충전\n• Steam, Amazon, Hotels.com\n• 170개국에서 작동</string>
 </resources>

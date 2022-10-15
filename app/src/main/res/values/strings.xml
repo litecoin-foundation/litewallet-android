@@ -731,6 +731,9 @@
   <string name="BuyCenter.moonpay.Title" tools:ignore="MissingTranslation">Moonpay</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Buy LTC with many fiat pairs\n• Pay with multiple methods\n• Global payment provider"</string>
 
+  <string name="BuyCenter.bitrefill.Title" tools:ignore="MissingTranslation">Bitrefill</string>
+  <string name="BuyCenter.bitrefill.FinancialDetails">"• Buy gift cards\n• Refill prepaid phones\n• Steam, Amazon, Hotels.com\n• Works in 170 countries"</string>
+
   <string name="aud_currency_code" translatable="false">AUD</string>
   <string name="gbp_currency_code" translatable="false">GBP</string>
   <string name="hkd_currency_code" translatable="false">HKD</string>
@@ -799,7 +802,4 @@
   <string name="Login.currentLtcPrice">Current LTC value in %1$s</string>
   <string name="Settings.languages">Languages</string>
   <string name="JailbreakWarnings.close">Close</string>
-  <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-  <string name="BuyCenter.bitrefill.FinancialDetails">Buy gift cards\\n• Refill prepaid phones\\n• Steam, Amazon, Hotels.com\\n• Works in 170 countries</string>
-
 </resources>

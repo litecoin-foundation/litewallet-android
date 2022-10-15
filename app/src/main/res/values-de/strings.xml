@@ -761,5 +761,5 @@
   <string name="Login.currentLtcPrice">Aktueller LTC-Wert in %1$s</string>
   <string name="Settings.languages">Sprachen</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">Geschenkkarten kaufen\\n• Prepaid-Telefone aufladen\\n• Steam, Amazon, Hotels.com\\n• Funktioniert in 170 Ländern</string>
+    <string name="BuyCenter.bitrefill.FinancialDetails">Geschenkkarten kaufen\n• Prepaid-Telefone aufladen\n• Steam, Amazon, Hotels.com\n• Funktioniert in 170 Ländern</string>
 </resources>
