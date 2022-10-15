@@ -48,7 +48,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$PROJECT_DIR$/../litewallet-ios/loafwallet/Assets.xcassets/Partners/bitrefillLogo.imageset/bitrefill-logo-app.png" />
+                                                <entry key="imagePath" value="$PROJECT_DIR$/../Bitrefill/bitrefill_logo.png" />
                                                 <entry key="opacityPercent" value="80" />
                                               </map>
                                             </option>
@@ -82,7 +82,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$PROJECT_DIR$/../litewallet-ios/loafwallet/Assets.xcassets/Partners/bitrefillLogo.imageset/bitrefill-logo-app.png" />
+                                      <entry key="imageAsset" value="$PROJECT_DIR$/../Bitrefill/bitrefill_logo.png" />
                                       <entry key="outputName" value="bitrefill_logo" />
                                       <entry key="theme" value="HOLO_DARK" />
                                       <entry key="themeColor" value="ffffff" />
