@@ -58,8 +58,8 @@ class BuyPartnersAdapter extends RecyclerView.Adapter<BuyPartnersAdapter.Partner
         });
 
         if (partner.getCode() == FragmentBuy.Partner.BITREFILL) {
-            holder.fiatOptionHScrollView.setVisibility(View.GONE);
-            holder.fiatOptions.setVisibility(View.GONE);
+            holder.fiatOptionHScrollView.setVisibility(View.INVISIBLE);
+            holder.fiatOptions.setVisibility(View.INVISIBLE);
         }
 
         holder.buyPartnerWrapper.setOnClickListener(v -> {
