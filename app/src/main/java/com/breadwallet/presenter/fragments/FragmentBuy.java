@@ -116,7 +116,6 @@ public class FragmentBuy extends Fragment {
         String bitrefillUrl = String.format( BRConstants.BITREFILL_AFFILIATE_LINK + "/embed/?paymentMethod=litecoin&ref=%s&utm_source=%s", bitrefillRef,utmSource);
 
         String buyUrl = partner == Partner.BITREFILL ? bitrefillUrl : url(getContext(), partner, currency);
-
         Timber.d("URL %s", buyUrl);
         webView.loadUrl(buyUrl);
 
