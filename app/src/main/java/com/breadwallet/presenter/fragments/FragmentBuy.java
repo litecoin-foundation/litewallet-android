@@ -31,6 +31,7 @@ import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.manager.BRSharedPrefs;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 
 import java.util.Date;
@@ -95,7 +96,8 @@ public class FragmentBuy extends Fragment {
         String currency = getArguments().getString(CURRENCY_KEY);
         Partner partner = (Partner) getArguments().getSerializable(PARTNER_KEY);
 
-        String buyUrl = url(getContext(), partner, currency);
+        String buyUrl = partner == Partner.BITREFILL ? BRConstants.BITREFILL_AFFILIATE_LINK : url(getContext(), partner, currency);
+ 
         Timber.d("URL %s", buyUrl);
         webView.loadUrl(buyUrl);
         return rootView;
