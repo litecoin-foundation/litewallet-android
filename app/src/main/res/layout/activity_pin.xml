@@ -60,14 +60,14 @@
 
     <ImageView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="186dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/ltc_logo"
+        android:src="@drawable/litewallet_logotype_white"
         app:layout_constraintBottom_toTopOf="@+id/brkeyboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
