@@ -65,39 +65,22 @@
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">API jetonu alınamıyor</string>
   <!-- Send BCH view body. -->
-  <string name="BCH.body">Aşağıya bir hedef BCH adresi girin. Çatal anında cüzdanınızdaki tüm BCH (%1$s) gönderilecektir.</string>
   <!-- Confirm sending <$5.00> to <address>? -->
-  <string name="BCH.confirmationMessage">Göndermeyi onaylayın %1$s -e %2$s</string>
-  <!-- Confirmation alert title -->
-  <string name="BCH.confirmationTitle">Onayla</string>
+    <!-- Confirmation alert title -->
   <!-- Generic bch erorr message -->
-  <string name="BCH.genericError">Hesabınız herhangi bir BCH içermiyor veya çataldan sonra BCH aldınız.</string>
   <!-- Transaction ID copied message -->
-  <string name="BCH.hashCopiedMessage">İşlem kimliği kopyalandı</string>
   <!-- No address error message -->
-  <string name="BCH.noAddressError">Bir Adresi giriniz</string>
   <!-- Attempted to scan unsupported qr code error message. -->
-  <string name="BCH.paymentProtocolError">Ödeme Protokolü İstekleri, BCH işlemleri için desteklenmez</string>
   <!-- BCH successfully sent alert message -->
-  <string name="BCH.successMessage">BCH başarıyla gönderildi.</string>
   <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">BCH\'yi geri çekin</string>
   <!-- Tx Hash button header -->
-  <string name="BCH.txHashHeader">BCH İşlem Kimliği</string>
   <!-- Approve button label -->
-  <string name="BitID.approve">Onayla</string>
   <!-- <sitename> is requesting authentication using your litecoin wallet -->
-  <string name="BitID.authenticationRequest">%1$s Litecoin cüzdanınızı kullanarak kimlik doğrulaması istiyor</string>
   <!-- Deny button label -->
-  <string name="BitID.deny">Reddetmek</string>
   <!-- BitID error alert title -->
-  <string name="BitID.error">Doğrulama hatası</string>
   <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
-  <string name="BitID.errorMessage">Lütfen servise danışın. Tekrar denemeniz gerekebilir.</string>
   <!-- BitID success alert title -->
-  <string name="BitID.success">Başarıyla Doğrulandı</string>
   <!-- BitID Authentication Request alert view title -->
-  <string name="BitID.title">BitID Kimlik Doğrulama İsteği</string>
   <!-- Cancel button label -->
   <string name="Button.cancel">İptal etmek</string>
   <!-- Ignore button label -->
@@ -119,7 +102,6 @@
   <!-- Yes button -->
   <string name="Button.yes">Evet</string>
   <!-- Camera plugin instruction -->
-  <string name="CameraPlugin.centerInstruction">Kimliğinizi kutuda ortalayın</string>
   <!-- Amount to Send: ($1.00) -->
   <string name="Confirmation.amountLabel">Gönderilecek tutar:</string>
   <!-- Network Fee: ($1.00) -->
@@ -815,6 +797,8 @@
   <!-- Beta Testing Litecoin Card -->
   <string name="LitecoinCard.Disclaimer.title">"Litecoin Kartı Beta"</string>
   <string name="Settings.languages">Diller</string>
+  <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+    <string name="BuyCenter.bitrefill.FinancialDetails">Hediye kartları satın alın\\n• Ön ödemeli telefonları yeniden doldurun\\n• Steam, Amazon, Hotels.com\\n• 170 ülkede çalışıyor</string>
 
 
 </resources>

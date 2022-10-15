@@ -784,4 +784,6 @@
   <string name="Receive.copied">Скопійовано в буфер обміну.</string>
   <string name="URLHandling.copy">Копія</string>
   <string name="URLHandling.addressListAlertTitle">Копіювати адреси гаманця</string>
+    <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+    <string name="BuyCenter.bitrefill.FinancialDetails">Купуйте подарункові картки\\n• Поповнюйте передплачені телефони\\n• Steam, Amazon, Hotels.com\\n• Працює в 170 країнах</string>
 </resources>

@@ -195,8 +195,7 @@
   <!-- Manage wallet description text -->
   <string name="ManageWallet.description">Nama dompet Anda hanya muncul di riwayat transaksi akun Anda dan tidak dapat dilihat oleh orang lain.</string>
   <!-- Change Wallet name textfield label -->
-  <string name="ManageWallet.textFieldLabel">Nama Dompet</string>
-  <!-- Manage wallet modal title -->
+    <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Kelola Dompet</string>
   <!-- Buy bitcoin title -->
   <string name="MenuButton.buy">Membeli</string>
@@ -761,4 +760,6 @@
   <string name="LitecoinCard.Disclaimer.referral">Kunjungi litecoin.getblockcard.com untuk akses penuh</string>
   <string name="LitecoinCard.Disclaimer.title">Kartu Litecoin Beta</string>
   <string name="Settings.languages">Bahasa</string>
+  <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+    <string name="BuyCenter.bitrefill.FinancialDetails">Beli kartu hadiah\\n• Isi ulang ponsel prabayar\\n• Steam, Amazon, Hotels.com\\n• Berfungsi di 170 negara</string>
 </resources>

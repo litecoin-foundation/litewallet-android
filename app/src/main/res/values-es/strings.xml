@@ -760,4 +760,6 @@
   <string name="BuyCenter.moonpay.FinancialDetails">"• Compre LTC con muchos pares fiat\n• Pague con múltiples métodos\n• Proveedor de pago global"</string>
   <string name="Login.currentLtcPrice">Valor actual de LTC en %1$s</string>
   <string name="Settings.languages">Idiomas</string>
+    <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+    <string name="BuyCenter.bitrefill.FinancialDetails">Compre tarjetas de regalo\\n• Recargue teléfonos prepagos\\n• Steam, Amazon, Hotels.com\\n• Funciona en 170 países</string>
 </resources>
