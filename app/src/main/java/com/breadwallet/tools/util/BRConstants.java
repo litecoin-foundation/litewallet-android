@@ -94,7 +94,7 @@ public class BRConstants {
 
     public static final String TWITTER_LINK = "https://twitter.com/Litewallet_App";
     public static final String REDDIT_LINK = "https://www.reddit.com/r/Litewallet";
-    public static final String WEB_LINK = "https://lite-wallet.org";
+    public static final String WEB_LINK = "https://litewalle.io";
     public static final String TOS_LINK = "https://lite-wallet.org/policy";
     public static String CUSTOMER_SUPPORT_LINK = "https://litecoinfoundation.zendesk.com";
     public static String BITREFILL_AFFILIATE_LINK = "https://www.bitrefill.com/?ref=bAshL935";
@@ -109,38 +109,67 @@ public class BRConstants {
     }
 
 
-    public static final String _20191105_AL = "APP_LAUNCHED";
-    public static final String _20191105_VSC = "VISIT_SEND_CONTROLLER";
-    public static final String _20202116_VRC = "VISIT_RECEIVE_CONTROLLER";
-    public static final String _20191105_DSL = "DID_SEND_LTC";
-    public static final String _20191105_DULP = "DID_UPDATE_LTC_PRICE";
-    public static final String _20191105_DTBT = "DID_TAP_BUY_TAB";
-    public static final String _20200111_DEDG = "DID_ENTER_DISPATCH_GROUP";
-    public static final String _20200111_DLDG = "DID_LEAVE_DISPATCH_GROUP";
-    public static final String _20200111_RNI = "RATE_NOT_INITIALIZED";
-    public static final String _20200111_FNI = "FEEPERKB_NOT_INITIALIZED";
-    public static final String _20200111_TNI = "TRANSACTION_NOT_INITIALIZED";
-    public static final String _20200111_WNI = "WALLET_NOT_INITIALIZED";
-    public static final String _20200111_PNI = "PHRASE_NOT_INITIALIZED";
-    public static final String _20200111_UTST = "UNABLE_TO_SIGN_TRANSACTION";
-    public static final String _20200112_ERR = "ERROR";
-    public static final String _20200112_DSR = "DID_START_RESYNC";
-    public static final String _20200125_DSRR = "DID_SHOW_REVIEW_REQUEST";
-    public static final String _20200217_DLWP = "DID_LOGIN_WITH_PIN";
-    public static final String _20200217_DLWB = "DID_LOGIN_WITH_BIOMETRICS";
-    public static final String _20200223_DD = "DID_DONATE";
-    public static final String _20200225_DCD = "DID_CANCEL_DONATE";
-    public static final String _20200301_DUDFPK = "DID_USE_DEFAULT_FEE_PER_KB";
-    public static final String _20201121_SIL = "STARTED_IFPS_LOOKUP";
-    public static final String _20201121_DRIA = "DID_RESOLVE_IPFS_ADDRESS";
-    public static final String _20201121_FRIA = "FAILED_RESOLVE_IPFS_ADDRESS";
+    public static final String _20191105_AL = "app_launched";
+    public static final String _20191105_VSC = "visit_send_controller";
+    public static final String _20202116_VRC = "visit_receive_controller";
+    public static final String _20191105_DSL = "did_send_ltc";
+    public static final String _20191105_DTBT = "did_tap_buy_tab";
+    public static final String _20200111_RNI = "rate_not_initialized";
+    public static final String _20200111_FNI = "feeperkb_not_initialized";
+    public static final String _20200111_TNI = "transaction_not_initialized";
+    public static final String _20200111_WNI = "wallet_not_initialized";
+    public static final String _20200111_PNI = "phrase_not_initialized";
+    public static final String _20200111_UTST = "unable_to_sign_transaction";
+    public static final String _20200112_ERR = "error";
+    public static final String _20200112_DSR = "did_start_resync";
+    public static final String _20200125_DSRR = "did_show_review_request";
+    public static final String _20200217_DLWP = "did_unlock_with_pin";
+    public static final String _20200217_DLWB = "did_unlock_with_biometrics";
+    public static final String _20200223_DD = "did_donate";
+    public static final String _20200225_DCD = "did_cancel_donate";
+    public static final String _20200301_DUDFPK = "did_use_default_fee_per_kb";
+    public static final String _20201121_SIL = "started_IFPS_lookup";
+    public static final String _20201121_DRIA = "did_resolve_IPFS_address";
+    public static final String _20201121_FRIA = "failed_resolve_IPFS_address";
+
+    public static final String _20200207_DTHB = "did_tap_header_balance";
+    public static final String _20210405_TAWDF = "ternio_api_wallet_details_failure";
+    public static final String _20210804_TAA2FAC = "ternio_API_auth_2FA_change";
+    public static final String _20210804_TAWDS = "ternio_API_wallet_details_success";
+    public static final String _20210804_TAULI = "ternio_API_user_log_in";
+    public static final String _20210804_TAULO = "ternio_API_user_log_out";
+    public static final String _20210427_HCIEEH = "heartbeat_check_if_event_even_happens";
+    public static final String _20220822_UTOU = "user_tapped_on_ud";
+
+
 
     @Retention(RetentionPolicy.SOURCE)
-    @StringDef({_20191105_AL, _20191105_VSC, _20202116_VRC, _20191105_DSL, _20191105_DULP,
-            _20191105_DTBT, _20200111_DEDG, _20200111_DLDG, _20200111_RNI, _20200111_FNI,
-            _20200111_TNI, _20200111_WNI, _20200111_PNI, _20200111_UTST, _20200112_ERR, _20200112_DSR,
-            _20200125_DSRR, _20200217_DLWP, _20200217_DLWB, _20200223_DD, _20200225_DCD, _20200301_DUDFPK,
-            _20201121_SIL, _20201121_DRIA, _20201121_FRIA})
+    @StringDef({
+            _20191105_AL,
+            _20191105_VSC,
+            _20202116_VRC,
+            _20191105_DSL,
+            _20191105_DTBT,
+            _20200111_DEDG,
+            _20200111_DLDG,
+            _20200111_RNI,
+            _20200111_FNI,
+            _20200111_TNI,
+            _20200111_WNI,
+            _20200111_PNI,
+            _20200111_UTST,
+            _20200112_ERR,
+            _20200112_DSR,
+            _20200125_DSRR,
+            _20200217_DLWP,
+            _20200217_DLWB,
+            _20200223_DD,
+            _20200225_DCD,
+            _20200301_DUDFPK,
+            _20201121_SIL,
+            _20201121_DRIA,
+            _20201121_FRIA
+    })
     public @interface Event {
     }
 
