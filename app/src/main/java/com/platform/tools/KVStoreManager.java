@@ -3,7 +3,9 @@ package com.platform.tools;
 import android.content.Context;
 
 import com.breadwallet.tools.crypto.CryptoHelper;
+import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.BRCompressor;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.platform.APIClient;
 import com.platform.entities.TxMetaData;
@@ -74,6 +76,7 @@ public class KVStoreManager {
         JSONObject json;
         if (value == null) {
             Timber.d("valueToMetaData: value is null!");
+            AnalyticsManager.logCustomEvent(BRConstants._20200111_TNI);
             return null;
         }
         try {
