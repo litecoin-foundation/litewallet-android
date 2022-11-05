@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.entities.Partner;
+import com.breadwallet.tools.manager.AnalyticsManager;
+import com.breadwallet.tools.util.BRConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +49,7 @@ public class BuyTabFragment extends Fragment {
         mRecyclerView.addItemDecoration(itemDecor);
 
         mRecyclerView.setAdapter(new BuyPartnersAdapter(getContext(), getPartners()));
-
-
+        AnalyticsManager.logCustomEvent(BRConstants._20191105_DTBT);
     }
 
     private List<Partner> getPartners() {

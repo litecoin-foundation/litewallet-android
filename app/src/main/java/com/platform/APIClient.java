@@ -10,6 +10,7 @@ import android.os.NetworkOnMainThreadException;
 import com.breadwallet.BreadApp;
 import com.breadwallet.BuildConfig;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 
 import org.json.JSONException;
@@ -28,6 +29,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import timber.log.Timber;
+import com.breadwallet.tools.manager.AnalyticsManager;
+import com.breadwallet.tools.util.BRConstants;
 
 import static com.breadwallet.tools.util.BRCompressor.gZipExtract;
 
@@ -82,6 +85,7 @@ public class APIClient {
                 body = response.body().string();
             } catch (IOException e) {
                 Timber.e(e);
+                AnalyticsManager.logCustomEvent(BRConstants._20200111_RNI);
             }
             JSONObject object = null;
             object = new JSONObject(body);
