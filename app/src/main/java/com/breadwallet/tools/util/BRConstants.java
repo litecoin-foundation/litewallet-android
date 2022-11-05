@@ -95,7 +95,7 @@ public class BRConstants {
     public static final String TWITTER_LINK = "https://twitter.com/Litewallet_App";
     public static final String REDDIT_LINK = "https://www.reddit.com/r/Litewallet";
     public static final String WEB_LINK = "https://litewalle.io";
-    public static final String TOS_LINK = "https://lite-wallet.org/policy";
+    public static final String TOS_LINK = "https://litewallet.io/privacy/policy.html";
     public static String CUSTOMER_SUPPORT_LINK = "https://litecoinfoundation.zendesk.com";
     public static String BITREFILL_AFFILIATE_LINK = "https://www.bitrefill.com/?ref=bAshL935";
 
@@ -107,7 +107,6 @@ public class BRConstants {
 
     private BRConstants() {
     }
-
 
     public static final String _20191105_AL = "app_launched";
     public static final String _20191105_VSC = "visit_send_controller";
@@ -123,8 +122,9 @@ public class BRConstants {
     public static final String _20200112_ERR = "error";
     public static final String _20200112_DSR = "did_start_resync";
     public static final String _20200125_DSRR = "did_show_review_request";
-    public static final String _20200217_DLWP = "did_unlock_with_pin";
-    public static final String _20200217_DLWB = "did_unlock_with_biometrics";
+    public static final String _20201118_DTGS = "did_tap_get_support";
+    public static final String _20200217_DUWP = "did_unlock_with_pin";
+    public static final String _20200217_DUWB = "did_unlock_with_biometrics";
     public static final String _20200223_DD = "did_donate";
     public static final String _20200225_DCD = "did_cancel_donate";
     public static final String _20200301_DUDFPK = "did_use_default_fee_per_kb";
@@ -132,6 +132,7 @@ public class BRConstants {
     public static final String _20201121_DRIA = "did_resolve_IPFS_address";
     public static final String _20201121_FRIA = "failed_resolve_IPFS_address";
 
+    ///Dev: These events not yet used
     public static final String _20200207_DTHB = "did_tap_header_balance";
     public static final String _20210405_TAWDF = "ternio_api_wallet_details_failure";
     public static final String _20210804_TAA2FAC = "ternio_API_auth_2FA_change";
@@ -140,8 +141,7 @@ public class BRConstants {
     public static final String _20210804_TAULO = "ternio_API_user_log_out";
     public static final String _20210427_HCIEEH = "heartbeat_check_if_event_even_happens";
     public static final String _20220822_UTOU = "user_tapped_on_ud";
-
-
+    ///Dev: These events not yet used
 
     @Retention(RetentionPolicy.SOURCE)
     @StringDef({
@@ -159,14 +159,23 @@ public class BRConstants {
             _20200112_ERR,
             _20200112_DSR,
             _20200125_DSRR,
-            _20200217_DLWP,
-            _20200217_DLWB,
+            _20201118_DTGS,
+            _20200217_DUWP,
+            _20200217_DUWB,
             _20200223_DD,
             _20200225_DCD,
             _20200301_DUDFPK,
             _20201121_SIL,
             _20201121_DRIA,
-            _20201121_FRIA
+            _20201121_FRIA,
+            _20200207_DTHB,
+            _20210405_TAWDF,
+            _20210804_TAA2FAC,
+            _20210804_TAWDS,
+            _20210804_TAULI,
+            _20210804_TAULO,
+            _20210427_HCIEEH,
+            _20220822_UTOU
     })
     public @interface Event {
     }
