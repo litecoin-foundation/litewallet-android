@@ -28,7 +28,7 @@ public class AnalyticsTests {
     @After
     public void tearDown() {
     }
-    
+
     /// This needs to be debugged. Some logs:
     /// Error: WARNING: The option setting is experimental and unsupported
     /// Manifest merger failed with multiple errors, see logs
