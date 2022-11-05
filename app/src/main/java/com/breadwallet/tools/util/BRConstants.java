@@ -150,8 +150,6 @@ public class BRConstants {
             _20202116_VRC,
             _20191105_DSL,
             _20191105_DTBT,
-            _20200111_DEDG,
-            _20200111_DLDG,
             _20200111_RNI,
             _20200111_FNI,
             _20200111_TNI,

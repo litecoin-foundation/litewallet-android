@@ -47,6 +47,8 @@ public class BuyTabFragment extends Fragment {
         mRecyclerView.addItemDecoration(itemDecor);
 
         mRecyclerView.setAdapter(new BuyPartnersAdapter(getContext(), getPartners()));
+
+
     }
 
     private List<Partner> getPartners() {
