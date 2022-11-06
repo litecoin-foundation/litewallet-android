@@ -107,6 +107,19 @@ public class FragmentBuy extends Fragment {
 //            WebViewCompat.addWebMessageListener(webView, "bitrefillPostObj", rules, bitrefillListener);
 //        }
 
+        // App (in Java)
+        WebMessageListener bitrefillListener = new WebMessageListener() {
+            @Override
+            public void onPostMessage(WebView view, WebMessageCompat message, Uri sourceOrigin,
+                                      boolean isMainFrame, JavaScriptReplyProxy replyProxy) {
+                // do something about view, message, sourceOrigin and isMainFrame.
+                replyProxy.postMessage("Got it!");
+            }
+        };
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
+            WebViewCompat.addWebMessageListener(webView, "bitrefillPostObj", rules, bitrefillListener);
+        }
+
 
         String currency = getArguments().getString(CURRENCY_KEY);
         Partner partner = (Partner) getArguments().getSerializable(PARTNER_KEY);
@@ -116,7 +129,6 @@ public class FragmentBuy extends Fragment {
         String bitrefillUrl = String.format( BRConstants.BITREFILL_AFFILIATE_LINK + "/embed/?paymentMethod=litecoin&ref=%s&utm_source=%s", bitrefillRef,utmSource);
 
         String buyUrl = partner == Partner.BITREFILL ? bitrefillUrl : url(getContext(), partner, currency);
-
         Timber.d("URL %s", buyUrl);
         webView.loadUrl(buyUrl);
 
