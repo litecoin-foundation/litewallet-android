@@ -131,7 +131,7 @@ public class BRApiManager {
     }
 
     public static JSONArray fetchRates(Activity activity) {
-        String jsonString = createGETRequestURL(activity, "https://api.loshan.co.uk/api/v1/rates");
+        String jsonString = createGETRequestURL(activity, "https://api.loafwallet.org/api/v1/rates");
         JSONArray jsonArray = null;
         if (jsonString == null) return null;
         try {
@@ -143,7 +143,7 @@ public class BRApiManager {
     }
 
     public static JSONArray backupFetchRates(Activity activity) {
-        String jsonString = createGETRequestURL(activity, "https://api.loafwallet.org/api/v1/rates");
+        String jsonString = createGETRequestURL(activity, "https://api-prod.lite-wallet.org/api/v1/rates");
 
         JSONArray jsonArray = null;
         if (jsonString == null) return null;
