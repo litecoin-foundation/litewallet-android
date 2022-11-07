@@ -18,8 +18,9 @@ public final class AnalyticsManager {
         instance = FirebaseAnalytics.getInstance(context);
     }
 
-    public static void logCustomEvent(@BRConstants.Event String customEvent) {
+    public static Object logCustomEvent(@BRConstants.Event String customEvent) {
         instance.logEvent(customEvent, null);
+        return null;
     }
 
     public static void logCustomEventWithParams(@BRConstants.Event String customEvent, Bundle params) {
