@@ -45,7 +45,7 @@ public class FragmentBuy extends Fragment {
     private ProgressBar progress;
     private WebView webView;
     private String onCloseUrl;
-    private static final String URL_BUY_LTC = BuildConfig.DEBUG ? "https://api-stage.lite-wallet.org" : "https://api-prod.lite-wallet.org";
+    private static final String URL_BUY_LTC = "https://api-prod.lite-wallet.org";
     private static final String CURRENCY_KEY = "currency_code_key";
     private static final String PARTNER_KEY = "partner_key";
     private ValueCallback<Uri> uploadMessage;
