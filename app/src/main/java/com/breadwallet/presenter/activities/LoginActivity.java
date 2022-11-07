@@ -162,7 +162,7 @@ public class LoginActivity extends BRActivity {
                 @Override
                 public void onComplete() {
                     unlockWallet();
-                    AnalyticsManager.logCustomEvent(BRConstants._20200217_DLWB);
+                    AnalyticsManager.logCustomEvent(BRConstants._20200217_DUWB);
                 }
 
                 @Override
@@ -298,7 +298,9 @@ public class LoginActivity extends BRActivity {
                     if (AuthManager.getInstance().checkAuth(pin.toString(), LoginActivity.this)) {
                         AuthManager.getInstance().authSuccess(LoginActivity.this);
                         unlockWallet();
-                        AnalyticsManager.logCustomEvent(BRConstants._20200217_DLWP);
+                        AnalyticsManager.logCustomEvent(BRConstants._20200217_DUWB);
+                        AnalyticsManager.logCustomEvent(BRConstants._20200217_DUWB);
+
                     } else {
                         AuthManager.getInstance().authFail(LoginActivity.this);
                         showFailedToUnlock();
@@ -333,5 +335,6 @@ public class LoginActivity extends BRActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }
