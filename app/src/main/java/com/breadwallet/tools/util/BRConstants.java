@@ -97,7 +97,7 @@ public class BRConstants {
     public static final String WEB_LINK = "https://litewalle.io";
     public static final String TOS_LINK = "https://litewallet.io/privacy/policy.html";
     public static String CUSTOMER_SUPPORT_LINK = "https://litecoinfoundation.zendesk.com";
-    public static String BITREFILL_AFFILIATE_LINK = "https://www.bitrefill.com/?ref=bAshL935";
+    public static String BITREFILL_AFFILIATE_LINK = "https://www.bitrefill.com/";
 
 
     public static final String BLOCK_EXPLORER_BASE_URL = BuildConfig.LITECOIN_TESTNET ? "https://testnet.litecore.io/tx/" : "https://insight.litecore.io/tx/";
