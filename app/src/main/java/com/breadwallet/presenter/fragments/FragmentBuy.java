@@ -13,15 +13,16 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.ConsoleMessage;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ import androidx.fragment.app.Fragment;
 
 import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
+import com.breadwallet.partner.bitrefill.PostMessageHandler;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.util.BRConstants;
@@ -92,20 +94,6 @@ public class FragmentBuy extends Fragment {
         }
         webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
-//
-//        // App (in Java)
-//        WebMessageListener bitrefillListener = new WebMessageListener() {
-//            @Override
-//            public void onPostMessage(WebView view, WebMessageCompat message, Uri sourceOrigin,
-//                                      boolean isMainFrame, JavaScriptReplyProxy replyProxy) {
-//                // do something about view, message, sourceOrigin and isMainFrame.
-//                replyProxy.postMessage("Got it!");
-//            }
-//        };
-//        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
-//            WebViewCompat.addWebMessageListener(webView, "bitrefillPostObj", rules, bitrefillListener);
-//        }
-
 
         String currency = getArguments().getString(CURRENCY_KEY);
         Partner partner = (Partner) getArguments().getSerializable(PARTNER_KEY);
@@ -115,7 +103,7 @@ public class FragmentBuy extends Fragment {
         String bitrefillUrl = String.format( BRConstants.BITREFILL_AFFILIATE_LINK + "/embed/?paymentMethod=litecoin&ref=%s&utm_source=%s", bitrefillRef,utmSource);
 
         String buyUrl = partner == Partner.BITREFILL ? bitrefillUrl : url(getContext(), partner, currency);
- 
+
         Timber.d("URL %s", buyUrl);
         webView.loadUrl(buyUrl);
 
@@ -169,9 +157,18 @@ public class FragmentBuy extends Fragment {
                 progress.setProgress(newProgress, true);
             } else progress.setProgress(newProgress);
         }
+
+        @Override
+        public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+            Toast.makeText(webView.getContext(), consoleMessage.message(), Toast.LENGTH_SHORT).show();
+            return super.onConsoleMessage(consoleMessage);
+        }
     };
 
     private WebViewClient mWebViewClient = new WebViewClient() {
+
+        private PostMessageHandler postMessageHandler = null;
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             String url = request.getUrl().toString();
@@ -200,7 +197,9 @@ public class FragmentBuy extends Fragment {
             super.onPageFinished(view, url);
             Timber.d("onPageFinished %s", url);
             progress.setVisibility(View.GONE);
+            postMessageHandler = new PostMessageHandler(view);
         }
+
     };
 
     private void openImageChooserActivity() {
@@ -255,3 +254,6 @@ public class FragmentBuy extends Fragment {
         SIMPLEX, MOONPAY, BITREFILL
     }
 }
+
+
+
