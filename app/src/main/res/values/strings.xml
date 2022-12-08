@@ -802,4 +802,5 @@
   <string name="Login.currentLtcPrice">Current LTC value in %1$s</string>
   <string name="Settings.languages">Languages</string>
   <string name="JailbreakWarnings.close">Close</string>
+    <string name="donation_disclaimer">**We appreciate your donation to the Litecoin Foundation. Donations are final and can not be refunded. Thanks for your continuing support.</string>
 </resources>

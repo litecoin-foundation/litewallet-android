@@ -1,5 +1,6 @@
 package com.breadwallet.presenter.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.breadwallet.R;
+import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.PaymentItem;
 import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
@@ -103,17 +105,18 @@ public class DynamicDonationFragment extends Fragment {
 
         Button donateBut = view.findViewById(R.id.donateBut);
         donateBut.setOnClickListener(v -> {
-            String memo = getString(R.string.Donate_toThe) + chosenAddress.first;
-            PaymentItem request = new PaymentItem(new String[]{chosenAddress.second}, null, mDonationAmount, null, false, memo);
+            BRDialogView dialog = new BRDialogView();
+            dialog.setTitle(getString(R.string.donate_dialog_title));
+            dialog.setMessage(getString(R.string.donate_dialog_message));
+            dialog.setPosButton(getString(R.string.donate_dialog_positive_text));
+            dialog.setNegButton(getString(R.string.donate_dialog_negative_text));
+            dialog.setPosListener(brDialogView -> {
+                dialog.dismiss();
+                sendDonation();
+            });
+            dialog.setNegListener(brDialogView -> dialog.dismiss());
+            dialog.show(((Activity) getActivity()).getFragmentManager(), dialog.getClass().getName());
 
-            Bundle params = new Bundle();
-            params.putString("DONATION_ACCOUNT", chosenAddress.first);
-            params.putLong("DONATION_AMOUNT", mDonationAmount);
-            params.putString("ADDRESS_SCHEME", "v2");
-
-            AnalyticsManager.logCustomEventWithParams(BRConstants._20200223_DD, params);
-
-            BRSender.getInstance().sendTransaction(getContext(), request);
         });
 
         amountSliderVal = view.findViewById(R.id.amountSliderVal);
@@ -159,6 +162,17 @@ public class DynamicDonationFragment extends Fragment {
         currentBalance = BRSharedPrefs.getCatchedBalance(getContext());
 
         updateDonationValues(BRConstants.DONATION_AMOUNT);
+    }
+
+    private void sendDonation() {
+        String memo = getString(R.string.Donate_toThe) + chosenAddress.first;
+        PaymentItem request = new PaymentItem(new String[]{chosenAddress.second}, null, mDonationAmount, null, false, memo);
+        Bundle params = new Bundle();
+        params.putString("DONATION_ACCOUNT", chosenAddress.first);
+        params.putLong("DONATION_AMOUNT", mDonationAmount);
+        params.putString("ADDRESS_SCHEME", "v2");
+        AnalyticsManager.logCustomEventWithParams(BRConstants._20200223_DD, params);
+        BRSender.getInstance().sendTransaction(getContext(), request);
     }
 
     private void setFeeToRegular() {

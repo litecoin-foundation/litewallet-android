@@ -185,7 +185,6 @@
             app:buttonType="2"
             android:fontFamily="@font/barlowsemicondensed_regular"
             app:isBreadButton="true"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/donateBut"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
@@ -208,6 +207,24 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cancelBut"
             app:layout_constraintTop_toTopOf="@+id/cancelBut" />
+
+
+        <TextView
+            android:id="@+id/donate_disclaimer"
+            style="@style/BRTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:lineHeight="12sp"
+            android:text="@string/donation_disclaimer"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/donateBut"
+            app:layout_constraintStart_toStartOf="@+id/cancelBut"
+            app:layout_constraintTop_toBottomOf="@+id/cancelBut" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
