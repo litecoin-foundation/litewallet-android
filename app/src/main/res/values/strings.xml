@@ -802,5 +802,10 @@
   <string name="Login.currentLtcPrice">Current LTC value in %1$s</string>
   <string name="Settings.languages">Languages</string>
   <string name="JailbreakWarnings.close">Close</string>
-    <string name="donation_disclaimer">**We appreciate your donation to the Litecoin Foundation. Donations are final and can not be refunded. Thanks for your continuing support.</string>
+
+  <!-- donation dialog -->
+  <string name="donate_dialog_title">Donate to the Litecoin Foundation</string>
+  <string name="donate_dialog_message">We appreciate your donation to the Litecoin Foundation. Donations are final and can not be refunded. Thanks for your continuing support.</string>
+  <string name="donate_dialog_positive_text">Donate</string>
+  <string name="donate_dialog_negative_text">Cancel</string>
 </resources>
