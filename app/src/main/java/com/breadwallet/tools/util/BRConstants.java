@@ -96,9 +96,14 @@ public class BRConstants {
     public static final String REDDIT_LINK = "https://www.reddit.com/r/Litewallet";
     public static final String WEB_LINK = "https://litewalle.io";
     public static final String TOS_LINK = "https://litewallet.io/privacy/policy.html";
-    public static String CUSTOMER_SUPPORT_LINK = "https://litecoinfoundation.zendesk.com";
+    public static String CUSTOMER_SUPPORT_LINK = "https://support.litewallet.io";
     public static String BITREFILL_AFFILIATE_LINK = "https://www.bitrefill.com/";
 
+    /**
+     * API Hosts
+     */
+    public static final String LW_API_HOST = "https://api-prod.lite-wallet.org";
+    public static final String LW_BACKUP_API_HOST = "https://api-dev.lite-wallet.org";
 
     public static final String BLOCK_EXPLORER_BASE_URL = BuildConfig.LITECOIN_TESTNET ? "https://testnet.litecore.io/tx/" : "https://insight.litecore.io/tx/";
 
@@ -131,6 +136,7 @@ public class BRConstants {
     public static final String _20201121_SIL = "started_IFPS_lookup";
     public static final String _20201121_DRIA = "did_resolve_IPFS_address";
     public static final String _20201121_FRIA = "failed_resolve_IPFS_address";
+    public static final String _20230113_BAC = "backup_apiserver_called";
 
     ///Dev: These events not yet used
     public static final String _20200207_DTHB = "did_tap_header_balance";
@@ -168,6 +174,7 @@ public class BRConstants {
             _20201121_SIL,
             _20201121_DRIA,
             _20201121_FRIA,
+            _20230113_BAC,
             _20200207_DTHB,
             _20210405_TAWDF,
             _20210804_TAA2FAC,
