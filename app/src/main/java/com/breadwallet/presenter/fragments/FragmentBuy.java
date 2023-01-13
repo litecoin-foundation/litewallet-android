@@ -1,5 +1,7 @@
 package com.breadwallet.presenter.fragments;
 
+import static com.breadwallet.tools.util.BRConstants.LW_API_HOST;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
@@ -45,7 +47,6 @@ public class FragmentBuy extends Fragment {
     private ProgressBar progress;
     private WebView webView;
     private String onCloseUrl;
-    private static final String URL_BUY_LTC = "https://api-prod.lite-wallet.org";
     private static final String CURRENCY_KEY = "currency_code_key";
     private static final String PARTNER_KEY = "partner_key";
     private ValueCallback<Uri> uploadMessage;
@@ -122,13 +123,12 @@ public class FragmentBuy extends Fragment {
         return rootView;
     }
 
-
         public static String url(Context context, Partner partner, String currency) {
         String walletAddress = BRSharedPrefs.getReceiveAddress(context);
         Long timestamp = new Date().getTime();
         String uuid = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         String prefix = partner == Partner.MOONPAY ? "/moonpay/buy" : "";
-        return String.format(URL_BUY_LTC + prefix + "?address=%s&code=%s&idate=%s&uid=%s", walletAddress, currency, timestamp, uuid);
+        return String.format(LW_API_HOST + prefix + "?address=%s&code=%s&idate=%s&uid=%s", walletAddress, currency, timestamp, uuid);
     }
 
     private void closePayment() {
