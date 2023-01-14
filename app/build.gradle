@@ -70,6 +70,9 @@ android {
         archivesBaseName = "${versionName}(${versionCode})"
 
         buildConfigField "String", "INFURA_KEY", "\"set the infura key here\""
+        buildConfigField "String", "LITEWALLET_API_URL_PROD", "\"https://api-prod.lite-wallet.org\""
+        buildConfigField "String", "LITEWALLET_API_URL_DEV", "\"https://api-dev.lite-wallet.org\""
+
 
         // Similar to other properties in the defaultConfig block,
         // you can configure the ndk block for each product flavor
