@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?android:attr/selectableItemBackground"
     android:background="@color/white"
     android:filterTouchesWhenObscured="true"
     android:orientation="horizontal">
@@ -23,24 +21,18 @@
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/item_addon"
+        app:layout_constraintEnd_toStartOf="@+id/item_switch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="item title" />
 
-
-    <TextView
-        android:id="@+id/item_addon"
-        style="@style/BRTextStyle"
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/item_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="24dp"
-        android:textColor="@color/light_gray"
-        android:textSize="@dimen/sub_header"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="item addon" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -62,6 +62,7 @@ public class BRConstants {
     public static final String ALLOW_SPEND = "allowSpend";
     public static final String USER_ID = "userId";
     public static final String GEO_PERMISSIONS_REQUESTED = "geoPermissionsRequested";
+    public static final String PREFS_LITEWALLET_SERVER_MODE = "PREFS_LITEWALLET_SERVER_URL";
 
     /**
      * Currency units
@@ -97,16 +98,11 @@ public class BRConstants {
     public static String CUSTOMER_SUPPORT_LINK = "https://support.litewallet.io";
     public static String BITREFILL_AFFILIATE_LINK = "https://www.bitrefill.com/";
 
-    /**
-     * API Hosts
-     */
-    public static final String LW_API_HOST = "https://api-prod.lite-wallet.org";
-    public static final String LW_BACKUP_API_HOST = "https://api-dev.lite-wallet.org";
-
     public static final String BLOCK_EXPLORER_BASE_URL = BuildConfig.LITECOIN_TESTNET ? "https://testnet.litecore.io/tx/" : "https://insight.litecore.io/tx/";
 
 
     public static final String RESET_CARD_PWD_LINK = "https://litecoin.dashboard.getblockcard.com/password/forgot";
+
 
     private BRConstants() {
     }

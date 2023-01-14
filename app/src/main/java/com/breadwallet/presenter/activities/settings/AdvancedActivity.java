@@ -1,12 +1,16 @@
 package com.breadwallet.presenter.activities.settings;
 
+import static com.breadwallet.R.layout.settings_list_item;
+import static com.breadwallet.R.layout.settings_list_section;
+import static com.breadwallet.R.layout.settings_list_switch;
+import static com.breadwallet.presenter.entities.BRSettingsItem.SettingItemsType.ADDON;
+import static com.breadwallet.presenter.entities.BRSettingsItem.SettingItemsType.SECTION;
+import static com.breadwallet.presenter.entities.BRSettingsItem.SettingItemsType.SWITCH;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +18,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.entities.BRSettingsItem;
+import com.breadwallet.tools.manager.BRSharedPrefs;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.breadwallet.R.layout.settings_list_item;
-import static com.breadwallet.R.layout.settings_list_section;
 
 public class AdvancedActivity extends BRActivity {
     private static final String TAG = AdvancedActivity.class.getName();
@@ -41,9 +48,7 @@ public class AdvancedActivity extends BRActivity {
         setContentView(R.layout.activity_advanced);
 
         listView = (ListView) findViewById(R.id.settings_list);
-
     }
-
 
     public class SettingsListAdapter extends ArrayAdapter<String> {
 
@@ -64,19 +69,30 @@ public class AdvancedActivity extends BRActivity {
             BRSettingsItem item = items.get(position);
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
 
-            if (item.isSection) {
-                v = inflater.inflate(settings_list_section, parent, false);
-            } else {
-                v = inflater.inflate(settings_list_item, parent, false);
-                TextView addon = (TextView) v.findViewById(R.id.item_addon);
-                addon.setText(item.addonText);
-                v.setOnClickListener(item.listener);
+            switch (item.type) {
+                case SECTION:
+                    v = inflater.inflate(settings_list_section, parent, false);
+                    v.setOnClickListener(item.listener);
+                    break;
+                case SWITCH:
+                    v = inflater.inflate(settings_list_switch, parent, false);
+                    View switchView = v.findViewById(R.id.item_switch);
+                    if (switchView instanceof SwitchCompat) {
+                        ((SwitchCompat) switchView).setChecked(item.isChecked);
+                        switchView.setOnClickListener(item.listener);
+                    }
+                    break;
+                default:
+                    v = inflater.inflate(settings_list_item, parent, false);
+                    TextView addon = (TextView) v.findViewById(R.id.item_addon);
+                    addon.setText(item.addonText);
+                    v.setOnClickListener(item.listener);
+                    break;
             }
 
             TextView title = (TextView) v.findViewById(R.id.item_title);
             title.setText(item.title);
             return v;
-
         }
 
         @Override
@@ -113,21 +129,24 @@ public class AdvancedActivity extends BRActivity {
 
     private void populateItems() {
 
-        items.add(new BRSettingsItem("", "", null, true));
+        items.add(new BRSettingsItem(SECTION, null, null, null, null));
 
-        items.add(new BRSettingsItem(getString(R.string.NodeSelector_title), "", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AdvancedActivity.this, NodesActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter_from_right, R.anim.empty_300);
+        items.add(new BRSettingsItem(ADDON, getString(R.string.NodeSelector_title), "", null, v -> {
+            Intent intent = new Intent(AdvancedActivity.this, NodesActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.enter_from_right, R.anim.empty_300);
+        }));
 
+        items.add(new BRSettingsItem(SWITCH, getString(R.string.DeveloperMode_title), "",
+                BRSharedPrefs.isApiServerModeDev(getApplicationContext()), v -> {
+            if (v instanceof SwitchCompat) {
+                if (((SwitchCompat) v).isChecked()) {
+                    BRSharedPrefs.setApiServerMode(v.getContext(), BRSharedPrefs.PrefsServerMode.DEV);
+                } else {
+                    BRSharedPrefs.setApiServerMode(v.getContext(), BRSharedPrefs.PrefsServerMode.PROD);
+                }
             }
-        }, false));
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
+        }));
     }
 
     @Override
