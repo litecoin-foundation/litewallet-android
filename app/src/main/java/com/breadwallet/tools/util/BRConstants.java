@@ -172,10 +172,7 @@ public class BRConstants {
             _20201121_SIL,
             _20201121_DRIA,
             _20201121_FRIA,
-<<<<<<< HEAD
             _20230113_BAC,
-=======
->>>>>>> 80e20a0e ([Techdebt/] pdate match firebase events 33 (#48))
             _20200207_DTHB,
             _20210405_TAWDF,
             _20210804_TAA2FAC,
