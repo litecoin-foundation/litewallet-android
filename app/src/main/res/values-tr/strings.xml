@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <!-- App name -->
-  <string name="About.appName.android">Loaf</string>
-  <!-- About screen blog label -->
+    <!-- About screen blog label -->
   <string name="About.blog">İnternet sitesi</string>
   <!-- About screen footer -->
   <string name="About.footer">Litecoin Vakfı\'nın Litewallet Ekibi tarafından yapılmıştır\n%1$s</string>
@@ -11,7 +10,7 @@
   <!-- Privay Policy button label -->
   <string name="About.privacy">Gizlilik Politikası</string>
   <!-- About screen reddit label -->
-  <string name="About.reddit">Reddit</string>
+  <string name="About.instagram">Reddit</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">Kullanım Şartları</string>
   <!-- About screen title -->
@@ -209,7 +208,7 @@
   <!-- Manage wallet description text -->
   <string name="ManageWallet.description">Cüzdan adınız yalnızca hesap işlem geçmişinizde görünür ve başkası tarafından görülemez.</string>
   <!-- Change Wallet name textfield label -->
-  <string name="ManageWallet.textFeildLabel">Cüzdan Adı</string>
+  <string name="ManageWallet.textFieldLabel">Cüzdan Adı</string>
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Cüzdanı Yönet</string>
   <!-- Buy litecoin title -->
@@ -736,8 +735,7 @@
   <string name="Confirmation.donateLabel">Bağışlanacak Miktar:</string>
   <string name="Confirmation.staticAddressLabel">Adres:</string>
   <string name="Donate.word">Bağış yap</string>
-  <string name="Donate.toThe">"Bağış yapın "</string>
-  <string name="FeeSelector.luxury">Lüks</string>
+    <string name="FeeSelector.luxury">Lüks</string>
   <string name="FeeSelector.luxuryTime">2,5 - 5+ dakika</string>
   <string name="FeeSelector.luxuryMessage">Bu seçenek, bir prim ödüyor olsanız bile işleminizin kabul edilmesini neredeyse garanti eder.</string>
 
@@ -796,9 +794,15 @@
   <string name="LitecoinCard.Disclaimer.referral">"Tam erişim için litecoin.getblockcard.com adresini ziyaret edin"</string>
   <!-- Beta Testing Litecoin Card -->
   <string name="LitecoinCard.Disclaimer.title">"Litecoin Kartı Beta"</string>
-  <string name="Settings.languages">Diller</string>
+    <string name="Login.currentLtcPrice">%1$s cinsinden geçerli LTC değeri</string>
+    <string name="Settings.languages">Diller</string>
   <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">Hediye kartları satın alın\n• Ön ödemeli telefonları yeniden doldurun\n• Steam, Amazon, Hotels.com\n• 170 ülkede çalışıyor</string>
+    <string name="Donate.Dialog.title">"\tLitecoin Vakfı'na bağış yapın "</string>
+    <string name="Donate.Dialog.message">Litecoin Vakfı\'na yaptığınız bağış için teşekkür ederiz. Bağışlar kesindir ve iade edilemez. Devam eden desteğiniz için teşekkürler. \tBağış yapmak</string>
+    <string name="Donate.Dialog.Positive.text">Bağış yapmak</string>
+  <string name="Donate.Dialog.Negative.text">İptal</string>
+    <string name="Donate.toThe.LWTeam">Bağışta bulunun: Litewallet Altyapısı</string>
 
 
 </resources>

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <!-- App name -->
-  <string name="About.appName.android">Loaf</string>
-  <!-- About screen blog label -->
+    <!-- About screen blog label -->
   <string name="About.blog">Блог</string>
   <!-- About screen footer -->
   <string name="About.footer">Сделано командой Litewallet Фонда Litecoin\n%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">Политика конфиденциальности</string>
-  <!-- About screen reddit label -->
-  <string name="About.reddit">Reddit</string>
+  <!-- About screen Instagram label -->
+  <string name="About.Instagram">Instagram</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">Условия использования</string>
   <!-- About screen title -->
@@ -25,9 +24,11 @@
   <!-- Default wallet name -->
   <string name="AccountHeader.defaultWalletName">Мой Loaf</string>
   <!-- Equals symbol -->
-  <string name="AccountHeader.equals">=</string>
+    <string name="Donate.Dialog.title">"\tПожертвовать в фонд Litecoin "</string>
+    <string name="Donate.Dialog.message">Мы ценим ваше пожертвование в фонд Litecoin. Пожертвования являются окончательными и возврату не подлежат. Спасибо за вашу постоянную поддержку.</string>
+    <string name="Donate.Dialog.Positive.text">Пожертвовать</string>
+  <string name="Donate.Dialog.Negative.text">Отмена</string>
   <!-- Manage wallet button title -->
-  <string name="AccountHeader.manageButtonName">УПРАВЛЕНИЕ</string>
   <!-- Third party keyboard warning -->
   <string name="Alert.customKeyboard.android">Похоже, что вы пользуетесь клавиатурой третьей стороны, которая может записывать последовательность нажимаемых клавиш и похитить ваш Бумажный ключ. Переключитесь на клавиатуру Android по умолчанию для дополнительной защиты.</string>
   <!-- Error alert title -->
@@ -185,7 +186,6 @@
   <!-- Jailbreak warning title -->
   <string name="JailbreakWarnings.title">ПРЕДУПРЕЖДЕНИЕ</string>
   <!-- Wipe wallet button -->
-  <string name="JailbreakWarnings.wipe">Очистить</string>
   <!-- Location services disabled error -->
   <string name="LocationPlugin.disabled">Сервисы определения местоположения отключены.</string>
   <!-- No permissions for location services -->
@@ -195,7 +195,7 @@
   <!-- Manage wallet description text -->
   <string name="ManageWallet.description">Название вашего кошелька отображается только в журнале транзакций вашей учетной записи, и ни один другой пользователь не может его видеть.</string>
   <!-- Change Wallet name textfield label -->
-  <string name="ManageWallet.textFeildLabel">Название кошелька</string>
+  <string name="ManageWallet.textFieldLabel">Название кошелька</string>
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Управление кошельком</string>
   <!-- Buy bitcoin title -->
@@ -718,7 +718,6 @@
   <string name="Confirmation.donateLabel">Сумма пожертвования:</string>
   <string name="Confirmation.staticAddressLabel">Адрес:</string>
   <string name="Donate.word">жертвовать</string>
-  <string name="Donate.toThe">"Пожертвовать "</string>
   <string name="FeeSelector.luxury">люкс</string>
   <string name="FeeSelector.luxuryMessage">Эта опция фактически гарантирует принятие вашей транзакции, хотя вы платите премию.</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ минут</string>
@@ -762,4 +761,5 @@
   <string name="Settings.languages">Языки</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">Покупайте подарочные карты\n• Пополняйте предоплаченные телефоны\n• Steam, Amazon, Hotels.com\n• Работает в 170 странах</string>
+    <string name="Donate.toThe.LWTeam">Пожертвовать: Инфраструктура Litewallet</string>
 </resources>
