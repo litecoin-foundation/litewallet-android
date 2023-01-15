@@ -17,6 +17,7 @@ import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
+import com.breadwallet.tools.manager.AnalyticsManager;
 
 import java.math.BigDecimal;
 import java.util.Locale;
@@ -73,6 +74,9 @@ public class BRSender {
                         long time = BRSharedPrefs.getFeeTime(app);
                         if (time <= 0 || now - time >= FEE_EXPIRATION_MILLIS) {
                             Timber.d("sendTransaction: fee out of date even after fetching...");
+
+                            AnalyticsManager.logCustomEvent(BRConstants._20200111_FNI);
+
                             throw new FeeOutOfDate(time, now);
                         }
                     }
@@ -142,6 +146,7 @@ public class BRSender {
             Timber.d("handlePay: WRONG PARAMS");
             String message = paymentRequest == null ? "paymentRequest is null" : "addresses is null";
             RuntimeException ex = new RuntimeException("paymentRequest is malformed: " + message);
+
             Timber.e(ex);
             throw ex;
         }

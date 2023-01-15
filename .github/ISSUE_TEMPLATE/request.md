@@ -1,20 +1,18 @@
 ---
-name: 🥳[Feature] 
-about: An issue that improves Litewallet Android
-title: '🥳[Feature]'
-labels: 'enhancement'
-assignees: 'mosadialiou'
+name: 💡[Request] 
+about: An issue that asks the Litewallet Android team if they could change the app.
+title: '💡[Request]'
+labels: 'request'
+assignees: 'kcw-grunt'
 
 ---
 
-## Overview
+## Request overview
 
-### Why?
+### Why is it important?
 **Is your request related to a problem? Or, do you have an idea to improve the app? Please describe.**
 <!-- A clear and concise description of your idea. --> 
 
-
-### What?
 **Describe the solution you'd like**
 <!-- A clear and concise description of what you want to happen. -->
 
@@ -23,14 +21,3 @@ assignees: 'mosadialiou'
 
 **Additional context**
 <!-- Add any other context or screenshots about the feature request here. --> 
-
-### Definition of Done
-- [ ] Action 1
-- [ ] Action 2
-- [ ] Action N
-
-## UI Changes
-
-|**Before**|**After**|
-|----------|---------|
-|<!-- Insert _before_ screenshot or gif-->|<!-- Insert _after_ screenshot or gif if you can-->|
