@@ -25,7 +25,7 @@ public class AboutActivity extends BRActivity {
     private TextView policyText;
     private TextView infoText;
 
-    private ImageView redditShare;
+    private ImageView instagramShare;
     private ImageView twitterShare;
     private ImageView blogShare;
     private static AboutActivity app;
@@ -57,14 +57,14 @@ public class AboutActivity extends BRActivity {
         String verName = pInfo != null ? pInfo.versionName : " ";
         infoText.setText(getString(R.string.About_footer, verName));
 
-        redditShare = (ImageView) findViewById(R.id.reddit_share_button);
+        instagramShare = (ImageView) findViewById(R.id.instagram_share_button);
         twitterShare = (ImageView) findViewById(R.id.twitter_share_button);
         blogShare = (ImageView) findViewById(R.id.blog_share_button);
 
-        redditShare.setOnClickListener(new View.OnClickListener() {
+        instagramShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BRConstants.REDDIT_LINK));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BRConstants.INSTAGRAM_LINK));
                 startActivity(browserIntent);
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }

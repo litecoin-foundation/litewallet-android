@@ -48,12 +48,14 @@ public class DynamicDonationFragment extends Fragment {
     private TextView feeVal;
     private TextView totalVal;
 
+    private TextView donationToTheLitewalletTeam;
+
     private TextView amountSliderVal;
 
     private SeekBar seekBar;
     private String selectedIso;
     private boolean isLTCSwap = true;
-    private Pair<String, String> chosenAddress;
+    private String chosenAddress = BRConstants.DONATION_ADDRESS;
     private long mDonationAmount;
 
 
@@ -69,26 +71,10 @@ public class DynamicDonationFragment extends Fragment {
         isLTCSwap = BRSharedPrefs.getPreferredLTC(getContext());
 
         addressVal = view.findViewById(R.id.addressVal);
+        addressVal.setText(chosenAddress);
 
-        chosenAddress = BRConstants.DONATION_ADDRESSES[0];
-        addressVal.setText(chosenAddress.second);
-
-        Spinner spinner = view.findViewById(R.id.donation_Address);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chosenAddress = BRConstants.DONATION_ADDRESSES[position];
-                addressVal.setText(chosenAddress.second);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                //NO-OP
-            }
-        });
-        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, addresses());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        donationToTheLitewalletTeam = view.findViewById(R.id.donationAddressesPhrase);
+        donationToTheLitewalletTeam.setText(getString(R.string.Donate_toThe_LWTeam));
 
         TextView processingTimeLbl = view.findViewById(R.id.processingTimeLbl);
         processingTimeLbl.setText(getString(R.string.Confirmation_processingAndDonationTime, "2.5-5"));
@@ -106,10 +92,11 @@ public class DynamicDonationFragment extends Fragment {
         Button donateBut = view.findViewById(R.id.donateBut);
         donateBut.setOnClickListener(v -> {
             BRDialogView dialog = new BRDialogView();
-            dialog.setTitle(getString(R.string.donate_dialog_title));
-            dialog.setMessage(getString(R.string.donate_dialog_message));
-            dialog.setNegButton(getString(R.string.donate_dialog_negative_text));
-            dialog.setPosButton(getString(R.string.donate_dialog_positive_text));
+            dialog.setTitle(getString(R.string.Donate_Dialog_title));
+
+            dialog.setMessage(getString(R.string.Donate_Dialog_message));
+            dialog.setNegButton(getString(R.string.Donate_Dialog_Negative_text));
+            dialog.setPosButton(getString(R.string.Donate_Dialog_Positive_text));
             dialog.setPosListener(brDialogView -> {
                 dialog.dismiss();
                 sendDonation();
@@ -165,10 +152,10 @@ public class DynamicDonationFragment extends Fragment {
     }
 
     private void sendDonation() {
-        String memo = getString(R.string.Donate_toThe) + chosenAddress.first;
-        PaymentItem request = new PaymentItem(new String[]{chosenAddress.second}, null, mDonationAmount, null, false, memo);
+        String memo = getString(R.string.Donate_toThe_LWTeam) + chosenAddress;
+        PaymentItem request = new PaymentItem(new String[]{chosenAddress}, null, mDonationAmount, null, false, memo);
         Bundle params = new Bundle();
-        params.putString("DONATION_ACCOUNT", chosenAddress.first);
+        params.putString("DONATION_ACCOUNT", chosenAddress);
         params.putLong("DONATION_AMOUNT", mDonationAmount);
         params.putString("ADDRESS_SCHEME", "v2");
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200223_DD, params);
@@ -195,14 +182,6 @@ public class DynamicDonationFragment extends Fragment {
         long maxFee = BRWalletManager.getInstance().feeForTransactionAmount(currentBalance);
         long adjustedAmount = (long) ((progress * 1f / seekBar.getMax()) * (currentBalance - BRConstants.DONATION_AMOUNT - maxFee));
         return adjustedAmount + BRConstants.DONATION_AMOUNT;
-    }
-
-    private String[] addresses() {
-        String[] addresses = new String[BRConstants.DONATION_ADDRESSES.length];
-        for (int i = 0; i < BRConstants.DONATION_ADDRESSES.length; i++) {
-            addresses[i] = String.valueOf(BRConstants.DONATION_ADDRESSES[i].first);
-        }
-        return addresses;
     }
 
     private void updateDonationValues(long donationAmount) {

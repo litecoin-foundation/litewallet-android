@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <!-- App name -->
-  <string name="About.appName.android">Loaf</string>
-  <!-- About screen blog label -->
+    <!-- About screen blog label -->
   <string name="About.blog">블로그</string>
   <!-- About screen footer -->
   <string name="About.footer">라이트 코인 재단 라이트 월렛 팀\n%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">개인정보 보호정책</string>
   <!-- About screen reddit label -->
-  <string name="About.reddit">레딧</string>
+  <string name="About.instagram">레딧</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">이용 약관</string>
   <!-- About screen title -->
@@ -25,9 +24,11 @@
   <!-- Default wallet name -->
   <string name="AccountHeader.defaultWalletName">나의 Loaf</string>
   <!-- Equals symbol -->
-  <string name="AccountHeader.equals">=</string>
-  <!-- Manage wallet button title -->
-  <string name="AccountHeader.manageButtonName">관리하기</string>
+    <string name="Donate.Dialog.title">"\t라이트코인 재단에 기부 "</string>
+    <string name="Donate.Dialog.message">"\tLitecoin Foundation에 기부해 주셔서 감사합니다. 기부는 최종적이며 환불되지 않습니다. 지속적인 지원에 감사드립니다. "</string>
+    <string name="Donate.Dialog.Positive.text">기부하다</string>
+  <string name="Donate.Dialog.Negative.text">취소</string>
+    <!-- Manage wallet button title -->
   <!-- Third party keyboard warning -->
   <string name="Alert.customKeyboard.android">제3자가 제공한 키보드를 사용하고 계신 것 같습니다, 귀하의 입력을 기록하고 귀하의 페이퍼 키가 도난 당할 수 있습니다. 추가적인 보호를 위해 기본 안드로이드 키보드로 전환해 주세요.</string>
   <!-- Error alert title -->
@@ -185,7 +186,6 @@
   <!-- Jailbreak warning title -->
   <string name="JailbreakWarnings.title">경고</string>
   <!-- Wipe wallet button -->
-  <string name="JailbreakWarnings.wipe">초기화</string>
   <!-- Location services disabled error -->
   <string name="LocationPlugin.disabled">위치 서비스가 꺼졌습니다.</string>
   <!-- No permissions for location services -->
@@ -195,7 +195,7 @@
   <!-- Manage wallet description text -->
   <string name="ManageWallet.description">귀하의 지갑 이름은 귀하 계정의 거래 기록에서만 나타나며 다른 사람은 볼 수 없습니다.</string>
   <!-- Change Wallet name textfield label -->
-  <string name="ManageWallet.textFeildLabel">지갑 이름</string>
+  <string name="ManageWallet.textFieldLabel">지갑 이름</string>
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">지갑 관리</string>
   <!-- Buy bitcoin title -->
@@ -718,7 +718,6 @@
   <string name="Confirmation.donateLabel">기부 금액</string>
   <string name="Confirmation.staticAddressLabel">주소</string>
   <string name="Donate.word">기부</string>
-  <string name="Donate.toThe">"에 기부 "</string>
   <string name="FeeSelector.luxury">사치</string>
   <string name="FeeSelector.luxuryMessage">이 옵션은 귀하가 보험료를 지불하더라도 사실상 거래 수락을 보장합니다.</string>
   <string name="FeeSelector.luxuryTime">2.5~5+분</string>
@@ -763,4 +762,5 @@
   <string name="Settings.languages">언어</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">기프트 카드 구매\n• 선불 전화 충전\n• Steam, Amazon, Hotels.com\n• 170개국에서 작동</string>
+    <string name="Donate.toThe.LWTeam">기부: Litewallet 인프라</string>
 </resources>
