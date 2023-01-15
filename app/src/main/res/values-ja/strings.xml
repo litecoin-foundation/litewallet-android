@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <!-- App name -->
-  <string name="About.appName.android">ブレッド</string>
-  <!-- About screen blog label -->
+    <!-- About screen blog label -->
   <string name="About.blog">ブログ</string>
   <!-- About screen footer -->
   <string name="About.footer">Litecoin FoundationのLitewalletチームが作成\n%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">プライバシーポリシー</string>
   <!-- About screen reddit label -->
-  <string name="About.reddit">Reddit（レディット）</string>
+  <string name="About.instagram">Reddit（レディット）</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">利用規約</string>
   <!-- About screen title -->
@@ -25,9 +24,11 @@
   <!-- Default wallet name -->
   <string name="AccountHeader.defaultWalletName">マイブレッド</string>
   <!-- Equals symbol -->
-  <string name="AccountHeader.equals">=</string>
-  <!-- Manage wallet button title -->
-  <string name="AccountHeader.manageButtonName">管理</string>
+    <string name="Donate.Dialog.title">ライトコイン財団に寄付する</string>
+    <string name="Donate.Dialog.message">ライトコイン財団へのご寄付に感謝いたします。 寄付は最終的なものであり、返金することはできません。 今後ともよろしくお願いいたします。</string>
+    <string name="Donate.Dialog.Positive.text">寄付</string>
+  <string name="Donate.Dialog.Negative.text">キャンセル</string>
+    <!-- Manage wallet button title -->
   <!-- Third party keyboard warning -->
   <string name="Alert.customKeyboard.android">現在、サードパーティーのキーボードを使用しているようです。これを使うと入力した内容が記録され、ペーパー・キーが盗まれる可能性があります。追加の保護措置としてAndroidのデフォルトキーボードに切り替えてください。</string>
   <!-- Error alert title -->
@@ -185,7 +186,6 @@
   <!-- Jailbreak warning title -->
   <string name="JailbreakWarnings.title">警告</string>
   <!-- Wipe wallet button -->
-  <string name="JailbreakWarnings.wipe">完全削除</string>
   <!-- Location services disabled error -->
   <string name="LocationPlugin.disabled">位置情報サービスが無効化されています。</string>
   <!-- No permissions for location services -->
@@ -195,7 +195,7 @@
   <!-- Manage wallet description text -->
   <string name="ManageWallet.description">あなたのウォレットの名前はご自身のアカウントの取引履歴上でのみ表示され、あなた以外誰も閲覧することができません。</string>
   <!-- Change Wallet name textfield label -->
-  <string name="ManageWallet.textFeildLabel">ウォレットの名前</string>
+  <string name="ManageWallet.textFieldLabel">ウォレットの名前</string>
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">ウォレットを管理</string>
   <!-- Buy bitcoin title -->
@@ -718,7 +718,6 @@
   <string name="Confirmation.donateLabel">寄付金額：</string>
   <string name="Confirmation.staticAddressLabel">住所：</string>
   <string name="Donate.word">寄付</string>
-  <string name="Donate.toThe">"に寄付する "</string>
   <string name="FeeSelector.luxury">ぜいたく</string>
   <string name="FeeSelector.luxuryMessage">このオプションは、プレミアムを支払っていますが、トランザクションの受け入れを事実上保証します。</string>
   <string name="FeeSelector.luxuryTime">2.5～5+分</string>
@@ -763,4 +762,5 @@
   <string name="Settings.languages">言語</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">ギフトカードの購入\n• プリペイド携帯電話の補充\n• Steam、Amazon、Hotels.com\n• 170 か国で利用可能</string>
+    <string name="Donate.toThe.LWTeam">寄付先: Litewallet インフラストラクチャ</string>
 </resources>
