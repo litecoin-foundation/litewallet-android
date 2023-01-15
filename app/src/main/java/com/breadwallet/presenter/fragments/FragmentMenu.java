@@ -28,6 +28,7 @@ import com.breadwallet.presenter.activities.settings.SettingsActivity;
 import com.breadwallet.presenter.entities.BRMenuItem;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.SlideDetector;
+import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.BRConstants;
 import com.platform.APIClient;
 
@@ -67,6 +68,7 @@ public class FragmentMenu extends Fragment {
             CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
             CustomTabsIntent customTabsIntent = builder.build();
             customTabsIntent.launchUrl(getContext(), Uri.parse(BRConstants.CUSTOMER_SUPPORT_LINK));
+            AnalyticsManager.logCustomEvent(BRConstants._20201118_DTGS);
         }));
 
         /* Settings */
