@@ -437,7 +437,7 @@ class FragmentSend : Fragment() {
                         comment
                     )
                 )
-                //AnalyticsManager.logCustomEvent(BRConstants._20191105_DSL)
+                AnalyticsManager.logCustomEvent(BRConstants._20191105_DSL);
                 BRSharedPrefs.incrementSendTransactionCount(context)
             }
         })
