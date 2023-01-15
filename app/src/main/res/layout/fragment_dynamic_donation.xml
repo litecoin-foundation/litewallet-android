@@ -67,14 +67,16 @@
             app:layout_constraintStart_toEndOf="@id/addressLbl"
             tools:text="MDPqwDf9eUErGLcZNt1HN9HqnbFCSCSRme" />
 
-        <Spinner
-            android:id="@+id/spinnerAddresses"
+        <TextView
+            android:id="@+id/donationAddressesPhrase"
+            style="@style/BRTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/addressVal"
+            app:layout_constraintEnd_toEndOf="@+id/donateBut"
             app:layout_constraintStart_toStartOf="@+id/addressLbl"
-            app:layout_constraintTop_toBottomOf="@id/addressVal" />
+            app:layout_constraintTop_toBottomOf="@id/addressVal"
+            tools:text="@string/Donate.toThe.LWTeam"/>
 
         <TextView
             android:id="@+id/processingTimeLbl"
@@ -84,9 +86,9 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/barlowsemicondensed_light"
             app:layout_constrainedWidth="true"
-            app:layout_constraintEnd_toEndOf="@+id/addressVal"
+            app:layout_constraintEnd_toEndOf="@+id/donateBut"
             app:layout_constraintStart_toStartOf="@+id/addressLbl"
-            app:layout_constraintTop_toBottomOf="@id/spinnerAddresses"
+            app:layout_constraintTop_toBottomOf="@id/donationAddressesPhrase"
             tools:text="@string/Confirmation.processingAndDonationTime" />
 
         <TextView

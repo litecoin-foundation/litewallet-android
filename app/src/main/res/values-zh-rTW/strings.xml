@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <!-- App name -->
-  <string name="About.appName.android">Loaf</string>
-  <!-- About screen blog label -->
+    <!-- About screen blog label -->
   <string name="About.blog">部落格</string>
   <!-- About screen footer -->
   <string name="About.footer">由莱特币基金会的莱特钱包团队制作\n%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">隱私政策</string>
   <!-- About screen reddit label -->
-  <string name="About.reddit">Reddit</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">使用規定</string>
   <!-- About screen title -->
@@ -25,9 +23,11 @@
   <!-- Default wallet name -->
   <string name="AccountHeader.defaultWalletName">我的 Loaf</string>
   <!-- Equals symbol -->
-  <string name="AccountHeader.equals">=</string>
+    <string name="Donate.Dialog.title">捐贈給萊特幣基金會</string>
+    <string name="Donate.Dialog.message">"\t感謝您對萊特幣基金會的捐贈。 捐款是最終的，不能退還。 感謝您一直以來的支持。 "</string>
+    <string name="Donate.Dialog.Positive.text">捐</string>
+  <string name="Donate.Dialog.Negative.text">取消</string>
   <!-- Manage wallet button title -->
-  <string name="AccountHeader.manageButtonName">管理</string>
   <!-- Third party keyboard warning -->
   <string name="Alert.customKeyboard.android">您似乎在使用第三方鍵盤，這可能會記錄您按下的鍵並竊取您的「紙鑰」。請切換至預設的 Android 鍵盤以獲得額外的保護。</string>
   <!-- Error alert title -->
@@ -105,7 +105,6 @@
   <!-- Word label eg. Word #1, Word #2 -->
   <string name="ConfirmPaperPhrase.word">字組 #%1$s</string>
   <!-- Litecoin denomination picker label -->
-  <string name="DefaultCurrency.g">比特幣顯示單位</string>
   <!-- Exchange rate label -->
   <string name="DefaultCurrency.rateLabel">匯率</string>
   <!-- Email unavailable alert title -->
@@ -185,7 +184,6 @@
   <!-- Jailbreak warning title -->
   <string name="JailbreakWarnings.title">警告</string>
   <!-- Wipe wallet button -->
-  <string name="JailbreakWarnings.wipe">抹除</string>
   <!-- Location services disabled error -->
   <string name="LocationPlugin.disabled">定位服務已停用。</string>
   <!-- No permissions for location services -->
@@ -195,7 +193,7 @@
   <!-- Manage wallet description text -->
   <string name="ManageWallet.description">您的錢包名稱只會出現在您的帳戶交易記錄中，任何其他人都看不到。</string>
   <!-- Change Wallet name textfield label -->
-  <string name="ManageWallet.textFeildLabel">電子錢包名稱</string>
+  <string name="ManageWallet.textFieldLabel">電子錢包名稱</string>
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">管理電子錢包</string>
   <!-- Buy bitcoin title -->
@@ -718,7 +716,6 @@
   <string name="Confirmation.donateLabel">捐款金額：</string>
   <string name="Confirmation.staticAddressLabel">地址：</string>
   <string name="Donate.word">捐</string>
-  <string name="Donate.toThe">"捐贈給 "</string>
   <string name="FeeSelector.luxury">豪華</string>
   <string name="FeeSelector.luxuryMessage">儘管您要支付一定的費用，但此選項實際上可以保證您接受交易。</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ 分鐘</string>
@@ -762,4 +759,5 @@
   <string name="Settings.languages">語言能力</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">購買禮品卡\n• 為預付費手機充值\n• Steam、亞馬遜、Hotels.com\n• 適用於 170 個國家/地區</string>
+    <string name="Donate.toThe.LWTeam">捐贈給：Litewallet 基礎設施</string>
 </resources>

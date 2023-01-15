@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!-- App name -->
-  <string name="About.appName.android">Loaf</string>
   <!-- About screen blog label -->
   <string name="About.blog">Website</string>
   <!-- About screen footer -->
@@ -11,7 +10,7 @@
   <!-- Privay Policy button label -->
   <string name="About.privacy">Privacy Policy</string>
   <!-- About screen reddit label -->
-  <string name="About.reddit">Reddit</string>
+  <string name="About.instagram" translatable="false">Instagram</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">Terms of Use</string>
   <!-- About screen title -->
@@ -192,7 +191,7 @@
   <!-- Manage wallet description text -->
   <string name="ManageWallet.description">Your wallet name only appears in your account transaction history and cannot be seen by anyone else.</string>
   <!-- Change Wallet name textfield label -->
-  <string name="ManageWallet.textFeildLabel">Wallet Name</string>
+  <string name="ManageWallet.textFieldLabel">Wallet Name</string>
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Manage Wallet</string>
   <!-- Buy litecoin title -->
@@ -719,16 +718,15 @@
   <string name="Confirmation.donateLabel">Amount to Donate:</string>
   <string name="Confirmation.staticAddressLabel">Address:</string>
   <string name="Donate.word">Donate</string>
-  <string name="Donate.toThe">"Donate to the "</string>
   <string name="FeeSelector.luxury">Luxury</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ minutes</string>
   <string name="FeeSelector.luxuryMessage">This option virtually guarantees acceptance of your transaction though you are paying a premium.</string>
 
   <!--Buy center - partners-->
-  <string name="BuyCenter.simplex.Title" tools:ignore="MissingTranslation">Simplex</string>
+  <string name="BuyCenter.simplex.Title" tools:ignore="MissingTranslation" translatable="false">Simplex</string>
   <string name="BuyCenter.simplex.FinancialDetails">"• Get Litecoin in 5 mins!\n• Buy Litecoin via credit card\n• Passport or State ID"</string>
 
-  <string name="BuyCenter.moonpay.Title" tools:ignore="MissingTranslation">Moonpay</string>
+  <string name="BuyCenter.moonpay.Title" tools:ignore="MissingTranslation" translatable="false">Moonpay</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Buy LTC with many fiat pairs\n• Pay with multiple methods\n• Global payment provider"</string>
 
   <string name="BuyCenter.bitrefill.Title" tools:ignore="MissingTranslation">Bitrefill</string>
@@ -804,8 +802,9 @@
   <string name="JailbreakWarnings.close">Close</string>
 
   <!-- donation dialog -->
-  <string name="donate_dialog_title">Donate to the Litecoin Foundation</string>
-  <string name="donate_dialog_message">We appreciate your donation to the Litecoin Foundation. Donations are final and can not be refunded. Thanks for your continuing support.</string>
-  <string name="donate_dialog_positive_text">Donate</string>
-  <string name="donate_dialog_negative_text">Cancel</string>
+  <string name="Donate.Dialog.title">Donate to the Litecoin Foundation</string>
+  <string name="Donate.Dialog.message">We appreciate your donation to the Litecoin Foundation. Donations are final and can not be refunded. Thanks for your continuing support.</string>
+  <string name="Donate.Dialog.Positive.text">Donate</string>
+  <string name="Donate.Dialog.Negative.text">Cancel</string>
+  <string name="Donate.toThe.LWTeam">Donate to: Litewallet Infrastructure</string>
 </resources>
