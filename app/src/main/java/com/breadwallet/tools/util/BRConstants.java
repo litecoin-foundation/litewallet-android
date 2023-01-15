@@ -82,10 +82,9 @@ public class BRConstants {
      */
     public static final Pair[] DONATION_ADDRESSES = new Pair[]
             {
-                    Pair.create("Litewallet Hardware Fundraiser", "MJ4W7NZya4SzE7R6xpEVdamGCimaQYPiWu"),
-                    Pair.create("Litecoin Foundation", "MVZj7gBRwcVpa9AAWdJm8A3HqTst112eJe")
+                    Pair.create("Donating to: Litewallet Infrastructure", "MJ4W7NZya4SzE7R6xpEVdamGCimaQYPiWu")
             };
-    public static final long DONATION_AMOUNT = 1_800_000;
+    public static final long DONATION_AMOUNT = 1_400_000;
 
     /**
      * Support Center article ids.

@@ -73,7 +73,7 @@ public class DynamicDonationFragment extends Fragment {
         chosenAddress = BRConstants.DONATION_ADDRESSES[0];
         addressVal.setText(chosenAddress.second);
 
-        Spinner spinner = view.findViewById(R.id.spinnerAddresses);
+        Spinner spinner = view.findViewById(R.id.donation_Address);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -108,8 +108,8 @@ public class DynamicDonationFragment extends Fragment {
             BRDialogView dialog = new BRDialogView();
             dialog.setTitle(getString(R.string.donate_dialog_title));
             dialog.setMessage(getString(R.string.donate_dialog_message));
-            dialog.setPosButton(getString(R.string.donate_dialog_positive_text));
             dialog.setNegButton(getString(R.string.donate_dialog_negative_text));
+            dialog.setPosButton(getString(R.string.donate_dialog_positive_text));
             dialog.setPosListener(brDialogView -> {
                 dialog.dismiss();
                 sendDonation();
@@ -200,7 +200,7 @@ public class DynamicDonationFragment extends Fragment {
     private String[] addresses() {
         String[] addresses = new String[BRConstants.DONATION_ADDRESSES.length];
         for (int i = 0; i < BRConstants.DONATION_ADDRESSES.length; i++) {
-            addresses[i] = getString(R.string.Donate_toThe) + BRConstants.DONATION_ADDRESSES[i].first;
+            addresses[i] = String.valueOf(BRConstants.DONATION_ADDRESSES[i].first);
         }
         return addresses;
     }
