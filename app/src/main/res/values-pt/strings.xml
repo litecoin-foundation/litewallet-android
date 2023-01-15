@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <!-- App name -->
-  <string name="About.appName.android">Loaf</string>
-  <!-- About screen blog label -->
+    <!-- About screen blog label -->
   <string name="About.blog">Blog</string>
   <!-- About screen footer -->
   <string name="About.footer">Feito pela equipe Litewallet da Fundação Litecoin\n%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">Política de Privacidade</string>
   <!-- About screen reddit label -->
-  <string name="About.reddit">Reddit</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">Termos de Uso</string>
   <!-- About screen title -->
@@ -25,9 +23,11 @@
   <!-- Default wallet name -->
   <string name="AccountHeader.defaultWalletName">Minha Loaf</string>
   <!-- Equals symbol -->
-  <string name="AccountHeader.equals">=</string>
+    <string name="Donate.Dialog.title">"\tDoe para a Fundação Litecoin "</string>
+    <string name="Donate.Dialog.message">Agradecemos sua doação para a Litecoin Foundation. As doações são definitivas e não podem ser reembolsadas. Obrigado pelo seu apoio contínuo.</string>
+    <string name="Donate.Dialog.Positive.text">Doar</string>
+  <string name="Donate.Dialog.Negative.text">Cancelar</string>
   <!-- Manage wallet button title -->
-  <string name="AccountHeader.manageButtonName">GERIR</string>
   <!-- Third party keyboard warning -->
   <string name="Alert.customKeyboard.android">Ao que parece, está a utilizar um teclado de terceiros, o qual pode gravar aquilo que digita e furtar a sua Paper Key. Por favor, mude para o teclado predefinido do Android, a fim de ficar mais protegido.</string>
   <!-- Error alert title -->
@@ -185,7 +185,6 @@
   <!-- Jailbreak warning title -->
   <string name="JailbreakWarnings.title">AVISO</string>
   <!-- Wipe wallet button -->
-  <string name="JailbreakWarnings.wipe">Apagar</string>
   <!-- Location services disabled error -->
   <string name="LocationPlugin.disabled">Os serviços de localização estão desativados.</string>
   <!-- No permissions for location services -->
@@ -195,7 +194,7 @@
   <!-- Manage wallet description text -->
   <string name="ManageWallet.description">O nome da sua carteira só aparece no histórico de transações da sua conta e não pode ser visto por mais ninguém.</string>
   <!-- Change Wallet name textfield label -->
-  <string name="ManageWallet.textFeildLabel">Nome da Carteira</string>
+  <string name="ManageWallet.textFieldLabel">Nome da Carteira</string>
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Gerir Carteira</string>
   <!-- Buy bitcoin title -->
@@ -718,8 +717,7 @@
   <string name="Confirmation.donateLabel">Valor para Doar:</string>
   <string name="Confirmation.staticAddressLabel">Endereço:</string>
   <string name="Donate.word">Doar</string>
-  <string name="Donate.toThe">"Doe para o "</string>
-  <string name="FeeSelector.luxury">Luxo</string>
+    <string name="FeeSelector.luxury">Luxo</string>
   <string name="FeeSelector.luxuryMessage">Essa opção praticamente garante a aceitação de sua transação, embora você esteja pagando um prêmio.</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ minutos</string>
   <string name="BottomNavItem.History.title">HISTORY</string>
@@ -762,4 +760,5 @@
   <string name="Settings.languages">Línguas</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">Compre vales-presente\n• Recarregue telefones pré-pagos\n• Steam, Amazon, Hotels.com\n• Funciona em 170 países</string>
+    <string name="Donate.toThe.LWTeam">Doe para: Litewallet Infrastructure</string>
 </resources>

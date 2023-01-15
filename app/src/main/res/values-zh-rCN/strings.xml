@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <!-- App name -->
-  <string name="About.appName.android">Loaf</string>
-  <!-- About screen blog label -->
+    <!-- About screen blog label -->
   <string name="About.blog">博客</string>
   <!-- About screen footer -->
   <string name="About.footer">由萊特幣基金會的萊特錢包團隊製作\n%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">隐私政策</string>
   <!-- About screen reddit label -->
-  <string name="About.reddit">Reddit</string>
+  <string name="About.instagram">Reddit</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">使用条款</string>
   <!-- About screen title -->
@@ -25,9 +24,11 @@
   <!-- Default wallet name -->
   <string name="AccountHeader.defaultWalletName">我的 Loaf</string>
   <!-- Equals symbol -->
-  <string name="AccountHeader.equals">=</string>
-  <!-- Manage wallet button title -->
-  <string name="AccountHeader.manageButtonName">管理</string>
+    <string name="Donate.Dialog.title">捐赠给莱特币基金会</string>
+    <string name="Donate.Dialog.message">"\t感谢您对莱特币基金会的捐赠。 捐款是最终的，不能退还。 感谢您一直以来的支持。 "</string>
+    <string name="Donate.Dialog.Positive.text">捐</string>
+  <string name="Donate.Dialog.Negative.text">取消</string>
+    <!-- Manage wallet button title -->
   <!-- Third party keyboard warning -->
   <string name="Alert.customKeyboard.android">看起来您正在使用第三方键盘，它可以记录您键入的内容并窃取您的密钥（Paper Key）。请切换到默认的安卓键盘以便获得额外保护。</string>
   <!-- Error alert title -->
@@ -185,7 +186,6 @@
   <!-- Jailbreak warning title -->
   <string name="JailbreakWarnings.title">警告</string>
   <!-- Wipe wallet button -->
-  <string name="JailbreakWarnings.wipe">擦除</string>
   <!-- Location services disabled error -->
   <string name="LocationPlugin.disabled">位置服务被禁用。</string>
   <!-- No permissions for location services -->
@@ -195,7 +195,7 @@
   <!-- Manage wallet description text -->
   <string name="ManageWallet.description">您的钱包名称仅出现在您的帐户交易记录中，其他任何人无法看到。</string>
   <!-- Change Wallet name textfield label -->
-  <string name="ManageWallet.textFeildLabel">钱包名称</string>
+  <string name="ManageWallet.textFieldLabel">钱包名称</string>
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">管理钱包</string>
   <!-- Buy bitcoin title -->
@@ -718,7 +718,6 @@
   <string name="Confirmation.donateLabel">捐款金额:</string>
   <string name="Confirmation.staticAddressLabel">地址:</string>
   <string name="Donate.word">捐</string>
-  <string name="Donate.toThe">"捐赠给 "</string>
   <string name="FeeSelector.luxury">豪华</string>
   <string name="FeeSelector.luxuryMessage">尽管您要支付一定的费用，但此选项实际上可以保证您接受交易。</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ 分钟</string>
@@ -762,4 +761,5 @@
   <string name="Settings.languages">语言能力</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">购买礼品卡\n• 为预付费手机充值\n• Steam、亚马逊、Hotels.com\n• 适用于 170 个国家/地区</string>
+    <string name="Donate.toThe.LWTeam">捐赠给：Litewallet 基础设施</string>
 </resources>

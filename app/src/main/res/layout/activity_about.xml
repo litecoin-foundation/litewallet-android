@@ -169,13 +169,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="@string/About.reddit"
+        android:text="@string/About.instagram"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/divider1"
         app:layout_constraintLeft_toLeftOf="@+id/divider1" />
 
     <ImageView
-        android:id="@+id/reddit_share_button"
+        android:id="@+id/instagram_share_button"
         android:layout_width="16dp"
         android:layout_height="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView21"

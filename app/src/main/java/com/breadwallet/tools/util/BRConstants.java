@@ -80,12 +80,8 @@ public class BRConstants {
     /**
      * Donation
      */
-    public static final Pair[] DONATION_ADDRESSES = new Pair[]
-            {
-                    Pair.create("Litewallet Hardware Fundraiser", "MJ4W7NZya4SzE7R6xpEVdamGCimaQYPiWu"),
-                    Pair.create("Litecoin Foundation", "MVZj7gBRwcVpa9AAWdJm8A3HqTst112eJe")
-            };
-    public static final long DONATION_AMOUNT = 1_800_000;
+    public static final String DONATION_ADDRESS =  "MJ4W7NZya4SzE7R6xpEVdamGCimaQYPiWu";
+    public static final long DONATION_AMOUNT = 1_400_000;
 
     /**
      * Support Center article ids.
@@ -93,8 +89,10 @@ public class BRConstants {
     public static final String loopBug = "android-loop-bug";
 
     public static final String TWITTER_LINK = "https://twitter.com/Litewallet_App";
-    public static final String REDDIT_LINK = "https://www.reddit.com/r/Litewallet";
-    public static final String WEB_LINK = "https://litewalle.io";
+
+    public static final String INSTAGRAM_LINK = "https://www.instagram.com/litewallet.app";
+
+    public static final String WEB_LINK = "https://litewallet.io";
     public static final String TOS_LINK = "https://litewallet.io/privacy/policy.html";
     public static String CUSTOMER_SUPPORT_LINK = "https://support.litewallet.io";
     public static String BITREFILL_AFFILIATE_LINK = "https://www.bitrefill.com/";
