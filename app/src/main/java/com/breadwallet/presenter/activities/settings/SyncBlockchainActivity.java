@@ -13,6 +13,7 @@ import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
+import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
@@ -60,7 +61,7 @@ public class SyncBlockchainActivity extends BRActivity {
                                         BRSharedPrefs.putAllowSpend(SyncBlockchainActivity.this, false);
                                         BRPeerManager.getInstance().rescan();
                                         BRAnimator.startBreadActivity(SyncBlockchainActivity.this, false);
-
+                                        AnalyticsManager.logCustomEvent(BRConstants._20200112_DSR);
                                     }
                                 });
                             }
