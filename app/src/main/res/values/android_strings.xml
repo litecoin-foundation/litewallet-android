@@ -2,7 +2,6 @@
 <resources>
     <string name="lang">en</string>
     <!-- Device authentication title -->
-    <string name="App.name.Android">LoafWallet</string>
     <!-- Device authentication title -->
     <string name="Auth.title.Android">Authentication required</string>
     <!-- Instruction to touch the sensor for fingerprint authentication -->
