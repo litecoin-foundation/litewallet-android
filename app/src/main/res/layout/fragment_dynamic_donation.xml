@@ -16,8 +16,8 @@
         android:background="@drawable/pin_round_corner">
 
         <TextView
-            style="@style/BRBoldTextStyle"
             android:id="@+id/dialogTitle"
+            style="@style/BRBoldTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -39,21 +39,21 @@
             app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
 
         <TextView
-            style="@style/BRTextStyle"
             android:id="@+id/addressLbl"
+            style="@style/BRTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/bread_margin"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/barlowsemicondensed_light"
             android:text="@string/Confirmation.staticAddressLabel"
             android:textSize="15sp"
-            android:fontFamily="@font/barlowsemicondensed_light"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/separator" />
 
         <TextView
-            style="@style/BRTextStyle"
             android:id="@+id/addressVal"
+            style="@style/BRTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -67,43 +67,45 @@
             app:layout_constraintStart_toEndOf="@id/addressLbl"
             tools:text="MDPqwDf9eUErGLcZNt1HN9HqnbFCSCSRme" />
 
-        <Spinner
-            android:id="@+id/spinnerAddresses"
+        <TextView
+            android:id="@+id/donationAddressesPhrase"
+            style="@style/BRTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/addressVal"
+            app:layout_constraintEnd_toEndOf="@+id/donateBut"
             app:layout_constraintStart_toStartOf="@+id/addressLbl"
-            app:layout_constraintTop_toBottomOf="@id/addressVal" />
+            app:layout_constraintTop_toBottomOf="@id/addressVal"
+            tools:text="@string/Donate.toThe.LWTeam"/>
 
         <TextView
-            style="@style/BRTextStyle"
             android:id="@+id/processingTimeLbl"
+            style="@style/BRTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/barlowsemicondensed_light"
             app:layout_constrainedWidth="true"
-            app:layout_constraintEnd_toEndOf="@+id/addressVal"
+            app:layout_constraintEnd_toEndOf="@+id/donateBut"
             app:layout_constraintStart_toStartOf="@+id/addressLbl"
-            app:layout_constraintTop_toBottomOf="@id/spinnerAddresses"
+            app:layout_constraintTop_toBottomOf="@id/donationAddressesPhrase"
             tools:text="@string/Confirmation.processingAndDonationTime" />
 
         <TextView
-            style="@style/BRTextStyle"
             android:id="@+id/amountLbl"
+            style="@style/BRTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:fontFamily="@font/barlowsemicondensed_light"
             android:text="@string/Confirmation.donateLabel"
             android:textSize="15sp"
-            android:fontFamily="@font/barlowsemicondensed_light"
             app:layout_constraintStart_toStartOf="@+id/addressLbl"
             app:layout_constraintTop_toBottomOf="@id/processingTimeLbl" />
 
         <TextView
-            style="@style/BRTextStyle"
             android:id="@+id/amountVal"
+            style="@style/BRTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -118,20 +120,20 @@
 
 
         <TextView
-            style="@style/BRTextStyle"
             android:id="@+id/feeLbl"
+            style="@style/BRTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/barlowsemicondensed_light"
             android:text="@string/Confirmation.feeLabel"
             android:textSize="15sp"
-            android:fontFamily="@font/barlowsemicondensed_light"
             app:layout_constraintStart_toStartOf="@+id/amountLbl"
             app:layout_constraintTop_toBottomOf="@id/amountLbl" />
 
         <TextView
-            style="@style/BRTextStyle"
             android:id="@+id/feeVal"
+            style="@style/BRTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -145,20 +147,20 @@
             tools:text="$0.00 (L 0.000001)" />
 
         <TextView
-            style="@style/BRTextStyle"
             android:id="@+id/totalLbl"
+            style="@style/BRTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/barlowsemicondensed_light"
             android:text="@string/Confirmation.totalLabel"
             android:textSize="15sp"
-            android:fontFamily="@font/barlowsemicondensed_light"
             app:layout_constraintStart_toStartOf="@+id/amountLbl"
             app:layout_constraintTop_toBottomOf="@id/feeLbl" />
 
         <TextView
-            style="@style/BRTextStyle"
             android:id="@+id/totalVal"
+            style="@style/BRTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -172,20 +174,19 @@
             tools:text="$0.00 (L 0.000001)" />
 
         <com.breadwallet.presenter.customviews.BRButton
-            style="@style/BRButtonStyle"
             android:id="@+id/cancelBut"
+            style="@style/BRButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/bread_margin"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/barlowsemicondensed_regular"
             android:text="@string/Button.cancel"
             android:textColor="@color/black"
             app:buttonType="2"
-            android:fontFamily="@font/barlowsemicondensed_regular"
             app:isBreadButton="true"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/donateBut"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
@@ -193,17 +194,18 @@
             app:layout_constraintTop_toBottomOf="@+id/totalLbl" />
 
         <com.breadwallet.presenter.customviews.BRButton
-            style="@style/BRButtonStyle"
             android:id="@+id/donateBut"
+            style="@style/BRButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/bread_margin"
             android:background="@color/litecoin_litewallet_blue"
+            android:fontFamily="@font/barlowsemicondensed_regular"
             android:text="@string/Donate.word"
             android:textColor="@color/white"
             app:buttonType="1"
-            android:fontFamily="@font/barlowsemicondensed_regular"
             app:isBreadButton="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cancelBut"
@@ -212,8 +214,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        style="@style/BRTextStyle"
         android:id="@+id/amountSliderVal"
+        style="@style/BRTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -245,10 +247,10 @@
             android:layout_marginEnd="2.5dp"
             android:layout_weight="1"
             android:max="100"
-            android:splitTrack="false"
-            android:thumb="@drawable/donate_slider_thumb"
             android:progressBackgroundTint="@color/white"
             android:progressTint="@color/white"
+            android:splitTrack="false"
+            android:thumb="@drawable/donate_slider_thumb"
             android:thumbTint="@color/white"
             tools:progress="50" />
 
