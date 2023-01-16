@@ -738,7 +738,6 @@
   <string name="idr_currency_code" translatable="false">IDR</string>
   <string name="rub_currency_code" translatable="false">RUB</string>
   <string name="sgd_currency_code" translatable="false">SGD</string>
-
   <string name="cad_currency_code" translatable="false">CAD</string>
   <string name="eur_currency_code" translatable="false">EUR</string>
   <string name="jpy_currency_code" translatable="false">JPY</string>
