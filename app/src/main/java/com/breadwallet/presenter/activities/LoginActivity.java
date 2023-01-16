@@ -118,15 +118,7 @@ public class LoginActivity extends BRActivity {
 
         keyboard.setCustomButtonBackgroundColor(10, getColor(android.R.color.transparent));
         keyboard.setDeleteImage(getDrawable(R.drawable.ic_delete_white));
-
-        PackageInfo pInfo = null;
-        try {
-            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            Timber.e(e);
-        }
-        String verName = pInfo != null ? pInfo.versionName : " ";
-        versionText.setText(String.format(Locale.US, "%1$s", verName));
+        versionText.setText(BRConstants.getAppNameAndCode());
 
         findViewById(R.id.scanQRCodeImgBut).setOnClickListener(v -> {
             if (!BRAnimator.isClickAllowed()) return;

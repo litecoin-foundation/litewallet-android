@@ -1,17 +1,37 @@
 package com.breadwallet.tools.util;
+import com.breadwallet.BuildConfig;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.util.Pair;
-
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import androidx.annotation.StringDef;
 
 import com.breadwallet.BuildConfig;
+import com.breadwallet.tools.manager.BRSharedPrefs;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Currency;
+import java.util.Locale;
+import java.util.Objects;
+
+import timber.log.Timber;
 
 public class BRConstants {
 
+    public static String getAppNameAndCode() {
+        final int versionCode = BuildConfig.VERSION_CODE;
+        final String versionName = BuildConfig.VERSION_NAME;
+        return String.format("%s (%03d)", versionName, versionCode);
+    }
     /**
      * Native library name
      */
