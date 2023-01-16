@@ -14,8 +14,7 @@ import com.breadwallet.presenter.activities.util.ActivityUTILS;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.util.BRConstants;
-
-import java.util.Locale;
+import com.unstoppabledomains.util.Utilities;
 
 import timber.log.Timber;
 
@@ -24,10 +23,10 @@ public class AboutActivity extends BRActivity {
 //    private TextView termsText;
     private TextView policyText;
     private TextView infoText;
-
     private ImageView instagramShare;
     private ImageView twitterShare;
     private ImageView blogShare;
+
     private static AboutActivity app;
 
     public static AboutActivity getApp() {
@@ -44,18 +43,9 @@ public class AboutActivity extends BRActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
         infoText = (TextView) findViewById(R.id.info_text);
         policyText = (TextView) findViewById(R.id.policy_text);
-
-        PackageInfo pInfo = null;
-        try {
-            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            Timber.e(e);
-        }
-        String verName = pInfo != null ? pInfo.versionName : " ";
-        infoText.setText(getString(R.string.About_footer, verName));
+        infoText.setText(getString(R.string.About_footer,BRConstants.getAppNameAndCode()));
 
         instagramShare = (ImageView) findViewById(R.id.instagram_share_button);
         twitterShare = (ImageView) findViewById(R.id.twitter_share_button);
