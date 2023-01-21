@@ -791,7 +791,8 @@
     <string name="Error.wrong2faTokenProvided">Wrong 2FA provided</string>
 
     <!-- Balance -->
-    <string name="ManageWallet.balance">Balance</string>
+  <string name="ManageWallet.balance">Balance</string>
+  <string name="ManageWallet.devMode">In Developer Mode</string>
 
   <!-- Features and limitations -->
   <string name="LitecoinCard.Disclaimer.bullets">"- Registration &amp; Login\n- Available card balance\n- Reset password\n- No transfer to Litewallet\n- US Only"</string>
