@@ -100,9 +100,10 @@ public class BRConstants {
 
     public static final String BLOCK_EXPLORER_BASE_URL = BuildConfig.LITECOIN_TESTNET ? "https://testnet.litecore.io/tx/" : "https://insight.litecore.io/tx/";
 
-
     public static final String RESET_CARD_PWD_LINK = "https://litecoin.dashboard.getblockcard.com/password/forgot";
 
+    public static final String LITEWALLET_API_URL_PROD = "https://api-prod.lite-wallet.org";
+    public static final String LITEWALLET_API_URL_DEV = "https://api-dev.lite-wallet.org";
 
     private BRConstants() {
     }

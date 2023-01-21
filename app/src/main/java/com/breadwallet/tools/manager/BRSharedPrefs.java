@@ -2,12 +2,13 @@ package com.breadwallet.tools.manager;
 
 import static com.breadwallet.tools.manager.BRSharedPrefs.PrefsServerMode.DEV;
 import static com.breadwallet.tools.util.BRConstants.GEO_PERMISSIONS_REQUESTED;
+import static com.breadwallet.tools.util.BRConstants.LITEWALLET_API_URL_DEV;
+import static com.breadwallet.tools.util.BRConstants.LITEWALLET_API_URL_PROD;
 import static com.breadwallet.tools.util.BRConstants.PREFS_LITEWALLET_SERVER_MODE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.breadwallet.BuildConfig;
 import com.breadwallet.tools.util.BRConstants;
 
 import org.json.JSONArray;
@@ -444,7 +445,7 @@ public class BRSharedPrefs {
     }
 
     public enum PrefsServerMode {
-        DEV(BuildConfig.LITEWALLET_API_URL_DEV), PROD(BuildConfig.LITEWALLET_API_URL_PROD);
+        DEV(LITEWALLET_API_URL_DEV), PROD(LITEWALLET_API_URL_PROD);
         public final String url;
 
         PrefsServerMode(String url) {
@@ -466,5 +467,7 @@ public class BRSharedPrefs {
                 .edit().putString(PREFS_LITEWALLET_SERVER_MODE, serverMode.url).commit();
     }
 
-    public static Boolean isApiServerModeDev(Context context) { return getApiServerMode(context) == DEV; }
+    public static Boolean isApiServerModeDev(Context context) {
+        return getApiServerMode(context) == DEV;
+    }
 }

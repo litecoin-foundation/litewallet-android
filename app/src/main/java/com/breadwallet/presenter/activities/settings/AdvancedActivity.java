@@ -77,9 +77,23 @@ public class AdvancedActivity extends BRActivity {
                 case SWITCH:
                     v = inflater.inflate(settings_list_switch, parent, false);
                     View switchView = v.findViewById(R.id.item_switch);
+                    View desc = v.findViewById(R.id.item_desc);
                     if (switchView instanceof SwitchCompat) {
                         ((SwitchCompat) switchView).setChecked(item.isChecked);
-                        switchView.setOnClickListener(item.listener);
+                        switchView.setOnClickListener(view -> {
+                            //relay click event to item.listener
+                            item.listener.onClick(view);
+
+                            if (desc instanceof TextView && view instanceof SwitchCompat) {
+                                Boolean isChecked = ((SwitchCompat) view).isChecked();
+                                ((TextView) desc).setText(isChecked ?
+                                        getString(R.string.DeveloperMode_On) : getString(R.string.DeveloperMode_Off));
+                            }
+                        });
+                        if (desc instanceof TextView) {
+                            ((TextView) desc).setText(item.isChecked ?
+                                    getString(R.string.DeveloperMode_On) : getString(R.string.DeveloperMode_Off));
+                        }
                     }
                     break;
                 default:
