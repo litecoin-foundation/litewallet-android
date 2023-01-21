@@ -229,7 +229,9 @@
   <!-- Node Selector view title -->
   <string name="NodeSelector.title">Litecoin Nodes</string>
   <!-- Settings Developer mode title -->
-  <string name="DeveloperMode.title">Developer Mode</string>
+  <string name="DeveloperMode.title">Developer Mode : </string>
+  <string name="DeveloperMode.On">On</string>
+  <string name="DeveloperMode.Off">Off</string>
   <!-- Bad Payment request alert title -->
   <string name="PaymentProtocol.Errors.badPaymentRequest">Bad Payment Request</string>
   <!-- Error opening payment protocol file message -->
