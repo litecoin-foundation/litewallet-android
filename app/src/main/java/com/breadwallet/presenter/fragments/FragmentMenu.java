@@ -52,6 +52,7 @@ public class FragmentMenu extends Fragment {
         signalLayout = rootView.findViewById(R.id.signal_layout);
         background.setOnClickListener(v -> {
             if (!BRAnimator.isClickAllowed()) return;
+            closeMenu();
             getActivity().onBackPressed();
         });
 
@@ -79,6 +80,7 @@ public class FragmentMenu extends Fragment {
 
         /* Lock Wallet */
         itemList.add(new BRMenuItem(getString(R.string.MenuButton_lock), R.drawable.ic_lock, v -> {
+            closeMenu();
             final Activity from = getActivity();
             from.getFragmentManager().popBackStack();
             BRAnimator.startBreadActivity(from, true);
@@ -86,6 +88,7 @@ public class FragmentMenu extends Fragment {
 
         /* Close button*/
         rootView.findViewById(R.id.close_button).setOnClickListener(v -> {
+            closeMenu();
             Activity app = getActivity();
             app.getFragmentManager().popBackStack();
         });
@@ -99,6 +102,7 @@ public class FragmentMenu extends Fragment {
     }
 
     private void launchActivity(Intent intent) {
+        closeMenu();
         Activity app = getActivity();
         app.startActivity(intent);
         app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.fade_down);
@@ -147,9 +151,7 @@ public class FragmentMenu extends Fragment {
         }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
+    private void closeMenu() {
         BRAnimator.animateBackgroundDim(background, true);
         BRAnimator.animateSignalSlide(signalLayout, true, () -> {
             if (getActivity() != null) {
