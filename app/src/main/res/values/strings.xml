@@ -9,7 +9,7 @@
   <string name="About.appVersion" translatable="false">%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">Privacy Policy</string>
-  <!-- About screen reddit label -->
+  <!-- About screen Instagram label -->
   <string name="About.instagram" translatable="false">Instagram</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">Terms of Use</string>
