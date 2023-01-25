@@ -63,6 +63,7 @@ public class BRApiManager {
             JSONArray arr = fetchRates(context);
             updateFeePerKb(context);
             if (arr != null) {
+                String selectedISO = BRSharedPrefs.getIso(context);
                 int length = arr.length();
                 for (int i = 0; i < length; i++) {
                     CurrencyEntity tmp = new CurrencyEntity();
@@ -71,7 +72,6 @@ public class BRApiManager {
                         tmp.name = tmpObj.getString("code");
                         tmp.code = tmpObj.getString("code");
                         tmp.rate = (float) tmpObj.getDouble("n");
-                        String selectedISO = BRSharedPrefs.getIso(context);
                         if (tmp.code.equalsIgnoreCase(selectedISO)) {
                             BRSharedPrefs.putIso(context, tmp.code);
                             BRSharedPrefs.putCurrencyListPosition(context, i - 1);
