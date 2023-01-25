@@ -75,8 +75,10 @@ public class IntroActivity extends BRActivity implements Serializable {
         } catch (PackageManager.NameNotFoundException e) {
             Timber.e(e);
         }
+
         String verName = pInfo != null ? pInfo.versionName : " ";
-        versionText.setText(String.format(Locale.US, "%1$s", verName));
+        String verCode = pInfo != null ? String.valueOf(pInfo.versionCode) : "0";
+        versionText.setText(String.format(Locale.US, "%1$s (%2$s)", verName,verCode));
 
         if (Utils.isEmulatorOrDebug(this))
             Utils.printPhoneSpecs();
