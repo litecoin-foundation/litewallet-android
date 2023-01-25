@@ -126,7 +126,8 @@ public class LoginActivity extends BRActivity {
             Timber.e(e);
         }
         String verName = pInfo != null ? pInfo.versionName : " ";
-        versionText.setText(String.format(Locale.US, "%1$s", verName));
+        String verCode = pInfo != null ? String.valueOf(pInfo.versionCode) : "0";
+        versionText.setText(String.format(Locale.US, "%1$s (%2$s)", verName,verCode));
 
         findViewById(R.id.scanQRCodeImgBut).setOnClickListener(v -> {
             if (!BRAnimator.isClickAllowed()) return;

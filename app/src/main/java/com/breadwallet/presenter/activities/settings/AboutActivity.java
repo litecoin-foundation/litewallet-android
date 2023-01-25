@@ -54,8 +54,10 @@ public class AboutActivity extends BRActivity {
         } catch (PackageManager.NameNotFoundException e) {
             Timber.e(e);
         }
+
         String verName = pInfo != null ? pInfo.versionName : " ";
-        infoText.setText(getString(R.string.About_footer, verName));
+        String verCode = pInfo != null ? String.valueOf(pInfo.versionCode) : "0";
+        infoText.setText(String.format(Locale.US, "%1$s (%2$s)", verName,verCode));
 
         instagramShare = (ImageView) findViewById(R.id.instagram_share_button);
         twitterShare = (ImageView) findViewById(R.id.twitter_share_button);
