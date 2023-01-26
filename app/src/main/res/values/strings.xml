@@ -718,16 +718,15 @@
     <string name="Confirmation.donateLabel">Amount to Donate:</string>
     <string name="Confirmation.staticAddressLabel">Address:</string>
     <string name="Donate.word">Donate</string>
-    <string name="Donate.toThe">"Donate to the "</string>
     <string name="FeeSelector.luxury">Luxury</string>
     <string name="FeeSelector.luxuryTime">2.5 - 5+ minutes</string>
     <string name="FeeSelector.luxuryMessage">This option virtually guarantees acceptance of your transaction though you are paying a premium.</string>
 
     <!--Buy center - partners-->
-    <string name="BuyCenter.simplex.Title" tools:ignore="MissingTranslation">Simplex</string>
+    <string name="BuyCenter.simplex.Title" tools:ignore="MissingTranslation" translatable="false">Simplex</string>
     <string name="BuyCenter.simplex.FinancialDetails">"• Get Litecoin in 5 mins!\n• Buy Litecoin via credit card\n• Passport or State ID"</string>
 
-    <string name="BuyCenter.moonpay.Title" tools:ignore="MissingTranslation">Moonpay</string>
+    <string name="BuyCenter.moonpay.Title" tools:ignore="MissingTranslation" translatable="false">Moonpay</string>
     <string name="BuyCenter.moonpay.FinancialDetails">"• Buy LTC with many fiat pairs\n• Pay with multiple methods\n• Global payment provider"</string>
 
     <string name="BuyCenter.bitrefill.Title" tools:ignore="MissingTranslation">Bitrefill</string>
@@ -808,5 +807,6 @@
   <string name="Donate.Dialog.Positive.text">Donate</string>
   <string name="Donate.Dialog.Negative.text">Cancel</string>
   <string name="Donate.toThe.LWTeam">Donate to: Litewallet Infrastructure</string>
+    <string name="About.Instagram" translatable="false">Instagram</string>
 
 </resources>

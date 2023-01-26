@@ -113,6 +113,7 @@
   <!-- Email unavailable alert title -->
   <string name="ErrorMessages.emailUnavailableTitle">E-Mail nicht verfügbar</string>
   <!-- Messaging unavailable alert title -->
+  <string name="ErrorMessages.loopingLockScreen.android">Litewallet kann aufgrund eines Fehlers in Ihrer Android-Version nicht authentifiziert werden. [Für weitere Informationen tippen Sie bitte hier.]</string>
   <string name="ErrorMessages.messagingUnavailableMessage">Dieses Gerät ist nicht dafür eingerichtet, Nachrichten zu versenden.</string>
   <!-- Messaging unavailable alert title -->
   <string name="ErrorMessages.messagingUnavailableTitle">Nachrichtensystem nicht verfügbar</string>
@@ -632,6 +633,7 @@
   <!-- Unlock with TouchID accessibility label -->
   <string name="UnlockScreen.touchIdText">Mit Touch ID entsperren</string>
   <!-- Device authentication title -->
+  <string name="ViewOnBlockchain">Blick auf die Blockchain</string>
   <string name="UnlockScreen.touchIdTitle.android">Authentifizierung erforderlich</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Wallet entsperrt</string>
