@@ -20,6 +20,7 @@ import com.breadwallet.tools.security.BRKeyStore;
 import com.breadwallet.tools.security.PostAuth;
 import com.breadwallet.tools.security.SmartValidator;
 import com.breadwallet.tools.threads.BRExecutor;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 import com.platform.APIClient;
@@ -68,17 +69,7 @@ public class IntroActivity extends BRActivity implements Serializable {
         introActivity = this;
 
         getWindowManager().getDefaultDisplay().getSize(screenParametersPoint);
-
-        PackageInfo pInfo = null;
-        try {
-            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            Timber.e(e);
-        }
-
-        String verName = pInfo != null ? pInfo.versionName : " ";
-        String verCode = pInfo != null ? String.valueOf(pInfo.versionCode) : "0";
-        versionText.setText(String.format(Locale.US, "%1$s (%2$s)", verName,verCode));
+        versionText.setText(BRConstants.APP_VERSION_NAME_CODE);
 
         if (Utils.isEmulatorOrDebug(this))
             Utils.printPhoneSpecs();
