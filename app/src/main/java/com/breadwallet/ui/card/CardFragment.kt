@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.breadwallet.R
 import com.breadwallet.databinding.FragmentCardBinding
+import com.breadwallet.tools.util.BRConstants
 
 
 class CardFragment : Fragment() {
@@ -30,8 +31,8 @@ class CardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.webview.loadUrl("https://litecoin.dashboard.getblockcard.com")
-        webSettings = binding.webview.settings
+        binding.webview.loadUrl(BRConstants.UNBANKED_LOGIN_LINK)
+        val webSettings: WebSettings = binding.webview.settings
         webSettings.javaScriptEnabled = true
         binding.webview.webViewClient = WebViewClient()
     }
