@@ -8,8 +8,7 @@
   <!-- Privay Policy button label -->
   <string name="About.privacy">プライバシーポリシー</string>
   <!-- About screen reddit label -->
-  <string name="About.instagram">Reddit（レディット）</string>
-  <!-- Terms of Use button label -->
+    <!-- Terms of Use button label -->
   <string name="About.terms">利用規約</string>
   <!-- About screen title -->
   <string name="About.title">概要</string>
@@ -114,7 +113,8 @@
   <!-- Email unavailable alert title -->
   <string name="ErrorMessages.emailUnavailableTitle">メールが利用できません</string>
   <!-- Messaging unavailable alert title -->
-  <string name="ErrorMessages.messagingUnavailableMessage">この端末はメール送信の設定がされていません。</string>
+    <string name="ErrorMessages.loopingLockScreen.android">お使いの Android のバージョンにバグがあるため、Litewallet を認証できません。 【詳しくはこちらをタップしてください。】</string>
+    <string name="ErrorMessages.messagingUnavailableMessage">この端末はメール送信の設定がされていません。</string>
   <!-- Messaging unavailable alert title -->
   <string name="ErrorMessages.messagingUnavailableTitle">メッセージの送受信ができません</string>
   <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
@@ -633,7 +633,8 @@
   <!-- Unlock with TouchID accessibility label -->
   <string name="UnlockScreen.touchIdText">Touch IDでロックを解除する</string>
   <!-- Device authentication title -->
-  <string name="UnlockScreen.touchIdTitle.android">認証が必要です</string>
+    <string name="ViewOnBlockchain">ブロックチェーンで見る</string>
+    <string name="UnlockScreen.touchIdTitle.android">認証が必要です</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">ウォレットのロックが解除されました</string>
   <!-- Update PIN caption text -->
@@ -750,8 +751,7 @@
   <string name="mismatch_password">パスワードの不一致</string>
   <string name="Error.emailNotVerified">ログインする前に、メールアドレスを確認する必要があります。</string>
   <string name="Error.wrong2faTokenProvided">間違った2FAが提供されました</string>
-  <string name="BuyCenter.simplex.Title">シンプレックス</string>
-  <string name="BuyCenter.simplex.FinancialDetails">"•5分でLitecoinを入手！\n •クレジットカードでLitecoinを購入 \n•パスポートまたは州ID"</string>
+    <string name="BuyCenter.simplex.FinancialDetails">"•5分でLitecoinを入手！\n •クレジットカードでLitecoinを購入 \n•パスポートまたは州ID"</string>
   <string name="ManageWallet.balance">残高</string>
   <string name="LitecoinCard.Disclaimer.bullets">"- 登録とログイン\n- 利用可能なカード残高\n- パスワードを再設定する\n- Litewalletへの転送なし\n- 米国のみ"</string>
   <string name="LitecoinCard.Disclaimer.description">ライトコインカードは現在、ライトウォレットの機能が制限されています。</string>

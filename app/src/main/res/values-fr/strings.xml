@@ -8,8 +8,7 @@
   <!-- Privay Policy button label -->
   <string name="About.privacy">Politique de confidentialité</string>
   <!-- About screen reddit label -->
-  <string name="About.instagram">Reddit</string>
-  <!-- Terms of Use button label -->
+    <!-- Terms of Use button label -->
   <string name="About.terms">Conditions d\'utilisation</string>
   <!-- About screen title -->
   <string name="About.title">À propos de</string>
@@ -114,7 +113,8 @@
   <!-- Email unavailable alert title -->
   <string name="ErrorMessages.emailUnavailableTitle">E-mail non disponible</string>
   <!-- Messaging unavailable alert title -->
-  <string name="ErrorMessages.messagingUnavailableMessage">Cet appareil n\'est pas configuré pour envoyer des messages.</string>
+    <string name="ErrorMessages.loopingLockScreen.android">Litewallet ne peut pas être authentifié en raison d\'un bogue dans votre version d\'Android. [Veuillez appuyer ici pour plus d\'informations.]</string>
+    <string name="ErrorMessages.messagingUnavailableMessage">Cet appareil n\'est pas configuré pour envoyer des messages.</string>
   <!-- Messaging unavailable alert title -->
   <string name="ErrorMessages.messagingUnavailableTitle">Messagerie non disponible</string>
   <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
@@ -633,7 +633,8 @@
   <!-- Unlock with TouchID accessibility label -->
   <string name="UnlockScreen.touchIdText">Déverrouiller avec TouchID</string>
   <!-- Device authentication title -->
-  <string name="UnlockScreen.touchIdTitle.android">Identification nécessaire</string>
+    <string name="ViewOnBlockchain">Voir sur la blockchain</string>
+    <string name="UnlockScreen.touchIdTitle.android">Identification nécessaire</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Portefeuille déverrouillé</string>
   <!-- Update PIN caption text -->
