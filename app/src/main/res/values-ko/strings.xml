@@ -8,8 +8,7 @@
   <!-- Privay Policy button label -->
   <string name="About.privacy">개인정보 보호정책</string>
   <!-- About screen reddit label -->
-  <string name="About.instagram">레딧</string>
-  <!-- Terms of Use button label -->
+    <!-- Terms of Use button label -->
   <string name="About.terms">이용 약관</string>
   <!-- About screen title -->
   <string name="About.title">관련 사항</string>
@@ -114,7 +113,8 @@
   <!-- Email unavailable alert title -->
   <string name="ErrorMessages.emailUnavailableTitle">이메일 사용불가</string>
   <!-- Messaging unavailable alert title -->
-  <string name="ErrorMessages.messagingUnavailableMessage">이 장치는 메시지를 보내도록 설정되지 않았습니다.</string>
+    <string name="ErrorMessages.loopingLockScreen.android">Android 버전의 버그로 인해 Litewallet을 인증할 수 없습니다. [자세한 내용은 여기를 누르세요.]</string>
+    <string name="ErrorMessages.messagingUnavailableMessage">이 장치는 메시지를 보내도록 설정되지 않았습니다.</string>
   <!-- Messaging unavailable alert title -->
   <string name="ErrorMessages.messagingUnavailableTitle">메시지 사용불가</string>
   <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
@@ -633,7 +633,8 @@
   <!-- Unlock with TouchID accessibility label -->
   <string name="UnlockScreen.touchIdText">Touch ID로 잠금 해제</string>
   <!-- Device authentication title -->
-  <string name="UnlockScreen.touchIdTitle.android">본인확인 필요</string>
+    <string name="ViewOnBlockchain">블록체인에서 보기</string>
+    <string name="UnlockScreen.touchIdTitle.android">본인확인 필요</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">월렛의 잠금이 해제됨</string>
   <!-- Update PIN caption text -->
@@ -750,8 +751,7 @@
   <string name="mismatch_password">비밀번호 불일치</string>
   <string name="Error.emailNotVerified">로그인하기 전에 이메일 주소를 확인해야합니다.</string>
   <string name="Error.wrong2faTokenProvided">잘못된 2FA 제공</string>
-  <string name="BuyCenter.simplex.Title">심플 렉스</string>
-  <string name="BuyCenter.simplex.FinancialDetails">"5 분 안에 Litecoin을 받으십시오! \n • 신용 카드를 통해 Litecoin을 구매하십시오 \n • 여권 또는 주 ID"</string>
+    <string name="BuyCenter.simplex.FinancialDetails">"5 분 안에 Litecoin을 받으십시오! \n • 신용 카드를 통해 Litecoin을 구매하십시오 \n • 여권 또는 주 ID"</string>
   <string name="ManageWallet.balance">밸런스</string>
   <string name="LitecoinCard.Disclaimer.bullets">"- 등록 및 로그인\n- 사용 가능한 카드 잔액\n- 암호를 재설정\n- Litewallet으로 양도 불가\n- 미국 만 해당"</string>
   <string name="LitecoinCard.Disclaimer.description">라이트 코인 카드는 현재 라이트 월렛에서 제한된 기능을 가지고 있습니다.</string>

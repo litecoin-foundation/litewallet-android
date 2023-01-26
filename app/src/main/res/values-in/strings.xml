@@ -8,8 +8,7 @@
   <!-- Privay Policy button label -->
   <string name="About.privacy">Kebijakan pribadi</string>
   <!-- About screen reddit label -->
-  <string name="About.instagram">Reddit</string>
-  <!-- Terms of Use button label -->
+    <!-- Terms of Use button label -->
   <string name="About.terms">Syarat Penggunaan</string>
   <!-- About screen title -->
   <string name="About.title">Tentang</string>
@@ -114,6 +113,7 @@
   <!-- Email unavailable alert title -->
   <string name="ErrorMessages.emailUnavailableTitle">Email Tidak Tersedia</string>
   <!-- Messaging unavailable alert title -->
+  <string name="ErrorMessages.loopingLockScreen.android">Litewallet tidak dapat diautentikasi karena bug di versi Android Anda. [Harap ketuk di sini untuk informasi lebih lanjut.]</string>
   <string name="ErrorMessages.messagingUnavailableMessage">Litewallet tidak dapat diautentikasi karena ada bug di versi Android Anda. [Harap ketuk di sini untuk informasi lebih lanjut.]</string>
   <!-- Messaging unavailable alert title -->
   <string name="ErrorMessages.messagingUnavailableTitle">Perangkat ini tidak dikonfigurasi untuk mengirim pesan.</string>
@@ -196,6 +196,7 @@
   <string name="ManageWallet.description">Nama dompet Anda hanya muncul di riwayat transaksi akun Anda dan tidak dapat dilihat oleh orang lain.</string>
   <!-- Change Wallet name textfield label -->
     <!-- Manage wallet modal title -->
+  <string name="ManageWallet.textFieldLabel">Nama Dompet</string>
   <string name="ManageWallet.title">Kelola Dompet</string>
   <!-- Buy bitcoin title -->
   <string name="MenuButton.buy">Membeli</string>
@@ -632,7 +633,8 @@
   <!-- Unlock with TouchID accessibility label -->
   <string name="UnlockScreen.touchIdText">Buka kunci dengan TouchID</string>
   <!-- Device authentication title -->
-  <string name="UnlockScreen.touchIdTitle.android">Otentikasi diperlukan</string>
+    <string name="ViewOnBlockchain">Lihat di blockchain</string>
+    <string name="UnlockScreen.touchIdTitle.android">Otentikasi diperlukan</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Dompet Tidak Terkunci</string>
   <!-- Update PIN caption text -->

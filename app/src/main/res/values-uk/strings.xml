@@ -6,8 +6,7 @@
   <!-- About screen footer -->
   <string name="About.footer">Створено командою Litewallet Litecoin Foundation\n%1$s</string>
   <!-- About app version -->
-  <string name="About.appVersion">%1$s</string>
-  <!-- Privay Policy button label -->
+    <!-- Privay Policy button label -->
   <string name="About.privacy">Політика конфіденційності</string>
   <!-- About screen reddit label -->
   <!-- Terms of Use button label -->
@@ -709,10 +708,8 @@
   <string name="FeeSelector.luxuryMessage">Ця опція практично гарантує прийняття вашої транзакції, хоча ви платите премію.</string>
 
   <!--Buy center - partners-->
-  <string name="BuyCenter.simplex.Title" tools:ignore="MissingTranslation">Симплекс</string>
   <string name="BuyCenter.simplex.FinancialDetails">"• Отримайте Litecoin за 5 хвилин!\n• Купуйте Litecoin за допомогою кредитної картки\n• Паспорт або посвідчення особи штату"</string>
 
-  <string name="BuyCenter.moonpay.Title" tools:ignore="MissingTranslation">Moonpay</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Купуйте LTC багатьма фіатними парами\n• Сплачуйте кількома способами\n• Глобальний постачальник платежів"</string>
 
   <string name="BottomNavItem.History.title">Історія</string>
