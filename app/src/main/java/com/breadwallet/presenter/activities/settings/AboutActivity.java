@@ -47,21 +47,11 @@ public class AboutActivity extends BRActivity {
 
         infoText = (TextView) findViewById(R.id.info_text);
         policyText = (TextView) findViewById(R.id.policy_text);
-
-        PackageInfo pInfo = null;
-        try {
-            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            Timber.e(e);
-        }
-
-        String verName = pInfo != null ? pInfo.versionName : " ";
-        String verCode = pInfo != null ? String.valueOf(pInfo.versionCode) : "0";
-        infoText.setText(String.format(Locale.US, "%1$s (%2$s)", verName,verCode));
-
         instagramShare = (ImageView) findViewById(R.id.instagram_share_button);
         twitterShare = (ImageView) findViewById(R.id.twitter_share_button);
         blogShare = (ImageView) findViewById(R.id.blog_share_button);
+
+        infoText.setText(BRConstants.APP_VERSION_NAME_CODE);
 
         instagramShare.setOnClickListener(new View.OnClickListener() {
             @Override
