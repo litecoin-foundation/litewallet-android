@@ -6,12 +6,10 @@
   <!-- About screen footer -->
   <string name="About.footer">Litecoin Vakfı\'nın Litewallet Ekibi tarafından yapılmıştır\n%1$s</string>
   <!-- About app version -->
-  <string name="About.appVersion">%1$s</string>
-  <!-- Privay Policy button label -->
+    <!-- Privay Policy button label -->
   <string name="About.privacy">Gizlilik Politikası</string>
   <!-- About screen reddit label -->
-  <string name="About.instagram">Reddit</string>
-  <!-- Terms of Use button label -->
+    <!-- Terms of Use button label -->
   <string name="About.terms">Kullanım Şartları</string>
   <!-- About screen title -->
   <string name="About.title">hakkında</string>
@@ -198,7 +196,8 @@
   <!-- Jailbreak warning message -->
   <string name="JailbreakWarnings.messageWithBalance">CİHAZ GÜVENLİĞİNDEN ÖDÜLLENDİRİLMİŞTİR\n Hiç \'jailbreak\' uygulaması anahtarlık verilerine erişebilir ve Litecoin\'inizi çalabilir! Bu cüzdanı hemen silin ve güvenli bir cihazda geri yükleyin.</string>
   <!-- Jailbreak warning title -->
-  <string name="JailbreakWarnings.title">UYARI</string>
+    <string name="JailbreakWarnings.messageWithoutBalance">CİHAZ GÜVENLİĞİ TEHLİKELİ   Herhangi bir \"jailbreak\" uygulaması, anahtarlık verilerine erişebilir ve Litecoin\'inizi çalabilir. Lütfen Litewallet\'i yalnızca jailbreak yapılmamış bir cihazda kullanın.</string>
+    <string name="JailbreakWarnings.title">UYARI</string>
   <!-- Location services disabled error -->
   <string name="LocationPlugin.disabled">Konum hizmetleri devre dışı bırakıldı.</string>
   <!-- No permissions for location services -->

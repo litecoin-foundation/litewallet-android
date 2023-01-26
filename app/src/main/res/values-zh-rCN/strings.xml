@@ -8,8 +8,7 @@
   <!-- Privay Policy button label -->
   <string name="About.privacy">隐私政策</string>
   <!-- About screen reddit label -->
-  <string name="About.instagram">Reddit</string>
-  <!-- Terms of Use button label -->
+    <!-- Terms of Use button label -->
   <string name="About.terms">使用条款</string>
   <!-- About screen title -->
   <string name="About.title">关于</string>
@@ -114,7 +113,8 @@
   <!-- Email unavailable alert title -->
   <string name="ErrorMessages.emailUnavailableTitle">电子邮箱不可用</string>
   <!-- Messaging unavailable alert title -->
-  <string name="ErrorMessages.messagingUnavailableMessage">本设备未被配置来发送消息。</string>
+    <string name="ErrorMessages.loopingLockScreen.android">由于您的 Android 版本存在错误，Litewallet 无法通过身份验证。 [请点击这里了解更多信息。]</string>
+    <string name="ErrorMessages.messagingUnavailableMessage">本设备未被配置来发送消息。</string>
   <!-- Messaging unavailable alert title -->
   <string name="ErrorMessages.messagingUnavailableTitle">消息发送不可用</string>
   <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
@@ -633,7 +633,8 @@
   <!-- Unlock with TouchID accessibility label -->
   <string name="UnlockScreen.touchIdText">使用 TouchID 解锁</string>
   <!-- Device authentication title -->
-  <string name="UnlockScreen.touchIdTitle.android">需要身份认证</string>
+    <string name="ViewOnBlockchain">在区块链上查看</string>
+    <string name="UnlockScreen.touchIdTitle.android">需要身份认证</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">钱包已解锁</string>
   <!-- Update PIN caption text -->

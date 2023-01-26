@@ -8,8 +8,7 @@
   <!-- Privay Policy button label -->
   <string name="About.privacy">Политика конфиденциальности</string>
   <!-- About screen Instagram label -->
-  <string name="About.Instagram">Instagram</string>
-  <!-- Terms of Use button label -->
+    <!-- Terms of Use button label -->
   <string name="About.terms">Условия использования</string>
   <!-- About screen title -->
   <string name="About.title">О нас</string>
@@ -114,7 +113,8 @@
   <!-- Email unavailable alert title -->
   <string name="ErrorMessages.emailUnavailableTitle">Электронное письмо недоступно</string>
   <!-- Messaging unavailable alert title -->
-  <string name="ErrorMessages.messagingUnavailableMessage">Для этого устройства отправка сообщений не настроена.</string>
+    <string name="ErrorMessages.loopingLockScreen.android">Litewallet не может быть аутентифицирован из-за ошибки в вашей версии Android. [Пожалуйста, нажмите здесь для получения дополнительной информации.]</string>
+    <string name="ErrorMessages.messagingUnavailableMessage">Для этого устройства отправка сообщений не настроена.</string>
   <!-- Messaging unavailable alert title -->
   <string name="ErrorMessages.messagingUnavailableTitle">Опция обмена сообщениями недоступна</string>
   <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
@@ -633,7 +633,8 @@
   <!-- Unlock with TouchID accessibility label -->
   <string name="UnlockScreen.touchIdText">Разблокировать с помощью TouchID</string>
   <!-- Device authentication title -->
-  <string name="UnlockScreen.touchIdTitle.android">Требуется аутентификация</string>
+    <string name="ViewOnBlockchain">Посмотреть на блокчейне</string>
+    <string name="UnlockScreen.touchIdTitle.android">Требуется аутентификация</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Кошелек разблокирован</string>
   <!-- Update PIN caption text -->
