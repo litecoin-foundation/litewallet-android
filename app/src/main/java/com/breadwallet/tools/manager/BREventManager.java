@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import com.breadwallet.BreadApp;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.platform.APIClient;
 
@@ -101,14 +102,7 @@ public class BREventManager implements BreadApp.OnAppBackgrounded {
                 JSONObject obj = new JSONObject();
                 try {
                     obj.put("deviceType", 1);
-                    int verCode = -1;
-                    try {
-                        PackageInfo pInfo = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
-                        verCode = pInfo.versionCode;
-                    } catch (PackageManager.NameNotFoundException e) {
-                        Timber.e(e);
-                    }
-                    obj.put("appVersion", verCode);
+                    obj.put("appVersion", BRConstants.APP_VERSION_NAME_CODE);
                     obj.put("events", arr);
 
                     String strUtl = BASE_URL + "/events";
