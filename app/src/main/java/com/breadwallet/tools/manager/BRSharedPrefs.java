@@ -1,5 +1,11 @@
 package com.breadwallet.tools.manager;
 
+import static com.breadwallet.tools.manager.BRSharedPrefs.PrefsServerMode.DEV;
+import static com.breadwallet.tools.util.BRConstants.GEO_PERMISSIONS_REQUESTED;
+import static com.breadwallet.tools.util.BRConstants.LITEWALLET_API_URL_DEV;
+import static com.breadwallet.tools.util.BRConstants.LITEWALLET_API_URL_PROD;
+import static com.breadwallet.tools.util.BRConstants.PREFS_LITEWALLET_SERVER_MODE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -8,14 +14,13 @@ import com.breadwallet.tools.util.BRConstants;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
 import timber.log.Timber;
-
-import static com.breadwallet.tools.util.BRConstants.GEO_PERMISSIONS_REQUESTED;
 
 public class BRSharedPrefs {
 
@@ -437,5 +442,32 @@ public class BRSharedPrefs {
     public static void inAppReviewDone(Context context) {
         context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
                 .edit().putBoolean(IN_APP_REVIEW_DONE, true).apply();
+    }
+
+    public enum PrefsServerMode {
+        DEV(LITEWALLET_API_URL_DEV), PROD(LITEWALLET_API_URL_PROD);
+        public final String url;
+
+        PrefsServerMode(String url) {
+            this.url = url;
+        }
+
+        public static PrefsServerMode fromString(String url) {
+            return Arrays.stream(values()).filter(v -> v.url.equals(url)).findFirst().orElse(PROD);
+        }
+    }
+
+    public static PrefsServerMode getApiServerMode(Context context) {
+        return PrefsServerMode.fromString(context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
+                .getString(PREFS_LITEWALLET_SERVER_MODE, PrefsServerMode.PROD.url));
+    }
+
+    public static void setApiServerMode(Context context, PrefsServerMode serverMode) {
+        context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
+                .edit().putString(PREFS_LITEWALLET_SERVER_MODE, serverMode.url).commit();
+    }
+
+    public static Boolean isApiServerModeDev(Context context) {
+        return getApiServerMode(context) == DEV;
     }
 }

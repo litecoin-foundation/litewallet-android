@@ -5,11 +5,11 @@ import android.content.Context;
 import android.os.Handler;
 
 import com.breadwallet.BreadApp;
+import com.breadwallet.BuildConfig;
 import com.breadwallet.presenter.entities.CurrencyEntity;
 import com.breadwallet.tools.sqlite.CurrencyDataSource;
 import com.breadwallet.tools.threads.BRExecutor;
 
-import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.platform.APIClient;
 
@@ -35,8 +35,6 @@ import okhttp3.Response;
 import timber.log.Timber;
 
 import static com.breadwallet.tools.util.BRConstants.*;
-import static com.breadwallet.tools.util.BRConstants.LW_API_HOST;
-import static com.breadwallet.tools.util.BRConstants.LW_BACKUP_API_HOST;
 
 public class BRApiManager {
     private static BRApiManager instance;
@@ -137,7 +135,7 @@ public class BRApiManager {
     }
 
     public static JSONArray fetchRates(Activity activity) {
-        String jsonString = createGETRequestURL(activity,  LW_API_HOST + "/api/v1/rates");
+        String jsonString = createGETRequestURL(activity, BRSharedPrefs.getApiServerMode(activity.getApplicationContext()).url + "/api/v1/rates");
         JSONArray jsonArray = null;
         if (jsonString == null) return null;
         try {
@@ -149,7 +147,7 @@ public class BRApiManager {
     }
 
     public static JSONArray backupFetchRates(Activity activity) {
-        String jsonString = createGETRequestURL(activity, LW_BACKUP_API_HOST + "/api/v1/rates");
+        String jsonString = createGETRequestURL(activity, BRSharedPrefs.PrefsServerMode.DEV.url + "/api/v1/rates");
 
         AnalyticsManager.logCustomEvent(_20230113_BAC);
 

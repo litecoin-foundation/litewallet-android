@@ -228,6 +228,10 @@
   <string name="NodeSelector.statusLabel">Node Connection Status</string>
   <!-- Node Selector view title -->
   <string name="NodeSelector.title">Litecoin Nodes</string>
+  <!-- Settings Developer mode title -->
+  <string name="DeveloperMode.title">Developer Mode : </string>
+  <string name="DeveloperMode.On">On</string>
+  <string name="DeveloperMode.Off">Off</string>
   <!-- Bad Payment request alert title -->
   <string name="PaymentProtocol.Errors.badPaymentRequest">Bad Payment Request</string>
   <!-- Error opening payment protocol file message -->
@@ -787,7 +791,8 @@
     <string name="Error.wrong2faTokenProvided">Wrong 2FA provided</string>
 
     <!-- Balance -->
-    <string name="ManageWallet.balance">Balance</string>
+  <string name="ManageWallet.balance">Balance</string>
+  <string name="ManageWallet.devMode">In Developer Mode</string>
 
   <!-- Features and limitations -->
   <string name="LitecoinCard.Disclaimer.bullets">"- Registration &amp; Login\n- Available card balance\n- Reset password\n- No transfer to Litewallet\n- US Only"</string>

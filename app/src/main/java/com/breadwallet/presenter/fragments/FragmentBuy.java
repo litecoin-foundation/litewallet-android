@@ -1,7 +1,5 @@
 package com.breadwallet.presenter.fragments;
 
-import static com.breadwallet.tools.util.BRConstants.LW_API_HOST;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
@@ -21,7 +19,6 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -94,41 +91,26 @@ public class FragmentBuy extends Fragment {
         webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
 
-//        // App (in Java)
-//        WebMessageListener bitrefillListener = new WebMessageListener() {
-//            @Override
-//            public void onPostMessage(WebView view, WebMessageCompat message, Uri sourceOrigin,
-//                                      boolean isMainFrame, JavaScriptReplyProxy replyProxy) {
-//                // do something about view, message, sourceOrigin and isMainFrame.
-//                replyProxy.postMessage("Got it!");
-//            }
-//        };
-//
-//        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
-//            WebViewCompat.addWebMessageListener(webView, "bitrefillPostObj", rules, bitrefillListener);
-//        }
 
         String currency = getArguments().getString(CURRENCY_KEY);
         Partner partner = (Partner) getArguments().getSerializable(PARTNER_KEY);
 
         String bitrefillRef = "bAshL935";
         String utmSource = "LitewalletAndroid";
-        String bitrefillUrl = String.format( BRConstants.BITREFILL_AFFILIATE_LINK + "/embed/?paymentMethod=litecoin&ref=%s&utm_source=%s", bitrefillRef,utmSource);
+        String bitrefillUrl = String.format(BRConstants.BITREFILL_AFFILIATE_LINK + "/embed/?paymentMethod=litecoin&ref=%s&utm_source=%s", bitrefillRef, utmSource);
 
         String buyUrl = partner == Partner.BITREFILL ? bitrefillUrl : url(getContext(), partner, currency);
-
-        Timber.d("URL %s", buyUrl);
         webView.loadUrl(buyUrl);
-
         return rootView;
     }
 
-        public static String url(Context context, Partner partner, String currency) {
+    public static String url(Context context, Partner partner, String currency) {
         String walletAddress = BRSharedPrefs.getReceiveAddress(context);
         Long timestamp = new Date().getTime();
         String uuid = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         String prefix = partner == Partner.MOONPAY ? "/moonpay/buy" : "";
-        return String.format(LW_API_HOST + prefix + "?address=%s&code=%s&idate=%s&uid=%s", walletAddress, currency, timestamp, uuid);
+        return String.format("%s%s?address=%s&code=%s&idate=%s&uid=%s",
+                BRSharedPrefs.getApiServerMode(context).url, prefix, walletAddress, currency, timestamp, uuid);
     }
 
     private void closePayment() {

@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.TelephonyManager;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -307,6 +308,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         mHandler.postDelayed(() -> updateUI(), 1000);
 
         BRWalletManager.getInstance().refreshBalance(this);
+        refreshDevMode();
     }
 
     private void setupNetworking() {
@@ -459,5 +461,11 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         BRNotificationBar view = new BRNotificationBar(this);
         barFlipper.addView(view);
         barFlipper.setDisplayedChild(1);
+    }
+
+    private void refreshDevMode() {
+        findViewById(R.id.menuDevMode).setVisibility(
+                BRSharedPrefs.isApiServerModeDev(getApplicationContext()) ?
+                        View.VISIBLE : View.GONE);
     }
 }
