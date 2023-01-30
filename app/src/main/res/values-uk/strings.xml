@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!-- App name -->
-  <string name="About.appName.android">Litewallet</string>
-  <!-- About screen blog label -->
+    <!-- About screen blog label -->
   <string name="About.blog">веб-сайт</string>
   <!-- About screen footer -->
   <string name="About.footer">Створено командою Litewallet Litecoin Foundation\n%1$s</string>
   <!-- About app version -->
-  <string name="About.appVersion">%1$s</string>
-  <!-- Privay Policy button label -->
+    <!-- Privay Policy button label -->
   <string name="About.privacy">Політика конфіденційності</string>
   <!-- About screen reddit label -->
-  <string name="About.reddit">Reddit</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">Умови використання</string>
   <!-- About screen title -->
@@ -192,7 +189,7 @@
   <!-- Manage wallet description text -->
   <string name="ManageWallet.description">Ім’я вашого гаманця з’являється лише в історії транзакцій вашого облікового запису і нікому не доступне.</string>
   <!-- Change Wallet name textfield label -->
-  <string name="ManageWallet.textFeildLabel">Назва гаманця</string>
+  <string name="ManageWallet.textFieldLabel">Назва гаманця</string>
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Керування гаманцем</string>
   <!-- Buy litecoin title -->
@@ -706,16 +703,13 @@
   <string name="Confirmation.donateLabel">Сума пожертвування:</string>
   <string name="Confirmation.staticAddressLabel">Адреса:</string>
   <string name="Donate.word">Пожертвуйте</string>
-  <string name="Donate.toThe">«Пожертвувати на»</string>
   <string name="FeeSelector.luxury">Розкіш</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ хвилин</string>
   <string name="FeeSelector.luxuryMessage">Ця опція практично гарантує прийняття вашої транзакції, хоча ви платите премію.</string>
 
   <!--Buy center - partners-->
-  <string name="BuyCenter.simplex.Title" tools:ignore="MissingTranslation">Симплекс</string>
   <string name="BuyCenter.simplex.FinancialDetails">"• Отримайте Litecoin за 5 хвилин!\n• Купуйте Litecoin за допомогою кредитної картки\n• Паспорт або посвідчення особи штату"</string>
 
-  <string name="BuyCenter.moonpay.Title" tools:ignore="MissingTranslation">Moonpay</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Купуйте LTC багатьма фіатними парами\n• Сплачуйте кількома способами\n• Глобальний постачальник платежів"</string>
 
   <string name="BottomNavItem.History.title">Історія</string>
@@ -786,4 +780,9 @@
   <string name="URLHandling.addressListAlertTitle">Копіювати адреси гаманця</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">Купуйте подарункові картки\n• Поповнюйте передплачені телефони\n• Steam, Amazon, Hotels.com\n• Працює в 170 країнах</string>
+    <string name="Donate.Dialog.title">"\tЗробіть пожертву Litecoin Foundation "</string>
+    <string name="Donate.Dialog.message">"\tМи цінуємо вашу пожертву Litecoin Foundation. Пожертви є остаточними і не підлягають поверненню. Дякуємо за вашу постійну підтримку. "</string>
+    <string name="Donate.Dialog.Positive.text">Пожертвуйте</string>
+  <string name="Donate.Dialog.Negative.text">Скасувати</string>
+    <string name="Donate.toThe.LWTeam">Пожертвуйте: Litewallet Infrastructure</string>
 </resources>
