@@ -63,9 +63,9 @@ android {
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
         minSdkVersion 27 
-        targetSdkVersion 32 
-        versionCode 718
-        versionName "v2.7.1"
+        targetSdkVersion 32  
+        versionCode 722
+        versionName "v2.8.0"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
 
