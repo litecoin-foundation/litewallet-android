@@ -1,4 +1,4 @@
-package com.breadwallet.presenter.spend
+package com.breadwallet.ui
 
 import android.app.Dialog
 import android.os.Bundle
