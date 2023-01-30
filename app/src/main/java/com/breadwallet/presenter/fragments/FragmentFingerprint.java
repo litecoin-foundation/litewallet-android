@@ -65,11 +65,11 @@ public class FragmentFingerprint extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fingerprint_dialog_container, container, false);
-        message = (TextView) v.findViewById(R.id.fingerprint_description);
-        title = (TextView) v.findViewById(R.id.fingerprint_title);
-        fingerPrintLayout = (LinearLayout) v.findViewById(R.id.fingerprint_layout);
-        fingerprintBackground = (RelativeLayout) v.findViewById(R.id.fingerprint_background);
+        View authModalView = inflater.inflate(R.layout.fingerprint_dialog_container, container, false);
+        message = (TextView) authModalView.findViewById(R.id.fingerprint_description);
+        title = (TextView) authModalView.findViewById(R.id.fingerprint_title);
+        fingerPrintLayout = (LinearLayout) authModalView.findViewById(R.id.fingerprint_layout);
+        fingerprintBackground = (RelativeLayout) authModalView.findViewById(R.id.fingerprint_background);
         Bundle bundle = getArguments();
         String titleString = bundle.getString("title");
         String messageString = bundle.getString("message");
@@ -83,12 +83,12 @@ public class FragmentFingerprint extends Fragment
         }
         FingerprintManager mFingerprintManager = (FingerprintManager) getActivity().getSystemService(Activity.FINGERPRINT_SERVICE);
         mFingerprintUiHelperBuilder = new FingerprintUiHelper.FingerprintUiHelperBuilder(mFingerprintManager);
-        mFingerprintUiHelper = mFingerprintUiHelperBuilder.build((ImageView) v.findViewById(R.id.fingerprint_icon),
-                (TextView) v.findViewById(R.id.fingerprint_status), this, getContext());
-        View mFingerprintContent = v.findViewById(R.id.fingerprint_container);
+        mFingerprintUiHelper = mFingerprintUiHelperBuilder.build((ImageView) authModalView.findViewById(R.id.fingerprint_icon),
+                (TextView) authModalView.findViewById(R.id.fingerprint_status), this, getContext());
+        View mFingerprintContent = authModalView.findViewById(R.id.fingerprint_container);
 
-        Button mCancelButton = (Button) v.findViewById(R.id.cancel_button);
-        Button mSecondDialogButton = (Button) v.findViewById(R.id.second_dialog_button);
+        Button mCancelButton = (Button) authModalView.findViewById(R.id.cancel_button);
+        Button mSecondDialogButton = (Button) authModalView.findViewById(R.id.second_dialog_button);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +108,7 @@ public class FragmentFingerprint extends Fragment
             }
         });
 
-        return v;
+        return authModalView;
     }
 
     @Override
@@ -223,12 +223,14 @@ public class FragmentFingerprint extends Fragment
             fingerPrintLayout.animate()
                     .translationY(1500)
                     .setDuration(ANIMATION_DURATION)
-                    .withLayer().setInterpolator(new AnticipateInterpolator(2f)).setListener(new AnimatorListenerAdapter() {
+                    .withLayer()
+                    .setInterpolator(new AnticipateInterpolator(2.0f))
+                    .setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     if (getActivity() != null)
-                        getActivity().getFragmentManager().beginTransaction().remove(FragmentFingerprint.this).commit();
+                    getActivity().getFragmentManager().beginTransaction().remove(FragmentFingerprint.this).commit();
                 }
             });
 
