@@ -9,10 +9,9 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.breadwallet.R
 import com.breadwallet.databinding.ChangeLanguageBottomSheetBinding
-import com.breadwallet.databinding.FragmentHistoryBinding
 import com.breadwallet.entities.Language
 import com.breadwallet.presenter.activities.intro.IntroActivity
-import com.breadwallet.presenter.spend.RoundedBottomSheetDialogFragment
+import com.breadwallet.ui.RoundedBottomSheetDialogFragment
 import com.breadwallet.tools.util.LocaleHelper
 import com.breadwallet.tools.util.Utils
 import com.breadwallet.tools.util.getString

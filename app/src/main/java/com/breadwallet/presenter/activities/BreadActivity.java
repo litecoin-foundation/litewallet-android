@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -32,8 +31,6 @@ import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRNotificationBar;
 import com.breadwallet.presenter.fragments.BuyTabFragment;
 import com.breadwallet.presenter.history.HistoryFragment;
-import com.breadwallet.presenter.spend.AuthBottomSheetDialogFragment;
-import com.breadwallet.presenter.transfer.TransferFragment;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.TextSizeTransition;
 import com.breadwallet.tools.manager.BRSharedPrefs;
@@ -47,15 +44,14 @@ import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
 import com.breadwallet.tools.util.ExtensionKt;
 import com.breadwallet.tools.util.Utils;
+import com.breadwallet.ui.card.CardFragment;
 import com.breadwallet.wallet.BRPeerManager;
 import com.breadwallet.wallet.BRWalletManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
 import com.google.android.play.core.tasks.Task;
-import com.platform.APIClient;
 
 import java.math.BigDecimal;
 
@@ -164,11 +160,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         BRSharedPrefs.removeListener(this);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        //leave it empty, avoiding the os bug
-    }
-
     private void setUrlHandler(Intent intent) {
         Uri data = intent.getData();
         if (data == null) return;
@@ -211,11 +202,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 mSelectedBottomNavItem = 0;
                 break;
             case R.id.nav_card:
-                if (TextUtils.isEmpty(BRSharedPrefs.getLitecoinCardId(BreadActivity.this))) {
-                    showAuthModal();
-                } else {
-                    ExtensionKt.replaceFragment(BreadActivity.this, new TransferFragment(), false, R.id.fragment_container);
-                }
+                ExtensionKt.replaceFragment(BreadActivity.this, new CardFragment(), false, R.id.fragment_container);
                 break;
             case R.id.nav_receive:
                 if (BRAnimator.isClickAllowed()) {
@@ -228,12 +215,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 break;
         }
         return true;
-    }
-
-    public void showAuthModal() {
-        BottomSheetDialogFragment fragment = new AuthBottomSheetDialogFragment();
-        fragment.show(getSupportFragmentManager(), fragment.getTag());
-        mSelectedBottomNavItem = 0;
     }
 
     private void swap() {
