@@ -106,12 +106,14 @@
   <string name="ConfirmPaperPhrase.word">字組 #%1$s</string>
   <!-- Litecoin denomination picker label -->
   <!-- Exchange rate label -->
-  <string name="DefaultCurrency.rateLabel">匯率</string>
+    <string name="DefaultCurrency.litecoinLabel">萊特幣顯示單元</string>
+    <string name="DefaultCurrency.rateLabel">匯率</string>
   <!-- Email unavailable alert title -->
   <string name="ErrorMessages.emailUnavailableMessage">本裝置並非設定來以 iOS 郵件應用程式傳送電子郵件。</string>
   <!-- Email unavailable alert title -->
   <string name="ErrorMessages.emailUnavailableTitle">無法使用電子郵件</string>
   <!-- Messaging unavailable alert title -->
+  <string name="ErrorMessages.loopingLockScreen.android">由於您的 Android 版本存在錯誤，Litewallet 無法通過身份驗證。 [請點擊這裡了解更多信息。]</string>
   <string name="ErrorMessages.messagingUnavailableMessage">本裝置並非設定來傳送訊息。</string>
   <!-- Messaging unavailable alert title -->
   <string name="ErrorMessages.messagingUnavailableTitle">無法使用傳訊</string>
@@ -631,7 +633,8 @@
   <!-- Unlock with TouchID accessibility label -->
   <string name="UnlockScreen.touchIdText">以 TouchID 解鎖</string>
   <!-- Device authentication title -->
-  <string name="UnlockScreen.touchIdTitle.android">需要驗證</string>
+    <string name="ViewOnBlockchain">在區塊鏈上查看</string>
+    <string name="UnlockScreen.touchIdTitle.android">需要驗證</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">錢包已解鎖</string>
   <!-- Update PIN caption text -->

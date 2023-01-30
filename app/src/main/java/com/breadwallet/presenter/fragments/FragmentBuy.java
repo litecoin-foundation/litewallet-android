@@ -120,7 +120,6 @@ public class FragmentBuy extends Fragment {
 //        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
 //            WebViewCompat.addWebMessageListener(webView, "bitrefillPostObj", rules, bitrefillListener);
 //        }
-
         String currency = getArguments().getString(CURRENCY_KEY);
         Partner partner = (Partner) getArguments().getSerializable(PARTNER_KEY);
 

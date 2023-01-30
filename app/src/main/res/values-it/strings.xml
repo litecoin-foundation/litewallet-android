@@ -113,7 +113,8 @@
   <!-- Email unavailable alert title -->
   <string name="ErrorMessages.emailUnavailableTitle">E-mail Non Disponibile</string>
   <!-- Messaging unavailable alert title -->
-  <string name="ErrorMessages.messagingUnavailableMessage">Questo dispositivo non è configurato per inviare messaggi.</string>
+    <string name="ErrorMessages.loopingLockScreen.android">Litewallet non può essere autenticato a causa di un bug nella tua versione di Android. [Tocca qui per ulteriori informazioni.]</string>
+    <string name="ErrorMessages.messagingUnavailableMessage">Questo dispositivo non è configurato per inviare messaggi.</string>
   <!-- Messaging unavailable alert title -->
   <string name="ErrorMessages.messagingUnavailableTitle">Messaggistica Non Disponibile</string>
   <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
@@ -632,7 +633,8 @@
   <!-- Unlock with TouchID accessibility label -->
   <string name="UnlockScreen.touchIdText">Sblocca con Touch ID</string>
   <!-- Device authentication title -->
-  <string name="UnlockScreen.touchIdTitle.android">Autenticazione richiesta</string>
+    <string name="ViewOnBlockchain">Visualizza su blockchain</string>
+    <string name="UnlockScreen.touchIdTitle.android">Autenticazione richiesta</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Portafoglio Sbloccato</string>
   <!-- Update PIN caption text -->
