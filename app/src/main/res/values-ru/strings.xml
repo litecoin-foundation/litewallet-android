@@ -8,8 +8,7 @@
   <!-- Privay Policy button label -->
   <string name="About.privacy">Политика конфиденциальности</string>
   <!-- About screen Instagram label -->
-  <string name="About.Instagram">Instagram</string>
-  <!-- Terms of Use button label -->
+    <!-- Terms of Use button label -->
   <string name="About.terms">Условия использования</string>
   <!-- About screen title -->
   <string name="About.title">О нас</string>
