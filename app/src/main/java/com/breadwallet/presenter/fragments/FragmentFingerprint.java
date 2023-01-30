@@ -1,4 +1,5 @@
 package com.breadwallet.presenter.fragments;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
@@ -9,7 +10,6 @@ import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.interfaces.BRAuthCompletion;
@@ -29,6 +31,8 @@ import com.breadwallet.tools.animation.DecelerateOvershootInterpolator;
 import com.breadwallet.tools.security.AuthManager;
 import com.breadwallet.tools.security.FingerprintUiHelper;
 import com.breadwallet.tools.util.Utils;
+
+import timber.log.Timber;
 
 /**
  * A dialog which uses fingerprint APIs to authenticate the user, and falls back to password
@@ -229,8 +233,9 @@ public class FragmentFingerprint extends Fragment
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    if (getActivity() != null)
-                    getActivity().getFragmentManager().beginTransaction().remove(FragmentFingerprint.this).commit();
+                    if (getActivity() != null) {
+                        fingerPrintLayout.clearAnimation();
+                    }
                 }
             });
 
