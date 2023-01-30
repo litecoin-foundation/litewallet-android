@@ -55,6 +55,8 @@ public class AboutActivity extends BRActivity {
         blogShare = (ImageView) findViewById(R.id.blog_share_button);
         versionText.setText(BRConstants.APP_VERSION_NAME_CODE);
 
+        infoText.setText(BRConstants.APP_VERSION_NAME_CODE);
+
         instagramShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
