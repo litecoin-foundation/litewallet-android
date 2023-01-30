@@ -7,7 +7,8 @@
   <string name="About.footer">Dibuat oleh Tim Litewallet dari Litecoin Foundation\n%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">Kebijakan pribadi</string>
-  <!-- About screen reddit label -->
+  <!-- About screen Instagram label -->
+  <string name="About.instagram">Instagram</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">Syarat Penggunaan</string>
   <!-- About screen title -->
