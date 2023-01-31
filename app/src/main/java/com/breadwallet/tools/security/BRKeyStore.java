@@ -117,7 +117,6 @@ public class BRKeyStore {
     private static final String TOKEN_FILENAME = "my_token";
     private static final String PASS_TIME_FILENAME = "my_pass_time";
     private static boolean bugMessageShowing;
-
     public static final int AUTH_DURATION_SEC = 300;
     private static final ReentrantLock lock = new ReentrantLock();
 
@@ -334,6 +333,12 @@ public class BRKeyStore {
             }
         } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException e) {
             /** if for any other reason the keystore fails, crash! */
+            // This is a major issue that has been present for years
+            // UnrecoverableKeyException  is thrown but its not clear why
+            // Generally the architecture of this class is abhorrent. Or, has a smell
+            // New versions of the app need to use some of the classes (Cipher, KeyStore)
+            // The way the new class needs to be much more bulletproof
+
             Timber.e(e, "getData: error");
             throw new RuntimeException(e.getMessage());
         } catch (BadPaddingException | IllegalBlockSizeException | NoSuchProviderException e) {
