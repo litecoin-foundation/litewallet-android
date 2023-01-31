@@ -28,8 +28,10 @@ import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.interfaces.BRAuthCompletion;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.DecelerateOvershootInterpolator;
+import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.security.AuthManager;
 import com.breadwallet.tools.security.FingerprintUiHelper;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 
 import timber.log.Timber;
@@ -235,6 +237,7 @@ public class FragmentFingerprint extends Fragment
                     super.onAnimationEnd(animation);
                     if (getActivity() != null) {
                         fingerPrintLayout.clearAnimation();
+                        AnalyticsManager.logCustomEvent(BRConstants._20230131_NENR);
                     }
                 }
             });
