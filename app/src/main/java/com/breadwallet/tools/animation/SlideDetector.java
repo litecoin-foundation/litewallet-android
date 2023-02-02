@@ -2,25 +2,24 @@ package com.breadwallet.tools.animation;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
-import android.content.Context;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
 
 public class SlideDetector implements View.OnTouchListener {
 
-    private static final String TAG = SlideDetector.class.getName();
+    public interface SlideDetectorEvent {
+        void onClosed();
+    }
 
-    private Context context;
+    private static final String TAG = SlideDetector.class.getName();
     private View _root;
     float origY;
     float dY;
+    private SlideDetectorEvent slideDetectorEvent;
 
-    public SlideDetector(Context context, final View view) {
-        this.context = context;
+    public SlideDetector(final View view, SlideDetectorEvent slideDetectorEvent) {
+        this.slideDetectorEvent = slideDetectorEvent;
         _root = view;
     }
 
@@ -68,6 +67,8 @@ public class SlideDetector implements View.OnTouchListener {
     }
 
     private void removeCurrentView() {
-        ((Activity) context).getFragmentManager().popBackStack();
+        if (slideDetectorEvent != null) {
+            slideDetectorEvent.onClosed();
+        }
     }
 }

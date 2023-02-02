@@ -137,9 +137,8 @@ public class FragmentFingerprint extends Fragment
     @Override
     public void onStop() {
         super.onStop();
-
-        animateBackgroundDim(true);
-        animateSignalSlide(true);
+//        animateBackgroundDim(true);
+//        animateSignalSlide(true);
         if (!authSucceeded)
             completion.onCancel();
     }

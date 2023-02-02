@@ -3,9 +3,6 @@ package com.breadwallet.presenter.fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +10,9 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.entities.TxItem;
@@ -61,7 +61,6 @@ public class FragmentTransactionDetails extends Fragment {
         return rootView;
     }
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -70,40 +69,24 @@ public class FragmentTransactionDetails extends Fragment {
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                if(observer.isAlive()) {
+                if (observer.isAlive()) {
                     observer.removeOnGlobalLayoutListener(this);
                 }
                 BRAnimator.animateBackgroundDim(backgroundLayout, false);
                 BRAnimator.animateSignalSlide(txViewPager, false, null);
             }
         });
-
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
+    public void close() {
         final Activity app = getActivity();
         BRAnimator.animateBackgroundDim(backgroundLayout, true);
-        BRAnimator.animateSignalSlide(txViewPager, true, new BRAnimator.OnSlideAnimationEnd() {
-            @Override
-            public void onAnimationEnd() {
-                if (app != null && !app.isDestroyed())
-                    app.getFragmentManager().popBackStack();
-                else
-                    Timber.d("onAnimationEnd: app is null");
-            }
+        BRAnimator.animateSignalSlide(txViewPager, true, () -> {
+            if (app != null && !app.isFinishing())
+                app.getFragmentManager().popBackStack();
+            else
+                Timber.d("onAnimationEnd: app is null");
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 
     public void setItems(List<TxItem> items) {

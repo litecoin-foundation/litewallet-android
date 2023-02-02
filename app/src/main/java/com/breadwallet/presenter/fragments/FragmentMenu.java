@@ -53,7 +53,6 @@ public class FragmentMenu extends Fragment {
         background.setOnClickListener(v -> {
             if (!BRAnimator.isClickAllowed()) return;
             closeMenu();
-            getActivity().onBackPressed();
         });
 
         itemList = new ArrayList<>();
@@ -82,21 +81,18 @@ public class FragmentMenu extends Fragment {
         itemList.add(new BRMenuItem(getString(R.string.MenuButton_lock), R.drawable.ic_lock, v -> {
             closeMenu();
             final Activity from = getActivity();
-            from.getFragmentManager().popBackStack();
             BRAnimator.startBreadActivity(from, true);
         }));
 
         /* Close button*/
         rootView.findViewById(R.id.close_button).setOnClickListener(v -> {
             closeMenu();
-            Activity app = getActivity();
-            app.getFragmentManager().popBackStack();
         });
 
         mTitle = rootView.findViewById(R.id.title);
         mListView = rootView.findViewById(R.id.menu_listview);
         mListView.setAdapter(new MenuListAdapter(getContext(), R.layout.menu_list_item, itemList));
-        signalLayout.setOnTouchListener(new SlideDetector(getContext(), signalLayout));
+        signalLayout.setOnTouchListener(new SlideDetector(signalLayout, this::closeMenu));
 
         return rootView;
     }
@@ -154,7 +150,7 @@ public class FragmentMenu extends Fragment {
     private void closeMenu() {
         BRAnimator.animateBackgroundDim(background, true);
         BRAnimator.animateSignalSlide(signalLayout, true, () -> {
-            if (getActivity() != null) {
+            if (getActivity() != null && !getActivity().isDestroyed() && !getActivity().isFinishing()) {
                 getActivity().getFragmentManager().popBackStack();
             }
         });
