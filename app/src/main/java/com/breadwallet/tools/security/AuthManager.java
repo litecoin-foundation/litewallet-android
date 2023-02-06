@@ -214,7 +214,7 @@ public class AuthManager {
                 transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
                 transaction.add(android.R.id.content, fingerprintFragment, FragmentFingerprint.class.getName());
                 transaction.addToBackStack(null);
-                if (!app.isDestroyed())
+                if (!app.isDestroyed() && !app.isFinishing())
                     transaction.commit();
             } else {
                 breadPin = new FragmentPin();
@@ -227,7 +227,7 @@ public class AuthManager {
                 transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
                 transaction.add(android.R.id.content, breadPin, breadPin.getClass().getName());
                 transaction.addToBackStack(null);
-                if (!app.isDestroyed()) {
+                if (!app.isDestroyed() && !app.isFinishing()) {
                     transaction.commit();
                 }
             }

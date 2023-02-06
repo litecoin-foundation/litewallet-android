@@ -153,6 +153,7 @@ public class BRConstants {
     public static final String _20210804_TAULO = "ternio_API_user_log_out";
     public static final String _20210427_HCIEEH = "heartbeat_check_if_event_even_happens";
     public static final String _20220822_UTOU = "user_tapped_on_ud";
+    public static final String _20230131_NENR = "no_error_nominal_response";
     ///Dev: These events not yet used
 
     @Retention(RetentionPolicy.SOURCE)
@@ -188,7 +189,8 @@ public class BRConstants {
             _20210804_TAULI,
             _20210804_TAULO,
             _20210427_HCIEEH,
-            _20220822_UTOU
+            _20220822_UTOU,
+            _20230131_NENR
     })
     public @interface Event {
     }
