@@ -5,12 +5,9 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.entities.TxItem;
@@ -81,27 +80,13 @@ public class FragmentTransactionItem extends Fragment {
         // Hiding until layouts are built.
         ImageButton faq = (ImageButton) rootView.findViewById(R.id.faq_button);
 
-        signalLayout.setOnTouchListener(new SlideDetector(getContext(), signalLayout));
+        signalLayout.setOnTouchListener(new SlideDetector(signalLayout, this::close));
 
-        rootView.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                getActivity().onBackPressed();
-            }
+        rootView.setOnClickListener(v -> {
+            if (!BRAnimator.isClickAllowed()) return;
+            close();
         });
-        close.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-                Activity app = getActivity();
-                if (app != null)
-                    app.getFragmentManager().popBackStack();
-            }
-        });
+        close.setOnClickListener(v -> close());
 
         return rootView;
     }
@@ -140,18 +125,13 @@ public class FragmentTransactionItem extends Fragment {
         String toFrom = sent ? String.format(getString(R.string.TransactionDetails_to), addr) : String.format(getString(R.string.TransactionDetails_from), addr);
 
         mTxHash.setText(item.getTxHashHexReversed());
-        mTxHashLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Activity app = getActivity();
-                if (app != null)
-                    app.getFragmentManager().popBackStack();
-                String txUrl = BRConstants.BLOCK_EXPLORER_BASE_URL + item.getTxHashHexReversed();
-                Timber.d("txUrl = %s", txUrl);
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(txUrl));
-                startActivity(browserIntent);
-                app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
-            }
+        mTxHashLink.setOnClickListener(view -> {
+            close();
+            String txUrl = BRConstants.BLOCK_EXPLORER_BASE_URL + item.getTxHashHexReversed();
+            Timber.d("txUrl = %s", txUrl);
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(txUrl));
+            startActivity(browserIntent);
+            getActivity().overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
         });
 
         int level = getLevel(item);
@@ -270,7 +250,6 @@ public class FragmentTransactionItem extends Fragment {
     public static FragmentTransactionItem newInstance(TxItem item) {
         FragmentTransactionItem f = new FragmentTransactionItem();
         f.setItem(item);
-
         return f;
     }
 
@@ -297,4 +276,10 @@ public class FragmentTransactionItem extends Fragment {
         return p1 + "..." + p2;
     }
 
+    private void close() {
+        Fragment parentFragment = getParentFragment();
+        if (parentFragment instanceof FragmentTransactionDetails) {
+            ((FragmentTransactionDetails) parentFragment).close();
+        }
+    }
 }

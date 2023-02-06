@@ -118,7 +118,7 @@ class FragmentSend : Fragment() {
         isoText.textSize = 18f
         isoText.setTextColor(requireContext().getColor(R.color.light_gray))
         isoText.requestLayout()
-        signalLayout.setOnTouchListener(SlideDetector(context, signalLayout))
+        signalLayout.setOnTouchListener(SlideDetector(signalLayout) { animateClose() })
         AnalyticsManager.logCustomEvent(BRConstants._20191105_VSC)
         setupFeesSelector(rootView)
         showFeeSelectionButtons(feeButtonsShown)
@@ -449,10 +449,10 @@ class FragmentSend : Fragment() {
         })
         backgroundLayout.setOnClickListener(View.OnClickListener {
             if (!BRAnimator.isClickAllowed()) return@OnClickListener
-            requireActivity().onBackPressed()
+            animateClose()
         })
         close.setOnClickListener {
-            activity?.onBackPressed()
+            animateClose()
         }
         addressEdit.setOnEditorActionListener { _, actionId, event ->
             if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
@@ -733,6 +733,16 @@ class FragmentSend : Fragment() {
                 amountEdit.performClick()
                 updateText()
             }, 500)
+        }
+    }
+
+    private fun animateClose() {
+        BRAnimator.animateBackgroundDim(backgroundLayout, true)
+        BRAnimator.animateSignalSlide(signalLayout, true) { close() }
+    }
+    private fun close() {
+        if(activity != null && activity?.isFinishing != true) {
+            activity?.onBackPressed()
         }
     }
 
