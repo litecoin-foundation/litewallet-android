@@ -24,6 +24,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static timber.log.Timber.DebugTree;
+
 import timber.log.Timber;
 
 public class BreadApp extends Application {
