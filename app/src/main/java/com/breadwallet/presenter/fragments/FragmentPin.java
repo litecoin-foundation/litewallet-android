@@ -204,22 +204,22 @@ public class FragmentPin extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        keyboard.animate()
-                .translationY(1000)
-                .withLayer();
-        dialogLayout.animate()
-                .scaleY(0)
-                .scaleX(0).alpha(0);
-        mainLayout.animate().alpha(0);
-        if (!authSucceeded)
-            completion.onCancel();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (getActivity() != null)
-                    getActivity().getFragmentManager().beginTransaction().remove(FragmentPin.this).commit();
-            }
-        }, 1000);
+//        keyboard.animate()
+//                .translationY(1000)
+//                .withLayer();
+//        dialogLayout.animate()
+//                .scaleY(0)
+//                .scaleX(0).alpha(0);
+//        mainLayout.animate().alpha(0);
+//        if (!authSucceeded)
+//            completion.onCancel();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (getActivity() != null)
+//                    getActivity().getFragmentManager().beginTransaction().remove(FragmentPin.this).commit();
+//            }
+//        }, 1000);
     }
 
     public void setCompletion(BRAuthCompletion completion) {
