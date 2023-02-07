@@ -68,7 +68,7 @@ public class SmartValidator {
         String addressFromPrefs = BRSharedPrefs.getFirstAddress(app);
         String generatedAddress = BRWalletManager.getFirstAddress(mpk);
         if (!addressFromPrefs.equalsIgnoreCase(generatedAddress) && addressFromPrefs.length() != 0 && generatedAddress.length() != 0) {
-            Timber.d("checkFirstAddress: WARNING, addresses don't match: Prefs:" + addressFromPrefs + ", gen:" + generatedAddress);
+            Timber.d("timber: checkFirstAddress: WARNING, addresses don't match: Prefs:" + addressFromPrefs + ", gen:" + generatedAddress);
         }
         return addressFromPrefs.equals(generatedAddress);
     }
@@ -78,10 +78,10 @@ public class SmartValidator {
     }
 
     public static boolean isWordValid(Context ctx, String word) {
-        Timber.d("isWordValid: word:" + word + ":" + word.length());
+        Timber.d("timber: isWordValid: word:" + word + ":" + word.length());
         if (list == null) list = Bip39Reader.bip39List(ctx, null);
         String cleanWord = Bip39Reader.cleanWord(word);
-        Timber.d("isWordValid: cleanWord:" + cleanWord + ":" + cleanWord.length());
+        Timber.d("timber: isWordValid: cleanWord:" + cleanWord + ":" + cleanWord.length());
         return list.contains(cleanWord);
     }
 }

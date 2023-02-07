@@ -63,7 +63,7 @@ public class PostAuth {
             app.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         } else {
             if (authAsked) {
-                Timber.d("%s: WARNING!!!! LOOP", new Object() {
+                Timber.d("timber: %s: WARNING!!!! LOOP", new Object() {
                 }.getClass().getEnclosingMethod().getName());
                 isStuckWithAuthLoop = true;
             }
@@ -83,7 +83,7 @@ public class PostAuth {
             cleanPhrase = new String(raw);
         } catch (UserNotAuthenticatedException e) {
             if (authAsked) {
-                Timber.d("%s: WARNING!!!! LOOP", new Object() {
+                Timber.d("timber: %s: WARNING!!!! LOOP", new Object() {
                 }.getClass().getEnclosingMethod().getName());
                 isStuckWithAuthLoop = true;
             }
@@ -101,7 +101,7 @@ public class PostAuth {
             cleanPhrase = new String(BRKeyStore.getPhrase(app, BRConstants.PROVE_PHRASE_REQUEST));
         } catch (UserNotAuthenticatedException e) {
             if (authAsked) {
-                Timber.d("%s: WARNING!!!! LOOP", new Object() {
+                Timber.d("timber: %s: WARNING!!!! LOOP", new Object() {
                 }.getClass().getEnclosingMethod().getName());
                 isStuckWithAuthLoop = true;
             }
@@ -136,7 +136,7 @@ public class PostAuth {
 
             if (!success) {
                 if (authAsked) {
-                    Timber.d("onRecoverWalletAuth,!success && authAsked");
+                    Timber.d("timber: onRecoverWalletAuth,!success && authAsked");
                 }
             } else {
                 if (phraseForKeyStore.length() != 0) {
@@ -173,7 +173,7 @@ public class PostAuth {
             rawSeed = BRKeyStore.getPhrase(app, BRConstants.PAY_REQUEST_CODE);
         } catch (UserNotAuthenticatedException e) {
             if (authAsked) {
-                Timber.d("%s: WARNING!!!! LOOP", new Object() {
+                Timber.d("timber: %s: WARNING!!!! LOOP", new Object() {
                 }.getClass().getEnclosingMethod().getName());
                 isStuckWithAuthLoop = true;
             }
@@ -185,9 +185,9 @@ public class PostAuth {
             if (seed.length != 0) {
                 if (paymentItem != null && paymentItem.serializedTx != null) {
                     byte[] txHash = walletManager.publishSerializedTransaction(paymentItem.serializedTx, seed);
-                    Timber.d("onPublishTxAuth: txhash:" + Arrays.toString(txHash));
+                    Timber.d("timber: onPublishTxAuth: txhash:" + Arrays.toString(txHash));
                     if (Utils.isNullOrEmpty(txHash)) {
-                        Timber.d("onPublishTxAuth: publishSerializedTransaction returned FALSE");
+                        Timber.d("timber: onPublishTxAuth: publishSerializedTransaction returned FALSE");
                         //todo fix this
 //                        BRWalletManager.getInstance().offerToChangeTheAmount(app, new PaymentItem(paymentRequest.addresses, paymentItem.serializedTx, paymentRequest.amount, null, paymentRequest.isPaymentRequest));
                     } else {
@@ -200,7 +200,7 @@ public class PostAuth {
                     throw new NullPointerException("payment item is null");
                 }
             } else {
-                Timber.d("onPublishTxAuth: seed length is 0!");
+                Timber.d("timber: onPublishTxAuth: seed length is 0!");
                 return;
             }
         } finally {
@@ -215,14 +215,14 @@ public class PostAuth {
             rawSeed = BRKeyStore.getPhrase(app, BRConstants.PAYMENT_PROTOCOL_REQUEST_CODE);
         } catch (UserNotAuthenticatedException e) {
             if (authAsked) {
-                Timber.d("%s: WARNING!!!! LOOP", new Object() {
+                Timber.d("timber: %s: WARNING!!!! LOOP", new Object() {
                 }.getClass().getEnclosingMethod().getName());
                 isStuckWithAuthLoop = true;
             }
             return;
         }
         if (rawSeed == null || rawSeed.length < 10 || paymentRequest.serializedTx == null) {
-            Timber.d("onPaymentProtocolRequest() returned: rawSeed is malformed: %s", Arrays.toString(rawSeed));
+            Timber.d("timber: onPaymentProtocolRequest() returned: rawSeed is malformed: %s", Arrays.toString(rawSeed));
             return;
         }
 
@@ -259,7 +259,7 @@ public class PostAuth {
             canary = BRKeyStore.getCanary(app, BRConstants.CANARY_REQUEST_CODE);
         } catch (UserNotAuthenticatedException e) {
             if (authAsked) {
-                Timber.d("%s: WARNING!!!! LOOP", new Object() {
+                Timber.d("timber: %s: WARNING!!!! LOOP", new Object() {
                 }.getClass().getEnclosingMethod().getName());
                 isStuckWithAuthLoop = true;
             }
@@ -271,7 +271,7 @@ public class PostAuth {
                 phrase = BRKeyStore.getPhrase(app, BRConstants.CANARY_REQUEST_CODE);
             } catch (UserNotAuthenticatedException e) {
                 if (authAsked) {
-                    Timber.d("%s: WARNING!!!! LOOP", new Object() {
+                    Timber.d("timber: %s: WARNING!!!! LOOP", new Object() {
                     }.getClass().getEnclosingMethod().getName());
                     isStuckWithAuthLoop = true;
                 }
@@ -284,12 +284,12 @@ public class PostAuth {
                 m.wipeKeyStore(app);
                 m.wipeWalletButKeystore(app);
             } else {
-                Timber.d("onCanaryCheck: Canary wasn't there, but the phrase persists, adding canary to keystore.");
+                Timber.d("timber: onCanaryCheck: Canary wasn't there, but the phrase persists, adding canary to keystore.");
                 try {
                     BRKeyStore.putCanary(BRConstants.CANARY_STRING, app, 0);
                 } catch (UserNotAuthenticatedException e) {
                     if (authAsked) {
-                        Timber.d("%s: WARNING!!!! LOOP", new Object() {
+                        Timber.d("timber: %s: WARNING!!!! LOOP", new Object() {
                         }.getClass().getEnclosingMethod().getName());
                         isStuckWithAuthLoop = true;
                     }

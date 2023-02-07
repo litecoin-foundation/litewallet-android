@@ -48,12 +48,12 @@ public class RemoteKVStore implements KVStoreAdaptor {
 
             res = apiClient.sendRequest(request, true, retryCount);
             if (res == null) {
-                Timber.i("ver: [KV] PUT key=" + key + ", err= response is null (maybe auth challenge)");
+                Timber.i("timber: ver: [KV] PUT key=" + key + ", err= response is null (maybe auth challenge)");
                 return new CompletionObject(0, 0, unknown);
             }
 
             if (!res.isSuccessful()) {
-                Timber.i("ver: [KV] PUT key=" + key + ", err=" + (res.code()));
+                Timber.i("timber: ver: [KV] PUT key=" + key + ", err=" + (res.code()));
                 return new CompletionObject(0, 0, unknown);
             }
             v = extractVersion(res);
@@ -83,12 +83,12 @@ public class RemoteKVStore implements KVStoreAdaptor {
         try {
             res = apiClient.sendRequest(request, true, retryCount);
             if (res == null) {
-                Timber.i("ver: [KV] PUT key=" + key + ", err= response is null (maybe auth challenge)");
+                Timber.i("timber: ver: [KV] PUT key=" + key + ", err= response is null (maybe auth challenge)");
                 return new CompletionObject(0, 0, unknown);
             }
 
             if (!res.isSuccessful()) {
-                Timber.i("ver: [KV] PUT key=" + key + ", err=" + (res.code()));
+                Timber.i("timber: ver: [KV] PUT key=" + key + ", err=" + (res.code()));
                 return new CompletionObject(0, 0, unknown);
             }
             v = extractVersion(res);
@@ -114,12 +114,12 @@ public class RemoteKVStore implements KVStoreAdaptor {
         try {
             res = apiClient.sendRequest(request, true, retryCount);
             if (res == null) {
-                Timber.i("ver: [KV] PUT key=" + key + ", err= response is null (maybe auth challenge)");
+                Timber.i("timber: ver: [KV] PUT key=" + key + ", err= response is null (maybe auth challenge)");
                 return new CompletionObject(0, 0, unknown);
             }
 
             if (!res.isSuccessful()) {
-                Timber.i("ver: [KV] PUT key=" + key + ", err=" + (res.code()));
+                Timber.i("timber: ver: [KV] PUT key=" + key + ", err=" + (res.code()));
                 return new CompletionObject(0, 0, unknown);
             }
             v = extractVersion(res);
@@ -145,12 +145,12 @@ public class RemoteKVStore implements KVStoreAdaptor {
         try {
             res = apiClient.sendRequest(request, true, retryCount);
             if (res == null) {
-                Timber.i("ver: [KV] PUT key=" + key + ", err= response is null (maybe auth challenge)");
+                Timber.i("timber: ver: [KV] PUT key=" + key + ", err= response is null (maybe auth challenge)");
                 return new CompletionObject(0, 0, unknown);
             }
 
             if (!res.isSuccessful()) {
-                Timber.i("ver: [KV] PUT key=" + key + ", err=" + (res.code()));
+                Timber.i("timber: ver: [KV] PUT key=" + key + ", err=" + (res.code()));
                 return new CompletionObject(0, 0, unknown);
             }
             v = extractVersion(res);
@@ -177,12 +177,12 @@ public class RemoteKVStore implements KVStoreAdaptor {
         try {
             res = apiClient.sendRequest(request, true, retryCount);
             if (res == null) {
-                Timber.i("ver: [KV] PUT key=" + key + ", err= response is null (maybe auth challenge)");
+                Timber.i("timber: ver: [KV] PUT key=" + key + ", err= response is null (maybe auth challenge)");
                 return new CompletionObject(0, 0, unknown);
             }
 
             if (!res.isSuccessful()) {
-                Timber.i("ver: [KV] PUT key=" + key + ", err=" + (res.code()));
+                Timber.i("timber: ver: [KV] PUT key=" + key + ", err=" + (res.code()));
                 return new CompletionObject(0, 0, unknown);
             }
             byte[] reqData;

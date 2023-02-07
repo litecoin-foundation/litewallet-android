@@ -86,7 +86,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     item.txReversed = Utils.reverseHex(Utils.bytesToHex(item.getTxHash()));
                 }
                 backUpFeed = newItems;
-                Timber.d("updateData: newItems: %d, took: %s", newItems.size(), System.currentTimeMillis() - s);
+                Timber.d("timber: updateData: newItems: %d, took: %s", newItems.size(), System.currentTimeMillis() - s);
                 updatingData = false;
             }
         });
@@ -262,7 +262,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private void setPrompt(final PromptHolder prompt) {
-        Timber.d("setPrompt: %s", TxManager.getInstance().promptInfo.title);
+        Timber.d("timber: setPrompt: %s", TxManager.getInstance().promptInfo.title);
         if (TxManager.getInstance().promptInfo == null) {
             throw new RuntimeException("can't happen, showing prompt with null PromptInfo");
         }
@@ -350,7 +350,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         itemFeed = filteredList;
         notifyDataSetChanged();
 
-        Timber.d("filter: %s took: %s", query, System.currentTimeMillis() - start);
+        Timber.d("timber: filter: %s took: %s", query, System.currentTimeMillis() - start);
     }
 
     private class TxHolder extends RecyclerView.ViewHolder {

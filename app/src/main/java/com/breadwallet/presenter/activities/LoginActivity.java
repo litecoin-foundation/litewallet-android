@@ -211,11 +211,11 @@ public class LoginActivity extends BRActivity {
 
     private void handleClick(String key) {
         if (!inputAllowed) {
-            Timber.d("handleClick: input not allowed");
+            Timber.d("timber: handleClick: input not allowed");
             return;
         }
         if (key == null) {
-            Timber.d("handleClick: key is null! ");
+            Timber.d("timber: handleClick: key is null! ");
             return;
         }
 
@@ -224,7 +224,7 @@ public class LoginActivity extends BRActivity {
         } else if (Character.isDigit(key.charAt(0))) {
             handleDigitClick(Integer.parseInt(key.substring(0, 1)));
         } else {
-            Timber.d("handleClick: oops: %s", key);
+            Timber.d("timber: handleClick: oops: %s", key);
         }
     }
 
@@ -313,7 +313,7 @@ public class LoginActivity extends BRActivity {
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
                 } else {
-                    Timber.i("onRequestPermissionsResult: permission isn't granted for: %s", requestCode);
+                    Timber.i("timber: onRequestPermissionsResult: permission isn't granted for: %s", requestCode);
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
