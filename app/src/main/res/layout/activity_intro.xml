@@ -16,7 +16,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:text="@string/About.appVersion"
-        android:textColor="@color/white_30_alpha"
+        android:textColor="@color/white"
         android:textSize="@dimen/sub_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
