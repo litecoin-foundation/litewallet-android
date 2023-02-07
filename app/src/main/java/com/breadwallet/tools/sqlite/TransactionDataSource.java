@@ -131,7 +131,7 @@ public class TransactionDataSource implements BRDataSourceInterface {
     public void updateTxBlockHeight(String hash, int blockHeight, int timeStamp) {
         try {
             database = openDatabase();
-            Timber.d("transaction updated with id: %s", hash);
+            Timber.d("timber: transaction updated with id: %s", hash);
             String strFilter = "_id=\'" + hash + "\'";
             ContentValues args = new ContentValues();
             args.put(BRSQLiteHelper.TX_BLOCK_HEIGHT, blockHeight);
@@ -146,7 +146,7 @@ public class TransactionDataSource implements BRDataSourceInterface {
     public void deleteTxByHash(String hash) {
         try {
             database = openDatabase();
-            Timber.d("transaction deleted with id: %s", hash);
+            Timber.d("timber: transaction deleted with id: %s", hash);
             database.delete(BRSQLiteHelper.TX_TABLE_NAME, BRSQLiteHelper.TX_COLUMN_ID
                     + " = \'" + hash + "\'", null);
         } finally {

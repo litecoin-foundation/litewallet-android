@@ -49,7 +49,7 @@ public class BRPeerManager {
      */
 
     public static void syncStarted() {
-        Timber.d("syncStarted: %s", Thread.currentThread().getName());
+        Timber.d("timber: syncStarted: %s", Thread.currentThread().getName());
 //        BRPeerManager.getInstance().refreshConnection();
         Context ctx = BreadApp.getBreadContext();
         int startHeight = BRSharedPrefs.getStartHeight(ctx);
@@ -59,7 +59,7 @@ public class BRPeerManager {
     }
 
     public static void syncSucceeded() {
-        Timber.d("syncSucceeded");
+        Timber.d("timber: syncSucceeded");
         final Context app = BreadApp.getBreadContext();
         if (app == null) return;
         BRSharedPrefs.putLastSyncTime(app, System.currentTimeMillis());
@@ -76,18 +76,18 @@ public class BRPeerManager {
     }
 
     public static void syncFailed() {
-        Timber.d("syncFailed");
+        Timber.d("timber: syncFailed");
         SyncManager.getInstance().stopSyncingProgressThread();
         Context ctx = BreadApp.getBreadContext();
         if (ctx == null) return;
-        Timber.d("Network Not Available, showing not connected bar");
+        Timber.d("timber: Network Not Available, showing not connected bar");
 
         SyncManager.getInstance().stopSyncingProgressThread();
         if (onSyncFinished != null) onSyncFinished.onFinished();
     }
 
     public static void txStatusUpdate() {
-        Timber.d("txStatusUpdate");
+        Timber.d("timber: txStatusUpdate");
 
         for (OnTxStatusUpdate listener : statusUpdateListeners) {
             if (listener != null) listener.onStatusUpdate();
@@ -101,7 +101,7 @@ public class BRPeerManager {
     }
 
     public static void saveBlocks(final BlockEntity[] blockEntities, final boolean replace) {
-        Timber.d("saveBlocks: %s", blockEntities.length);
+        Timber.d("timber: saveBlocks: %s", blockEntities.length);
 
         final Context ctx = BreadApp.getBreadContext();
         if (ctx == null) return;
@@ -116,7 +116,7 @@ public class BRPeerManager {
     }
 
     public static void savePeers(final PeerEntity[] peerEntities, final boolean replace) {
-        Timber.d("savePeers: %s", peerEntities.length);
+        Timber.d("timber: savePeers: %s", peerEntities.length);
         final Context ctx = BreadApp.getBreadContext();
         if (ctx == null) return;
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
@@ -129,12 +129,12 @@ public class BRPeerManager {
     }
 
     public static boolean networkIsReachable() {
-        Timber.d("networkIsReachable");
+        Timber.d("timber: networkIsReachable");
         return BRWalletManager.getInstance().isNetworkAvailable(BreadApp.getBreadContext());
     }
 
     public static void deleteBlocks() {
-        Timber.d("deleteBlocks");
+        Timber.d("timber: deleteBlocks");
         final Context ctx = BreadApp.getBreadContext();
         if (ctx == null) return;
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
@@ -146,7 +146,7 @@ public class BRPeerManager {
     }
 
     public static void deletePeers() {
-        Timber.d("deletePeers");
+        Timber.d("timber: deletePeers");
         final Context ctx = BreadApp.getBreadContext();
         if (ctx == null) return;
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
@@ -163,9 +163,9 @@ public class BRPeerManager {
         int port = TrustedNode.getNodePort(node);
         boolean success = setFixedPeer(host, port);
         if (!success) {
-            Timber.i("updateFixedPeer: Failed to updateFixedPeer with input: %s", node);
+            Timber.i("timber: updateFixedPeer: Failed to updateFixedPeer with input: %s", node);
         } else {
-            Timber.d("updateFixedPeer: succeeded");
+            Timber.d("timber: updateFixedPeer: succeeded");
         }
         connect();
     }

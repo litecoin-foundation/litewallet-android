@@ -142,12 +142,12 @@ public class TxManager {
         crashIfNotMain();
         PromptManager.PromptItem toShow = PromptManager.getInstance().nextPrompt(app);
         if (toShow != null) {
-            Timber.d("showNextPrompt: %s", toShow);
+            Timber.d("timber: showNextPrompt: %s", toShow);
             currentPrompt = toShow;
             promptInfo = PromptManager.getInstance().promptInfo(app, currentPrompt);
             updateCard(app);
         } else {
-            Timber.d("showNextPrompt: nothing to show");
+            Timber.d("timber: showNextPrompt: nothing to show");
         }
     }
 
@@ -159,7 +159,7 @@ public class TxManager {
 
         long took = (System.currentTimeMillis() - start);
         if (took > 500)
-            Timber.d("updateTxList: took: %s", took);
+            Timber.d("timber: updateTxList: took: %s", took);
         if (adapter != null) {
             ((Activity) app).runOnUiThread(new Runnable() {
                 @Override
@@ -167,7 +167,7 @@ public class TxManager {
                     adapter.setItems(items);
                     txList.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-                    Timber.d("updateTxList: %s", currentPrompt);
+                    Timber.d("timber: updateTxList: %s", currentPrompt);
                 }
             });
         }
