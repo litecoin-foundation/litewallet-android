@@ -157,7 +157,7 @@ public class BRKeyStore {
                 inCipher.init(Cipher.ENCRYPT_MODE, secretKey);
             } else {
 
-                Timber.d("KeyStore: is initialized");
+                Timber.d("timber: KeyStore: is initialized");
 
                 //see if the key is old format, create a new one if it is
                 try {
@@ -167,7 +167,7 @@ public class BRKeyStore {
                     if (ignored instanceof UserNotAuthenticatedException) {
                         throw ignored;
                     }
-                    Timber.d("_setData: OLD KEY PRESENT: %s", alias);
+                    Timber.d("timber: _setData: OLD KEY PRESENT: %s", alias);
                     //create new key and reinitialize the cipher
                     secretKey = createKeys(alias, auth_required);
                     inCipher.init(Cipher.ENCRYPT_MODE, secretKey);
@@ -191,7 +191,7 @@ public class BRKeyStore {
             storeEncryptedData(context, encryptedData, alias);
             return true;
         } catch (UserNotAuthenticatedException e) {
-            Timber.e(e, "_setData: showAuthenticationScreen: %s", alias);
+            Timber.e(e, "timber:_setData: showAuthenticationScreen: %s", alias);
             showAuthenticationScreen(context, request_code, alias);
             throw e;
         } catch (InvalidKeyException ex) {
@@ -313,11 +313,11 @@ public class BRKeyStore {
         } catch (InvalidKeyException e) {
             if (e instanceof UserNotAuthenticatedException) {
                 /** user not authenticated, ask the system for authentication */
-                Timber.e(e, "_getData: showAuthenticationScreen: %s", alias);
+                Timber.e(e, "timber:_getData: showAuthenticationScreen: %s", alias);
                 showAuthenticationScreen(context, request_code, alias);
                 throw (UserNotAuthenticatedException) e;
             } else {
-                Timber.e(e, "_getData: InvalidKeyException");
+                Timber.e(e, "timber:_getData: InvalidKeyException");
                 if (e instanceof KeyPermanentlyInvalidatedException)
                     showKeyInvalidated(context);
                 throw new UserNotAuthenticatedException(); //just to not go any further
@@ -334,7 +334,7 @@ public class BRKeyStore {
             }
         } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException e) {
             /** if for any other reason the keystore fails, crash! */
-            Timber.e(e, "getData: error");
+            Timber.e(e, "timber:getData: error");
             throw new RuntimeException(e.getMessage());
         } catch (BadPaddingException | IllegalBlockSizeException | NoSuchProviderException e) {
             Timber.e(e);
@@ -553,7 +553,7 @@ public class BRKeyStore {
         try {
             Integer.parseInt(pinCode);
         } catch (Exception e) {
-            Timber.e(e, "getPinCode: WARNING passcode isn't a number");
+            Timber.e(e, "timber:getPinCode: WARNING passcode isn't a number");
             pinCode = "";
             putPinCode(pinCode, context);
             putFailCount(0, context);
@@ -701,7 +701,7 @@ public class BRKeyStore {
                 destroyEncryptedData(context, alias);
                 count++;
             }
-            Timber.d("resetWalletKeyStore: removed:%s", count);
+            Timber.d("timber: resetWalletKeyStore: removed:%s", count);
         } catch (NoSuchAlgorithmException | KeyStoreException | IOException e) {
             Timber.e(e);
             return false;
@@ -797,7 +797,7 @@ public class BRKeyStore {
         try {
             validateSet(data, alias, alias_file, alias_iv, auth_required);
         } catch (Exception e) {
-            Timber.e(e, "_setData: ");
+            Timber.e(e, "timber:_setData: ");
         }
 
         KeyStore keyStore;
@@ -827,7 +827,7 @@ public class BRKeyStore {
 
             SecretKey secret = (SecretKey) keyStore.getKey(alias, null);
             if (secret == null) {
-                Timber.d("_setOldData: " + "secret is null on _setData: " + alias);
+                Timber.d("timber: _setOldData: " + "secret is null on _setData: " + alias);
                 return false;
             }
             Cipher inCipher = Cipher.getInstance(CIPHER_ALGORITHM);
@@ -836,7 +836,7 @@ public class BRKeyStore {
             String path = getFilePath(alias_iv, context);
             boolean success = writeBytesToFile(path, iv);
             if (!success) {
-                Timber.d("_setOldData: " + "failed to writeBytesToFile: " + alias);
+                Timber.d("timber: _setOldData: " + "failed to writeBytesToFile: " + alias);
                 BRDialog.showCustomDialog(context, context.getString(R.string.Alert_keystore_title_android), "Failed to save the iv file for: " + alias, "close", null, new BRDialogView.BROnClickListener() {
                     @Override
                     public void onClick(BRDialogView brDialogView) {
@@ -858,11 +858,11 @@ public class BRKeyStore {
             }
             return true;
         } catch (UserNotAuthenticatedException e) {
-            Timber.e(e, "_setOldData: showAuthenticationScreen: " + alias);
+            Timber.e(e, "timber:_setOldData: showAuthenticationScreen: " + alias);
             showAuthenticationScreen(context, request_code, alias);
             throw e;
         } catch (Exception e) {
-            Timber.e(e, "_setOldData: ");
+            Timber.e(e, "timber:_setOldData: ");
             return false;
         }
     }
@@ -873,7 +873,7 @@ public class BRKeyStore {
         try {
             validateGet(alias, alias_file, alias_iv);
         } catch (Exception e) {
-            Timber.e(e, "_getOldData");
+            Timber.e(e, "timber:_getOldData");
         }
 
         KeyStore keyStore;
@@ -889,7 +889,7 @@ public class BRKeyStore {
                 if (!fileExists) {
                     return null;/* file also not there, fine then */
                 }
-                Timber.i("_getOldData: file is present but the key is gone: %s", alias);
+                Timber.i("timber: _getOldData: file is present but the key is gone: %s", alias);
                 return null;
             }
 
@@ -899,10 +899,10 @@ public class BRKeyStore {
                 removeAliasAndFiles(keyStore, alias, context);
                 //report it if one exists and not the other.
                 if (ivExists != aliasExists) {
-                    Timber.d("_getOldData: " + "alias or iv isn't on the disk: " + alias + ", aliasExists:" + aliasExists);
+                    Timber.d("timber: _getOldData: " + "alias or iv isn't on the disk: " + alias + ", aliasExists:" + aliasExists);
                     return null;
                 } else {
-                    Timber.d("_getOldData: " + "!ivExists && !aliasExists: " + alias);
+                    Timber.d("timber: _getOldData: " + "!ivExists && !aliasExists: " + alias);
                     return null;
                 }
             }
@@ -918,20 +918,20 @@ public class BRKeyStore {
         } catch (InvalidKeyException e) {
             if (e instanceof UserNotAuthenticatedException) {
                 /** user not authenticated, ask the system for authentication */
-                Timber.e(e, "_getOldData: showAuthenticationScreen: %s", alias);
+                Timber.e(e, "timber:_getOldData: showAuthenticationScreen: %s", alias);
                 showAuthenticationScreen(context, request_code, alias);
                 throw (UserNotAuthenticatedException) e;
             } else {
-                Timber.e(e, "_getOldData: InvalidKeyException");
+                Timber.e(e, "timber:_getOldData: InvalidKeyException");
                 return null;
             }
         } catch (IOException | CertificateException | KeyStoreException e) {
             /** keyStore.load(null) threw the Exception, meaning the keystore is unavailable */
-            Timber.e(e, "_getOldData: keyStore.load(null) threw the Exception, meaning the keystore is unavailable");
+            Timber.e(e, "timber:_getOldData: keyStore.load(null) threw the Exception, meaning the keystore is unavailable");
             return null;
         } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException e) {
             /** if for any other reason the keystore fails, crash! */
-            Timber.e(e, "getData: error");
+            Timber.e(e, "timber:getData: error");
             return null;
         }
     }
@@ -939,14 +939,14 @@ public class BRKeyStore {
     private static void showLoopBugMessage(final Context app) {
         if (bugMessageShowing) return;
         bugMessageShowing = true;
-        Timber.d("showLoopBugMessage: ");
+        Timber.d("timber: showLoopBugMessage: ");
         String mess = app.getString(R.string.ErrorMessages_loopingLockScreen_android);
 
         SpannableString ss = new SpannableString(mess.replace("[", "").replace("]", ""));
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-                Timber.d("onClick: clicked on span!");
+                Timber.d("timber: onClick: clicked on span!");
                 BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {

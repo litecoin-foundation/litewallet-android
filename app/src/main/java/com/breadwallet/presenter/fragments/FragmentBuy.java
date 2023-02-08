@@ -128,7 +128,7 @@ public class FragmentBuy extends Fragment {
         String bitrefillUrl = String.format( BRConstants.BITREFILL_AFFILIATE_LINK + "/embed/?paymentMethod=litecoin&ref=%s&utm_source=%s", bitrefillRef,utmSource);
 
         String buyUrl = partner == Partner.BITREFILL ? bitrefillUrl : url(getContext(), partner, currency);
-        Timber.d("URL %s", buyUrl);
+        Timber.d("timber: URL %s", buyUrl);
         webView.loadUrl(buyUrl);
 
         return rootView;
@@ -186,7 +186,7 @@ public class FragmentBuy extends Fragment {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             String url = request.getUrl().toString();
-            Timber.d("shouldOverrideUrlLoading: URL=%s\nMethod=%s", url, request.getMethod());
+            Timber.d("timber: shouldOverrideUrlLoading: URL=%s\nMethod=%s", url, request.getMethod());
             if (url.equalsIgnoreCase(onCloseUrl)) {
                 closePayment();
                 onCloseUrl = null;
@@ -201,7 +201,7 @@ public class FragmentBuy extends Fragment {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            Timber.d("onPageStarted: %s", url);
+            Timber.d("timber: onPageStarted: %s", url);
             super.onPageStarted(view, url, favicon);
             progress.setVisibility(View.VISIBLE);
         }
@@ -209,7 +209,7 @@ public class FragmentBuy extends Fragment {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            Timber.d("onPageFinished %s", url);
+            Timber.d("timber: onPageFinished %s", url);
             progress.setVisibility(View.GONE);
         }
     };

@@ -531,7 +531,7 @@ class FragmentSend : Fragment() {
 
     private fun handleClick(key: String?) {
         if (key == null) {
-            Timber.d("handleClick: key is null! ")
+            Timber.d("timber: handleClick: key is null! ")
             return
         }
         when {
@@ -606,7 +606,7 @@ class FragmentSend : Fragment() {
             BigDecimal(tmpAmount)
         ).toLong()
         val balanceForISO = BRExchange.getAmountFromSatoshis(activity, iso, BigDecimal(curBalance))
-        Timber.d("updateText: balanceForISO: %s", balanceForISO)
+        Timber.d("timber: updateText: balanceForISO: %s", balanceForISO)
 
         //formattedBalance
         val formattedBalance = BRCurrency.getFormattedCurrencyString(activity, iso, balanceForISO)
@@ -617,7 +617,7 @@ class FragmentSend : Fragment() {
         } else {
             fee = BRWalletManager.getInstance().feeForTransactionAmount(satoshis).toLong()
             if (fee == 0L) {
-                Timber.i("updateText: fee is 0, trying the estimate")
+                Timber.i("timber: updateText: fee is 0, trying the estimate")
                 fee = BRWalletManager.getInstance()
                     .feeForTransaction(addressEdit.text.toString(), satoshis).toLong()
             }
@@ -627,10 +627,10 @@ class FragmentSend : Fragment() {
             iso,
             BigDecimal(if (curBalance == 0L) 0 else fee)
         )
-        Timber.d("updateText: feeForISO: %s", feeForISO)
+        Timber.d("timber: updateText: feeForISO: %s", feeForISO)
         //formattedBalance
         val aproxFee = BRCurrency.getFormattedCurrencyString(activity, iso, feeForISO)
-        Timber.d("updateText: aproxFee: %s", aproxFee)
+        Timber.d("timber: updateText: aproxFee: %s", aproxFee)
         if (BigDecimal(
                 if (tmpAmount.isEmpty() || tmpAmount.equals(
                         ".",
@@ -708,10 +708,10 @@ class FragmentSend : Fragment() {
 
         // Checks whether a hardware keyboard is available
         if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
-            Timber.d("onConfigurationChanged: hidden")
+            Timber.d("timber: onConfigurationChanged: hidden")
             showKeyboard(true)
         } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
-            Timber.d("onConfigurationChanged: shown")
+            Timber.d("timber: onConfigurationChanged: shown")
             showKeyboard(false)
         }
     }

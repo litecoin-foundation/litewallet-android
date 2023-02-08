@@ -130,6 +130,6 @@ public class BRExecutor implements RejectedExecutionHandler {
 
     @Override
     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-        Timber.d("rejectedExecution: ");
+        Timber.d("timber: rejectedExecution: ");
     }
 }

@@ -54,13 +54,13 @@ public class PlatformSqliteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        Timber.d("onCreate: %s", KV_DATABASE_CREATE);
+        Timber.d("timber: onCreate: %s", KV_DATABASE_CREATE);
         database.execSQL(KV_DATABASE_CREATE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Timber.d("Upgrading database from version %d to %d, which will destroy all old data", oldVersion, newVersion);
+        Timber.d("timber: Upgrading database from version %d to %d, which will destroy all old data", oldVersion, newVersion);
         db.execSQL("DROP TABLE IF EXISTS " + KV_STORE_TABLE_NAME);
         //recreate the dbs
         onCreate(db);

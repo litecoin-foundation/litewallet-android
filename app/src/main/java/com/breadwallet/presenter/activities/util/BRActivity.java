@@ -113,7 +113,7 @@ public class BRActivity extends FragmentActivity {
                             if (BitcoinUrlHandler.isBitcoinUrl(result))
                                 BitcoinUrlHandler.processRequest(BRActivity.this, result);
                             else
-                                Timber.i("onActivityResult: not litecoin address NOR bitID");
+                                Timber.i("timber: onActivityResult: not litecoin address NOR bitID");
                         }
                     }, 500);
 
@@ -124,7 +124,7 @@ public class BRActivity extends FragmentActivity {
                 if (resultCode == RESULT_OK) {
                     PostAuth.getInstance().onCreateWalletAuth(this, true);
                 } else {
-                    Timber.d("WARNING: resultCode != RESULT_OK");
+                    Timber.d("timber: WARNING: resultCode != RESULT_OK");
                     BRWalletManager m = BRWalletManager.getInstance();
                     m.wipeWalletButKeystore(this);
                     finish();

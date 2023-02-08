@@ -73,7 +73,7 @@ public class BRSender {
                         //if the fee is STILL out of date then fail with network problem message
                         long time = BRSharedPrefs.getFeeTime(app);
                         if (time <= 0 || now - time >= FEE_EXPIRATION_MILLIS) {
-                            Timber.d("sendTransaction: fee out of date even after fetching...");
+                            Timber.d("timber: sendTransaction: fee out of date even after fetching...");
 
                             AnalyticsManager.logCustomEvent(BRConstants._20200111_FNI);
 
@@ -143,7 +143,7 @@ public class BRSender {
     private void tryPay(final Context app, final PaymentItem paymentRequest) throws InsufficientFundsException,
             AmountSmallerThanMinException, SpendingNotAllowed, FeeNeedsAdjust {
         if (paymentRequest == null || paymentRequest.addresses == null) {
-            Timber.d("handlePay: WRONG PARAMS");
+            Timber.d("timber: handlePay: WRONG PARAMS");
             String message = paymentRequest == null ? "paymentRequest is null" : "addresses is null";
             RuntimeException ex = new RuntimeException("paymentRequest is malformed: " + message);
 
@@ -242,7 +242,7 @@ public class BRSender {
 
     private void confirmPay(final Context ctx, final PaymentItem request) {
         if (ctx == null) {
-            Timber.i("confirmPay: context is null");
+            Timber.i("timber: confirmPay: context is null");
             return;
         }
 
@@ -276,10 +276,10 @@ public class BRSender {
         }
         boolean forcePin = false;
 
-        Timber.d("confirmPay: totalSent: %s", BRWalletManager.getInstance().getTotalSent());
-        Timber.d("confirmPay: request.amount: %s", request.amount);
-        Timber.d("confirmPay: total limit: %s", AuthManager.getInstance().getTotalLimit(ctx));
-        Timber.d("confirmPay: limit: %s", BRKeyStore.getSpendLimit(ctx));
+        Timber.d("timber: confirmPay: totalSent: %s", BRWalletManager.getInstance().getTotalSent());
+        Timber.d("timber: confirmPay: request.amount: %s", request.amount);
+        Timber.d("timber: confirmPay: total limit: %s", AuthManager.getInstance().getTotalLimit(ctx));
+        Timber.d("timber: confirmPay: limit: %s", BRKeyStore.getSpendLimit(ctx));
 
         if (BRWalletManager.getInstance().getTotalSent() + request.amount > AuthManager.getInstance().getTotalLimit(ctx)) {
             forcePin = true;
@@ -381,7 +381,7 @@ public class BRSender {
     }
 
     private static void showSpendNotAllowed(final Context app) {
-        Timber.d("showSpendNotAllowed");
+        Timber.d("timber: showSpendNotAllowed");
         ((Activity) app).runOnUiThread(new Runnable() {
             @Override
             public void run() {
