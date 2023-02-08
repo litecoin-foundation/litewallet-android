@@ -94,7 +94,7 @@ public class IntroActivity extends BRActivity implements Serializable {
                 final long startTime = System.currentTimeMillis();
                 APIClient apiClient = APIClient.getInstance(IntroActivity.this);
                 long endTime = System.currentTimeMillis();
-                Timber.d("updateBundle DONE in %sms",endTime - startTime);
+                Timber.d("timber: updateBundle DONE in %sms",endTime - startTime);
             }
         });
     }

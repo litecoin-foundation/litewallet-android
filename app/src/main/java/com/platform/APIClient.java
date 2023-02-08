@@ -113,7 +113,7 @@ public class APIClient {
         byte[] data = new byte[0];
         try {
             OkHttpClient client = new OkHttpClient.Builder().followRedirects(false).connectTimeout(60, TimeUnit.SECONDS)/*.addInterceptor(new LoggingInterceptor())*/.build();
-            Timber.d("sendRequest: headers for : %s \n %s", request.url(), request.headers());
+            Timber.d("timber: sendRequest: headers for : %s \n %s", request.url(), request.headers());
             String agent = Utils.getAgentString(ctx, "OkHttp/3.4.1");
             request = request.newBuilder().header("User-agent", agent).build();
             response = client.newCall(request).execute();
@@ -127,11 +127,11 @@ public class APIClient {
                 String newLocation = request.url().scheme() + "://" + request.url().host() + response.header("location");
                 Uri newUri = Uri.parse(newLocation);
                 if (newUri == null) {
-                    Timber.d("sendRequest: redirect uri is null");
+                    Timber.d("timber: sendRequest: redirect uri is null");
                 } else if (!newUri.getHost().equalsIgnoreCase(BreadApp.HOST) || !newUri.getScheme().equalsIgnoreCase(PROTO)) {
-                    Timber.d("sendRequest: WARNING: redirect is NOT safe: %s", newLocation);
+                    Timber.d("timber: sendRequest: WARNING: redirect is NOT safe: %s", newLocation);
                 } else {
-                    Timber.d("redirecting: %s >>> %s", request.url(), newLocation);
+                    Timber.d("timber: redirecting: %s >>> %s", request.url(), newLocation);
                     response.close();
                     return sendRequest(new Request.Builder().url(newLocation).get().build(), needsAuth, 0);
                 }
@@ -143,11 +143,11 @@ public class APIClient {
         }
 
         if (response.header("content-encoding") != null && response.header("content-encoding").equalsIgnoreCase("gzip")) {
-            Timber.d("sendRequest: the content is gzip, unzipping");
+            Timber.d("timber: sendRequest: the content is gzip, unzipping");
             byte[] decompressed = gZipExtract(data);
             postReqBody = ResponseBody.create(null, decompressed);
             try {
-                Timber.d("sendRequest: (%s)%s, code (%d), mess (%s), body (%s)", request.method(),
+                Timber.d("timber: sendRequest: (%s)%s, code (%d), mess (%s), body (%s)", request.method(),
                         request.url(), response.code(), response.message(), new String(decompressed, "utf-8"));
             } catch (UnsupportedEncodingException e) {
                 Timber.e(e);
@@ -155,7 +155,7 @@ public class APIClient {
             return response.newBuilder().body(postReqBody).build();
         } else {
             try {
-                Timber.d("sendRequest: (%s)%s, code (%d), mess (%s), body (%s)", request.method(),
+                Timber.d("timber: sendRequest: (%s)%s, code (%d), mess (%s), body (%s)", request.method(),
                         request.url(), response.code(), response.message(), new String(data, "utf-8"));
             } catch (UnsupportedEncodingException e) {
                 Timber.e(e);
@@ -174,7 +174,7 @@ public class APIClient {
     private void itemFinished() {
         int items = itemsLeftToUpdate.incrementAndGet();
         if (items >= 4) {
-            Timber.d("PLATFORM ALL UPDATED: %s", items);
+            Timber.d("timber: PLATFORM ALL UPDATED: %s", items);
             platformUpdating = false;
             itemsLeftToUpdate.set(0);
         }

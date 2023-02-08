@@ -211,13 +211,13 @@ public class QRCodeReaderView extends SurfaceView
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        Timber.d("surfaceCreated");
+        Timber.d("timber: surfaceCreated");
 
         try {
             // Indicate camera, our View dimensions
             mCameraManager.openDriver(holder, this.getWidth(), this.getHeight());
         } catch (IOException | RuntimeException e) {
-            Timber.e(e, "Can not openDriver");
+            Timber.e(e, "timber:Can not openDriver");
             mCameraManager.closeDriver();
         }
 
@@ -225,22 +225,22 @@ public class QRCodeReaderView extends SurfaceView
             mQRCodeReader = new QRCodeReader();
             mCameraManager.startPreview();
         } catch (Exception e) {
-            Timber.e(e, "Exception");
+            Timber.e(e, "timber:Exception");
             mCameraManager.closeDriver();
         }
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        Timber.d("surfaceChanged");
+        Timber.d("timber: surfaceChanged");
 
         if (holder.getSurface() == null) {
-            Timber.d("Error: preview surface does not exist");
+            Timber.d("timber: Error: preview surface does not exist");
             return;
         }
 
         if (mCameraManager.getPreviewSize() == null) {
-            Timber.d("Error: preview size does not exist");
+            Timber.d("timber: Error: preview size does not exist");
             return;
         }
 
@@ -258,7 +258,7 @@ public class QRCodeReaderView extends SurfaceView
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        Timber.d("surfaceDestroyed");
+        Timber.d("timber: surfaceDestroyed");
 
         mCameraManager.setPreviewCallback(null);
         mCameraManager.stopPreview();
@@ -366,11 +366,11 @@ public class QRCodeReaderView extends SurfaceView
             try {
                 return view.mQRCodeReader.decode(bitmap, hintsRef.get());
             } catch (ChecksumException e) {
-                Timber.e(e, "ChecksumException");
+                Timber.e(e, "timber:ChecksumException");
             } catch (NotFoundException e) {
-                Timber.e(e, "No QR Code found");
+                Timber.e(e, "timber:No QR Code found");
             } catch (FormatException e) {
-                Timber.e(e, "FormatException");
+                Timber.e(e, "timber:FormatException");
             } finally {
                 view.mQRCodeReader.reset();
             }

@@ -203,7 +203,7 @@ public class BRSharedPrefs {
             JSONArray arr = new JSONArray(result);
             for (int i = 0; i < arr.length(); i++) {
                 int a = arr.getInt(i);
-                Timber.d("found a nonce: %s", a);
+                Timber.d("timber: found a nonce: %s", a);
                 list.add(a);
             }
         } catch (Exception e) {
@@ -241,7 +241,7 @@ public class BRSharedPrefs {
 
     //if the user prefers all in litecoin units, not other currencies
     public static void putPreferredLTC(Context activity, boolean b) {
-        Timber.d("putPreferredLTC: %s", b);
+        Timber.d("timber: putPreferredLTC: %s", b);
         SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("priceSetToLitecoin", b);
