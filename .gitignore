@@ -3,6 +3,7 @@ app/src/main/jni/transition/testingStuff.c
 # Built application files
 *.apk
 *.ap_
+*/release/*.aab
 
 # Files for the Dalvik VM
 *.dex
