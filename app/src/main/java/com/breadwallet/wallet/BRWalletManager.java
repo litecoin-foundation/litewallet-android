@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.WorkerThread;
+import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.BreadApp;
 import com.breadwallet.R;
@@ -37,7 +38,6 @@ import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.animation.SpringAnimator;
 import com.breadwallet.tools.manager.AnalyticsManager;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.breadwallet.tools.manager.BRNotificationManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.FeeManager;
@@ -54,7 +54,6 @@ import com.breadwallet.tools.util.Bip39Reader;
 import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
 import com.platform.entities.WalletInfo;
-import com.platform.tools.KVStoreManager;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
@@ -493,67 +492,79 @@ public class BRWalletManager {
             BRWalletManager m = BRWalletManager.getInstance();
             final BRPeerManager pm = BRPeerManager.getInstance();
 
-            if (!m.isCreated()) {
-                List<BRTransactionEntity> transactions = TransactionDataSource.getInstance(ctx).getAllTransactions();
-                int transactionsCount = transactions.size();
-                if (transactionsCount > 0) {
-                    m.createTxArrayWithCount(transactionsCount);
-                    for (BRTransactionEntity entity : transactions) {
-                        m.putTransaction(entity.getBuff(), entity.getBlockheight(), entity.getTimestamp());
+           // int currentBalance = (int) m.getBalance();
+           // Timber.i("timber: wallet manager balance %d", currentBalance);
+
+            BRAnimator.showBalanceSeedFragment((FragmentActivity) ctx);
+            Timber.d("timber: Showing seed fragment");
+//            if (m.isCreated() && pm.isCreated()) {
+//                    BRAnimator.showBalanceSeedFragment((FragmentActivity) ctx);
+//                    Timber.i("timber: Showing seed fragment");
+//                }
+                if (!m.isCreated()) {
+                    List<BRTransactionEntity> transactions = TransactionDataSource.getInstance(ctx).getAllTransactions();
+                    int transactionsCount = transactions.size();
+                    if (transactionsCount > 0) {
+                        m.createTxArrayWithCount(transactionsCount);
+                        for (BRTransactionEntity entity : transactions) {
+                            m.putTransaction(entity.getBuff(), entity.getBlockheight(), entity.getTimestamp());
+                        }
+                    }
+
+                    byte[] pubkeyEncoded = BRKeyStore.getMasterPublicKey(ctx);
+                    if (Utils.isNullOrEmpty(pubkeyEncoded)) {
+                        Timber.i("timber: initWallet: pubkey is missing");
+                        return;
+                    }
+                    //Save the first address for future check
+                    m.createWallet(transactionsCount, pubkeyEncoded);
+                    String firstAddress = BRWalletManager.getFirstAddress(pubkeyEncoded);
+                    BRSharedPrefs.putFirstAddress(ctx, firstAddress);
+                    FeeManager feeManager = FeeManager.getInstance();
+                    if (feeManager.isRegularFee()) {
+                        Fee fees = feeManager.getFees();
+                        BRWalletManager.getInstance().setFeePerKb(fees.regular);
                     }
                 }
 
-                byte[] pubkeyEncoded = BRKeyStore.getMasterPublicKey(ctx);
-                if (Utils.isNullOrEmpty(pubkeyEncoded)) {
-                    Timber.i("timber: initWallet: pubkey is missing");
-                    return;
-                }
-                //Save the first address for future check
-                m.createWallet(transactionsCount, pubkeyEncoded);
-                String firstAddress = BRWalletManager.getFirstAddress(pubkeyEncoded);
-                BRSharedPrefs.putFirstAddress(ctx, firstAddress);
-                FeeManager feeManager = FeeManager.getInstance();
-                if (feeManager.isRegularFee()) {
-                    Fee fees = feeManager.getFees();
-                    BRWalletManager.getInstance().setFeePerKb(fees.regular);
-                }
-            }
-
-            if (!pm.isCreated()) {
-                List<BRMerkleBlockEntity> blocks = MerkleBlockDataSource.getInstance(ctx).getAllMerkleBlocks();
-                List<BRPeerEntity> peers = PeerDataSource.getInstance(ctx).getAllPeers();
-                final int blocksCount = blocks.size();
-                final int peersCount = peers.size();
-                if (blocksCount > 0) {
-                    pm.createBlockArrayWithCount(blocksCount);
-                    for (BRMerkleBlockEntity entity : blocks) {
-                        pm.putBlock(entity.getBuff(), entity.getBlockHeight());
+                if (!pm.isCreated()) {
+                    List<BRMerkleBlockEntity> blocks = MerkleBlockDataSource.getInstance(ctx).getAllMerkleBlocks();
+                    List<BRPeerEntity> peers = PeerDataSource.getInstance(ctx).getAllPeers();
+                    final int blocksCount = blocks.size();
+                    final int peersCount = peers.size();
+                    if (blocksCount > 0) {
+                        pm.createBlockArrayWithCount(blocksCount);
+                        for (BRMerkleBlockEntity entity : blocks) {
+                            pm.putBlock(entity.getBuff(), entity.getBlockHeight());
+                        }
                     }
-                }
-                if (peersCount > 0) {
-                    pm.createPeerArrayWithCount(peersCount);
-                    for (BRPeerEntity entity : peers) {
-                        pm.putPeer(entity.getAddress(), entity.getPort(), entity.getTimeStamp());
+                    if (peersCount > 0) {
+                        pm.createPeerArrayWithCount(peersCount);
+                        for (BRPeerEntity entity : peers) {
+                            pm.putPeer(entity.getAddress(), entity.getPort(), entity.getTimeStamp());
+                        }
                     }
+                    Timber.d("timber: blocksCount before connecting: %s", blocksCount);
+                    Timber.d("timber: peersCount before connecting: %s", peersCount);
+
+                    int walletTime = BRKeyStore.getWalletCreationTime(ctx);
+
+                    Timber.d("timber: initWallet: walletTime: %s", walletTime);
+                    pm.create(walletTime, blocksCount, peersCount);
+                    BRPeerManager.getInstance().updateFixedPeer(ctx);
                 }
-                Timber.d("timber: blocksCount before connecting: %s", blocksCount);
-                Timber.d("timber: peersCount before connecting: %s", peersCount);
 
-                int walletTime = BRKeyStore.getWalletCreationTime(ctx);
+                pm.connect();
+                if (BRSharedPrefs.getStartHeight(ctx) == 0) {
+                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            BRSharedPrefs.putStartHeight(ctx, BRPeerManager.getCurrentBlockHeight());
+                        }
+                    });
+                }
 
-                Timber.d("timber: initWallet: walletTime: %s", walletTime);
-                pm.create(walletTime, blocksCount, peersCount);
-                BRPeerManager.getInstance().updateFixedPeer(ctx);
-            }
 
-            pm.connect();
-            if (BRSharedPrefs.getStartHeight(ctx) == 0)
-                BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        BRSharedPrefs.putStartHeight(ctx, BRPeerManager.getCurrentBlockHeight());
-                    }
-                });
         } finally {
             itInitiatingWallet = false;
         }

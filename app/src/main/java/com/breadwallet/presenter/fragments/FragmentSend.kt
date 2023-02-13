@@ -287,7 +287,7 @@ class FragmentSend : Fragment() {
             if (BRWalletManager.validateAddress(address)) {
                 val app: Activity? = activity
                 if (app == null) {
-                    Timber.e("paste onClick: app is null")
+                    Timber.e("timber:paste onClick: app is null")
                     return@OnClickListener
                 }
                 BRExecutor.getInstance().forLightWeightBackgroundTasks().execute {
