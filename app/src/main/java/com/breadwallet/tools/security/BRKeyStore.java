@@ -234,6 +234,7 @@ public class BRKeyStore {
             lock.lock();
             keyStore = KeyStore.getInstance(ANDROID_KEY_STORE);
             keyStore.load(null);
+            Timber.d("timber: BRKeyStore size: %d", keyStore.size());
             SecretKey secretKey = (SecretKey) keyStore.getKey(alias, null);
 
             byte[] encryptedData = retrieveEncryptedData(context, alias);
