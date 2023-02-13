@@ -91,7 +91,7 @@ public class BRSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Timber.e("Upgrading database from version " + oldVersion + " to "
+        Timber.e("timber: Upgrading database from version " + oldVersion + " to "
                 + newVersion + ", which will destroy all old data");
         onCreate(db);
     }

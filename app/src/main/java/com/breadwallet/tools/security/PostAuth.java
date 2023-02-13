@@ -127,7 +127,7 @@ public class PostAuth {
                         app, BRConstants.PUT_PHRASE_RECOVERY_WALLET_REQUEST_CODE);
             } catch (UserNotAuthenticatedException e) {
                 if (authAsked) {
-                    Timber.e("%s: WARNING!!!! LOOP", new Object() {
+                    Timber.e("timber:%s: WARNING!!!! LOOP", new Object() {
                     }.getClass().getEnclosingMethod().getName());
                     isStuckWithAuthLoop = true;
                 }
