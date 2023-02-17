@@ -21,7 +21,7 @@ public class BRSQLiteHelper extends SQLiteOpenHelper {
     }
 
     private static final String DATABASE_NAME = "loafwallet.db";
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 13;
 
     /**
      * MerkleBlock table
@@ -91,8 +91,20 @@ public class BRSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+<<<<<<< HEAD
         Timber.e("timber: Upgrading database from version " + oldVersion + " to "
                 + newVersion + ", which will destroy all old data");
         onCreate(db);
+=======
+        Timber.e("Upgrading database from version " + oldVersion + " to "
+                + newVersion);
+
+        // Clear DB tables to enable Bech32 features
+        if (oldVersion == 12 && newVersion == 13) {
+            db.execSQL("DELETE FROM " + MB_TABLE_NAME);
+            db.execSQL("DELETE FROM " + PEER_TABLE_NAME);
+            db.execSQL("DELETE FROM " + TX_TABLE_NAME);
+        }
+>>>>>>> 99fa1b1b03083da1d8247d4b662ba5161bc2d0fd
     }
 }
