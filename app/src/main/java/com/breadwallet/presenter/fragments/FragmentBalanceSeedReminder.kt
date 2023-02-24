@@ -1,6 +1,7 @@
 package com.breadwallet.presenter.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,12 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.breadwallet.R
 import com.breadwallet.tools.animation.BRAnimator
+import com.breadwallet.tools.security.BRKeyStore
+import com.breadwallet.tools.util.BRConstants
+import com.breadwallet.tools.util.Bip39Reader
 import com.breadwallet.wallet.BRWalletManager
+import java.util.*
+import kotlin.math.log
 
 
 class FragmentBalanceSeedReminder : Fragment() {
@@ -18,7 +24,7 @@ class FragmentBalanceSeedReminder : Fragment() {
     private lateinit var showSeedButton: Button
     private lateinit var currentBalanceTextView: TextView
     private lateinit var seedPhraseTextView: TextView
-    private lateinit var closeButton: Button
+    private lateinit var closeButton: View
 
 
     override fun onCreateView(
@@ -35,9 +41,7 @@ class FragmentBalanceSeedReminder : Fragment() {
         seedPhraseTextView = rootView.findViewById(R.id.seed_phrase)
         closeButton = rootView.findViewById(R.id.close_button)
         showSeedButton = rootView.findViewById(R.id.show_seed_button)
-        signalLayout.layoutTransition = BRAnimator.getDefaultTransition()
-
-        setListeners()
+//        signalLayout.layoutTransition = BRAnimator.getDefaultTransition()
 
         return rootView
     }
@@ -68,30 +72,14 @@ class FragmentBalanceSeedReminder : Fragment() {
                 }
             }
         })
+        setListeners()
+        fetchWalletInfo()
     }
     fun fetchWalletInfo() {
-
         val walletManager = BRWalletManager.getInstance()
-//        val phrase: ByteArray
-//        phrase = try {
-//            BRKeyStore.getPhrase(this, 0)
-//        } catch (e: UserNotAuthenticatedException) {
-//            throw RuntimeException("Failed to retrieve the phrase even though at this point the system auth was asked for sure.")
-//        }
-        currentBalanceTextView.text = "String.format.getBalance())"
-        seedPhraseTextView.text = "! d dw"
-    }
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-
+        val balance = walletManager.getBalance(requireContext())
+        currentBalanceTextView.text = "$balance"
+        seedPhraseTextView.text = walletManager.getSeedPhrase(requireContext())
     }
 
     private fun animateClose() {
