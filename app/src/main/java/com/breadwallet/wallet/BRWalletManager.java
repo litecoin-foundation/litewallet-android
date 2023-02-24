@@ -55,6 +55,8 @@ import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
 import com.platform.entities.WalletInfo;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -577,6 +579,16 @@ public class BRWalletManager {
 
     public void removeListener(OnBalanceChanged listener) {
         balanceListeners.remove(listener);
+    }
+
+    public String getSeedPhrase(Context context) {
+        byte[] phraseBytes;
+        try {
+            phraseBytes = BRKeyStore.getPhrase(context, BRConstants.PUT_PHRASE_NEW_WALLET_REQUEST_CODE);
+        } catch (UserNotAuthenticatedException e) {
+            phraseBytes = new byte[0];
+        }
+        return new String(phraseBytes);
     }
 
     public interface OnBalanceChanged {
