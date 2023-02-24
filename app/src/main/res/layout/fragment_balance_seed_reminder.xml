@@ -109,7 +109,8 @@
                 android:layout_marginBottom="@dimen/bread_margin"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:text="@string/seed_phrase.label" />
+                android:text="@string/seed_phrase.label"
+                android:textIsSelectable="true"/>
 
         </LinearLayout>
 
