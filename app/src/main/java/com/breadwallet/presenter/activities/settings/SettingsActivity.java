@@ -20,6 +20,7 @@ import com.breadwallet.presenter.language.ChangeLanguageBottomSheet;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.entities.BRSettingsItem;
 import com.breadwallet.presenter.interfaces.BRAuthCompletion;
+import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.security.AuthManager;
 import com.platform.APIClient;
@@ -124,6 +125,11 @@ public class SettingsActivity extends BRActivity {
             startActivity(intent);
             overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
 
+        }, false));
+
+        // recover seed phrase
+        items.add(new BRSettingsItem(getString(R.string.Settings_recover_seed), "", v -> {
+            BRAnimator.showBalanceSeedFragment(this);
         }, false));
 
         /*Wipe Start_Recover Wallet*/

@@ -32,6 +32,10 @@ import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.TxItem;
 import com.breadwallet.presenter.fragments.DynamicDonationFragment;
+<<<<<<< HEAD
+=======
+import com.breadwallet.presenter.fragments.FragmentRecoverSeedPhrase;
+>>>>>>> 6addd4a8 (Add seed recovery to settings)
 import com.breadwallet.presenter.fragments.FragmentBuy;
 import com.breadwallet.presenter.fragments.FragmentGreetings;
 import com.breadwallet.presenter.fragments.FragmentMenu;
@@ -71,6 +75,29 @@ public class BRAnimator {
             transaction.commit();
     }
 
+<<<<<<< HEAD
+=======
+
+   public static void showBalanceSeedFragment(@NonNull FragmentActivity app) {
+       Timber.d("timber: fetched info");
+
+         androidx.fragment.app.FragmentManager fragmentManager = app.getSupportFragmentManager();
+        FragmentRecoverSeedPhrase fragmentRecoverSeedPhrase = (FragmentRecoverSeedPhrase) fragmentManager.findFragmentByTag(FragmentRecoverSeedPhrase.class.getName());
+        if (fragmentRecoverSeedPhrase != null) {
+            fragmentRecoverSeedPhrase.fetchWalletInfo();
+            Timber.d("timber: fetched info");
+
+            return;
+        }
+
+       fragmentRecoverSeedPhrase = new FragmentRecoverSeedPhrase();
+       fragmentManager.beginTransaction()
+               .setCustomAnimations(0, 0, 0, R.animator.plain_300)
+               .add(android.R.id.content, fragmentRecoverSeedPhrase, FragmentRecoverSeedPhrase.class.getName())
+               .addToBackStack(FragmentRecoverSeedPhrase.class.getName()).commit();
+   }
+
+>>>>>>> 6addd4a8 (Add seed recovery to settings)
     public static void showSendFragment(FragmentActivity app, final String bitcoinUrl) {
         if (app == null) {
             Timber.i("showSendFragment: app is null");

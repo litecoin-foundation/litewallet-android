@@ -1,0 +1,159 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    android:animateLayoutChanges="true"
+    android:background="@color/black_trans"
+    android:filterTouchesWhenObscured="true"
+    android:isScrollContainer="false">
+
+    <LinearLayout
+        android:id="@+id/signal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/receive_layout"
+        android:clickable="true"
+        android:isScrollContainer="false"
+        android:orientation="vertical"
+        android:padding="0dp">
+
+        <RelativeLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="81dp">
+
+            <ImageButton
+                android:id="@+id/close_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="@dimen/bread_margin"
+                android:layout_marginRight="@dimen/bread_margin"
+                android:background="@drawable/ic_close_black_24dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="81dp" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/BRBoldTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/bread_margin"
+                android:layout_marginTop="@dimen/bread_margin"
+                android:layout_marginEnd="@dimen/bread_margin"
+                android:layout_marginBottom="@dimen/bread_margin"
+                android:text="@string/BalanceSeedReminder.title"
+                android:textColor="@color/almost_black"
+                android:textSize="@dimen/header"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="81dp" />
+
+            <ImageButton
+                android:id="@+id/faq_button"
+                android:layout_width="@dimen/faq_dimen"
+                android:layout_height="@dimen/faq_dimen"
+                android:layout_alignTop="@+id/title"
+                android:layout_alignBottom="@+id/title"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="@dimen/bread_margin"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="@dimen/bread_margin"
+                android:visibility="invisible"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="81dp" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/separator0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/extra_light_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/seed_phrase"
+                style="@style/BRTextStyle"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/bread_margin"
+                android:layout_marginEnd="@dimen/bread_margin"
+                android:layout_marginBottom="@dimen/bread_margin"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:textIsSelectable="true"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/extra_light_gray" />
+
+        <View
+            android:id="@+id/separator2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/extra_light_gray" />
+
+        <LinearLayout
+            android:id="@+id/keyboard_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/separator3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/extra_light_gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"/>
+
+        <View
+            android:id="@+id/separator4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/extra_light_gray" />
+
+        <com.breadwallet.presenter.customviews.BRButton
+            android:id="@+id/show_seed_button"
+            style="@style/BRButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:padding="10dp"
+            android:text="@string/show_seed_label"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:buttonType="1"
+            app:isBreadButton="true"
+            tools:background="@color/litecoin_litewallet_blue" />
+
+    </LinearLayout>
+
+</ScrollView>

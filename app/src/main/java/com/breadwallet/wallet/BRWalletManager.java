@@ -54,7 +54,10 @@ import com.breadwallet.tools.util.Bip39Reader;
 import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
 import com.platform.entities.WalletInfo;
+<<<<<<< HEAD
 import com.platform.tools.KVStoreManager;
+=======
+>>>>>>> 6addd4a8 (Add seed recovery to settings)
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
@@ -505,7 +508,11 @@ public class BRWalletManager {
 
                 byte[] pubkeyEncoded = BRKeyStore.getMasterPublicKey(ctx);
                 if (Utils.isNullOrEmpty(pubkeyEncoded)) {
+<<<<<<< HEAD
                     Timber.i("initWallet: pubkey is missing");
+=======
+                    Timber.i("timber: initWallet: pubkey is missing");
+>>>>>>> 6addd4a8 (Add seed recovery to settings)
                     return;
                 }
                 //Save the first address for future check
@@ -518,6 +525,46 @@ public class BRWalletManager {
                     BRWalletManager.getInstance().setFeePerKb(fees.regular);
                 }
             }
+<<<<<<< HEAD
+=======
+
+            if (!pm.isCreated()) {
+                List<BRMerkleBlockEntity> blocks = MerkleBlockDataSource.getInstance(ctx).getAllMerkleBlocks();
+                List<BRPeerEntity> peers = PeerDataSource.getInstance(ctx).getAllPeers();
+                final int blocksCount = blocks.size();
+                final int peersCount = peers.size();
+                if (blocksCount > 0) {
+                    pm.createBlockArrayWithCount(blocksCount);
+                    for (BRMerkleBlockEntity entity : blocks) {
+                        pm.putBlock(entity.getBuff(), entity.getBlockHeight());
+                    }
+                }
+                if (peersCount > 0) {
+                    pm.createPeerArrayWithCount(peersCount);
+                    for (BRPeerEntity entity : peers) {
+                        pm.putPeer(entity.getAddress(), entity.getPort(), entity.getTimeStamp());
+                    }
+                }
+                Timber.d("timber: blocksCount before connecting: %s", blocksCount);
+                Timber.d("timber: peersCount before connecting: %s", peersCount);
+
+                int walletTime = BRKeyStore.getWalletCreationTime(ctx);
+
+                Timber.d("timber: initWallet: walletTime: %s", walletTime);
+                pm.create(walletTime, blocksCount, peersCount);
+                BRPeerManager.getInstance().updateFixedPeer(ctx);
+            }
+
+            pm.connect();
+            if (BRSharedPrefs.getStartHeight(ctx) == 0) {
+                BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        BRSharedPrefs.putStartHeight(ctx, BRPeerManager.getCurrentBlockHeight());
+                    }
+                });
+            }
+>>>>>>> 6addd4a8 (Add seed recovery to settings)
 
             if (!pm.isCreated()) {
                 List<BRMerkleBlockEntity> blocks = MerkleBlockDataSource.getInstance(ctx).getAllMerkleBlocks();
