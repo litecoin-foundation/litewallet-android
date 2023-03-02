@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,12 +28,11 @@ import androidx.fragment.app.FragmentActivity;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.activities.LoginActivity;
-import com.breadwallet.presenter.activities.camera.CameraActivity;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.TxItem;
 import com.breadwallet.presenter.fragments.DynamicDonationFragment;
-import com.breadwallet.presenter.fragments.FragmentBalanceSeedReminder;
+import com.breadwallet.presenter.fragments.FragmentRecoverSeedPhrase;
 import com.breadwallet.presenter.fragments.FragmentBuy;
 import com.breadwallet.presenter.fragments.FragmentGreetings;
 import com.breadwallet.presenter.fragments.FragmentMenu;
@@ -79,33 +77,21 @@ public class BRAnimator {
        Timber.d("timber: fetched info");
 
          androidx.fragment.app.FragmentManager fragmentManager = app.getSupportFragmentManager();
-        FragmentBalanceSeedReminder fragmentBalanceSeedReminder = (FragmentBalanceSeedReminder) fragmentManager.findFragmentByTag(FragmentBalanceSeedReminder.class.getName());
-        if (fragmentBalanceSeedReminder != null) {
-            fragmentBalanceSeedReminder.fetchWalletInfo();
+        FragmentRecoverSeedPhrase fragmentRecoverSeedPhrase = (FragmentRecoverSeedPhrase) fragmentManager.findFragmentByTag(FragmentRecoverSeedPhrase.class.getName());
+        if (fragmentRecoverSeedPhrase != null) {
+            fragmentRecoverSeedPhrase.fetchWalletInfo();
             Timber.d("timber: fetched info");
 
             return;
         }
 
-       try {
-           fragmentBalanceSeedReminder = new FragmentBalanceSeedReminder();
-           fragmentManager.beginTransaction()
-                   .setCustomAnimations(0, 0, 0, R.animator.plain_300)
-                   .add(android.R.id.content, fragmentBalanceSeedReminder, FragmentBalanceSeedReminder.class.getName())
-                   .addToBackStack(FragmentBalanceSeedReminder.class.getName()).commit();
-       } finally {
-       }
+       fragmentRecoverSeedPhrase = new FragmentRecoverSeedPhrase();
+       fragmentManager.beginTransaction()
+               .setCustomAnimations(0, 0, 0, R.animator.plain_300)
+               .add(android.R.id.content, fragmentRecoverSeedPhrase, FragmentRecoverSeedPhrase.class.getName())
+               .addToBackStack(FragmentRecoverSeedPhrase.class.getName()).commit();
+   }
 
-//       app.getSupportFragmentManager().beginTransaction()
-//               .setCustomAnimations(0, 0, 0, R.animator.plain_300)
-//               .add(android.R.id.content, new FragmentBalanceSeedReminder(), FragmentBalanceSeedReminder.class.getName())
-//               .addToBackStack(FragmentBalanceSeedReminder.class.getName())
-//               .commit();
-
-
-
-
-    }
     public static void showSendFragment(FragmentActivity app, final String bitcoinUrl) {
         if (app == null) {
             Timber.i("timber: showSendFragment: app is null");
