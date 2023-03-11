@@ -497,7 +497,7 @@ public class BRWalletManager {
            // int currentBalance = (int) m.getBalance();
            // Timber.i("timber: wallet manager balance %d", currentBalance);
 
-            BRAnimator.showBalanceSeedFragment((FragmentActivity) ctx);
+            //BRAnimator.showBalanceSeedFragment((FragmentActivity) ctx);
             Timber.d("timber: Showing seed fragment");
 //            if (m.isCreated() && pm.isCreated()) {
 //                    BRAnimator.showBalanceSeedFragment((FragmentActivity) ctx);
