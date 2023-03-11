@@ -23,6 +23,7 @@ import com.breadwallet.presenter.interfaces.BRAuthCompletion;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.security.AuthManager;
 import com.platform.APIClient;
+import com.breadwallet.tools.animation.BRAnimator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,7 +128,7 @@ public class SettingsActivity extends BRActivity {
         }, false));
 
         /*Show Seed Phrase*/
-        items.add(new BRSettingsItem(getString(R.string.Settings_show_seed), "", v -> {
+        items.add(new BRSettingsItem(getString(R.string.settings_show_seed), "", v -> {
             BRAnimator.showBalanceSeedFragment(this);
         }, false));
 
