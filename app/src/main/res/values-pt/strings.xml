@@ -763,4 +763,6 @@
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">Compre vales-presente\n• Recarregue telefones pré-pagos\n• Steam, Amazon, Hotels.com\n• Funciona em 170 países</string>
     <string name="Donate.toThe.LWTeam">Doe para: Litewallet Infrastructure</string>
+    <string name="show_seed_label">Mostrar</string>
+    <string name="settings_show_seed">Mostrar minha frase de semente</string>
 </resources>

@@ -763,4 +763,6 @@
   <string name="Settings.languages">Sprachen</string>
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">Geschenkkarten kaufen\n• Prepaid-Telefone aufladen\n• Steam, Amazon, Hotels.com\n• Funktioniert in 170 Ländern</string>
+    <string name="show_seed_label">Zeigen</string>
+    <string name="settings_show_seed">Meine Seed-Phrase anzeigen</string>
 </resources>

@@ -763,4 +763,6 @@
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">Achetez des cartes-cadeaux\n• Rechargez des téléphones prépayés\n• Steam, Amazon, Hotels.com\n• Fonctionne dans 170 pays</string>
     <string name="Donate.toThe.LWTeam">Faire un don à : Litewallet Infrastructure</string>
+    <string name="show_seed_label">Montrer</string>
+    <string name="settings_show_seed">Afficher la phrase de départ</string>
 </resources>

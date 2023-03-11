@@ -763,4 +763,6 @@
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">购买礼品卡\n• 为预付费手机充值\n• Steam、亚马逊、Hotels.com\n• 适用于 170 个国家/地区</string>
     <string name="Donate.toThe.LWTeam">捐赠给：Litewallet 基础设施</string>
+    <string name="show_seed_label">展示</string>
+    <string name="settings_show_seed">显示我的助记词</string>
 </resources>

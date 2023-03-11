@@ -763,4 +763,6 @@
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">購買禮品卡\n• 為預付費手機充值\n• Steam、亞馬遜、Hotels.com\n• 適用於 170 個國家/地區</string>
     <string name="Donate.toThe.LWTeam">捐贈給：Litewallet 基礎設施</string>
+    <string name="show_seed_label">展示</string>
+    <string name="settings_show_seed">顯示我的助記詞</string>
 </resources>

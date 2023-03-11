@@ -44,7 +44,7 @@
                 tools:layout_editor_absoluteY="81dp" />
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/show_seed_title"
                 style="@style/BRBoldTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:layout_marginTop="@dimen/bread_margin"
                 android:layout_marginEnd="@dimen/bread_margin"
                 android:layout_marginBottom="@dimen/bread_margin"
-                android:text="@string/BalanceSeedReminder.title"
+                android:text="@string/settings_show_seed"
                 android:textColor="@color/almost_black"
                 android:textSize="@dimen/header"
                 tools:layout_editor_absoluteX="0dp"
@@ -86,19 +86,6 @@
             android:layout_height="240dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/current_balance"
-                style="@style/BRBoldTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_marginStart="@dimen/bread_margin"
-                android:layout_marginEnd="@dimen/bread_margin"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/barlowsemicondensed_light"
-                android:text="@string/current_balance.label"
-                android:textColor="@color/almost_black"
-                android:textSize="@dimen/header"
-                />
             <TextView
                 android:id="@+id/seed_phrase"
                 style="@style/BRBoldTextStyle"
