@@ -1,7 +1,6 @@
 package com.breadwallet.presenter.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,20 +11,16 @@ import com.breadwallet.R
 import com.breadwallet.tools.animation.BRAnimator
 import com.breadwallet.tools.security.BRKeyStore
 import com.breadwallet.tools.util.BRConstants
-import com.breadwallet.tools.util.Bip39Reader
 import com.breadwallet.wallet.BRWalletManager
 import java.util.*
-import kotlin.math.log
 
 
 class FragmentBalanceSeedReminder : Fragment() {
     private lateinit var backgroundLayout: ScrollView
     private lateinit var signalLayout: LinearLayout
     private lateinit var showSeedButton: Button
-    private lateinit var currentBalanceTextView: TextView
     private lateinit var seedPhraseTextView: TextView
     private lateinit var closeButton: View
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,12 +32,9 @@ class FragmentBalanceSeedReminder : Fragment() {
         backgroundLayout = rootView.findViewById(R.id.background_layout)
         signalLayout = rootView.findViewById(R.id.signal_layout)
         signalLayout = rootView.findViewById<View>(R.id.signal_layout) as LinearLayout
-        currentBalanceTextView = rootView.findViewById(R.id.current_balance)
         seedPhraseTextView = rootView.findViewById(R.id.seed_phrase)
         closeButton = rootView.findViewById(R.id.close_button)
         showSeedButton = rootView.findViewById(R.id.show_seed_button)
-//        signalLayout.layoutTransition = BRAnimator.getDefaultTransition()
-
         return rootView
     }
 
@@ -67,27 +59,23 @@ class FragmentBalanceSeedReminder : Fragment() {
                 }
                 BRAnimator.animateBackgroundDim(backgroundLayout, false)
                 BRAnimator.animateSignalSlide(signalLayout, false) {
-//                    val bundle = arguments
-//                    if (bundle?.getString("url") != null) setUrl(bundle.getString("url"))
                 }
             }
         })
         setListeners()
-        fetchWalletInfo()
+        fetchSeedPhrase()
     }
-    fun fetchWalletInfo() {
-        val walletManager = BRWalletManager.getInstance()
-        val balance = walletManager.getBalance(requireContext())
-        currentBalanceTextView.text = "$balance"
-        seedPhraseTextView.text = walletManager.getSeedPhrase(requireContext())
+    fun fetchSeedPhrase() {
+        seedPhraseTextView.text =  String(BRKeyStore.getPhrase(context, 0))
     }
 
     private fun animateClose() {
         BRAnimator.animateBackgroundDim(backgroundLayout, true)
         BRAnimator.animateSignalSlide(signalLayout, true) { close() }
     }
+
     private fun close() {
-        if(activity != null && activity?.isFinishing != true) {
+        if (activity != null && activity?.isFinishing != true) {
             activity?.onBackPressed()
         }
     }

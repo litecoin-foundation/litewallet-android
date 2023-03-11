@@ -785,4 +785,6 @@
     <string name="Donate.Dialog.Positive.text">Пожертвуйте</string>
   <string name="Donate.Dialog.Negative.text">Скасувати</string>
     <string name="Donate.toThe.LWTeam">Пожертвуйте: Litewallet Infrastructure</string>
+  <string name="show_seed_label">Показати</string>
+  <string name="settings_show_seed">Покажи мою початкову фразу</string>
 </resources>
