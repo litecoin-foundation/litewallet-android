@@ -126,6 +126,11 @@ public class SettingsActivity extends BRActivity {
 
         }, false));
 
+        /*Show Seed Phrase*/
+        items.add(new BRSettingsItem(getString(R.string.Settings_show_seed), "", v -> {
+            BRAnimator.showBalanceSeedFragment(this);
+        }, false));
+
         /*Wipe Start_Recover Wallet*/
         items.add(new BRSettingsItem(getString(R.string.Settings_wipe), "", v -> {
             Intent intent = new Intent(SettingsActivity.this, WipeActivity.class);

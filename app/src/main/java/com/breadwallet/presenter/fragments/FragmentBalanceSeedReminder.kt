@@ -1,7 +1,6 @@
 package com.breadwallet.presenter.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +9,8 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.breadwallet.R
 import com.breadwallet.tools.animation.BRAnimator
-import com.breadwallet.tools.security.BRKeyStore
-import com.breadwallet.tools.util.BRConstants
-import com.breadwallet.tools.util.Bip39Reader
 import com.breadwallet.wallet.BRWalletManager
 import java.util.*
-import kotlin.math.log
 
 
 class FragmentBalanceSeedReminder : Fragment() {
@@ -83,12 +78,26 @@ class FragmentBalanceSeedReminder : Fragment() {
     }
 
     private fun animateClose() {
+
         BRAnimator.animateBackgroundDim(backgroundLayout, true)
-        BRAnimator.animateSignalSlide(signalLayout, true) { close() }
-    }
-    private fun close() {
-        if(activity != null && activity?.isFinishing != true) {
-            activity?.onBackPressed()
+        BRAnimator.animateSignalSlide(signalLayout, true) {
+     //       val prev: Fragment = parentFragmentManager().findFragmentByTag("fragment_dialog")
+//            if (prev != null) {
+//                val df: DialogFragment = prev as DialogFragment
+//                df.dismiss()
+//            }
+
+//            fun onBackPressed() {
+//                if (fragmentManager!!.backStackEntryCount > 0) {
+//                    fragmentManager!!.popBackStack()
+//                } else if (AuthManager.getInstance().isWalletDisabled(this@DisabledActivity)) {
+//                    SpringAnimator.failShakeAnimation(this@DisabledActivity, disabled)
+//                } else {
+//                    BRAnimator.startBreadActivity(this@DisabledActivity, true)
+//                }
+//                overridePendingTransition(R.anim.fade_up, R.anim.fade_down)
+//            }
+
         }
     }
 }
