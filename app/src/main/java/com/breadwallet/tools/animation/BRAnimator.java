@@ -95,16 +95,6 @@ public class BRAnimator {
                    .addToBackStack(FragmentBalanceSeedReminder.class.getName()).commit();
        } finally {
        }
-
-//       app.getSupportFragmentManager().beginTransaction()
-//               .setCustomAnimations(0, 0, 0, R.animator.plain_300)
-//               .add(android.R.id.content, new FragmentBalanceSeedReminder(), FragmentBalanceSeedReminder.class.getName())
-//               .addToBackStack(FragmentBalanceSeedReminder.class.getName())
-//               .commit();
-
-
-
-
     }
     public static void showSendFragment(FragmentActivity app, final String bitcoinUrl) {
         if (app == null) {
