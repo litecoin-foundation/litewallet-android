@@ -763,4 +763,6 @@
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">기프트 카드 구매\n• 선불 전화 충전\n• Steam, Amazon, Hotels.com\n• 170개국에서 작동</string>
     <string name="Donate.toThe.LWTeam">기부: Litewallet 인프라</string>
+    <string name="show_seed_label">보여주다</string>
+    <string name="settings_show_seed">내 시드 문구 표시</string>
 </resources>

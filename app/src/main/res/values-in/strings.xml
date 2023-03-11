@@ -765,4 +765,6 @@
   <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">Beli kartu hadiah\n• Isi ulang ponsel prabayar\n• Steam, Amazon, Hotels.com\n• Berfungsi di 170 negara</string>
     <string name="Donate.toThe.LWTeam">Donasi ke: Infrastruktur Litewallet</string>
+    <string name="show_seed_label">Menunjukkan</string>
+    <string name="settings_show_seed">Tunjukkan frase seed saya</string>
 </resources>
