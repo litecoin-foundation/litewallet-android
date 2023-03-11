@@ -808,9 +808,8 @@
   <string name="Donate.Dialog.Negative.text">Cancel</string>
   <string name="Donate.toThe.LWTeam">Donate to: Litewallet Infrastructure</string>
     <string name="About.Instagram" translatable="false">Instagram</string>
-  <string name="BalanceSeedReminder.title">Balance and Seed</string>
-  <string name="current_balance.label">Current Balance: %d</string>
-    <string name="seed_phrase.label">1: %s 2: %s 3: %s 4: %s \\n5: %s 6: %s 7: %s 8: %s%s \\n9: %s 10: %s 11: %s 12: %s  %s</string>
-    <string name="show_seed_label">Show me my seed phrase</string>
+  <string name="seed_phrase.label" translatable="false">1: %s 2: %s 3: %s 4: %s \\n5: %s 6: %s 7: %s 8: %s%s \\n9: %s 10: %s 11: %s 12: %s  %s</string>
+    <string name="show_seed_label">Show</string>
+  <string name="settings_show_seed">Show my seed phrase</string>
 
 </resources>

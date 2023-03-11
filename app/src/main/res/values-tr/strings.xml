@@ -802,6 +802,8 @@
     <string name="Donate.Dialog.Positive.text">Bağış yapmak</string>
   <string name="Donate.Dialog.Negative.text">İptal</string>
     <string name="Donate.toThe.LWTeam">Bağışta bulunun: Litewallet Altyapısı</string>
+    <string name="show_seed_label">Göstermek</string>
+    <string name="settings_show_seed">" Tohum ifademi göster"</string>
 
 
 </resources>
