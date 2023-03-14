@@ -494,15 +494,8 @@ public class BRWalletManager {
             BRWalletManager m = BRWalletManager.getInstance();
             final BRPeerManager pm = BRPeerManager.getInstance();
 
-           // int currentBalance = (int) m.getBalance();
-           // Timber.i("timber: wallet manager balance %d", currentBalance);
-
-            //BRAnimator.showBalanceSeedFragment((FragmentActivity) ctx);
             Timber.d("timber: Showing seed fragment");
-//            if (m.isCreated() && pm.isCreated()) {
-//                    BRAnimator.showBalanceSeedFragment((FragmentActivity) ctx);
-//                    Timber.i("timber: Showing seed fragment");
-//                }
+
                 if (!m.isCreated()) {
                     List<BRTransactionEntity> transactions = TransactionDataSource.getInstance(ctx).getAllTransactions();
                     int transactionsCount = transactions.size();
