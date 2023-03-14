@@ -141,6 +141,7 @@ public class PostAuth {
             } else {
                 if (phraseForKeyStore.length() != 0) {
                     BRSharedPrefs.putPhraseWroteDown(app, true);
+                    Timber.d("timber: BRSharedPrefs.putPhraseWroteDown was set to true");
                     bytePhrase = TypesConverter.getNullTerminatedPhrase(phraseForKeyStore.getBytes());
                     byte[] seed = BRWalletManager.getSeedFromPhrase(bytePhrase);
                     byte[] authKey = BRWalletManager.getAuthPrivKeyForAPI(seed);
@@ -188,9 +189,7 @@ public class PostAuth {
                     Timber.d("timber: onPublishTxAuth: txhash:" + Arrays.toString(txHash));
                     if (Utils.isNullOrEmpty(txHash)) {
                         Timber.d("timber: onPublishTxAuth: publishSerializedTransaction returned FALSE");
-                        //todo fix this
-//                        BRWalletManager.getInstance().offerToChangeTheAmount(app, new PaymentItem(paymentRequest.addresses, paymentItem.serializedTx, paymentRequest.amount, null, paymentRequest.isPaymentRequest));
-                    } else {
+                      } else {
                         TxMetaData txMetaData = new TxMetaData();
                         txMetaData.comment = paymentItem.comment;
                         KVStoreManager.getInstance().putTxMetaData(app, txMetaData, txHash);

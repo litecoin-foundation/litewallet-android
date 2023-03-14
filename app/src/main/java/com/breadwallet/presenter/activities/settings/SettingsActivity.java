@@ -129,7 +129,7 @@ public class SettingsActivity extends BRActivity {
 
         /*Show Seed Phrase*/
         items.add(new BRSettingsItem(getString(R.string.settings_show_seed), "", v -> {
-            BRAnimator.showBalanceSeedFragment(this);
+          BRAnimator.showBalanceSeedFragment(this);
         }, false));
 
         /*Wipe Start_Recover Wallet*/

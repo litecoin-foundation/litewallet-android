@@ -81,9 +81,8 @@ public class BRAnimator {
          androidx.fragment.app.FragmentManager fragmentManager = app.getSupportFragmentManager();
         FragmentBalanceSeedReminder fragmentBalanceSeedReminder = (FragmentBalanceSeedReminder) fragmentManager.findFragmentByTag(FragmentBalanceSeedReminder.class.getName());
         if (fragmentBalanceSeedReminder != null) {
-            fragmentBalanceSeedReminder.fetchWalletInfo();
-            Timber.d("timber: fetched info");
-
+            fragmentBalanceSeedReminder.fetchSeedPhrase();
+            Timber.d("timber: fetched seed phrase");
             return;
         }
 

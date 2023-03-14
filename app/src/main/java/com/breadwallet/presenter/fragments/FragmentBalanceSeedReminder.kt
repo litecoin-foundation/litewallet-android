@@ -9,6 +9,8 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.breadwallet.R
 import com.breadwallet.tools.animation.BRAnimator
+import com.breadwallet.tools.security.BRKeyStore
+import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.wallet.BRWalletManager
 import java.util.*
 
@@ -61,12 +63,10 @@ class FragmentBalanceSeedReminder : Fragment() {
             }
         })
         setListeners()
-        fetchWalletInfo()
+        fetchSeedPhrase()
     }
-    fun fetchWalletInfo() {
-        val walletManager = BRWalletManager.getInstance()
-        val balance = walletManager.getBalance(requireContext())
-        seedPhraseTextView.text = walletManager.getSeedPhrase(requireContext())
+    fun fetchSeedPhrase() {
+        seedPhraseTextView.text =  String(BRKeyStore.getPhrase(context, 0))
     }
 
     private fun animateClose() {
