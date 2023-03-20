@@ -24,6 +24,8 @@ public class BRSharedPrefs {
     public static final String SEND_TRANSACTION_COUNT = "send_transaction_count";
     public static final String IN_APP_REVIEW_DONE = "in_app_review_done";
 
+    public static final String PREFERRED_FPRATE = "preferredFalsePositiveRate";
+
     public interface OnIsoChangedListener {
         void onIsoChanged(String iso);
     }
@@ -438,4 +440,9 @@ public class BRSharedPrefs {
         context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
                 .edit().putBoolean(IN_APP_REVIEW_DONE, true).apply();
     }
+
+    public static float getBloomFilterFalsePositivesRate(Context context, Double preferredRate) {
+        return context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE).getFloat(PREFERRED_FPRATE, 0.00004F);
+    }
 }
+
