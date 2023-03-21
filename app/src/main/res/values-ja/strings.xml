@@ -765,4 +765,8 @@
     <string name="Donate.toThe.LWTeam">寄付先: Litewallet インフラストラクチャ</string>
     <string name="show_seed_label">見せる</string>
     <string name="settings_show_seed">私のシードフレーズを表示</string>
+  <string name="sync_preferences">同期設定: %1$s 誤検知</string>
+    <string name="radio_low_privacy">低プライバシー (~19 分)</string>
+  <string name="radio_semi_private">セミプライベート（～42分）</string>
+  <string name="radio_anonymous">匿名 (~77 分)</string>
 </resources>

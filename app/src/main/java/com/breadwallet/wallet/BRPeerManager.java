@@ -209,7 +209,7 @@ public class BRPeerManager {
 
     public native String getCurrentPeerName();
 
-    public native void create(int earliestKeyTime, int blockCount, int peerCount);
+    public native void create(int earliestKeyTime, int blockCount, int peerCount, double fpRate);
 
     public native void connect();
 
@@ -240,4 +240,6 @@ public class BRPeerManager {
     public native long getLastBlockTimestamp();
 
     public native void rescan();
+
+    //public native void updateFPRate(double fpRate);
 }
