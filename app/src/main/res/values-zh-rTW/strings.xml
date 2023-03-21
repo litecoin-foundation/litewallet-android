@@ -760,9 +760,13 @@
   <string name="BuyCenter.moonpay.FinancialDetails">"•購買具有許多法定貨幣對的LTC\n•以多種方式支付\n•全球支付提供商"</string>
   <string name="Login.currentLtcPrice">當前的LTC值 %1$s</string>
   <string name="Settings.languages">語言能力</string>
-    <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">購買禮品卡\n• 為預付費手機充值\n• Steam、亞馬遜、Hotels.com\n• 適用於 170 個國家/地區</string>
-    <string name="Donate.toThe.LWTeam">捐贈給：Litewallet 基礎設施</string>
-    <string name="show_seed_label">展示</string>
-    <string name="settings_show_seed">顯示我的助記詞</string>
+  <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+  <string name="BuyCenter.bitrefill.FinancialDetails">購買禮品卡\n• 為預付費手機充值\n• Steam、亞馬遜、Hotels.com\n• 適用於 170 個國家/地區</string>
+  <string name="Donate.toThe.LWTeam">捐贈給：Litewallet 基礎設施</string>
+  <string name="show_seed_label">展示</string>
+  <string name="settings_show_seed">顯示我的助記詞</string>
+  <string name="sync_preferences">同步偏好：%1$s 誤報</string>
+    <string name="radio_low_privacy">低隱私（約 19 分鐘）</string>
+  <string name="radio_semi_private">半私人（約 42 分鐘）</string>
+  <string name="radio_anonymous">匿名（約 77 分鐘）</string>
 </resources>

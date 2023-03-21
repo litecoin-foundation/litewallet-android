@@ -811,5 +811,9 @@
   <string name="seed_phrase.label" translatable="false">1: %s 2: %s 3: %s 4: %s \\n5: %s 6: %s 7: %s 8: %s%s \\n9: %s 10: %s 11: %s 12: %s  %s</string>
     <string name="show_seed_label">Show</string>
   <string name="settings_show_seed">Show my seed phrase</string>
+  <string name="sync_preferences">Sync  Preference: %1$s false positives</string>
+  <string name="radio_low_privacy">Low privacy (~19 minutes)</string>
+  <string name="radio_semi_private">Semi-private (~42 minutes)</string>
+  <string name="radio_anonymous">Anonymous (~77 minutes)</string>
 
 </resources>

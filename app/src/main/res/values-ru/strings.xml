@@ -765,4 +765,8 @@
     <string name="Donate.toThe.LWTeam">Пожертвовать: Инфраструктура Litewallet</string>
     <string name="show_seed_label">Показывать</string>
     <string name="settings_show_seed">" Покажи мою початкову фразу"</string>
+  <string name="sync_preferences">Настройка синхронизации: %1$s ложных срабатываний</string>
+    <string name="radio_low_privacy">"Низкая конфиденциальность (~ 19 минут) "</string>
+  <string name="radio_semi_private">"Полуприватный (~ 42 минуты) "</string>
+  <string name="radio_anonymous">"Аноним (~77 минут) "</string>
 </resources>
