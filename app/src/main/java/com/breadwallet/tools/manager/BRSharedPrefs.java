@@ -441,8 +441,15 @@ public class BRSharedPrefs {
                 .edit().putBoolean(IN_APP_REVIEW_DONE, true).apply();
     }
 
-    public static float getBloomFilterFalsePositivesRate(Context context, Double preferredRate) {
-        return context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE).getFloat(PREFERRED_FPRATE, 0.00004F);
+    public static float getFalsePositivesRate(Context context) {
+        return context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE).getFloat(PREFERRED_FPRATE, BRConstants.FALSE_POS_RATE_SEMI_PRIVACY);
+    }
+
+    public static void putFalsePositivesRate(Context context, float preferredRate) {
+        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putFloat(PREFERRED_FPRATE, preferredRate);
+        editor.apply();
     }
 }
 

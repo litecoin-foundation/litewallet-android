@@ -9,8 +9,22 @@
     tools:context="com.breadwallet.presenter.activities.SetPinActivity">
 
     <TextView
+        android:id="@+id/sync_preferences"
         style="@style/BRBoldTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+
+        android:text="Sync Preferences:"
+        android:textColor="@color/almost_black"
+        android:textSize="@dimen/sub_header"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
         android:id="@+id/title"
+        style="@style/BRBoldTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/bread_margin"
@@ -22,59 +36,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        style="@style/BRBoldTextStyle"
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/ReScan.subheader1"
-        android:textColor="@color/almost_black"
-        android:textSize="@dimen/sub_header"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/title"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <TextView
-        style="@style/BRTextStyle"
-        android:id="@+id/exchange_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/ReScan.body1"
-        android:textColor="@color/almost_black"
-        android:textSize="@dimen/paragraph"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/description"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
-
-    <TextView
-        style="@style/BRBoldTextStyle"
         android:id="@+id/textView13"
+        style="@style/BRBoldTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:text="@string/ReScan.subheader2"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/exchange_text"
+        app:layout_constraintLeft_toLeftOf="@+id/title"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exchange_text" />
+        app:layout_constraintTop_toBottomOf="@+id/title"/>
 
     <TextView
-        style="@style/BRTextStyle"
         android:id="@+id/textView15"
+        style="@style/BRTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
         android:text="@string/ReScan.body2"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
@@ -84,11 +67,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
-        style="@style/BRTextStyle"
         android:id="@+id/textView16"
+        style="@style/BRTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="@string/ReScan.body3"
         android:textColor="@color/almost_black"
@@ -98,13 +81,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <TextView
-        style="@style/BRTextStyle"
         android:id="@+id/textView17"
+        style="@style/BRTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
         android:lineSpacingMultiplier="1.1"
         android:text="@string/ReScan.footer"
         android:textSize="@dimen/sub_header"
@@ -113,13 +96,13 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <com.breadwallet.presenter.customviews.BRButton
-        style="@style/BRButtonStyle"
         android:id="@+id/button_scan"
+        style="@style/BRButtonStyle"
         android:layout_width="0dp"
         android:layout_height="@dimen/big_button_height"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="@dimen/bread_margin"
         android:layout_marginStart="@dimen/bread_margin"
+        android:layout_marginEnd="@dimen/bread_margin"
+        android:layout_marginBottom="8dp"
         android:elevation="8dp"
         android:padding="10dp"
         android:text="@string/ReScan.buttonTitle"
@@ -135,12 +118,44 @@
         android:id="@+id/faq_button"
         android:layout_width="@dimen/faq_dimen"
         android:layout_height="@dimen/faq_dimen"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="0dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title" />
+
+    <RadioGroup
+        android:id="@+id/sync_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bread_margin"
+        android:layout_marginEnd="@dimen/bread_margin"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="32dp"
+        android:elevation="8dp"
+        android:padding="10dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/sync_preferences">
+
+        <RadioButton
+            android:id="@+id/radio_low_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Low privacy" />
+
+        <RadioButton
+            android:id="@+id/radio_semi_private"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Semi-Private" />
+
+        <RadioButton
+            android:id="@+id/radio_anonymous"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Anonymous" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
