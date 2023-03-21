@@ -765,4 +765,8 @@
     <string name="BuyCenter.bitrefill.FinancialDetails">Geschenkkarten kaufen\n• Prepaid-Telefone aufladen\n• Steam, Amazon, Hotels.com\n• Funktioniert in 170 Ländern</string>
     <string name="show_seed_label">Zeigen</string>
     <string name="settings_show_seed">Meine Seed-Phrase anzeigen</string>
+  <string name="sync_preferences">Synchronisierungseinstellung: %1$s Fehlalarme</string>
+    <string name="radio_low_privacy">Geringe Privatsphäre (~19 Minuten)</string>
+  <string name="radio_semi_private">Halbprivat (~42 Minuten)</string>
+  <string name="radio_anonymous">Anonym (~77 Minuten)</string>
 </resources>

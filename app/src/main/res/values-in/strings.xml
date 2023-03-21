@@ -767,4 +767,8 @@
     <string name="Donate.toThe.LWTeam">Donasi ke: Infrastruktur Litewallet</string>
     <string name="show_seed_label">Menunjukkan</string>
     <string name="settings_show_seed">Tunjukkan frase seed saya</string>
+  <string name="sync_preferences">Preferensi Sinkronisasi: %1$s positif palsu</string>
+    <string name="radio_low_privacy">Privasi rendah (~19 menit)</string>
+  <string name="radio_semi_private">Semi-pribadi (~42 menit)</string>
+  <string name="radio_anonymous">Anonim (~77 menit)</string>
 </resources>
