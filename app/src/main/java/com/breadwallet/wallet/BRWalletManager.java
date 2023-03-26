@@ -493,6 +493,7 @@ public class BRWalletManager {
             }
             BRWalletManager m = BRWalletManager.getInstance();
             final BRPeerManager pm = BRPeerManager.getInstance();
+            double fpRate = BRSharedPrefs.getFalsePositivesRate(ctx);
 
             Timber.d("timber: Showing seed fragment");
 
@@ -545,7 +546,7 @@ public class BRWalletManager {
                     int walletTime = BRKeyStore.getWalletCreationTime(ctx);
 
                     Timber.d("timber: initWallet: walletTime: %s", walletTime);
-                    pm.create(walletTime, blocksCount, peersCount);
+                    pm.create(walletTime, blocksCount, peersCount, fpRate);
                     BRPeerManager.getInstance().updateFixedPeer(ctx);
                 }
 
