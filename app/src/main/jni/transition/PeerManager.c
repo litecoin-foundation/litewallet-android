@@ -77,35 +77,6 @@ static void syncStopped(void *info, int error) {
     (*env)->CallStaticVoidMethod(env, _peerManagerClass, mid);
 }
 
-//static void syncSucceeded(void *info) {
-//    __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "syncSucceeded: # of tx: %d",
-//                        (int) BRWalletTransactions(_wallet, NULL, 0));
-//    if (!_peerManager) return;
-//
-//    JNIEnv *env = getEnv();
-//    jmethodID mid;
-//
-//    if (!env) return;
-//
-//    //call java methods
-//    mid = (*env)->GetStaticMethodID(env, _peerManagerClass, "syncSucceeded", "()V");
-//    (*env)->CallStaticVoidMethod(env, _peerManagerClass, mid);
-//}
-//
-//static void syncFailed(void *info, int error) {
-//    __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "syncFailed");
-//    if (!_peerManager) return;
-//
-//    JNIEnv *env = getEnv();
-//    jmethodID mid;
-//
-//    if (!env) return;
-//
-//    //call java methods
-//    mid = (*env)->GetStaticMethodID(env, _peerManagerClass, "syncFailed", "()V");
-//    (*env)->CallStaticVoidMethod(env, _peerManagerClass, mid);
-//}
-
 static void txStatusUpdate(void *info) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "txStatusUpdate");
     if (!_peerManager) return;
@@ -130,12 +101,6 @@ static void saveBlocks(void *info, int replace, BRMerkleBlock *blocks[], size_t 
     jmethodID mid;
 
     if (!env) return;
-
-//    if (count != 1) {
-//        __android_log_print(ANDROID_LOG_ERROR, "Message from C: ", "deleting %zu blocks", count);
-//        mid = (*env)->GetStaticMethodID(env, _peerManagerClass, "deleteBlocks", "()V");
-//        (*env)->CallStaticVoidMethod(env, _peerManagerClass, mid);
-//    }
 
     //call java methods
 
@@ -172,13 +137,6 @@ static void savePeers(void *info, int replace, const BRPeer peers[], size_t coun
     jmethodID mid;
 
     if (!env) return;
-
-//    //call java methods
-//    if (count != 1) {
-//        __android_log_print(ANDROID_LOG_ERROR, "Message from C: ", "deleting %d peers", count);
-//        mid = (*env)->GetStaticMethodID(env, _peerManagerClass, "deletePeers", "()V");
-//        (*env)->CallStaticVoidMethod(env, _peerManagerClass, mid);
-//    }
 
     jobjectArray peerObjectArray = (*env)->NewObjectArray(env, (jsize) count, _peerClass, 0);
 
@@ -236,8 +194,7 @@ JNIEXPORT void JNICALL Java_com_breadwallet_wallet_BRPeerManager_rescan(JNIEnv *
     if (!_peerManager)
         __android_log_print(ANDROID_LOG_ERROR, "Message from C: ",
                             "rescan: peerManager is NULL!!!!!!!");
-//    __android_log_print(ANDROID_LOG_ERROR, "Message from C: ", "is Connected: %d",
-//                        BRPeerManagerIsConnected(_peerManager));
+
     if (_peerManager) BRPeerManagerRescan(_peerManager);
 }
 
@@ -247,8 +204,7 @@ Java_com_breadwallet_wallet_BRPeerManager_create(JNIEnv *env, jobject thiz,
                                                  int blocksCount, int peersCount,
                                                  double fpRate) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ",
-                        "create| blocksCount: %d, peersCount: %d, earliestKeyTime: %d",
-                        blocksCount, peersCount, earliestKeyTime);
+                        "create | blocksCount: %d, peersCount: %d, earliestKeyTime: %d fpRate: %1.9f", blocksCount, peersCount, earliestKeyTime, fpRate);
 
     jint rs = (*env)->GetJavaVM(env, &_jvmPM);
     jclass peerManagerClass = (*env)->FindClass(env, "com/breadwallet/wallet/BRPeerManager");
