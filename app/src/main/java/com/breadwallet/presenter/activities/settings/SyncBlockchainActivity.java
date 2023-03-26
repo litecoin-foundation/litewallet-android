@@ -50,7 +50,7 @@ public class SyncBlockchainActivity extends BRActivity {
 
     private void updateSyncPreference() {
         float fprate =  BRSharedPrefs.getFalsePositivesRate(SyncBlockchainActivity.this);
-        String rateAsString = String.format("%1.5f",fprate);
+        String rateAsString = String.format("%1.7f",fprate);
         syncPreferenceTextView.setText(getString(R.string.sync_preferences, rateAsString));
 
         if (fprate == BRConstants.FALSE_POS_RATE_LOW_PRIVACY) {

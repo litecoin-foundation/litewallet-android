@@ -207,7 +207,7 @@ public class BRConstants {
     /**
     * False Positive rate keys
     */
-    public static final float FALSE_POS_RATE_LOW_PRIVACY = 0.00001F;
+    public static final float FALSE_POS_RATE_LOW_PRIVACY = 0.000005F;
     public static final float FALSE_POS_RATE_SEMI_PRIVACY = 0.00002F;
     public static final float FALSE_POS_RATE_ANONYMOUS = 0.00005F;
 }
