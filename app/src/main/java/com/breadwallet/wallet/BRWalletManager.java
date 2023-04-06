@@ -242,6 +242,7 @@ public class BRWalletManager {
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
+                Timber.d("timber: Running peerManagerFreeEverything");
                 BRPeerManager.getInstance().peerManagerFreeEverything();
                 walletFreeEverything();
                 TransactionDataSource.getInstance(ctx).deleteAllTransactions();
@@ -545,7 +546,7 @@ public class BRWalletManager {
 
                     int walletTime = BRKeyStore.getWalletCreationTime(ctx);
 
-                    Timber.d("timber: initWallet: walletTime: %s", walletTime);
+                    Timber.d("timber: initWallet: walletTime: %s user preferred fpRate: %f", walletTime, fpRate);
                     pm.create(walletTime, blocksCount, peersCount, fpRate);
                     BRPeerManager.getInstance().updateFixedPeer(ctx);
                 }

@@ -442,7 +442,7 @@ public class BRSharedPrefs {
     }
 
     public static float getFalsePositivesRate(Context context) {
-        return context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE).getFloat(PREFERRED_FPRATE, BRConstants.FALSE_POS_RATE_SEMI_PRIVACY);
+        return context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE).getFloat(PREFERRED_FPRATE, BRConstants.FALSE_POS_RATE_LOW_PRIVACY);
     }
 
     public static void putFalsePositivesRate(Context context, float preferredRate) {

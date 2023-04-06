@@ -59,8 +59,6 @@ public class IntroActivity extends BRActivity implements Serializable {
         versionText = findViewById(R.id.version_text);
         setListeners();
         updateBundles();
-//        SyncManager.getInstance().updateAlarms(this);
-
         if (!BuildConfig.DEBUG && BRKeyStore.AUTH_DURATION_SEC != 300) {
             RuntimeException ex = new RuntimeException("onCreate: AUTH_DURATION_SEC should be 300");
             Timber.e(ex);
@@ -77,9 +75,12 @@ public class IntroActivity extends BRActivity implements Serializable {
         byte[] masterPubKey = BRKeyStore.getMasterPublicKey(this);
         boolean isFirstAddressCorrect = false;
         if (masterPubKey != null && masterPubKey.length != 0) {
+            Timber.d("timber: masterPubkey exists");
+
             isFirstAddressCorrect = SmartValidator.checkFirstAddress(this, masterPubKey);
         }
         if (!isFirstAddressCorrect) {
+            Timber.d("timber: Calling wipeWalletButKeyStore");
             BRWalletManager.getInstance().wipeWalletButKeystore(this);
         }
 
