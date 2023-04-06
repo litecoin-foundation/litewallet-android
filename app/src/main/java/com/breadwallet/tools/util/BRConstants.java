@@ -143,6 +143,7 @@ public class BRConstants {
     public static final String _20201121_FRIA = "failed_resolve_IPFS_address";
     public static final String _20230113_BAC = "backup_apiserver_called";
 
+    public static final String _20230407_DCS = "did_complete_sync";
     ///Dev: These events not yet used
     public static final String _20200207_DTHB = "did_tap_header_balance";
     public static final String _20210405_TAWDF = "ternio_api_wallet_details_failure";
@@ -189,7 +190,8 @@ public class BRConstants {
             _20210804_TAULO,
             _20210427_HCIEEH,
             _20220822_UTOU,
-            _20230131_NENR
+            _20230131_NENR,
+            _20230407_DCS
     })
     public @interface Event {
     }
@@ -207,7 +209,7 @@ public class BRConstants {
     /**
     * False Positive rate keys
     */
-    public static final float FALSE_POS_RATE_LOW_PRIVACY = 0.00001F;
-    public static final float FALSE_POS_RATE_SEMI_PRIVACY = 0.00002F;
-    public static final float FALSE_POS_RATE_ANONYMOUS = 0.00005F;
+    public static final float FALSE_POS_RATE_LOW_PRIVACY = 0.00005F;
+    public static final float FALSE_POS_RATE_SEMI_PRIVACY = 0.00008F;
+    public static final float FALSE_POS_RATE_ANONYMOUS = 0.0005F;
 }

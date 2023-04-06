@@ -4,19 +4,23 @@ import android.content.Context;
 
 import androidx.annotation.WorkerThread;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.breadwallet.BreadApp;
 import com.breadwallet.presenter.entities.BlockEntity;
 import com.breadwallet.presenter.entities.PeerEntity;
+import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.SyncManager;
 import com.breadwallet.tools.sqlite.MerkleBlockDataSource;
 import com.breadwallet.tools.sqlite.PeerDataSource;
 import com.breadwallet.tools.threads.BRExecutor;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.TrustedNode;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import timber.log.Timber;
@@ -26,6 +30,9 @@ public class BRPeerManager {
 
     private static final List<OnTxStatusUpdate> statusUpdateListeners = new ArrayList<>();
     private static OnSyncSucceeded onSyncFinished;
+
+    static long syncStartDate = new Date().getTime();
+    static long syncCompletedDate = new Date().getTime();
 
     private BRPeerManager() {
     }
@@ -49,8 +56,9 @@ public class BRPeerManager {
      */
 
     public static void syncStarted() {
-        Timber.d("timber: syncStarted: %s", Thread.currentThread().getName());
-//        BRPeerManager.getInstance().refreshConnection();
+        syncStartDate = new Date().getTime();
+        long syncCompletedDate = new Date().getTime();
+        Timber.d("timber: syncStarted: %s startDate: %s", Thread.currentThread().getName(), syncStartDate);
         Context ctx = BreadApp.getBreadContext();
         int startHeight = BRSharedPrefs.getStartHeight(ctx);
         int lastHeight = BRSharedPrefs.getLastBlockHeight(ctx);
@@ -59,13 +67,23 @@ public class BRPeerManager {
     }
 
     public static void syncSucceeded() {
-        Timber.d("timber: syncSucceeded");
+        syncCompletedDate = new Date().getTime();
+        Timber.d("timber: syncSucceeded completed at: %s", syncCompletedDate);
         final Context app = BreadApp.getBreadContext();
         if (app == null) return;
         BRSharedPrefs.putLastSyncTime(app, System.currentTimeMillis());
         SyncManager.getInstance().updateAlarms(app);
         BRSharedPrefs.putAllowSpend(app, true);
         SyncManager.getInstance().stopSyncingProgressThread();
+
+        long syncTimeElapsed = syncCompletedDate - syncStartDate;
+        float userFalsePositiveRate = BRSharedPrefs.getFalsePositivesRate(app);
+
+        Bundle params = new Bundle();
+        params.putLong("sync_time_elapsed", syncTimeElapsed);
+        params.putFloat("user_preferred_fprate",userFalsePositiveRate);
+
+        AnalyticsManager.logCustomEventWithParams(BRConstants._20230407_DCS, params);
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
