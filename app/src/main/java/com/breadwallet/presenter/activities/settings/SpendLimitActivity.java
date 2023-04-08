@@ -72,7 +72,7 @@ public class SpendLimitActivity extends BRActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Timber.d("onItemClick: %s", position);
+                Timber.d("timber: onItemClick: %s", position);
                 int limit = adapter.getItem(position);
                 BRKeyStore.putSpendLimit(limit, app);
 

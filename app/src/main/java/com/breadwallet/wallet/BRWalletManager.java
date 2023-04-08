@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.WorkerThread;
+import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.BreadApp;
 import com.breadwallet.R;
@@ -37,7 +38,6 @@ import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.animation.SpringAnimator;
 import com.breadwallet.tools.manager.AnalyticsManager;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.breadwallet.tools.manager.BRNotificationManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.FeeManager;
@@ -54,7 +54,8 @@ import com.breadwallet.tools.util.Bip39Reader;
 import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
 import com.platform.entities.WalletInfo;
-import com.platform.tools.KVStoreManager;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
@@ -72,7 +73,7 @@ public class BRWalletManager {
 
     public void setBalance(final Context context, long balance) {
         if (context == null) {
-            Timber.i("setBalance: FAILED TO SET THE BALANCE NULL context");
+            Timber.i("timber: setBalance: FAILED TO SET THE BALANCE NULL context");
             return;
         }
         BRSharedPrefs.putCatchedBalance(context, balance);
@@ -88,7 +89,7 @@ public class BRWalletManager {
         if (nativeBalance != -1) {
             setBalance(app, nativeBalance);
         } else {
-            Timber.i("UpdateUI, nativeBalance is -1 meaning _wallet was null!");
+            Timber.i("timber: UpdateUI, nativeBalance is -1 meaning _wallet was null!");
         }
     }
 
@@ -180,7 +181,7 @@ public class BRWalletManager {
     }
 
     public boolean wipeKeyStore(Context context) {
-        Timber.d("wipeKeyStore");
+        Timber.d("timber: wipeKeyStore");
         return BRKeyStore.resetWalletKeyStore(context);
     }
 
@@ -229,7 +230,7 @@ public class BRWalletManager {
     public static boolean refreshAddress(Context ctx) {
         String address = getReceiveAddress();
         if (Utils.isNullOrEmpty(address)) {
-            Timber.d("refreshAddress: WARNING, retrieved address:%s", address);
+            Timber.d("timber: refreshAddress: WARNING, retrieved address:%s", address);
             return false;
         }
         BRSharedPrefs.putReceiveAddress(ctx, address);
@@ -237,10 +238,11 @@ public class BRWalletManager {
     }
 
     public void wipeWalletButKeystore(final Context ctx) {
-        Timber.d("wipeWalletButKeystore");
+        Timber.d("timber: wipeWalletButKeystore");
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
+                Timber.d("timber: Running peerManagerFreeEverything");
                 BRPeerManager.getInstance().peerManagerFreeEverything();
                 walletFreeEverything();
                 TransactionDataSource.getInstance(ctx).deleteAllTransactions();
@@ -259,7 +261,7 @@ public class BRWalletManager {
     public boolean confirmSweep(final Context ctx, final String privKey) {
         if (ctx == null) return false;
         if (isValidBitcoinBIP38Key(privKey)) {
-            Timber.d("isValidBitcoinBIP38Key true");
+            Timber.d("timber: isValidBitcoinBIP38Key true");
             ((Activity) ctx).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -293,17 +295,17 @@ public class BRWalletManager {
                                     }
                                 });
                             if (editText == null) {
-                                Timber.d("onClick: edit text is null!");
+                                Timber.d("timber: onClick: edit text is null!");
                                 return;
                             }
 
                             final String pass = editText.getText().toString();
-                            Timber.d("onClick: before");
+                            Timber.d("timber: onClick: before");
                             BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                                 @Override
                                 public void run() {
                                     String decryptedKey = decryptBip38Key(privKey, pass);
-                                    Timber.d("onClick: after");
+                                    Timber.d("timber: onClick: after");
 
                                     if (decryptedKey.equals("")) {
                                         SpringAnimator.springView(input);
@@ -328,11 +330,11 @@ public class BRWalletManager {
             });
             return true;
         } else if (isValidBitcoinPrivateKey(privKey)) {
-            Timber.d("isValidBitcoinPrivateKey true");
+            Timber.d("timber: isValidBitcoinPrivateKey true");
             new ImportPrivKeyTask(((Activity) ctx)).execute(privKey);
             return true;
         } else {
-            Timber.d("confirmSweep: !isValidBitcoinPrivateKey && !isValidBitcoinBIP38Key");
+            Timber.d("timber: confirmSweep: !isValidBitcoinPrivateKey && !isValidBitcoinBIP38Key");
             return false;
         }
     }
@@ -342,7 +344,7 @@ public class BRWalletManager {
      * Wallet callbacks
      */
     public static void publishCallback(final String message, final int error, byte[] txHash) {
-        Timber.d("publishCallback: " + message + ", err:" + error + ", txHash: " + Arrays.toString(txHash));
+        Timber.d("timber: publishCallback: " + message + ", err:" + error + ", txHash: " + Arrays.toString(txHash));
         final Context app = BreadApp.getBreadContext();
         BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
             @Override
@@ -367,14 +369,14 @@ public class BRWalletManager {
     }
 
     public static void onBalanceChanged(final long balance) {
-        Timber.d("onBalanceChanged:  " + balance);
+        Timber.d("timber: onBalanceChanged:  " + balance);
         Context app = BreadApp.getBreadContext();
         BRWalletManager.getInstance().setBalance(app, balance);
 
     }
 
     public static void onTxAdded(byte[] tx, int blockHeight, long timestamp, final long amount, String hash) {
-        Timber.d("onTxAdded: " + String.format("tx.length: %d, blockHeight: %d, timestamp: %d, amount: %d, hash: %s", tx.length, blockHeight, timestamp, amount, hash));
+        Timber.d("timber: onTxAdded: " + String.format("tx.length: %d, blockHeight: %d, timestamp: %d, amount: %d, hash: %s", tx.length, blockHeight, timestamp, amount, hash));
 
         final Context ctx = BreadApp.getBreadContext();
         if (amount > 0) {
@@ -392,7 +394,7 @@ public class BRWalletManager {
         if (ctx != null)
             TransactionDataSource.getInstance(ctx).putTransaction(new BRTransactionEntity(tx, blockHeight, timestamp, hash));
         else
-            Timber.i("onTxAdded: ctx is null!");
+            Timber.i("timber: onTxAdded: ctx is null!");
     }
 
     private static void showToastWithMessage(Context ctx, final String message) {
@@ -423,28 +425,28 @@ public class BRWalletManager {
 
 
         } else {
-            Timber.i("showToastWithMessage: failed, ctx is null");
+            Timber.i("timber: showToastWithMessage: failed, ctx is null");
         }
     }
 
     public static void onTxUpdated(String hash, int blockHeight, int timeStamp) {
-        Timber.d("onTxUpdated: " + String.format("hash: %s, blockHeight: %d, timestamp: %d", hash, blockHeight, timeStamp));
+        Timber.d("timber: onTxUpdated: " + String.format("hash: %s, blockHeight: %d, timestamp: %d", hash, blockHeight, timeStamp));
         Context ctx = BreadApp.getBreadContext();
         if (ctx != null) {
             TransactionDataSource.getInstance(ctx).updateTxBlockHeight(hash, blockHeight, timeStamp);
 
         } else {
-            Timber.i("onTxUpdated: Failed, ctx is null");
+            Timber.i("timber: onTxUpdated: Failed, ctx is null");
         }
     }
 
     public static void onTxDeleted(String hash, int notifyUser, final int recommendRescan) {
-        Timber.d("onTxDeleted: " + String.format("hash: %s, notifyUser: %d, recommendRescan: %d", hash, notifyUser, recommendRescan));
+        Timber.d("timber: onTxDeleted: " + String.format("hash: %s, notifyUser: %d, recommendRescan: %d", hash, notifyUser, recommendRescan));
         final Context ctx = BreadApp.getBreadContext();
         if (ctx != null) {
             BRSharedPrefs.putScanRecommended(ctx, true);
         } else {
-            Timber.i("onTxDeleted: Failed! ctx is null");
+            Timber.i("timber: onTxDeleted: Failed! ctx is null");
         }
     }
 
@@ -485,75 +487,81 @@ public class BRWalletManager {
         itInitiatingWallet = true;
 
         try {
-            Timber.d("initWallet:%s", Thread.currentThread().getName());
+            Timber.d("timber: initWallet:%s", Thread.currentThread().getName());
             if (ctx == null) {
-                Timber.i("initWallet: ctx is null");
+                Timber.i("timber: initWallet: ctx is null");
                 return;
             }
             BRWalletManager m = BRWalletManager.getInstance();
             final BRPeerManager pm = BRPeerManager.getInstance();
+            double fpRate = BRSharedPrefs.getFalsePositivesRate(ctx);
 
-            if (!m.isCreated()) {
-                List<BRTransactionEntity> transactions = TransactionDataSource.getInstance(ctx).getAllTransactions();
-                int transactionsCount = transactions.size();
-                if (transactionsCount > 0) {
-                    m.createTxArrayWithCount(transactionsCount);
-                    for (BRTransactionEntity entity : transactions) {
-                        m.putTransaction(entity.getBuff(), entity.getBlockheight(), entity.getTimestamp());
+            Timber.d("timber: Showing seed fragment");
+
+                if (!m.isCreated()) {
+                    List<BRTransactionEntity> transactions = TransactionDataSource.getInstance(ctx).getAllTransactions();
+                    int transactionsCount = transactions.size();
+                    if (transactionsCount > 0) {
+                        m.createTxArrayWithCount(transactionsCount);
+                        for (BRTransactionEntity entity : transactions) {
+                            m.putTransaction(entity.getBuff(), entity.getBlockheight(), entity.getTimestamp());
+                        }
+                    }
+
+                    byte[] pubkeyEncoded = BRKeyStore.getMasterPublicKey(ctx);
+                    if (Utils.isNullOrEmpty(pubkeyEncoded)) {
+                        Timber.i("timber: initWallet: pubkey is missing");
+                        return;
+                    }
+                    //Save the first address for future check
+                    m.createWallet(transactionsCount, pubkeyEncoded);
+                    String firstAddress = BRWalletManager.getFirstAddress(pubkeyEncoded);
+                    BRSharedPrefs.putFirstAddress(ctx, firstAddress);
+                    FeeManager feeManager = FeeManager.getInstance();
+                    if (feeManager.isRegularFee()) {
+                        Fee fees = feeManager.getFees();
+                        BRWalletManager.getInstance().setFeePerKb(fees.regular);
                     }
                 }
 
-                byte[] pubkeyEncoded = BRKeyStore.getMasterPublicKey(ctx);
-                if (Utils.isNullOrEmpty(pubkeyEncoded)) {
-                    Timber.i("initWallet: pubkey is missing");
-                    return;
-                }
-                //Save the first address for future check
-                m.createWallet(transactionsCount, pubkeyEncoded);
-                String firstAddress = BRWalletManager.getFirstAddress(pubkeyEncoded);
-                BRSharedPrefs.putFirstAddress(ctx, firstAddress);
-                FeeManager feeManager = FeeManager.getInstance();
-                if (feeManager.isRegularFee()) {
-                    Fee fees = feeManager.getFees();
-                    BRWalletManager.getInstance().setFeePerKb(fees.regular);
-                }
-            }
-
-            if (!pm.isCreated()) {
-                List<BRMerkleBlockEntity> blocks = MerkleBlockDataSource.getInstance(ctx).getAllMerkleBlocks();
-                List<BRPeerEntity> peers = PeerDataSource.getInstance(ctx).getAllPeers();
-                final int blocksCount = blocks.size();
-                final int peersCount = peers.size();
-                if (blocksCount > 0) {
-                    pm.createBlockArrayWithCount(blocksCount);
-                    for (BRMerkleBlockEntity entity : blocks) {
-                        pm.putBlock(entity.getBuff(), entity.getBlockHeight());
+                if (!pm.isCreated()) {
+                    List<BRMerkleBlockEntity> blocks = MerkleBlockDataSource.getInstance(ctx).getAllMerkleBlocks();
+                    List<BRPeerEntity> peers = PeerDataSource.getInstance(ctx).getAllPeers();
+                    final int blocksCount = blocks.size();
+                    final int peersCount = peers.size();
+                    if (blocksCount > 0) {
+                        pm.createBlockArrayWithCount(blocksCount);
+                        for (BRMerkleBlockEntity entity : blocks) {
+                            pm.putBlock(entity.getBuff(), entity.getBlockHeight());
+                        }
                     }
-                }
-                if (peersCount > 0) {
-                    pm.createPeerArrayWithCount(peersCount);
-                    for (BRPeerEntity entity : peers) {
-                        pm.putPeer(entity.getAddress(), entity.getPort(), entity.getTimeStamp());
+                    if (peersCount > 0) {
+                        pm.createPeerArrayWithCount(peersCount);
+                        for (BRPeerEntity entity : peers) {
+                            pm.putPeer(entity.getAddress(), entity.getPort(), entity.getTimeStamp());
+                        }
                     }
+                    Timber.d("timber: blocksCount before connecting: %s", blocksCount);
+                    Timber.d("timber: peersCount before connecting: %s", peersCount);
+
+                    int walletTime = BRKeyStore.getWalletCreationTime(ctx);
+
+                    Timber.d("timber: initWallet: walletTime: %s user preferred fpRate: %f", walletTime, fpRate);
+                    pm.create(walletTime, blocksCount, peersCount, fpRate);
+                    BRPeerManager.getInstance().updateFixedPeer(ctx);
                 }
-                Timber.d("blocksCount before connecting: %s", blocksCount);
-                Timber.d("peersCount before connecting: %s", peersCount);
 
-                int walletTime = BRKeyStore.getWalletCreationTime(ctx);
+                pm.connect();
+                if (BRSharedPrefs.getStartHeight(ctx) == 0) {
+                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            BRSharedPrefs.putStartHeight(ctx, BRPeerManager.getCurrentBlockHeight());
+                        }
+                    });
+                }
 
-                Timber.d("initWallet: walletTime: %s", walletTime);
-                pm.create(walletTime, blocksCount, peersCount);
-                BRPeerManager.getInstance().updateFixedPeer(ctx);
-            }
 
-            pm.connect();
-            if (BRSharedPrefs.getStartHeight(ctx) == 0)
-                BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        BRSharedPrefs.putStartHeight(ctx, BRPeerManager.getCurrentBlockHeight());
-                    }
-                });
         } finally {
             itInitiatingWallet = false;
         }
@@ -566,6 +574,16 @@ public class BRWalletManager {
 
     public void removeListener(OnBalanceChanged listener) {
         balanceListeners.remove(listener);
+    }
+
+    public String getSeedPhrase(Context context) {
+        byte[] phraseBytes;
+        try {
+            phraseBytes = BRKeyStore.getPhrase(context, BRConstants.PUT_PHRASE_NEW_WALLET_REQUEST_CODE);
+        } catch (UserNotAuthenticatedException e) {
+            phraseBytes = new byte[0];
+        }
+        return new String(phraseBytes);
     }
 
     public interface OnBalanceChanged {

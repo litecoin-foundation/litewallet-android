@@ -133,7 +133,7 @@ public class BRButton extends Button {
             setTextSize(TypedValue.COMPLEX_UNIT_PX, px);
             lines = getLineCount();
             if (limit <= 0) {
-                Timber.d("correctTextSizeIfNeeded: Failed to rescale, limit reached, final: %s", px);
+                Timber.d("timber: correctTextSizeIfNeeded: Failed to rescale, limit reached, final: %s", px);
                 break;
             }
         }

@@ -52,7 +52,7 @@ public class InternetManager extends BroadcastReceiver {
             for (ConnectionReceiverListener listener : connectionReceiverListeners) {
                 listener.onConnectionChanged(connected);
             }
-            Timber.d("onReceive: %s", connected);
+            Timber.d("timber: onReceive: %s", connected);
         }
     }
 

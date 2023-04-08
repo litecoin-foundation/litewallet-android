@@ -72,7 +72,7 @@ public class FingerprintActivity extends BRActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Activity app = FingerprintActivity.this;
                 if (isChecked && !Utils.isFingerprintEnrolled(app)) {
-                    Timber.d("onCheckedChanged: fingerprint not setup");
+                    Timber.d("timber: onCheckedChanged: fingerprint not setup");
                     BRDialog.showCustomDialog(app, getString(R.string.TouchIdSettings_disabledWarning_title_android), getString(R.string.TouchIdSettings_disabledWarning_body_android), getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
                         @Override
                         public void onClick(BRDialogView brDialogView) {

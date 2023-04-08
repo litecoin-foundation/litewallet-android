@@ -57,11 +57,11 @@ public class Utils {
 
     @SuppressWarnings("deprecation")
     public static void printPhoneSpecs() {
-        Timber.d("***************************PHONE SPECS***************************");
-        Timber.d("* screen X: %d , screen Y: %s", IntroActivity.screenParametersPoint.x, IntroActivity.screenParametersPoint.y);
-        Timber.d("* Build.CPU_ABI: %s", Build.CPU_ABI);
-        Timber.d("* maxMemory:%s", Runtime.getRuntime().maxMemory());
-        Timber.d("----------------------------PHONE SPECS----------------------------");
+        Timber.d("timber: ***************************PHONE SPECS***************************");
+        Timber.d("timber: * screen X: %d , screen Y: %s", IntroActivity.screenParametersPoint.x, IntroActivity.screenParametersPoint.y);
+        Timber.d("timber: * Build.CPU_ABI: %s", Build.CPU_ABI);
+        Timber.d("timber: * maxMemory:%s", Runtime.getRuntime().maxMemory());
+        Timber.d("timber: ----------------------------PHONE SPECS----------------------------");
     }
 
     public static boolean isEmulatorOrDebug(Context app) {
