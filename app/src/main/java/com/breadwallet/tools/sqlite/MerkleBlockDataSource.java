@@ -75,7 +75,7 @@ public class MerkleBlockDataSource implements BRDataSourceInterface {
         try {
             database = openDatabase();
             long id = merkleBlock.getId();
-            Timber.d("MerkleBlock deleted with id: %s", id);
+            Timber.d("timber: MerkleBlock deleted with id: %s", id);
             database.delete(BRSQLiteHelper.MB_TABLE_NAME, BRSQLiteHelper.MB_COLUMN_ID
                     + " = " + id, null);
         } finally {
@@ -98,7 +98,7 @@ public class MerkleBlockDataSource implements BRDataSourceInterface {
                 merkleBlocks.add(merkleBlockEntity);
                 cursor.moveToNext();
             }
-            Timber.d("merkleBlocks: %s", merkleBlocks.size());
+            Timber.d("timber: merkleBlocks: %s", merkleBlocks.size());
         } finally {
             closeDatabase();
             if (cursor != null) cursor.close();

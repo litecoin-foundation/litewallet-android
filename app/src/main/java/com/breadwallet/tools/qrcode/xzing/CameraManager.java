@@ -125,8 +125,8 @@ public final class CameraManager {
             configManager.setDesiredCameraParameters(theCamera, false);
         } catch (RuntimeException re) {
             // Driver failed
-            Timber.d("Camera rejected parameters. Setting only minimal safe-mode parameters");
-            Timber.d("Resetting to saved camera params: %s", parametersFlattened);
+            Timber.d("timber: Camera rejected parameters. Setting only minimal safe-mode parameters");
+            Timber.d("timber: Resetting to saved camera params: %s", parametersFlattened);
             // Reset:
             if (parametersFlattened != null) {
                 parameters = cameraObject.getParameters();

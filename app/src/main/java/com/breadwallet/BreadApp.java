@@ -51,7 +51,7 @@ public class BreadApp extends Application {
         }
 
         // setup Timber
-        Timber.plant(BuildConfig.DEBUG ? new Timber.DebugTree() : new CrashReportingTree());
+        Timber.plant(new Timber.DebugTree());
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
         AnalyticsManager.init(this);
@@ -98,7 +98,7 @@ public class BreadApp extends Application {
             public void run() {
                 if (isAppInBackground(app)) {
                     backgroundedTime = System.currentTimeMillis();
-                    Timber.d("App went in background!");
+                    Timber.d("timber: App went in background!");
                     // APP in background, do something
                     isBackgroundChecker.cancel();
                     fireListeners();

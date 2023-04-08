@@ -33,7 +33,7 @@ public class KVItem {
     }
 
     public void printValues() {
-        Timber.d("KVItem values: \nversion: %s\nremoteVersion: %s\nkey: %s\nvalue.length: %s\ntime: %s\ndeleted: %s"
+        Timber.d("timber: KVItem values: \nversion: %s\nremoteVersion: %s\nkey: %s\nvalue.length: %s\ntime: %s\ndeleted: %s"
                 , version
                 , remoteVersion
                 , key

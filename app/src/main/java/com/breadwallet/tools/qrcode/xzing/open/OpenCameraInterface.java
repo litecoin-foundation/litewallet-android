@@ -46,7 +46,7 @@ public final class OpenCameraInterface {
 
         int numCameras = Camera.getNumberOfCameras();
         if (numCameras == 0) {
-            Timber.d("No cameras!");
+            Timber.d("timber: No cameras!");
             return null;
         }
 
@@ -74,14 +74,14 @@ public final class OpenCameraInterface {
 
         Camera camera;
         if (index < numCameras) {
-            Timber.d("Opening camera #%s", index);
+            Timber.d("timber: Opening camera #%s", index);
             camera = Camera.open(index);
         } else {
             if (explicitRequest) {
-                Timber.d("Requested camera does not exist: %s", cameraId);
+                Timber.d("timber: Requested camera does not exist: %s", cameraId);
                 camera = null;
             } else {
-                Timber.d("No camera facing " + CameraFacing.BACK + "; returning camera #0");
+                Timber.d("timber: No camera facing " + CameraFacing.BACK + "; returning camera #0");
                 camera = Camera.open(0);
                 selectedCameraInfo = new Camera.CameraInfo();
                 Camera.getCameraInfo(0, selectedCameraInfo);

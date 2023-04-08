@@ -98,7 +98,7 @@ public class QRUtils {
 
     public static void share(String via, Activity app, String bitcoinUri) {
         if (app == null) {
-            Timber.d("share: app is null");
+            Timber.d("timber: share: app is null");
             return;
         }
 
@@ -112,7 +112,7 @@ public class QRUtils {
 
     private static File saveToExternalStorage(Bitmap bitmapImage, Activity app) {
         if (app == null) {
-            Timber.d("saveToExternalStorage: app is null");
+            Timber.d("timber: saveToExternalStorage: app is null");
             return null;
         }
 
@@ -124,11 +124,11 @@ public class QRUtils {
         f.setReadable(true, false);
         try {
             boolean a = f.createNewFile();
-            if(!a) Timber.d("saveToExternalStorage: createNewFile: failed");
+            if(!a) Timber.d("timber: saveToExternalStorage: createNewFile: failed");
         } catch (IOException e) {
             Timber.e(e);
         }
-        Timber.d("saveToExternalStorage: " + f.getAbsolutePath());
+        Timber.d("timber: saveToExternalStorage: " + f.getAbsolutePath());
         if (f.exists()) f.delete();
 
         try {
