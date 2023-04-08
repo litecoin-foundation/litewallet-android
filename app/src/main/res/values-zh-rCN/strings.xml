@@ -7,9 +7,8 @@
   <string name="About.footer">由萊特幣基金會的萊特錢包團隊製作\n%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">隐私政策</string>
-  <!-- About screen Instagram label --> 
-  <string name="About.instagram">Instagram</string>
-  <!-- Terms of Use button label -->
+  <!-- About screen Instagram label -->
+    <!-- Terms of Use button label -->
   <string name="About.terms">使用条款</string>
   <!-- About screen title -->
   <string name="About.title">关于</string>

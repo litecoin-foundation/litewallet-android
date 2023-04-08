@@ -9,8 +9,7 @@
     <!-- Privay Policy button label -->
   <string name="About.privacy">Gizlilik Politikası</string>
   <!-- About screen Instagram label -->
-  <string name="About.instagram">Instagram</string>
-  <!-- Terms of Use button label -->
+    <!-- Terms of Use button label -->
   <string name="About.terms">Kullanım Şartları</string>
   <!-- About screen title -->
   <string name="About.title">hakkında</string>
