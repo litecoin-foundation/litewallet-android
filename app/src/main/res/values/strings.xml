@@ -812,8 +812,10 @@
     <string name="show_seed_label">Show</string>
   <string name="settings_show_seed">Show my seed phrase</string>
   <string name="sync_preferences">Sync  Preference: %1$s false positives</string>
-  <string name="radio_low_privacy">Low privacy (~19 minutes)</string>
-  <string name="radio_semi_private">Semi-private (~42 minutes)</string>
+  <string name="radio_low_privacy">Low privacy (~45 minutes)</string>
+  <string name="radio_semi_private">Semi-private (~60 minutes)</string>
   <string name="radio_anonymous">Anonymous (~77 minutes)</string>
+  <string name="release_notes">IMPORTANT: App will sync to allow 1ltc addresses. Wait ~1 hour for syncing!</string>
+
 
 </resources>

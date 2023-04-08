@@ -769,4 +769,5 @@
     <string name="radio_low_privacy">Faible confidentialité (~19 minutes)</string>
   <string name="radio_semi_private">Semi-privé (~42 minutes)</string>
   <string name="radio_anonymous">Anonyme (~77 minutes)</string>
+    <string name="release_notes">IMPORTANT : attendez environ 1 heure pour la synchronisation !</string>
 </resources>

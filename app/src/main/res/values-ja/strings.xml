@@ -769,4 +769,5 @@
     <string name="radio_low_privacy">低プライバシー (~19 分)</string>
   <string name="radio_semi_private">セミプライベート（～42分）</string>
   <string name="radio_anonymous">匿名 (~77 分)</string>
+    <string name="release_notes">重要: 同期が完了するまで 1 時間ほどお待ちください。</string>
 </resources>

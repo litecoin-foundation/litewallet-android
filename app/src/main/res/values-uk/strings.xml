@@ -791,4 +791,5 @@
     <string name="radio_low_privacy">Низька конфіденційність (~19 хвилин)</string>
   <string name="radio_semi_private">Напівприватний (~42 хвилини)</string>
   <string name="radio_anonymous">Анонімно (~77 хвилин)</string>
+    <string name="release_notes">ВАЖЛИВО: зачекайте ~1 годину для синхронізації!</string>
 </resources>

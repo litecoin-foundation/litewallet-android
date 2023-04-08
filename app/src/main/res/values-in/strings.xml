@@ -771,4 +771,5 @@
     <string name="radio_low_privacy">Privasi rendah (~19 menit)</string>
   <string name="radio_semi_private">Semi-pribadi (~42 menit)</string>
   <string name="radio_anonymous">Anonim (~77 menit)</string>
+    <string name="release_notes">PENTING: Tunggu ~1 jam untuk sinkronisasi!</string>
 </resources>

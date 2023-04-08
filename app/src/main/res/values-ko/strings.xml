@@ -769,4 +769,5 @@
     <string name="radio_low_privacy">낮은 프라이버시(~19분)</string>
   <string name="radio_semi_private">세미 프라이빗(~42분)</string>
   <string name="radio_anonymous">익명(~77분)</string>
+    <string name="release_notes">중요: 동기화를 위해 1시간 정도 기다리세요!</string>
 </resources>
