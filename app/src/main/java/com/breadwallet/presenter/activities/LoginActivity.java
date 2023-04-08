@@ -172,6 +172,19 @@ public class LoginActivity extends BRActivity {
         }, 500);
 
         setCurrentLtcPrice();
+
+        if (BuildConfig.VERSION_NAME == "v2.8.4") {
+            Snackbar.make(parentLayout,
+                            R.string.release_notes,
+                            Snackbar.LENGTH_INDEFINITE).setAction(R.string.Webview_dismiss, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    })
+                    .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
+                    .show();
+        }
     }
 
     private void setCurrentLtcPrice() {
