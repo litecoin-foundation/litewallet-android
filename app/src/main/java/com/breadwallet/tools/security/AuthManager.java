@@ -41,7 +41,7 @@ public class AuthManager {
     }
 
     public boolean checkAuth(CharSequence passSequence, Context context) {
-        Timber.d("checkAuth: ");
+        Timber.d("timber: checkAuth: ");
         String tempPass = passSequence.toString();
         if (!previousTry.equals(tempPass)) {
             int failCount = BRKeyStore.getFailCount(context);
@@ -175,7 +175,7 @@ public class AuthManager {
 
     public void authPrompt(final Context context, String title, String message, boolean forcePin, boolean forceFingerprint, BRAuthCompletion completion) {
         if (context == null || !(context instanceof Activity)) {
-            Timber.i("authPrompt: context is null or not Activity: %s", context);
+            Timber.i("timber: authPrompt: context is null or not Activity: %s", context);
             return;
         }
         KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Activity.KEYGUARD_SERVICE);

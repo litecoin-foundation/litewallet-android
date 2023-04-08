@@ -73,7 +73,7 @@ public class BRDialogView extends DialogFragment {
             }
         });
         if (Utils.isNullOrEmpty(negButton)) {
-            Timber.e("onCreateDialog: removing negative button");
+            Timber.e("timber:onCreateDialog: removing negative button");
             buttonsLayout.removeView(negativeButton);
             buttonsLayout.requestLayout();
         }

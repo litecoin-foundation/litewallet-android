@@ -123,7 +123,7 @@ public class ReplicatedKVStore {
                 if (syncImmediately && obj.err == null) {
                     if (!syncRunning) {
                         syncKey(kv.key, 0, 0, null);
-                        Timber.d("set: key synced: " + kv.key);
+                        Timber.d("timber: set: key synced: " + kv.key);
                     }
                 }
                 return obj;
@@ -141,7 +141,7 @@ public class ReplicatedKVStore {
     }
 
     private synchronized CompletionObject _set(KVItem kv) throws Exception {
-        Timber.d("_set: " + kv.key);
+        Timber.d("timber: _set: " + kv.key);
         long localVer = kv.version;
         long newVer = 0;
         long time = System.currentTimeMillis();
@@ -149,7 +149,7 @@ public class ReplicatedKVStore {
 
         long curVer = _localVersion(key).version;
         if (curVer != localVer) {
-            Timber.d("set key %s conflict: version %d != current version %d", key, localVer, curVer);
+            Timber.d("timber: set key %s conflict: version %d != current version %d", key, localVer, curVer);
             return new CompletionObject(CompletionObject.RemoteKVStoreError.conflict);
         }
         newVer = curVer + 1;
@@ -161,7 +161,7 @@ public class ReplicatedKVStore {
             if (!success) return new CompletionObject(CompletionObject.RemoteKVStoreError.unknown);
             db.setTransactionSuccessful();
         } catch (Exception e) {
-            Timber.e(e, "_set: ");
+            Timber.e(e, "timber:_set: ");
         } finally {
             db.endTransaction();
             closeDB();
@@ -233,7 +233,7 @@ public class ReplicatedKVStore {
                 kv.value = encrypted ? decrypt(val, mContext) : val;
                 if (val != null && Utils.isNullOrEmpty(kv.value)) {
                     //decrypting failed
-                    Timber.d("get: Decrypting failed for key: " + key + ", deleting the kv");
+                    Timber.d("timber: get: Decrypting failed for key: " + key + ", deleting the kv");
                     delete(key, curVer);
                 }
             }
@@ -256,7 +256,7 @@ public class ReplicatedKVStore {
         if (isKeyValid(key)) {
             return _localVersion(key);
         } else {
-            Timber.d("Key is invalid: %s", key);
+            Timber.d("timber: Key is invalid: %s", key);
         }
         return new CompletionObject(CompletionObject.RemoteKVStoreError.notFound);
     }
@@ -406,7 +406,7 @@ public class ReplicatedKVStore {
         try {
             if (remoteVersion == 0 || remoteTime == 0) {
                 final CompletionObject completionObject = remoteKvStore.ver(key);
-                Timber.d("syncKey: completionObject: version: %d, value: %s, err: %s, time: %d",
+                Timber.d("timber: syncKey: completionObject: version: %d, value: %s, err: %s, time: %d",
                         completionObject.version, Arrays.toString(completionObject.value), completionObject.err, completionObject.time);
                 _syncKey(key, completionObject.version, completionObject.time, completionObject.err);
             } else {
@@ -459,50 +459,50 @@ public class ReplicatedKVStore {
 
             if (localKv.deleted > 0 && err == CompletionObject.RemoteKVStoreError.tombstone) {
                 // was removed on both server and locally
-                Timber.i("Local key %s was deleted, and so was the remote key", key);
+                Timber.i("timber: Local key %s was deleted, and so was the remote key", key);
                 return setRemoteVersion(key, localKv.version, localKv.remoteVersion).err == null;
             }
             if (localKv.time >= remoteTime) {// local is newer (or a tiebreaker)
                 if (localKv.deleted > 0) {
-                    Timber.i("Local key %s was deleted, removing remotely...", key);
+                    Timber.i("timber: Local key %s was deleted, removing remotely...", key);
                     CompletionObject obj = remoteKvStore.del(key, remoteVersion);
                     if (obj.err == CompletionObject.RemoteKVStoreError.notFound) {
-                        Timber.i("Local key %s was already missing on the server. Ignoring", key);
+                        Timber.i("timber: Local key %s was already missing on the server. Ignoring", key);
                         return true;
                     }
                     if (obj.err != null) {
-                        Timber.d("Error deleting remote version for key %s, error: %s", key, err);
+                        Timber.d("timber: Error deleting remote version for key %s, error: %s", key, err);
                         return false;
                     }
 
                     boolean success = setRemoteVersion(key, localKv.version, obj.version).err == null;
                     if (!success) return false;
                 } else {
-                    Timber.i("Local key %s is newer, updating remotely...", key);
+                    Timber.i("timber: Local key %s is newer, updating remotely...", key);
                     // if the remote version is zero it means it doesnt yet exist on the server. set the remote version
                     // to "1" to create the key on the server
                     long useRemoteVer = (remoteVersion == 0 || remoteVersion < recorderRemoteVersion) ? 1 : remoteVersion;
                     byte[] val = localKv.value;
                     if (Utils.isNullOrEmpty(val)) {
-                        Timber.d("_syncKey: encrypting value before sending to remote failed");
+                        Timber.d("timber: _syncKey: encrypting value before sending to remote failed");
                         return false;
                     }
                     CompletionObject obj = remoteKvStore.put(key, val, useRemoteVer);
 
                     if (obj.err != null) {
-                        Timber.d("Error updating remote version for key %s, error: %s", key, err);
+                        Timber.d("timber: Error updating remote version for key %s, error: %s", key, err);
                         return false;
                     }
 
                     boolean success = setRemoteVersion(key, localKv.version, obj.version).err == null;
-                    Timber.i("Local key %s updated on server", key);
+                    Timber.i("timber: Local key %s updated on server", key);
                     if (!success) return false;
                 }
             } else {
                 // local is out-of-date
                 if (err == CompletionObject.RemoteKVStoreError.tombstone) {
                     // remote is deleted
-                    Timber.i("Remote key %s deleted, removing locally", key);
+                    Timber.i("timber: Remote key %s deleted, removing locally", key);
                     CompletionObject obj = new CompletionObject(CompletionObject.RemoteKVStoreError.unknown);
                     try {
                         obj = _delete(key, localKv.version);
@@ -512,25 +512,25 @@ public class ReplicatedKVStore {
                     if (obj.version != 0) {
                         boolean success = setRemoteVersion(key, obj.version, remoteVersion).err == null;
                         if (!success) return false;
-                        Timber.i("Remote key %s was removed locally", key);
+                        Timber.i("timber: Remote key %s was removed locally", key);
                     }
                 } else {
-                    Timber.i("Remote key %s is newer, fetching...", key);
+                    Timber.i("timber: Remote key %s is newer, fetching...", key);
                     CompletionObject remoteGet = remoteKvStore.get(key, remoteVersion);
 
                     if (remoteGet.err != null) {
-                        Timber.d("Error fetching the remote value for key %s, error: %s", key, err);
+                        Timber.d("timber: Error fetching the remote value for key %s, error: %s", key, err);
                         return false;
                     }
 
                     byte[] val = remoteGet.value;
                     if (Utils.isNullOrEmpty(val)) {
-                        Timber.d("_syncKey: key: " + key + " ,from the remote, is empty");
+                        Timber.d("timber: _syncKey: key: " + key + " ,from the remote, is empty");
                         return false;
                     }
                     byte[] decryptedValue = encryptedReplication ? decrypt(val, mContext) : val;
                     if (Utils.isNullOrEmpty(decryptedValue)) {
-                        Timber.d("_syncKey: failed to decrypt the value from remote for key: %s", key);
+                        Timber.d("timber: _syncKey: failed to decrypt the value from remote for key: %s", key);
                         return false;
                     }
 
@@ -547,7 +547,7 @@ public class ReplicatedKVStore {
                 }
             }
         } else {
-            Timber.d("Error fetching remote version for key %s, error: %s", key, err);
+            Timber.d("timber: Error fetching remote version for key %s, error: %s", key, err);
             return false;
         }
         return true;
@@ -564,7 +564,7 @@ public class ReplicatedKVStore {
         // 3. for kvs that we do have, sync em
         // 4. for kvs that they don't have that we do, upload em
         if (syncRunning) {
-            Timber.d("syncAllKeys: already syncing");
+            Timber.d("timber: syncAllKeys: already syncing");
             return false;
         }
         syncRunning = true;
@@ -573,7 +573,7 @@ public class ReplicatedKVStore {
         try {
             CompletionObject obj = remoteKvStore.keys();
             if (obj.err != null) {
-                Timber.i("Error fetching remote key data: %s", obj.err);
+                Timber.i("timber: Error fetching remote key data: %s", obj.err);
                 syncRunning = false;
                 return false;
             }
@@ -589,13 +589,13 @@ public class ReplicatedKVStore {
                     allKvs.add(new KVItem(0, 0, kv.key, null, 0, 0));
             }
 
-            Timber.d("Syncing %d kvs", allKvs.size());
+            Timber.d("timber: Syncing %d kvs", allKvs.size());
             int failures = 0;
             for (KVItem k : allKvs) {
                 boolean success = _syncKey(k.key, k.remoteVersion == -1 ? k.version : k.remoteVersion, k.time, k.err);
                 if (!success) failures++;
             }
-            Timber.d("Finished syncing in %d, with failures: %d", System.currentTimeMillis() - startTime, failures);
+            Timber.d("timber: Finished syncing in %d, with failures: %d", System.currentTimeMillis() - startTime, failures);
             return true;
         } catch (Exception ex) {
             Timber.e(ex);
@@ -633,7 +633,7 @@ public class ReplicatedKVStore {
                     if (cursor.moveToNext())
                         version = cursor.getLong(0);
                     else
-                        Timber.i("remoteVersion: cursor is null for: %s", selectQuery);
+                        Timber.i("timber: remoteVersion: cursor is null for: %s", selectQuery);
                 } catch (Exception e) {
                     Timber.e(e);
                 } finally {
@@ -642,7 +642,7 @@ public class ReplicatedKVStore {
                     closeDB();
                 }
             } else {
-                Timber.i("Key is invalid: %s", key);
+                Timber.i("timber: Key is invalid: %s", key);
             }
         } finally {
             if (cursor != null) cursor.close();
@@ -669,7 +669,7 @@ public class ReplicatedKVStore {
                 long curVer = _localVersion(key).version;
 
                 if (curVer != localVer) {
-                    Timber.d("set remote version key %s conflict: version %d != current version %d", key, localVer, curVer);
+                    Timber.d("timber: set remote version key %s conflict: version %d != current version %d", key, localVer, curVer);
                     return new CompletionObject(CompletionObject.RemoteKVStoreError.conflict);
                 }
 
@@ -704,7 +704,7 @@ public class ReplicatedKVStore {
                 closeDB();
             }
         } else {
-            Timber.i("Key is invalid: %s", key);
+            Timber.i("timber: Key is invalid: %s", key);
         }
         return new CompletionObject(CompletionObject.RemoteKVStoreError.unknown);
     }
@@ -715,7 +715,7 @@ public class ReplicatedKVStore {
      */
     public CompletionObject delete(String key, long localVersion) {
         try {
-            Timber.d("kv deleted with key: %s", key);
+            Timber.d("timber: kv deleted with key: %s", key);
             if (isKeyValid(key)) {
                 CompletionObject obj = new CompletionObject(CompletionObject.RemoteKVStoreError.unknown);
                 try {
@@ -726,7 +726,7 @@ public class ReplicatedKVStore {
                 if (syncImmediately && obj.err == null) {
                     if (!syncRunning) {
                         syncKey(key, 0, 0, null);
-                        Timber.d("set: key synced: %s", key);
+                        Timber.d("timber: set: key synced: %s", key);
                     }
                 }
                 return obj;
@@ -746,13 +746,13 @@ public class ReplicatedKVStore {
         try {
             long curVer = _localVersion(key).version;
             if (curVer != localVersion) {
-                Timber.d("del key %s conflict: version %d != current version %d", key, localVersion, curVer);
+                Timber.d("timber: del key %s conflict: version %d != current version %d", key, localVersion, curVer);
                 return new CompletionObject(CompletionObject.RemoteKVStoreError.conflict);
             }
             SQLiteDatabase db = getWritable();
             try {
                 db.beginTransaction();
-                Timber.d("DEL key: %s ver: %d", key, curVer);
+                Timber.d("timber: DEL key: %s ver: %d", key, curVer);
                 newVer = curVer + 1;
                 cursor = db.query(KV_STORE_TABLE_NAME,
                         new String[]{PlatformSqliteHelper.KV_VALUE}, "key = ? AND version = ?", new String[]{key, String.valueOf(localVersion)},
@@ -800,28 +800,28 @@ public class ReplicatedKVStore {
      */
     public static byte[] encrypt(byte[] data, Context app) {
         if (data == null) {
-            Timber.i("encrypt: data is null");
+            Timber.i("timber: encrypt: data is null");
             return null;
         }
         if (app == null) app = BreadApp.getBreadContext();
         if (app == null) {
-            Timber.i("encrypt: app is null");
+            Timber.i("timber: encrypt: app is null");
             return null;
         }
         if (tempAuthKey == null) retrieveAuthKey(app);
         if (Utils.isNullOrEmpty(tempAuthKey)) {
-            Timber.i("encrypt: authKey is empty: %s", tempAuthKey == null ? null : tempAuthKey.length);
+            Timber.i("timber: encrypt: authKey is empty: %s", tempAuthKey == null ? null : tempAuthKey.length);
             return null;
         }
         BRKey key = new BRKey(tempAuthKey);
         byte[] nonce = getNonce();
         if (Utils.isNullOrEmpty(nonce) || nonce.length != 12) {
-            Timber.i("encrypt: nonce is invalid: %s", nonce == null ? null : nonce.length);
+            Timber.i("timber: encrypt: nonce is invalid: %s", nonce == null ? null : nonce.length);
             return null;
         }
         byte[] encryptedData = key.encryptNative(data, nonce);
         if (Utils.isNullOrEmpty(encryptedData)) {
-            Timber.i("encrypt: encryptNative failed: %s", encryptedData == null ? null : encryptedData.length);
+            Timber.i("timber: encrypt: encryptNative failed: %s", encryptedData == null ? null : encryptedData.length);
             return null;
         }
         //result is nonce + encryptedData
@@ -836,7 +836,7 @@ public class ReplicatedKVStore {
      */
     public static byte[] decrypt(byte[] data, Context app) {
         if (data == null || data.length <= 12) {
-            Timber.i("decrypt: failed to decrypt: %s", data == null ? null : data.length);
+            Timber.i("timber: decrypt: failed to decrypt: %s", data == null ? null : data.length);
             return null;
         }
         if (app == null) app = BreadApp.getBreadContext();
@@ -852,7 +852,7 @@ public class ReplicatedKVStore {
     private static void retrieveAuthKey(Context context) {
         if (Utils.isNullOrEmpty(tempAuthKey)) {
             tempAuthKey = BRKeyStore.getAuthKey(context);
-            if (tempAuthKey == null) Timber.d("retrieveAuthKey: FAILED, still null!");
+            if (tempAuthKey == null) Timber.d("timber: retrieveAuthKey: FAILED, still null!");
             BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                 @Override
                 public void run() {
@@ -878,7 +878,7 @@ public class ReplicatedKVStore {
         if (matcher.find()) {
             return true;
         }
-        Timber.d("checkKey: found illegal patterns, key: %s", key);
+        Timber.d("timber: checkKey: found illegal patterns, key: %s", key);
         return false;
     }
 

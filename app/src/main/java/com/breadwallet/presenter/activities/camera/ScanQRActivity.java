@@ -51,7 +51,7 @@ public class ScanQRActivity extends BRActivity implements ActivityCompat.OnReque
                 == PackageManager.PERMISSION_GRANTED) {
             initQRCodeReaderView();
         } else {
-            Timber.d("onCreate: Permissions needed? HUH?");
+            Timber.d("timber: onCreate: Permissions needed? HUH?");
         }
 
         new Handler().postDelayed(new Runnable() {

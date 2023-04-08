@@ -13,8 +13,15 @@
 #include <assert.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include <stdlib.h>
 
 #define fprintf(...) __android_log_print(ANDROID_LOG_ERROR, "bread", _va_rest(__VA_ARGS__, NULL))
+
+#if LITECOIN_TESTNET
+#define BR_CHAIN_PARAMS BRTestNetParams
+#else
+#define BR_CHAIN_PARAMS BRMainNetParams
+#endif
 
 static BRMerkleBlock **_blocks;
 BRPeerManager *_peerManager;
@@ -237,7 +244,8 @@ JNIEXPORT void JNICALL Java_com_breadwallet_wallet_BRPeerManager_rescan(JNIEnv *
 JNIEXPORT void JNICALL
 Java_com_breadwallet_wallet_BRPeerManager_create(JNIEnv *env, jobject thiz,
                                                  int earliestKeyTime,
-                                                 int blocksCount, int peersCount) {
+                                                 int blocksCount, int peersCount,
+                                                 double fpRate) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ",
                         "create| blocksCount: %d, peersCount: %d, earliestKeyTime: %d",
                         blocksCount, peersCount, earliestKeyTime);
@@ -268,9 +276,9 @@ Java_com_breadwallet_wallet_BRPeerManager_create(JNIEnv *env, jobject thiz,
         if (earliestKeyTime < BIP39_CREATION_TIME) earliestKeyTime = BIP39_CREATION_TIME;
         __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "earliestKeyTime: %d",
                             earliestKeyTime);
-        _peerManager = BRPeerManagerNew(_wallet, (uint32_t) earliestKeyTime, _blocks,
+        _peerManager = BRPeerManagerNew(&BR_CHAIN_PARAMS, _wallet, (uint32_t) earliestKeyTime, _blocks,
                                         (size_t) blocksCount,
-                                        _peers, (size_t) peersCount);
+                                        _peers, (size_t) peersCount, (double) fpRate);
         BRPeerManagerSetCallbacks(_peerManager, NULL, syncStarted, syncStopped,
                                   txStatusUpdate,
                                   saveBlocks, savePeers, networkIsReachable, threadCleanup);
@@ -321,7 +329,7 @@ Java_com_breadwallet_wallet_BRPeerManager_putBlock(JNIEnv *env, jobject thiz, jb
 
 JNIEXPORT void JNICALL
 Java_com_breadwallet_wallet_BRPeerManager_createBlockArrayWithCount(JNIEnv *env, jobject thiz,
-                                                                    size_t blockCount) {
+                                                                    jint blockCount) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ",
                         "block array created with count: %zu", blockCount);
     _blocks = calloc(blockCount, sizeof(*_blocks));
@@ -355,7 +363,7 @@ Java_com_breadwallet_wallet_BRPeerManager_putPeer(JNIEnv *env, jobject thiz, jby
 
 JNIEXPORT void JNICALL
 Java_com_breadwallet_wallet_BRPeerManager_createPeerArrayWithCount(JNIEnv *env, jobject thiz,
-                                                                   size_t peerCount) {
+                                                                   jint peerCount) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "peer array created with count: %zu",
                         peerCount);
     _peers = calloc(peerCount, sizeof(BRPeer));
@@ -399,7 +407,7 @@ JNIEXPORT jboolean JNICALL Java_com_breadwallet_wallet_BRPeerManager_isCreated(J
 JNIEXPORT jboolean JNICALL Java_com_breadwallet_wallet_BRPeerManager_isConnected(JNIEnv *env,
                                                                                  jobject obj) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "isConnected");
-    return (jboolean) (_peerManager && BRPeerManagerIsConnected(_peerManager));
+    return (jboolean) (_peerManager && BRPeerManagerConnectStatus(_peerManager) == BRPeerStatusConnected);
 }
 
 JNIEXPORT jint JNICALL Java_com_breadwallet_wallet_BRPeerManager_getEstimatedBlockHeight(
@@ -436,7 +444,7 @@ JNIEXPORT jboolean JNICALL Java_com_breadwallet_wallet_BRPeerManager_setFixedPee
         if (inet_pton(AF_INET, host, &addr) != 1) return JNI_FALSE;
         address.u16[5] = 0xffff;
         address.u32[3] = addr.s_addr;
-        if (port == 0) _port = STANDARD_PORT;
+        if (port == 0) _port = BRPeerManagerStandardPort(_peerManager);
     } else {
         _port = 0;
     }

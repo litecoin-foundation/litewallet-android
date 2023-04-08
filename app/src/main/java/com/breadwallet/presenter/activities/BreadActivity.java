@@ -97,8 +97,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         initializeViews();
         setPriceTags(BRSharedPrefs.getPreferredLTC(BreadActivity.this), false);
         setListeners();
-
         setUpBarFlipper();
+        checkTransactionDatabase();
 
         primaryPrice.setTextSize(PRIMARY_TEXT_SIZE);
         secondaryPrice.setTextSize(SECONDARY_TEXT_SIZE);
@@ -138,7 +138,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                         // The flow has finished. The API does not indicate whether the user
                         // reviewed or not, or even whether the review dialog was shown. Thus, no
                         // matter the result, we continue our app flow.
-                        Timber.i("In-app LaunchReviewFlow completed successful (%s)", task1.isSuccessful());
+                        Timber.i("timber: In-app LaunchReviewFlow completed successful (%s)", task1.isSuccessful());
                         if (task1.isSuccessful()) {
                             BRSharedPrefs.inAppReviewDone(BreadActivity.this);
                         }
@@ -279,6 +279,10 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         set.applyTo(toolBarConstraintLayout);
 
         mHandler.postDelayed(() -> updateUI(), toolBarConstraintLayout.getLayoutTransition().getDuration(LayoutTransition.CHANGING));
+    }
+
+    private void checkTransactionDatabase() {
+
     }
 
     private void setUpBarFlipper() {
@@ -435,7 +439,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             }
             BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(() -> {
                 final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(BreadActivity.this));
-                Timber.d("Sync Progress: %s", progress);
+                Timber.d("timber: Sync Progress: %s", progress);
                 if (progress < 1 && progress > 0) {
                     SyncManager.getInstance().startSyncingProgressThread();
                 }

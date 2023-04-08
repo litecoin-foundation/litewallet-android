@@ -391,7 +391,7 @@ public class CameraActivity extends BRActivity implements View.OnClickListener, 
         } else if (notBigEnough.size() > 0) {
             return Collections.max(notBigEnough, new CompareSizesByArea());
         } else {
-            Timber.d("Couldn't find any suitable preview size");
+            Timber.d("timber: Couldn't find any suitable preview size");
             return choices[0];
         }
     }
@@ -473,7 +473,7 @@ public class CameraActivity extends BRActivity implements View.OnClickListener, 
                         }
                         break;
                     default:
-                        Timber.d("Display rotation is invalid: %s", displayRotation);
+                        Timber.d("timber: Display rotation is invalid: %s", displayRotation);
                 }
 
                 Point displaySize = new Point();
