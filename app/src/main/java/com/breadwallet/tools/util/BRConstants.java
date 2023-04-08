@@ -101,7 +101,7 @@ public class BRConstants {
     public static final String INSTAGRAM_LINK = "https://www.instagram.com/litewallet.app";
 
     public static final String WEB_LINK = "https://litewallet.io";
-    public static final String TOS_LINK = "https://litewallet.io/privacy/policy.html";
+    public static final String TOS_LINK = "https://litewallet.io/privacy";
     public static String CUSTOMER_SUPPORT_LINK = "https://support.litewallet.io";
     public static String BITREFILL_AFFILIATE_LINK = "https://www.bitrefill.com/";
 
