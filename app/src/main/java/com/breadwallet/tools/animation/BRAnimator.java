@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,10 +29,12 @@ import androidx.fragment.app.FragmentActivity;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.activities.LoginActivity;
+import com.breadwallet.presenter.activities.camera.CameraActivity;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.TxItem;
 import com.breadwallet.presenter.fragments.DynamicDonationFragment;
+import com.breadwallet.presenter.fragments.FragmentBalanceSeedReminder;
 import com.breadwallet.presenter.fragments.FragmentBuy;
 import com.breadwallet.presenter.fragments.FragmentGreetings;
 import com.breadwallet.presenter.fragments.FragmentMenu;
@@ -71,9 +74,30 @@ public class BRAnimator {
             transaction.commit();
     }
 
+
+   public static void showBalanceSeedFragment(@NonNull FragmentActivity app) {
+       Timber.d("timber: fetched info");
+
+         androidx.fragment.app.FragmentManager fragmentManager = app.getSupportFragmentManager();
+        FragmentBalanceSeedReminder fragmentBalanceSeedReminder = (FragmentBalanceSeedReminder) fragmentManager.findFragmentByTag(FragmentBalanceSeedReminder.class.getName());
+        if (fragmentBalanceSeedReminder != null) {
+            fragmentBalanceSeedReminder.fetchSeedPhrase();
+            Timber.d("timber: fetched seed phrase");
+            return;
+        }
+
+       try {
+           fragmentBalanceSeedReminder = new FragmentBalanceSeedReminder();
+           fragmentManager.beginTransaction()
+                   .setCustomAnimations(0, 0, 0, R.animator.plain_300)
+                   .add(android.R.id.content, fragmentBalanceSeedReminder, FragmentBalanceSeedReminder.class.getName())
+                   .addToBackStack(FragmentBalanceSeedReminder.class.getName()).commit();
+       } finally {
+       }
+    }
     public static void showSendFragment(FragmentActivity app, final String bitcoinUrl) {
         if (app == null) {
-            Timber.i("showSendFragment: app is null");
+            Timber.i("timber: showSendFragment: app is null");
             return;
         }
         androidx.fragment.app.FragmentManager fragmentManager = app.getSupportFragmentManager();
@@ -115,13 +139,13 @@ public class BRAnimator {
 
     public static void showTransactionPager(Activity app, List<TxItem> items, int position) {
         if (app == null) {
-            Timber.i("showSendFragment: app is null");
+            Timber.i("timber: showSendFragment: app is null");
             return;
         }
         FragmentTransactionDetails fragmentTransactionDetails = (FragmentTransactionDetails) app.getFragmentManager().findFragmentByTag(FragmentTransactionDetails.class.getName());
         if (fragmentTransactionDetails != null && fragmentTransactionDetails.isAdded()) {
             fragmentTransactionDetails.setItems(items);
-            Timber.i("showTransactionPager: Already showing");
+            Timber.i("timber: showTransactionPager: Already showing");
             return;
         }
         fragmentTransactionDetails = new FragmentTransactionDetails();
@@ -193,11 +217,11 @@ public class BRAnimator {
 
     public static void showRequestFragment(Activity app, String address) {
         if (app == null) {
-            Timber.i("showRequestFragment: app is null");
+            Timber.i("timber: showRequestFragment: app is null");
             return;
         }
         if (Utils.isNullOrEmpty(address)) {
-            Timber.i("showRequestFragment: address is empty");
+            Timber.i("timber: showRequestFragment: address is empty");
             return;
         }
 
@@ -219,7 +243,7 @@ public class BRAnimator {
     //isReceive tells the Animator that the Receive fragment is requested, not My Address
     public static void showReceiveFragment(Activity app, boolean isReceive) {
         if (app == null) {
-            Timber.i("showReceiveFragment: app is null");
+            Timber.i("timber: showReceiveFragment: app is null");
             return;
         }
         FragmentReceive fragmentReceive = (FragmentReceive) app.getFragmentManager().findFragmentByTag(FragmentReceive.class.getName());
@@ -239,7 +263,7 @@ public class BRAnimator {
 
     public static void showBuyFragment(FragmentActivity app, String currency, FragmentBuy.Partner partner) {
         if (app == null) {
-            Timber.i("showBuyFragment: app is null");
+            Timber.i("timber: showBuyFragment: app is null");
             return;
         }
         app.getSupportFragmentManager()
@@ -260,7 +284,7 @@ public class BRAnimator {
 
     public static void showMenuFragment(Activity app) {
         if (app == null) {
-            Timber.i("showReceiveFragment: app is null");
+            Timber.i("timber: showReceiveFragment: app is null");
             return;
         }
         FragmentTransaction transaction = app.getFragmentManager().beginTransaction();
@@ -272,7 +296,7 @@ public class BRAnimator {
 
     public static void showGreetingsMessage(Activity app) {
         if (app == null) {
-            Timber.i("showGreetingsMessage: app is null");
+            Timber.i("timber: showGreetingsMessage: app is null");
             return;
         }
         FragmentTransaction transaction = app.getFragmentManager().beginTransaction();
@@ -312,7 +336,7 @@ public class BRAnimator {
 
     public static void startBreadActivity(Activity from, boolean auth) {
         if (from == null) return;
-        Timber.i("startBreadActivity: %s", from.getClass().getName());
+        Timber.i("timber: startBreadActivity: %s", from.getClass().getName());
         Class toStart = auth ? LoginActivity.class : BreadActivity.class;
         Intent intent = new Intent(from, toStart);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

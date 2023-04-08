@@ -2,13 +2,13 @@
 package com.breadwallet.presenter.activities.intro;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+import com.google.android.material.snackbar.Snackbar;
 
 import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
@@ -26,7 +26,6 @@ import com.breadwallet.wallet.BRWalletManager;
 import com.platform.APIClient;
 
 import java.io.Serializable;
-import java.util.Locale;
 
 import timber.log.Timber;
 
@@ -37,7 +36,6 @@ public class IntroActivity extends BRActivity implements Serializable {
     public static boolean appVisible = false;
     private static IntroActivity app;
     private TextView versionText;
-
 
     public static IntroActivity getApp() {
         return app;
@@ -57,10 +55,10 @@ public class IntroActivity extends BRActivity implements Serializable {
         newWalletButton = (Button) findViewById(R.id.button_new_wallet);
         recoverWalletButton = (Button) findViewById(R.id.button_recover_wallet);
         versionText = findViewById(R.id.version_text);
+        View parentLayout = findViewById(android.R.id.content);
+
         setListeners();
         updateBundles();
-//        SyncManager.getInstance().updateAlarms(this);
-
         if (!BuildConfig.DEBUG && BRKeyStore.AUTH_DURATION_SEC != 300) {
             RuntimeException ex = new RuntimeException("onCreate: AUTH_DURATION_SEC should be 300");
             Timber.e(ex);
@@ -77,10 +75,26 @@ public class IntroActivity extends BRActivity implements Serializable {
         byte[] masterPubKey = BRKeyStore.getMasterPublicKey(this);
         boolean isFirstAddressCorrect = false;
         if (masterPubKey != null && masterPubKey.length != 0) {
+            Timber.d("timber: masterPubkey exists");
+
             isFirstAddressCorrect = SmartValidator.checkFirstAddress(this, masterPubKey);
         }
         if (!isFirstAddressCorrect) {
+            Timber.d("timber: Calling wipeWalletButKeyStore");
             BRWalletManager.getInstance().wipeWalletButKeystore(this);
+        }
+
+        if (BuildConfig.VERSION_NAME == "v2.8.4") {
+            Snackbar.make(parentLayout,
+                            R.string.release_notes,
+                            Snackbar.LENGTH_INDEFINITE).setAction(R.string.Webview_dismiss, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    })
+                    .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
+                    .show();
         }
 
         PostAuth.getInstance().onCanaryCheck(this, false);
@@ -94,7 +108,7 @@ public class IntroActivity extends BRActivity implements Serializable {
                 final long startTime = System.currentTimeMillis();
                 APIClient apiClient = APIClient.getInstance(IntroActivity.this);
                 long endTime = System.currentTimeMillis();
-                Timber.d("updateBundle DONE in %sms",endTime - startTime);
+                Timber.d("timber: updateBundle DONE in %sms",endTime - startTime);
             }
         });
     }

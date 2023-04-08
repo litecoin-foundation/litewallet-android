@@ -44,10 +44,10 @@ public class SetPinActivity extends BRActivity {
         keyboard = (BRKeyboard) findViewById(R.id.brkeyboard);
         title = (TextView) findViewById(R.id.title);
 
+
         //TODO: all views are using the layout of this button. Views should be refactored without it
         // Hiding until layouts are built.
         faq = (ImageButton) findViewById(R.id.faq_button);
-
         dot1 = findViewById(R.id.dot1);
         dot2 = findViewById(R.id.dot2);
         dot3 = findViewById(R.id.dot3);
@@ -82,7 +82,7 @@ public class SetPinActivity extends BRActivity {
 
     private void handleClick(String key) {
         if (key == null) {
-            Timber.d("handleClick: key is null! ");
+            Timber.d("timber: handleClick: key is null! ");
             return;
         }
 
@@ -91,7 +91,7 @@ public class SetPinActivity extends BRActivity {
         } else if (Character.isDigit(key.charAt(0))) {
             handleDigitClick(Integer.parseInt(key.substring(0, 1)));
         } else {
-            Timber.d("handleClick: oops: %s", key);
+            Timber.d("timber: handleClick: oops: %s", key);
         }
     }
 
