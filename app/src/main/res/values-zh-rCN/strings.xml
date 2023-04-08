@@ -769,4 +769,5 @@
     <string name="radio_low_privacy">低隐私（约 19 分钟）</string>
   <string name="radio_semi_private">半私人（约 42 分钟）</string>
   <string name="radio_anonymous">匿名（约 77 分钟）</string>
+    <string name="release_notes">重要提示：等待约 1 小时进行同步！</string>
 </resources>

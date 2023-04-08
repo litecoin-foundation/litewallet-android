@@ -808,6 +808,7 @@
     <string name="radio_low_privacy">Düşük gizlilik (~19 dakika)</string>
   <string name="radio_semi_private">Yarı özel (~42 dakika)</string>
     <string name="radio_anonymous">Anonim (~77 dakika)</string>
+    <string name="release_notes">ÖNEMLİ: Senkronizasyon için ~1 saat bekleyin!</string>
 
 
 </resources>

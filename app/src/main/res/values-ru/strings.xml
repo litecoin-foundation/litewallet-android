@@ -769,4 +769,5 @@
     <string name="radio_low_privacy">"Низкая конфиденциальность (~ 19 минут) "</string>
   <string name="radio_semi_private">"Полуприватный (~ 42 минуты) "</string>
   <string name="radio_anonymous">"Аноним (~77 минут) "</string>
+  <string name="release_notes">ВАЖНО: Подождите ~1 час для синхронизации!</string>
 </resources>
