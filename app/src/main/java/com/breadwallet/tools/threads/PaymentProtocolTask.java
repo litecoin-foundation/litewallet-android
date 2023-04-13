@@ -47,7 +47,7 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
         app = (Activity) BreadApp.getBreadContext();
         InputStream in;
         try {
-            Timber.d("the uri: %s", params[0]);
+            Timber.d("timber: the uri: %s", params[0]);
             URL url = new URL(params[0]);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Accept", "application/litecoin-paymentrequest");
@@ -57,19 +57,19 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
             in = urlConnection.getInputStream();
 
             if (in == null) {
-                Timber.i("The inputStream is null!");
+                Timber.i("timber: The inputStream is null!");
                 return null;
             }
             byte[] serializedBytes = BytesUtil.readBytesFromStream(in);
             if (serializedBytes == null || serializedBytes.length == 0) {
-                Timber.i("serializedBytes are null!!!");
+                Timber.i("timber: serializedBytes are null!!!");
                 return null;
             }
 
             paymentRequest = BitcoinUrlHandler.parsePaymentRequest(serializedBytes);
 
             if (paymentRequest == null || paymentRequest.error == PaymentRequestWrapper.INVALID_REQUEST_ERROR) {
-                Timber.i("paymentRequest is null!!!");
+                Timber.i("timber: paymentRequest is null!!!");
                 BRDialog.showCustomDialog(app, "", app.getString(R.string.Send_remoteRequestError), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
                     @Override
                     public void onClick(BRDialogView brDialogView) {
@@ -79,7 +79,7 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
                 paymentRequest = null;
                 return null;
             } else if (paymentRequest.error == PaymentRequestWrapper.INSUFFICIENT_FUNDS_ERROR) {
-                Timber.i("insufficient amount!!!");
+                Timber.i("timber: insufficient amount!!!");
                 BRDialog.showCustomDialog(app, "", app.getString(R.string.Alerts_sendFailure), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
                     @Override
                     public void onClick(BRDialogView brDialogView) {
@@ -89,7 +89,7 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
                 paymentRequest = null;
                 return null;
             } else if (paymentRequest.error == PaymentRequestWrapper.SIGNING_FAILED_ERROR) {
-                Timber.i("failed to sign tx!!! \n insufficient amount!!!");
+                Timber.i("timber: failed to sign tx!!! \n insufficient amount!!!");
                 BRDialog.showCustomDialog(app, "", app.getString(R.string.Import_Error_signing), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
                     @Override
                     public void onClick(BRDialogView brDialogView) {
@@ -99,7 +99,7 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
                 paymentRequest = null;
                 return null;
             } else if (paymentRequest.error == PaymentRequestWrapper.REQUEST_TOO_LONG_ERROR) {
-                Timber.i("failed to sign tx!!!");
+                Timber.i("timber: failed to sign tx!!!");
                 BRDialog.showCustomDialog(app, app.getString(R.string.PaymentProtocol_Errors_badPaymentRequest), "Too long", app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
                     @Override
                     public void onClick(BRDialogView brDialogView) {
@@ -109,7 +109,7 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
                 paymentRequest = null;
                 return null;
             } else if (paymentRequest.error == PaymentRequestWrapper.AMOUNTS_ERROR) {
-                Timber.i("failed to sign tx!!!");
+                Timber.i("timber: failed to sign tx!!!");
                 BRDialog.showCustomDialog(app, "", app.getString(R.string.PaymentProtocol_Errors_badPaymentRequest), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
                     @Override
                     public void onClick(BRDialogView brDialogView) {
@@ -148,7 +148,7 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
                     "amount", String.valueOf(paymentRequest.amount));
             //end logging
             if (paymentRequest.expires != 0 && paymentRequest.time > paymentRequest.expires) {
-                Timber.i("Request is expired");
+                Timber.i("timber: Request is expired");
                 if (app != null)
                     BRDialog.showCustomDialog(app, app.getString(R.string.Alert_error), app.getString(R.string.PaymentProtocol_Errors_requestExpired), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
                         @Override
@@ -190,7 +190,7 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
                     }, null, null, 0);
                 paymentRequest = null;
             } else if (e instanceof CertificateChainNotFound) {
-                Timber.e(e, "No certificates!");
+                Timber.e(e, "timber:No certificates!");
             } else {
                 if (app != null)
                     BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title), app.getString(R.string.PaymentProtocol_Errors_badPaymentRequest) + ":" + e.getMessage(), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
@@ -329,7 +329,7 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
 
                             @Override
                             public void onCancel() {
-                                Timber.d("onCancel: ");
+                                Timber.d("timber: onCancel: ");
                             }
                         });
                     }

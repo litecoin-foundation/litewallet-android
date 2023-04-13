@@ -7,8 +7,8 @@
   <string name="About.footer">Hecho por el equipo Litewallet de la Fundación Litecoin\n%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">Política de privacidad</string>
-  <!-- About screen reddit label -->
-  <!-- Terms of Use button label -->
+  <!-- About screen Instagram label -->
+    <!-- Terms of Use button label -->
   <string name="About.terms">Términos de uso</string>
   <!-- About screen title -->
   <string name="About.title">Acerca de nosotros</string>
@@ -763,4 +763,11 @@
     <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">Compre tarjetas de regalo\n• Recargue teléfonos prepagos\n• Steam, Amazon, Hotels.com\n• Funciona en 170 países</string>
     <string name="Donate.toThe.LWTeam">Donar a: Infraestructura Litewallet</string>
+    <string name="show_seed_label">Espectáculo</string>
+    <string name="settings_show_seed">Mostrar mi frase inicial</string>
+  <string name="sync_preferences">Preferencia de sincronización: %1$s falsos positivos</string>
+    <string name="radio_low_privacy">Baja privacidad (~19 minutos)</string>
+  <string name="radio_semi_private">Semiprivado (~42 minutos)</string>
+  <string name="radio_anonymous">Anónimo (~77 minutos)</string>
+    <string name="release_notes">IMPORTANTE: ¡Espera ~1 hora para sincronizar!</string>
 </resources>

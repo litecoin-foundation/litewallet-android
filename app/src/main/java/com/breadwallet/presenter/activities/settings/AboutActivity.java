@@ -21,9 +21,8 @@ import timber.log.Timber;
 
 public class AboutActivity extends BRActivity {
     private static final String TAG = AboutActivity.class.getName();
-//    private TextView termsText;
     private TextView policyText;
-    private TextView infoText;
+    private TextView versionText;
 
     private ImageView instagramShare;
     private ImageView twitterShare;
@@ -45,13 +44,12 @@ public class AboutActivity extends BRActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        infoText = (TextView) findViewById(R.id.info_text);
+        versionText = (TextView) findViewById(R.id.info_text);
         policyText = (TextView) findViewById(R.id.policy_text);
         instagramShare = (ImageView) findViewById(R.id.instagram_share_button);
         twitterShare = (ImageView) findViewById(R.id.twitter_share_button);
         blogShare = (ImageView) findViewById(R.id.blog_share_button);
-
-        infoText.setText(BRConstants.APP_VERSION_NAME_CODE);
+        versionText.setText(BRConstants.APP_VERSION_NAME_CODE);
 
         instagramShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,14 +84,6 @@ public class AboutActivity extends BRActivity {
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }
         });
-//        termsText.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://breadapp.com/privacy-policy"));
-//                startActivity(browserIntent);
-//                app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
-//            }
-//        });
 
     }
 

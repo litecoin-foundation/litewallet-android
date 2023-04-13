@@ -89,34 +89,34 @@ final class CameraConfigurationManager {
                     throw new IllegalArgumentException("Bad rotation: " + displayRotation);
                 }
         }
-        Timber.d("Display at: %s", cwRotationFromNaturalToDisplay);
+        Timber.d("timber: Display at: %s", cwRotationFromNaturalToDisplay);
 
         int cwRotationFromNaturalToCamera = camera.getOrientation();
-        Timber.d("Camera at: %s", cwRotationFromNaturalToCamera);
+        Timber.d("timber: Camera at: %s", cwRotationFromNaturalToCamera);
 
         // Still not 100% sure about this. But acts like we need to flip this:
         if (camera.getFacing() == CameraFacing.FRONT) {
             cwRotationFromNaturalToCamera = (360 - cwRotationFromNaturalToCamera) % 360;
-            Timber.d("Front camera overriden to: %s", cwRotationFromNaturalToCamera);
+            Timber.d("timber: Front camera overriden to: %s", cwRotationFromNaturalToCamera);
         }
 
         cwRotationFromDisplayToCamera =
                 (360 + cwRotationFromNaturalToCamera - cwRotationFromNaturalToDisplay) % 360;
-        Timber.d("Final display orientation: %s", cwRotationFromDisplayToCamera);
+        Timber.d("timber: Final display orientation: %s", cwRotationFromDisplayToCamera);
         if (camera.getFacing() == CameraFacing.FRONT) {
-            Timber.d("Compensating rotation for front camera");
+            Timber.d("timber: Compensating rotation for front camera");
             cwNeededRotation = (360 - cwRotationFromDisplayToCamera) % 360;
         } else {
             cwNeededRotation = cwRotationFromDisplayToCamera;
         }
-        Timber.d("Clockwise rotation from display to camera: %s", cwNeededRotation);
+        Timber.d("timber: Clockwise rotation from display to camera: %s", cwNeededRotation);
 
         resolution = new Point(width, height);
-        Timber.d("Screen resolution in current orientation: %s", resolution);
+        Timber.d("timber: Screen resolution in current orientation: %s", resolution);
         cameraResolution = findBestPreviewSizeValue(parameters, resolution);
-        Timber.d("Camera resolution: %s", cameraResolution);
+        Timber.d("timber: Camera resolution: %s", cameraResolution);
         bestPreviewSize = findBestPreviewSizeValue(parameters, resolution);
-        Timber.d("Best available preview size: %s", bestPreviewSize);
+        Timber.d("timber: Best available preview size: %s", bestPreviewSize);
 
         boolean isScreenPortrait = resolution.x < resolution.y;
         boolean isPreviewSizePortrait = bestPreviewSize.x < bestPreviewSize.y;
@@ -126,7 +126,7 @@ final class CameraConfigurationManager {
         } else {
             previewSizeOnScreen = new Point(bestPreviewSize.y, bestPreviewSize.x);
         }
-        Timber.d("Preview size on screen: %s", previewSizeOnScreen);
+        Timber.d("timber: Preview size on screen: %s", previewSizeOnScreen);
     }
 
     void setDesiredCameraParameters(OpenCamera camera, boolean safeMode) {
@@ -135,14 +135,14 @@ final class CameraConfigurationManager {
         Camera.Parameters parameters = theCamera.getParameters();
 
         if (parameters == null) {
-            Timber.d("Device error: no camera parameters are available. Proceeding without configuration.");
+            Timber.d("timber: Device error: no camera parameters are available. Proceeding without configuration.");
             return;
         }
 
-        Timber.d("Initial camera parameters: %s", parameters.flatten());
+        Timber.d("timber: Initial camera parameters: %s", parameters.flatten());
 
         if (safeMode) {
-            Timber.d("In camera config safe mode -- most settings will not be honored");
+            Timber.d("timber: In camera config safe mode -- most settings will not be honored");
         }
 
         // Maybe selected auto-focus but not available, so fall through here:
@@ -194,7 +194,7 @@ final class CameraConfigurationManager {
 
         List<Camera.Size> rawSupportedSizes = parameters.getSupportedPreviewSizes();
         if (rawSupportedSizes == null) {
-            Timber.d("Device returned no supported preview sizes; using default");
+            Timber.d("timber: Device returned no supported preview sizes; using default");
             Camera.Size defaultSize = parameters.getPreviewSize();
             return new Point(defaultSize.width, defaultSize.height);
         }
@@ -223,7 +223,7 @@ final class CameraConfigurationManager {
                     .append(supportedPreviewSize.height)
                     .append(' ');
         }
-        Timber.d("Supported preview sizes: %s", previewSizesString);
+        Timber.d("timber: Supported preview sizes: %s", previewSizesString);
 
         Point bestSize = null;
         float screenAspectRatio = (float) screenResolution.x / (float) screenResolution.y;
@@ -244,7 +244,7 @@ final class CameraConfigurationManager {
 
             if (maybeFlippedWidth == screenResolution.x && maybeFlippedHeight == screenResolution.y) {
                 Point exactPoint = new Point(realWidth, realHeight);
-                Timber.d("Found preview size exactly matching screen size: %s", exactPoint);
+                Timber.d("timber: Found preview size exactly matching screen size: %s", exactPoint);
                 return exactPoint;
             }
             float aspectRatio = (float) maybeFlippedWidth / (float) maybeFlippedHeight;
@@ -258,26 +258,26 @@ final class CameraConfigurationManager {
         if (bestSize == null) {
             Camera.Size defaultSize = parameters.getPreviewSize();
             bestSize = new Point(defaultSize.width, defaultSize.height);
-            Timber.d("No suitable preview sizes, using default: %s", bestSize);
+            Timber.d("timber: No suitable preview sizes, using default: %s", bestSize);
         }
 
-        Timber.d("Found best approximate preview size: %s", bestSize);
+        Timber.d("timber: Found best approximate preview size: %s", bestSize);
         return bestSize;
     }
 
     private static String findSettableValue(String name, Collection<String> supportedValues,
                                             String... desiredValues) {
-        Timber.d("Requesting " + name + " value from among: " + Arrays.toString(desiredValues));
-        Timber.d("Supported " + name + " values: " + supportedValues);
+        Timber.d("timber: Requesting " + name + " value from among: " + Arrays.toString(desiredValues));
+        Timber.d("timber: Supported " + name + " values: " + supportedValues);
         if (supportedValues != null) {
             for (String desiredValue : desiredValues) {
                 if (supportedValues.contains(desiredValue)) {
-                    Timber.d("Can set " + name + " to: " + desiredValue);
+                    Timber.d("timber: Can set " + name + " to: " + desiredValue);
                     return desiredValue;
                 }
             }
         }
-        Timber.d("No supported values match");
+        Timber.d("timber: No supported values match");
         return null;
     }
 
@@ -320,9 +320,9 @@ final class CameraConfigurationManager {
         }
         if (flashMode != null) {
             if (flashMode.equals(parameters.getFlashMode())) {
-                Timber.d("Flash mode already set to %s", flashMode);
+                Timber.d("timber: Flash mode already set to %s", flashMode);
             } else {
-                Timber.d("Setting flash mode to %s", flashMode);
+                Timber.d("timber: Setting flash mode to %s", flashMode);
                 parameters.setFlashMode(flashMode);
             }
         }
@@ -341,14 +341,14 @@ final class CameraConfigurationManager {
             // Clamp value:
             compensationSteps = Math.max(Math.min(compensationSteps, maxExposure), minExposure);
             if (parameters.getExposureCompensation() == compensationSteps) {
-                Timber.d("Exposure compensation already set to " + compensationSteps + " / "
+                Timber.d("timber: Exposure compensation already set to " + compensationSteps + " / "
                         + actualCompensation);
             } else {
-                Timber.d("Setting exposure compensation to " + compensationSteps + " / " + actualCompensation);
+                Timber.d("timber: Setting exposure compensation to " + compensationSteps + " / " + actualCompensation);
                 parameters.setExposureCompensation(compensationSteps);
             }
         } else {
-            Timber.d("Camera does not support exposure compensation");
+            Timber.d("timber: Camera does not support exposure compensation");
         }
     }
 }
