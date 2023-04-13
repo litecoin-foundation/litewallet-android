@@ -45,12 +45,12 @@ public class SyncManager {
     }
 
     public synchronized void startSyncingProgressThread() {
-        Timber.d("startSyncingProgressThread:%s", Thread.currentThread().getName());
+        Timber.d("timber: startSyncingProgressThread:%s", Thread.currentThread().getName());
 
         try {
             if (syncTask != null) {
                 if (running) {
-                    Timber.d("startSyncingProgressThread: syncTask.running == true, returning");
+                    Timber.d("timber: startSyncingProgressThread: syncTask.running == true, returning");
                     return;
                 }
                 syncTask.interrupt();
@@ -64,10 +64,10 @@ public class SyncManager {
     }
 
     public synchronized void stopSyncingProgressThread() {
-        Timber.d("stopSyncingProgressThread");
+        Timber.d("timber: stopSyncingProgressThread");
         final BreadActivity ctx = BreadActivity.getApp();
         if (ctx == null) {
-            Timber.i("stopSyncingProgressThread: ctx is null");
+            Timber.i("timber: stopSyncingProgressThread: ctx is null");
             return;
         }
         try {
@@ -95,7 +95,7 @@ public class SyncManager {
                 app = BreadActivity.getApp();
                 progressStatus = 0;
                 running = true;
-                Timber.d("run: starting: %s", progressStatus);
+                Timber.d("timber: run: starting: %s", progressStatus);
 
                 if (app != null) {
                     final long lastBlockTimeStamp = BRPeerManager.getInstance().getLastBlockTimestamp() * 1000;
@@ -124,7 +124,7 @@ public class SyncManager {
                             public void run() {
 
                                 if (TxManager.getInstance().currentPrompt != PromptManager.PromptItem.SYNCING) {
-                                    Timber.d("run: currentPrompt != SYNCING, showPrompt(SYNCING) ....");
+                                    Timber.d("timber: run: currentPrompt != SYNCING, showPrompt(SYNCING) ....");
                                     TxManager.getInstance().showPrompt(app, PromptManager.PromptItem.SYNCING);
                                 }
 
@@ -142,10 +142,10 @@ public class SyncManager {
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
-                        Timber.e(e, "run: Thread.sleep was Interrupted:%s", Thread.currentThread().getName());
+                        Timber.e(e, "timber:run: Thread.sleep was Interrupted:%s", Thread.currentThread().getName());
                     }
                 }
-                Timber.d("run: SyncProgress task finished:%s", Thread.currentThread().getName());
+                Timber.d("timber: run: SyncProgress task finished:%s", Thread.currentThread().getName());
             } finally {
                 running = false;
                 progressStatus = 0;

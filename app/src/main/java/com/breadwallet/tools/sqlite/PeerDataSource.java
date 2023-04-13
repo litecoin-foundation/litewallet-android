@@ -52,7 +52,7 @@ public class PeerDataSource implements BRDataSourceInterface {
             database = openDatabase();
             database.beginTransaction();
             for (PeerEntity p : peerEntities) {
-                Timber.d("SQLite peer saved: %s", Arrays.toString(p.getPeerTimeStamp()));
+                Timber.d("timber: SQLite peer saved: %s", Arrays.toString(p.getPeerTimeStamp()));
                 ContentValues values = new ContentValues();
                 values.put(BRSQLiteHelper.PEER_ADDRESS, p.getPeerAddress());
                 values.put(BRSQLiteHelper.PEER_PORT, p.getPeerPort());
@@ -74,7 +74,7 @@ public class PeerDataSource implements BRDataSourceInterface {
         try {
             database = openDatabase();
             long id = peerEntity.getId();
-            Timber.d("Peer deleted with id: %s", id);
+            Timber.d("timber: Peer deleted with id: %s", id);
             database.delete(BRSQLiteHelper.PEER_TABLE_NAME, BRSQLiteHelper.PEER_COLUMN_ID
                     + " = " + id, null);
         } finally {
@@ -111,7 +111,7 @@ public class PeerDataSource implements BRDataSourceInterface {
                 cursor.close();
             closeDatabase();
         }
-        Timber.d("peers: %s", peers.size());
+        Timber.d("timber: peers: %s", peers.size());
         return peers;
     }
 

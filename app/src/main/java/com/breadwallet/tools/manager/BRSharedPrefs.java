@@ -24,6 +24,8 @@ public class BRSharedPrefs {
     public static final String SEND_TRANSACTION_COUNT = "send_transaction_count";
     public static final String IN_APP_REVIEW_DONE = "in_app_review_done";
 
+    public static final String PREFERRED_FPRATE = "preferredFalsePositiveRate";
+
     public interface OnIsoChangedListener {
         void onIsoChanged(String iso);
     }
@@ -203,7 +205,7 @@ public class BRSharedPrefs {
             JSONArray arr = new JSONArray(result);
             for (int i = 0; i < arr.length(); i++) {
                 int a = arr.getInt(i);
-                Timber.d("found a nonce: %s", a);
+                Timber.d("timber: found a nonce: %s", a);
                 list.add(a);
             }
         } catch (Exception e) {
@@ -241,7 +243,7 @@ public class BRSharedPrefs {
 
     //if the user prefers all in litecoin units, not other currencies
     public static void putPreferredLTC(Context activity, boolean b) {
-        Timber.d("putPreferredLTC: %s", b);
+        Timber.d("timber: putPreferredLTC: %s", b);
         SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("priceSetToLitecoin", b);
@@ -438,4 +440,16 @@ public class BRSharedPrefs {
         context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
                 .edit().putBoolean(IN_APP_REVIEW_DONE, true).apply();
     }
+
+    public static float getFalsePositivesRate(Context context) {
+        return context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE).getFloat(PREFERRED_FPRATE, BRConstants.FALSE_POS_RATE_LOW_PRIVACY);
+    }
+
+    public static void putFalsePositivesRate(Context context, float preferredRate) {
+        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putFloat(PREFERRED_FPRATE, preferredRate);
+        editor.apply();
+    }
 }
+

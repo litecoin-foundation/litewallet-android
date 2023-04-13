@@ -95,7 +95,7 @@ public class UpdatePinActivity extends BRActivity {
 
     private void handleClick(String key) {
         if (key == null) {
-            Timber.d("handleClick: key is null! ");
+            Timber.d("timber: handleClick: key is null! ");
             return;
         }
 
@@ -104,7 +104,7 @@ public class UpdatePinActivity extends BRActivity {
         } else if (Character.isDigit(key.charAt(0))) {
             handleDigitClick(Integer.parseInt(key.substring(0, 1)));
         } else {
-            Timber.d("handleClick: oops: %s", key);
+            Timber.d("timber: handleClick: oops: %s", key);
         }
     }
 

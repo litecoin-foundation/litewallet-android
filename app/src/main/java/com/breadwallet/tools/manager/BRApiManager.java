@@ -82,7 +82,7 @@ public class BRApiManager {
                     set.add(tmp);
                 }
             } else {
-                Timber.d("getCurrencies: failed to get currencies");
+                Timber.d("timber: getCurrencies: failed to get currencies");
             }
         } catch (Exception e) {
             Timber.e(e);
@@ -103,7 +103,7 @@ public class BRApiManager {
                             @Override
                             public void run() {
                                 if (!BreadApp.isAppInBackground(context)) {
-                                    Timber.d("doInBackground: Stopping timer, no activity on.");
+                                    Timber.d("timber: doInBackground: Stopping timer, no activity on.");
                                     BRApiManager.getInstance().stopTimerTask();
                                 }
                                 Set<CurrencyEntity> tmp = getCurrencies((Activity) context);
@@ -198,13 +198,13 @@ public class BRApiManager {
 
         try {
             if (resp == null) {
-                Timber.i("urlGET: %s resp is null", myURL);
+                Timber.i("timber: urlGET: %s resp is null", myURL);
                 return null;
             }
             response = resp.body().string();
             String strDate = resp.header("date");
             if (strDate == null) {
-                Timber.i("urlGET: strDate is null!");
+                Timber.i("timber: urlGET: strDate is null!");
                 return response;
             }
             SimpleDateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);

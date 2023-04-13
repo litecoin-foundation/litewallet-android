@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.activities.util.BRActivity;
@@ -38,6 +39,7 @@ import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.wallet.BRWalletManager;
+import com.google.android.material.snackbar.Snackbar;
 import com.platform.APIClient;
 
 import java.math.BigDecimal;
@@ -81,7 +83,8 @@ public class LoginActivity extends BRActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pin);
+        setContentView(R.layout.activity_pin); 
+        View parentLayout = findViewById(android.R.id.content);
         String pin = BRKeyStore.getPinCode(this);
         if (pin.isEmpty() || (pin.length() != 6 && pin.length() != 4)) {
             Intent intent = new Intent(this, SetPinActivity.class);
@@ -169,6 +172,19 @@ public class LoginActivity extends BRActivity {
         }, 500);
 
         setCurrentLtcPrice();
+
+        if (BuildConfig.VERSION_NAME == "v2.8.4") {
+            Snackbar.make(parentLayout,
+                            R.string.release_notes,
+                            Snackbar.LENGTH_INDEFINITE).setAction(R.string.Webview_dismiss, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    })
+                    .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
+                    .show();
+        }
     }
 
     private void setCurrentLtcPrice() {
@@ -211,11 +227,11 @@ public class LoginActivity extends BRActivity {
 
     private void handleClick(String key) {
         if (!inputAllowed) {
-            Timber.d("handleClick: input not allowed");
+            Timber.d("timber: handleClick: input not allowed");
             return;
         }
         if (key == null) {
-            Timber.d("handleClick: key is null! ");
+            Timber.d("timber: handleClick: key is null! ");
             return;
         }
 
@@ -224,7 +240,7 @@ public class LoginActivity extends BRActivity {
         } else if (Character.isDigit(key.charAt(0))) {
             handleDigitClick(Integer.parseInt(key.substring(0, 1)));
         } else {
-            Timber.d("handleClick: oops: %s", key);
+            Timber.d("timber: handleClick: oops: %s", key);
         }
     }
 
@@ -313,7 +329,7 @@ public class LoginActivity extends BRActivity {
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
                 } else {
-                    Timber.i("onRequestPermissionsResult: permission isn't granted for: %s", requestCode);
+                    Timber.i("timber: onRequestPermissionsResult: permission isn't granted for: %s", requestCode);
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }

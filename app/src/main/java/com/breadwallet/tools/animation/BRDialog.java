@@ -24,7 +24,7 @@ public class BRDialog {
                                         @NonNull final String posButton, final String negButton, final BRDialogView.BROnClickListener posListener,
                                         final BRDialogView.BROnClickListener negListener, final DialogInterface.OnDismissListener dismissListener, final int iconRes) {
         if (((Activity) app).isDestroyed()) {
-            Timber.d("showCustomDialog: FAILED, context is destroyed");
+            Timber.d("timber: showCustomDialog: FAILED, context is destroyed");
             return;
         }
 
@@ -51,7 +51,7 @@ public class BRDialog {
                                         @NonNull final String posButton, final String negButton, final BRDialogView.BROnClickListener posListener,
                                         final BRDialogView.BROnClickListener negListener, final DialogInterface.OnDismissListener dismissListener, final int iconRes) {
         if (((Activity) app).isDestroyed()) {
-            Timber.d("showCustomDialog: FAILED, context is destroyed");
+            Timber.d("timber: showCustomDialog: FAILED, context is destroyed");
             return;
         }
 

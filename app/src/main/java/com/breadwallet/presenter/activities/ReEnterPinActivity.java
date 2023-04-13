@@ -95,7 +95,7 @@ public class ReEnterPinActivity extends BRActivity {
     private void handleClick(String key) {
         if (!isPressAllowed) return;
         if (key == null) {
-            Timber.d("handleClick: key is null! ");
+            Timber.d("timber: handleClick: key is null! ");
             return;
         }
 
@@ -104,7 +104,7 @@ public class ReEnterPinActivity extends BRActivity {
         } else if (Character.isDigit(key.charAt(0))) {
             handleDigitClick(Integer.parseInt(key.substring(0, 1)));
         } else {
-            Timber.d("handleClick: oops: %s", key);
+            Timber.d("timber: handleClick: oops: %s", key);
         }
     }
 
@@ -171,7 +171,7 @@ public class ReEnterPinActivity extends BRActivity {
             }
         } else {
             AuthManager.getInstance().authFail(this);
-            Timber.d("verifyPin: FAIL: firs: %s, reEnter: %s ", firstPIN, pin);
+            Timber.d("timber: verifyPin: FAIL: firs: %s, reEnter: %s ", firstPIN, pin);
             SpringAnimator.failShakeAnimation(this, pinLayout);
             pin = new StringBuilder();
         }

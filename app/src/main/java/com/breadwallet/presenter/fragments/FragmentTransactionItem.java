@@ -128,7 +128,7 @@ public class FragmentTransactionItem extends Fragment {
         mTxHashLink.setOnClickListener(view -> {
             close();
             String txUrl = BRConstants.BLOCK_EXPLORER_BASE_URL + item.getTxHashHexReversed();
-            Timber.d("txUrl = %s", txUrl);
+            Timber.d("timber: txUrl = %s", txUrl);
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(txUrl));
             startActivity(browserIntent);
             getActivity().overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
@@ -164,7 +164,7 @@ public class FragmentTransactionItem extends Fragment {
         }
 
         boolean removeView = sent || !availableForSpend;
-        Timber.d("fillTexts: removeView : %s", removeView);
+        Timber.d("timber: fillTexts: removeView : %s", removeView);
         if (!removeView) {
             mAvailableSpend.setText(getString(R.string.Transaction_available));
         } else {

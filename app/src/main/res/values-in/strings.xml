@@ -7,7 +7,7 @@
   <string name="About.footer">Dibuat oleh Tim Litewallet dari Litecoin Foundation\n%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">Kebijakan pribadi</string>
-  <!-- About screen reddit label -->
+  <!-- About screen Instagram label -->
     <!-- Terms of Use button label -->
   <string name="About.terms">Syarat Penggunaan</string>
   <!-- About screen title -->
@@ -765,4 +765,11 @@
   <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">Beli kartu hadiah\n• Isi ulang ponsel prabayar\n• Steam, Amazon, Hotels.com\n• Berfungsi di 170 negara</string>
     <string name="Donate.toThe.LWTeam">Donasi ke: Infrastruktur Litewallet</string>
+    <string name="show_seed_label">Menunjukkan</string>
+    <string name="settings_show_seed">Tunjukkan frase seed saya</string>
+  <string name="sync_preferences">Preferensi Sinkronisasi: %1$s positif palsu</string>
+    <string name="radio_low_privacy">Privasi rendah (~19 menit)</string>
+  <string name="radio_semi_private">Semi-pribadi (~42 menit)</string>
+  <string name="radio_anonymous">Anonim (~77 menit)</string>
+    <string name="release_notes">PENTING: Tunggu ~1 jam untuk sinkronisasi!</string>
 </resources>

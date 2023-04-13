@@ -85,7 +85,7 @@ public class FragmentTransactionDetails extends Fragment {
             if (app != null && !app.isFinishing())
                 app.getFragmentManager().popBackStack();
             else
-                Timber.d("onAnimationEnd: app is null");
+                Timber.d("timber: onAnimationEnd: app is null");
         });
     }
 
