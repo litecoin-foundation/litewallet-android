@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.Date;
+
 import timber.log.Timber;
 
 public class BRSQLiteHelper extends SQLiteOpenHelper {
@@ -21,7 +23,7 @@ public class BRSQLiteHelper extends SQLiteOpenHelper {
     }
 
     private static final String DATABASE_NAME = "loafwallet.db";
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 13;
 
     /**
      * MerkleBlock table
@@ -91,8 +93,19 @@ public class BRSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Timber.e("Upgrading database from version " + oldVersion + " to "
+
+        Timber.e("timber: Upgrading database from version " + oldVersion + " to "
                 + newVersion + ", which will destroy all old data");
-        onCreate(db);
+
+        // Clear DB tables to enable Bech32 features
+        if (oldVersion == 12 && newVersion == 13) {
+            Timber.e("timber: Delete start %s", new Date().toString());
+            db.execSQL("DELETE FROM " + MB_TABLE_NAME);
+            db.execSQL("DELETE FROM " + TX_TABLE_NAME);
+            db.execSQL("DELETE FROM " + PEER_TABLE_NAME);
+            db.execSQL("DELETE FROM " + CURRENCY_TABLE_NAME);
+            Timber.e("timber: Delete Finish %s", new Date().toString());
+
+        }
     }
 }

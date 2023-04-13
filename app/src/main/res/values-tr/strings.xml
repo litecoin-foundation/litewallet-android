@@ -8,7 +8,7 @@
   <!-- About app version -->
     <!-- Privay Policy button label -->
   <string name="About.privacy">Gizlilik Politikası</string>
-  <!-- About screen reddit label -->
+  <!-- About screen Instagram label -->
     <!-- Terms of Use button label -->
   <string name="About.terms">Kullanım Şartları</string>
   <!-- About screen title -->
@@ -802,6 +802,13 @@
     <string name="Donate.Dialog.Positive.text">Bağış yapmak</string>
   <string name="Donate.Dialog.Negative.text">İptal</string>
     <string name="Donate.toThe.LWTeam">Bağışta bulunun: Litewallet Altyapısı</string>
+    <string name="show_seed_label">Göstermek</string>
+    <string name="settings_show_seed">" Tohum ifademi göster"</string>
+  <string name="sync_preferences">Senkronizasyon Tercihi: %1$s yanlış pozitifler</string>
+    <string name="radio_low_privacy">Düşük gizlilik (~19 dakika)</string>
+  <string name="radio_semi_private">Yarı özel (~42 dakika)</string>
+    <string name="radio_anonymous">Anonim (~77 dakika)</string>
+    <string name="release_notes">ÖNEMLİ: Senkronizasyon için ~1 saat bekleyin!</string>
 
 
 </resources>

@@ -65,12 +65,12 @@ public class PaymentProtocolPostPaymentTask extends AsyncTask<String, String, St
             in = urlConnection.getInputStream();
 
             if (in == null) {
-                Timber.i("The inputStream is null!");
+                Timber.i("timber: The inputStream is null!");
                 return null;
             }
             byte[] serializedBytes = BytesUtil.readBytesFromStream(in);
             if (serializedBytes == null || serializedBytes.length == 0) {
-                Timber.d("serializedBytes are null!!!");
+                Timber.d("timber: serializedBytes are null!!!");
                 return null;
             }
 

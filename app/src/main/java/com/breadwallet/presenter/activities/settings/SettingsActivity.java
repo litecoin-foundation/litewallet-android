@@ -23,6 +23,7 @@ import com.breadwallet.presenter.interfaces.BRAuthCompletion;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.security.AuthManager;
 import com.platform.APIClient;
+import com.breadwallet.tools.animation.BRAnimator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,6 +125,11 @@ public class SettingsActivity extends BRActivity {
             startActivity(intent);
             overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
 
+        }, false));
+
+        /*Show Seed Phrase*/
+        items.add(new BRSettingsItem(getString(R.string.settings_show_seed), "", v -> {
+          BRAnimator.showBalanceSeedFragment(this);
         }, false));
 
         /*Wipe Start_Recover Wallet*/

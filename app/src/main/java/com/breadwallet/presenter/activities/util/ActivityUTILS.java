@@ -29,7 +29,7 @@ public class ActivityUTILS {
         Intent intent = new Intent(app, DisabledActivity.class);
         app.startActivity(intent);
         app.overridePendingTransition(R.anim.fade_up, R.anim.fade_down);
-        Timber.d("showWalletDisabled: %s", app.getClass().getName());
+        Timber.d("timber: showWalletDisabled: %s", app.getClass().getName());
     }
 
     public static boolean isLast(Activity app) {
@@ -47,7 +47,7 @@ public class ActivityUTILS {
     public static boolean isMainThread() {
         boolean isMain = Looper.myLooper() == Looper.getMainLooper();
         if (isMain) {
-            Timber.d("IS MAIN UI THREAD!");
+            Timber.d("timber: IS MAIN UI THREAD!");
         }
         return isMain;
     }

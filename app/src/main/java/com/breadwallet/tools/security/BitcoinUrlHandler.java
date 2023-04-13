@@ -28,7 +28,7 @@ public class BitcoinUrlHandler {
 
     public static synchronized boolean processRequest(FragmentActivity app, String url) {
         if (url == null) {
-            Timber.d("processRequest: url is null");
+            Timber.d("timber: processRequest: url is null");
             return false;
         }
 

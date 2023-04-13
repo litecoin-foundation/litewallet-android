@@ -9,7 +9,7 @@
   <string name="About.appVersion" translatable="false">%1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">Privacy Policy</string>
-  <!-- About screen reddit label -->
+  <!-- About screen Instagram label -->
   <string name="About.instagram" translatable="false">Instagram</string>
   <!-- Terms of Use button label -->
   <string name="About.terms">Terms of Use</string>
@@ -712,7 +712,6 @@
     <string name="WritePaperPhrase.step">%1$d of %2$d</string>
 
     <string name="Donate.title">Donate to the Litecoin Foundation (%1$s)</string>
-
     <string name="Confirmation.processingAndDonationTime">Processing time: These transactions will take %1$s minutes to process.</string>
     <string name="Donate.title.confirmation">Confirm Donation</string>
     <string name="Confirmation.donateLabel">Amount to Donate:</string>
@@ -808,5 +807,14 @@
   <string name="Donate.Dialog.Negative.text">Cancel</string>
   <string name="Donate.toThe.LWTeam">Donate to: Litewallet Infrastructure</string>
     <string name="About.Instagram" translatable="false">Instagram</string>
+  <string name="seed_phrase.label" translatable="false">1: %s 2: %s 3: %s 4: %s \\n5: %s 6: %s 7: %s 8: %s%s \\n9: %s 10: %s 11: %s 12: %s  %s</string>
+    <string name="show_seed_label">Show</string>
+  <string name="settings_show_seed">Show my seed phrase</string>
+  <string name="sync_preferences">Sync  Preference: %1$s false positives</string>
+  <string name="radio_low_privacy">Low privacy (~45 minutes)</string>
+  <string name="radio_semi_private">Semi-private (~60 minutes)</string>
+  <string name="radio_anonymous">Anonymous (~77 minutes)</string>
+  <string name="release_notes">IMPORTANT: App will sync to allow 1ltc addresses. Wait ~1 hour for syncing!</string>
+
 
 </resources>

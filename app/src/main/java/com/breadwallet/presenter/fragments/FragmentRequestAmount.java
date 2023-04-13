@@ -255,7 +255,7 @@ public class FragmentRequestAmount extends Fragment {
 
     private void handleClick(String key) {
         if (key == null) {
-            Timber.d("handleClick: key is null! ");
+            Timber.d("timber: handleClick: key is null! ");
             return;
         }
 

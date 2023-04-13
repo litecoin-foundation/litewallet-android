@@ -38,7 +38,7 @@ public class KVStoreManager {
     }
 
     public WalletInfo getWalletInfo(Context app) {
-        Timber.i("Never initialized always null until WalletInfo struct to be removed");
+        Timber.i("timber: Never initialized always null until WalletInfo struct to be removed");
         return null;
     }
 
@@ -75,14 +75,14 @@ public class KVStoreManager {
         TxMetaData result = new TxMetaData();
         JSONObject json;
         if (value == null) {
-            Timber.d("valueToMetaData: value is null!");
+            Timber.d("timber: valueToMetaData: value is null!");
             AnalyticsManager.logCustomEvent(BRConstants._20200111_TNI);
             return null;
         }
         try {
             byte[] decompressed = BRCompressor.bz2Extract(value);
             if (decompressed == null) {
-                Timber.d("getTxMetaData: decompressed value is null");
+                Timber.d("timber: getTxMetaData: decompressed value is null");
                 return null;
             }
             json = new JSONObject(new String(decompressed));
@@ -121,19 +121,19 @@ public class KVStoreManager {
         } else if (data != null) {
             String finalExchangeCurrency = getFinalValue(data.exchangeCurrency, old.exchangeCurrency);
             if (finalExchangeCurrency != null) {
-                Timber.d("putTxMetaData: finalExchangeCurrency:%s", finalExchangeCurrency);
+                Timber.d("timber: putTxMetaData: finalExchangeCurrency:%s", finalExchangeCurrency);
                 old.exchangeCurrency = finalExchangeCurrency;
                 needsUpdate = true;
             }
             String finalDeviceId = getFinalValue(data.deviceId, old.deviceId);
             if (finalDeviceId != null) {
-                Timber.d("putTxMetaData: finalDeviceId:%s", finalDeviceId);
+                Timber.d("timber: putTxMetaData: finalDeviceId:%s", finalDeviceId);
                 old.deviceId = finalDeviceId;
                 needsUpdate = true;
             }
             String finalComment = getFinalValue(data.comment, old.comment);
             if (finalComment != null) {
-                Timber.d("putTxMetaData: comment:%s", finalComment);
+                Timber.d("timber: putTxMetaData: comment:%s", finalComment);
                 old.comment = finalComment;
                 needsUpdate = true;
             }
@@ -171,7 +171,7 @@ public class KVStoreManager {
 
         if (!needsUpdate) return;
 
-        Timber.d("putTxMetaData: updating txMetadata for : %s", key);
+        Timber.d("timber: putTxMetaData: updating txMetadata for : %s", key);
 
         byte[] result;
         try {
@@ -192,7 +192,7 @@ public class KVStoreManager {
         }
 
         if (result.length == 0) {
-            Timber.d("putTxMetaData: FAILED: result is empty");
+            Timber.d("timber: putTxMetaData: FAILED: result is empty");
             return;
         }
         byte[] compressed;
@@ -208,7 +208,7 @@ public class KVStoreManager {
         long removeVer = kvStore.remoteVersion(key);
         CompletionObject compObj = kvStore.set(localVer, removeVer, key, compressed, System.currentTimeMillis(), 0);
         if (compObj.err != null) {
-            Timber.d("putTxMetaData: Error setting value for key: " + key + ", err: " + compObj.err);
+            Timber.d("timber: putTxMetaData: Error setting value for key: " + key + ", err: " + compObj.err);
         }
     }
 
