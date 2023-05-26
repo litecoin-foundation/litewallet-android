@@ -1,6 +1,7 @@
 package com.breadwallet.presenter.fragments
 
 import android.os.Bundle
+import android.security.keystore.UserNotAuthenticatedException
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,7 +67,9 @@ class FragmentBalanceSeedReminder : Fragment() {
         fetchSeedPhrase()
     }
     fun fetchSeedPhrase() {
-        seedPhraseTextView.text =  String(BRKeyStore.getPhrase(context, 0))
+        try {
+            seedPhraseTextView.text = String(BRKeyStore.getPhrase(context, 0))
+        } catch (_: UserNotAuthenticatedException) {}
     }
 
     private fun animateClose() {
