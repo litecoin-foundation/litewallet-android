@@ -109,9 +109,7 @@
   <!-- Exchange rate label -->
   <string name="DefaultCurrency.rateLabel">Обменный курс</string>
   <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableMessage">Для этого устройства не настроена отправка электронных писем через почтовое приложение iOS.</string>
-  <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableTitle">Электронное письмо недоступно</string>
+    <!-- Email unavailable alert title -->
   <!-- Messaging unavailable alert title -->
     <string name="ErrorMessages.loopingLockScreen.android">Litewallet не может быть аутентифицирован из-за ошибки в вашей версии Android. [Пожалуйста, нажмите здесь для получения дополнительной информации.]</string>
     <string name="ErrorMessages.messagingUnavailableMessage">Для этого устройства отправка сообщений не настроена.</string>
@@ -723,40 +721,8 @@
   <string name="FeeSelector.luxuryMessage">Эта опция фактически гарантирует принятие вашей транзакции, хотя вы платите премию.</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ минут</string>
   <string name="BottomNavItem.History.title">ИСТОРИЯ</string>
-  <string name="BottomNavItem.Card.title">КАРТА</string>
-  <string name="LitecoinCard.cardBalance">Баланс карты</string>
-  <string name="LitecoinCard.logout">Выйти</string>
-  <string name="Register.Hint.mobileNumber">Номер мобильного</string>
-  <string name="Register.Hint.zipPostalCode">Почтовый индекс</string>
-  <string name="Register.Hint.country">Страна</string>
-  <string name="Register.Hint.stateProvince">Штат / провинция</string>
-  <string name="Register.Hint.city">город</string>
-  <string name="Register.Hint.address">Адрес улицы</string>
-  <string name="Register.Hint.confirmPassword">Подтвердите Пароль</string>
-  <string name="Register.Hint.lastName">фамилия</string>
-  <string name="Register.Hint.firstName">Имя</string>
-  <string name="Register.registerCardPhrase">Зарегистрируйтесь для получения карты Litecoin</string>
-  <string name="Login.Dialog.forgotPassword.reset">Сброс пароля</string>
-  <string name="Login.register">регистр</string>
-  <string name="Login.login">Авторизоваться</string>
-  <string name="Login.forgotPassword">Забыли пароль?</string>
-  <string name="Login.Hint.password">пароль</string>
-  <string name="Login.Dialog.forgotPasswordMessage">Посетите https://litecoin.dashboard.getblockcard.com/password/forgot, чтобы сбросить пароль.</string>
-  <string name="Login.Dialog.forgotPassword.visit">Посещение</string>
-  <string name="required">Обязательное поле</string>
-  <string name="wrong_email_format">Неверный адрес электронной почты</string>
-  <string name="error_pwd_6chars_min">Пароль должен состоять не менее чем из 6 символов.</string>
-  <string name="Register.Dialog.registeredSuccessMessage">Вы зарегистрировались. Пожалуйста, подтвердите, посетив свой почтовый ящик и нажав кнопку подтверждения</string>
-  <string name="Error.unknownSystem">Ой, что-то случилось. Пожалуйста, попробуйте позже</string>
-  <string name="mismatch_password">Несоответствующий пароль</string>
-  <string name="Error.emailNotVerified">Вам необходимо подтвердить свой адрес электронной почты, прежде чем вы сможете войти в систему.</string>
-  <string name="Error.wrong2faTokenProvided">Предоставлен неверный 2FA</string>
   <string name="BuyCenter.simplex.FinancialDetails">"• Получить Litecoin за 5 минут! \n • Купить Litecoin с помощью кредитной карты \n • Паспорт или удостоверение личности штата"</string>
   <string name="ManageWallet.balance">Баланс</string>
-  <string name="LitecoinCard.Disclaimer.bullets">"- Регистрация и вход\n- Доступный баланс карты\n- Сброс пароля\n- Без перевода на Litewallet\n- Только США"</string>
-  <string name="LitecoinCard.Disclaimer.description">Litecoin Card в настоящее время имеет ограниченную функциональность в Litewallet.</string>
-  <string name="LitecoinCard.Disclaimer.referral">Посетите litecoin.getblockcard.com для полного доступа</string>
-  <string name="LitecoinCard.Disclaimer.title">Бета-версия карты Litecoin</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Покупайте LTC с помощью множества фиатных пар\n• Оплачивайте несколькими способами\n• Глобальный платежный провайдер"</string>
   <string name="Login.currentLtcPrice">Текущее значение LTC в %1$s</string>
   <string name="Settings.languages">Языки</string>
