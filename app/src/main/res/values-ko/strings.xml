@@ -109,9 +109,7 @@
   <!-- Exchange rate label -->
   <string name="DefaultCurrency.rateLabel">환율</string>
   <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableMessage">이 장치는 iOS 메일 앱으로 이메일을 전송하도록 설정되지 않았습니다.</string>
-  <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableTitle">이메일 사용불가</string>
+    <!-- Email unavailable alert title -->
   <!-- Messaging unavailable alert title -->
     <string name="ErrorMessages.loopingLockScreen.android">Android 버전의 버그로 인해 Litewallet을 인증할 수 없습니다. [자세한 내용은 여기를 누르세요.]</string>
     <string name="ErrorMessages.messagingUnavailableMessage">이 장치는 메시지를 보내도록 설정되지 않았습니다.</string>
@@ -723,40 +721,8 @@
   <string name="FeeSelector.luxuryMessage">이 옵션은 귀하가 보험료를 지불하더라도 사실상 거래 수락을 보장합니다.</string>
   <string name="FeeSelector.luxuryTime">2.5~5+분</string>
   <string name="BottomNavItem.History.title">역사</string>
-  <string name="BottomNavItem.Card.title">카드</string>
-  <string name="LitecoinCard.cardBalance">카드 잔액</string>
-  <string name="LitecoinCard.logout">로그 아웃</string>
-  <string name="Register.Hint.mobileNumber">휴대폰 번호</string>
-  <string name="Register.Hint.zipPostalCode">우편 번호</string>
-  <string name="Register.Hint.country">국가</string>
-  <string name="Register.Hint.stateProvince">주 / 도</string>
-  <string name="Register.Hint.city">시티</string>
-  <string name="Register.Hint.address">주소</string>
-  <string name="Register.Hint.confirmPassword">비밀번호 확인</string>
-  <string name="Register.Hint.lastName">성</string>
-  <string name="Register.Hint.firstName">이름</string>
-  <string name="Register.registerCardPhrase">라이트 코인 카드 등록</string>
-  <string name="Login.Dialog.forgotPassword.reset">암호를 재설정</string>
-  <string name="Login.register">레지스터</string>
-  <string name="Login.login">로그인</string>
-  <string name="Login.forgotPassword">비밀번호를 잊으 셨나요?</string>
-  <string name="Login.Hint.password">암호</string>
-  <string name="Login.Dialog.forgotPasswordMessage">https://litecoin.dashboard.getblockcard.com/password/forgot을 방문하여 암호를 재설정하십시오.</string>
-  <string name="Login.Dialog.forgotPassword.visit">방문</string>
-  <string name="required">필수 필드</string>
-  <string name="wrong_email_format">잘못된 이메일 주소</string>
-  <string name="error_pwd_6chars_min">비밀번호는 6 자 이상이어야합니다.</string>
-  <string name="Register.Dialog.registeredSuccessMessage">등록되었습니다. 이메일받은 편지함을 방문하여 확인 버튼을 클릭하여 확인하십시오.</string>
-  <string name="Error.unknownSystem">죄송합니다. 문제가 발생했습니다. 나중에 다시 시도 해주십시오</string>
-  <string name="mismatch_password">비밀번호 불일치</string>
-  <string name="Error.emailNotVerified">로그인하기 전에 이메일 주소를 확인해야합니다.</string>
-  <string name="Error.wrong2faTokenProvided">잘못된 2FA 제공</string>
-    <string name="BuyCenter.simplex.FinancialDetails">"5 분 안에 Litecoin을 받으십시오! \n • 신용 카드를 통해 Litecoin을 구매하십시오 \n • 여권 또는 주 ID"</string>
+  <string name="BuyCenter.simplex.FinancialDetails">"5 분 안에 Litecoin을 받으십시오! \n • 신용 카드를 통해 Litecoin을 구매하십시오 \n • 여권 또는 주 ID"</string>
   <string name="ManageWallet.balance">밸런스</string>
-  <string name="LitecoinCard.Disclaimer.bullets">"- 등록 및 로그인\n- 사용 가능한 카드 잔액\n- 암호를 재설정\n- Litewallet으로 양도 불가\n- 미국 만 해당"</string>
-  <string name="LitecoinCard.Disclaimer.description">라이트 코인 카드는 현재 라이트 월렛에서 제한된 기능을 가지고 있습니다.</string>
-  <string name="LitecoinCard.Disclaimer.referral">전체 액세스를 위해 litecoin.getblockcard.com을 방문하십시오.</string>
-  <string name="LitecoinCard.Disclaimer.title">라이트 코인 카드 베타</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• 많은 법정 화폐 쌍으로 LTC 구매\n• 여러 방법으로 지불\n• 글로벌 지불 공급자"</string>
   <string name="Login.currentLtcPrice">현재 LTC 값 %1$s</string>
   <string name="Settings.languages">언어</string>
