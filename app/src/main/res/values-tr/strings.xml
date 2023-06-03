@@ -122,9 +122,7 @@
   <!-- Exchange rate label -->
   <string name="DefaultCurrency.rateLabel">Döviz kuru</string>
   <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableMessage">Bu cihaz, iOS posta uygulamasıyla e-posta gönderecek şekilde yapılandırılmamış.</string>
-  <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableTitle">E-posta Kullanılamıyor</string>
+    <!-- Email unavailable alert title -->
   <!-- Message that gets shown when we've detected the user has encountered the looping lock-screen bug. (preserve [ ] characters) -->
   <string name="ErrorMessages.loopingLockScreen.android">Android sürümünüzdeki bir hata nedeniyle Litewallet kimliği doğrulanamıyor. [Daha fazla bilgi için lütfen buraya dokunun.]</string>
   <!-- Messaging unavailable alert title -->
@@ -743,57 +741,10 @@
   <string name="BuyCenter.moonpay.FinancialDetails">"• Birçok fiat çiftiyle LTC satın alın\n• Birden fazla yöntemle ödeme yapın\n• Küresel ödeme sağlayıcısı"</string>
 
   <string name="BottomNavItem.History.title">Tarih</string>
-  <string name="BottomNavItem.Card.title">Kart</string>
 
-  <!-- Login/Register fields validation texts -->
-  <string name="required">gerekli alan</string>
-  <string name="wrong_email_format">Geçersiz e-posta adresi</string>
-  <string name="error_pwd_6chars_min">Parola en az 6 karakter içermelidir</string>
-  <string name="mismatch_password">Eşleşmeyen şifre</string>
-
-  <!-- Login view texts -->
-  <string name="Login.Hint.password">Parola</string>
-  <string name="Login.forgotPassword">Parolanızı mı unuttunuz?</string>
-  <string name="Login.login">Oturum aç</string>
-  <string name="Login.register">Kayıt ol</string>
-  <string name="Login.Dialog.forgotPassword.reset">Şifreyi yenile</string>
-  <string name="Login.Dialog.forgotPassword.visit">Ziyaret etmek</string>
-  <string name="Login.Dialog.forgotPasswordMessage">Ziyaret etmek https://litecoin.dashboard.getblockcard.com/password/forgot Şifrenizi sıfırlamak için</string>
-
-  <!-- Register view texts -->
-  <string name="Register.registerCardPhrase">Litecoin Kartına Kaydolun</string>
-  <string name="Register.Hint.firstName">İsim</string>
-  <string name="Register.Hint.lastName">Soyadı</string>
-  <string name="Register.Hint.confirmPassword">Şifreyi Onayla</string>
-  <string name="Register.Hint.address">Adres</string>
-  <string name="Register.Hint.city">Kent</string>
-  <string name="Register.Hint.stateProvince">Eyalet / İl</string>
-  <string name="Register.Hint.country">Ülke</string>
-  <string name="Register.Hint.zipPostalCode">Zip / Posta Kodu</string>
-  <string name="Register.Hint.mobileNumber">Cep numarası</string>
-  <string name="Register.Dialog.registeredSuccessMessage">Kaydınız yapıldı. Lütfen e-posta gelen kutunuzu ziyaret ederek ve onay düğmesine tıklayarak onaylayın</string>
-
-  <!-- Transfer view texts -->
-  <string name="LitecoinCard.logout">Çıkış Yap</string>
-  <string name="LitecoinCard.cardBalance">Kart bakiyesi</string>
-
-  <!-- Api Errors -->
-  <string name="Error.unknownSystem">Maalesef bir sorun oldu. Lütfen daha sonra tekrar deneyiniz</string>
-  <string name="Error.emailNotVerified">Giriş yapmadan önce e-posta adresinizi doğrulamanız gerekmektedir.</string>
-  <string name="Error.wrong2faTokenProvided">Yanlış 2FA sağlandı</string>
-
-  <!-- Balance -->
+    <!-- Balance -->
   <string name="ManageWallet.balance">Denge</string>
-
-  <!-- Features and limitations -->
-  <string name="LitecoinCard.Disclaimer.bullets">"- Kayıt ve Giriş\n- Kullanılabilir kart bakiyesi\n- Şifreyi sıfırlayın\n- Litewallet'a aktarım yok\n- US Sadece"</string>
-  <!-- Description of the status -->
-  <string name="LitecoinCard.Disclaimer.description">"Litecoin Kartı şu anda Litewallet'te sınırlı işlevselliğe sahiptir."</string>
-  <!-- Referral to the website -->
-  <string name="LitecoinCard.Disclaimer.referral">"Tam erişim için litecoin.getblockcard.com adresini ziyaret edin"</string>
-  <!-- Beta Testing Litecoin Card -->
-  <string name="LitecoinCard.Disclaimer.title">"Litecoin Kartı Beta"</string>
-    <string name="Login.currentLtcPrice">%1$s cinsinden geçerli LTC değeri</string>
+  <string name="Login.currentLtcPrice">%1$s cinsinden geçerli LTC değeri</string>
     <string name="Settings.languages">Diller</string>
   <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
     <string name="BuyCenter.bitrefill.FinancialDetails">Hediye kartları satın alın\n• Ön ödemeli telefonları yeniden doldurun\n• Steam, Amazon, Hotels.com\n• 170 ülkede çalışıyor</string>
