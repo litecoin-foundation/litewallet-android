@@ -109,9 +109,7 @@
     <string name="DefaultCurrency.litecoinLabel">萊特幣顯示單元</string>
     <string name="DefaultCurrency.rateLabel">匯率</string>
   <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableMessage">本裝置並非設定來以 iOS 郵件應用程式傳送電子郵件。</string>
-  <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableTitle">無法使用電子郵件</string>
+    <!-- Email unavailable alert title -->
   <!-- Messaging unavailable alert title -->
   <string name="ErrorMessages.loopingLockScreen.android">由於您的 Android 版本存在錯誤，Litewallet 無法通過身份驗證。 [請點擊這裡了解更多信息。]</string>
   <string name="ErrorMessages.messagingUnavailableMessage">本裝置並非設定來傳送訊息。</string>
@@ -723,40 +721,8 @@
   <string name="FeeSelector.luxuryMessage">儘管您要支付一定的費用，但此選項實際上可以保證您接受交易。</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ 分鐘</string>
   <string name="BottomNavItem.History.title">歷史</string>
-  <string name="BottomNavItem.Card.title">卡</string>
-  <string name="LitecoinCard.cardBalance">卡餘額</string>
-  <string name="LitecoinCard.logout">登出</string>
-  <string name="Register.Hint.mobileNumber">手機號碼</string>
-  <string name="Register.Hint.zipPostalCode">郵編</string>
-  <string name="Register.Hint.country">國家</string>
-  <string name="Register.Hint.stateProvince">州/省</string>
-  <string name="Register.Hint.city">市</string>
-  <string name="Register.Hint.address">街道地址</string>
-  <string name="Register.Hint.confirmPassword">確認密碼</string>
-  <string name="Register.Hint.lastName">姓</string>
-  <string name="Register.Hint.firstName">名字</string>
-  <string name="Register.registerCardPhrase">註冊萊特幣卡</string>
-  <string name="Login.Dialog.forgotPassword.reset">重設密碼</string>
-  <string name="Login.register">寄存器</string>
-  <string name="Login.login">登錄</string>
-  <string name="Login.forgotPassword">忘記密碼？</string>
-  <string name="Login.Hint.password">密碼</string>
-  <string name="Login.Dialog.forgotPasswordMessage">訪問https://litecoin.dashboard.getblockcard.com/password/forgot重設密碼。</string>
-  <string name="Login.Dialog.forgotPassword.visit">訪問</string>
-  <string name="required">不能為空</string>
-  <string name="wrong_email_format">無效的郵件地址</string>
-  <string name="error_pwd_6chars_min">密碼必須至少包含6個字符</string>
-  <string name="Register.Dialog.registeredSuccessMessage">您已註冊。 請通過訪問您的電子郵件收件箱並單擊確認按鈕進行確認</string>
-  <string name="Error.unknownSystem">糟糕，發生了錯誤。 請稍後再試</string>
-  <string name="mismatch_password">密碼不匹配</string>
-  <string name="Error.emailNotVerified">您需要先驗證電子郵件地址，然後才能登錄。</string>
-  <string name="Error.wrong2faTokenProvided">提供了錯誤的2FA</string>
   <string name="BuyCenter.simplex.FinancialDetails">"•5分鐘內獲得Litecoin！\n •通過信用卡購買Litecoin \n •護照或州ID"</string>
   <string name="ManageWallet.balance">平衡</string>
-  <string name="LitecoinCard.Disclaimer.bullets">"- 註冊和登錄\n- 可用卡餘額\n- 重置密碼\n- 不能轉移到Litewallet\n- 僅限美國"</string>
-  <string name="LitecoinCard.Disclaimer.description">Litecoin卡當前在Litewallet中具有有限的功能。</string>
-  <string name="LitecoinCard.Disclaimer.referral">訪問litecoin.getblockcard.com以獲取完全訪問權限</string>
-  <string name="LitecoinCard.Disclaimer.title">Litecoin卡測試版</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"•購買具有許多法定貨幣對的LTC\n•以多種方式支付\n•全球支付提供商"</string>
   <string name="Login.currentLtcPrice">當前的LTC值 %1$s</string>
   <string name="Settings.languages">語言能力</string>
