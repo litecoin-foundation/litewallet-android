@@ -109,9 +109,6 @@
   <!-- Exchange rate label -->
   <string name="DefaultCurrency.rateLabel">Tasa de cambio</string>
   <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableMessage">Este dispositivo no está configurado para enviar correo electrónico mediante una aplicación de iOS</string>
-  <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableTitle">Correo electrónico no disponible</string>
   <!-- Messaging unavailable alert title -->
     <string name="ErrorMessages.loopingLockScreen.android">Litewallet no se puede autenticar debido a un error en su versión de Android. [Toque aquí para obtener más información.]</string>
     <string name="ErrorMessages.messagingUnavailableMessage">Este dispositivo no está configurado para enviar mensajes.</string>
@@ -722,41 +719,9 @@
     <string name="FeeSelector.luxury">Lujo</string>
   <string name="FeeSelector.luxuryMessage">Esta opción prácticamente garantiza la aceptación de su transacción aunque esté pagando una prima.</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ minutos</string>
-  <string name="BottomNavItem.History.title">HISTORIA</string>
-  <string name="BottomNavItem.Card.title">TARJETA</string>
-  <string name="LitecoinCard.cardBalance">Balance de tarjeta</string>
-  <string name="LitecoinCard.logout">Cerrar sesión</string>
-  <string name="Register.Hint.mobileNumber">Número de teléfono móvil</string>
-  <string name="Register.Hint.zipPostalCode">Código postal</string>
-  <string name="Register.Hint.country">País</string>
-  <string name="Register.Hint.stateProvince">Provincia del estado</string>
-  <string name="Register.Hint.city">Ciudad</string>
-  <string name="Register.Hint.address">Dirección</string>
-  <string name="Register.Hint.confirmPassword">Confirmar contraseña</string>
-  <string name="Register.Hint.lastName">Apellido</string>
-  <string name="Register.Hint.firstName">Primer nombre</string>
-  <string name="Register.registerCardPhrase">Registrarse para la tarjeta Litecoin</string>
-  <string name="Login.Dialog.forgotPassword.reset">Restablecer la contraseña</string>
-  <string name="Login.register">Registrarse</string>
-  <string name="Login.login">Iniciar sesión</string>
-  <string name="Login.forgotPassword">¿Se te olvidó tu contraseña?</string>
-  <string name="Login.Hint.password">Contraseña</string>
-  <string name="Login.Dialog.forgotPasswordMessage">Visita https://litecoin.dashboard.getblockcard.com/password/forgot para restablecer tu contraseña.</string>
-  <string name="Login.Dialog.forgotPassword.visit">Visitar</string>
-  <string name="required">Campo requerido</string>
-  <string name="wrong_email_format">Dirección de correo electrónico inválida</string>
-  <string name="error_pwd_6chars_min">La contraseña debe tener al menos 6 caracteres</string>
-  <string name="Register.Dialog.registeredSuccessMessage">Has sido registrado. Confirme visitando la bandeja de entrada de su correo electrónico y haciendo clic en el botón de confirmación</string>
-  <string name="Error.unknownSystem">Vaya, pasó algo mal. Por favor, inténtelo de nuevo más tarde</string>
-  <string name="mismatch_password">Contraseña incorrecta</string>
-  <string name="Error.emailNotVerified">Debe verificar su dirección de correo electrónico antes de poder iniciar sesión.</string>
-  <string name="Error.wrong2faTokenProvided">2FA incorrecto proporcionado</string>
+  <string name="BottomNavItem.History.title">Historia</string>
   <string name="BuyCenter.simplex.FinancialDetails">"• ¡Obtenga Litecoin en 5 minutos! \n • Compre Litecoin con tarjeta de crédito \n • Pasaporte o identificación del estado"</string>
   <string name="ManageWallet.balance">Saldo</string>
-  <string name="LitecoinCard.Disclaimer.bullets">"- Registro e inicio de sesión\n- Saldo de tarjeta disponible\n- Restablecer contraseña\n- Sin transferencia a Litewallet\n- Estados Unidos solamente"</string>
-  <string name="LitecoinCard.Disclaimer.description">La tarjeta Litecoin actualmente tiene una funcionalidad limitada en Litewallet.</string>
-  <string name="LitecoinCard.Disclaimer.referral">Visite litecoin.getblockcard.com para obtener acceso completo</string>
-  <string name="LitecoinCard.Disclaimer.title">Tarjeta Litecoin Beta</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Compre LTC con muchos pares fiat\n• Pague con múltiples métodos\n• Proveedor de pago global"</string>
   <string name="Login.currentLtcPrice">Valor actual de LTC en %1$s</string>
   <string name="Settings.languages">Idiomas</string>

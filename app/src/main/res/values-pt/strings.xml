@@ -109,9 +109,7 @@
   <!-- Exchange rate label -->
   <string name="DefaultCurrency.rateLabel">Taxa de Câmbio</string>
   <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableMessage">Este dispositivo não está configurado para enviar emails com a app Mail do iOS.</string>
-  <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableTitle">Email Indisponível</string>
+    <!-- Email unavailable alert title -->
   <!-- Messaging unavailable alert title -->
     <string name="ErrorMessages.loopingLockScreen.android">Litewallet não pode ser autenticado devido a um bug na sua versão do Android. [Toque aqui para mais informações.]</string>
     <string name="ErrorMessages.messagingUnavailableMessage">Este dispositivo não está configurado para enviar mensagens.</string>
@@ -723,40 +721,8 @@
   <string name="FeeSelector.luxuryMessage">Essa opção praticamente garante a aceitação de sua transação, embora você esteja pagando um prêmio.</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ minutos</string>
   <string name="BottomNavItem.History.title">HISTORY</string>
-  <string name="BottomNavItem.Card.title">CARTÃO</string>
-  <string name="LitecoinCard.cardBalance">Saldo do cartão</string>
-  <string name="LitecoinCard.logout">Sair</string>
-  <string name="Register.Hint.mobileNumber">Número de celular</string>
-  <string name="Register.Hint.zipPostalCode">Código postal</string>
-  <string name="Register.Hint.country">País</string>
-  <string name="Register.Hint.stateProvince">Estado / Província</string>
-  <string name="Register.Hint.city">Cidade</string>
-  <string name="Register.Hint.address">Endereço</string>
-  <string name="Register.Hint.confirmPassword">Confirme a Senha</string>
-  <string name="Register.Hint.lastName">último nome</string>
-  <string name="Register.Hint.firstName">Primeiro nome</string>
-  <string name="Register.registerCardPhrase">Registre-se para Cartão Litecoin</string>
-  <string name="Login.Dialog.forgotPassword.reset">Redefinir senha</string>
-  <string name="Login.register">Registro</string>
-  <string name="Login.login">Conecte-se</string>
-  <string name="Login.forgotPassword">Esqueceu a senha?</string>
-  <string name="Login.Hint.password">Senha</string>
-  <string name="Login.Dialog.forgotPasswordMessage">Visite https://litecoin.dashboard.getblockcard.com/password/forgot para redefinir a sua palavra-passe.</string>
-  <string name="Login.Dialog.forgotPassword.visit">Visita</string>
-  <string name="required">Campo obrigatório</string>
-  <string name="wrong_email_format">Endereço de email invalido</string>
-  <string name="error_pwd_6chars_min">A senha deve ter pelo menos 6 caracteres</string>
-  <string name="Register.Dialog.registeredSuccessMessage">Você foi registrado. Confirme visitando sua caixa de entrada de e-mail e clicando no botão de confirmação</string>
-  <string name="Error.unknownSystem">Opa, algo errado aconteceu. Por favor, tente novamente mais tarde</string>
-  <string name="mismatch_password">Senha incompatível</string>
-  <string name="Error.emailNotVerified">Você precisa verificar o seu endereço de e-mail antes de fazer o login.</string>
-  <string name="Error.wrong2faTokenProvided">2FA errado fornecido</string>
   <string name="BuyCenter.simplex.FinancialDetails">"• Obtenha Litecoin em 5 minutos! \n • Compre Litecoin via cartão de crédito \n • Passaporte ou ID do estado"</string>
   <string name="ManageWallet.balance">Saldo</string>
-  <string name="LitecoinCard.Disclaimer.bullets">"- Registro e login\n- Saldo do cartão disponível\n- Redefinir senha\n- Sem transferência para Litewallet\n- Somente nos EUA"</string>
-  <string name="LitecoinCard.Disclaimer.description">O cartão Litecoin atualmente tem funcionalidade limitada no Litewallet.</string>
-  <string name="LitecoinCard.Disclaimer.referral">Visite litecoin.getblockcard.com para acesso total</string>
-  <string name="LitecoinCard.Disclaimer.title">Litecoin Card Beta</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Compre LTC com muitos pares fiat\n• Pague com vários métodos\n• Provedor de pagamento global"</string>
   <string name="Login.currentLtcPrice">Valor LTC atual em %1$s</string>
   <string name="Settings.languages">Línguas</string>
