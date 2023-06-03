@@ -405,21 +405,6 @@ public class BRSharedPrefs {
         editor.apply();
     }
 
-    public static void putLitecoinCardId(Context context, String id) {
-        context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
-                .edit().putString(TERNIO_USER_ID, id).apply();
-    }
-
-    public static String getLitecoinCardId(Context context) {
-        return context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
-                .getString(TERNIO_USER_ID, null);
-    }
-
-    public static void logoutFromLitecoinCard(Context context) {
-        context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
-                .edit().remove(TERNIO_USER_ID).apply();
-    }
-
     public static void incrementSendTransactionCount(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         int currentTransactions = prefs.getInt(SEND_TRANSACTION_COUNT, 0);

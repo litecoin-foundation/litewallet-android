@@ -106,9 +106,7 @@
   <!-- Exchange rate label -->
   <string name="DefaultCurrency.rateLabel">Exchange Rate</string>
   <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableMessage">This device isn\'t configured to send email with the iOS mail app.</string>
-  <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableTitle">Email Unavailable</string>
+    <!-- Email unavailable alert title -->
   <!-- Message that gets shown when we've detected the user has encountered the looping lock-screen bug. (preserve [ ] characters) -->
   <string name="ErrorMessages.loopingLockScreen.android">Litewallet can not be authenticated due to a bug in your version of Android. [Please tap here for more information.]</string>
   <!-- Messaging unavailable alert title -->
@@ -744,57 +742,10 @@
     <string name="usd_currency_code" translatable="false">USD</string>
 
     <string name="BottomNavItem.History.title">History</string>
-    <string name="BottomNavItem.Card.title">Card</string>
-
-    <!-- Login/Register fields validation texts -->
-    <string name="required">Required field</string>
-    <string name="wrong_email_format">Invalid e-mail address</string>
-    <string name="error_pwd_6chars_min">Password must have at least 6 characters</string>
-    <string name="mismatch_password">Mismatch password</string>
-
-    <!-- Login view texts -->
-    <string name="Login.Hint.email" translatable="false">@string/Receive.emailButton</string>
-    <string name="Login.Hint.password">Password</string>
-    <string name="Login.forgotPassword">Forgot password?</string>
-    <string name="Login.login">Login</string>
-    <string name="Login.register">Register</string>
-    <string name="Login.Dialog.forgotPassword.reset">Reset password</string>
-    <string name="Login.Dialog.forgotPassword.visit">Visit</string>
-    <string name="Login.Dialog.forgotPasswordMessage">Visit https://litecoin.dashboard.getblockcard.com/password/forgot to reset your password</string>
-
-    <!-- Register view texts -->
-    <string name="Register.registerCardPhrase">Register for Litecoin Card</string>
-    <string name="Register.Hint.firstName">First name</string>
-    <string name="Register.Hint.lastName">Last name</string>
-    <string name="Register.Hint.confirmPassword">Confirm password</string>
-    <string name="Register.Hint.address">Address</string>
-    <string name="Register.Hint.city">City</string>
-    <string name="Register.Hint.stateProvince">State / Province</string>
-    <string name="Register.Hint.country">Country</string>
-    <string name="Register.Hint.zipPostalCode">Zip / Postcode</string>
-    <string name="Register.Hint.mobileNumber">Mobile number</string>
-    <string name="Register.Dialog.registeredSuccessMessage">You have been registered. Please confirm by visiting your email inbox and clicking on the confirmation button</string>
-
-    <!-- Transfer view texts -->
-    <string name="LitecoinCard.logout">Logout</string>
-    <string name="LitecoinCard.cardBalance">Card Balance</string>
-
-    <!-- Api Errors -->
-    <string name="Error.unknownSystem">Oops something wrong happened. Please try again later</string>
-    <string name="Error.emailNotVerified">You need to verify your email address before you can login.</string>
-    <string name="Error.wrong2faTokenProvided">Wrong 2FA provided</string>
 
     <!-- Balance -->
     <string name="ManageWallet.balance">Balance</string>
 
-  <!-- Features and limitations -->
-  <string name="LitecoinCard.Disclaimer.bullets">"- Registration &amp; Login\n- Available card balance\n- Reset password\n- No transfer to Litewallet\n- US Only"</string>
-  <!-- Description of the status -->
-  <string name="LitecoinCard.Disclaimer.description">"Litecoin Card currently has limited functionality in Litewallet."</string>
-  <!-- Referral to the website -->
-  <string name="LitecoinCard.Disclaimer.referral">"Visit litecoin.getblockcard.com for full access"</string>
-  <!-- Beta Testing Litecoin Card -->
-  <string name="LitecoinCard.Disclaimer.title">"Litecoin Card Beta"</string>
   <string name="Login.ltcPrice" translatable="false">1 LTC = %1$s</string>
   <string name="Login.currentLtcPrice">Current LTC value in %1$s</string>
   <string name="Settings.languages">Languages</string>

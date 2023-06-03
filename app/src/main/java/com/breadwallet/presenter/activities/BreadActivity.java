@@ -44,7 +44,6 @@ import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
 import com.breadwallet.tools.util.ExtensionKt;
 import com.breadwallet.tools.util.Utils;
-import com.breadwallet.ui.card.CardFragment;
 import com.breadwallet.wallet.BRPeerManager;
 import com.breadwallet.wallet.BRWalletManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -200,9 +199,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                     BRAnimator.showSendFragment(BreadActivity.this, null);
                 }
                 mSelectedBottomNavItem = 0;
-                break;
-            case R.id.nav_card:
-                ExtensionKt.replaceFragment(BreadActivity.this, new CardFragment(), false, R.id.fragment_container);
                 break;
             case R.id.nav_receive:
                 if (BRAnimator.isClickAllowed()) {

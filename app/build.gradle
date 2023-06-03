@@ -64,8 +64,8 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 27 
         targetSdkVersion 32  
-        versionCode 733
-        versionName "v2.8.4"
+        versionCode 734
+        versionName "v2.9.0"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
 
