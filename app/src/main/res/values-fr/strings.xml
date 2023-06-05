@@ -721,8 +721,7 @@
   <string name="FeeSelector.luxuryMessage">Cette option garantit pratiquement l\'acceptation de votre transaction même si vous payez une prime.</string>
   <string name="FeeSelector.luxuryTime">2.5 à 5+ minutes</string>
   <string name="BottomNavItem.History.title">HISTORIQUE</string>
-<string name="BuyCenter.simplex.FinancialDetails">"• Obtenez du Litecoin en 5 minutes! \n • Achetez du Litecoin par carte de crédit \n • Passeport ou identifiant d\'État"</string>
-  <string name="ManageWallet.balance">Solde</string>
+    <string name="ManageWallet.balance">Solde</string>
  <string name="BuyCenter.moonpay.FinancialDetails">"• Achetez des LTC avec de nombreuses paires de fiat\n• Payez avec plusieurs méthodes\n• Fournisseur de paiement mondial"</string>
   <string name="Login.currentLtcPrice">Valeur LTC actuelle en %1$s</string>
   <string name="Settings.languages">Langues</string>
