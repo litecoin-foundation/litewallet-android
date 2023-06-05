@@ -720,10 +720,8 @@
     <string name="FeeSelector.luxuryMessage">This option virtually guarantees acceptance of your transaction though you are paying a premium.</string>
 
     <!--Buy center - partners-->
-    <string name="BuyCenter.simplex.Title" tools:ignore="MissingTranslation" translatable="false">Simplex</string>
-    <string name="BuyCenter.simplex.FinancialDetails">"• Get Litecoin in 5 mins!\n• Buy Litecoin via credit card\n• Passport or State ID"</string>
 
-    <string name="BuyCenter.moonpay.Title" tools:ignore="MissingTranslation" translatable="false">Moonpay</string>
+  <string name="BuyCenter.moonpay.Title" tools:ignore="MissingTranslation" translatable="false">Moonpay</string>
     <string name="BuyCenter.moonpay.FinancialDetails">"• Buy LTC with many fiat pairs\n• Pay with multiple methods\n• Global payment provider"</string>
 
     <string name="BuyCenter.bitrefill.Title" tools:ignore="MissingTranslation">Bitrefill</string>

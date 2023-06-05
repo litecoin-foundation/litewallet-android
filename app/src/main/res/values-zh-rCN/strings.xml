@@ -721,8 +721,7 @@
   <string name="FeeSelector.luxuryMessage">尽管您要支付一定的费用，但此选项实际上可以保证您接受交易。</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ 分钟</string>
   <string name="BottomNavItem.History.title">历史</string>
-  <string name="BuyCenter.simplex.FinancialDetails">"• 5分钟内获得Litecoin！\n •通过信用卡购买Litecoin \n •护照或州ID"</string>
-  <string name="ManageWallet.balance">平衡</string>
+    <string name="ManageWallet.balance">平衡</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"•购买具有许多法定货币对的LTC\n•以多种方式支付\n•全球支付提供商"</string>
   <string name="Login.currentLtcPrice">当前的LTC值 %1$s</string>
   <string name="Settings.languages">语言能力</string>

@@ -720,8 +720,7 @@
   <string name="FeeSelector.luxury">Kemewahan</string>
   <string name="FeeSelector.luxuryMessage">Opsi ini secara virtual menjamin penerimaan transaksi Anda meskipun Anda membayar premi.</string>
 
-  <string name="BuyCenter.simplex.FinancialDetails">"• Dapatkan Litecoin dalam 5 menit!\n• Beli Litecoin melalui kartu kredit\n• Paspor atau ID Negara"</string>
-  <string name="BuyCenter.moonpay.FinancialDetails">"• Beli LTC dengan banyak pasangan fiat\n• Bayar dengan beberapa metode\n• Penyedia pembayaran global"</string>
+    <string name="BuyCenter.moonpay.FinancialDetails">"• Beli LTC dengan banyak pasangan fiat\n• Bayar dengan beberapa metode\n• Penyedia pembayaran global"</string>
 
   <string name="FeeSelector.luxuryTime">2.5 - 5+ menit</string>
   <string name="BottomNavItem.History.title">Sejarah</string>
