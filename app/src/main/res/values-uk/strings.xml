@@ -709,7 +709,7 @@
 
   <!--Buy center - partners-->
 
-  <string name="BuyCenter.moonpay.FinancialDetails">"• Купуйте LTC багатьма фіатними парами\n• Сплачуйте кількома способами\n• Глобальний постачальник платежів"</string>
+    <string name="BuyCenter.moonpay.FinancialDetails">"• Купуйте LTC багатьма фіатними парами\n• Сплачуйте кількома способами\n• Глобальний постачальник платежів"</string>
 
   <string name="BottomNavItem.History.title">Історія</string>
 
