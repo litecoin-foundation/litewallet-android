@@ -721,8 +721,7 @@
   <string name="FeeSelector.luxuryMessage">このオプションは、プレミアムを支払っていますが、トランザクションの受け入れを事実上保証します。</string>
   <string name="FeeSelector.luxuryTime">2.5～5+分</string>
   <string name="BottomNavItem.History.title">歴史</string>
-  <string name="BuyCenter.simplex.FinancialDetails">"•5分でLitecoinを入手！\n •クレジットカードでLitecoinを購入 \n•パスポートまたは州ID"</string>
-  <string name="ManageWallet.balance">残高</string>
+    <string name="ManageWallet.balance">残高</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"•多くの法定紙幣ペアでLTCを購入する\n•複数の方法で支払う\n•グローバル決済プロバイダー"</string>
   <string name="Login.currentLtcPrice">現在のLTC値 %1$s</string>
   <string name="Settings.languages">言語</string>
