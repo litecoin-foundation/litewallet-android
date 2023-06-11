@@ -706,9 +706,8 @@
   <string name="FeeSelector.luxuryMessage">Ця опція практично гарантує прийняття вашої транзакції, хоча ви платите премію.</string>
 
   <!--Buy center - partners-->
-  <string name="BuyCenter.simplex.FinancialDetails">"• Отримайте Litecoin за 5 хвилин!\n• Купуйте Litecoin за допомогою кредитної картки\n• Паспорт або посвідчення особи штату"</string>
 
-  <string name="BuyCenter.moonpay.FinancialDetails">"• Купуйте LTC багатьма фіатними парами\n• Сплачуйте кількома способами\n• Глобальний постачальник платежів"</string>
+    <string name="BuyCenter.moonpay.FinancialDetails">"• Купуйте LTC багатьма фіатними парами\n• Сплачуйте кількома способами\n• Глобальний постачальник платежів"</string>
 
   <string name="BottomNavItem.History.title">Історія</string>
 

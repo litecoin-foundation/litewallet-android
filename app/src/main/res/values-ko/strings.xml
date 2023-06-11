@@ -721,7 +721,6 @@
   <string name="FeeSelector.luxuryMessage">이 옵션은 귀하가 보험료를 지불하더라도 사실상 거래 수락을 보장합니다.</string>
   <string name="FeeSelector.luxuryTime">2.5~5+분</string>
   <string name="BottomNavItem.History.title">역사</string>
-  <string name="BuyCenter.simplex.FinancialDetails">"5 분 안에 Litecoin을 받으십시오! \n • 신용 카드를 통해 Litecoin을 구매하십시오 \n • 여권 또는 주 ID"</string>
   <string name="ManageWallet.balance">밸런스</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• 많은 법정 화폐 쌍으로 LTC 구매\n• 여러 방법으로 지불\n• 글로벌 지불 공급자"</string>
   <string name="Login.currentLtcPrice">현재 LTC 값 %1$s</string>
