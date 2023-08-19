@@ -65,7 +65,7 @@ android {
         minSdkVersion 27 
         targetSdkVersion 32  
         versionCode 736
-        versionName "v2.9.0"
+        versionName "v2.9.0" 
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
 
