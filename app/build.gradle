@@ -57,13 +57,13 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
         minSdkVersion 27 
-        targetSdkVersion 32  
+        targetSdkVersion 33
         versionCode 736
         versionName "v2.9.0" 
         multiDexEnabled true
