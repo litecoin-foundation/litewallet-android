@@ -92,9 +92,11 @@ public class BreadApp extends Application {
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point size = new Point();
-        display.getSize(size);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            display.getSize(size);
+        }
         DISPLAY_HEIGHT_PX = size.y;
-        mFingerprintManager = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
+        //mFingerprintManager = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
     }
 
 
