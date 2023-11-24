@@ -41,7 +41,13 @@ object Versions {
     const val corektx = "1.8.1"
     const val ktlint = "0.44.0"
     const val lifecycleViewmodel = "2.6.2"
-    const val viewmodelKtx = ""
+
+    //class path
+    const val kotlinVersion = "1.6.21"
+    const val androidTools = "8.1.0"
+    const val kotlinGradlePlugin = "$kotlinVersion"
+    const val googleServices = "4.3.14"
+    const val firebaseCrashlyticsGradle = "2.9.9"
 }
 object Deps {
 
@@ -102,6 +108,7 @@ object Deps {
 
         // Dagger
         const val  daggerTest = "com.google.dagger:dagger:${Versions.dagger}"
+
        //was kapt
         const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.daggerCompiler}"
 
@@ -112,18 +119,18 @@ object Deps {
         // Ktlint
         const val ktlinter = "com.pinterest:ktlint:${Versions.ktlint}"
 
-        //kotlin https://stackoverflow.com/questions/69817925/problem-duplicate-class-androidx-lifecycle-viewmodel-found-in-modules
+        // kotlin
         const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel:${Versions.lifecycleViewmodel}"
         const val lifecycleViewModelKTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleViewmodel}"
-//TBD: Need to move soemthing else this from the rest of the project
-//object Deps {
-//    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-//    const val gradlePlugin = "com.android.tools.build:gradle:${Versions.gradlePlugin}"
-//    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
 
+        // classpath
+        const val androidTools = "com.android.tools.build:gradle:${Versions.androidTools}"
+        const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinVersion}"
+        const val googleServices = "com.android.tools.build:gradle:${Versions.googleServices}"
+        const val firebaseCrashlyticsGradle = "com.android.tools.build:gradle:${Versions.firebaseCrashlyticsGradle}"
 }
 
-object Configs {
+object ConfigVersions {
 
 
 }
