@@ -13,7 +13,7 @@ configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
         if (requested.group == 'org.jetbrains.kotlin' && requested.name == 'kotlin-reflect') {
-            details.useVersion Deps.kotlinVersion
+            details.useVersion kotlin_version
         }
     }
 }
