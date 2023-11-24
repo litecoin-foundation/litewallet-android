@@ -69,6 +69,7 @@ object Deps {
 
     // androidx
         const val androidxCore = "androidx.core:core-ktx:${Versions.androidxCore}"
+        const val androidX = "androidx.core:core-ktx:${Versions.androidx}"
         const val androidxAppCompat = "androidx.appcompat:appcompat:${Versions.androidxAppCompat}"
         const val androidxConstraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidxConstraintLayout}"
         const val androidxLegacy = "androidx.legacy:legacy-support-v13:${Versions.androidxLegacy}"
@@ -129,43 +130,11 @@ object Deps {
         const val googleServices = "com.android.tools.build:gradle:${Versions.googleServices}"
         const val firebaseCrashlyticsGradle = "com.android.tools.build:gradle:${Versions.firebaseCrashlyticsGradle}"
 }
-
 object ConfigVersions {
-
-        //
+        const val compileSdk = 33
         const val minSDK = 30
-        const val targetSDK = 34
+        const val targetSDK = 33
         const val code = 736
         const val name = "v2.9.0"
         const val multiDexEnabled = true
-    //archivesBaseName = "${versionName}(${versionCode})"
-
 }
-
-//defaultConfig {
-//    testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
-//    applicationId = 'com.loafwallet'
-//    minSdkVersion 30
-//    targetSdkVersion 34
-//    versionCode 736
-//    versionName "v2.9.0"
-//    multiDexEnabled true
-//    archivesBaseName = "${versionName}(${versionCode})"
-//
-//    buildConfigField "String", "INFURA_KEY", "\"set the infura key here\""
-//
-//    // Similar to other properties in the defaultConfig block,
-//    // you can configure the ndk block for each product flavor
-//    // in your build configuration.
-//    ndk {
-//        // Specifies the ABI configurations of your native
-//        // libraries Gradle should build and package with your APK.
-//        abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
-//    }
-//    externalNativeBuild {
-//        cmake {
-//            arguments "-DANDROID_TOOLCHAIN=clang"
-//        }
-//    }
-//
-//}
