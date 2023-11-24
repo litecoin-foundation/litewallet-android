@@ -317,7 +317,7 @@ dependencies {
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
-
+	
     // Unstoppable domain
     implementation 'com.unstoppabledomains:resolution:5.0.0'
 

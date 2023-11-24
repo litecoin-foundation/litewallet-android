@@ -123,3 +123,35 @@ object Deps {
 
 }
 
+object Configs {
+
+
+}
+
+//defaultConfig {
+//    testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
+//    applicationId = 'com.loafwallet'
+//    minSdkVersion 30
+//    targetSdkVersion 34
+//    versionCode 736
+//    versionName "v2.9.0"
+//    multiDexEnabled true
+//    archivesBaseName = "${versionName}(${versionCode})"
+//
+//    buildConfigField "String", "INFURA_KEY", "\"set the infura key here\""
+//
+//    // Similar to other properties in the defaultConfig block,
+//    // you can configure the ndk block for each product flavor
+//    // in your build configuration.
+//    ndk {
+//        // Specifies the ABI configurations of your native
+//        // libraries Gradle should build and package with your APK.
+//        abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
+//    }
+//    externalNativeBuild {
+//        cmake {
+//            arguments "-DANDROID_TOOLCHAIN=clang"
+//        }
+//    }
+//
+//}
