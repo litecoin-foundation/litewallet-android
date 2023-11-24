@@ -58,9 +58,8 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    compileSdkVersion 34
-
     defaultConfig {
+        compileSdkVersion = ConfigVersions.compileSdk
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
         minSdkVersion 31
