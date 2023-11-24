@@ -13,7 +13,7 @@ configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
         if (requested.group == 'org.jetbrains.kotlin' && requested.name == 'kotlin-reflect') {
-            details.useVersion kotlin_version
+            details.useVersion Deps.kotlinVersion
         }
     }
 }
@@ -262,9 +262,12 @@ repositories {
 
 dependencies {
 
+    // test implementation
     androidTestImplementation Deps.androidTestImplementationExtension
     androidTestImplementation Deps.androidTestImplementationJunit
     androidTestImplementation Deps.androidTestImplementationEspresso
+    androidTestImplementation Deps.androidTestImplementationRunner
+    androidTestImplementation Deps.androidTestImplementationRules
 
     implementation Deps.jetbrainsKotlinCoRoutines
     implementation Deps.jetbrainsKotlinReflect

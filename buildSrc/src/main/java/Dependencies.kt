@@ -1,12 +1,21 @@
+import java.util.Locale
+
 object Versions {
+
+
     const val kotlin = "1.3.71"
     const val gradlePlugin = "3.6.2"
     const val androidxAppCompat = "1.6.1"
     const val androidxCore = "1.12.0"
     const val androidx = "1.1.5"
+
+
     const val androidxExtJunit = "1.1.5"
     const val androidxJunit = "4.13.2"
     const val espressoCore = "3.5.1"
+    const val runner = "1.4.0"
+    const val rules = "1.4.0"
+
     const val androidxConstraintLayout = "2.1.4"
     const val jetbrainsCoRoutines = "1.7.3"
     const val jetbrainsKotlinReflect = "1.9.20"
@@ -51,10 +60,23 @@ object Versions {
 }
 object Deps {
 
+    //Checks the stable releases are available
+    @JvmStatic
+    fun isNonStable(version: String): Boolean {
+        val stableKeyword = listOf("RELEASE", "FINAL", "GA").any {
+            version.uppercase(Locale.ROOT).contains(it)
+        }
+        val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+        val isStable = stableKeyword || regex.matches(version)
+        return isStable.not()
+    }
+
     // Test
     const val androidTestImplementationExtension =  "androidx.test.ext:${Versions.androidxExtJunit}"
     const val androidTestImplementationJunit = "junit:junit:${Versions.androidxJunit}"
     const val androidTestImplementationEspresso = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+    const val androidTestImplementationRunner = "androidx.test:${Versions.runner}"
+    const val androidTestImplementationRules = "androidx.test:rules:${Versions.rules}"
 
     // jetbrains
     const val jetbrainsKotlinCoRoutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.jetbrainsCoRoutines}"
