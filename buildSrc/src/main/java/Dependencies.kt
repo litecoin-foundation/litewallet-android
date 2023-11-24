@@ -52,7 +52,7 @@ object Versions {
     const val lifecycleViewmodel = "2.6.2"
 
     //class path
-    const val kotlinVersion = "1.6.21"
+    const val kotlinVersion = "$kotlin_version"
     const val androidTools = "8.1.0"
     const val kotlinGradlePlugin = "$kotlinVersion"
     const val googleServices = "4.3.14"
