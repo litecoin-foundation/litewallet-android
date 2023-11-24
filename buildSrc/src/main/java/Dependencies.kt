@@ -132,6 +132,13 @@ object Deps {
 
 object ConfigVersions {
 
+        //
+        const val minSDK = 30
+        const val targetSDK = 34
+        const val code = 736
+        const val name = "v2.9.0"
+        const val multiDexEnabled = true
+    //archivesBaseName = "${versionName}(${versionCode})"
 
 }
 
