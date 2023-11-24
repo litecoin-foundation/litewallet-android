@@ -1,22 +1,23 @@
-buildscript { 
+buildscript {
 
-    ext.kotlin_version = '1.6.21'
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-
-        classpath 'com.android.tools.build:gradle:8.1.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-        classpath 'com.google.gms:google-services:4.3.14'
-
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
+        classpath "com.android.tools.build:gradle:${Versions.androidTools}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinGradlePlugin}"
+        classpath "com.google.gms:google-services:${Versions.googleServices}"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:${Versions.firebaseCrashlyticsGradle}"
     }
 }
+
+
+repositories {
+    google()
+    mavenCentral()
+}
+
 
 allprojects {
     repositories {
