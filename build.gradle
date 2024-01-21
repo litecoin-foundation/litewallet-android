@@ -1,20 +1,37 @@
 buildscript { 
 
-    ext.kotlin_version = '1.6.21'
+    ext.kotlin_version = '1.9.21'
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
 
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        // in below line we are adding configurations to our project.
+        configurations.all {
+            // in below line we are adding strategy for each dependency and requesting the details
+            resolutionStrategy.eachDependency {DependencyResolveDetails details ->
+                // on below line we are getting to see the details using requested.
+                def requested = details.requested
+                // in below line we are requesting a group.
+                if (requested.group == 'com.android.support'){
+                    // on below line we are checking if the request is a group and checking if it starts with com.android.support.
+                    if(!requested.name.startsWith("multidex")){
+                        // if the requested name starts with multi dex then we are displaying the use version which is given below.
+                        details.useVersion '25.3.0'
+                    }
+                }
+            }
+        }
+
+        classpath 'com.android.tools.build:gradle:8.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        classpath 'com.google.gms:google-services:4.3.14'
+        classpath 'com.google.gms:google-services:4.4.0'
 
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
     }
 }
 
