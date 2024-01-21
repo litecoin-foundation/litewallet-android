@@ -19,6 +19,8 @@
     <!-- Allows changing locales -->
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
 
+    <uses-sdk android:minSdkVersion="31" android:targetSdkVersion="33"/>
+
     <uses-feature
         android:name="android.hardware.location.gps"
         android:required="false"/>
