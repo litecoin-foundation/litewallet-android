@@ -59,24 +59,13 @@ android {
     }
 
     compileSdkVersion 34
-//    android {
-//        compileSdkVersion 17
-//        buildToolsVersion "17.0.0"
-//
-//        defaultConfig {
-//            minSdkVersion 14
-//            targetSdkVersion 16
-//        }
-//    }
-
-
 
     defaultConfig {
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
         minSdkVersion 31
         targetSdkVersion 33
-        versionCode 735
+        versionCode 738
         versionName "v2.9.1"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"

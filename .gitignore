@@ -81,3 +81,4 @@ crash.txt
 /fastlane/
 fastlane/
 partner-keys.json
+/.idea/appInsightsSettings.xml
