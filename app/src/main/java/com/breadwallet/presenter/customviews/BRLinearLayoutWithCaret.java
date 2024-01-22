@@ -93,18 +93,15 @@ public class BRLinearLayoutWithCaret extends LinearLayout {
         final int N = a.getIndexCount();
         for (int i = 0; i < N; ++i) {
             int attr = a.getIndex(i);
-            switch (attr) {
-                case R.styleable.BRLinearLayoutWithCaret_strokeColor:
-                    @ColorInt int strokeColor = a.getColor(attr, 0);
-                    if (strokeColor != 0) strokePaint.setColor(strokeColor);
-                    break;
-                case R.styleable.BRLinearLayoutWithCaret_backgroundColor:
-                    @ColorInt int bgColor = a.getColor(attr, 0);
-                    if (bgColor != 0) backgroundPaint.setColor(bgColor);
-                    break;
-                case R.styleable.BRLinearLayoutWithCaret_withStroke:
-                    withStroke = a.getBoolean(attr, false);
-                    break;
+
+            if (attr==R.styleable.BRLinearLayoutWithCaret_strokeColor) {
+                @ColorInt int strokeColor = a.getColor(attr, 0);
+                if (strokeColor != 0) strokePaint.setColor(strokeColor);
+            }  else if (attr==R.styleable.BRLinearLayoutWithCaret_backgroundColor) {
+                @ColorInt int bgColor = a.getColor(attr, 0);
+                if (bgColor != 0) backgroundPaint.setColor(bgColor);
+            }else{
+                withStroke = a.getBoolean(attr, false);
             }
         }
         a.recycle();
