@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -14,10 +13,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.BIND_JOB_SERVICE"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+
     <!-- Allows unlocking your device and activating its screen so UI tests can succeed -->
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
     <!-- Allows changing locales -->
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+
+    <uses-sdk android:minSdkVersion="31" android:targetSdkVersion="33"/>
 
     <uses-feature
         android:name="android.hardware.location.gps"
@@ -36,6 +39,7 @@
         android:required="false"/>
 
     <application
+        xmlns:tools="http://schemas.android.com/tools"
         android:name=".BreadApp"
         android:allowBackup="false"
         android:fullBackupContent="false"
@@ -46,6 +50,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustResize"
+        tools:replace="android:fullBackupContent"
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
         >
 
         <activity

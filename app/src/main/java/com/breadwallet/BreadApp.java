@@ -23,8 +23,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
+import com.pusher.pushnotifications.PushNotifications;
 
-import static timber.log.Timber.DebugTree;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import timber.log.Timber;
 
@@ -49,9 +52,37 @@ public class BreadApp extends Application {
         if (Utils.isEmulatorOrDebug(this)) {
             enableCrashlytics = false;
         }
+        // setup Push Notifications
+        //PushNotifications.start(getApplicationContext(), "06a438d5-27ba-4cc2-94df-554dc932a796");
+        //PushNotifications.addDeviceInterest("");
+
+//        // Pusher
+//        pushNotifications.start(instanceId: Partner.partnerKeyPath(name: .pusherStaging))
+//        // pushNotifications.registerForRemoteNotifications()
+//        let generaliOSInterest = "general-ios"
+//        let debugGeneraliOSInterest = "debug-general-ios"
+//
+//        try? pushNotifications
+//                .addDeviceInterest(interest: generaliOSInterest)
+//        try? pushNotifications
+//                .addDeviceInterest(interest: debugGeneraliOSInterest)
+//
+//        let interests = pushNotifications.getDeviceInterests()?.joined(separator: "|") ?? ""
+//        let device = UIDevice.current.identifierForVendor?.uuidString ?? "ID"
+//        let interestesDict: [String: String] = ["device_id": device,
+//                "pusher_interests": interests]
+//
+//        LWAnalytics.logEventWithParameters(itemName: ._20231202_RIGI, properties: interestesDict)
+
+//        delay(4.0) {
+//            self.appDelegate.pushNotifications.registerForRemoteNotifications()
+//        }
+
 
         // setup Timber
-        Timber.plant(new Timber.DebugTree());
+        if(BuildConfig.DEBUG){
+            Timber.plant(new Timber.DebugTree());
+        }
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
         AnalyticsManager.init(this);
