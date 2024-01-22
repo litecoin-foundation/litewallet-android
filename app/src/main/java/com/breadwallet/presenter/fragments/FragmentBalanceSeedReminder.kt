@@ -79,7 +79,7 @@ class FragmentBalanceSeedReminder : Fragment() {
 
     private fun close() {
         if (activity != null && activity?.isFinishing != true) {
-            activity?.onBackPressed()
+            activity?.onBackPressedDispatcher?.onBackPressed()
         }
     }
 }
