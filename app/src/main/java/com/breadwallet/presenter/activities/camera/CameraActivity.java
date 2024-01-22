@@ -820,11 +820,8 @@ public class CameraActivity extends BRActivity implements View.OnClickListener, 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.take_picture: {
-                takePicture();
-                break;
-            }
+        if (view.getId() == R.id.take_picture)  {
+            takePicture();
         }
     }
 

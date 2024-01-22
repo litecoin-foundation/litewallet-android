@@ -149,7 +149,9 @@ public class BRConstants {
     public static final String _20210427_HCIEEH = "heartbeat_check_if_event_even_happens";
     public static final String _20220822_UTOU = "user_tapped_on_ud";
     public static final String _20230131_NENR = "no_error_nominal_response";
-    ///Dev: These events not yet used
+    public static final String _20231202_RIGI = "registered_ios_general_interest";
+    public static final String _20231225_UAP = "user_accepted_push";
+    public static final String _20240101_US = "user_signup";
 
     @Retention(RetentionPolicy.SOURCE)
     @StringDef({
@@ -186,7 +188,10 @@ public class BRConstants {
             _20210427_HCIEEH,
             _20220822_UTOU,
             _20230131_NENR,
-            _20230407_DCS
+            _20230407_DCS,
+            _20231202_RIGI,
+            _20231225_UAP,
+            _20240101_US
     })
     public @interface Event {
     }
