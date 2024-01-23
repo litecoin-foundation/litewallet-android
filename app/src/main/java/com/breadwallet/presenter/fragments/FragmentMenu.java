@@ -149,10 +149,9 @@ public class FragmentMenu extends Fragment {
 
     private void closeMenu() {
         BRAnimator.animateBackgroundDim(background, true);
-        BRAnimator.animateSignalSlide(signalLayout, true, () -> {
-            if (getActivity() != null && !getActivity().isDestroyed() && !getActivity().isFinishing()) {
-                getActivity().getFragmentManager().popBackStack();
-            }
-        });
+        BRAnimator.animateSignalSlide(signalLayout, true, () -> {});
+        if (getActivity() != null && !getActivity().isDestroyed() && !getActivity().isFinishing()) {
+            getActivity().getFragmentManager().popBackStack();
+        }
     }
 }
