@@ -52,9 +52,19 @@ public class BreadApp extends Application {
         if (Utils.isEmulatorOrDebug(this)) {
             enableCrashlytics = false;
         }
+
+        // setup Timber
+        if(BuildConfig.DEBUG){
+            Timber.plant(new Timber.DebugTree());
+        }
+
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
+
         // setup Push Notifications
-        //PushNotifications.start(getApplicationContext(), "06a438d5-27ba-4cc2-94df-554dc932a796");
-        //PushNotifications.addDeviceInterest("");
+        //This worked had to add the iid dep https://github.com/mixpanel/mixpanel-android/issues/744
+
+//        PushNotifications.start(getApplicationContext(), "06a438d5-27ba-4cc2-94df-554dc932a796");
+//        PushNotifications.addDeviceInterest("hello");
 
 //        // Pusher
 //        pushNotifications.start(instanceId: Partner.partnerKeyPath(name: .pusherStaging))
@@ -79,12 +89,7 @@ public class BreadApp extends Application {
 //        }
 
 
-        // setup Timber
-        if(BuildConfig.DEBUG){
-            Timber.plant(new Timber.DebugTree());
-        }
 
-        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
         AnalyticsManager.init(this);
 
         AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
