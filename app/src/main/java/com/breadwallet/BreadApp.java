@@ -23,10 +23,6 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,6 +48,8 @@ public class BreadApp extends Application {
     public static long backgroundedTime;
     private static Activity currentActivity;
 
+    private static String adInfoString = "";
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -69,6 +67,40 @@ public class BreadApp extends Application {
         }
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
+
+        loadAdvertisingID(this);
+        Timber.d("timber: After loading the Ad ID : %s ", adInfoString);
+
+        // setup Push Notifications
+        //This worked had to add the iid dep https://github.com/mixpanel/mixpanel-android/issues/744
+
+//        PushNotifications.start(getApplicationContext(), "06a438d5-27ba-4cc2-94df-554dc932a796");
+//        PushNotifications.addDeviceInterest("hello");
+
+//        // Pusher
+//        pushNotifications.start(instanceId: Partner.partnerKeyPath(name: .pusherStaging))
+//        // pushNotifications.registerForRemoteNotifications()
+//        let generaliOSInterest = "general-ios"
+//        let debugGeneraliOSInterest = "debug-general-ios"
+//
+//        try? pushNotifications
+//                .addDeviceInterest(interest: generaliOSInterest)
+//        try? pushNotifications
+//                .addDeviceInterest(interest: debugGeneraliOSInterest)
+//
+//        let interests = pushNotifications.getDeviceInterests()?.joined(separator: "|") ?? ""
+//        let device = UIDevice.current.identifierForVendor?.uuidString ?? "ID"
+//        let interestesDict: [String: String] = ["device_id": device,
+//                "pusher_interests": interests]
+//
+//        LWAnalytics.logEventWithParameters(itemName: ._20231202_RIGI, properties: interestesDict)
+
+//        delay(4.0) {
+//            self.appDelegate.pushNotifications.registerForRemoteNotifications()
+//        }
+
+
+
         AnalyticsManager.init(this);
         AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
         loadAdvertisingAndPush(this);
@@ -177,6 +209,42 @@ public class BreadApp extends Application {
             AnalyticsManager.logCustomEventWithParams(BRConstants._20240123_RAGI, params);
         }
     }
+
+
+    private void loadAdvertisingID(Context app) {
+        Thread thr = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    AdvertisingIdClient.Info adInfo = AdvertisingIdClient.getAdvertisingIdInfo(app);
+                    finished(adInfo);
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+
+                finished(null);
+            }
+        });
+
+        thr.start();
+    }
+
+    private void finished(final AdvertisingIdClient.Info adInfo) {
+        if(adInfo!=null) {
+            adInfoString = adInfo.getId();
+            //long timestamp = new Date().getTime()
+            Timber.d("timber: Finished Ad ID : %s -", adInfoString);
+            ////adInfoString =
+        }
+    }
+
+
 
     private static class CrashReportingTree extends Timber.Tree {
         private static final String CRASHLYTICS_KEY_PRIORITY = "priority";
