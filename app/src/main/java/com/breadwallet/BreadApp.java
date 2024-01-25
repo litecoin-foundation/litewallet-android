@@ -16,9 +16,14 @@ import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.LocaleHelper;
 import com.breadwallet.tools.util.Utils;
+import com.google.android.gms.ads.identifier.AdvertisingIdClient;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -42,6 +47,8 @@ public class BreadApp extends Application {
 
     private static Activity currentActivity;
 
+    private static String adInfoString = "";
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -59,6 +66,9 @@ public class BreadApp extends Application {
         }
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
+
+        loadAdvertisingID(this);
+        Timber.d("timber: After loading the Ad ID : %s ", adInfoString);
 
         // setup Push Notifications
         //This worked had to add the iid dep https://github.com/mixpanel/mixpanel-android/issues/744
@@ -155,6 +165,42 @@ public class BreadApp extends Application {
     public interface OnAppBackgrounded {
         void onBackgrounded();
     }
+
+
+    private void loadAdvertisingID(Context app) {
+        Thread thr = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    AdvertisingIdClient.Info adInfo = AdvertisingIdClient.getAdvertisingIdInfo(app);
+                    finished(adInfo);
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+
+                finished(null);
+            }
+        });
+
+        thr.start();
+    }
+
+    private void finished(final AdvertisingIdClient.Info adInfo) {
+        if(adInfo!=null) {
+            adInfoString = adInfo.getId();
+            //long timestamp = new Date().getTime()
+            Timber.d("timber: Finished Ad ID : %s -", adInfoString);
+            ////adInfoString =
+        }
+    }
+
+
 
     private static class CrashReportingTree extends Timber.Tree {
         private static final String CRASHLYTICS_KEY_PRIORITY = "priority";
