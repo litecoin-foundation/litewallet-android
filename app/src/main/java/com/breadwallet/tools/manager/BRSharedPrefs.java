@@ -43,11 +43,17 @@ public class BRSharedPrefs {
 
         SharedPreferences settingsToGet = context.getSharedPreferences(BRConstants.PREFS_NAME, 0);
         String defIso;
+        String defaultLanguage = Locale.getDefault().getLanguage();
+
         try {
-            defIso = Currency.getInstance(Locale.getDefault()).getCurrencyCode();
+            if (defaultLanguage == "ru") {
+                defIso = Currency.getInstance(new Locale("ru", "RU")).getCurrencyCode();
+            }
+            else {
+                defIso = Currency.getInstance(Locale.getDefault()).getCurrencyCode();
+            }
         } catch (IllegalArgumentException e) {
             Timber.e(e);
-            ///This is always going to be a Litewallet problem
             // Inspired by: https://stackoverflow.com/questions/26376439/locale-getdefault-returns-unsuported-invalid-locale-for-currency-getinstance
             defIso = Currency.getInstance(new Locale("en", "US")).getCurrencyCode();
         }
