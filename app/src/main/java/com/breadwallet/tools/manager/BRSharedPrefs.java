@@ -54,10 +54,8 @@ public class BRSharedPrefs {
             }
         } catch (IllegalArgumentException e) {
             Timber.e(e);
-            // Inspired by: https://stackoverflow.com/questions/26376439/locale-getdefault-returns-unsuported-invalid-locale-for-currency-getinstance
             defIso = Currency.getInstance(new Locale("en", "US")).getCurrencyCode();
         }
-
         return settingsToGet.getString(BRConstants.CURRENT_CURRENCY, defIso);
     }
 
