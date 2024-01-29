@@ -265,6 +265,7 @@ repositories {
 
 dependencies {
 
+    implementation 'org.json:json:20231013'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'junit:junit:4.12'
     androidTestImplementation('androidx.test.espresso:espresso-core:3.5.1')
@@ -310,6 +311,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-crashlytics-ndk'
+    implementation('com.google.firebase:firebase-iid:21.1.0')
 
     // push notifications
     implementation 'com.google.firebase:firebase-messaging:23.4.0'
