@@ -76,6 +76,7 @@ crash.txt
 .idea/copyright/
 /app/google-services.json
 /app/partner-keys.json
+/app/src/main/assets/partner-keys.json
 /.idea/markdown-navigator/
 /app/src/main/java/com/breadwallet/presenter/fragments/FragmentBreadSignal.java
 /fastlane/

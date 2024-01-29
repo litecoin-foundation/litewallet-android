@@ -5,20 +5,31 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Point;
 import android.hardware.fingerprint.FingerprintManager;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
 import com.breadwallet.di.component.DaggerAppComponent;
 import com.breadwallet.presenter.activities.util.BRActivity;
+import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.tools.listeners.SyncReceiver;
 import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.LocaleHelper;
 import com.breadwallet.tools.util.Utils;
+import com.google.android.gms.ads.identifier.AdvertisingIdClient;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,7 +50,6 @@ public class BreadApp extends Application {
     private static Timer isBackgroundChecker;
     public static AtomicInteger activityCounter = new AtomicInteger();
     public static long backgroundedTime;
-
     private static Activity currentActivity;
 
     @Override
@@ -52,32 +62,6 @@ public class BreadApp extends Application {
         if (Utils.isEmulatorOrDebug(this)) {
             enableCrashlytics = false;
         }
-        // setup Push Notifications
-        //PushNotifications.start(getApplicationContext(), "06a438d5-27ba-4cc2-94df-554dc932a796");
-        //PushNotifications.addDeviceInterest("");
-
-//        // Pusher
-//        pushNotifications.start(instanceId: Partner.partnerKeyPath(name: .pusherStaging))
-//        // pushNotifications.registerForRemoteNotifications()
-//        let generaliOSInterest = "general-ios"
-//        let debugGeneraliOSInterest = "debug-general-ios"
-//
-//        try? pushNotifications
-//                .addDeviceInterest(interest: generaliOSInterest)
-//        try? pushNotifications
-//                .addDeviceInterest(interest: debugGeneraliOSInterest)
-//
-//        let interests = pushNotifications.getDeviceInterests()?.joined(separator: "|") ?? ""
-//        let device = UIDevice.current.identifierForVendor?.uuidString ?? "ID"
-//        let interestesDict: [String: String] = ["device_id": device,
-//                "pusher_interests": interests]
-//
-//        LWAnalytics.logEventWithParameters(itemName: ._20231202_RIGI, properties: interestesDict)
-
-//        delay(4.0) {
-//            self.appDelegate.pushNotifications.registerForRemoteNotifications()
-//        }
-
 
         // setup Timber
         if(BuildConfig.DEBUG){
@@ -86,8 +70,8 @@ public class BreadApp extends Application {
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
         AnalyticsManager.init(this);
-
         AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
+        loadAdvertisingAndPush(this);
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -134,7 +118,6 @@ public class BreadApp extends Application {
                     isBackgroundChecker.cancel();
                     fireListeners();
                 }
-                // APP in foreground, do something else
             }
         };
 
@@ -149,6 +132,50 @@ public class BreadApp extends Application {
 
     public interface OnAppBackgrounded {
         void onBackgrounded();
+    }
+    private void loadAdvertisingAndPush(Context app) {
+        Thread thr = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    AdvertisingIdClient.Info adInfo = AdvertisingIdClient.getAdvertisingIdInfo(app);
+                    finished(adInfo);
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+                finished(null);
+            }
+        });
+        thr.start();
+    }
+
+    private void finished(final AdvertisingIdClient.Info adInfo) {
+        if(adInfo!=null) {
+
+            String adInfoString = adInfo.getId();
+            String generalAndroidInterest = "general-android";
+            String debugGeneralAndroidInterest = "debug-general-android";
+            String pusherInstanceID = Utils.fetchPartnerKey(this, PartnerNames.PUSHERSTAGING);
+
+            // setup Push Notifications
+            //This worked had to add the iid dep https://github.com/mixpanel/mixpanel-android/issues/744
+            PushNotifications.start(getApplicationContext(), pusherInstanceID);
+            PushNotifications.addDeviceInterest(generalAndroidInterest);
+            PushNotifications.addDeviceInterest(debugGeneralAndroidInterest);
+
+            //Send params for pusher setup
+            Bundle params = new Bundle();
+            params.putString("general-interest",generalAndroidInterest);
+            params.putString("debug-general-interest",debugGeneralAndroidInterest);
+            params.putString("device-ad-info",adInfoString);
+            AnalyticsManager.logCustomEventWithParams(BRConstants._20240123_RAGI, params);
+        }
     }
 
     private static class CrashReportingTree extends Timber.Tree {
