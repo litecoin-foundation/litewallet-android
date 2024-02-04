@@ -620,6 +620,8 @@
   <string name="ViewOnBlockchain">Перегляд на блокчейні</string>
   <!-- Device authentication title -->
   <!-- Wallet unlocked message -->
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">Забули пароль або PIN-код?</string>
   <string name="UnlockScreen.unlocked">Гаманець розблоковано</string>
   <!-- Update PIN caption text -->
   <string name="UpdatePin.caption">Запам’ятайте цей PIN-код. Якщо ви забудете його, ви не зможете отримати доступ до свого Litecoin.</string>

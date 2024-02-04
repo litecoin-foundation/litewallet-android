@@ -635,6 +635,8 @@
     <string name="UnlockScreen.touchIdTitle.android">Autenticação necessária</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Carteira Desbloqueada</string>
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">Esqueceu-se da sua frase-semente ou PIN?</string>
   <!-- Update PIN caption text -->
   <string name="UpdatePin.caption">Lembre-se deste PIN. Se o esquecer, não será capaz de aceder às suas Litecoins.</string>
   <!-- PIN creation info. -->

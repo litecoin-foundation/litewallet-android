@@ -633,6 +633,8 @@
   <!-- Device authentication title -->
     <string name="ViewOnBlockchain">Voir sur la blockchain</string>
     <string name="UnlockScreen.touchIdTitle.android">Identification nécessaire</string>
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">Vous avez oublié votre phrase de départ ou votre code PIN?</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Portefeuille déverrouillé</string>
   <!-- Update PIN caption text -->
