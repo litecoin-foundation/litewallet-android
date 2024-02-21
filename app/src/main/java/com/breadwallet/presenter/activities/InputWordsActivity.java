@@ -352,9 +352,10 @@ public class InputWordsActivity extends BRActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
-    private class FocusListener implements View.OnFocusChangeListener {
+        private class FocusListener implements View.OnFocusChangeListener {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {

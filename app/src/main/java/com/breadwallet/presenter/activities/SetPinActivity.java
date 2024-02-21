@@ -148,5 +148,7 @@ public class SetPinActivity extends BRActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
     }
 }

@@ -132,6 +132,7 @@ class FragmentSend : Fragment() {
         val faq = rootView.findViewById<View>(R.id.faq_button) as ImageButton
         showKeyboard(false)
         signalLayout.layoutTransition = BRAnimator.getDefaultTransition()
+        
         return rootView
     }
 

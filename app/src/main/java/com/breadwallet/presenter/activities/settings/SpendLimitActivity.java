@@ -39,8 +39,11 @@ public class SpendLimitActivity extends BRActivity {
     private ListView listView;
     private LimitAdaptor adapter;
 
+    private ImageButton closeButton;
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     public static SpendLimitActivity getApp() {
@@ -56,6 +59,7 @@ public class SpendLimitActivity extends BRActivity {
         // Hiding until layouts are built.
         ImageButton faq = findViewById(R.id.faq_button);
 
+        closeButton = (ImageButton) findViewById(R.id.close_button);
         listView = findViewById(R.id.limit_list);
         listView.setFooterDividersEnabled(true);
         adapter = new LimitAdaptor(this);
@@ -83,6 +87,13 @@ public class SpendLimitActivity extends BRActivity {
         });
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     //satoshis

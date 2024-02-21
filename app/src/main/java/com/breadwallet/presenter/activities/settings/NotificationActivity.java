@@ -21,6 +21,7 @@ public class NotificationActivity extends BRActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override

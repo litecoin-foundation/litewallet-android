@@ -172,5 +172,6 @@ public class ScanQRActivity extends BRActivity implements ActivityCompat.OnReque
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

@@ -41,12 +41,15 @@ public class DisplayCurrencyActivity extends BRActivity {
     private Button leftButton;
     private Button rightButton;
 
+    private ImageButton closeButton;
+
     public static DisplayCurrencyActivity getApp() {
         return app;
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -100,6 +103,15 @@ public class DisplayCurrencyActivity extends BRActivity {
         });
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+
+        closeButton = (ImageButton) findViewById(R.id.close_button);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void updateExchangeRate() {

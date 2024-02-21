@@ -8,14 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.breadwallet.R;
+import com.breadwallet.presenter.activities.DisabledActivity;
+import com.breadwallet.presenter.activities.InputWordsActivity;
 import com.breadwallet.presenter.language.ChangeLanguageBottomSheet;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.entities.BRSettingsItem;
@@ -35,18 +41,21 @@ public class SettingsActivity extends BRActivity {
     private ListView listView;
     public List<BRSettingsItem> items;
     public static boolean appVisible = false;
+    private ImageButton closeButton;
     private static SettingsActivity app;
-
     public static SettingsActivity getApp() {
         return app;
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+
         listView = findViewById(R.id.settings_list);
+
+        closeButton = (ImageButton) findViewById(R.id.close_button);
+        closeButton.setOnClickListener(v -> finish());
     }
 
     public class SettingsListAdapter extends ArrayAdapter<String> {
