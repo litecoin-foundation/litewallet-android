@@ -71,10 +71,11 @@
     <item name="litecoin_gray" type="color">#F1F1F1</item>
     <item name="litecoin_silver" type="color">#A6A9AA</item>
     <item name="litecoin_dark_silver" type="color">#4D4D4E</item>
-    <item name="litecoin_litewallet_blue" type="color">#0C3475</item>
+    <item name="litecoin_litewallet_blue" type="color">#345D9D</item>
     <item name="litecoin_litewallet_orange" type="color">#FE5F55</item>
     <item name="litecoin_litewallet_green" type="color">#179E27</item>
     <color name="white_30_alpha">#b3ffffff</color>
+    <item name="litecoin_litewallet_dark_blue" type="color">#0C3475</item>
 
     <color name="blue_grey">#7c98c7</color>
     <color name="white_two">#f5f5f5</color>

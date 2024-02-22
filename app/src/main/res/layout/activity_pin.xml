@@ -5,14 +5,14 @@
     android:id="@+id/activity_pit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/litecoin_litewallet_blue"
+    android:background="@color/litecoin_litewallet_dark_blue"
     tools:context="com.breadwallet.presenter.activities.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ltcPriceConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/litecoin_litewallet_blue">
+        android:background="@color/litecoin_litewallet_dark_blue">
 
         <TextView
             android:id="@+id/ltcPriceTextView"
@@ -160,7 +160,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/UnlockScreen.subheader"
-        android:textColor="#FFF5F5"
+        android:textColor="@color/white"
         android:textSize="@dimen/sub_header"
         app:layout_constraintBottom_toTopOf="@+id/pinLayout"
         app:layout_constraintLeft_toLeftOf="@+id/pinLayout"
