@@ -5,7 +5,7 @@ import android.content.res.Resources
 import com.breadwallet.R
 import java.util.Locale
 
-class AudioSource {
+class AudioSource() {
     fun getLocalizedText(locale: Locale, resourceId: Int): String {
         val config = Configuration()
         config.setLocale(locale)
