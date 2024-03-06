@@ -12,7 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:fontFamily="@font/barlowsemicondensed_light"
-        android:text="Hello"
+        android:text="English"
+        android:paddingEnd="2dp"
+        android:paddingBottom="2dp"
+        android:paddingStart="2dp"
         android:textSize="25sp"
         android:textColor="@color/white"
         />

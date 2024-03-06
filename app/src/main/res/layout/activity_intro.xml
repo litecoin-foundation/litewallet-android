@@ -42,9 +42,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/language_list"
-        android:layout_width="180dp"
-        android:layout_height="45dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="10dp"
         android:layout_marginTop="96dp"
+        android:background="@drawable/lang_rounded_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

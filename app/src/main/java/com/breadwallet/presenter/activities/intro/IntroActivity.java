@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -66,12 +67,25 @@ public class IntroActivity extends BRActivity implements Serializable {
         versionText = findViewById(R.id.version_text);
         listLangRecyclerView = findViewById(R.id.language_list);
         View parentLayout = findViewById(android.R.id.content);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
         countryAudioList = new CountryLangResource().loadResources();
 
-        CountryLanguageAdapter countryLanguageAdapter = new CountryLanguageAdapter(countryAudioList);
+        CountryLanguageAdapter countryLanguageAdapter = new CountryLanguageAdapter(this, countryAudioList);
         listLangRecyclerView.setAdapter(countryLanguageAdapter);
-        listLangRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        listLangRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+                int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+
+                int centerPosition = (lastVisibleItemPosition - firstVisibleItemPosition) / 2 + firstVisibleItemPosition;
+
+                countryLanguageAdapter.updateCenterPosition(centerPosition);
+            }
+        });
+        listLangRecyclerView.setLayoutManager(layoutManager);
 
         setListeners();
         updateBundles();
