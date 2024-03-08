@@ -1,6 +1,9 @@
 
 package com.breadwallet.presenter.activities.intro;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.media.AudioAttributes;
@@ -35,9 +38,13 @@ import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 import com.platform.APIClient;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Objects;
+
 import timber.log.Timber;
 
 public class IntroActivity extends BRActivity implements Serializable {
@@ -83,8 +90,11 @@ public class IntroActivity extends BRActivity implements Serializable {
                     int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
 
                     int centerPosition = (lastVisibleItemPosition - firstVisibleItemPosition) / 2 + firstVisibleItemPosition;
-                    countryLanguageAdapter.updateCenterPosition(centerPosition);
-                    description.setText(countryLanguageAdapter.selectedDesc());
+                    if (centerPosition != RecyclerView.NO_POSITION) {
+                        countryLanguageAdapter.updateCenterPosition(centerPosition);
+                        description.setText(countryLanguageAdapter.selectedDesc());
+                        showDialogForItem(centerPosition);
+                    }
                 }
             }
 
@@ -133,6 +143,13 @@ public class IntroActivity extends BRActivity implements Serializable {
         }
 
         PostAuth.getInstance().onCanaryCheck(this, false);
+    }
+
+    private void showDialogForItem(final int position) {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.pop_up_language_intro);
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(R.drawable.rounded_pop_up_intro);
+        dialog.show();
     }
 
     private void updateBundles() {
