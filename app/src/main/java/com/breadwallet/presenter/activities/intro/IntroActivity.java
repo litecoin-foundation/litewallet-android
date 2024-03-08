@@ -93,7 +93,7 @@ public class IntroActivity extends BRActivity implements Serializable {
                     if (centerPosition != RecyclerView.NO_POSITION) {
                         countryLanguageAdapter.updateCenterPosition(centerPosition);
                         description.setText(countryLanguageAdapter.selectedDesc());
-                        showDialogForItem(centerPosition);
+                        showDialogForItem(countryLanguageAdapter.selectedMessage());
                     }
                 }
             }
@@ -145,10 +145,27 @@ public class IntroActivity extends BRActivity implements Serializable {
         PostAuth.getInstance().onCanaryCheck(this, false);
     }
 
-    private void showDialogForItem(final int position) {
-        Dialog dialog = new Dialog(this);
+    private void showDialogForItem(String title) {
+        Dialog dialog = new Dialog(IntroActivity.this);
         dialog.setContentView(R.layout.pop_up_language_intro);
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(R.drawable.rounded_pop_up_intro);
+        Button btnYes = dialog.findViewById(R.id.button_yes);
+        Button btnNo = dialog.findViewById(R.id.button_no);
+        TextView txtTitle = dialog.findViewById(R.id.dialog_message);
+        txtTitle.setText(title);
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
         dialog.show();
     }
 

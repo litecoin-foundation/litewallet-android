@@ -83,7 +83,7 @@ class CountryLanguageAdapter(context: Context,val languages: Array<IntroLanguage
         notifyDataSetChanged() // Refresh the list to update the bold text
     }
 
-    fun selectedTitle() = languages[mSelectedItem].lang
+    fun selectedMessage() = languages[mSelectedItem].message
 
     fun selectedDesc() = languages[mSelectedItem].desc
 

@@ -17,7 +17,7 @@
         android:paddingStart="60dp"
         android:textAlignment="center"
         android:paddingBottom="20dp"
-        android:text="Are you sure you want to proceed?" />
+        android:text="Are you sure you want to change the language to English?" />
 
     <View
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/blue"
+            android:textColor="@color/litecoin_litewallet_blue"
             android:fontFamily="@font/barlowsemicondensed_regular"
             android:background="@drawable/button_intro_left"
             android:clickable="true"
@@ -55,6 +55,6 @@
             android:textColor="@color/red"
             android:clickable="true"
             android:background="@drawable/button_intro_right"
-            android:text="No" />
+            android:text="Cancel" />
     </LinearLayout>
 </LinearLayout>
