@@ -13,8 +13,7 @@
         android:layout_centerInParent="true"
         android:fontFamily="@font/barlowsemicondensed_light"
         android:text="English"
-        android:layout_margin="2dp"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textColor="@color/white"
         />
 
