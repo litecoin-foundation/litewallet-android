@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.breadwallet.presenter.activities.AnnounceUpdatesViewActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import com.breadwallet.BuildConfig;

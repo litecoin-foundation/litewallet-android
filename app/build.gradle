@@ -23,6 +23,7 @@ android {
     buildFeatures {
         dataBinding true
         buildConfig true
+        viewBinding true
     }
 
     signingConfigs {
@@ -53,10 +54,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = '1.8'
     }
+
 
     compileSdkVersion 34
 
@@ -266,6 +267,8 @@ repositories {
 dependencies {
 
     implementation 'org.json:json:20231013'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'junit:junit:4.12'
     androidTestImplementation('androidx.test.espresso:espresso-core:3.5.1')
