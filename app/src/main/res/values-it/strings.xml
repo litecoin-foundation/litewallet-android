@@ -721,18 +721,19 @@
   <string name="FeeSelector.luxuryMessage">"Questa opzione garantisce virtualmente l'accettazione della tua transazione anche se stai pagando un premio."</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ minuti</string>
   <string name="BottomNavItem.History.title">STORIA</string>
-    <string name="ManageWallet.balance">Saldo</string>
+  <string name="ManageWallet.balance">Saldo</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Acquista LTC con molte coppie fiat\n• Paga con più metodi\n• Fornitore globale di pagamenti"</string>
   <string name="Login.currentLtcPrice">Valore LTC corrente in %1$s</string>
   <string name="Settings.languages">Le lingue</string>
-    <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">Acquista buoni regalo\n• Ricarica telefoni prepagati\n• Steam, Amazon, Hotels.com\n• Funziona in 170 paesi</string>
-    <string name="Donate.toThe.LWTeam">Dona a: Litewallet Infrastructure</string>
-    <string name="show_seed_label">Spettacolo</string>
-    <string name="settings_show_seed">Mostra la mia frase seme</string>
+  <string name="Settings.ChangeLanguage.alertMessage">Sei sicuro di voler cambiare la lingua in italiano?</string>
+  <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+  <string name="BuyCenter.bitrefill.FinancialDetails">Acquista buoni regalo\n• Ricarica telefoni prepagati\n• Steam, Amazon, Hotels.com\n• Funziona in 170 paesi</string>
+  <string name="Donate.toThe.LWTeam">Dona a: Litewallet Infrastructure</string>
+  <string name="show_seed_label">Spettacolo</string>
+  <string name="settings_show_seed">Mostra la mia frase seme</string>
   <string name="sync_preferences">Preferenza di sincronizzazione: %1$s falsi positivi</string>
-    <string name="radio_low_privacy">Bassa privacy (~19 minuti)</string>
+  <string name="radio_low_privacy">Bassa privacy (~19 minuti)</string>
   <string name="radio_semi_private">Semi-privato (~42 minuti)</string>
   <string name="radio_anonymous">Anonimo (~77 minuti)</string>
-    <string name="release_notes">IMPORTANTE: Attendi ~1 ora per la sincronizzazione!</string>
+  <string name="release_notes">IMPORTANTE: Attendi ~1 ora per la sincronizzazione!</string>
 </resources>

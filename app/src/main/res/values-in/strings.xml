@@ -724,17 +724,18 @@
 
   <string name="FeeSelector.luxuryTime">2.5 - 5+ menit</string>
   <string name="BottomNavItem.History.title">Sejarah</string>
- <string name="ManageWallet.balance">Saldo Kartu</string>
-<string name="Login.currentLtcPrice">Nilai LTC saat ini di %1$s</string>
-    <string name="Settings.languages">Bahasa</string>
+  <string name="ManageWallet.balance">Saldo Kartu</string>
+  <string name="Login.currentLtcPrice">Nilai LTC saat ini di %1$s</string>
+  <string name="Settings.languages">Bahasa</string>
+  <string name="Settings.ChangeLanguage.alertMessage">Apakah Anda yakin ingin mengubah bahasanya ke bahasa Indonesia?</string>
   <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">Beli kartu hadiah\n• Isi ulang ponsel prabayar\n• Steam, Amazon, Hotels.com\n• Berfungsi di 170 negara</string>
-    <string name="Donate.toThe.LWTeam">Donasi ke: Infrastruktur Litewallet</string>
-    <string name="show_seed_label">Menunjukkan</string>
-    <string name="settings_show_seed">Tunjukkan frase seed saya</string>
+  <string name="BuyCenter.bitrefill.FinancialDetails">Beli kartu hadiah\n• Isi ulang ponsel prabayar\n• Steam, Amazon, Hotels.com\n• Berfungsi di 170 negara</string>
+  <string name="Donate.toThe.LWTeam">Donasi ke: Infrastruktur Litewallet</string>
+  <string name="show_seed_label">Menunjukkan</string>
+  <string name="settings_show_seed">Tunjukkan frase seed saya</string>
   <string name="sync_preferences">Preferensi Sinkronisasi: %1$s positif palsu</string>
-    <string name="radio_low_privacy">Privasi rendah (~19 menit)</string>
+  <string name="radio_low_privacy">Privasi rendah (~19 menit)</string>
   <string name="radio_semi_private">Semi-pribadi (~42 menit)</string>
   <string name="radio_anonymous">Anonim (~77 menit)</string>
-    <string name="release_notes">PENTING: Tunggu ~1 jam untuk sinkronisasi!</string>
+  <string name="release_notes">PENTING: Tunggu ~1 jam untuk sinkronisasi!</string>
 </resources>
