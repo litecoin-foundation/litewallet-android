@@ -721,18 +721,19 @@
   <string name="FeeSelector.luxuryMessage">このオプションは、プレミアムを支払っていますが、トランザクションの受け入れを事実上保証します。</string>
   <string name="FeeSelector.luxuryTime">2.5～5+分</string>
   <string name="BottomNavItem.History.title">歴史</string>
-    <string name="ManageWallet.balance">残高</string>
+  <string name="ManageWallet.balance">残高</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"•多くの法定紙幣ペアでLTCを購入する\n•複数の方法で支払う\n•グローバル決済プロバイダー"</string>
   <string name="Login.currentLtcPrice">現在のLTC値 %1$s</string>
   <string name="Settings.languages">言語</string>
-    <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">ギフトカードの購入\n• プリペイド携帯電話の補充\n• Steam、Amazon、Hotels.com\n• 170 か国で利用可能</string>
-    <string name="Donate.toThe.LWTeam">寄付先: Litewallet インフラストラクチャ</string>
-    <string name="show_seed_label">見せる</string>
-    <string name="settings_show_seed">私のシードフレーズを表示</string>
+  <string name="Settings.ChangeLanguage.alertMessage">言語を日本語に変更してもよろしいですか?</string>
+  <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+  <string name="BuyCenter.bitrefill.FinancialDetails">ギフトカードの購入\n• プリペイド携帯電話の補充\n• Steam、Amazon、Hotels.com\n• 170 か国で利用可能</string>
+  <string name="Donate.toThe.LWTeam">寄付先: Litewallet インフラストラクチャ</string>
+  <string name="show_seed_label">見せる</string>
+  <string name="settings_show_seed">私のシードフレーズを表示</string>
   <string name="sync_preferences">同期設定: %1$s 誤検知</string>
-    <string name="radio_low_privacy">低プライバシー (~19 分)</string>
+  <string name="radio_low_privacy">低プライバシー (~19 分)</string>
   <string name="radio_semi_private">セミプライベート（～42分）</string>
   <string name="radio_anonymous">匿名 (~77 分)</string>
-    <string name="release_notes">重要: 同期が完了するまで 1 時間ほどお待ちください。</string>
+  <string name="release_notes">重要: 同期が完了するまで 1 時間ほどお待ちください。</string>
 </resources>
