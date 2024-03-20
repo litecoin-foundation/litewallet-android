@@ -707,14 +707,15 @@
 
   <!--Buy center - partners-->
 
-    <string name="BuyCenter.moonpay.FinancialDetails">"• Купуйте LTC багатьма фіатними парами\n• Сплачуйте кількома способами\n• Глобальний постачальник платежів"</string>
+  <string name="BuyCenter.moonpay.FinancialDetails">"• Купуйте LTC багатьма фіатними парами\n• Сплачуйте кількома способами\n• Глобальний постачальник платежів"</string>
 
   <string name="BottomNavItem.History.title">Історія</string>
 
     <!-- Balance -->
   <string name="ManageWallet.balance">Баланс</string>
-<string name="Login.currentLtcPrice">Поточне значення LTC в %1$s</string>
+  <string name="Login.currentLtcPrice">Поточне значення LTC в %1$s</string>
   <string name="Settings.languages">Мови</string>
+  <string name="Settings.ChangeLanguage.alertMessage">Dili Ukraynaca olarak değiştirmek istediğinizden emin misiniz?</string>
   <string name="Prompts.NoScreenLock.body.android">Для захисту вашого гаманця необхідне блокування екрана пристрою. Перейдіть до «Налаштування» &gt; \"Безпека\" &gt; «Блокування екрана» та увімкніть, щоб продовжити.</string>
   <string name="Send.cameraUnavailabeMessage.android">Дозволити доступ до камери в \"Налаштуваннях\" &gt; \"Програми\" &gt; \\Litewallet\" &gt; \"Дозволи\"</string>
   <string name="Alerts.copiedAddressesSubheader">Усі адреси гаманців успішно скопійовано.</string>
@@ -728,18 +729,18 @@
   <string name="Receive.copied">Скопійовано в буфер обміну.</string>
   <string name="URLHandling.copy">Копія</string>
   <string name="URLHandling.addressListAlertTitle">Копіювати адреси гаманця</string>
-    <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">Купуйте подарункові картки\n• Поповнюйте передплачені телефони\n• Steam, Amazon, Hotels.com\n• Працює в 170 країнах</string>
-    <string name="Donate.Dialog.title">"\tЗробіть пожертву Litecoin Foundation "</string>
-    <string name="Donate.Dialog.message">"\tМи цінуємо вашу пожертву Litecoin Foundation. Пожертви є остаточними і не підлягають поверненню. Дякуємо за вашу постійну підтримку. "</string>
-    <string name="Donate.Dialog.Positive.text">Пожертвуйте</string>
+  <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+  <string name="BuyCenter.bitrefill.FinancialDetails">Купуйте подарункові картки\n• Поповнюйте передплачені телефони\n• Steam, Amazon, Hotels.com\n• Працює в 170 країнах</string>
+  <string name="Donate.Dialog.title">"\tЗробіть пожертву Litecoin Foundation "</string>
+  <string name="Donate.Dialog.message">"\tМи цінуємо вашу пожертву Litecoin Foundation. Пожертви є остаточними і не підлягають поверненню. Дякуємо за вашу постійну підтримку. "</string>
+  <string name="Donate.Dialog.Positive.text">Пожертвуйте</string>
   <string name="Donate.Dialog.Negative.text">Скасувати</string>
-    <string name="Donate.toThe.LWTeam">Пожертвуйте: Litewallet Infrastructure</string>
+  <string name="Donate.toThe.LWTeam">Пожертвуйте: Litewallet Infrastructure</string>
   <string name="show_seed_label">Показати</string>
   <string name="settings_show_seed">Покажи мою початкову фразу</string>
   <string name="sync_preferences">Налаштування синхронізації: %1$s помилкові спрацьовування</string>
-    <string name="radio_low_privacy">Низька конфіденційність (~19 хвилин)</string>
+  <string name="radio_low_privacy">Низька конфіденційність (~19 хвилин)</string>
   <string name="radio_semi_private">Напівприватний (~42 хвилини)</string>
   <string name="radio_anonymous">Анонімно (~77 хвилин)</string>
-    <string name="release_notes">ВАЖЛИВО: зачекайте ~1 годину для синхронізації!</string>
+  <string name="release_notes">ВАЖЛИВО: зачекайте ~1 годину для синхронізації!</string>
 </resources>

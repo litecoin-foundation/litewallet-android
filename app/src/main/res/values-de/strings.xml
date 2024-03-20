@@ -726,13 +726,14 @@
   <string name="BuyCenter.moonpay.FinancialDetails">"• Kaufen Sie LTC mit vielen Fiat-Paaren.\n• Bezahlen Sie mit mehreren Methoden.\n• Globaler Zahlungsanbieter"</string>
   <string name="Login.currentLtcPrice">Aktueller LTC-Wert in %1$s</string>
   <string name="Settings.languages">Sprachen</string>
-    <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">Geschenkkarten kaufen\n• Prepaid-Telefone aufladen\n• Steam, Amazon, Hotels.com\n• Funktioniert in 170 Ländern</string>
-    <string name="show_seed_label">Zeigen</string>
-    <string name="settings_show_seed">Meine Seed-Phrase anzeigen</string>
+  <string name="Settings.ChangeLanguage.alertMessage">Sind Sie sicher, dass Sie die Sprache auf Deutsch ändern möchten?</string>
+  <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+  <string name="BuyCenter.bitrefill.FinancialDetails">Geschenkkarten kaufen\n• Prepaid-Telefone aufladen\n• Steam, Amazon, Hotels.com\n• Funktioniert in 170 Ländern</string>
+  <string name="show_seed_label">Zeigen</string>
+  <string name="settings_show_seed">Meine Seed-Phrase anzeigen</string>
   <string name="sync_preferences">Synchronisierungseinstellung: %1$s Fehlalarme</string>
-    <string name="radio_low_privacy">Geringe Privatsphäre (~19 Minuten)</string>
+  <string name="radio_low_privacy">Geringe Privatsphäre (~19 Minuten)</string>
   <string name="radio_semi_private">Halbprivat (~42 Minuten)</string>
   <string name="radio_anonymous">Anonym (~77 Minuten)</string>
-    <string name="release_notes">WICHTIG: Warten Sie ca. 1 Stunde auf die Synchronisierung!</string>
+  <string name="release_notes">WICHTIG: Warten Sie ca. 1 Stunde auf die Synchronisierung!</string>
 </resources>
