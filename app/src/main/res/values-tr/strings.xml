@@ -636,6 +636,8 @@
   <string name="UnlockScreen.subheader">PIN girin</string>
   <!-- Instruction to touch the sensor for fingerprint authentication -->
   <string name="UnlockScreen.touchIdInstructions.android">Dokunma Sensörü</string>
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">Tohum cümlenizi veya PIN kodunuzu mu unuttunuz?</string>
   <!-- TouchID prompt text -->
   <string name="UnlockScreen.touchIdPrompt">Litewallet\'ınızın kilidini açın.</string>
   <!-- Device authentication body -->

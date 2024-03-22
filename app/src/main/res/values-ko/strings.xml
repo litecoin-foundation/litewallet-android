@@ -635,6 +635,8 @@
     <string name="UnlockScreen.touchIdTitle.android">본인확인 필요</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">월렛의 잠금이 해제됨</string>
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">시드 문구나 PIN을 잊으셨나요?</string>
   <!-- Update PIN caption text -->
   <string name="UpdatePin.caption">이 PIN 코드를 기억하세요. PIN 코드를 잊어버리면 자신의 라이트코인을 사용할 수 없게 됩니다.</string>
   <!-- PIN creation info. -->

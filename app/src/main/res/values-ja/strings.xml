@@ -635,6 +635,8 @@
     <string name="UnlockScreen.touchIdTitle.android">認証が必要です</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">ウォレットのロックが解除されました</string>
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">シードフレーズまたはPINをお忘れですか？</string>
   <!-- Update PIN caption text -->
   <string name="UpdatePin.caption">このPINコードは覚えておいてください。忘れた場合、ご自身のライトコインへアクセスできなくなります。</string>
   <!-- PIN creation info. -->
