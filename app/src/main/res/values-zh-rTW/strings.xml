@@ -635,6 +635,8 @@
     <string name="UnlockScreen.touchIdTitle.android">需要驗證</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">錢包已解鎖</string>
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">忘了助記詞或 PIN 碼？</string>
   <!-- Update PIN caption text -->
   <string name="UpdatePin.caption">請記住此 PIN 碼。如果忘記，會無法存取您的比特幣。</string>
   <!-- PIN creation info. -->
