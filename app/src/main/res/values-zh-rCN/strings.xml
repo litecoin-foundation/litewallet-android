@@ -635,6 +635,8 @@
     <string name="UnlockScreen.touchIdTitle.android">需要身份认证</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">钱包已解锁</string>
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">忘记密码或 PIN 码？</string>
   <!-- Update PIN caption text -->
   <string name="UpdatePin.caption">请牢记此 PIN 码。如果您忘记，您将无法访问您的莱特币。</string>
   <!-- PIN creation info. -->
