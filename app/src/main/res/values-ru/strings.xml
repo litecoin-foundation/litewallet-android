@@ -633,6 +633,8 @@
   <!-- Device authentication title -->
     <string name="ViewOnBlockchain">Посмотреть на блокчейне</string>
     <string name="UnlockScreen.touchIdTitle.android">Требуется аутентификация</string>
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">Забыли начальную фразу или PIN-код?</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Кошелек разблокирован</string>
   <!-- Update PIN caption text -->
@@ -721,17 +723,18 @@
   <string name="FeeSelector.luxuryMessage">Эта опция фактически гарантирует принятие вашей транзакции, хотя вы платите премию.</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ минут</string>
   <string name="BottomNavItem.History.title">ИСТОРИЯ</string>
-    <string name="ManageWallet.balance">Баланс</string>
+  <string name="ManageWallet.balance">Баланс</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Покупайте LTC с помощью множества фиатных пар\n• Оплачивайте несколькими способами\n• Глобальный платежный провайдер"</string>
   <string name="Login.currentLtcPrice">Текущее значение LTC в %1$s</string>
   <string name="Settings.languages">Языки</string>
-    <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">Покупайте подарочные карты\n• Пополняйте предоплаченные телефоны\n• Steam, Amazon, Hotels.com\n• Работает в 170 странах</string>
-    <string name="Donate.toThe.LWTeam">Пожертвовать: Инфраструктура Litewallet</string>
-    <string name="show_seed_label">Показывать</string>
-    <string name="settings_show_seed">" Покажи мою початкову фразу"</string>
+  <string name="Settings.ChangeLanguage.alertMessage">Вы уверены, что хотите сменить язык на русский?</string>
+  <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+  <string name="BuyCenter.bitrefill.FinancialDetails">Покупайте подарочные карты\n• Пополняйте предоплаченные телефоны\n• Steam, Amazon, Hotels.com\n• Работает в 170 странах</string>
+  <string name="Donate.toThe.LWTeam">Пожертвовать: Инфраструктура Litewallet</string>
+  <string name="show_seed_label">Показывать</string>
+  <string name="settings_show_seed">" Покажи мою початкову фразу"</string>
   <string name="sync_preferences">Настройка синхронизации: %1$s ложных срабатываний</string>
-    <string name="radio_low_privacy">"Низкая конфиденциальность (~ 19 минут) "</string>
+  <string name="radio_low_privacy">"Низкая конфиденциальность (~ 19 минут) "</string>
   <string name="radio_semi_private">"Полуприватный (~ 42 минуты) "</string>
   <string name="radio_anonymous">"Аноним (~77 минут) "</string>
   <string name="release_notes">ВАЖНО: Подождите ~1 час для синхронизации!</string>

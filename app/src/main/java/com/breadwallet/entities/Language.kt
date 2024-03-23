@@ -1,14 +1,21 @@
 package com.breadwallet.entities
 
+import com.breadwallet.R
+import java.util.Locale
+
 
 /** Litewallet
  * Created by Mohamed Barry on 7/19/21
  * email: mosadialiou@gmail.com
  * Copyright © 2021 Litecoin Foundation. All rights reserved.
  */
-enum class Language(val code: String, val title: String, val desc: String) {
-    GERMAN("de", "Deutsch", "Sprache auswählen"),
+enum class Language(
+    val code: String,
+    val title: String,
+    val desc: String
+    ) {
     ENGLISH("en", "English", "Select language"),
+    GERMAN("de", "Deutsch", "Sprache auswählen"),
     SPANISH("es", "Español", "Seleccione el idioma"),
     FRENCH("fr", "Français", "Sélectionner la langue"),
     INDONESIAN("in", "Indonesia", "Pilih bahasa"),

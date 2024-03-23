@@ -633,6 +633,8 @@
   <!-- Device authentication title -->
     <string name="ViewOnBlockchain">Voir sur la blockchain</string>
     <string name="UnlockScreen.touchIdTitle.android">Identification nécessaire</string>
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">Vous avez oublié votre phrase de départ ou votre code PIN?</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Portefeuille déverrouillé</string>
   <!-- Update PIN caption text -->
@@ -717,22 +719,23 @@
   <string name="Confirmation.donateLabel">Montant à donner:</string>
   <string name="Confirmation.staticAddressLabel">Adresse:</string>
   <string name="Donate.word">Faire un don</string>
-    <string name="FeeSelector.luxury">Luxe</string>
+  <string name="FeeSelector.luxury">Luxe</string>
   <string name="FeeSelector.luxuryMessage">Cette option garantit pratiquement l\'acceptation de votre transaction même si vous payez une prime.</string>
   <string name="FeeSelector.luxuryTime">2.5 à 5+ minutes</string>
   <string name="BottomNavItem.History.title">HISTORIQUE</string>
-    <string name="ManageWallet.balance">Solde</string>
- <string name="BuyCenter.moonpay.FinancialDetails">"• Achetez des LTC avec de nombreuses paires de fiat\n• Payez avec plusieurs méthodes\n• Fournisseur de paiement mondial"</string>
+  <string name="ManageWallet.balance">Solde</string>
+  <string name="BuyCenter.moonpay.FinancialDetails">"• Achetez des LTC avec de nombreuses paires de fiat\n• Payez avec plusieurs méthodes\n• Fournisseur de paiement mondial"</string>
   <string name="Login.currentLtcPrice">Valeur LTC actuelle en %1$s</string>
   <string name="Settings.languages">Langues</string>
-    <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">Achetez des cartes-cadeaux\n• Rechargez des téléphones prépayés\n• Steam, Amazon, Hotels.com\n• Fonctionne dans 170 pays</string>
-    <string name="Donate.toThe.LWTeam">Faire un don à : Litewallet Infrastructure</string>
-    <string name="show_seed_label">Montrer</string>
-    <string name="settings_show_seed">Afficher la phrase de départ</string>
+  <string name="Settings.ChangeLanguage.alertMessage">Êtes-vous sûr de vouloir changer la langue en français ?</string>
+  <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+  <string name="BuyCenter.bitrefill.FinancialDetails">Achetez des cartes-cadeaux\n• Rechargez des téléphones prépayés\n• Steam, Amazon, Hotels.com\n• Fonctionne dans 170 pays</string>
+  <string name="Donate.toThe.LWTeam">Faire un don à : Litewallet Infrastructure</string>
+  <string name="show_seed_label">Montrer</string>
+  <string name="settings_show_seed">Afficher la phrase de départ</string>
   <string name="sync_preferences">Préférence de synchronisation : %1$s faux positifs</string>
-    <string name="radio_low_privacy">Faible confidentialité (~19 minutes)</string>
+  <string name="radio_low_privacy">Faible confidentialité (~19 minutes)</string>
   <string name="radio_semi_private">Semi-privé (~42 minutes)</string>
   <string name="radio_anonymous">Anonyme (~77 minutes)</string>
-    <string name="release_notes">IMPORTANT : attendez environ 1 heure pour la synchronisation !</string>
+  <string name="release_notes">IMPORTANT : attendez environ 1 heure pour la synchronisation !</string>
 </resources>

@@ -634,6 +634,8 @@
     <string name="UnlockScreen.touchIdTitle.android">Se requiere autenticación</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Cartera desbloqueada</string>
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">¿Olvidó su frase inicial o PIN?</string>
   <!-- Update PIN caption text -->
   <string name="UpdatePin.caption">Recuerda este PIN. Si lo olvidas, no podrás acceder a tu Litecoin.</string>
   <!-- PIN creation info. -->
@@ -716,22 +718,23 @@
   <string name="Confirmation.donateLabel">Cantidad a donar:</string>
   <string name="Confirmation.staticAddressLabel">Dirección:</string>
   <string name="Donate.word">Donar</string>
-    <string name="FeeSelector.luxury">Lujo</string>
+  <string name="FeeSelector.luxury">Lujo</string>
   <string name="FeeSelector.luxuryMessage">Esta opción prácticamente garantiza la aceptación de su transacción aunque esté pagando una prima.</string>
   <string name="FeeSelector.luxuryTime">2.5 - 5+ minutos</string>
   <string name="BottomNavItem.History.title">Historia</string>
-    <string name="ManageWallet.balance">Saldo</string>
+  <string name="ManageWallet.balance">Saldo</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Compre LTC con muchos pares fiat\n• Pague con múltiples métodos\n• Proveedor de pago global"</string>
   <string name="Login.currentLtcPrice">Valor actual de LTC en %1$s</string>
   <string name="Settings.languages">Idiomas</string>
-    <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">Compre tarjetas de regalo\n• Recargue teléfonos prepagos\n• Steam, Amazon, Hotels.com\n• Funciona en 170 países</string>
-    <string name="Donate.toThe.LWTeam">Donar a: Infraestructura Litewallet</string>
-    <string name="show_seed_label">Espectáculo</string>
-    <string name="settings_show_seed">Mostrar mi frase inicial</string>
+  <string name="Settings.ChangeLanguage.alertMessage">¿Estás seguro de que quieres cambiar el idioma a español?</string>
+  <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
+  <string name="BuyCenter.bitrefill.FinancialDetails">Compre tarjetas de regalo\n• Recargue teléfonos prepagos\n• Steam, Amazon, Hotels.com\n• Funciona en 170 países</string>
+  <string name="Donate.toThe.LWTeam">Donar a: Infraestructura Litewallet</string>
+  <string name="show_seed_label">Espectáculo</string>
+  <string name="settings_show_seed">Mostrar mi frase inicial</string>
   <string name="sync_preferences">Preferencia de sincronización: %1$s falsos positivos</string>
-    <string name="radio_low_privacy">Baja privacidad (~19 minutos)</string>
+  <string name="radio_low_privacy">Baja privacidad (~19 minutos)</string>
   <string name="radio_semi_private">Semiprivado (~42 minutos)</string>
   <string name="radio_anonymous">Anónimo (~77 minutos)</string>
-    <string name="release_notes">IMPORTANTE: ¡Espera ~1 hora para sincronizar!</string>
+  <string name="release_notes">IMPORTANTE: ¡Espera ~1 hora para sincronizar!</string>
 </resources>

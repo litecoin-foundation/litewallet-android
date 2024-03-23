@@ -1,17 +1,30 @@
 
 package com.breadwallet.presenter.activities.intro;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.breadwallet.presenter.activities.AnnounceUpdatesViewActivity;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.breadwallet.entities.IntroLanguageResource;
+import com.breadwallet.tools.adapter.CountryLanguageAdapter;
+import com.breadwallet.tools.listeners.RecyclerItemClickListener;
 import com.google.android.material.snackbar.Snackbar;
-
 import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
@@ -27,7 +40,12 @@ import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 import com.platform.APIClient;
 
+import org.w3c.dom.Text;
+
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -37,14 +55,13 @@ public class IntroActivity extends BRActivity implements Serializable {
     public static IntroActivity introActivity;
     public static boolean appVisible = false;
     private static IntroActivity app;
-    private TextView versionText;
-
+    public RecyclerView listLangRecyclerView;
+    public IntroLanguageResource introLanguageResource = new IntroLanguageResource();
     public static IntroActivity getApp() {
         return app;
     }
 
     public static final Point screenParametersPoint = new Point();
-
     @Override
     protected void onRestart() {
         super.onRestart();  // Always call the superclass method first
@@ -54,10 +71,38 @@ public class IntroActivity extends BRActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+        Log.i("Some", getPackageName());
         newWalletButton = (Button) findViewById(R.id.button_new_wallet);
         recoverWalletButton = (Button) findViewById(R.id.button_recover_wallet);
-        versionText = findViewById(R.id.version_text);
+        TextView description = findViewById(R.id.textView);
+
+        TextView versionText = findViewById(R.id.version_text);
+        listLangRecyclerView = findViewById(R.id.language_list);
         View parentLayout = findViewById(android.R.id.content);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        CountryLanguageAdapter countryLanguageAdapter = new CountryLanguageAdapter(this, introLanguageResource.loadResources());
+        listLangRecyclerView.setAdapter(countryLanguageAdapter);
+
+        listLangRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+                    int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+
+                    int centerPosition = (lastVisibleItemPosition - firstVisibleItemPosition) / 2 + firstVisibleItemPosition;
+                    if (centerPosition != RecyclerView.NO_POSITION) {
+                        countryLanguageAdapter.updateCenterPosition(centerPosition);
+                        description.setText(countryLanguageAdapter.selectedDesc());
+                        showDialogForItem(countryLanguageAdapter.selectedMessage());
+                    }
+                }
+            }
+
+        });
+
+        listLangRecyclerView.setLayoutManager(layoutManager);
 
         setListeners();
         updateBundles();
@@ -100,6 +145,30 @@ public class IntroActivity extends BRActivity implements Serializable {
         }
 
         PostAuth.getInstance().onCanaryCheck(this, false);
+    }
+
+    private void showDialogForItem(String title) {
+        Dialog dialog = new Dialog(IntroActivity.this);
+        dialog.setContentView(R.layout.pop_up_language_intro);
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(R.drawable.rounded_pop_up_intro);
+        Button btnYes = dialog.findViewById(R.id.button_yes);
+        Button btnNo = dialog.findViewById(R.id.button_no);
+        TextView txtTitle = dialog.findViewById(R.id.dialog_message);
+        txtTitle.setText(title);
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private void updateBundles() {
