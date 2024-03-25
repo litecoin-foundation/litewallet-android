@@ -1,8 +1,8 @@
 apply plugin: 'com.android.asset-pack'
 
 assetPack {
-    packName = "install_time_asset_pack"
+    packName = "fast_follow_asset_pack_01"
     dynamicDelivery {
-        deliveryType = "install-time"
+        deliveryType = "fast_follow"
     }
 }
