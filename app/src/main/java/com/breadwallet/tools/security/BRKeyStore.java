@@ -937,38 +937,37 @@ public class BRKeyStore {
         bugMessageShowing = true;
         Timber.d("timber: showLoopBugMessage: ");
         String mess = app.getString(R.string.ErrorMessages_loopingLockScreen_android);
-
         SpannableString ss = new SpannableString(mess.replace("[", "").replace("]", ""));
-//        ClickableSpan clickableSpan = new ClickableSpan() {
-//            @Override
-//            public void onClick(View textView) {
-//                Timber.d("timber: onClick: clicked on span!");
-//                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        BRDialog.hideDialog();
-//                    }
-//                });
-//            }
-//            @Override
-//            public void updateDrawState(TextPaint ds) {
-//                super.updateDrawState(ds);
-//                ds.setUnderlineText(false);
-//            }
-//        }
-//        ss.setSpan(clickableSpan, mess.indexOf("[") - 1, mess.indexOf("]") - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title), ss, app.getString(R.string.AccessibilityLabels_close), null,
-//                new BRDialogView.BROnClickListener() {
-//                    @Override
-//                    public void onClick(BRDialogView brDialogView) {
-//                        if (app instanceof Activity) ((Activity) app).finish();
-//                    }
-//                }, null, new DialogInterface.OnDismissListener() {
-//                    @Override
-//                    public void onDismiss(DialogInterface dialog) {
-//                        bugMessageShowing = false;
-//                    }
-//                }, 0);
+                ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                Timber.d("timber: onClick: clicked on span!");
+                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        BRDialog.hideDialog();
+                    }
+                });
+            }
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+            }
+        };
+        ss.setSpan(clickableSpan, mess.indexOf("[") - 1, mess.indexOf("]") - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title), ss, app.getString(R.string.AccessibilityLabels_close), null,
+                new BRDialogView.BROnClickListener() {
+                    @Override
+                    public void onClick(BRDialogView brDialogView) {
+                        if (app instanceof Activity) ((Activity) app).finish();
+                    }
+                }, null, new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        bugMessageShowing = false;
+                    }
+                }, 0);
     }
 
     public static boolean writeBytesToFile(String path, byte[] data) {
