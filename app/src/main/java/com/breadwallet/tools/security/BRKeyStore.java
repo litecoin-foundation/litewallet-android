@@ -20,11 +20,9 @@ import android.view.View;
 import com.breadwallet.R;
 import com.breadwallet.exceptions.BRKeystoreErrorException;
 import com.breadwallet.presenter.customviews.BRDialogView;
-import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.threads.BRExecutor;
-import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BytesUtil;
 import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
@@ -261,10 +259,9 @@ public class BRKeyStore {
             String encryptedDataFilePath = getFilePath(alias_file, context);
 
             if (secretKey == null) {
-                /* no such key, the key is just simply not there */
                 boolean fileExists = new File(encryptedDataFilePath).exists();
                 if (!fileExists) {
-                    return null;/* file also not there, fine then */
+                    return null;
                 }
                 Timber.e(new BRKeystoreErrorException("file is present but the key is gone: " + alias));
                 return null;
@@ -1001,7 +998,6 @@ public class BRKeyStore {
         }
         return false;
     }
-
     public static class AliasObject {
         public String alias;
         public String datafileName;
