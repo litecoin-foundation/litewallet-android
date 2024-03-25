@@ -5,22 +5,16 @@ import android.content.SharedPreferences;
 
 import com.breadwallet.tools.util.BRConstants;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 import timber.log.Timber;
-
-import static com.breadwallet.tools.util.BRConstants.GEO_PERMISSIONS_REQUESTED;
 
 public class BRSharedPrefs {
 
     private static final List<OnIsoChangedListener> isoChangedListeners = new ArrayList<>();
-    public static final String TERNIO_USER_ID = "ternio_user_id";
     public static final String SEND_TRANSACTION_COUNT = "send_transaction_count";
     public static final String IN_APP_REVIEW_DONE = "in_app_review_done";
 
@@ -46,7 +40,7 @@ public class BRSharedPrefs {
         String defaultLanguage = Locale.getDefault().getLanguage();
 
         try {
-            if (defaultLanguage == "ru") {
+            if (defaultLanguage.equals("ru")) {
                 defIso = Currency.getInstance(new Locale("ru", "RU")).getCurrencyCode();
             }
             else {
@@ -134,31 +128,6 @@ public class BRSharedPrefs {
         editor.putString(BRConstants.FIRST_ADDRESS, firstAddress);
         editor.apply();
     }
-
-    public static long getFeePerKb(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        return prefs.getLong(BRConstants.FEE_KB_PREFS, 0);
-    }
-
-    public static void putFeePerKb(Context context, long fee) {
-        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putLong(BRConstants.FEE_KB_PREFS, fee);
-        editor.apply();
-    }
-
-    public static long getEconomyFeePerKb(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        return prefs.getLong(BRConstants.ECONOMY_FEE_KB_PREFS, 0);
-    }
-
-    public static void putEconomyFeePerKb(Context context, long fee) {
-        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putLong(BRConstants.ECONOMY_FEE_KB_PREFS, fee);
-        editor.apply();
-    }
-
     public static long getCatchedBalance(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getLong("balance", 0);
@@ -202,33 +171,6 @@ public class BRSharedPrefs {
         editor.putLong("feeTime", feeTime);
         editor.apply();
     }
-
-    public static List<Integer> getBitIdNonces(Context activity, String key) {
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        String result = prefs.getString(key, null);
-        List<Integer> list = new ArrayList<>();
-        try {
-            JSONArray arr = new JSONArray(result);
-            for (int i = 0; i < arr.length(); i++) {
-                int a = arr.getInt(i);
-                Timber.d("timber: found a nonce: %s", a);
-                list.add(a);
-            }
-        } catch (Exception e) {
-            Timber.e(e);
-        }
-        return list;
-    }
-
-    public static void putBitIdNonces(Context activity, List<Integer> nonces, String key) {
-        JSONArray arr = new JSONArray();
-        arr.put(nonces);
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(key, arr.toString());
-        editor.apply();
-    }
-
     public static boolean getAllowSpend(Context activity) {
         SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(BRConstants.ALLOW_SPEND, true);
@@ -267,23 +209,6 @@ public class BRSharedPrefs {
         SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("useFingerprint", use);
-        editor.apply();
-    }
-
-    public static boolean getFeatureEnabled(Context activity, String feature) {
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        return prefs.getBoolean(feature, false);
-    }
-
-    public static boolean getGeoPermissionsRequested(Context activity) {
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        return prefs.getBoolean(GEO_PERMISSIONS_REQUESTED, false);
-    }
-
-    public static void putGeoPermissionsRequested(Context activity, boolean requested) {
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean(GEO_PERMISSIONS_REQUESTED, requested);
         editor.apply();
     }
 
@@ -338,22 +263,6 @@ public class BRSharedPrefs {
         editor.putInt(BRConstants.CURRENT_UNIT, unit);
         editor.apply();
     }
-
-    public static String getDeviceId(Context context) {
-        SharedPreferences settingsToGet = context.getSharedPreferences(BRConstants.PREFS_NAME, 0);
-        String deviceId = settingsToGet.getString(BRConstants.USER_ID, "");
-        if (deviceId.isEmpty()) setDeviceId(context, UUID.randomUUID().toString());
-        return (settingsToGet.getString(BRConstants.USER_ID, ""));
-    }
-
-    private static void setDeviceId(Context context, String uuid) {
-        if (context == null) return;
-        SharedPreferences settings = context.getSharedPreferences(BRConstants.PREFS_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString(BRConstants.USER_ID, uuid);
-        editor.apply();
-    }
-
     public static void clearAllPrefs(Context activity) {
         SharedPreferences.Editor editor = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE).edit();
         editor.clear();
