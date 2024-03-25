@@ -20,9 +20,11 @@ import android.view.View;
 import com.breadwallet.R;
 import com.breadwallet.exceptions.BRKeystoreErrorException;
 import com.breadwallet.presenter.customviews.BRDialogView;
+import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.threads.BRExecutor;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BytesUtil;
 import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
@@ -225,7 +227,7 @@ public class BRKeyStore {
 
     private synchronized static byte[] _getData(final Context context, String alias, String alias_file, String alias_iv, int request_code)
             throws UserNotAuthenticatedException {
-        validateGet(alias, alias_file, alias_iv);//validate entries
+        validateGet(alias, alias_file, alias_iv);
         KeyStore keyStore;
 
         try {
@@ -257,7 +259,6 @@ public class BRKeyStore {
             }
             //no new format data, get the old one and migrate it to the new format
             String encryptedDataFilePath = getFilePath(alias_file, context);
-
             if (secretKey == null) {
                 boolean fileExists = new File(encryptedDataFilePath).exists();
                 if (!fileExists) {
@@ -266,7 +267,6 @@ public class BRKeyStore {
                 Timber.e(new BRKeystoreErrorException("file is present but the key is gone: " + alias));
                 return null;
             }
-
             boolean ivExists = new File(getFilePath(alias_iv, context)).exists();
             boolean aliasExists = new File(getFilePath(alias_file, context)).exists();
             //cannot happen, they all should be present
@@ -330,11 +330,9 @@ public class BRKeyStore {
                 Timber.e(e);
                 throw new RuntimeException(e.getMessage());
             }
-        } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException e) {
-            /** if for any other reason the keystore fails, crash! */
-            Timber.e(e, "timber:getData: error");
-            throw new RuntimeException(e.getMessage());
-        } catch (BadPaddingException | IllegalBlockSizeException | NoSuchProviderException e) {
+        } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException |
+                 InvalidAlgorithmParameterException | BadPaddingException |
+                 IllegalBlockSizeException | NoSuchProviderException e) {
             Timber.e(e);
             throw new RuntimeException(e.getMessage());
         } finally {
@@ -941,37 +939,36 @@ public class BRKeyStore {
         String mess = app.getString(R.string.ErrorMessages_loopingLockScreen_android);
 
         SpannableString ss = new SpannableString(mess.replace("[", "").replace("]", ""));
-        ClickableSpan clickableSpan = new ClickableSpan() {
-            @Override
-            public void onClick(View textView) {
-                Timber.d("timber: onClick: clicked on span!");
-                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        BRDialog.hideDialog();
-                    }
-                });
-            }
-
-            @Override
-            public void updateDrawState(TextPaint ds) {
-                super.updateDrawState(ds);
-                ds.setUnderlineText(false);
-            }
-        };
-        ss.setSpan(clickableSpan, mess.indexOf("[") - 1, mess.indexOf("]") - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title), ss, app.getString(R.string.AccessibilityLabels_close), null,
-                new BRDialogView.BROnClickListener() {
-                    @Override
-                    public void onClick(BRDialogView brDialogView) {
-                        if (app instanceof Activity) ((Activity) app).finish();
-                    }
-                }, null, new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        bugMessageShowing = false;
-                    }
-                }, 0);
+//        ClickableSpan clickableSpan = new ClickableSpan() {
+//            @Override
+//            public void onClick(View textView) {
+//                Timber.d("timber: onClick: clicked on span!");
+//                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        BRDialog.hideDialog();
+//                    }
+//                });
+//            }
+//            @Override
+//            public void updateDrawState(TextPaint ds) {
+//                super.updateDrawState(ds);
+//                ds.setUnderlineText(false);
+//            }
+//        }
+//        ss.setSpan(clickableSpan, mess.indexOf("[") - 1, mess.indexOf("]") - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title), ss, app.getString(R.string.AccessibilityLabels_close), null,
+//                new BRDialogView.BROnClickListener() {
+//                    @Override
+//                    public void onClick(BRDialogView brDialogView) {
+//                        if (app instanceof Activity) ((Activity) app).finish();
+//                    }
+//                }, null, new DialogInterface.OnDismissListener() {
+//                    @Override
+//                    public void onDismiss(DialogInterface dialog) {
+//                        bugMessageShowing = false;
+//                    }
+//                }, 0);
     }
 
     public static boolean writeBytesToFile(String path, byte[] data) {
@@ -991,9 +988,12 @@ public class BRKeyStore {
             try {
                 if (fos != null) {
                     fos.close();
+                    return false;
                 }
+                return false;
             } catch (IOException ioe) {
                 Timber.e(ioe, "Error while closing stream");
+
             }
         }
         return false;

@@ -177,7 +177,6 @@ public class BreadApp extends Application {
             AnalyticsManager.logCustomEventWithParams(BRConstants._20240123_RAGI, params);
         }
     }
-
     private static class CrashReportingTree extends Timber.Tree {
         private static final String CRASHLYTICS_KEY_PRIORITY = "priority";
         private static final String CRASHLYTICS_KEY_TAG = "tag";
