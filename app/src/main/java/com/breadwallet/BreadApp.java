@@ -36,10 +36,6 @@ import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
 import com.pusher.pushnotifications.PushNotifications;
 
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import timber.log.Timber;
 
 public class BreadApp extends Application {
