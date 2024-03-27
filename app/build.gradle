@@ -24,7 +24,7 @@ android {
         dataBinding true
         buildConfig true
     }
-
+    assetPacks = [":install_time_asset_pack",":fast_follow_asset_pack_01"]
     signingConfigs {
         release {
             storeFile file(RELEASE_STORE_FILE)
@@ -65,7 +65,7 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 31
         targetSdkVersion 33
-        versionCode 738
+        versionCode 20240326
         versionName "v2.9.1"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"

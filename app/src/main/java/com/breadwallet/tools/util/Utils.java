@@ -224,7 +224,10 @@ public class Utils {
         return stringBuilder.toString();
     }
     public static String fetchPartnerKey(Context app, PartnerNames name) {
-    JSONObject keyObject;
+
+        Timber.d("timber: fetch name: %s", name);
+
+        JSONObject keyObject;
         AssetManager assetManager = app.getAssets();
         try (InputStream inputStream = assetManager.open("partner-keys.json")) {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -234,11 +237,15 @@ public class Utils {
                     sb.append(line);
                 }
                 keyObject = new JSONObject(sb.toString()).getJSONObject("keys");
+                Timber.d("timber: fetch obj: %s", keyObject.toString());
                 return keyObject.get(name.getKey()).toString();
             } catch (IOException e) {
                 e.printStackTrace();
+                Timber.d("timber: IOEXception");
+
             } catch (JSONException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
+                Timber.d("timber: JSONException");
             }
         } catch (IOException e) {
             e.printStackTrace();
