@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ public class AboutActivity extends BRActivity {
     private ImageView blogShare;
     private static AboutActivity app;
 
+    private ImageButton closeButton;
+
     public static AboutActivity getApp() {
         return app;
     }
@@ -37,6 +40,7 @@ public class AboutActivity extends BRActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -82,6 +86,14 @@ public class AboutActivity extends BRActivity {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BRConstants.TOS_LINK));
                 startActivity(browserIntent);
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
+            }
+        });
+
+        closeButton = (ImageButton) findViewById(R.id.close_button);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
