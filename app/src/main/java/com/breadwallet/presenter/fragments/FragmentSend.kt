@@ -114,6 +114,7 @@ class FragmentSend : Fragment() {
         // Hiding until layouts are built.
         showKeyboard(false)
         signalLayout.layoutTransition = BRAnimator.getDefaultTransition()
+        
         return rootView
     }
 

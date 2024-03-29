@@ -145,6 +145,14 @@ public class SyncBlockchainActivity extends BRActivity {
             }
         });
 
+        closeButton = (ImageButton) findViewById(R.id.close_button);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
 
