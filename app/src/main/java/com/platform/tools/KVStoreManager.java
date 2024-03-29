@@ -48,6 +48,9 @@ public class KVStoreManager {
         RemoteKVStore remoteKVStore = RemoteKVStore.getInstance(APIClient.getInstance(app));
         ReplicatedKVStore kvStore = ReplicatedKVStore.getInstance(app, remoteKVStore);
         long ver = kvStore.localVersion(key).version;
+        Timber.d("timber: remoteKVStore: %s",remoteKVStore.toString());
+        Timber.d("timber: ReplicatedKVStore: %s",kvStore.toString());
+        Timber.d("timber: ver: %s",ver);
 
         CompletionObject obj = kvStore.get(key, ver);
 
