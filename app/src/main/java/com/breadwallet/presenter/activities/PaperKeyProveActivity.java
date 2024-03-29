@@ -208,6 +208,7 @@ public class PaperKeyProveActivity extends BRActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
 //    private class FocusListener implements View.OnFocusChangeListener {

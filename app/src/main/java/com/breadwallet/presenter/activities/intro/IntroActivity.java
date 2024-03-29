@@ -226,7 +226,7 @@ public class IntroActivity extends BRActivity implements Serializable {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-
+        super.onSaveInstanceState(outState);
     }
 
     @Override
