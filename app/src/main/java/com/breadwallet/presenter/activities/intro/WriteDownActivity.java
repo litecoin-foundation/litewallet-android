@@ -17,7 +17,8 @@ import com.breadwallet.tools.util.BRConstants;
 
 public class WriteDownActivity extends BRActivity {
     private Button writeButton;
-    private ImageButton close;
+    private ImageButton closeButton;
+
     public static boolean appVisible = false;
     private static WriteDownActivity app;
 
@@ -31,13 +32,26 @@ public class WriteDownActivity extends BRActivity {
         setContentView(R.layout.activity_write_down);
 
         writeButton = (Button) findViewById(R.id.button_write_down);
-        close = (ImageButton) findViewById(R.id.close_button);
-        close.setOnClickListener(new View.OnClickListener() {
+//        close = (ImageButton) findViewById(R.id.close_button);
+//        close.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                close();
+//            }
+//        });
+
+        closeButton = (ImageButton) findViewById(R.id.close_button);
+        closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                close();
+                onBackPressed();
             }
         });
+
+//        public void onBackPressed() {
+//            super.onBackPressed();
+//            overridePendingTransition(R.anim.fade_up, R.anim.exit_to_bottom);
+//        }
 
         //TODO: all views are using the layout of this button. Views should be refactored without it
         // Hiding until layouts are built.
@@ -78,6 +92,7 @@ public class WriteDownActivity extends BRActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (getFragmentManager().getBackStackEntryCount() == 0) {
             close();
         } else {
@@ -93,6 +108,7 @@ public class WriteDownActivity extends BRActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
 }

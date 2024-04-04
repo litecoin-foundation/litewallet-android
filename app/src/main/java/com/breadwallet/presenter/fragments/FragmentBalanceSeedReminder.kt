@@ -1,6 +1,7 @@
 package com.breadwallet.presenter.fragments
 
 import android.os.Bundle
+import android.security.keystore.UserNotAuthenticatedException
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,7 @@ import androidx.fragment.app.Fragment
 import com.breadwallet.R
 import com.breadwallet.tools.animation.BRAnimator
 import com.breadwallet.tools.security.BRKeyStore
-import com.breadwallet.tools.util.BRConstants
-import com.breadwallet.wallet.BRWalletManager
 import java.util.*
-
 
 class FragmentBalanceSeedReminder : Fragment() {
     private lateinit var backgroundLayout: ScrollView
@@ -25,9 +23,8 @@ class FragmentBalanceSeedReminder : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-
         val rootView = inflater.inflate(R.layout.fragment_balance_seed_reminder, container, false)
         backgroundLayout = rootView.findViewById(R.id.background_layout)
         signalLayout = rootView.findViewById(R.id.signal_layout)
@@ -39,7 +36,6 @@ class FragmentBalanceSeedReminder : Fragment() {
     }
 
     private fun setListeners() {
-
         showSeedButton.setOnClickListener {
             seedPhraseTextView.visibility = View.VISIBLE
         }
@@ -49,24 +45,33 @@ class FragmentBalanceSeedReminder : Fragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         val observer = signalLayout.viewTreeObserver
-        observer.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                if (observer.isAlive) {
-                    observer.removeOnGlobalLayoutListener(this)
+        observer.addOnGlobalLayoutListener(
+            object : OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    if (observer.isAlive) {
+                        observer.removeOnGlobalLayoutListener(this)
+                    }
+                    BRAnimator.animateBackgroundDim(backgroundLayout, false)
+                    BRAnimator.animateSignalSlide(signalLayout, false) {
+                    }
                 }
-                BRAnimator.animateBackgroundDim(backgroundLayout, false)
-                BRAnimator.animateSignalSlide(signalLayout, false) {
-                }
-            }
-        })
+            },
+        )
         setListeners()
         fetchSeedPhrase()
     }
+
     fun fetchSeedPhrase() {
-        seedPhraseTextView.text =  String(BRKeyStore.getPhrase(context, 0))
+        try {
+            seedPhraseTextView.text = String(BRKeyStore.getPhrase(context, 0))
+        } catch (_: UserNotAuthenticatedException) {
+        }
     }
 
     private fun animateClose() {
@@ -76,7 +81,7 @@ class FragmentBalanceSeedReminder : Fragment() {
 
     private fun close() {
         if (activity != null && activity?.isFinishing != true) {
-            activity?.onBackPressed()
+            activity?.onBackPressedDispatcher?.onBackPressed()
         }
     }
 }

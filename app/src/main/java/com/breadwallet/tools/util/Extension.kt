@@ -14,13 +14,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
-
 /** Litewallet
  * Created by Mohamed Barry on 12/24/20
  * email: mosadialiou@gmail.com
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
-
 
 /**
  * Extension to create and execute an asynchronous task
@@ -29,12 +27,13 @@ import java.util.*
 fun <R> CoroutineScope.executeAsyncTask(
     onPreExecute: () -> Unit,
     doInBackground: () -> R,
-    onPostExecute: (R) -> Unit
+    onPostExecute: (R) -> Unit,
 ) = launch {
     onPreExecute() // runs in Main Thread
-    val result = withContext(Dispatchers.IO) {
-        doInBackground() // runs in background thread without blocking the Main Thread
-    }
+    val result =
+        withContext(Dispatchers.IO) {
+            doInBackground() // runs in background thread without blocking the Main Thread
+        }
     onPostExecute(result) // runs in Main Thread
 }
 
@@ -50,7 +49,10 @@ val Int.Companion.NO_ERROR: Int
 /**
  * String extension
  */
-fun String.Companion.join(array: Array<String>, separator: Char?): String {
+fun String.Companion.join(
+    array: Array<String>,
+    separator: Char?,
+): String {
     if (array.isEmpty()) {
         return ""
     }
@@ -66,7 +68,9 @@ fun String.Companion.join(array: Array<String>, separator: Char?): String {
 /**
  * TextInputLayout extension
  */
-fun TextInputLayout.onError(@StringRes error: Int) {
+fun TextInputLayout.onError(
+    @StringRes error: Int,
+) {
     this.error = if (error.noError()) null else resources.getString(error)
 }
 
@@ -78,7 +82,7 @@ fun TextInputLayout.text(): CharSequence = this.editText?.text ?: ""
 fun FragmentActivity.addFragment(
     fragment: Fragment,
     addToBackStack: Boolean = true,
-    containerId: Int = R.id.fragment_container
+    containerId: Int = R.id.fragment_container,
 ) {
     addFragment(this.supportFragmentManager, fragment, null, addToBackStack, containerId)
 }
@@ -86,7 +90,7 @@ fun FragmentActivity.addFragment(
 fun FragmentActivity.replaceFragment(
     fragment: Fragment,
     addToBackStack: Boolean = true,
-    containerId: Int = R.id.fragment_container
+    containerId: Int = R.id.fragment_container,
 ) {
     replaceFragment(this.supportFragmentManager, fragment, null, addToBackStack, containerId)
 }
@@ -98,7 +102,7 @@ fun Fragment.addFragment(
     fragment: Fragment,
     addToBackStack: Boolean = true,
     containerId: Int = R.id.fragment_container,
-    transition: Int? = null
+    transition: Int? = null,
 ) {
     addFragment(this.childFragmentManager, fragment, transition, addToBackStack, containerId)
 }
@@ -107,7 +111,7 @@ fun Fragment.replaceChildFragment(
     fragment: Fragment,
     addToBackStack: Boolean = true,
     containerId: Int = R.id.fragment_container,
-    transition: Int? = null
+    transition: Int? = null,
 ) {
     replaceFragment(this.childFragmentManager, fragment, transition, addToBackStack, containerId)
 }
@@ -116,15 +120,14 @@ fun Fragment.replaceFragment(
     fragment: Fragment,
     addToBackStack: Boolean = true,
     containerId: Int = R.id.fragment_container,
-    transition: Int? = null
+    transition: Int? = null,
 ) {
-
     replaceFragment(
         this.requireFragmentManager(),
         fragment,
         transition,
         addToBackStack,
-        containerId
+        containerId,
     )
 }
 
@@ -133,7 +136,7 @@ private fun addFragment(
     fragment: Fragment,
     transition: Int?,
     addToBackStack: Boolean = true,
-    containerId: Int = R.id.fragment_container
+    containerId: Int = R.id.fragment_container,
 ) {
     val transaction = fragmentManager.beginTransaction()
     transition?.let { transaction.setTransition(it) }
@@ -149,7 +152,7 @@ private fun replaceFragment(
     fragment: Fragment,
     transition: Int?,
     addToBackStack: Boolean = true,
-    containerId: Int = R.id.fragment_container
+    containerId: Int = R.id.fragment_container,
 ) {
     val transaction = fragmentManager.beginTransaction()
     transition?.let { transaction.setTransition(it) }
@@ -164,7 +167,10 @@ private fun replaceFragment(
  * Context extension
  */
 
-fun Fragment.getString(locale: Locale, resId: Int): String {
+fun Fragment.getString(
+    locale: Locale,
+    resId: Int,
+): String {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) { // use latest api
         val config = Configuration(resources.configuration)
         config.setLocale(locale)

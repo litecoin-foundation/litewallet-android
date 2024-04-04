@@ -43,15 +43,19 @@ public class BRSharedPrefs {
 
         SharedPreferences settingsToGet = context.getSharedPreferences(BRConstants.PREFS_NAME, 0);
         String defIso;
+        String defaultLanguage = Locale.getDefault().getLanguage();
+
         try {
-            defIso = Currency.getInstance(Locale.getDefault()).getCurrencyCode();
+            if (defaultLanguage == "ru") {
+                defIso = Currency.getInstance(new Locale("ru", "RU")).getCurrencyCode();
+            }
+            else {
+                defIso = Currency.getInstance(Locale.getDefault()).getCurrencyCode();
+            }
         } catch (IllegalArgumentException e) {
             Timber.e(e);
-            ///This is always going to be a Litewallet problem
-            // Inspired by: https://stackoverflow.com/questions/26376439/locale-getdefault-returns-unsuported-invalid-locale-for-currency-getinstance
             defIso = Currency.getInstance(new Locale("en", "US")).getCurrencyCode();
         }
-
         return settingsToGet.getString(BRConstants.CURRENT_CURRENCY, defIso);
     }
 
@@ -403,21 +407,6 @@ public class BRSharedPrefs {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("trustNode", trustNode);
         editor.apply();
-    }
-
-    public static void putLitecoinCardId(Context context, String id) {
-        context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
-                .edit().putString(TERNIO_USER_ID, id).apply();
-    }
-
-    public static String getLitecoinCardId(Context context) {
-        return context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
-                .getString(TERNIO_USER_ID, null);
-    }
-
-    public static void logoutFromLitecoinCard(Context context) {
-        context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE)
-                .edit().remove(TERNIO_USER_ID).apply();
     }
 
     public static void incrementSendTransactionCount(Context context) {

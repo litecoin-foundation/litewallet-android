@@ -105,9 +105,6 @@ public class BRConstants {
     public static String CUSTOMER_SUPPORT_LINK = "https://support.litewallet.io";
     public static String BITREFILL_AFFILIATE_LINK = "https://www.bitrefill.com/";
 
-    public static String UNBANKED_LOGIN_LINK = "https://litecoin.dashboard.getblockcard.com";
-
-
     /**
      * API Hosts
      */
@@ -115,8 +112,6 @@ public class BRConstants {
     public static final String LW_BACKUP_API_HOST = "https://api-dev.lite-wallet.org";
 
     public static final String BLOCK_EXPLORER_BASE_URL = BuildConfig.LITECOIN_TESTNET ? "https://chain.so/tx/LTCTEST/" : "https://blockchair.com/litecoin/transaction/";
-
-    public static final String RESET_CARD_PWD_LINK = "https://litecoin.dashboard.getblockcard.com/password/forgot";
 
     public static final String _20191105_AL = "app_launched";
     public static final String _20191105_VSC = "visit_send_controller";
@@ -154,7 +149,9 @@ public class BRConstants {
     public static final String _20210427_HCIEEH = "heartbeat_check_if_event_even_happens";
     public static final String _20220822_UTOU = "user_tapped_on_ud";
     public static final String _20230131_NENR = "no_error_nominal_response";
-    ///Dev: These events not yet used
+    public static final String _20240123_RAGI = "registered_android_general_interest";
+    public static final String _20231225_UAP = "user_accepted_push";
+    public static final String _20240101_US = "user_signup";
 
     @Retention(RetentionPolicy.SOURCE)
     @StringDef({
@@ -191,7 +188,10 @@ public class BRConstants {
             _20210427_HCIEEH,
             _20220822_UTOU,
             _20230131_NENR,
-            _20230407_DCS
+            _20230407_DCS,
+            _20240123_RAGI,
+            _20231225_UAP,
+            _20240101_US
     })
     public @interface Event {
     }

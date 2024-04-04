@@ -18,7 +18,7 @@ public class ImportActivity extends BRActivity {
     private static final String TAG = ImportActivity.class.getName();
     public static boolean appVisible = false;
     private static ImportActivity app;
-    private ImageButton close;
+    private ImageButton closeButton;
 
     public static ImportActivity getApp() {
         return app;
@@ -31,8 +31,8 @@ public class ImportActivity extends BRActivity {
         setContentView(R.layout.activity_import);
 
         scan = (Button) findViewById(R.id.scan_button);
-        close = (ImageButton) findViewById(R.id.close_button);
-        close.setOnClickListener(new View.OnClickListener() {
+        closeButton = (ImageButton) findViewById(R.id.close_button);
+        closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -67,6 +67,7 @@ public class ImportActivity extends BRActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override

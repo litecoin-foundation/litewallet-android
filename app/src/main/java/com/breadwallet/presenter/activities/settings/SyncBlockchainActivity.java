@@ -34,6 +34,8 @@ public class SyncBlockchainActivity extends BRActivity {
     private Button semiPrivateButton;
     private Button anonymousButton;
 
+    private ImageButton closeButton;
+
     private RadioGroup syncRadioGroup;
 
     public static boolean appVisible = false;
@@ -46,6 +48,7 @@ public class SyncBlockchainActivity extends BRActivity {
     }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     private void updateSyncPreference() {
@@ -134,6 +137,14 @@ public class SyncBlockchainActivity extends BRActivity {
                                 brDialogView.dismissWithAnimation();
                             }
                         }, null, 0);
+            }
+        });
+
+        closeButton = (ImageButton) findViewById(R.id.close_button);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
