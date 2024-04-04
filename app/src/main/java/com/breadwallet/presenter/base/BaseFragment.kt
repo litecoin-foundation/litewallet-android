@@ -30,13 +30,13 @@ abstract class BaseFragment<P : BasePresenter<BaseView>> : Fragment() {
     fun showError(error: String) {
         AlertDialog.Builder(requireContext()).setMessage(error).setPositiveButton(
             android.R.string.ok,
-            null
+            null,
         ).show()
     }
 
     fun showError(errorId: Int) {
         showError(getString(errorId))
     }
-	
+
     abstract fun initPresenter(): P
 }

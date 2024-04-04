@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.breadwallet.R
 import com.breadwallet.databinding.FragmentHistoryBinding
 import com.breadwallet.presenter.activities.BreadActivity
 import com.breadwallet.presenter.base.BaseFragment
@@ -30,13 +29,12 @@ class HistoryFragment :
     OnIsoChangedListener,
     OnTxAddedListener,
     HistoryView {
-
     lateinit var binding: FragmentHistoryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
