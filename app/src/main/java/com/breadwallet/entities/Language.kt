@@ -1,9 +1,5 @@
 package com.breadwallet.entities
 
-import com.breadwallet.R
-import java.util.Locale
-
-
 /** Litewallet
  * Created by Mohamed Barry on 7/19/21
  * email: mosadialiou@gmail.com
@@ -12,8 +8,8 @@ import java.util.Locale
 enum class Language(
     val code: String,
     val title: String,
-    val desc: String
-    ) {
+    val desc: String,
+) {
     ENGLISH("en", "English", "Select language"),
     GERMAN("de", "Deutsch", "Sprache auswählen"),
     SPANISH("es", "Español", "Seleccione el idioma"),
@@ -27,7 +23,9 @@ enum class Language(
     KOREAN("ko", "한국어", "언어 선택"),
     JAPANESE("ja", "日本語", "言語を選択する"),
     CHINESE_SIMPLIFIED("zh-CN", "简化字", "选择语言"),
-    CHINESE_TRADITIONAL("zh-TW", "繁體字", "選擇語言");
+    CHINESE_TRADITIONAL("zh-TW", "繁體字", "選擇語言"),
+    ;
+
     companion object {
         fun find(code: String?): Language = values().find { it.code == code } ?: ENGLISH
     }

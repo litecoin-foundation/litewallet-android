@@ -4,7 +4,7 @@ package com.breadwallet.entities
 annotation class AudioRes
 
 data class CountryAudio(
-    val langDescription : String,
-    val langQuestion : String,
-    @AudioRes val langAudio : Int
+    val langDescription: String,
+    val langQuestion: String,
+    @AudioRes val langAudio: Int,
 )

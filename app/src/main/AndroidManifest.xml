@@ -55,7 +55,7 @@
         <activity
             android:name=".presenter.activities.AnnounceUpdatesViewActivity"
             android:exported="false"
-            android:label="@string/title_activity_announce_updates_view"
+            android:label="Litewallet"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".presenter.activities.intro.IntroActivity"
