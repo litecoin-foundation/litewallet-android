@@ -11,13 +11,12 @@ import com.breadwallet.R
 import com.breadwallet.databinding.ChangeLanguageBottomSheetBinding
 import com.breadwallet.entities.Language
 import com.breadwallet.presenter.activities.intro.IntroActivity
-import com.breadwallet.ui.RoundedBottomSheetDialogFragment
 import com.breadwallet.tools.util.LocaleHelper
 import com.breadwallet.tools.util.Utils
 import com.breadwallet.tools.util.getString
+import com.breadwallet.ui.RoundedBottomSheetDialogFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-
 
 /** Litewallet
  * Created by Mohamed Barry on 7/19/21
@@ -25,18 +24,21 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
  * Copyright © 2021 Litecoin Foundation. All rights reserved.
  */
 class ChangeLanguageBottomSheet : RoundedBottomSheetDialogFragment() {
-
     lateinit var binding: ChangeLanguageBottomSheetBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = ChangeLanguageBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.toolbar.setNavigationOnClickListener { dismiss() }
@@ -44,13 +46,14 @@ class ChangeLanguageBottomSheet : RoundedBottomSheetDialogFragment() {
         val currentLanguage = LocaleHelper.instance.currentLocale
         binding.toolbar.title = currentLanguage.desc
 
-        val adapter = LanguageAdapter(Language.values()).apply {
-            selectedPosition = currentLanguage.ordinal
-            onLanguageChecked = {
-                binding.toolbar.title = it.desc
-                binding.okButton.text = getString(LocaleHelper.getLocale(it), R.string.Button_ok)
+        val adapter =
+            LanguageAdapter(Language.values()).apply {
+                selectedPosition = currentLanguage.ordinal
+                onLanguageChecked = {
+                    binding.toolbar.title = it.desc
+                    binding.okButton.text = getString(LocaleHelper.getLocale(it), R.string.Button_ok)
+                }
             }
-        }
         binding.recyclerView.adapter = adapter
 
         binding.recyclerView.post {
@@ -78,16 +81,24 @@ class ChangeLanguageBottomSheet : RoundedBottomSheetDialogFragment() {
         behavior.isFitToContents = false
         behavior.isHideable = true
 
-        behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            }
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
-                    behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        behavior.addBottomSheetCallback(
+            object : BottomSheetBehavior.BottomSheetCallback() {
+                override fun onSlide(
+                    bottomSheet: View,
+                    slideOffset: Float,
+                ) {
                 }
-            }
-        })
+
+                override fun onStateChanged(
+                    bottomSheet: View,
+                    newState: Int,
+                ) {
+                    if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    }
+                }
+            },
+        )
 
         dialog.setOnShowListener {
             val bottomSheet: FrameLayout? = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet)

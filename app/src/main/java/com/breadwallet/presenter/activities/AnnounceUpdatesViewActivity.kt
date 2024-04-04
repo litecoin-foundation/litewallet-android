@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.webkit.WebView
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.ui.AppBarConfiguration
 import com.breadwallet.R
 import com.breadwallet.databinding.ActivityAnnounceUpdatesViewBinding
 
 class AnnounceUpdatesViewActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityAnnounceUpdatesViewBinding
     private var url: String = "https://litewallet.io/mobile-signup/signup.html"
 
@@ -24,7 +22,7 @@ class AnnounceUpdatesViewActivity : AppCompatActivity() {
         webView.loadUrl(url)
 
         val buttonNoThanks: Button = findViewById(R.id.btnNoThanks)
-        buttonNoThanks.setOnClickListener{
+        buttonNoThanks.setOnClickListener {
             finish()
         }
     }

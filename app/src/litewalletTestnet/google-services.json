@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "701561840073",
+    "project_id": "litewallet-testnet-mobile",
+    "storage_bucket": "litewallet-testnet-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701561840073:android:249a95d9788d58c6350818",
+        "android_client_info": {
+          "package_name": "com.loafwallet.testnet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7V59T96RyrdE0Po79Aoz9LBSWk0tFa2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
