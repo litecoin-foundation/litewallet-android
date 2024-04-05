@@ -5,25 +5,29 @@ public class PaymentItem {
 
     public byte[] serializedTx;
     public String[] addresses;
+    public String opsAddress;
     public long amount;
-    public String cn;
+    //This variable was previously called -cn- which is too short to know what it means or does
+    public String certifiedName;
     public boolean isAmountRequested;
     public String comment;
 
-    public PaymentItem(String[] addresses, byte[] tx, long theAmount, String theCn, boolean isAmountRequested) {
+    public PaymentItem(String[] addresses, String opsAddress, byte[] tx, long theAmount, String theCertifiedName, boolean isAmountRequested) {
         this.isAmountRequested = isAmountRequested;
         this.serializedTx = tx;
         this.addresses = addresses;
+        this.opsAddress = opsAddress;
         this.amount = theAmount;
-        this.cn = theCn;
+        this.certifiedName = theCertifiedName;
     }
 
-    public PaymentItem(String[] addresses, byte[] tx,long theAmount, String theCn, boolean isAmountRequested, String comment) {
+    public PaymentItem(String[] addresses, String opsAddress, byte[] tx,long theAmount, String theCertifiedName, boolean isAmountRequested, String comment) {
         this.isAmountRequested = isAmountRequested;
         this.serializedTx = tx;
         this.addresses = addresses;
+        this.opsAddress = opsAddress;
         this.amount = theAmount;
-        this.cn = theCn;
+        this.certifiedName = theCertifiedName;
         this.comment = comment;
     }
 

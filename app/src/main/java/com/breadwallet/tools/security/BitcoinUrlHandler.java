@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -176,7 +177,7 @@ public class BitcoinUrlHandler {
         } else {
             if (app != null) {
                 BRAnimator.killAllFragments(app);
-                BRSender.getInstance().sendTransaction(app, new PaymentItem(addresses, null, new BigDecimal(amount).longValue(), null, true));
+                BRSender.getInstance().sendTransaction(app, new PaymentItem(addresses, "testOpsAddress", null, new BigDecimal(amount).longValue(), null, true));
             } else {
                 Timber.e(new NullPointerException("tryLitecoinURL, app is null!"));
             }
