@@ -8,24 +8,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.breadwallet.R
 import com.breadwallet.entities.Language
 
-
 /** Litewallet
  * Created by Mohamed Barry on 7/19/21
  * email: mosadialiou@gmail.com
  * Copyright © 2021 Litecoin Foundation. All rights reserved.
  */
 class LanguageAdapter(val languages: Array<Language>) : RecyclerView.Adapter<LanguageAdapter.ViewHolder>() {
-
     var selectedPosition = 0
 
     var onLanguageChecked: ((Language) -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.change_language_item, null)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         val language = languages[position]
         with(holder.lang) {
             text = language.title

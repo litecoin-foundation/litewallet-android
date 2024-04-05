@@ -13,7 +13,6 @@ import com.breadwallet.databinding.ActivityAnnounceUpdatesViewBinding
 import com.breadwallet.presenter.activities.intro.RecoverActivity
 
 class AnnounceUpdatesViewActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityAnnounceUpdatesViewBinding
     private var url: String = "https://litewallet.io/mobile-signup/signup.html"
 

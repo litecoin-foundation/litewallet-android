@@ -56,6 +56,7 @@
             android:name=".presenter.activities.AnnounceUpdatesViewActivity"
             android:exported="false"
             android:enableOnBackInvokedCallback="true"
+            android:label="Litewallet"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".presenter.activities.intro.IntroActivity"

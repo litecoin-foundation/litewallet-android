@@ -12,7 +12,6 @@ import javax.inject.Singleton
  */
 @Module
 class AppModule(val app: BreadApp) {
-
     @Provides
     @Singleton
     fun provideApplication() = app
