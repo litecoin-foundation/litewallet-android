@@ -740,4 +740,10 @@
   <string name="radio_semi_private">Semi-pribadi (~42 menit)</string>
   <string name="radio_anonymous">Anonim (~77 menit)</string>
   <string name="release_notes">PENTING: Tunggu ~1 jam untuk sinkronisasi!</string>
+
+  <!-- Announce Updates View -->
+  <string name="Announce.title">Jangan Ketinggalan!</string>
+  <string name="Announce.close">Tutup</string>
+  <string name="Announce.description">Daftar untuk mendapatkan informasi terbaru dan kontes dari tim Litewallet! Terima pemberitahuan untuk mendapatkan berita langsung, harga, dan informasi pasar!</string>
+  <string name="Announce.no_thanks">Tidak, terimakasih!</string>
 </resources>

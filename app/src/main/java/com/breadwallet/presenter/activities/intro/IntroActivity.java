@@ -1,34 +1,24 @@
 
 package com.breadwallet.presenter.activities.intro;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
-import android.media.AudioAttributes;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.breadwallet.presenter.activities.AnnounceUpdatesViewActivity;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.breadwallet.entities.IntroLanguageResource;
 import com.breadwallet.tools.adapter.CountryLanguageAdapter;
-import com.breadwallet.tools.listeners.RecyclerItemClickListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
-import com.breadwallet.presenter.activities.SetPinActivity;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.security.BRKeyStore;
@@ -39,14 +29,8 @@ import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 import com.platform.APIClient;
-
-import org.w3c.dom.Text;
-
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Objects;
-
 import timber.log.Timber;
 
 public class IntroActivity extends BRActivity implements Serializable {
@@ -57,6 +41,7 @@ public class IntroActivity extends BRActivity implements Serializable {
     private static IntroActivity app;
     public RecyclerView listLangRecyclerView;
     public IntroLanguageResource introLanguageResource = new IntroLanguageResource();
+    public static boolean isNewWallet = false;
     public static IntroActivity getApp() {
         return app;
     }
@@ -191,9 +176,10 @@ public class IntroActivity extends BRActivity implements Serializable {
                 if (!BRAnimator.isClickAllowed()) return;
                 BreadActivity bApp = BreadActivity.getApp();
                 if (bApp != null) bApp.finish();
-                Intent intent = new Intent(IntroActivity.this, SetPinActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                isNewWallet = true;
+                Intent intentEmailNewWallet = new Intent(IntroActivity.this, AnnounceUpdatesViewActivity.class);
+                intentEmailNewWallet.putExtra("isNewWallet", true);
+                startActivity(intentEmailNewWallet);
             }
         });
 
@@ -203,12 +189,14 @@ public class IntroActivity extends BRActivity implements Serializable {
                 if (!BRAnimator.isClickAllowed()) return;
                 BreadActivity bApp = BreadActivity.getApp();
                 if (bApp != null) bApp.finish();
-                Intent intent = new Intent(IntroActivity.this, RecoverActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                isNewWallet = false;
+                Intent intentEmailRecover = new Intent(IntroActivity.this, AnnounceUpdatesViewActivity.class);
+                intentEmailRecover.putExtra("isNewWallet", false);
+                startActivity(intentEmailRecover);
             }
         });
     }
+
 
     @Override
     protected void onResume() {

@@ -738,4 +738,10 @@
   <string name="radio_semi_private">セミプライベート（～42分）</string>
   <string name="radio_anonymous">匿名 (~77 分)</string>
   <string name="release_notes">重要: 同期が完了するまで 1 時間ほどお待ちください。</string>
+
+  <!-- Announce Updates View -->
+  <string name="Announce.title">何も見逃してはいけない</string>
+  <string name="Announce.close">閉じる</string>
+  <string name="Announce.description">登録すると、Litewalletチームからの最新情報やコンテストのお知らせを受け取ることができます！通知を受信して、ライブニュース、価格、マーケット情報を入手しましょう！</string>
+  <string name="Announce.no_thanks">いえ、結構です</string>
 </resources>
