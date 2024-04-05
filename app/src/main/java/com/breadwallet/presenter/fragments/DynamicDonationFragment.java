@@ -153,7 +153,13 @@ public class DynamicDonationFragment extends Fragment {
 
     private void sendDonation() {
         String memo = getString(R.string.Donate_toThe_LWTeam) + chosenAddress;
-        PaymentItem request = new PaymentItem(new String[]{chosenAddress}, null, mDonationAmount, null, false, memo);
+        PaymentItem request = new PaymentItem(new String[]{chosenAddress},
+                "testOpsAddress",
+                null,mDonationAmount,
+                null,
+                false,
+                memo);
+
         Bundle params = new Bundle();
         params.putString("DONATION_ACCOUNT", chosenAddress);
         params.putLong("DONATION_AMOUNT", mDonationAmount);

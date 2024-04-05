@@ -447,14 +447,14 @@ class FragmentSend : Fragment() {
                 if (allFilled) {
                     BRSender.getInstance().sendTransaction(
                         context,
-                        PaymentItem(
-                            arrayOf(address),
+                        PaymentItem(arrayOf(address),
+                            "testOpsAddress",
                             null,
                             satoshiAmount.toLong(),
                             null,
                             false,
-                            comment,
-                        ),
+                            comment
+                            ),
                     )
                     AnalyticsManager.logCustomEvent(BRConstants._20191105_DSL)
                     BRSharedPrefs.incrementSendTransactionCount(context)

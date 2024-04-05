@@ -61,7 +61,6 @@ public class BREventManager implements BreadApp.OnAppBackgrounded {
     public void onBackgrounded() {
         Timber.d("timber: onBackgrounded: ");
         saveEvents();
-        pushToServer();
     }
 
     private void saveEvents() {
@@ -90,67 +89,6 @@ public class BREventManager implements BreadApp.OnAppBackgrounded {
             writeEventsToDisk(fileName, array.toString());
         } else {
             Timber.i("timber: saveEvents: FAILED TO WRITE EVENTS TO FILE: app is null");
-        }
-    }
-
-    private void pushToServer() {
-        Context app = BreadApp.getBreadContext();
-        if (app != null) {
-            List<JSONArray> arrs = getEventsFromDisk(app);
-            int fails = 0;
-            for (JSONArray arr : arrs) {
-                JSONObject obj = new JSONObject();
-                try {
-                    obj.put("deviceType", 1);
-                    obj.put("appVersion", BRConstants.APP_VERSION_NAME_CODE);
-                    obj.put("events", arr);
-
-                    String strUtl = BASE_URL + "/events";
-
-                    final MediaType JSON = MediaType.parse("application/json");
-                    RequestBody requestBody = RequestBody.create(JSON, obj.toString());
-                    Request request = new Request.Builder()
-                            .url(strUtl)
-                            .header("Content-Type", "application/json")
-                            .header("Accept", "application/json")
-                            .post(requestBody).build();
-                    String strResponse = null;
-                    Response response = null;
-                    try {
-                        response = APIClient.getInstance(app).sendRequest(request, true, 0);
-                        if (response != null)
-                            strResponse = response.body().string();
-                    } catch (IOException e) {
-                        Timber.e(e);
-                        fails++;
-                    } finally {
-                        if (response != null) response.close();
-                    }
-                    if (Utils.isNullOrEmpty(strResponse)) {
-                        Timber.i("timber: pushToServer: response is empty");
-                        fails++;
-                    }
-                } catch (JSONException e) {
-                    Timber.e(e);
-                    fails++;
-                }
-            }
-            if (fails == 0) {
-                //if no fails then remove the local files.
-                File dir = new File(app.getFilesDir().getAbsolutePath() + "/events/");
-                if (dir.isDirectory()) {
-                    String[] children = dir.list();
-                    for (int i = 0; i < children.length; i++) {
-                        new File(dir, children[i]).delete();
-                    }
-                } else {
-                    Timber.i("timber: pushToServer: missing events directory");
-                }
-            } else {
-                Timber.i("timber: pushToServer: FAILED with: %s fails", fails);
-            }
-        } else {
-            Timber.i("timber: pushToServer: Failed to push, app is null");
         }
     }
 

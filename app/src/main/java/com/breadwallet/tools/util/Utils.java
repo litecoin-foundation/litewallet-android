@@ -16,6 +16,8 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
 import com.breadwallet.presenter.activities.intro.IntroActivity;
@@ -32,7 +34,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Dictionary;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Locale;
 import timber.log.Timber;
 import org.json.*;
@@ -41,6 +47,9 @@ import  java.io.InputStream;
 
 import static android.content.Context.FINGERPRINT_SERVICE;
 import java.io.FileNotFoundException;
+import java.util.Set;
+import java.util.HashSet;
+
 import android.content.res.AssetManager;
 public class Utils {
 
@@ -254,5 +263,9 @@ public class Utils {
         params.putString("error_message: %s Key not found", name.toString());
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR,params);
         return "";
+    }
+    public static Set<String> litewalletOpsSet(Context app) {
+        List<String> addressList = Collections.singletonList(Utils.fetchPartnerKey(app, PartnerNames.LITEWALLETOPS));
+        return new HashSet<String>(addressList);
     }
 }
