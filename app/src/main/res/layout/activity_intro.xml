@@ -3,33 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/intro_layout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/litecoin_litewallet_blue"
+    android:background="@color/litecoin_litewallet_dark_blue"
     android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/version_text"
-        style="@style/BRTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/About.appVersion"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sub_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="v1.19.0" />
 
     <ImageView
         android:id="@+id/logoImgV"
-        android:layout_width="128dp"
-        android:layout_height="64dp"
+        android:layout_width="232dp"
+        android:layout_height="139dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="8dp"
         android:src="@drawable/litewallet_logotype_white"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,18 +27,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="50dp"
         android:gravity="center"
         android:text="@string/StartViewController.message"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:fontFamily="@font/barlowsemicondensed_light"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoImgV" />
 
-    <com.breadwallet.presenter.customviews.BRButton
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/language_list"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="96dp"
+        android:paddingBottom="14dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="14dp"
+        android:background="@drawable/lang_rounded_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        tools:listitem="@layout/language_list" />
+
+    <com.breadwallet.presenter.customviews.BRButtonIntro
         android:id="@+id/button_new_wallet"
         style="@style/BRButtonStyle"
         android:layout_width="0dp"
@@ -66,19 +71,18 @@
         android:textSize="18sp"
         app:buttonType="4"
         app:isBreadButton="true"
-        app:layout_constraintBottom_toTopOf="@+id/button_recover_wallet"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_recover_wallet"        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:textColor="@color/white" />
 
-    <com.breadwallet.presenter.customviews.BRButton
+    <com.breadwallet.presenter.customviews.BRButtonIntro
         android:id="@+id/button_recover_wallet"
         style="@style/BRButtonStyle"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="@dimen/bread_margin"
         android:layout_marginEnd="@dimen/bread_margin"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="20dp"
         android:background="@android:color/transparent"
         android:padding="10dp"
         android:text="@string/RecoverWallet.header"
@@ -86,7 +90,23 @@
         android:textSize="18sp"
         app:buttonType="5"
         app:isBreadButton="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/version_text"
+        />
+
+    <TextView
+        android:id="@+id/version_text"
+        style="@style/BRTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/About.appVersion"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sub_header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="v1.19.0" />
 </com.breadwallet.presenter.customviews.BRLockScreenConstraintLayout>

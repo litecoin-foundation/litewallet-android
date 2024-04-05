@@ -22,8 +22,10 @@ android {
 
     buildFeatures {
         dataBinding true
+        buildConfig true
+        viewBinding true
     }
-
+    assetPacks = [":install_time_asset_pack",":fast_follow_asset_pack_01"]
     signingConfigs {
         release {
             storeFile file(RELEASE_STORE_FILE)
@@ -52,20 +54,20 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = '1.8'
     }
 
-    compileSdkVersion 32
+
+    compileSdkVersion 34
 
     defaultConfig {
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
-        minSdkVersion 27 
-        targetSdkVersion 32  
-        versionCode 733
-        versionName "v2.8.4"
+        minSdkVersion 31
+        targetSdkVersion 33
+        versionCode 20240326
+        versionName "v2.9.1"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
 
@@ -106,7 +108,7 @@ android {
     // Specifies two flavor dimensions.
     flavorDimensions "mode"
     productFlavors {
-        loaf {
+        litewallet {
             applicationId "com.loafwallet"
             dimension "mode"
             resValue "string", "app_name", "Litewallet"
@@ -123,7 +125,7 @@ android {
             }
         }
 
-        loafTestnet {
+        litewalletTestnet {
             applicationId "com.loafwallet.testnet"
             dimension "mode"
             resValue "string", "app_name", "Litewallet-testnet"
@@ -245,6 +247,7 @@ android {
 
     }
     namespace 'com.breadwallet'
+    buildToolsVersion '34.0.0'
 }
 
 task copyResDirectoryToClasses(type: Copy) {
@@ -263,13 +266,16 @@ repositories {
 
 dependencies {
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    implementation 'org.json:json:20231013'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'junit:junit:4.12'
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.4.0')
-    androidTestImplementation('androidx.test:runner:1.4.0')
-    androidTestImplementation('androidx.test:rules:1.4.0')
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.5.1')
+    androidTestImplementation('androidx.test:runner:1.5.2')
+    androidTestImplementation('androidx.test:rules:1.5.0')
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
-    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.20-RC'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.9.22'
 
     // commons
     implementation 'commons-io:commons-io:2.4'
@@ -279,34 +285,40 @@ dependencies {
     implementation 'org.slf4j:slf4j-api:1.7.22'
 
     // androidx
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+
     // preferences
-    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
     // ChromeCustomTabs
-    implementation 'androidx.browser:browser:1.4.0'
+    implementation 'androidx.browser:browser:1.7.0'
     // material design
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.11.0'
 
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
 
-    implementation 'com.google.zxing:core:3.4.1'
+    implementation 'com.google.zxing:core:3.5.2'
 
     implementation 'io.sigpipe:jbsdiff:1.0'
 
-    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:29.3.1')
+    implementation platform('com.google.firebase:firebase-bom:32.7.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-crashlytics-ndk'
+    implementation('com.google.firebase:firebase-iid:21.1.0')
+
+    // push notifications
+    implementation 'com.google.firebase:firebase-messaging:23.4.0'
+    implementation 'com.pusher:push-notifications-android:1.8.0'
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
@@ -318,15 +330,22 @@ dependencies {
     implementation 'com.github.razir.progressbutton:progressbutton:2.1.0'
 
     // Dagger
-    implementation 'com.google.dagger:dagger:2.41'
-    kapt 'com.google.dagger:dagger-compiler:2.41'
+    implementation 'com.google.dagger:dagger:2.50'
+    kapt 'com.google.dagger:dagger-compiler:2.50'
 
     // Play Core
     implementation 'com.google.android.play:core:1.10.3'
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     // Ktlint
-    ktlint 'com.pinterest:ktlint:0.44.0'
+    ktlint("com.pinterest.ktlint:ktlint-cli:1.2.1") {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, getObjects().named(Bundling, Bundling.EXTERNAL))
+        }
+    }
+    // additional 3rd party ruleset(s) can be specified here
+    // just add them to the classpath (e.g. ktlint 'groupId:artifactId:version') and
+    // ktlint will pick them up
 
     //kotlin https://stackoverflow.com/questions/69817925/problem-duplicate-class-androidx-lifecycle-viewmodel-found-in-modules
     def lifecycle_version = "2.4.0"
@@ -334,18 +353,26 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 }
 
-task ktlint(type: JavaExec, group: "verification") {
+
+tasks.register("ktlintCheck", JavaExec) {
+    group = "verification"
     description = "Check Kotlin code style."
-    main = "com.pinterest.ktlint.Main"
     classpath = configurations.ktlint
-    args "src/**/*.kt"
+    mainClass = "com.pinterest.ktlint.Main"
+    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
+    args "src/**/*.kt", "**.kts", "!**/build/**"
 }
-check.dependsOn ktlint
 
-task ktlintFormat(type: JavaExec, group: "formatting") {
+tasks.named("check") {
+    dependsOn tasks.named("ktlintCheck")
+}
+
+tasks.register("ktlintFormat", JavaExec) {
+    group = "formatting"
     description = "Fix Kotlin code style deviations."
-    main = "com.pinterest.ktlint.Main"
     classpath = configurations.ktlint
-    args "-F", "src/**/*.kt"
+    mainClass = "com.pinterest.ktlint.Main"
+    jvmArgs "--add-opens=java.base/java.lang=ALL-UNNAMED"
+    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
+    args "-F", "src/**/*.kt", "**.kts", "!**/build/**"
 }
-

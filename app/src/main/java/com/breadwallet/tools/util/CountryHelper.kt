@@ -9,11 +9,12 @@ import java.util.Locale
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
 object CountryHelper {
-    val countries: List<Country> = Locale.getISOCountries().map {
-        with(Locale("", it)) {
-            Country(displayCountry, it)
-        }
-    }.sortedWith(compareBy { it.name }).toList()
+    val countries: List<Country> =
+        Locale.getISOCountries().map {
+            with(Locale("", it)) {
+                Country(displayCountry, it)
+            }
+        }.sortedWith(compareBy { it.name }).toList()
 
     val usaCountry = Country("United States", "US")
 }

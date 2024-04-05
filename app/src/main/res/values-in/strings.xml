@@ -109,9 +109,7 @@
   <!-- Exchange rate label -->
   <string name="DefaultCurrency.rateLabel">Kurs</string>
   <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableMessage">Perangkat ini tidak dikonfigurasi untuk mengirim email dengan aplikasi email iOS.</string>
-  <!-- Email unavailable alert title -->
-  <string name="ErrorMessages.emailUnavailableTitle">Email Tidak Tersedia</string>
+    <!-- Email unavailable alert title -->
   <!-- Messaging unavailable alert title -->
   <string name="ErrorMessages.loopingLockScreen.android">Litewallet tidak dapat diautentikasi karena bug di versi Android Anda. [Harap ketuk di sini untuk informasi lebih lanjut.]</string>
   <string name="ErrorMessages.messagingUnavailableMessage">Litewallet tidak dapat diautentikasi karena ada bug di versi Android Anda. [Harap ketuk di sini untuk informasi lebih lanjut.]</string>
@@ -635,6 +633,8 @@
   <!-- Device authentication title -->
     <string name="ViewOnBlockchain">Lihat di blockchain</string>
     <string name="UnlockScreen.touchIdTitle.android">Otentikasi diperlukan</string>
+  <!-- Forget Seed Phrase or PIN -->
+  <string name="UnlockScreen.forgetSeedPhraseOrPIN">Lupa seed phrase atau PIN Anda?</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Dompet Tidak Terkunci</string>
   <!-- Update PIN caption text -->
@@ -722,54 +722,22 @@
   <string name="FeeSelector.luxury">Kemewahan</string>
   <string name="FeeSelector.luxuryMessage">Opsi ini secara virtual menjamin penerimaan transaksi Anda meskipun Anda membayar premi.</string>
 
-  <string name="BuyCenter.simplex.FinancialDetails">"• Dapatkan Litecoin dalam 5 menit!\n• Beli Litecoin melalui kartu kredit\n• Paspor atau ID Negara"</string>
-  <string name="BuyCenter.moonpay.FinancialDetails">"• Beli LTC dengan banyak pasangan fiat\n• Bayar dengan beberapa metode\n• Penyedia pembayaran global"</string>
+    <string name="BuyCenter.moonpay.FinancialDetails">"• Beli LTC dengan banyak pasangan fiat\n• Bayar dengan beberapa metode\n• Penyedia pembayaran global"</string>
 
   <string name="FeeSelector.luxuryTime">2.5 - 5+ menit</string>
   <string name="BottomNavItem.History.title">Sejarah</string>
-  <string name="BottomNavItem.Card.title">Kartu</string>
-  <string name="LitecoinCard.cardBalance">Saldo Kartu</string>
-  <string name="LitecoinCard.logout">Keluar</string>
-  <string name="Register.Hint.mobileNumber">Nomor handphone</string>
-  <string name="Register.Hint.zipPostalCode">Kode / Pos</string>
-  <string name="Register.Hint.country">Negara</string>
-  <string name="Register.Hint.stateProvince">Negara Bagian / Provinsi</string>
-  <string name="Register.Hint.city">Kota</string>
-  <string name="Register.Hint.address">Alamat</string>
-  <string name="Register.Hint.confirmPassword">Setujui password</string>
-  <string name="Register.Hint.lastName">nama keluarga</string>
-  <string name="Register.Hint.firstName">Nama depan</string>
-  <string name="Register.registerCardPhrase">Daftar untuk Kartu Litecoin</string>
-  <string name="Login.Dialog.forgotPassword.reset">Setel ulang kata sandi</string>
-  <string name="Login.register">Daftar</string>
-  <string name="Login.login">Gabung</string>
-  <string name="Login.forgotPassword">Tidak ingat kata sandi?</string>
-  <string name="Login.Hint.password">Kata sandi</string>
-  <string name="Login.Dialog.forgotPasswordMessage">Kunjungi https://litecoin.dashboard.getblockcard.com/password/forgot untuk mengatur ulang kata sandi Anda</string>
-  <string name="Login.Dialog.forgotPassword.visit">Mengunjungi</string>
-  <string name="required">kolom yang harus diisi</string>
-  <string name="wrong_email_format">Alamat email salah</string>
-  <string name="error_pwd_6chars_min">Kata sandi minimal harus terdiri dari 6 karakter</string>
-  <string name="Register.Dialog.registeredSuccessMessage">Anda telah terdaftar. Harap konfirmasi dengan mengunjungi kotak masuk email Anda dan mengklik tombol konfirmasi</string>
-  <string name="Error.unknownSystem">Ups terjadi sesuatu yang salah. Silakan coba lagi nanti</string>
-  <string name="mismatch_password">Kata sandi tidak cocok</string>
-  <string name="Error.emailNotVerified">Anda perlu memverifikasi alamat email Anda sebelum Anda dapat masuk.</string>
-  <string name="Error.wrong2faTokenProvided">2FA yang diberikan salah</string>
   <string name="ManageWallet.balance">Saldo Kartu</string>
-  <string name="LitecoinCard.Disclaimer.bullets">- Pendaftaran &amp; Login\n- Saldo kartu yang tersedia\n- Reset kata sandi\n- Tidak ada transfer ke Litewallet\n- AS Sudah</string>
-  <string name="LitecoinCard.Disclaimer.description">Kartu Litecoin saat ini memiliki fungsi terbatas di Litewallet.</string>
-  <string name="LitecoinCard.Disclaimer.referral">Kunjungi litecoin.getblockcard.com untuk akses penuh</string>
-  <string name="LitecoinCard.Disclaimer.title">Kartu Litecoin Beta</string>
-    <string name="Login.currentLtcPrice">Nilai LTC saat ini di %1$s</string>
-    <string name="Settings.languages">Bahasa</string>
+  <string name="Login.currentLtcPrice">Nilai LTC saat ini di %1$s</string>
+  <string name="Settings.languages">Bahasa</string>
+  <string name="Settings.ChangeLanguage.alertMessage">Apakah Anda yakin ingin mengubah bahasanya ke bahasa Indonesia?</string>
   <string name="BuyCenter.bitrefill.Title">Bitrefill</string>
-    <string name="BuyCenter.bitrefill.FinancialDetails">Beli kartu hadiah\n• Isi ulang ponsel prabayar\n• Steam, Amazon, Hotels.com\n• Berfungsi di 170 negara</string>
-    <string name="Donate.toThe.LWTeam">Donasi ke: Infrastruktur Litewallet</string>
-    <string name="show_seed_label">Menunjukkan</string>
-    <string name="settings_show_seed">Tunjukkan frase seed saya</string>
+  <string name="BuyCenter.bitrefill.FinancialDetails">Beli kartu hadiah\n• Isi ulang ponsel prabayar\n• Steam, Amazon, Hotels.com\n• Berfungsi di 170 negara</string>
+  <string name="Donate.toThe.LWTeam">Donasi ke: Infrastruktur Litewallet</string>
+  <string name="show_seed_label">Menunjukkan</string>
+  <string name="settings_show_seed">Tunjukkan frase seed saya</string>
   <string name="sync_preferences">Preferensi Sinkronisasi: %1$s positif palsu</string>
-    <string name="radio_low_privacy">Privasi rendah (~19 menit)</string>
+  <string name="radio_low_privacy">Privasi rendah (~19 menit)</string>
   <string name="radio_semi_private">Semi-pribadi (~42 menit)</string>
   <string name="radio_anonymous">Anonim (~77 menit)</string>
-    <string name="release_notes">PENTING: Tunggu ~1 jam untuk sinkronisasi!</string>
+  <string name="release_notes">PENTING: Tunggu ~1 jam untuk sinkronisasi!</string>
 </resources>
