@@ -21,10 +21,15 @@ class LocaleHelper private constructor() {
     fun setLocale(context: Context): Context {
         return if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
             updateLocale(context, currentLocale)
-        } else updateLocaleLegacy(context, currentLocale)
+        } else {
+            updateLocaleLegacy(context, currentLocale)
+        }
     }
 
-    private fun updateLocale(context: Context, language: Language): Context {
+    private fun updateLocale(
+        context: Context,
+        language: Language,
+    ): Context {
         val locale = getLocale(language)
         Locale.setDefault(locale)
         val config = context.resources.configuration
@@ -33,7 +38,10 @@ class LocaleHelper private constructor() {
     }
 
     @Suppress("deprecation")
-    private fun updateLocaleLegacy(context: Context, language: Language): Context {
+    private fun updateLocaleLegacy(
+        context: Context,
+        language: Language,
+    ): Context {
         val locale = getLocale(language)
         Locale.setDefault(locale)
         val res = context.resources
@@ -49,8 +57,8 @@ class LocaleHelper private constructor() {
         }
         currentLocale = language
         sharedPreferences.edit()
-                .putString(LANGUAGE_PREF_KEY, language.code)
-                .apply()
+            .putString(LANGUAGE_PREF_KEY, language.code)
+            .apply()
         return true
     }
 
@@ -63,10 +71,11 @@ class LocaleHelper private constructor() {
         fun init(context: Context) {
             instance = LocaleHelper()
             instance.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-            val code = instance.sharedPreferences.getString(
-                LANGUAGE_PREF_KEY,
-                Language.ENGLISH.code
-            )
+            val code =
+                instance.sharedPreferences.getString(
+                    LANGUAGE_PREF_KEY,
+                    Language.ENGLISH.code,
+                )
             instance.currentLocale = Language.find(code)
         }
 
