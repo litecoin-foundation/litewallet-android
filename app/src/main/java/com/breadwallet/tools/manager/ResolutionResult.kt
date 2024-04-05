@@ -1,17 +1,15 @@
 package com.breadwallet.tools.manager
 
-import com.breadwallet.BuildConfig
-import com.unstoppabledomains.config.network.model.Network
 import com.unstoppabledomains.exceptions.ns.NamingServiceException
 import com.unstoppabledomains.resolution.DomainResolution
 import com.unstoppabledomains.resolution.Resolution
-import com.unstoppabledomains.resolution.naming.service.NamingServiceType
 import timber.log.Timber
 
 data class ResolutionResult(val error: NamingServiceException?, val address: String?)
 
 class UDResolution {
-    private val tool: DomainResolution = Resolution.builder()
+    private val tool: DomainResolution =
+        Resolution.builder()
 //            .infura(NamingServiceType.CNS, Network.MAINNET, BuildConfig.INFURA_KEY)
             .build()
 
@@ -25,10 +23,10 @@ class UDResolution {
     }
 }
 
-//https://github.com/unstoppabledomains/resolution-java/blob/master/samples.md
-//data class ResolutionResult(val error: NamingServiceException?, val address: String?) {}
+// https://github.com/unstoppabledomains/resolution-java/blob/master/samples.md
+// data class ResolutionResult(val error: NamingServiceException?, val address: String?) {}
 //
-//class AsyncResolution : AsyncTask<String, String, ResolutionResult>() {
+// class AsyncResolution : AsyncTask<String, String, ResolutionResult>() {
 //    private val tool: DomainResolution = Resolution()
 //
 //    override fun doInBackground(vararg params: String?): ResolutionResult {
@@ -42,4 +40,4 @@ class UDResolution {
 //            ResolutionResult(err, null)
 //        }
 //    }
-//}
+// }

@@ -65,10 +65,8 @@ public class BRKeyboard extends LinearLayout implements View.OnClickListener {
         final int N = a.getIndexCount();
         for (int i = 0; i < N; ++i) {
             int attr = a.getIndex(i);
-            switch (attr) {
-                case R.styleable.BRKeyboard_showAlphabet:
+            if (attr==R.styleable.BRKeyboard_showAlphabet) {
                     showAlphabet = a.getBoolean(attr, false);
-                    break;
             }
         }
         a.recycle();
