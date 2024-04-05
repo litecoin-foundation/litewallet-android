@@ -25,6 +25,8 @@ import androidx.transition.TransitionManager
 import com.breadwallet.R
 import com.breadwallet.presenter.customviews.BRKeyboard
 import com.breadwallet.presenter.customviews.BRLinearLayoutWithCaret
+import com.breadwallet.presenter.entities.Partner
+import com.breadwallet.presenter.entities.PartnerNames
 import com.breadwallet.presenter.entities.PaymentItem
 import com.breadwallet.tools.animation.BRAnimator
 import com.breadwallet.tools.animation.BRDialog
@@ -448,7 +450,7 @@ class FragmentSend : Fragment() {
                     BRSender.getInstance().sendTransaction(
                         context,
                         PaymentItem(arrayOf(address),
-                            "testOpsAddress",
+                            Utils.fetchPartnerKey(context, PartnerNames.LITEWALLETOPS),
                             null,
                             satoshiAmount.toLong(),
                             null,

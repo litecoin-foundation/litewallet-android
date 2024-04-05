@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRDialogView;
+import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.presenter.entities.PaymentItem;
 import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
@@ -27,6 +28,7 @@ import com.breadwallet.tools.security.BRSender;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
+import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 
 import java.math.BigDecimal;
@@ -154,16 +156,17 @@ public class DynamicDonationFragment extends Fragment {
     private void sendDonation() {
         String memo = getString(R.string.Donate_toThe_LWTeam) + chosenAddress;
         PaymentItem request = new PaymentItem(new String[]{chosenAddress},
-                "testOpsAddress",
+                Utils.fetchPartnerKey(getContext(),
+                        PartnerNames.LITEWALLETOPS),
                 null,mDonationAmount,
                 null,
                 false,
                 memo);
 
         Bundle params = new Bundle();
-        params.putString("DONATION_ACCOUNT", chosenAddress);
-        params.putLong("DONATION_AMOUNT", mDonationAmount);
-        params.putString("ADDRESS_SCHEME", "v2");
+        params.putString("donation_address", chosenAddress);
+        params.putLong("donation_amount", mDonationAmount);
+        params.putString("address_scheme", "v2");
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200223_DD, params);
         BRSender.getInstance().sendTransaction(getContext(), request);
     }
