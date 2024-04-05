@@ -7,6 +7,7 @@ import com.breadwallet.presenter.fragments.FragmentBuy;
  * Created by sadia on 2020-January-27
  * email: mosadialiou@gmail.com
  */
+
 public class Partner {
     private int logo;
     private int title;

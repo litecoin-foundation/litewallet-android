@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.view.inputmethod.InputMethodInfo;
@@ -18,18 +19,29 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 
 import com.breadwallet.presenter.activities.intro.IntroActivity;
+import com.breadwallet.presenter.entities.PartnerNames;
+import com.breadwallet.tools.manager.AnalyticsManager;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
-
 import timber.log.Timber;
+import org.json.*;
+import java.io.FileReader;
+import  java.io.InputStream;
 
 import static android.content.Context.FINGERPRINT_SERVICE;
-
+import java.io.FileNotFoundException;
+import android.content.res.AssetManager;
 public class Utils {
 
     public static boolean isUsingCustomInputMethod(Activity context) {
@@ -211,5 +223,36 @@ public class Utils {
         stringBuilder.append(array[array.length - 1]);
         return stringBuilder.toString();
     }
+    public static String fetchPartnerKey(Context app, PartnerNames name) {
 
+        Timber.d("timber: fetch name: %s", name);
+
+        JSONObject keyObject;
+        AssetManager assetManager = app.getAssets();
+        try (InputStream inputStream = assetManager.open("partner-keys.json")) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+                keyObject = new JSONObject(sb.toString()).getJSONObject("keys");
+                Timber.d("timber: fetch obj: %s", keyObject.toString());
+                return keyObject.get(name.getKey()).toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Timber.d("timber: IOEXception");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Timber.d("timber: JSONException");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Bundle   params = new Bundle();
+        params.putString("error_message: %s Key not found", name.toString());
+        AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR,params);
+        return "";
+    }
 }

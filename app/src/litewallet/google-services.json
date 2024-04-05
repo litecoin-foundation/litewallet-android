@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "230187998656",
+    "firebase_url": "https://litewallet-beta.firebaseio.com",
+    "project_id": "litewallet-beta",
+    "storage_bucket": "litewallet-beta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230187998656:android:d76d03bc3c57ebbe70bc25",
+        "android_client_info": {
+          "package_name": "com.loafwallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230187998656-mvo0eadvv8cu98vhdtkku72olhvdjgao.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.loafwallet",
+            "certificate_hash": "534e36e5207e9587dcfc01fa4379f9a1d7d08277"
+          }
+        },
+        {
+          "client_id": "230187998656-grds3s0l2n3t4v0okj7iqh2emuh7t9ju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLi47OjPwiCFdLcDLlEd0qQs3TpxCdc8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230187998656-grds3s0l2n3t4v0okj7iqh2emuh7t9ju.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "230187998656-s6tf5antivdoid0pmbt6qkmo5lnipiq3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.litecoin.loafwallet",
+                "app_store_id": "1119332592"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

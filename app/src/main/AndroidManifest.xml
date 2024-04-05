@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
-    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.BIND_JOB_SERVICE"/>
-    <!-- Allows unlocking your device and activating its screen so UI tests can succeed -->
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
-    <!-- Allows changing locales -->
-    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+    <uses-sdk
+        android:minSdkVersion="31"
+        android:targetSdkVersion="33" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.BIND_JOB_SERVICE" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" /> <!-- Allows unlocking your device and activating its screen so UI tests can succeed -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" /> <!-- Allows changing locales -->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
 
     <uses-feature
         android:name="android.hardware.location.gps"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.location.network"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.telephony"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="true"/>
+        android:required="true" />
     <uses-feature
         android:name="android.hardware.camera.autofocus"
-        android:required="false"/>
+        android:required="false" />
 
-    <application
+    <application xmlns:tools="http://schemas.android.com/tools"
         android:name=".BreadApp"
         android:allowBackup="false"
         android:fullBackupContent="false"
@@ -46,205 +50,185 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustResize"
-        >
-
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
+        tools:replace="android:fullBackupContent">
+        <activity
+            android:name=".presenter.activities.AnnounceUpdatesViewActivity"
+            android:exported="false"
+            android:label="Litewallet"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".presenter.activities.intro.IntroActivity"
+            android:exported="true"
             android:label="Litewallet"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:screenOrientation="portrait">
             <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".presenter.activities.BreadActivity"
+            android:exported="true"
             android:label="Litewallet"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true"
-            >
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <data android:scheme="litecoin"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="litecoin" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
 
             <meta-data
                 android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+                android:resource="@xml/searchable" />
         </activity>
         <activity
             android:name=".presenter.activities.SetPinActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.intro.RecoverActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.WipeActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.ImportActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.ReEnterPinActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.UpdatePinActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.LoginActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.SettingsActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.NotificationActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.SyncBlockchainActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.DisplayCurrencyActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.AboutActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.SecurityCenterActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.ShareDataActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.intro.WriteDownActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.PaperKeyActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.SpendLimitActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.PaperKeyProveActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.InputWordsActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.camera.ScanQRActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.DisabledActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.FingerprintActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.AdvancedActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.NodesActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.camera.CameraActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activities.settings.TestActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".tools.listeners.SyncReceiver"
             android:enabled="true"
             android:exported="false"
-            android:label="SyncReceiver"/>
+            android:label="SyncReceiver" />
     </application>
 
 </manifest>
