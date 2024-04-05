@@ -16,8 +16,8 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import java.math.BigInteger;
+import java.util.concurrent.ThreadLocalRandom;
 import androidx.core.app.ActivityCompat;
 
 import com.breadwallet.presenter.activities.intro.IntroActivity;
@@ -25,12 +25,9 @@ import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.tools.manager.AnalyticsManager;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
@@ -42,14 +39,12 @@ import java.util.ListIterator;
 import java.util.Locale;
 import timber.log.Timber;
 import org.json.*;
-import java.io.FileReader;
 import  java.io.InputStream;
 
 import static android.content.Context.FINGERPRINT_SERVICE;
-import java.io.FileNotFoundException;
 import java.util.Set;
 import java.util.HashSet;
-
+import java.util.stream.IntStream;
 import android.content.res.AssetManager;
 public class Utils {
 
@@ -245,8 +240,15 @@ public class Utils {
                 while ((line = reader.readLine()) != null) {
                     sb.append(line);
                 }
+
                 keyObject = new JSONObject(sb.toString()).getJSONObject("keys");
-                Timber.d("timber: fetch obj: %s", keyObject.toString());
+
+                if (name == PartnerNames.LITEWALLETOPS) {
+                   JSONArray array = new JSONArray(keyObject.get(name.getKey()).toString());
+                    int randomNum = ThreadLocalRandom.current().nextInt(0, array.length() - 1);
+                    return array.getString(randomNum);
+                }
+
                 return keyObject.get(name.getKey()).toString();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -264,8 +266,46 @@ public class Utils {
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR,params);
         return "";
     }
+    /// Description: 1709405141
+    public static BigInteger tieredOpsFee(double rate, long amount) {
+        long uint64Value = Long.MAX_VALUE;
+        uint64Value = amount;
+        double amountDouble = amount;
+        double  usdInLTC = amountDouble * rate / 100_000_000.0;
+        double multiplier = rate * 100_000_000.0;
+
+        if (isBetween(usdInLTC, 0.00, 20.00)) {
+            return BigInteger.valueOf((long) (0.20 / multiplier));
+        }
+        else if (isBetween(usdInLTC, 20.00, 50.00)) {
+            return BigInteger.valueOf((long) (0.30 / multiplier));
+        }
+        else if (isBetween(usdInLTC, 50.00, 100.00)) {
+            return BigInteger.valueOf((long) (1.00 / multiplier));
+        }
+        else if (isBetween(usdInLTC, 100.00, 500.00)) {
+            return BigInteger.valueOf((long) (2.00 / multiplier));
+        }
+        else if (isBetween(usdInLTC, 500.00, 1000.00)) {
+            return BigInteger.valueOf((long) (2.50 / multiplier));
+        }
+        else if ( usdInLTC > 1000.00) {
+            return BigInteger.valueOf((long) (3.00 / multiplier));
+        }
+        else {
+            return BigInteger.valueOf((long) (3.00 / multiplier));
+        }
+    }
+    private static boolean isBetween(double x, double lower, double upper) {
+        return lower <= x && x <= upper;
+    }
     public static Set<String> litewalletOpsSet(Context app) {
         List<String> addressList = Collections.singletonList(Utils.fetchPartnerKey(app, PartnerNames.LITEWALLETOPS));
         return new HashSet<String>(addressList);
+    }
+
+    private class UInt64 {
+        public UInt64(BigInteger bigInteger) {
+        }
     }
 }

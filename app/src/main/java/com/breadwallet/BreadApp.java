@@ -162,7 +162,6 @@ public class BreadApp extends Application {
             String generalAndroidInterest = "general-android";
             String debugGeneralAndroidInterest = "debug-general-android";
             String pusherInstanceID = Utils.fetchPartnerKey(this, PartnerNames.PUSHERSTAGING);
-
             // setup Push Notifications
             //This worked had to add the iid dep https://github.com/mixpanel/mixpanel-android/issues/744
             PushNotifications.start(getApplicationContext(), pusherInstanceID);
