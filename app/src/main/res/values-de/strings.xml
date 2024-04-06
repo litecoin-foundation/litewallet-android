@@ -744,4 +744,6 @@
   <string name="Announce.close">Schließen</string>
   <string name="Announce.description">Melden Sie sich an, um über Updates und Wettbewerbe vom Litewallet-Team zu erfahren! Akzeptieren Sie Benachrichtigungen, um Live-Nachrichten, Preise, \u0026 Marktinformationen zu erhalten!</string>
   <string name="Announce.no_thanks">Nein danke!</string>
+    <string name="Fees.Service">Service</string>
+    <string name="Network.feeLabel">Netzwerk</string>
 </resources>

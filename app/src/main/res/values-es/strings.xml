@@ -743,4 +743,6 @@
   <string name="Announce.close">Cerca</string>
   <string name="Announce.description">¡Regístrese para recibir actualizaciones y concursos del equipo de Litewallet! ¡Acepte notificaciones para recibir noticias en vivo, precios e información de mercado!</string>
   <string name="Announce.no_thanks">¡No, gracias!</string>
+    <string name="Fees.Service">Servicio</string>
+    <string name="Network.feeLabel">Red</string>
 </resources>

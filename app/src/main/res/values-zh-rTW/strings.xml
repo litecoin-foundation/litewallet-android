@@ -744,4 +744,6 @@
   <string name="Announce.close">關閉</string>
   <string name="Announce.description">註冊以了解 Litewallet 團隊的最新動態和競賽！ 接受通知以獲取即時新聞、價格和市場資訊！</string>
   <string name="Announce.no_thanks">不，謝謝</string>
+    <string name="Fees.Service">服務</string>
+    <string name="Network.feeLabel">網路</string>
 </resources>

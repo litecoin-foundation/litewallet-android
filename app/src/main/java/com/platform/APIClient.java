@@ -83,6 +83,7 @@ public class APIClient {
             try {
                 response = sendRequest(request, false, 0);
                 body = response.body().string();
+                Timber.d("timber: fee per kb %s",body);
             } catch (IOException e) {
                 Timber.e(e);
                 AnalyticsManager.logCustomEvent(BRConstants._20200111_RNI);

@@ -17,12 +17,17 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import java.math.BigInteger;
+import java.util.Currency;
 import java.util.concurrent.ThreadLocalRandom;
 import androidx.core.app.ActivityCompat;
 
+import com.breadwallet.R;
 import com.breadwallet.presenter.activities.intro.IntroActivity;
+import com.breadwallet.presenter.entities.CurrencyEntity;
 import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.tools.manager.AnalyticsManager;
+import com.breadwallet.tools.manager.BRSharedPrefs;
+import com.breadwallet.tools.sqlite.CurrencyDataSource;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -229,14 +234,13 @@ public class Utils {
     }
     public static String fetchPartnerKey(Context app, PartnerNames name) {
 
-        Timber.d("timber: fetch name: %s", name);
-
         JSONObject keyObject;
         AssetManager assetManager = app.getAssets();
         try (InputStream inputStream = assetManager.open("partner-keys.json")) {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
                 StringBuilder sb = new StringBuilder();
                 String line;
+                String opsString = "";
                 while ((line = reader.readLine()) != null) {
                     sb.append(line);
                 }
@@ -248,7 +252,22 @@ public class Utils {
                     int randomNum = ThreadLocalRandom.current().nextInt(0, array.length() - 1);
                     return array.getString(randomNum);
                 }
+                else if (name == PartnerNames.OPSALL) {
+                    JSONArray opsArray = new JSONArray(keyObject.get(name.getKey()).toString());
 
+                    if (opsArray != null) {
+                        for (int i=0;i<opsArray.length();i++){
+                            opsString = (new StringBuilder())
+                                 .append(opsString)
+                                 .append(opsArray.getString(i))
+                                 .append(",")
+                                 .toString();
+                        }
+                    } else {
+                        Timber.e("timber: ops element fail");
+                    }
+                    return opsString.replaceAll("\\s+","");
+                }
                 return keyObject.get(name.getKey()).toString();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -267,33 +286,34 @@ public class Utils {
         return "";
     }
     /// Description: 1709405141
-    public static BigInteger tieredOpsFee(double rate, long amount) {
-        long uint64Value = Long.MAX_VALUE;
-        uint64Value = amount;
-        double amountDouble = amount;
-        double  usdInLTC = amountDouble * rate / 100_000_000.0;
-        double multiplier = rate * 100_000_000.0;
+    public static long tieredOpsFee(Context app, long sendAmount) {
+
+        double sendAmountDouble = new Double(String.valueOf(sendAmount));
+        String usIso = Currency.getInstance(new Locale("en", "US")).getCurrencyCode();
+        CurrencyEntity currency = CurrencyDataSource.getInstance(app).getCurrencyByIso(usIso);
+        double doubleRate = currency.rate;
+        double usdInLTC = sendAmountDouble * doubleRate / 100_000_000.0;
 
         if (isBetween(usdInLTC, 0.00, 20.00)) {
-            return BigInteger.valueOf((long) (0.20 / multiplier));
+            return (long) ((0.20 / doubleRate) * 100_000_000.0);
         }
         else if (isBetween(usdInLTC, 20.00, 50.00)) {
-            return BigInteger.valueOf((long) (0.30 / multiplier));
-        }
+            return (long) ((0.30 / doubleRate) * 100_000_000.0);
+         }
         else if (isBetween(usdInLTC, 50.00, 100.00)) {
-            return BigInteger.valueOf((long) (1.00 / multiplier));
-        }
+             return (long) ((1.00 / doubleRate) * 100_000_000.0);
+         }
         else if (isBetween(usdInLTC, 100.00, 500.00)) {
-            return BigInteger.valueOf((long) (2.00 / multiplier));
+             return (long) ((2.00 / doubleRate) * 100_000_000.0);
         }
         else if (isBetween(usdInLTC, 500.00, 1000.00)) {
-            return BigInteger.valueOf((long) (2.50 / multiplier));
+             return (long) ((2.50 / doubleRate) * 100_000_000.0);
         }
         else if ( usdInLTC > 1000.00) {
-            return BigInteger.valueOf((long) (3.00 / multiplier));
+             return (long) ((3.00 / doubleRate) * 100_000_000.0);
         }
         else {
-            return BigInteger.valueOf((long) (3.00 / multiplier));
+             return (long) ((3.00 / doubleRate) * 100_000_000.0);
         }
     }
     private static boolean isBetween(double x, double lower, double upper) {

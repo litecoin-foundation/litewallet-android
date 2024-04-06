@@ -374,7 +374,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             final BigDecimal amount = new BigDecimal(BRSharedPrefs.getCatchedBalance(BreadActivity.this));
 
             //amount in LTC units
-            BigDecimal btcAmount = BRExchange.getBitcoinForSatoshis(BreadActivity.this, amount);
+            BigDecimal btcAmount = BRExchange.getLitecoinForLitoshis(BreadActivity.this, amount);
             final String formattedBTCAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, "LTC", btcAmount);
 
             //amount in currency units

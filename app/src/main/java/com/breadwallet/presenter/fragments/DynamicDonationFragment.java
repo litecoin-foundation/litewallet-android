@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.PartnerNames;
-import com.breadwallet.presenter.entities.PaymentItem;
+import com.breadwallet.presenter.entities.TransactionItem;
 import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.FeeManager;
@@ -155,10 +155,11 @@ public class DynamicDonationFragment extends Fragment {
 
     private void sendDonation() {
         String memo = getString(R.string.Donate_toThe_LWTeam) + chosenAddress;
-        PaymentItem request = new PaymentItem(new String[]{chosenAddress},
-                Utils.fetchPartnerKey(getContext(),
-                        PartnerNames.LITEWALLETOPS),
-                null,mDonationAmount,
+        TransactionItem request = new TransactionItem(chosenAddress,
+                null,
+                null,
+                mDonationAmount,
+                0,
                 null,
                 false,
                 memo);
@@ -210,7 +211,7 @@ public class DynamicDonationFragment extends Fragment {
     }
 
     private String formatLtcAmount(BigDecimal amount) {
-        BigDecimal ltcAmount = BRExchange.getBitcoinForSatoshis(getContext(), amount);
+        BigDecimal ltcAmount = BRExchange.getLitecoinForLitoshis(getContext(), amount);
         return BRCurrency.getFormattedCurrencyString(getContext(), "LTC", ltcAmount);
     }
 

@@ -1,5 +1,7 @@
 package com.breadwallet.tools.adapter;
 
+import static java.util.function.Predicate.not;
+
 import android.app.Activity;
 import android.content.Context;
 import android.util.TypedValue;
@@ -17,6 +19,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.breadwallet.R;
+import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.presenter.entities.TxItem;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.PromptManager;
@@ -31,8 +34,15 @@ import com.platform.tools.KVStoreManager;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import timber.log.Timber;
 
@@ -95,7 +105,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private void updateTxHashes() {
         if (updatingReverseTxHash) return;
         updatingReverseTxHash = true;
-
     }
 
     public List<TxItem> getItems() {
@@ -149,6 +158,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         TxItem item = itemFeed.get(TxManager.getInstance().currentPrompt == null ? position : position - 1);
         item.metaData = KVStoreManager.getInstance().getTxMetaData(mContext, item.getTxHash());
         String commentString = (item.metaData == null || item.metaData.comment == null) ? "" : item.metaData.comment;
+        String sendAddress = "ERROR-ADDRESS";
         convertView.comment.setText(commentString);
         if (commentString.isEmpty()) {
             convertView.constraintLayout.removeView(convertView.comment);
@@ -175,8 +185,22 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         convertView.mainLayout.setBackgroundResource(getResourceByPos(position));
         convertView.sentReceived.setText(received ? mContext.getString(R.string.TransactionDetails_received, "") : mContext.getString(R.string.TransactionDetails_sent, ""));
         convertView.toFrom.setText(received ? String.format(mContext.getString(R.string.TransactionDetails_from), "") : String.format(mContext.getString(R.string.TransactionDetails_to), ""));
-        final String addr = item.getTo()[0];
-        convertView.account.setText(addr);
+
+        Set<String> outputAddressSet = new HashSet<String>(Arrays.asList(item.getTo()));
+
+        final String opsString = Utils.fetchPartnerKey(mContext, PartnerNames.OPSALL);
+        List<String> opsList = new ArrayList<String>(Arrays.asList(opsString.split(",")));
+        Set<String> opsSet = new HashSet<>();
+        opsSet.addAll(opsList);
+        List<String> outputAddress = outputAddressSet.stream().filter(element -> !opsSet.contains(element)).collect(Collectors.toList());
+        List<String> filteredAddress = outputAddress.stream().filter(Objects::nonNull).collect(Collectors.toList());
+        if (filteredAddress.stream().findFirst().isPresent()) {
+            sendAddress =  filteredAddress.stream().findFirst().get();
+        } else {
+            sendAddress = "ERROR-ADDRESS";
+        }
+        convertView.account.setText(sendAddress);
+
         int blockHeight = item.getBlockHeight();
         int confirms = blockHeight == Integer.MAX_VALUE ? 0 : BRSharedPrefs.getLastBlockHeight(mContext) - blockHeight + 1;
 
