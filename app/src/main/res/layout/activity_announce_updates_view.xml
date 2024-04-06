@@ -8,28 +8,41 @@
     android:background="@color/litecoin_litewallet_dark_blue"
     tools:context=".presenter.activities.AnnounceUpdatesViewActivity">
 
+    <ImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@string/Announce.close"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/ic_close_white_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.896"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
         android:fontFamily="@font/barlowsemicondensed_semibold"
-        android:text="Don't miss a thing!"
+        android:text="@string/Announce.title"
         android:textColor="@color/white"
-        android:textSize="35sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.191"
+        app:layout_constraintHorizontal_bias="0.197"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnClose" />
 
     <TextView
         android:id="@+id/textDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:padding="30dp"
+        android:layout_marginTop="25dp"
+        android:padding="25dp"
         android:fontFamily="@font/barlowsemicondensed_regular"
-        android:text="Signup to hear about updates and contests from the Litewallet team! Accept notifications to get live news, price, \u0026 market information!"
+        android:text="@string/Announce.description"
         android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,8 +53,10 @@
         android:id="@+id/webViewEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/litecoin_litewallet_dark_blue"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDesc" />
 
@@ -54,9 +69,9 @@
         android:fontFamily="@font/barlowsemicondensed_light"
         android:paddingStart="80dp"
         android:paddingEnd="80dp"
-        android:text="No, thanks!"
+        android:text="@string/Announce.no_thanks"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

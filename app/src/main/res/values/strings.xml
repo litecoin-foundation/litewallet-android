@@ -768,5 +768,9 @@
   <string name="radio_anonymous">Anonymous (~77 minutes)</string>
   <string name="release_notes">IMPORTANT: App will sync to allow 1ltc addresses. Wait ~1 hour for syncing!</string>
 
-
+  <!-- Announce Updates View -->
+  <string name="Announce.title">Don\'t miss a thing!</string>
+  <string name="Announce.close">Close</string>
+  <string name="Announce.description">Signup to hear about updates and contests from the Litewallet team! Accept notifications to get live news, price, \u0026 market information!</string>
+  <string name="Announce.no_thanks">No, thanks!</string>
 </resources>
