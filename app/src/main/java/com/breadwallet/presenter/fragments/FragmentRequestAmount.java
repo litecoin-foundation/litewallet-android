@@ -150,7 +150,7 @@ public class FragmentRequestAmount extends Fragment {
             String iso = selectedIso;
             String strAmount = amountEdit.getText().toString();
             BigDecimal bigAmount = new BigDecimal((Utils.isNullOrEmpty(strAmount) || strAmount.equalsIgnoreCase(".")) ? "0" : strAmount);
-            long amount = BRExchange.getSatoshisFromAmount(getActivity(), iso, bigAmount).longValue();
+            long amount = BRExchange.getLitoshisFromAmount(getActivity(), iso, bigAmount).longValue();
             String bitcoinUri = Utils.createBitcoinUrl(receiveAddress, amount, null, null, null);
             QRUtils.share("mailto:", getActivity(), bitcoinUri);
 
@@ -164,7 +164,7 @@ public class FragmentRequestAmount extends Fragment {
 //                String iso = selectedIso;
 //                String strAmount = amountEdit.getText().toString();
 //                BigDecimal bigAmount = new BigDecimal((Utils.isNullOrEmpty(strAmount) || strAmount.equalsIgnoreCase(".")) ? "0" : strAmount);
-//                long amount = BRExchange.getSatoshisFromAmount(getActivity(), iso, bigAmount).longValue();
+//                long amount = BRExchange.getLitoshisFromAmount(getActivity(), iso, bigAmount).longValue();
 //                String bitcoinUri = Utils.createBitcoinUrl(receiveAddress, amount, null, null, null);
 //                QRUtils.share("sms:", getActivity(), bitcoinUri);
 //            }
@@ -334,7 +334,7 @@ public class FragmentRequestAmount extends Fragment {
         String amountArg = "";
         if (strAmount != null && !strAmount.isEmpty()) {
             BigDecimal bigAmount = new BigDecimal((Utils.isNullOrEmpty(strAmount) || strAmount.equalsIgnoreCase(".")) ? "0" : strAmount);
-            long amount = BRExchange.getSatoshisFromAmount(getActivity(), iso, bigAmount).longValue();
+            long amount = BRExchange.getLitoshisFromAmount(getActivity(), iso, bigAmount).longValue();
             String am = new BigDecimal(amount).divide(new BigDecimal(100000000), 8, BRConstants.ROUNDING_MODE).toPlainString();
             amountArg = "?amount=" + am;
         }

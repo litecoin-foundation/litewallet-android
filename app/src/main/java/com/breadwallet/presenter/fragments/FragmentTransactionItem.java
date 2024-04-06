@@ -121,8 +121,8 @@ public class FragmentTransactionItem extends Fragment {
         String eb = String.format(getString(R.string.Transaction_ending), endingBalance);
         String amountString = String.format("%s %s\n\n%s\n%s", amount, item.getFee() == -1 ? "" : String.format(getString(R.string.Transaction_fee), fee), sb, eb);
         if (sent) amountString = "-" + amountString;
-        String addr = item.getTo()[0];
-        String toFrom = sent ? String.format(getString(R.string.TransactionDetails_to), addr) : String.format(getString(R.string.TransactionDetails_from), addr);
+        String sendAddress = item.getTo()[0];
+        String toFrom = sent ? String.format(getString(R.string.TransactionDetails_to), sendAddress) : String.format(getString(R.string.TransactionDetails_from), sendAddress);
 
         mTxHash.setText(item.getTxHashHexReversed());
         mTxHashLink.setOnClickListener(view -> {
@@ -188,7 +188,7 @@ public class FragmentTransactionItem extends Fragment {
         mCommentText.setText(commentString);
 
         mAmountText.setText(amountString);
-        mAddressText.setText(addr);
+        mAddressText.setText(sendAddress);
     }
 
     private int getLevel(TxItem item) {
@@ -270,9 +270,9 @@ public class FragmentTransactionItem extends Fragment {
         return str1 + " " + String.format(getString(R.string.TransactionDetails_from), str2);
     }
 
-    private String getShortAddress(String addr) {
-        String p1 = addr.substring(0, 5);
-        String p2 = addr.substring(addr.length() - 5, addr.length());
+    private String getShortAddress(String sendAddress) {
+        String p1 = sendAddress.substring(0, 5);
+        String p2 = sendAddress.substring(sendAddress.length() - 5, sendAddress.length());
         return p1 + "..." + p2;
     }
 

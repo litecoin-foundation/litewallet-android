@@ -17,16 +17,16 @@ public class BRExchange {
     public static final long ONE_LITECOIN = 100000000L; 
 
     public static BigDecimal getMaxAmount(Context context, String iso) {
-        final long MAX_BTC = 84000000;
+        final long MAX_LTC = 84000000;
         if (iso.equalsIgnoreCase("LTC"))
-            return getBitcoinForSatoshis(context, new BigDecimal(MAX_BTC * 100000000));
+            return getLitecoinForLitoshis(context, new BigDecimal(MAX_LTC * 100000000));
         CurrencyEntity ent = CurrencyDataSource.getInstance(context).getCurrencyByIso(iso);
         if (ent == null) return new BigDecimal(Integer.MAX_VALUE);
-        return new BigDecimal(ent.rate * MAX_BTC);
+        return new BigDecimal(ent.rate * MAX_LTC);
     }
 
-    // amount in satoshis
-    public static BigDecimal getBitcoinForSatoshis(Context app, BigDecimal amount) {
+    // amount in Litoshis
+    public static BigDecimal getLitecoinForLitoshis(Context app, BigDecimal amount) {
         BigDecimal result = new BigDecimal(0);
         int unit = BRSharedPrefs.getCurrencyUnit(app);
         switch (unit) {
@@ -83,7 +83,7 @@ public class BRExchange {
     public static BigDecimal getAmountFromSatoshis(Context app, String iso, BigDecimal amount) {
         BigDecimal result;
         if (iso.equalsIgnoreCase("LTC")) {
-            result = getBitcoinForSatoshis(app, amount);
+            result = getLitecoinForLitoshis(app, amount);
         } else {
             //multiply by 100 because core function localAmount accepts the smallest amount e.g. cents
             CurrencyEntity ent = CurrencyDataSource.getInstance(app).getCurrencyByIso(iso);
@@ -97,7 +97,7 @@ public class BRExchange {
 
 
     //get satoshis from an iso amount
-    public static BigDecimal getSatoshisFromAmount(Context app, String iso, BigDecimal amount) {
+    public static BigDecimal getLitoshisFromAmount(Context app, String iso, BigDecimal amount) {
         BigDecimal result;
         if (iso.equalsIgnoreCase("LTC")) {
             result = BRExchange.getSatoshisForBitcoin(app, amount);

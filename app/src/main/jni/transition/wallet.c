@@ -539,6 +539,34 @@ Java_com_breadwallet_wallet_BRWalletManager_tryTransaction(JNIEnv *env, jobject 
     return result;
 }
 
+JNIEXPORT jbyteArray JNICALL
+Java_com_breadwallet_wallet_BRWalletManager_tryTransactionWithOps(JNIEnv *env, jobject obj,
+                                                                  jstring jSendAddress, jlong jSendAmount,
+                                                                  jstring jOpsAddress, jlong jOpsFeeAmount) {
+    __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "tryTransactionWithOps");
+    if (!_wallet) return 0;
+
+    const char *rawSendAddress = (*env)->GetStringUTFChars(env, jSendAddress, NULL);
+    const char *rawOpsAddress = (*env)->GetStringUTFChars(env, jOpsAddress, NULL);
+
+    BRTransaction *tx = BRWalletCreateOpsTransaction(_wallet, (uint64_t) jSendAmount,
+                                                     rawSendAddress,
+                                                     (uint64_t) jOpsFeeAmount,
+                                                     rawOpsAddress);
+    if (!tx) return NULL;
+
+    size_t len = BRTransactionSerialize(tx, NULL, 0);
+    uint8_t *buf = malloc(len);
+
+    len = BRTransactionSerialize(tx, buf, len);
+
+    jbyteArray result = (*env)->NewByteArray(env, (jsize) len);
+
+    (*env)->SetByteArrayRegion(env, result, 0, (jsize) len, (jbyte *) buf);
+    free(buf);
+    return result;
+}
+
 JNIEXPORT jboolean JNICALL Java_com_breadwallet_wallet_BRWalletManager_isCreated(JNIEnv *env,
                                                                                  jobject obj) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "wallet isCreated %s",
@@ -569,7 +597,7 @@ Java_com_breadwallet_wallet_BRWalletManager_bitcoinAmount(JNIEnv *env, jobject t
                                                           jlong localAmount, double price) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ",
                         "bitcoinAmount: localAmount: %lli, price: %lf", localAmount, price);
-    return (jlong) BRBitcoinAmount(localAmount, price);
+    return (jlong) BRLitecoinAmount(localAmount, price);
 }
 
 JNIEXPORT jlong
