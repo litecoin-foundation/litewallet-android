@@ -15,8 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.breadwallet.entities.IntroLanguageResource;
 import com.breadwallet.tools.adapter.CountryLanguageAdapter;
+import com.breadwallet.tools.util.LocaleHelper;
 import com.google.android.material.snackbar.Snackbar;
-import com.breadwallet.BuildConfig;
+//import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.activities.util.BRActivity;
@@ -28,6 +29,7 @@ import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
+import com.google.android.play.core.ktx.BuildConfig;
 import com.platform.APIClient;
 import java.io.Serializable;
 import java.util.Objects;
@@ -39,6 +41,7 @@ public class IntroActivity extends BRActivity implements Serializable {
     public static IntroActivity introActivity;
     public static boolean appVisible = false;
     private static IntroActivity app;
+    public CountryLanguageAdapter countryLanguageAdapter;
     public RecyclerView listLangRecyclerView;
     public IntroLanguageResource introLanguageResource = new IntroLanguageResource();
     public static boolean isNewWallet = false;
@@ -65,7 +68,7 @@ public class IntroActivity extends BRActivity implements Serializable {
         listLangRecyclerView = findViewById(R.id.language_list);
         View parentLayout = findViewById(android.R.id.content);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        CountryLanguageAdapter countryLanguageAdapter = new CountryLanguageAdapter(this, introLanguageResource.loadResources());
+        countryLanguageAdapter = new CountryLanguageAdapter(this, introLanguageResource.loadResources());
         listLangRecyclerView.setAdapter(countryLanguageAdapter);
 
         listLangRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -75,7 +78,6 @@ public class IntroActivity extends BRActivity implements Serializable {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
                     int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
-
                     int centerPosition = (lastVisibleItemPosition - firstVisibleItemPosition) / 2 + firstVisibleItemPosition;
                     if (centerPosition != RecyclerView.NO_POSITION) {
                         countryLanguageAdapter.updateCenterPosition(centerPosition);
@@ -86,6 +88,7 @@ public class IntroActivity extends BRActivity implements Serializable {
             }
 
         });
+
 
         listLangRecyclerView.setLayoutManager(layoutManager);
 
@@ -143,9 +146,15 @@ public class IntroActivity extends BRActivity implements Serializable {
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                if (LocaleHelper.Companion.getInstance().setLocaleIfNeeded(countryLanguageAdapter.selectedLang())) {
+                    dialog.dismiss();
+                    recreate();
+                }else {
+                    dialog.dismiss();
+                }
             }
         });
+
 
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
