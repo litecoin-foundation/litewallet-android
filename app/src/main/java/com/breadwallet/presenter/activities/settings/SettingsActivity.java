@@ -175,7 +175,7 @@ public class SettingsActivity extends BRActivity {
         }, false));
 
         /*Display Currency*/
-        items.add(new BRSettingsItem(getString(R.string.Settings_currency), BRSharedPrefs.getIso(this), v -> {
+        items.add(new BRSettingsItem(getString(R.string.Settings_currency), BRSharedPrefs.getIsoSymbol(this), v -> {
             Intent intent = new Intent(SettingsActivity.this, DisplayCurrencyActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);

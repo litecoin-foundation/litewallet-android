@@ -69,7 +69,7 @@ public class DynamicDonationFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        selectedIso = BRSharedPrefs.getIso(getContext());
+        selectedIso = BRSharedPrefs.getIsoSymbol(getContext());
         isLTCSwap = BRSharedPrefs.getPreferredLTC(getContext());
 
         addressVal = view.findViewById(R.id.addressVal);
@@ -179,7 +179,7 @@ public class DynamicDonationFragment extends Fragment {
         AnalyticsManager.logCustomEvent(BRConstants._20200301_DUDFPK);
 
         feeManager.resetFeeType();
-        BRWalletManager.getInstance().setFeePerKb(feeManager.getFees().regular);
+        BRWalletManager.getInstance().setFeePerKb(feeManager.currentFees.regular);
     }
 
     private int diff() {
@@ -216,7 +216,7 @@ public class DynamicDonationFragment extends Fragment {
     }
 
     private String formatIsoAmount(BigDecimal amount) {
-        BigDecimal fiatAmount = BRExchange.getAmountFromSatoshis(getContext(), selectedIso, amount);
+        BigDecimal fiatAmount = BRExchange.getAmountFromLitoshis(getContext(), selectedIso, amount);
         return BRCurrency.getFormattedCurrencyString(getContext(), selectedIso, fiatAmount);
     }
 

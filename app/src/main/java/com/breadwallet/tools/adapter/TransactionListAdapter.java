@@ -39,11 +39,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
 import timber.log.Timber;
 
 public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -122,7 +119,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             return new SyncingHolder(inflater.inflate(syncingResId, parent, false));
         return null;
     }
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
@@ -137,7 +133,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 break;
         }
     }
-
     @Override
     public int getItemViewType(int position) {
         if (position == 0 && TxManager.getInstance().currentPrompt == PromptManager.PromptItem.SYNCING) {
@@ -192,8 +187,10 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         List<String> opsList = new ArrayList<String>(Arrays.asList(opsString.split(",")));
         Set<String> opsSet = new HashSet<>();
         opsSet.addAll(opsList);
-        List<String> outputAddress = outputAddressSet.stream().filter(element -> !opsSet.contains(element)).collect(Collectors.toList());
-        List<String> filteredAddress = outputAddress.stream().filter(Objects::nonNull).collect(Collectors.toList());
+        List<String> outputAddresses = outputAddressSet.stream().filter(element -> !opsSet.contains(element)).collect(Collectors.toList());
+        List<String> opsAddressList = outputAddressSet.stream().filter(element -> opsSet.contains(element)).collect(Collectors.toList());
+        List<String> filteredAddress = outputAddresses.stream().filter(Objects::nonNull).collect(Collectors.toList());
+        //Filter method
         if (filteredAddress.stream().findFirst().isPresent()) {
             sendAddress =  filteredAddress.stream().findFirst().get();
         } else {
@@ -271,18 +268,32 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if (!item.isValid())
             convertView.status.setText(mContext.getString(R.string.Transaction_invalid));
 
-        long satoshisAmount = received ? item.getReceived() : (item.getSent() - item.getReceived());
+        long[] outAmounts = item.getOutAmounts();
+        long opsAmount = Long.MAX_VALUE;
+        if (outAmounts.length == 3) {
+            for (int i = 0; i < outAmounts.length; i++) {
 
+                long value = outAmounts[i];
+
+                if (value < opsAmount && value != 0L) {
+                    opsAmount = value;
+                    Timber.d("timber: outAmounts size %d opsAmount value: %d", outAmounts.length, value);
+                }
+            }
+        }
+        else {
+            opsAmount = 0L;
+        }
+
+        long sentLitoshisAmount = received ? item.getReceived() : (item.getSent() - item.getReceived() -  opsAmount);
         boolean isBTCPreferred = BRSharedPrefs.getPreferredLTC(mContext);
-        String iso = isBTCPreferred ? "LTC" : BRSharedPrefs.getIso(mContext);
-        convertView.amount.setText(BRCurrency.getFormattedCurrencyString(mContext, iso, BRExchange.getAmountFromSatoshis(mContext, iso, new BigDecimal(satoshisAmount))));
+        String iso = isBTCPreferred ? "LTC" : BRSharedPrefs.getIsoSymbol(mContext);
+        convertView.amount.setText(BRCurrency.getFormattedCurrencyString(mContext, iso, BRExchange.getAmountFromLitoshis(mContext, iso, new BigDecimal(sentLitoshisAmount))));
 
         //if it's 0 we use the current time.
         long timeStamp = item.getTimeStamp() == 0 ? System.currentTimeMillis() : item.getTimeStamp() * 1000;
         CharSequence timeSpan = BRDateUtil.getCustomSpan(new Date(timeStamp));
-
         convertView.timestamp.setText(timeSpan);
-
     }
 
     private void setPrompt(final PromptHolder prompt) {

@@ -165,7 +165,6 @@ public class BreadApp extends Application {
             PushNotifications.addDeviceInterest(debugGeneralAndroidInterest);
 
             String opsAll = Utils.fetchPartnerKey(this, PartnerNames.OPSALL);
-            Timber.d("timber:  ops All  %s",opsAll);
             //Send params for pusher setup
             Bundle params = new Bundle();
             params.putString("general-interest",generalAndroidInterest);

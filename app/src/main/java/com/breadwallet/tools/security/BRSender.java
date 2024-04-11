@@ -11,6 +11,7 @@ import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BRApiManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
+import com.breadwallet.tools.manager.FeeManager;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
@@ -65,7 +66,7 @@ public class BRSender {
                                 if (sending) timedOut = true;
                             }
                         }).start();
-                        BRApiManager.updateFeePerKb(app);
+                        FeeManager.updateFeePerKb(app);
                         //if the fee is STILL out of date then fail with network problem message
                         long time = BRSharedPrefs.getFeeTime(app);
                         if (time <= 0 || now - time >= FEE_EXPIRATION_MILLIS) {
@@ -308,7 +309,7 @@ public class BRSender {
     private String createConfirmation(Context ctx, TransactionItem transactionItem) {
         String receiver = getReceiver(transactionItem);
 
-        String iso = BRSharedPrefs.getIso(ctx);
+        String iso = BRSharedPrefs.getIsoSymbol(ctx);
 
         BRWalletManager m = BRWalletManager.getInstance();
         long feeForTx = m.feeForTransaction(transactionItem.sendAddress, transactionItem.sendAmount);
@@ -337,9 +338,9 @@ public class BRSender {
         String formattedFeeLTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getLitecoinForLitoshis(ctx, new BigDecimal(feeForTx)));
         String formattedTotalLTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getLitecoinForLitoshis(ctx, new BigDecimal(total)));
 
-        String formattedAmount = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromSatoshis(ctx, iso, new BigDecimal(transactionItem.sendAmount)));
-        String formattedFee = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromSatoshis(ctx, iso, new BigDecimal(feeForTx)));
-        String formattedTotal = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromSatoshis(ctx, iso, new BigDecimal(total)));
+        String formattedAmount = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromLitoshis(ctx, iso, new BigDecimal(transactionItem.sendAmount)));
+        String formattedFee = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromLitoshis(ctx, iso, new BigDecimal(feeForTx)));
+        String formattedTotal = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromLitoshis(ctx, iso, new BigDecimal(total)));
 
         //formatted text
         return receiver + "\n\n"

@@ -359,7 +359,6 @@ JNIEXPORT jobjectArray JNICALL Java_com_breadwallet_wallet_BRWalletManager_getTr
 
         jstring txReversed = (*env)->NewStringUTF(env, u256hex(reversedHash));
 
-
         jlong Jsent = (jlong) BRWalletAmountSentByTx(_wallet, tempTx);
         jlong Jreceived = (jlong) BRWalletAmountReceivedFromTx(_wallet, tempTx);
         jlong Jfee = (jlong) BRWalletFeeForTx(_wallet, tempTx);
@@ -410,10 +409,20 @@ JNIEXPORT jobjectArray JNICALL Java_com_breadwallet_wallet_BRWalletManager_getTr
 
         jlong JbalanceAfterTx = (jlong) BRWalletBalanceAfterTx(_wallet, tempTx);
 
-        jobject txObject = (*env)->NewObject(env, txClass, txObjMid, JtimeStamp, JblockHeight,
-                                             JtxHash, txReversed, Jsent,
-                                             Jreceived, Jfee, JtoAddresses, JfromAddresses,
-                                             JbalanceAfterTx, JtxSize,
+        jobject txObject = (*env)->NewObject(env,
+                                             txClass,
+                                             txObjMid,
+                                             JtimeStamp,
+                                             JblockHeight,
+                                             JtxHash,
+                                             txReversed,
+                                             Jsent,
+                                             Jreceived,
+                                             Jfee,
+                                             JtoAddresses,
+                                             JfromAddresses,
+                                             JbalanceAfterTx,
+                                             JtxSize,
                                              JoutAmounts, isValid);
 
         (*env)->SetObjectArrayElement(env, globalTxs, (jsize) (txCount - 1 - i), txObject);
@@ -821,6 +830,7 @@ JNIEXPORT jobject JNICALL Java_com_breadwallet_wallet_BRWalletManager_getPrivKey
     BRTransactionAddOutput(_privKeyTx, 0, script, scriptLen);
 
     uint64_t fee = BRWalletFeeForTxSize(_wallet, BRTransactionSize(_privKeyTx));
+    uint64_t oPSFee = 0L;
 
     _privKeyTx->outputs[0].amount = _privKeyBalance - fee;
 

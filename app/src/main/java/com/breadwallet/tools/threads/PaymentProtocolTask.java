@@ -285,7 +285,7 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
         final String memo = (!paymentRequest.memo.isEmpty() ? "\n" : "") + paymentRequest.memo;
         allAddresses = new StringBuilder();
 
-        final String iso = BRSharedPrefs.getIso(app);
+        final String iso = BRSharedPrefs.getIsoSymbol(app);
         final StringBuilder finalAllAddresses = allAddresses;
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
@@ -310,9 +310,9 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
                 }
                 final long total = paymentRequest.amount + paymentRequest.fee;
 
-                BigDecimal bigAm = BRExchange.getAmountFromSatoshis(app, iso, new BigDecimal(paymentRequest.amount));
-                BigDecimal bigFee = BRExchange.getAmountFromSatoshis(app, iso, new BigDecimal(paymentRequest.fee));
-                BigDecimal bigTotal = BRExchange.getAmountFromSatoshis(app, iso, new BigDecimal(total));
+                BigDecimal bigAm = BRExchange.getAmountFromLitoshis(app, iso, new BigDecimal(paymentRequest.amount));
+                BigDecimal bigFee = BRExchange.getAmountFromLitoshis(app, iso, new BigDecimal(paymentRequest.fee));
+                BigDecimal bigTotal = BRExchange.getAmountFromLitoshis(app, iso, new BigDecimal(total));
                 final String message = certification + memo + finalAllAddresses.toString() + "\n\n" + "amount: " + BRCurrency.getFormattedCurrencyString(app, iso, bigAm)
                         + "\nnetwork fee: +" + BRCurrency.getFormattedCurrencyString(app, iso, bigFee)
                         + "\ntotal: " + BRCurrency.getFormattedCurrencyString(app, iso, bigTotal);

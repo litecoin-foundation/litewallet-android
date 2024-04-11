@@ -109,7 +109,7 @@ public class FragmentRequestAmount extends Fragment {
         signalLayout.removeView(request);
 
         showCurrencyList(false);
-        selectedIso = BRSharedPrefs.getPreferredLTC(getContext()) ? "LTC" : BRSharedPrefs.getIso(getContext());
+        selectedIso = BRSharedPrefs.getPreferredLTC(getContext()) ? "LTC" : BRSharedPrefs.getIsoSymbol(getContext());
 
         signalLayout.setOnClickListener(v -> {
 //                removeCurrencySelector();
@@ -188,10 +188,10 @@ public class FragmentRequestAmount extends Fragment {
         });
 
         isoButton.setOnClickListener(v -> {
-            if (selectedIso.equalsIgnoreCase(BRSharedPrefs.getIso(getContext()))) {
+            if (selectedIso.equalsIgnoreCase(BRSharedPrefs.getIsoSymbol(getContext()))) {
                 selectedIso = "LTC";
             } else {
-                selectedIso = BRSharedPrefs.getIso(getContext());
+                selectedIso = BRSharedPrefs.getIsoSymbol(getContext());
             }
             boolean generated = generateQrImage(receiveAddress, amountEdit.getText().toString(), selectedIso);
             if (!generated)

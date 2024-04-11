@@ -16,8 +16,7 @@ import static com.breadwallet.tools.util.BRConstants.CURRENT_UNIT_PHOTONS;
 public class BRCurrency {
     public static final String TAG = BRCurrency.class.getName();
 
-
-    // amount is in currency or BTC (bits, mBTC or BTC)
+    // amount is in currency or LTC (bits, mLTC or LTC)
     public static String getFormattedCurrencyString(Context app, String isoCurrencyCode, BigDecimal amount) {
         // This formats currency values as the user expects to read them (default locale).
         DecimalFormat  currencyFormat = (DecimalFormat) DecimalFormat.getCurrencyInstance(Locale.getDefault());
