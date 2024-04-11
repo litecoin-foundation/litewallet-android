@@ -60,50 +60,6 @@ public class BREventManager implements BreadApp.OnAppBackgrounded {
     @Override
     public void onBackgrounded() {
         Timber.d("timber: onBackgrounded: ");
-        saveEvents();
-    }
-
-    private void saveEvents() {
-        JSONArray array = new JSONArray();
-        for (Event event : events) {
-            JSONObject obj = new JSONObject();
-            try {
-                obj.put("sessionId", event.sessionId);
-                obj.put("time", event.time);
-                obj.put("eventName", event.eventName);
-                JSONObject mdObj = new JSONObject();
-                if (event.attributes != null && event.attributes.size() > 0) {
-                    for (Map.Entry<String, String> entry : event.attributes.entrySet()) {
-                        mdObj.put(entry.getKey(), entry.getValue());
-                    }
-                }
-                obj.put("metadata", mdObj);
-            } catch (JSONException e) {
-                Timber.e(e);
-            }
-            array.put(obj);
-        }
-        Context app = BreadApp.getBreadContext();
-        if (app != null) {
-            String fileName = app.getFilesDir().getAbsolutePath() + "/events/" + UUID.randomUUID().toString();
-            writeEventsToDisk(fileName, array.toString());
-        } else {
-            Timber.i("timber: saveEvents: FAILED TO WRITE EVENTS TO FILE: app is null");
-        }
-    }
-
-    private boolean writeEventsToDisk(String fileName, String json) {
-        Timber.d("timber: saveEvents: eventsFile: %s,\njson: %s", fileName, json);
-        try {
-            FileWriter file = new FileWriter(fileName);
-            file.write(json);
-            file.flush();
-            file.close();
-            return true;
-        } catch (IOException e) {
-            Timber.e(e, "timber:Error in Writing");
-        }
-        return false;
     }
 
     //returns the list of JSONArray which consist of Event arrays

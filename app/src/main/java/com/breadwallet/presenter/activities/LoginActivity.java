@@ -175,7 +175,7 @@ public class LoginActivity extends BRActivity {
     }
 
     private void setCurrentLtcPrice() {
-        String iso = BRSharedPrefs.getIso(this);
+        String iso = BRSharedPrefs.getIsoSymbol(this);
 
         String formattedCurrency = null;
         CurrencyEntity currency = CurrencyDataSource.getInstance(this).getCurrencyByIso(iso);

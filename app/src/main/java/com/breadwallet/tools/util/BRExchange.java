@@ -6,7 +6,6 @@ import com.breadwallet.presenter.entities.CurrencyEntity;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.sqlite.CurrencyDataSource;
 import com.breadwallet.wallet.BRWalletManager;
-
 import java.math.BigDecimal;
 
 import static com.breadwallet.tools.util.BRConstants.CURRENT_UNIT_PHOTONS;
@@ -80,7 +79,7 @@ public class BRExchange {
     }
 
     //get an iso amount from  satoshis
-    public static BigDecimal getAmountFromSatoshis(Context app, String iso, BigDecimal amount) {
+    public static BigDecimal getAmountFromLitoshis(Context app, String iso, BigDecimal amount) {
         BigDecimal result;
         if (iso.equalsIgnoreCase("LTC")) {
             result = getLitecoinForLitoshis(app, amount);

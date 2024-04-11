@@ -35,21 +35,23 @@ import com.breadwallet.tools.security.BitcoinUrlHandler
 import com.breadwallet.tools.threads.BRExecutor
 import com.breadwallet.tools.util.*
 import com.breadwallet.wallet.BRWalletManager
+import com.google.common.math.Quantiles.scale
 import timber.log.Timber
 import java.math.BigDecimal
+import java.math.RoundingMode
 import java.util.regex.Pattern
 
 class FragmentSend : Fragment() {
     private lateinit var signalLayout: LinearLayout; private lateinit var keyboardLayout: LinearLayout
-    private lateinit var scan: Button; private lateinit var paste: Button; private lateinit var send: Button; private lateinit var donate: Button; private lateinit var isoCurrencySymbolButton: Button
+    private lateinit var scanButton: Button; private lateinit var pasteButton: Button; private lateinit var sendButton: Button; private lateinit var donateButton: Button; private lateinit var isoCurrencySymbolButton: Button
     private lateinit var commentEdit: EditText; private lateinit var addressEdit: EditText;private lateinit var amountEdit: EditText
     private lateinit var isoCurrencySymbolText: TextView; private lateinit var balanceText: TextView; private lateinit var feeText: TextView; private lateinit var feeDescription: TextView; private lateinit var warningText: TextView
     private var amountLabelOn = true; private var ignoreCleanup = false; private var feeButtonsShown = false
     private lateinit var edit: ImageView
-    private var curBalance: Long = 0
+    private var currentBalance: Long = 0
     private var keyboardIndex = 0
     private lateinit var keyboard: BRKeyboard
-    private lateinit var close: ImageButton
+    private lateinit var closeButton: ImageButton
     private lateinit var amountLayout: ConstraintLayout
     private lateinit var feeLayout: BRLinearLayoutWithCaret
     private var selectedIsoCurrencySymbol: String? = null
@@ -68,11 +70,11 @@ class FragmentSend : Fragment() {
         keyboard.setBRKeyboardColor(R.color.white)
         isoCurrencySymbolText = rootView.findViewById<View>(R.id.iso_text) as TextView
         addressEdit = rootView.findViewById<View>(R.id.address_edit) as EditText
-        scan = rootView.findViewById<View>(R.id.scan) as Button
-        paste = rootView.findViewById<View>(R.id.paste_button) as Button
+        scanButton = rootView.findViewById<View>(R.id.scan) as Button
+        pasteButton = rootView.findViewById<View>(R.id.paste_button) as Button
 
-        send = rootView.findViewById<View>(R.id.send_button) as Button
-        donate = rootView.findViewById<View>(R.id.donate_button) as Button
+        sendButton = rootView.findViewById<View>(R.id.send_button) as Button
+        donateButton = rootView.findViewById<View>(R.id.donate_button) as Button
         commentEdit = rootView.findViewById<View>(R.id.comment_edit) as EditText
         amountEdit = rootView.findViewById<View>(R.id.amount_edit) as EditText
         balanceText = rootView.findViewById<View>(R.id.balance_text) as TextView
@@ -84,9 +86,9 @@ class FragmentSend : Fragment() {
         feeLayout = rootView.findViewById<View>(R.id.fee_buttons_layout) as BRLinearLayoutWithCaret
         feeDescription = rootView.findViewById<View>(R.id.fee_description) as TextView
         warningText = rootView.findViewById<View>(R.id.warning_text) as TextView
-        close = rootView.findViewById<View>(R.id.close_button) as ImageButton
+        closeButton = rootView.findViewById<View>(R.id.close_button) as ImageButton
         selectedIsoCurrencySymbol =
-            if (BRSharedPrefs.getPreferredLTC(context)) "LTC" else BRSharedPrefs.getIso(context)
+            if (BRSharedPrefs.getPreferredLTC(context)) "LTC" else BRSharedPrefs.getIsoSymbol(context)
         amountBuilder = StringBuilder(0)
         setListeners()
 
@@ -121,21 +123,21 @@ class FragmentSend : Fragment() {
 
     private fun setupFeesSelector(rootView: View) {
         val feesSegment = rootView.findViewById<RadioGroup>(R.id.fees_segment)
-        feesSegment.setOnCheckedChangeListener { _, checkedId -> onFeeTypeSelected(checkedId) }
+        feesSegment.setOnCheckedChangeListener { _, checkedTypeId -> onFeeTypeSelected(checkedTypeId) }
         onFeeTypeSelected(R.id.regular_fee_but)
     }
 
-    private fun onFeeTypeSelected(checkedId: Int) {
+    private fun onFeeTypeSelected(checkedTypeId: Int) {
         val feeManager = FeeManager.getInstance()
-        when (checkedId) {
+        when (checkedTypeId) {
             R.id.regular_fee_but -> {
                 feeManager.setFeeType(FeeManager.REGULAR)
-                BRWalletManager.getInstance().setFeePerKb(feeManager.fees.regular)
+                BRWalletManager.getInstance().setFeePerKb(feeManager.currentFees.regular)
                 setFeeInformation(R.string.FeeSelector_regularTime, 0, 0, View.GONE)
             }
             R.id.economy_fee_but -> {
                 feeManager.setFeeType(FeeManager.ECONOMY)
-                BRWalletManager.getInstance().setFeePerKb(feeManager.fees.economy)
+                BRWalletManager.getInstance().setFeePerKb(feeManager.currentFees.economy)
                 setFeeInformation(
                     R.string.FeeSelector_economyTime,
                     R.string.FeeSelector_economyWarning,
@@ -145,7 +147,7 @@ class FragmentSend : Fragment() {
             }
             R.id.luxury_fee_but -> {
                 feeManager.setFeeType(FeeManager.LUXURY)
-                BRWalletManager.getInstance().setFeePerKb(feeManager.fees.luxury)
+                BRWalletManager.getInstance().setFeePerKb(feeManager.currentFees.luxury)
                 setFeeInformation(
                     R.string.FeeSelector_luxuryTime,
                     R.string.FeeSelector_luxuryMessage,
@@ -256,7 +258,7 @@ class FragmentSend : Fragment() {
                 false
             },
         )
-        paste.setOnClickListener(
+        pasteButton.setOnClickListener(
             View.OnClickListener {
                 if (!BRAnimator.isClickAllowed()) return@OnClickListener
                 val bitcoinUrl = BRClipboardManager.getClipboard(activity)
@@ -325,14 +327,14 @@ class FragmentSend : Fragment() {
         )
         isoCurrencySymbolButton.setOnClickListener {
             selectedIsoCurrencySymbol =
-                if (selectedIsoCurrencySymbol.equals(BRSharedPrefs.getIso(context), ignoreCase = true)) {
+                if (selectedIsoCurrencySymbol.equals(BRSharedPrefs.getIsoSymbol(context), ignoreCase = true)) {
                     "LTC"
                 } else {
-                    BRSharedPrefs.getIso(context)
+                    BRSharedPrefs.getIsoSymbol(context)
                 }
             updateText()
         }
-        scan.setOnClickListener(
+        scanButton.setOnClickListener(
             View.OnClickListener {
                 if (!BRAnimator.isClickAllowed()) return@OnClickListener
                 saveMetaData()
@@ -340,7 +342,7 @@ class FragmentSend : Fragment() {
             },
         )
 
-        send.setOnClickListener(
+        sendButton.setOnClickListener(
             View.OnClickListener {
                 if (!BRAnimator.isClickAllowed()) {
                     return@OnClickListener
@@ -384,7 +386,7 @@ class FragmentSend : Fragment() {
                 }
             },
         )
-        donate.setOnClickListener(
+        donateButton.setOnClickListener(
             View.OnClickListener {
                 if (!BRAnimator.isClickAllowed()) {
                     return@OnClickListener
@@ -398,7 +400,7 @@ class FragmentSend : Fragment() {
                 animateClose()
             },
         )
-        close.setOnClickListener {
+        closeButton.setOnClickListener {
             animateClose()
         }
         addressEdit.setOnEditorActionListener { _, actionId, event ->
@@ -504,14 +506,14 @@ class FragmentSend : Fragment() {
     }
 
     private fun handleDigitClick(dig: Int) {
-        val currAmount = amountBuilder.toString()
+        val currentAmount = amountBuilder.toString()
         val iso = selectedIsoCurrencySymbol
-        if (BigDecimal(currAmount + dig.toString()).toDouble()
+        if (BigDecimal(currentAmount + dig.toString()).toDouble()
             <= BRExchange.getMaxAmount(activity, iso).toDouble()
         ) {
             // do not insert 0 if the balance is 0 now
-            if (currAmount.equals("0", ignoreCase = true)) amountBuilder = StringBuilder("")
-            if (currAmount.contains(".") && currAmount.length - currAmount.indexOf(".") >
+            if (currentAmount.equals("0", ignoreCase = true)) amountBuilder = StringBuilder("")
+            if (currentAmount.contains(".") && currentAmount.length - currentAmount.indexOf(".") >
                 BRCurrency.getMaxDecimalPlaces(
                     iso,
                 )
@@ -524,16 +526,16 @@ class FragmentSend : Fragment() {
     }
 
     private fun handleSeparatorClick() {
-        val currAmount = amountBuilder.toString()
-        if (currAmount.contains(".") || BRCurrency.getMaxDecimalPlaces(selectedIsoCurrencySymbol) == 0) return
+        val currentAmount = amountBuilder.toString()
+        if (currentAmount.contains(".") || BRCurrency.getMaxDecimalPlaces(selectedIsoCurrencySymbol) == 0) return
         amountBuilder.append(".")
         updateText()
     }
 
     private fun handleDeleteClick() {
-        val currAmount = amountBuilder.toString()
-        if (currAmount.isNotEmpty()) {
-            amountBuilder.deleteCharAt(currAmount.length - 1)
+        val currentAmount = amountBuilder.toString()
+        if (currentAmount.isNotEmpty()) {
+            amountBuilder.deleteCharAt(currentAmount.length - 1)
             updateText()
         }
     }
@@ -541,12 +543,11 @@ class FragmentSend : Fragment() {
     private fun updateText() {
         if (activity == null) return
         val tmpAmount = amountBuilder.toString()
+        val scaleValue = 4
         setAmount()
-        val iso = selectedIsoCurrencySymbol
-
-        //val opsFee = Utils.tieredOpsFee(activity, tmpAmount.toLong())
+        val selectedISOSymbol = selectedIsoCurrencySymbol
         val currencySymbol = BRCurrency.getSymbolByIso(activity, selectedIsoCurrencySymbol)
-        curBalance = BRWalletManager.getInstance().getBalance(activity)
+        currentBalance = BRWalletManager.getInstance().getBalance(activity)
         if (!amountLabelOn) isoCurrencySymbolText.text = currencySymbol
         isoCurrencySymbolButton.text =
             String.format(
@@ -555,9 +556,8 @@ class FragmentSend : Fragment() {
                 currencySymbol,
             )
 
-        // Balance depending on ISO
-        //
-        val satoshis =
+        // Balance depending on ISOSymbol
+        val litoshis =
             if (Utils.isNullOrEmpty(tmpAmount) ||
                 tmpAmount.equals(
                     ".",
@@ -577,51 +577,55 @@ class FragmentSend : Fragment() {
                     BigDecimal(tmpAmount),
                 ).toLong()
             }
-        val balanceForISO = BRExchange.getAmountFromSatoshis(activity, iso, BigDecimal(curBalance))
-        val formattedBalance = BRCurrency.getFormattedCurrencyString(activity, iso, balanceForISO)
+        val balanceForISO = BRExchange.getAmountFromLitoshis(activity, selectedISOSymbol, BigDecimal(currentBalance))
+        val formattedBalance = BRCurrency.getFormattedCurrencyString(activity, selectedISOSymbol, balanceForISO)
 
-        var fee: Long
-        if (satoshis == 0L) {
-            fee = 0
+        // Network Fee depending on ISOSymbol
+        var networkFee: Long
+        if (litoshis == 0L) {
+            networkFee = 0
         } else {
-            fee = BRWalletManager.getInstance().feeForTransactionAmount(satoshis).toLong()
-            if (fee == 0L) {
+            networkFee = BRWalletManager.getInstance().feeForTransactionAmount(litoshis).toLong()
+            if (networkFee == 0L) {
                 Timber.i("timber: updateText: fee is 0, trying the estimate")
-                fee =
+                networkFee =
                     BRWalletManager.getInstance()
-                        .feeForTransaction(addressEdit.text.toString(), satoshis).toLong()
+                        .feeForTransaction(addressEdit.text.toString(), litoshis).toLong()
 
             }
         }
-        val feeForISO =
-            BRExchange.getAmountFromSatoshis(
+        val feeForISOSymbol =
+            BRExchange.getAmountFromLitoshis(
                 activity,
-                iso,
-                BigDecimal(if (curBalance == 0L) 0 else fee),
-            )
-        Timber.d("timber: updateText: feeForISO: %s", feeForISO)
-        // formattedBalance
-        val approximateFee = BRCurrency.getFormattedCurrencyString(activity, iso, feeForISO)
-        Timber.d("timber: updateText: approximateFee: %s", approximateFee)
+                selectedISOSymbol,
+                BigDecimal(if (currentBalance == 0L) 0 else networkFee),
+            ).setScale(scaleValue, RoundingMode.HALF_UP)
 
-//        var opsFeeForISO = BRExchange.getAmountFromSatoshis(
-//            activity,
-//            iso,
-//            BigDecimal(Utils.tieredOpsFee(activity, tmpAmount.toLong())))
-//
-//        Timber.d("timber: updateText: feeForISO: %s", feeForISO)
-//        // formattedBalance
-//        val opsFee = BRCurrency.getFormattedCurrencyString(activity, iso, opsFeeForISO)
-//
-//        val totalFeesValue = BigDecimal(if (curBalance == 0L) 0 else fee) +  BigDecimal(Utils.tieredOpsFee(activity, tmpAmount.toLong()))
-//
-//        var totalFeeForISO = BRExchange.getAmountFromSatoshis(
-//            activity,
-//            iso,
-//            totalFeesValue)
-//
-//        val totalFeeString = BRCurrency.getFormattedCurrencyString(activity, iso, totalFeeForISO)
+        val approximateNetworkFee = BRCurrency.getFormattedCurrencyString(activity, selectedISOSymbol, feeForISOSymbol)
 
+        // Service Fee depending on ISOSymbol
+        var currentAmountValue = 0L
+            try {
+                currentAmountValue = tmpAmount.toLong()
+            } catch (ex: NumberFormatException) {
+                Timber.d("timber: updateText: the String is non-numeric")
+            }
+// FIX the fees here
+        var serviceFee = Utils.tieredOpsFee(activity, currentAmountValue)
+        val serviceFeeForISOSymbol =
+            BRExchange.getAmountFromLitoshis(
+                activity,
+                selectedISOSymbol,
+                BigDecimal(serviceFee),
+            ).setScale(scaleValue, RoundingMode.HALF_UP)
+
+       val totalFees = serviceFeeForISOSymbol.add(feeForISOSymbol)
+        val totalFeeForISOSymbol =
+            BRExchange.getAmountFromLitoshis(
+                activity,
+                selectedISOSymbol,
+                totalFees,
+            ).setScale(scaleValue, RoundingMode.HALF_UP)
         if (BigDecimal(
                 if (tmpAmount.isEmpty() ||
                     tmpAmount.equals(
@@ -645,23 +649,25 @@ class FragmentSend : Fragment() {
             amountEdit.setTextColor(requireContext().getColor(R.color.almost_black))
             if (!amountLabelOn) isoCurrencySymbolText.setTextColor(requireContext().getColor(R.color.almost_black))
         }
+
+
+        Timber.d("timber: updateText: servicefeeForISOSymbol: %s", serviceFeeForISOSymbol)
+        Timber.d("timber: updateText: amount: %s", tmpAmount)
+        Timber.d("timber: updateText: serviceFee: %s", serviceFee.toString())
+      //  Timber.d("timber: updateText: approximateNetworkFee: %f", approximateNetworkFee)
+
         balanceText.text = getString(R.string.Send_balance, formattedBalance)
+        feeText.text = String.format("(%s + %s): %s + %s = %s",
+            getString(R.string.Network_feeLabel),
+            getString(R.string.Fees_Service),
+            feeForISOSymbol,
+            serviceFeeForISOSymbol,
+            totalFeeForISOSymbol)
+        //(Network + Service): $0.01 + $1.37 = $1.38
+        donateButton.text = getString(R.string.Donate_title, currencySymbol)
 
-        // val totalFees = approximateFee + opsFee
-        feeText.text = String.format("(%s + %s): %s + %s = %s", getString(R.string.Network_feeLabel), getString(R.string.Fees_Service), getString(R.string.Fees_Service), getString(R.string.Fees_Service), getString(R.string.Fees_Service))
-///(Network + Service): $0.01 + $1.37 = $1.38
-
-
-
-        //        feeText.text = String.format("%s(%s)", getString(R.string.Send_fee))
-///+getString(R.string.Send_fee), aproxFee, opsFee)
-//        String.format(
-//            "%s(%s)",
-//            BRCurrency.getCurrencyName(activity, selectedIso),
-//            currencySymbol,
-//        )
-        donate.text = getString(R.string.Donate_title, currencySymbol)
-        donate.isEnabled = curBalance >= BRConstants.DONATION_AMOUNT * 2
+        ///Added another check. User must have sent once already before donating
+        donateButton.isEnabled = currentBalance >= BRConstants.DONATION_AMOUNT * 2 && (TxManager.getInstance().adapter.items.size > 1)
         amountLayout.requestLayout()
     }
 
@@ -678,7 +684,7 @@ class FragmentSend : Fragment() {
             val satoshiAmount = BigDecimal(obj.amount).multiply(BigDecimal(100000000))
             amountBuilder =
                 StringBuilder(
-                    BRExchange.getAmountFromSatoshis(activity, iso, satoshiAmount).toPlainString(),
+                    BRExchange.getAmountFromLitoshis(activity, iso, satoshiAmount).toPlainString(),
                 )
             updateText()
         }
@@ -705,6 +711,7 @@ class FragmentSend : Fragment() {
                 newAmount.append(",")
             }
         }
+        
         amountEdit.setText(newAmount.toString())
     }
 
