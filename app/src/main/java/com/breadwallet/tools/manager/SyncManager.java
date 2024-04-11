@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
+import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.tools.listeners.SyncReceiver;
 import com.breadwallet.tools.util.Utils;
@@ -80,6 +81,7 @@ public class SyncManager {
         }
     }
 
+
     private class SyncProgressTask extends Thread {
         public double progressStatus = 0;
         private BreadActivity app;
@@ -104,8 +106,10 @@ public class SyncManager {
                         public void run() {
                             if (TxManager.getInstance().syncingHolder != null)
                                 TxManager.getInstance().syncingHolder.progress.setProgress((int) (progressStatus * 100));
-                            if (TxManager.getInstance().syncingHolder != null)
+                            if (TxManager.getInstance().syncingHolder != null) {
                                 TxManager.getInstance().syncingHolder.date.setText(Utils.formatTimeStamp(lastBlockTimeStamp, "MMM. dd, yyyy  ha"));
+                                TxManager.getInstance().syncingHolder.label.setText(BreadActivity.getApp().getString(R.string.SyncingView_header));
+                            }
                         }
                     });
                 }
@@ -122,16 +126,17 @@ public class SyncManager {
                         app.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
                                 if (TxManager.getInstance().currentPrompt != PromptManager.PromptItem.SYNCING) {
                                     Timber.d("timber: run: currentPrompt != SYNCING, showPrompt(SYNCING) ....");
                                     TxManager.getInstance().showPrompt(app, PromptManager.PromptItem.SYNCING);
                                 }
-
                                 if (TxManager.getInstance().syncingHolder != null)
                                     TxManager.getInstance().syncingHolder.progress.setProgress((int) (progressStatus * 100));
-                                if (TxManager.getInstance().syncingHolder != null)
+                                if (TxManager.getInstance().syncingHolder != null) {
                                     TxManager.getInstance().syncingHolder.date.setText(Utils.formatTimeStamp(lastBlockTimeStamp, "MMM. dd, yyyy  ha"));
+                                    TxManager.getInstance().syncingHolder.label.setText(BreadActivity.getApp().getString(R.string.SyncingView_header));
+                                }
+
                             }
                         });
 

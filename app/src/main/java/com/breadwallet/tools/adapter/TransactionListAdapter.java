@@ -411,8 +411,8 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             mainLayout = (RelativeLayout) view.findViewById(R.id.main_layout);
             constraintLayout = (ConstraintLayout) view.findViewById(R.id.syncing_layout);
             date = view.findViewById(R.id.sync_date);
-            label = view.findViewById(R.id.syncing_label);
             progress = (ProgressBar) view.findViewById(R.id.sync_progress);
+            label = view.findViewById(R.id.syncing_label);
         }
     }
 
