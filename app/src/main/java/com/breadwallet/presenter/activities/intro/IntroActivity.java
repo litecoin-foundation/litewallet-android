@@ -89,6 +89,7 @@ public class IntroActivity extends BRActivity implements Serializable {
 
         });
 
+
         listLangRecyclerView.setLayoutManager(layoutManager);
 
         setListeners();
