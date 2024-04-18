@@ -753,4 +753,5 @@
   <string name="Announce.no_thanks">Ні, дякую!</string>
     <string name="Fees.Service">Сервіс</string>
     <string name="Network.feeLabel">Мережа</string>
+    <string name="ConfirmationAllFees.Label">Збори:</string>
 </resources>

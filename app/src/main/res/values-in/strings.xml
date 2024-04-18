@@ -748,4 +748,5 @@
   <string name="Announce.no_thanks">Tidak, terimakasih!</string>
     <string name="Fees.Service">Melayani</string>
     <string name="Network.feeLabel">Jaringan</string>
+  <string name="ConfirmationAllFees.Label">Biaya:</string>
 </resources>

@@ -746,4 +746,5 @@
   <string name="Announce.no_thanks">Nein danke!</string>
     <string name="Fees.Service">Service</string>
     <string name="Network.feeLabel">Netzwerk</string>
+  <string name="ConfirmationAllFees.Label">Gebühren:</string>
 </resources>

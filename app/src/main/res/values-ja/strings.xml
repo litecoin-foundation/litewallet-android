@@ -746,4 +746,5 @@
   <string name="Announce.no_thanks">いえ、結構です</string>
     <string name="Fees.Service">サービス</string>
     <string name="Network.feeLabel">通信網</string>
+  <string name="ConfirmationAllFees.Label">料金:</string>
 </resources>
