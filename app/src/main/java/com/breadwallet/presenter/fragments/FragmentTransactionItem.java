@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.breadwallet.R;
+import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.presenter.entities.TxItem;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.SlideDetector;
@@ -38,19 +39,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import timber.log.Timber;
 
 public class FragmentTransactionItem extends Fragment {
     public TextView mTitle;
-    private TextView mDescriptionText;
+    private TextView mLargeDescriptionText;
     private TextView mSubHeader;
     private TextView mConfirmationText;
     private TextView mAvailableSpend;
     private EditText mCommentText;
-    private TextView mAmountText;
     private TextView mAddressText;
     private TextView mDateText;
     private TextView mToFromBottom;
@@ -66,10 +70,9 @@ public class FragmentTransactionItem extends Fragment {
         final View rootView = inflater.inflate(R.layout.transaction_details_item, container, false);
         signalLayout = (LinearLayout) rootView.findViewById(R.id.signal_layout);
         mTitle = (TextView) rootView.findViewById(R.id.title);
-        mDescriptionText = (TextView) rootView.findViewById(R.id.description_text);
+        mLargeDescriptionText = (TextView) rootView.findViewById(R.id.large_description_text);
         mSubHeader = (TextView) rootView.findViewById(R.id.sub_header);
         mCommentText = (EditText) rootView.findViewById(R.id.comment_text);
-        mAmountText = (TextView) rootView.findViewById(R.id.amount_text);
         mAddressText = (TextView) rootView.findViewById(R.id.address_text);
         mDateText = (TextView) rootView.findViewById(R.id.date_text);
         mToFromBottom = (TextView) rootView.findViewById(R.id.to_from);
@@ -104,40 +107,53 @@ public class FragmentTransactionItem extends Fragment {
         //get the current iso
         String iso = BRSharedPrefs.getPreferredLTC(getActivity()) ? "LTC" : BRSharedPrefs.getIsoSymbol(getContext());
 
+        long opsAmount = Long.MAX_VALUE;
+        long[] outAmounts = item.getOutAmounts();
+        if (outAmounts.length == 3) {
+            for (int i = 0; i < outAmounts.length; i++) {
+                long value = outAmounts[i];
+                if (value < opsAmount && value != 0L) {
+                    opsAmount = value;
+                }
+            }
+        }
+        else {
+            opsAmount = 0L;
+        }
+
         //get the tx amount
         BigDecimal txAmount = new BigDecimal(item.getReceived() - item.getSent()).abs();
         //see if it was sent
         boolean sent = item.getReceived() - item.getSent() < 0;
 
-        //calculated and formatted amount for iso
-        String amountWithFee = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromLitoshis(getActivity(), iso, txAmount));
-
-        List<String> outputs = Arrays.asList(item.getTo());
-        long opsAmount = 0L;
-        for (int i = 0; i < outputs.size(); i++) {
-            String address = outputs.get(i);
-
-            if (Utils.litewalletOpsSet(getContext()).contains(address)) {
-                 opsAmount = item.getOutAmounts()[i];
-
-
-            }
-        }
-
-        String amount = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromLitoshis(getActivity(), iso, item.getFee() == -1 ? txAmount : txAmount.subtract(new BigDecimal(item.getFee())).subtract(new BigDecimal(opsAmount))));
-        //calculated and formatted fee for iso
-        String fee = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromLitoshis(getActivity(), iso, new BigDecimal(item.getFee())));
-        //description (Sent $24.32 ....)
-        Spannable descriptionString = sent ? new SpannableString(String.format(getString(R.string.TransactionDetails_sent), amountWithFee)) : new SpannableString(String.format(getString(R.string.TransactionDetails_received), amount));
-
+        //calculated and formatted amount for isoSymbol
+        String amountWithFee = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromLitoshis(getActivity(), iso, txAmount.subtract(new BigDecimal(opsAmount))));
+        String amount = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromLitoshis(getActivity(), iso, item.getFee() == -1 ? txAmount.subtract(new BigDecimal(opsAmount)) : txAmount.subtract(new BigDecimal(item.getFee())).subtract(new BigDecimal(opsAmount))));
+        //large sent (Sent $24.32 ....)
+        Spannable largeDescriptionString = sent ? new SpannableString(String.format(getString(R.string.TransactionDetails_sent), amountWithFee)) : new SpannableString(String.format(getString(R.string.TransactionDetails_received), amount));
         String startingBalance = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromLitoshis(getActivity(), iso, new BigDecimal(sent ? item.getBalanceAfterTx() + txAmount.longValue() : item.getBalanceAfterTx() - txAmount.longValue())));
         String endingBalance = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromLitoshis(getActivity(), iso, new BigDecimal(item.getBalanceAfterTx())));
         String commentString = item.metaData == null || item.metaData.comment == null ? "" : item.metaData.comment;
         String sb = String.format(getString(R.string.Transaction_starting), startingBalance);
         String eb = String.format(getString(R.string.Transaction_ending), endingBalance);
-        String amountString = String.format("%s %s\n\n%s\n%s", amount, item.getFee() == -1 ? "" : String.format(getString(R.string.Transaction_fee), fee), sb, eb);
-        if (sent) amountString = "-" + amountString;
-        String sendAddress = item.getTo()[0];
+
+        //Target sent address
+        String sendAddress;
+        Set<String> outputAddressSet = new HashSet<String>(Arrays.asList(item.getTo()));
+        final String opsString = Utils.fetchPartnerKey(getActivity(), PartnerNames.OPSALL);
+        List<String> opsList = new ArrayList<String>(Arrays.asList(opsString.split(",")));
+        Set<String> opsSet = new HashSet<>();
+        opsSet.addAll(opsList);
+        List<String> outputAddresses = outputAddressSet.stream().filter(element -> !opsSet.contains(element)).collect(Collectors.toList());
+        List<String> filteredAddress = outputAddresses.stream().filter(Objects::nonNull).collect(Collectors.toList());
+
+        //Filter method
+        if (filteredAddress.stream().findFirst().isPresent()) {
+            sendAddress =  filteredAddress.stream().findFirst().get();
+        } else {
+            sendAddress = "ERROR-ADDRESS";
+        }
+
         String toFrom = sent ? String.format(getString(R.string.TransactionDetails_to), sendAddress) : String.format(getString(R.string.TransactionDetails_from), sendAddress);
 
         mTxHash.setText(item.getTxHashHexReversed());
@@ -199,11 +215,9 @@ public class FragmentTransactionItem extends Fragment {
 
         mToFromBottom.setText(sent ? getString(R.string.TransactionDirection_to) : getString(R.string.TransactionDirection_address));
         mDateText.setText(getFormattedDate(item.getTimeStamp()));
-        mDescriptionText.setText(TextUtils.concat(descriptionString));
+        mLargeDescriptionText.setText(TextUtils.concat(largeDescriptionString));
         mSubHeader.setText(toFrom);
         mCommentText.setText(commentString);
-
-        mAmountText.setText(amountString);
         mAddressText.setText(sendAddress);
     }
 

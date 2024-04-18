@@ -746,4 +746,5 @@
   <string name="Announce.no_thanks">아니요, 괜찮습니다!</string>
     <string name="Fees.Service">서비스</string>
     <string name="Network.feeLabel">회로망</string>
+    <string name="ConfirmationAllFees.Label">수수료:</string>
 </resources>

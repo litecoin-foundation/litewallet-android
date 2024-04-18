@@ -27,7 +27,7 @@ public class BRCurrency {
         String symbol;
         decimalFormatSymbols = currencyFormat.getDecimalFormatSymbols();
         if (Objects.equals(isoCurrencyCode, "LTC")) {
-            symbol = BRExchange.getBitcoinSymbol(app);
+            symbol = BRExchange.getLitecoinSymbol(app);
         } else {
             try {
                 currency = Currency.getInstance(isoCurrencyCode);

@@ -746,4 +746,5 @@
   <string name="Announce.no_thanks">不，謝謝</string>
     <string name="Fees.Service">服務</string>
     <string name="Network.feeLabel">網路</string>
+    <string name="ConfirmationAllFees.Label">費用：</string>
 </resources>

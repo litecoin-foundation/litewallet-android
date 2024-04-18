@@ -770,4 +770,5 @@
   <string name="Announce.no_thanks">Hayır, sağ ol!</string>
     <string name="Fees.Service">Hizmet</string>
     <string name="Network.feeLabel">Ağ</string>
+    <string name="ConfirmationAllFees.Label">Ücretler:</string>
 </resources>

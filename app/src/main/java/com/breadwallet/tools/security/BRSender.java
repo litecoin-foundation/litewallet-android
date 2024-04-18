@@ -31,7 +31,6 @@ public class BRSender {
     private boolean timedOut, sending;
     private BRSender() {
     }
-
     public static BRSender getInstance() {
         if (instance == null) instance = new BRSender();
         return instance;
@@ -308,12 +307,12 @@ public class BRSender {
 
     private String createConfirmation(Context ctx, TransactionItem transactionItem) {
         String receiver = getReceiver(transactionItem);
-
         String iso = BRSharedPrefs.getIsoSymbol(ctx);
-
         BRWalletManager m = BRWalletManager.getInstance();
-        long feeForTx = m.feeForTransaction(transactionItem.sendAddress, transactionItem.sendAmount);
-        if (feeForTx == 0) {
+
+        long feesForTx = m.feeForTransaction(transactionItem.sendAddress, transactionItem.sendAmount);
+        long opsFee = Utils.tieredOpsFee(ctx,transactionItem.sendAmount);
+        if (feesForTx == 0) {
             long maxAmount = m.getMaxOutputAmount();
             if (maxAmount == -1) {
                 RuntimeException ex = new RuntimeException("getMaxOutputAmount is -1, meaning _wallet is NULL");
@@ -330,22 +329,23 @@ public class BRSender {
 
                 return null;
             }
-            feeForTx = m.feeForTransaction(transactionItem.sendAddress, maxAmount);
-            feeForTx += (BRWalletManager.getInstance().getBalance(ctx) - transactionItem.sendAmount) % 100;
+            feesForTx = m.feeForTransaction(transactionItem.sendAddress, maxAmount);
+            feesForTx += (BRWalletManager.getInstance().getBalance(ctx) - transactionItem.sendAmount) % 100;
+            feesForTx += opsFee;
         }
-        final long total = transactionItem.sendAmount + feeForTx;
+        final long total = transactionItem.sendAmount + feesForTx + opsFee;
         String formattedAmountLTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getLitecoinForLitoshis(ctx, new BigDecimal(transactionItem.sendAmount)));
-        String formattedFeeLTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getLitecoinForLitoshis(ctx, new BigDecimal(feeForTx)));
+        String formattedFeesLTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getLitecoinForLitoshis(ctx, new BigDecimal(feesForTx)));
         String formattedTotalLTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getLitecoinForLitoshis(ctx, new BigDecimal(total)));
 
         String formattedAmount = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromLitoshis(ctx, iso, new BigDecimal(transactionItem.sendAmount)));
-        String formattedFee = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromLitoshis(ctx, iso, new BigDecimal(feeForTx)));
+        String formattedFees = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromLitoshis(ctx, iso, new BigDecimal(feesForTx)));
         String formattedTotal = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromLitoshis(ctx, iso, new BigDecimal(total)));
 
         //formatted text
         return receiver + "\n\n"
                 + ctx.getString(R.string.Confirmation_amountLabel) + " " + formattedAmountLTC + " (" + formattedAmount + ")"
-                + "\n" + ctx.getString(R.string.Confirmation_feeLabel) + " " + formattedFeeLTC + " (" + formattedFee + ")"
+                + "\n" + ctx.getString(R.string.ConfirmationAllFees_Label) + " " + formattedFeesLTC + " (" + formattedFees + ")"
                 + "\n" + ctx.getString(R.string.Confirmation_totalLabel) + " " + formattedTotalLTC + " (" + formattedTotal + ")"
                 + (transactionItem.comment == null ? "" : "\n\n" + transactionItem.comment);
     }

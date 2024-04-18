@@ -71,7 +71,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="586dp"
             android:padding="0dp">
 
             <LinearLayout
@@ -80,8 +80,8 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/BRBoldTextStyle"
                     android:id="@+id/date_text"
+                    style="@style/BRBoldTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -92,8 +92,8 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/large_description_text"
                     style="@style/BRBoldTextStyle"
-                    android:id="@+id/description_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -179,32 +179,6 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/almost_black" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@color/separator_gray" />
-
-                <TextView
-                    style="@style/BRBoldTextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/TransactionDetails.amountHeader"
-                    android:textColor="@color/light_gray" />
-
-                <TextView
-                    android:id="@+id/amount_text"
-                    style="@style/BRTextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:textColor="@color/almost_black"
-                    android:textIsSelectable="true" />
 
                 <View
                     android:layout_width="match_parent"

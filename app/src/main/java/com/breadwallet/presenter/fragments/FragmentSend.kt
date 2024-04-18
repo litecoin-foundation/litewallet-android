@@ -250,7 +250,9 @@ class FragmentSend : Fragment() {
 
         // needed to fix the overlap bug
         commentEdit.setOnKeyListener(
+
             View.OnKeyListener { v, keyCode, event ->
+
                 if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                     amountLayout.requestLayout()
                     return@OnKeyListener true
@@ -404,6 +406,7 @@ class FragmentSend : Fragment() {
             animateClose()
         }
         addressEdit.setOnEditorActionListener { _, actionId, event ->
+            showKeyboard(false)
             if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
                 Utils.hideKeyboard(activity)
                 Handler().postDelayed({ showKeyboard(true) }, 500)
@@ -542,127 +545,75 @@ class FragmentSend : Fragment() {
 
     private fun updateText() {
         if (activity == null) return
-        val tmpAmount = amountBuilder.toString()
+        var tempDoubleAmountValue = 0.0
+        if (amountBuilder.toString() != "" && amountBuilder.toString() != "." ) {
+            tempDoubleAmountValue = amountBuilder.toString().toDouble()
+        }
         val scaleValue = 4
         setAmount()
+
+        // Fetch/Set Current ISOSymbol
         val selectedISOSymbol = selectedIsoCurrencySymbol
         val currencySymbol = BRCurrency.getSymbolByIso(activity, selectedIsoCurrencySymbol)
-        currentBalance = BRWalletManager.getInstance().getBalance(activity)
         if (!amountLabelOn) isoCurrencySymbolText.text = currencySymbol
-        isoCurrencySymbolButton.text =
-            String.format(
-                "%s(%s)",
-                BRCurrency.getCurrencyName(activity, selectedIsoCurrencySymbol),
-                currencySymbol,
-            )
+        isoCurrencySymbolButton.text = String.format("%s(%s)",
+                                        BRCurrency.getCurrencyName(activity, selectedIsoCurrencySymbol),
+                                        currencySymbol)
 
         // Balance depending on ISOSymbol
-        val litoshis =
-            if (Utils.isNullOrEmpty(tmpAmount) ||
-                tmpAmount.equals(
-                    ".",
-                    ignoreCase = true,
-                )
-            ) {
-                0
-            } else if (selectedIsoCurrencySymbol.equals("btc", ignoreCase = true)) {
-                BRExchange.getSatoshisForBitcoin(
-                    activity,
-                    BigDecimal(tmpAmount),
-                ).toLong()
+        currentBalance = BRWalletManager.getInstance().getBalance(activity)
+        val balanceForISOSymbol = BRExchange.getAmountFromLitoshis(activity, selectedISOSymbol, BigDecimal(currentBalance))
+        val formattedBalance = BRCurrency.getFormattedCurrencyString(activity, selectedISOSymbol, balanceForISOSymbol)
+
+        // Current amount depending on ISOSymbol
+        val currentAmountInLitoshis =
+            if (selectedIsoCurrencySymbol.equals("LTC", ignoreCase = true)) {
+                BRExchange.convertltcsToLitoshis(tempDoubleAmountValue).toLong()
             } else {
-                BRExchange.getLitoshisFromAmount(
-                    activity,
-                    selectedIsoCurrencySymbol,
-                    BigDecimal(tmpAmount),
-                ).toLong()
+                BRExchange.getLitoshisFromAmount(activity,selectedIsoCurrencySymbol,BigDecimal(tempDoubleAmountValue)).toLong()
             }
-        val balanceForISO = BRExchange.getAmountFromLitoshis(activity, selectedISOSymbol, BigDecimal(currentBalance))
-        val formattedBalance = BRCurrency.getFormattedCurrencyString(activity, selectedISOSymbol, balanceForISO)
+        Timber.d("timber: updateText: currentAmountInLitoshis %d",currentAmountInLitoshis)
 
         // Network Fee depending on ISOSymbol
-        var networkFee: Long
-        if (litoshis == 0L) {
-            networkFee = 0
-        } else {
-            networkFee = BRWalletManager.getInstance().feeForTransactionAmount(litoshis).toLong()
-            if (networkFee == 0L) {
-                Timber.i("timber: updateText: fee is 0, trying the estimate")
-                networkFee =
-                    BRWalletManager.getInstance()
-                        .feeForTransaction(addressEdit.text.toString(), litoshis).toLong()
-
-            }
-        }
-        val feeForISOSymbol =
-            BRExchange.getAmountFromLitoshis(
-                activity,
-                selectedISOSymbol,
-                BigDecimal(if (currentBalance == 0L) 0 else networkFee),
-            ).setScale(scaleValue, RoundingMode.HALF_UP)
-
-        val approximateNetworkFee = BRCurrency.getFormattedCurrencyString(activity, selectedISOSymbol, feeForISOSymbol)
+        var networkFee = if(currentAmountInLitoshis > 0) { BRWalletManager.getInstance().feeForTransactionAmount(currentAmountInLitoshis) }
+        else { 0 } //Amount is zero so network fee is also zero
+        val networkFeeForISOSymbol =
+          BRExchange.getAmountFromLitoshis(activity,selectedISOSymbol, BigDecimal(networkFee)).setScale(scaleValue, RoundingMode.HALF_UP)
+        val formattedNetworkFee = BRCurrency.getFormattedCurrencyString(activity, selectedISOSymbol, networkFeeForISOSymbol)
 
         // Service Fee depending on ISOSymbol
-        var currentAmountValue = 0L
-            try {
-                currentAmountValue = tmpAmount.toLong()
-            } catch (ex: NumberFormatException) {
-                Timber.d("timber: updateText: the String is non-numeric")
-            }
-// FIX the fees here
-        var serviceFee = Utils.tieredOpsFee(activity, currentAmountValue)
+        var serviceFee = Utils.tieredOpsFee(activity, currentAmountInLitoshis)
         val serviceFeeForISOSymbol =
-            BRExchange.getAmountFromLitoshis(
-                activity,
-                selectedISOSymbol,
-                BigDecimal(serviceFee),
-            ).setScale(scaleValue, RoundingMode.HALF_UP)
+          BRExchange.getAmountFromLitoshis(activity,selectedISOSymbol,BigDecimal(serviceFee)).setScale(scaleValue, RoundingMode.HALF_UP)
+        val formattedServiceFee = BRCurrency.getFormattedCurrencyString(activity, selectedISOSymbol, serviceFeeForISOSymbol)
 
-       val totalFees = serviceFeeForISOSymbol.add(feeForISOSymbol)
+        // Total Fees depending on ISOSymbol
+        val totalFees = networkFee + serviceFee
         val totalFeeForISOSymbol =
-            BRExchange.getAmountFromLitoshis(
-                activity,
-                selectedISOSymbol,
-                totalFees,
-            ).setScale(scaleValue, RoundingMode.HALF_UP)
-        if (BigDecimal(
-                if (tmpAmount.isEmpty() ||
-                    tmpAmount.equals(
-                        ".",
-                        ignoreCase = true,
-                    )
-                ) {
-                    "0"
-                } else {
-                    tmpAmount
-                },
-            ).toDouble() > balanceForISO.toDouble()
-        ) {
+            BRExchange.getAmountFromLitoshis( activity,selectedISOSymbol,BigDecimal(totalFees)).setScale(scaleValue, RoundingMode.HALF_UP)
+        val formattedTotalFees = BRCurrency.getFormattedCurrencyString(activity, selectedISOSymbol, totalFeeForISOSymbol)
+
+        // Update UI with alert red when over balance
+        if (BigDecimal(currentAmountInLitoshis).toDouble() > currentBalance.toDouble()) {
             balanceText.setTextColor(requireContext().getColor(R.color.warning_color))
             feeText.setTextColor(requireContext().getColor(R.color.warning_color))
             amountEdit.setTextColor(requireContext().getColor(R.color.warning_color))
             if (!amountLabelOn) isoCurrencySymbolText.setTextColor(requireContext().getColor(R.color.warning_color))
-        } else {
+        }
+        else {
             balanceText.setTextColor(requireContext().getColor(R.color.light_gray))
             feeText.setTextColor(requireContext().getColor(R.color.light_gray))
             amountEdit.setTextColor(requireContext().getColor(R.color.almost_black))
             if (!amountLabelOn) isoCurrencySymbolText.setTextColor(requireContext().getColor(R.color.almost_black))
         }
 
-
-        Timber.d("timber: updateText: servicefeeForISOSymbol: %s", serviceFeeForISOSymbol)
-        Timber.d("timber: updateText: amount: %s", tmpAmount)
-        Timber.d("timber: updateText: serviceFee: %s", serviceFee.toString())
-      //  Timber.d("timber: updateText: approximateNetworkFee: %f", approximateNetworkFee)
-
         balanceText.text = getString(R.string.Send_balance, formattedBalance)
         feeText.text = String.format("(%s + %s): %s + %s = %s",
             getString(R.string.Network_feeLabel),
             getString(R.string.Fees_Service),
-            feeForISOSymbol,
-            serviceFeeForISOSymbol,
-            totalFeeForISOSymbol)
+            formattedNetworkFee,
+            formattedServiceFee,
+            formattedTotalFees)
         //(Network + Service): $0.01 + $1.37 = $1.38
         donateButton.text = getString(R.string.Donate_title, currencySymbol)
 
@@ -770,3 +721,29 @@ class FragmentSend : Fragment() {
         private var savedAmount: String? = null
     }
 }
+
+
+
+///DEV WIP
+
+//      val approximateNetworkFee = BRCurrency.getFormattedCurrencyString(activity, selectedISOSymbol, feeForISOSymbol)
+
+//
+//        var currentAmountValue = 0L
+//        val amountString = amountEdit.getText().toString()
+//        if (amountString != "") {
+//            currentAmountValue = amountString.toDouble().toLong()
+//            if (selectedIsoCurrencySymbol.equals("LTC")) {
+//                currentAmountValue = BRExchange.getAmountFromLitoshis(
+//                    activity,
+//                    selectedISOSymbol,
+//                    BigDecimal(currentAmountValue)
+//                ).toLong()
+//            } else {
+//                currentAmountValue = BRExchange.getLitoshisFromAmount(
+//                    activity,
+//                    selectedISOSymbol,
+//                    BigDecimal(currentAmountValue)
+//                ).toLong()
+//            }
+//
