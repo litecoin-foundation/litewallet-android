@@ -285,7 +285,7 @@ public class Utils {
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR,params);
         return "";
     }
-    /// Description: 1709405141
+    /// Description: 1713522152
     public static long tieredOpsFee(Context app, long sendAmount) {
 
         double sendAmountDouble = new Double(String.valueOf(sendAmount));
@@ -298,7 +298,7 @@ public class Utils {
             return (long) ((0.20 / doubleRate) * 100_000_000.0);
         }
         else if (isBetween(usdInLTC, 20.00, 50.00)) {
-            return (long) ((0.30 / doubleRate) * 100_000_000.0);
+            return (long) ((0.25 / doubleRate) * 100_000_000.0);
          }
         else if (isBetween(usdInLTC, 50.00, 100.00)) {
              return (long) ((1.00 / doubleRate) * 100_000_000.0);
