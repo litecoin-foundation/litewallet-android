@@ -61,9 +61,9 @@ public class BRApiManager {
         Set<CurrencyEntity> set = new LinkedHashSet<>();
         try {
             JSONArray arr = fetchRates(context);
-            updateFeePerKb(context);
+            FeeManager.updateFeePerKb(context);
             if (arr != null) {
-                String selectedISO = BRSharedPrefs.getIso(context);
+                String selectedISO = BRSharedPrefs.getIsoSymbol(context);
                 int length = arr.length();
                 for (int i = 0; i < length; i++) {
                     CurrencyEntity tmp = new CurrencyEntity();
@@ -102,10 +102,6 @@ public class BRApiManager {
                         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                             @Override
                             public void run() {
-                                if (!BreadApp.isAppInBackground(context)) {
-                                    Timber.d("timber: doInBackground: Stopping timer, no activity on.");
-                                    BRApiManager.getInstance().stopTimerTask();
-                                }
                                 Set<CurrencyEntity> tmp = getCurrencies((Activity) context);
                                 CurrencyDataSource.getInstance(context).putCurrencies(tmp);
                             }
@@ -125,7 +121,7 @@ public class BRApiManager {
         initializeTimerTask(context);
 
         //schedule the timer, after the first 0ms the TimerTask will run every 60000ms
-        timer.schedule(timerTask, 0, 60000);
+        timer.schedule(timerTask, 0, 4000);
     }
 
     public void stopTimerTask() {
@@ -142,6 +138,8 @@ public class BRApiManager {
         if (jsonString == null) return null;
         try {
             jsonArray = new JSONArray(jsonString);
+
+            Timber.d("timber: JSON %s",jsonArray.toString());
         } catch (JSONException ex) {
             Timber.e(ex);
         }
@@ -162,26 +160,6 @@ public class BRApiManager {
             Timber.e(e);
         }
         return jsonArray;
-    }
-
-    public static void updateFeePerKb(Context app) {
-
-        //Operationally, it makes more sense to review the fees than rely on a server.
-        // Especially, when the missing server causes a major disconnect
-        // Using this hard code for a bi-yearly review. This matches the architecture in iOS
-        // KCW: May 3, 2022
-        String jsonString = "{'fee_per_kb': 10000, 'fee_per_kb_economy': 2500, 'fee_per_kb_luxury': 66746}";
-        try {
-            JSONObject obj = new JSONObject(jsonString);
-            // TODO: Refactor when mobile-api v0.4.0 is in prod
-            long regularFee = obj.optLong("fee_per_kb");
-            long economyFee = obj.optLong("fee_per_kb_economy");
-            long luxuryFee = obj.optLong("fee_per_kb_luxury");
-            FeeManager.getInstance().setFees(luxuryFee, regularFee, economyFee);
-            BRSharedPrefs.putFeeTime(app, System.currentTimeMillis()); //store the time of the last successful fee fetch
-        } catch (JSONException e) {
-            Timber.e(new IllegalArgumentException("updateFeePerKb: FAILED: " + jsonString, e));
-        }
     }
 
     // createGETRequestURL

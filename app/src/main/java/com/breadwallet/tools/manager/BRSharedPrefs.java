@@ -39,7 +39,7 @@ public class BRSharedPrefs {
         isoChangedListeners.remove(listener);
     }
 
-    public static String getIso(Context context) {
+    public static String getIsoSymbol(Context context) {
 
         SharedPreferences settingsToGet = context.getSharedPreferences(BRConstants.PREFS_NAME, 0);
         String defIso;
@@ -49,12 +49,15 @@ public class BRSharedPrefs {
             if (defaultLanguage == "ru") {
                 defIso = Currency.getInstance(new Locale("ru", "RU")).getCurrencyCode();
             }
+            else if (defaultLanguage == "en") {
+                defIso = Currency.getInstance(Locale.US).getCurrencyCode();
+            }
             else {
                 defIso = Currency.getInstance(Locale.getDefault()).getCurrencyCode();
             }
         } catch (IllegalArgumentException e) {
             Timber.e(e);
-            defIso = Currency.getInstance(new Locale("en", "US")).getCurrencyCode();
+             defIso = Currency.getInstance(Locale.US).getCurrencyCode();
         }
         return settingsToGet.getString(BRConstants.CURRENT_CURRENCY, defIso);
     }
