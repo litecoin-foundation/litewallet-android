@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'kotlin-parcelize'
 
@@ -66,7 +65,7 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 31
         targetSdkVersion 33
-        versionCode 20240419
+        versionCode 20240421
         versionName "v2.10.0"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
@@ -318,7 +317,7 @@ dependencies {
 
     // push notifications
     implementation 'com.google.firebase:firebase-messaging:23.4.0'
-    implementation 'com.pusher:push-notifications-android:1.8.0'
+    implementation 'com.pusher:push-notifications-android:1.9.0'
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
@@ -376,3 +375,4 @@ tasks.register("ktlintFormat", JavaExec) {
     // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
     args "-F", "src/**/*.kt", "**.kts", "!**/build/**"
 }
+apply plugin: 'com.google.gms.google-services'

@@ -3,16 +3,12 @@ package com.breadwallet;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-
-import androidx.datastore.preferences.protobuf.Internal;
-
 import com.breadwallet.di.component.DaggerAppComponent;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.entities.PartnerNames;
@@ -26,18 +22,9 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -164,7 +151,6 @@ public class BreadApp extends Application {
             PushNotifications.addDeviceInterest(generalAndroidInterest);
             PushNotifications.addDeviceInterest(debugGeneralAndroidInterest);
 
-            String opsAll = Utils.fetchPartnerKey(this, PartnerNames.OPSALL);
             //Send params for pusher setup
             Bundle params = new Bundle();
             params.putString("general-interest",generalAndroidInterest);
