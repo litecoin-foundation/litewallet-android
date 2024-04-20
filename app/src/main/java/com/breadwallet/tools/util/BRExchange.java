@@ -6,7 +6,6 @@ import com.breadwallet.presenter.entities.CurrencyEntity;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.sqlite.CurrencyDataSource;
 import com.breadwallet.wallet.BRWalletManager;
-
 import java.math.BigDecimal;
 
 import static com.breadwallet.tools.util.BRConstants.CURRENT_UNIT_PHOTONS;
@@ -14,19 +13,19 @@ import static com.breadwallet.tools.util.BRConstants.ROUNDING_MODE;
 
 public class BRExchange {
 
-    public static final long ONE_LITECOIN = 100000000L; 
+    public static final long ONE_LITECOIN_OF_LITOSHIS = 100000000L;
 
     public static BigDecimal getMaxAmount(Context context, String iso) {
-        final long MAX_BTC = 84000000;
+        final long MAX_LTC = 84000000;
         if (iso.equalsIgnoreCase("LTC"))
-            return getBitcoinForSatoshis(context, new BigDecimal(MAX_BTC * 100000000));
+            return getLitecoinForLitoshis(context, new BigDecimal(MAX_LTC * 100000000));
         CurrencyEntity ent = CurrencyDataSource.getInstance(context).getCurrencyByIso(iso);
         if (ent == null) return new BigDecimal(Integer.MAX_VALUE);
-        return new BigDecimal(ent.rate * MAX_BTC);
+        return new BigDecimal(ent.rate * MAX_LTC);
     }
 
-    // amount in satoshis
-    public static BigDecimal getBitcoinForSatoshis(Context app, BigDecimal amount) {
+    // amount in Litoshis
+    public static BigDecimal getLitecoinForLitoshis(Context app, BigDecimal amount) {
         BigDecimal result = new BigDecimal(0);
         int unit = BRSharedPrefs.getCurrencyUnit(app);
         switch (unit) {
@@ -43,7 +42,7 @@ public class BRExchange {
         return result;
     }
 
-    public static BigDecimal getSatoshisForBitcoin(Context app, BigDecimal amount) {
+    public static BigDecimal getLitoshisForLitecoin(Context app, BigDecimal amount) {
         BigDecimal result = new BigDecimal(0);
         int unit = BRSharedPrefs.getCurrencyUnit(app);
         switch (unit) {
@@ -60,7 +59,23 @@ public class BRExchange {
         return result;
     }
 
-    public static String getBitcoinSymbol(Context app) {
+    //get an iso amount from litoshis
+    public static BigDecimal getAmountFromLitoshis(Context app, String iso, BigDecimal amount) {
+        BigDecimal result;
+        if (iso.equalsIgnoreCase("LTC")) {
+            result = getLitecoinForLitoshis(app, amount);
+        } else {
+            //multiply by 100 because core function localAmount accepts the smallest amount e.g. cents
+            CurrencyEntity ent = CurrencyDataSource.getInstance(app).getCurrencyByIso(iso);
+            if (ent == null) return new BigDecimal(0);
+            BigDecimal rate = new BigDecimal(ent.rate).multiply(new BigDecimal(100));
+            result = new BigDecimal(BRWalletManager.getInstance().localAmount(amount.longValue(), rate.doubleValue()))
+                    .divide(new BigDecimal(100), 2, BRConstants.ROUNDING_MODE);
+        }
+        return result;
+    }
+
+    public static String getLitecoinSymbol(Context app) {
         String currencySymbolString = BRConstants.bitcoinLowercase;
         if (app != null) {
             int unit = BRSharedPrefs.getCurrencyUnit(app);
@@ -79,28 +94,12 @@ public class BRExchange {
         return currencySymbolString;
     }
 
-    //get an iso amount from  satoshis
-    public static BigDecimal getAmountFromSatoshis(Context app, String iso, BigDecimal amount) {
+
+    //get litoshis from an iso symbol amount
+    public static BigDecimal getLitoshisFromAmount(Context app, String iso, BigDecimal amount) {
         BigDecimal result;
         if (iso.equalsIgnoreCase("LTC")) {
-            result = getBitcoinForSatoshis(app, amount);
-        } else {
-            //multiply by 100 because core function localAmount accepts the smallest amount e.g. cents
-            CurrencyEntity ent = CurrencyDataSource.getInstance(app).getCurrencyByIso(iso);
-            if (ent == null) return new BigDecimal(0);
-            BigDecimal rate = new BigDecimal(ent.rate).multiply(new BigDecimal(100));
-            result = new BigDecimal(BRWalletManager.getInstance().localAmount(amount.longValue(), rate.doubleValue()))
-                    .divide(new BigDecimal(100), 2, BRConstants.ROUNDING_MODE);
-        }
-        return result;
-    }
-
-
-    //get satoshis from an iso amount
-    public static BigDecimal getSatoshisFromAmount(Context app, String iso, BigDecimal amount) {
-        BigDecimal result;
-        if (iso.equalsIgnoreCase("LTC")) {
-            result = BRExchange.getSatoshisForBitcoin(app, amount);
+            result = BRExchange.getLitoshisForLitecoin(app, amount);
         } else {
             //multiply by 100 because core function localAmount accepts the smallest amount e.g. cents
             CurrencyEntity ent = CurrencyDataSource.getInstance(app).getCurrencyByIso(iso);
@@ -111,7 +110,7 @@ public class BRExchange {
         return result;
     }
 
-    public static BigDecimal ltcToLitoshi(Double amountLtc) {
-        return BigDecimal.valueOf(amountLtc).multiply(BigDecimal.valueOf(ONE_LITECOIN));
+    public static BigDecimal convertltcsToLitoshis(Double amountLtc) {
+        return BigDecimal.valueOf(amountLtc).multiply(BigDecimal.valueOf(ONE_LITECOIN_OF_LITOSHIS));
     }
 }

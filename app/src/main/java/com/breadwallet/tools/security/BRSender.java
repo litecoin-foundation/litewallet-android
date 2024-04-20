@@ -5,12 +5,13 @@ import android.content.Context;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRDialogView;
-import com.breadwallet.presenter.entities.PaymentItem;
+import com.breadwallet.presenter.entities.TransactionItem;
 import com.breadwallet.presenter.interfaces.BRAuthCompletion;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BRApiManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
+import com.breadwallet.tools.manager.FeeManager;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
@@ -27,21 +28,16 @@ import timber.log.Timber;
 public class BRSender {
     private static BRSender instance;
     private final static long FEE_EXPIRATION_MILLIS = 72 * 60 * 60 * 1000L;
-    private boolean timedOut;
-    private boolean sending;
-
+    private boolean timedOut, sending;
     private BRSender() {
     }
-
     public static BRSender getInstance() {
         if (instance == null) instance = new BRSender();
         return instance;
     }
 
-    /**
-     * Create tx from the PaymentItem object and try to send it
-     */
-    public void sendTransaction(final Context app, final PaymentItem request) {
+    //Create tx from the TransactionItem object and try to send it
+    public void sendTransaction(final Context app, final TransactionItem transactionItem) {
         //array in order to be able to modify the first element from an inner block (can't be final)
         final String[] errTitle = {null};
         final String[] errMessage = {null};
@@ -69,7 +65,7 @@ public class BRSender {
                                 if (sending) timedOut = true;
                             }
                         }).start();
-                        BRApiManager.updateFeePerKb(app);
+                        FeeManager.updateFeePerKb(app);
                         //if the fee is STILL out of date then fail with network problem message
                         long time = BRSharedPrefs.getFeeTime(app);
                         if (time <= 0 || now - time >= FEE_EXPIRATION_MILLIS) {
@@ -81,7 +77,7 @@ public class BRSender {
                         }
                     }
                     if (!timedOut)
-                        tryPay(app, request);
+                        tryPay(app, transactionItem);
                     else
                         Timber.e(new NullPointerException("did not send, timedOut!"));
                     return; //return so no error is shown
@@ -97,7 +93,7 @@ public class BRSender {
                     return;
                 } catch (FeeNeedsAdjust feeNeedsAdjust) {
                     //offer to change amount, so it would be enough for fee
-                    showAdjustFee((Activity) app, request);
+                    showAdjustFee((Activity) app, transactionItem);
                     return;
                 } catch (FeeOutOfDate ex) {
                     //Fee is out of date, show not connected error
@@ -136,21 +132,18 @@ public class BRSender {
         });
     }
 
-    /**
-     * Try transaction and throw appropriate exceptions if something was wrong
-     * BLOCKS
-     */
-    private void tryPay(final Context app, final PaymentItem paymentRequest) throws InsufficientFundsException,
+    //Try transaction and throw appropriate exceptions if something was wrong
+    private void tryPay(final Context app, final TransactionItem transactionItem) throws InsufficientFundsException,
             AmountSmallerThanMinException, SpendingNotAllowed, FeeNeedsAdjust {
-        if (paymentRequest == null || paymentRequest.addresses == null) {
+        if (transactionItem == null || transactionItem.sendAddress == null) {
             Timber.d("timber: handlePay: WRONG PARAMS");
-            String message = paymentRequest == null ? "paymentRequest is null" : "addresses is null";
-            RuntimeException ex = new RuntimeException("paymentRequest is malformed: " + message);
-
+            String message = transactionItem == null ? "transactionItem is null" : "addresses is null";
+            RuntimeException ex = new RuntimeException("transactionItem is malformed: " + message);
             Timber.e(ex);
             throw ex;
         }
-        long amount = paymentRequest.amount;
+
+        long sendAmount = transactionItem.sendAmount + transactionItem.opsFee;
         long balance = BRWalletManager.getInstance().getBalance(app);
         final BRWalletManager m = BRWalletManager.getInstance();
         long minOutputAmount = BRWalletManager.getInstance().getMinOutputAmount();
@@ -162,17 +155,17 @@ public class BRSender {
         }
 
         //check if amount isn't smaller than the min amount
-        if (isSmallerThanMin(paymentRequest)) {
-            throw new AmountSmallerThanMinException(amount, balance);
+        if (isSmallerThanMin(transactionItem)) {
+            throw new AmountSmallerThanMinException(sendAmount, balance);
         }
 
         //amount is larger than balance
-        if (isLargerThanBalance(app, paymentRequest)) {
-            throw new InsufficientFundsException(amount, balance);
+        if (isLargerThanBalance(app, transactionItem)) {
+            throw new InsufficientFundsException(sendAmount, balance);
         }
 
         //not enough for fee
-        if (notEnoughForFee(paymentRequest)) {
+        if (notEnoughForFee(transactionItem)) {
             //weird bug when the core BRWalletManager is NULL
             if (maxOutputAmount == -1) {
                 RuntimeException ex = new RuntimeException("getMaxOutputAmount is -1, meaning _wallet is NULL");
@@ -181,17 +174,20 @@ public class BRSender {
             }
             // max you can spend is smaller than the min you can spend
             if (maxOutputAmount < minOutputAmount) {
-                throw new InsufficientFundsException(amount, balance);
+                throw new InsufficientFundsException(sendAmount, balance);
             }
 
-            long feeForTx = m.feeForTransaction(paymentRequest.addresses[0], paymentRequest.amount);
-            throw new FeeNeedsAdjust(amount, balance, feeForTx);
+            long feeForTx = m.feeForTransaction(transactionItem.sendAddress, transactionItem.sendAmount + transactionItem.opsFee);
+            throw new FeeNeedsAdjust(sendAmount, balance, feeForTx);
         }
         // payment successful
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
-                byte[] tmpTx = m.tryTransaction(paymentRequest.addresses[0], paymentRequest.amount);
+                byte[] tmpTx = m.tryTransactionWithOps(transactionItem.sendAddress,
+                        transactionItem.sendAmount,
+                        transactionItem.opsAddress,
+                        transactionItem.opsFee);
                 if (tmpTx == null) {
                     //something went wrong, failed to create tx
                     ((Activity) app).runOnUiThread(new Runnable() {
@@ -208,14 +204,14 @@ public class BRSender {
                     });
                     return;
                 }
-                paymentRequest.serializedTx = tmpTx;
-                PostAuth.getInstance().setPaymentItem(paymentRequest);
-                confirmPay(app, paymentRequest);
+                transactionItem.serializedTx = tmpTx;
+                PostAuth.getInstance().setTransactionItem(transactionItem);
+                confirmPay(app, transactionItem);
             }
         });
     }
 
-    private void showAdjustFee(final Activity app, PaymentItem item) {
+    private void showAdjustFee(final Activity app, TransactionItem item) {
         BRWalletManager m = BRWalletManager.getInstance();
         long maxAmountDouble = m.getMaxOutputAmount();
         if (maxAmountDouble == -1) {
@@ -240,26 +236,25 @@ public class BRSender {
         }
     }
 
-    private void confirmPay(final Context ctx, final PaymentItem request) {
+    private void confirmPay(final Context ctx, final TransactionItem transactionItem) {
         if (ctx == null) {
             Timber.i("timber: confirmPay: context is null");
             return;
         }
 
-        String message = createConfirmation(ctx, request);
+        String message = createConfirmation(ctx, transactionItem);
 
         double minOutput;
-        if (request.isAmountRequested) {
+        if (transactionItem.isAmountRequested) {
             minOutput = BRWalletManager.getInstance().getMinOutputAmountRequested();
         } else {
             minOutput = BRWalletManager.getInstance().getMinOutputAmount();
         }
 
         //amount can't be less than the min
-        if (request.amount < minOutput) {
+        if (transactionItem.sendAmount < minOutput) {
             final String bitcoinMinMessage = String.format(Locale.getDefault(), ctx.getString(R.string.PaymentProtocol_Errors_smallTransaction),
                     BRConstants.bitcoinLowercase + new BigDecimal(minOutput).divide(new BigDecimal("100")));
-
 
             ((Activity) ctx).runOnUiThread(new Runnable() {
                 @Override
@@ -276,12 +271,10 @@ public class BRSender {
         }
         boolean forcePin = false;
 
-        Timber.d("timber: confirmPay: totalSent: %s", BRWalletManager.getInstance().getTotalSent());
-        Timber.d("timber: confirmPay: request.amount: %s", request.amount);
-        Timber.d("timber: confirmPay: total limit: %s", AuthManager.getInstance().getTotalLimit(ctx));
-        Timber.d("timber: confirmPay: limit: %s", BRKeyStore.getSpendLimit(ctx));
+        Timber.d("timber: confirmPay: totalSent: %s, request.amount: %s, total limit: %s, limit: %s", BRWalletManager.getInstance().getTotalSent(),transactionItem.sendAmount,AuthManager.getInstance().getTotalLimit(ctx),BRKeyStore.getSpendLimit(ctx));
 
-        if (BRWalletManager.getInstance().getTotalSent() + request.amount > AuthManager.getInstance().getTotalLimit(ctx)) {
+
+        if (BRWalletManager.getInstance().getTotalSent() + transactionItem.sendAmount > AuthManager.getInstance().getTotalLimit(ctx)) {
             forcePin = true;
         }
 
@@ -312,14 +305,14 @@ public class BRSender {
         });
     }
 
-    private String createConfirmation(Context ctx, PaymentItem request) {
-        String receiver = getReceiver(request);
-
-        String iso = BRSharedPrefs.getIso(ctx);
-
+    private String createConfirmation(Context ctx, TransactionItem transactionItem) {
+        String receiver = getReceiver(transactionItem);
+        String iso = BRSharedPrefs.getIsoSymbol(ctx);
         BRWalletManager m = BRWalletManager.getInstance();
-        long feeForTx = m.feeForTransaction(request.addresses[0], request.amount);
-        if (feeForTx == 0) {
+
+        long feesForTx = m.feeForTransaction(transactionItem.sendAddress, transactionItem.sendAmount);
+        long opsFee = Utils.tieredOpsFee(ctx,transactionItem.sendAmount);
+        if (feesForTx == 0) {
             long maxAmount = m.getMaxOutputAmount();
             if (maxAmount == -1) {
                 RuntimeException ex = new RuntimeException("getMaxOutputAmount is -1, meaning _wallet is NULL");
@@ -336,50 +329,49 @@ public class BRSender {
 
                 return null;
             }
-            feeForTx = m.feeForTransaction(request.addresses[0], maxAmount);
-            feeForTx += (BRWalletManager.getInstance().getBalance(ctx) - request.amount) % 100;
+            feesForTx = m.feeForTransaction(transactionItem.sendAddress, maxAmount);
+            feesForTx += (BRWalletManager.getInstance().getBalance(ctx) - transactionItem.sendAmount) % 100;
+            feesForTx += opsFee;
         }
-        final long total = request.amount + feeForTx;
-        String formattedAmountBTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getBitcoinForSatoshis(ctx, new BigDecimal(request.amount)));
-        String formattedFeeBTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getBitcoinForSatoshis(ctx, new BigDecimal(feeForTx)));
-        String formattedTotalBTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getBitcoinForSatoshis(ctx, new BigDecimal(total)));
+        final long total = transactionItem.sendAmount + feesForTx + opsFee;
+        String formattedAmountLTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getLitecoinForLitoshis(ctx, new BigDecimal(transactionItem.sendAmount)));
+        String formattedFeesLTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getLitecoinForLitoshis(ctx, new BigDecimal(feesForTx)));
+        String formattedTotalLTC = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getLitecoinForLitoshis(ctx, new BigDecimal(total)));
 
-        String formattedAmount = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromSatoshis(ctx, iso, new BigDecimal(request.amount)));
-        String formattedFee = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromSatoshis(ctx, iso, new BigDecimal(feeForTx)));
-        String formattedTotal = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromSatoshis(ctx, iso, new BigDecimal(total)));
+        String formattedAmount = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromLitoshis(ctx, iso, new BigDecimal(transactionItem.sendAmount)));
+        String formattedFees = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromLitoshis(ctx, iso, new BigDecimal(feesForTx)));
+        String formattedTotal = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromLitoshis(ctx, iso, new BigDecimal(total)));
 
         //formatted text
         return receiver + "\n\n"
-                + ctx.getString(R.string.Confirmation_amountLabel) + " " + formattedAmountBTC + " (" + formattedAmount + ")"
-                + "\n" + ctx.getString(R.string.Confirmation_feeLabel) + " " + formattedFeeBTC + " (" + formattedFee + ")"
-                + "\n" + ctx.getString(R.string.Confirmation_totalLabel) + " " + formattedTotalBTC + " (" + formattedTotal + ")"
-                + (request.comment == null ? "" : "\n\n" + request.comment);
+                + ctx.getString(R.string.Confirmation_amountLabel) + " " + formattedAmountLTC + " (" + formattedAmount + ")"
+                + "\n" + ctx.getString(R.string.ConfirmationAllFees_Label) + " " + formattedFeesLTC + " (" + formattedFees + ")"
+                + "\n" + ctx.getString(R.string.Confirmation_totalLabel) + " " + formattedTotalLTC + " (" + formattedTotal + ")"
+                + (transactionItem.comment == null ? "" : "\n\n" + transactionItem.comment);
     }
 
-    String getReceiver(PaymentItem item) {
-        boolean certified = item.cn != null && item.cn.length() != 0;
-        return certified ? "certified: " + item.cn : Utils.join(item.addresses, ", ");
+    String getReceiver(TransactionItem item) {
+        boolean certified = item.certifiedName != null && item.certifiedName.length() != 0;
+        return certified ? "certified: " + item.certifiedName : item.sendAddress;
     }
-
-    private boolean isSmallerThanMin(PaymentItem paymentRequest) {
+    private boolean isSmallerThanMin(TransactionItem transactionItem) {
         long minAmount = BRWalletManager.getInstance().getMinOutputAmountRequested();
-        return paymentRequest.amount < minAmount;
+        return transactionItem.sendAmount < minAmount;
     }
 
-    private boolean isLargerThanBalance(Context app, PaymentItem paymentRequest) {
-        return paymentRequest.amount > 0 && paymentRequest.amount > BRWalletManager.getInstance().getBalance(app);
+    private boolean isLargerThanBalance(Context app, TransactionItem transactionItem) {
+        return transactionItem.sendAmount > 0 && transactionItem.sendAmount > BRWalletManager.getInstance().getBalance(app);
     }
 
-    private boolean notEnoughForFee(PaymentItem paymentRequest) {
+    private boolean notEnoughForFee(TransactionItem transactionItem) {
         BRWalletManager m = BRWalletManager.getInstance();
-        long feeForTx = m.feeForTransaction(paymentRequest.addresses[0], paymentRequest.amount);
+        long feeForTx = m.feeForTransaction(transactionItem.sendAddress, transactionItem.sendAmount);
         if (feeForTx == 0) {
-            feeForTx = m.feeForTransaction(paymentRequest.addresses[0], m.getMaxOutputAmount());
+            feeForTx = m.feeForTransaction(transactionItem.sendAddress, m.getMaxOutputAmount());
             return feeForTx != 0;
         }
         return false;
     }
-
     private static void showSpendNotAllowed(final Context app) {
         Timber.d("timber: showSpendNotAllowed");
         ((Activity) app).runOnUiThread(new Runnable() {
@@ -394,7 +386,6 @@ public class BRSender {
             }
         });
     }
-
     private static class InsufficientFundsException extends Exception {
         InsufficientFundsException(long amount, long balance) {
             super("Balance: " + balance + " satoshis, amount: " + amount + " satoshis.");
@@ -406,19 +397,16 @@ public class BRSender {
             super("Balance: " + balance + " satoshis, amount: " + amount + " satoshis.");
         }
     }
-
     private static class SpendingNotAllowed extends Exception {
         SpendingNotAllowed() {
             super("spending is not allowed at the moment");
         }
     }
-
     private static class FeeNeedsAdjust extends Exception {
         FeeNeedsAdjust(long amount, long balance, long fee) {
             super("Balance: " + balance + " satoshis, amount: " + amount + " satoshis, fee: " + fee + " satoshis.");
         }
     }
-
     private static class FeeOutOfDate extends Exception {
         FeeOutOfDate(long timestamp, long now) {
             super("FeeOutOfDate: timestamp: " + timestamp + ",now: " + now);
