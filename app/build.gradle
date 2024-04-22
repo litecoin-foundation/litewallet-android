@@ -65,7 +65,7 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 31
         targetSdkVersion 33
-        versionCode 20240421
+        versionCode 20240422
         versionName "v2.10.0"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
@@ -213,13 +213,13 @@ android {
     }
 
     buildTypes {
-//        gitUpdateModules()
-//        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
         release {
             signingConfig signingConfigs.release
-            minifyEnabled = false
+            minifyEnabled = true
             debuggable = false
+            //DEV: Mothballing gitUpdateModules() until time to resolve:
+            //gitUpdateModules()
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             ndk {
                 minifyEnabled = false
