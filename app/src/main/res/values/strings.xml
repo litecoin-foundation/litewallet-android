@@ -87,6 +87,8 @@
     <string name="Confirmation.amountLabel">Amount to Send:</string>
     <!-- Network Fee: ($1.00) -->
     <string name="Confirmation.feeLabel">Network Fee:</string>
+    <!-- Network-->
+    <string name="Network.feeLabel">Network</string>
     <!-- eg. Processing time: This transaction is predicted to complete in [10-60 minutes]. -->
     <string name="Confirmation.processingTime">Processing time: This transaction is predicted to complete in %1$s.</string>
     <!-- Label for "send" button on final confirmation screen -->
@@ -773,4 +775,6 @@
   <string name="Announce.close">Close</string>
   <string name="Announce.description">Signup to hear about updates and contests from the Litewallet team! Accept notifications to get live news, price, \u0026 market information!</string>
   <string name="Announce.no_thanks">No, thanks!</string>
+    <string name="Fees.Service">Service</string>
+    <string name="ConfirmationAllFees.Label">Fees:</string>
 </resources>

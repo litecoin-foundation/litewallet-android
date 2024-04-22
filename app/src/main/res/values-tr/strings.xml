@@ -768,4 +768,7 @@
   <string name="Announce.close">Kapat</string>
   <string name="Announce.description">Litewallet ekibinden güncellemeler ve yarışmalar hakkında bilgi almak için kaydolun! Canlı haberler, fiyat ve piyasa bilgileri almak için bildirimleri kabul edin!</string>
   <string name="Announce.no_thanks">Hayır, sağ ol!</string>
+    <string name="Fees.Service">Hizmet</string>
+    <string name="Network.feeLabel">Ağ</string>
+    <string name="ConfirmationAllFees.Label">Ücretler:</string>
 </resources>

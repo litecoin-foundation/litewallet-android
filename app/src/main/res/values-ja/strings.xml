@@ -744,4 +744,7 @@
   <string name="Announce.close">閉じる</string>
   <string name="Announce.description">登録すると、Litewalletチームからの最新情報やコンテストのお知らせを受け取ることができます！通知を受信して、ライブニュース、価格、マーケット情報を入手しましょう！</string>
   <string name="Announce.no_thanks">いえ、結構です</string>
+    <string name="Fees.Service">サービス</string>
+    <string name="Network.feeLabel">通信網</string>
+  <string name="ConfirmationAllFees.Label">料金:</string>
 </resources>

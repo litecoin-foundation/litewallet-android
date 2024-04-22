@@ -70,13 +70,13 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
             return;
         }
 
-//        String iso = BRSharedPrefs.getIso(app);
+//        String iso = BRSharedPrefs.getIsoSymbol(app);
 
-        String sentBits = BRCurrency.getFormattedCurrencyString(app, "LTC", BRExchange.getAmountFromSatoshis(app, "LTC", new BigDecimal(importPrivKeyEntity.getAmount())));
-//        String sentExchange = BRCurrency.getFormattedCurrencyString(app, iso, BRExchange.getAmountFromSatoshis(app, iso, new BigDecimal(importPrivKeyEntity.getAmount())));
+        String sentBits = BRCurrency.getFormattedCurrencyString(app, "LTC", BRExchange.getAmountFromLitoshis(app, "LTC", new BigDecimal(importPrivKeyEntity.getAmount())));
+//        String sentExchange = BRCurrency.getFormattedCurrencyString(app, iso, BRExchange.getAmountFromLitoshis(app, iso, new BigDecimal(importPrivKeyEntity.getAmount())));
 
-        String feeBits = BRCurrency.getFormattedCurrencyString(app, "LTC", BRExchange.getAmountFromSatoshis(app, "LTC", new BigDecimal(importPrivKeyEntity.getFee())));
-//        String feeExchange = BRCurrency.getFormattedCurrencyString(app, iso, BRExchange.getAmountFromSatoshis(app, iso, new BigDecimal(importPrivKeyEntity.getFee())));
+        String feeBits = BRCurrency.getFormattedCurrencyString(app, "LTC", BRExchange.getAmountFromLitoshis(app, "LTC", new BigDecimal(importPrivKeyEntity.getFee())));
+//        String feeExchange = BRCurrency.getFormattedCurrencyString(app, iso, BRExchange.getAmountFromLitoshis(app, iso, new BigDecimal(importPrivKeyEntity.getFee())));
 
         if (app == null || importPrivKeyEntity == null) return;
         String message = String.format(app.getString(R.string.Import_confirm), sentBits, feeBits);

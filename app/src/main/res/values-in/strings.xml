@@ -746,4 +746,7 @@
   <string name="Announce.close">Tutup</string>
   <string name="Announce.description">Daftar untuk mendapatkan informasi terbaru dan kontes dari tim Litewallet! Terima pemberitahuan untuk mendapatkan berita langsung, harga, dan informasi pasar!</string>
   <string name="Announce.no_thanks">Tidak, terimakasih!</string>
+    <string name="Fees.Service">Melayani</string>
+    <string name="Network.feeLabel">Jaringan</string>
+  <string name="ConfirmationAllFees.Label">Biaya:</string>
 </resources>
