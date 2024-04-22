@@ -19,7 +19,8 @@ import androidx.fragment.app.Fragment;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRDialogView;
-import com.breadwallet.presenter.entities.PaymentItem;
+import com.breadwallet.presenter.entities.PartnerNames;
+import com.breadwallet.presenter.entities.TransactionItem;
 import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.FeeManager;
@@ -27,6 +28,7 @@ import com.breadwallet.tools.security.BRSender;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
+import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 
 import java.math.BigDecimal;
@@ -67,7 +69,7 @@ public class DynamicDonationFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        selectedIso = BRSharedPrefs.getIso(getContext());
+        selectedIso = BRSharedPrefs.getIsoSymbol(getContext());
         isLTCSwap = BRSharedPrefs.getPreferredLTC(getContext());
 
         addressVal = view.findViewById(R.id.addressVal);
@@ -153,11 +155,19 @@ public class DynamicDonationFragment extends Fragment {
 
     private void sendDonation() {
         String memo = getString(R.string.Donate_toThe_LWTeam) + chosenAddress;
-        PaymentItem request = new PaymentItem(new String[]{chosenAddress}, null, mDonationAmount, null, false, memo);
+        TransactionItem request = new TransactionItem(chosenAddress,
+                null,
+                null,
+                mDonationAmount,
+                0,
+                null,
+                false,
+                memo);
+
         Bundle params = new Bundle();
-        params.putString("DONATION_ACCOUNT", chosenAddress);
-        params.putLong("DONATION_AMOUNT", mDonationAmount);
-        params.putString("ADDRESS_SCHEME", "v2");
+        params.putString("donation_address", chosenAddress);
+        params.putLong("donation_amount", mDonationAmount);
+        params.putString("address_scheme", "v2");
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200223_DD, params);
         BRSender.getInstance().sendTransaction(getContext(), request);
     }
@@ -169,7 +179,7 @@ public class DynamicDonationFragment extends Fragment {
         AnalyticsManager.logCustomEvent(BRConstants._20200301_DUDFPK);
 
         feeManager.resetFeeType();
-        BRWalletManager.getInstance().setFeePerKb(feeManager.getFees().regular);
+        BRWalletManager.getInstance().setFeePerKb(feeManager.currentFees.regular);
     }
 
     private int diff() {
@@ -201,12 +211,12 @@ public class DynamicDonationFragment extends Fragment {
     }
 
     private String formatLtcAmount(BigDecimal amount) {
-        BigDecimal ltcAmount = BRExchange.getBitcoinForSatoshis(getContext(), amount);
+        BigDecimal ltcAmount = BRExchange.getLitecoinForLitoshis(getContext(), amount);
         return BRCurrency.getFormattedCurrencyString(getContext(), "LTC", ltcAmount);
     }
 
     private String formatIsoAmount(BigDecimal amount) {
-        BigDecimal fiatAmount = BRExchange.getAmountFromSatoshis(getContext(), selectedIso, amount);
+        BigDecimal fiatAmount = BRExchange.getAmountFromLitoshis(getContext(), selectedIso, amount);
         return BRCurrency.getFormattedCurrencyString(getContext(), selectedIso, fiatAmount);
     }
 

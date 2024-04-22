@@ -744,4 +744,7 @@
   <string name="Announce.close">닫기</string>
   <string name="Announce.description">라이트월렛 팀으로부터 업데이트 및 콘테스트 소식을 받아보세요! 알림을 수락하여 실시간 뉴스, 가격, 시장 정보를 받아보세요!</string>
   <string name="Announce.no_thanks">아니요, 괜찮습니다!</string>
+    <string name="Fees.Service">서비스</string>
+    <string name="Network.feeLabel">회로망</string>
+    <string name="ConfirmationAllFees.Label">수수료:</string>
 </resources>
