@@ -61,7 +61,14 @@ public class BreadApp extends Application {
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
         AnalyticsManager.init(this);
         AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
-        loadAdvertisingAndPush(this);
+
+        new Thread(() -> {
+            //fetch instance ID
+            String instanceID = Utils.fetchPartnerKey(this,
+                    PartnerNames.PUSHERSTAGING);
+            // setup Push Notifications
+            loadAdvertisingAndPush(instanceID, this);
+        }).start();
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -115,14 +122,13 @@ public class BreadApp extends Application {
     public interface OnAppBackgrounded {
         void onBackgrounded();
     }
-    private void loadAdvertisingAndPush(Context app) {
-        Thread thr = new Thread(new Runnable() {
+    private void loadAdvertisingAndPush(String instanceID, Context app) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     AdvertisingIdClient.Info adInfo = AdvertisingIdClient.getAdvertisingIdInfo(app);
-                    finishedLoadingPushService(adInfo);
-
+                    finishedLoadingPushService( instanceID, adInfo);
                 } catch (IllegalStateException e) {
                     e.printStackTrace();
                 } catch (GooglePlayServicesRepairableException e) {
@@ -132,31 +138,27 @@ public class BreadApp extends Application {
                 } catch (GooglePlayServicesNotAvailableException e) {
                     e.printStackTrace();
                 }
-                finishedLoadingPushService(null);
+                String emptyID = "";
+                finishedLoadingPushService(emptyID,null);
+                Bundle params = new Bundle();
+                params.putString("pusher_instanceid_not_found",emptyID);
+                AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR, params);
             }
-        });
-        thr.start();
+        }).start();
     }
-    private void finishedLoadingPushService(final AdvertisingIdClient.Info adInfo) {
-        if(adInfo!=null) {
-
+    private void finishedLoadingPushService(final String instanceID, AdvertisingIdClient.Info adInfo) {
+        if(adInfo!=null && instanceID != "") {
             // setup Pusher Interests
             String adInfoString = adInfo.getId();
             String generalAndroidInterest = "general-android";
             String debugGeneralAndroidInterest = "debug-general-android";
 
-            // setup Push Notifications
-            String pusherInstanceID = Utils.fetchPartnerKey(this, PartnerNames.PUSHERSTAGING);
-            PushNotifications.start(getApplicationContext(), pusherInstanceID);
+            PushNotifications.start(getApplicationContext(), instanceID);
             PushNotifications.addDeviceInterest(generalAndroidInterest);
             PushNotifications.addDeviceInterest(debugGeneralAndroidInterest);
 
             //Send params for pusher setup
-            Bundle params = new Bundle();
-            params.putString("general-interest",generalAndroidInterest);
-            params.putString("debug-general-interest",debugGeneralAndroidInterest);
-            params.putString("device-ad-info",adInfoString);
-            AnalyticsManager.logCustomEventWithParams(BRConstants._20240123_RAGI, params);
+            AnalyticsManager.logCustomEvent(BRConstants._20240123_RAGI);
         }
     }
     private static class CrashReportingTree extends Timber.Tree {
