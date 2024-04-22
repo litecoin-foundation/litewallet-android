@@ -280,6 +280,43 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     Timber.d("timber: outAmounts size %d opsAmount value: %d", outAmounts.length, value);
                 }
             }
+        });
+    }
+
+    private void updateTxHashes() {
+        if (updatingReverseTxHash) return;
+        updatingReverseTxHash = true;
+
+    }
+
+    public List<TxItem> getItems() {
+        return itemFeed;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
+        if (viewType == txType)
+            return new TxHolder(inflater.inflate(txResId, parent, false));
+        else if (viewType == promptType)
+            return new PromptHolder(inflater.inflate(promptResId, parent, false));
+        else if (viewType == syncingType)
+            return new SyncingHolder(inflater.inflate(syncingResId, parent, false));
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()) {
+            case txType:
+                setTexts((TxHolder) holder, position);
+                break;
+            case promptType:
+                setPrompt((PromptHolder) holder);
+                break;
+            case syncingType:
+                setSyncing((SyncingHolder) holder);
+                break;
         }
         else {
             opsAmount = 0L;
