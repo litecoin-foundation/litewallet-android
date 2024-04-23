@@ -1,7 +1,4 @@
 package com.breadwallet.tools.adapter;
-
-import static java.util.function.Predicate.not;
-
 import android.app.Activity;
 import android.content.Context;
 import android.util.TypedValue;
@@ -50,7 +47,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private final int promptResId;
     private List<TxItem> backUpFeed;
     private List<TxItem> itemFeed;
-    //    private Map<String, TxMetaData> mds;
     private final int txType = 0;
     private final int promptType = 1;
     private final int syncingType = 2;
@@ -280,43 +276,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     Timber.d("timber: outAmounts size %d opsAmount value: %d", outAmounts.length, value);
                 }
             }
-        });
-    }
-
-    private void updateTxHashes() {
-        if (updatingReverseTxHash) return;
-        updatingReverseTxHash = true;
-
-    }
-
-    public List<TxItem> getItems() {
-        return itemFeed;
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
-        if (viewType == txType)
-            return new TxHolder(inflater.inflate(txResId, parent, false));
-        else if (viewType == promptType)
-            return new PromptHolder(inflater.inflate(promptResId, parent, false));
-        else if (viewType == syncingType)
-            return new SyncingHolder(inflater.inflate(syncingResId, parent, false));
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        switch (holder.getItemViewType()) {
-            case txType:
-                setTexts((TxHolder) holder, position);
-                break;
-            case promptType:
-                setPrompt((PromptHolder) holder);
-                break;
-            case syncingType:
-                setSyncing((SyncingHolder) holder);
-                break;
         }
         else {
             opsAmount = 0L;
