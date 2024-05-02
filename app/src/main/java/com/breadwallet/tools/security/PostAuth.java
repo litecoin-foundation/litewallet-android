@@ -6,17 +6,14 @@ import android.content.Intent;
 import android.os.NetworkOnMainThreadException;
 import android.security.keystore.UserNotAuthenticatedException;
 
-import com.breadwallet.BreadApp;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.PaperKeyActivity;
 import com.breadwallet.presenter.activities.PaperKeyProveActivity;
-import com.breadwallet.presenter.activities.SetPinActivity;
+import com.breadwallet.presenter.activities.SetPinActivity_java;
 import com.breadwallet.presenter.activities.intro.WriteDownActivity;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
-import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.TransactionItem;
 import com.breadwallet.presenter.entities.PaymentRequestWrapper;
-import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.threads.PaymentProtocolPostPaymentTask;
@@ -24,17 +21,11 @@ import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
-import com.platform.APIClient;
 import com.platform.entities.TxMetaData;
 import com.platform.tools.KVStoreManager;
 
-import java.io.IOException;
 import java.util.Arrays;
 
-import okhttp3.MediaType;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import timber.log.Timber;
 
 public class PostAuth {
@@ -149,7 +140,7 @@ public class PostAuth {
                     byte[] pubKey = BRWalletManager.getInstance().getMasterPubKey(bytePhrase);
                     BRKeyStore.putMasterPublicKey(pubKey, app);
                     app.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                    Intent intent = new Intent(app, SetPinActivity.class);
+                    Intent intent = new Intent(app, SetPinActivity_java.class);
                     intent.putExtra("noPin", true);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     app.startActivity(intent);

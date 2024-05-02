@@ -53,10 +53,25 @@
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:fullBackupContent">
         <activity
+            android:name=".presenter.activities.SetPinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presenter.activities.ReEnterPinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presenter.activities.intro.SetSecurityActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".presenter.activities.AnnounceUpdatesViewActivity"
+            android:enableOnBackInvokedCallback="true"
             android:exported="false"
             android:label="Litewallet"
-            android:enableOnBackInvokedCallback="true"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".presenter.activities.intro.IntroActivity"
@@ -64,11 +79,11 @@
             android:label="Litewallet"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter android:autoVerify="true">-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".presenter.activities.BreadActivity"
@@ -95,7 +110,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".presenter.activities.SetPinActivity"
+            android:name=".presenter.activities.SetPinActivity_java"
             android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
@@ -115,7 +130,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presenter.activities.ReEnterPinActivity"
+            android:name=".presenter.activities.ReEnterPinActivity_java"
             android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />

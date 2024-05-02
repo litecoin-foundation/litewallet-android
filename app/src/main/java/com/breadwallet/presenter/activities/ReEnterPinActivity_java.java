@@ -1,38 +1,43 @@
 package com.breadwallet.presenter.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRKeyboard;
-import com.breadwallet.tools.manager.BRSharedPrefs;
+import com.breadwallet.presenter.interfaces.BROnSignalCompletion;
+import com.breadwallet.tools.animation.BRAnimator;
+import com.breadwallet.tools.animation.SpringAnimator;
+import com.breadwallet.tools.security.AuthManager;
+import com.breadwallet.tools.security.PostAuth;
+import com.breadwallet.tools.util.Utils;
 
 import timber.log.Timber;
 
-public class SetPinActivity extends BRActivity {
+public class ReEnterPinActivity_java extends BRActivity {
     private BRKeyboard keyboard;
-    public static SetPinActivity introSetPitActivity;
+    public static ReEnterPinActivity_java reEnterPinActivityJava;
     private View dot1;
     private View dot2;
     private View dot3;
     private View dot4;
     private View dot5;
     private View dot6;
-
-    private ImageButton faq;
     private StringBuilder pin = new StringBuilder();
-    private int pinLimit = 6;
-    private boolean startingNextActivity;
     private TextView title;
+    private int pinLimit = 6;
+    private String firstPIN;
+    private boolean isPressAllowed = true;
+    private LinearLayout pinLayout;
     public static boolean appVisible = false;
-    private static SetPinActivity app;
+    private static ReEnterPinActivity_java app;
 
-    public static SetPinActivity getApp() {
+    public static ReEnterPinActivity_java getApp() {
         return app;
     }
 
@@ -42,12 +47,20 @@ public class SetPinActivity extends BRActivity {
         setContentView(R.layout.activity_pin_template);
 
         keyboard = (BRKeyboard) findViewById(R.id.brkeyboard);
-        title = (TextView) findViewById(R.id.title);
+        pinLayout = (LinearLayout) findViewById(R.id.pinLayout);
 
-
+        ImageButton faq = (ImageButton) findViewById(R.id.faq_button);
         //TODO: all views are using the layout of this button. Views should be refactored without it
         // Hiding until layouts are built.
-        faq = (ImageButton) findViewById(R.id.faq_button);
+
+        title = (TextView) findViewById(R.id.title);
+        title.setText(getString(R.string.UpdatePin_createTitleConfirm));
+        firstPIN = getIntent().getExtras().getString("pin");
+        if (Utils.isNullOrEmpty(firstPIN)) {
+            throw new RuntimeException("first PIN is required");
+        }
+        reEnterPinActivityJava = this;
+
         dot1 = findViewById(R.id.dot1);
         dot2 = findViewById(R.id.dot2);
         dot3 = findViewById(R.id.dot3);
@@ -62,16 +75,15 @@ public class SetPinActivity extends BRActivity {
             }
         });
         keyboard.setShowDot(false);
-        BRSharedPrefs.putGreetingsShown(this, true);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         updateDots();
-        introSetPitActivity = this;
         appVisible = true;
         app = this;
+        isPressAllowed = true;
     }
 
     @Override
@@ -81,6 +93,7 @@ public class SetPinActivity extends BRActivity {
     }
 
     private void handleClick(String key) {
+        if (!isPressAllowed) return;
         if (key == null) {
             Timber.d("timber: handleClick: key is null! ");
             return;
@@ -116,6 +129,7 @@ public class SetPinActivity extends BRActivity {
 
     private void updateDots() {
         int selectedDots = pin.length();
+
         dot1.setBackground(getDrawable(selectedDots <= 0 ? R.drawable.ic_pin_dot_gray : R.drawable.ic_pin_dot_black));
         selectedDots--;
         dot2.setBackground(getDrawable(selectedDots <= 0 ? R.drawable.ic_pin_dot_gray : R.drawable.ic_pin_dot_black));
@@ -129,26 +143,42 @@ public class SetPinActivity extends BRActivity {
         dot6.setBackground(getDrawable(selectedDots <= 0 ? R.drawable.ic_pin_dot_gray : R.drawable.ic_pin_dot_black));
 
         if (pin.length() == 6) {
-            if (startingNextActivity) return;
-            startingNextActivity = true;
+            verifyPin();
+        }
+    }
+
+    private void verifyPin() {
+        if (firstPIN.equalsIgnoreCase(pin.toString())) {
+            AuthManager.getInstance().authSuccess(this);
+            isPressAllowed = false;
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(SetPinActivity.this, ReEnterPinActivity.class);
-                    intent.putExtra("pin", pin.toString());
-                    intent.putExtra("noPin", getIntent().getBooleanExtra("noPin", false));
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                    pin = new StringBuilder("");
-                    startingNextActivity = false;
+                    pin = new StringBuilder();
+                    updateDots();
                 }
-            }, 100);
+            }, 200);
+            AuthManager.getInstance().setPinCode(pin.toString(), this);
+            if (getIntent().getBooleanExtra("noPin", false)) {
+                BRAnimator.startBreadActivity(this, false);
+            } else {
+                BRAnimator.showBreadSignal(this, getString(R.string.Alerts_pinSet), getString(R.string.UpdatePin_createInstruction), R.drawable.ic_check_mark_white, new BROnSignalCompletion() {
+                    @Override
+                    public void onComplete() {
+                        PostAuth.getInstance().onCreateWalletAuth(ReEnterPinActivity_java.this, false);
+                    }
+                });
+            }
+        } else {
+            AuthManager.getInstance().authFail(this);
+            Timber.d("timber: verifyPin: FAIL: firs: %s, reEnter: %s ", firstPIN, pin);
+            SpringAnimator.failShakeAnimation(this, pinLayout);
+            pin = new StringBuilder();
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
     }
 }
