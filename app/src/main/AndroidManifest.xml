@@ -53,6 +53,12 @@
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:fullBackupContent">
         <activity
+            android:name=".presenter.activities.AuthPassCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presenter.activities.AuthPassCodeAndBiometricsActivity"
+            android:exported="false" />
+        <activity
             android:name=".presenter.activities.SetPinActivity"
             android:exported="false" />
         <activity
@@ -79,11 +85,13 @@
             android:label="Litewallet"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-<!--            <intent-filter android:autoVerify="true">-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter android:autoVerify="true"> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".presenter.activities.BreadActivity"

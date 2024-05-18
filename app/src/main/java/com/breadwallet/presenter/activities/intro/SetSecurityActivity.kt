@@ -43,6 +43,8 @@ import androidx.core.content.ContextCompat.startActivity
 import com.breadwallet.R
 import com.breadwallet.entities.IntroLanguage
 import com.breadwallet.entities.IntroLanguageResource
+import com.breadwallet.presenter.activities.AuthPassCodeActivity
+import com.breadwallet.presenter.activities.AuthPassCodeAndBiometricsActivity
 import com.breadwallet.presenter.activities.ReEnterPinActivity
 import com.breadwallet.presenter.activities.SetPin
 import com.breadwallet.presenter.activities.SetPinActivity
@@ -75,7 +77,7 @@ fun SetSecurity(modifier: Modifier = Modifier){
     val arrayLanguages = IntroLanguageResource().loadResources()
     Column (modifier= modifier
         .fillMaxWidth()
-        .padding(0.dp, 90.dp, 0.dp, 0.dp)
+        .padding(0.dp, 60.dp, 0.dp, 0.dp)
         ,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
@@ -87,13 +89,12 @@ fun SetSecurity(modifier: Modifier = Modifier){
                 .height(200.dp)
                 .padding(0.dp, 0.dp, 0.dp, 80.dp)
         )
-        Spacer(modifier = Modifier.height(50.dp))
         // Scroll Languages
         Languages(languagesArray = arrayLanguages, lazyListState = lazyListState)
         // Texts Information
         TextInformation()
         // Button dark mode
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         IconButton(
             modifier = Modifier
                 .size(20.dp)
@@ -106,7 +107,7 @@ fun SetSecurity(modifier: Modifier = Modifier){
                 contentDescription = "Dark Mode",
             )
         }
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(0.5f))
         // Button biometrics and passcode
         ButtonBiometrics()
         Text(
@@ -195,7 +196,7 @@ fun ButtonBiometrics(
         colors = ButtonDefaults.buttonColors(Color.White, Color.Black),
         border = BorderStroke(1.dp, Color.Black),
         onClick = {
-            context.startActivity(Intent(context, SetPinActivity::class.java))
+            context.startActivity(Intent(context, AuthPassCodeAndBiometricsActivity::class.java))
         }
     ) {
         Text(
@@ -213,7 +214,7 @@ fun ButtonBiometrics(
         colors = ButtonDefaults.buttonColors(Color.White, Color.Black),
         border = BorderStroke(1.dp, Color.Black),
         onClick = {
-            context.startActivity(Intent(context, SetPinActivity::class.java))
+            context.startActivity(Intent(context, AuthPassCodeActivity::class.java))
         }
     ) {
         Text(
