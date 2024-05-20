@@ -1,51 +1,54 @@
 package com.breadwallet.tools.util;
 
+import java.net.Inet4Address;
+import java.net.Inet6Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Arrays;
+
 public class TrustedNode {
+    public static  String removePort(String input) {
+        return input.startsWith("[")
+                 ? input.split("]")[0]+"]"
+                 : input.split(":")[0];
+    }
+    
     public static  String getNodeHost(String input) {
-        if (input.contains(":")) {
-            return input.split(":")[0];
+        try {
+            return InetAddress.getByName(removePort(input)).getHostAddress().toString();
+        } catch (UnknownHostException e) {
+            return "Error";
         }
-        return input;
     }
 
     public static  int getNodePort(String input) {
         int port = 0;
-        if (input.contains(":")) {
-            try {
-                port = Integer.parseInt(input.split(":")[1]);
-            } catch (Exception e) {
-
-            }
+        try {
+            port = Integer.parseInt(input.split(":")[input.split(":").length - 1]);
+        } catch (Exception e) {
         }
         return port;
     }
 
     public static  boolean isValid(String input) {
+        return (isIPv4(input) || isIPv6(input));
+    }
+
+    public static  boolean isIPv4(String input) {
         try {
-            if (input == null || input.length() == 0) return false;
-            for (int i = 0; i < input.length(); i++) {
-                char c = input.charAt(i);
-                if (!Character.isDigit(c) && c != '.' && c != ':') return false;
-            }
-            String host;
-            if (input.contains(":")) {
-                String[] pieces = input.split(":");
-                if (pieces.length > 2) return false;
-                host = pieces[0];
-                int port = Integer.parseInt(pieces[1]); //just try to see if it's a number
-            } else {
-                host = input;
-            }
-            String[] nums = host.split("\\.");
-            if (nums.length != 4) return false;
-            for (int i = 0; i < nums.length; i++) {
-                int slice = Integer.parseInt(nums[i]);
-                if (slice < 0 || slice > 255) return false;
-            }
-        } catch (Exception e) {
+            InetAddress inetAddress = InetAddress.getByName(removePort(input));
+            return (inetAddress instanceof Inet4Address) && inetAddress.getHostAddress().equals(removePort(input));
+        } catch (UnknownHostException ex) {
             return false;
         }
+    }
 
-        return true;
+    public static boolean isIPv6(String input) {
+        try {
+            InetAddress inetAddress = InetAddress.getByName(removePort(input));
+            return inetAddress instanceof Inet6Address;
+        } catch (UnknownHostException ex) {
+            return false;
+        }
     }
 }
