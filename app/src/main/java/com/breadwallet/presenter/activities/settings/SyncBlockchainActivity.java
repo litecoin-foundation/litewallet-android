@@ -40,7 +40,6 @@ public class SyncBlockchainActivity extends BRActivity {
 
     public static boolean appVisible = false;
     private static TextView syncPreferenceTextView;
-    private ImageButton fingerPrint;
 
     private static SyncBlockchainActivity app;
     public static SyncBlockchainActivity getApp() {
@@ -74,12 +73,12 @@ public class SyncBlockchainActivity extends BRActivity {
 
         syncRadioGroup = (RadioGroup) findViewById(R.id.sync_radio_group);
 
-        ImageButton faq = (ImageButton) findViewById(R.id.faq_button);
         syncPreferenceTextView =  (TextView)  findViewById(R.id.sync_preferences);
         scanButton = (Button) findViewById(R.id.button_scan);
         lowPrivacyButton = (Button) findViewById(R.id.radio_low_privacy);
         semiPrivateButton = (Button) findViewById(R.id.radio_semi_private);
         anonymousButton = (Button) findViewById(R.id.radio_anonymous);
+        closeButton = (ImageButton) findViewById(R.id.close_button);
 
         lowPrivacyButton.setText(getString(R.string.radio_low_privacy));
         semiPrivateButton.setText(getString(R.string.radio_semi_private));
@@ -139,8 +138,6 @@ public class SyncBlockchainActivity extends BRActivity {
                         }, null, 0);
             }
         });
-
-        closeButton = (ImageButton) findViewById(R.id.close_button);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

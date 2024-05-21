@@ -663,6 +663,7 @@ public class BRWalletManager {
     public native String reverseTxHash(String txHash);
 
     public native String txHashToHex(byte[] txHash);
+    
     public native long nativeBalance();
 
     public native long defaultFee();
