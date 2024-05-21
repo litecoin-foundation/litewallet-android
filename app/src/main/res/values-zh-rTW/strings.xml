@@ -738,4 +738,13 @@
   <string name="radio_semi_private">半私人（約 42 分鐘）</string>
   <string name="radio_anonymous">匿名（約 77 分鐘）</string>
   <string name="release_notes">重要提示：等待約 1 小時進行同步！</string>
+
+  <!-- Announce Updates View -->
+  <string name="Announce.title">不要錯過任何事情！</string>
+  <string name="Announce.close">關閉</string>
+  <string name="Announce.description">註冊以了解 Litewallet 團隊的最新動態和競賽！ 接受通知以獲取即時新聞、價格和市場資訊！</string>
+  <string name="Announce.no_thanks">不，謝謝</string>
+    <string name="Fees.Service">服務</string>
+    <string name="Network.feeLabel">網路</string>
+    <string name="ConfirmationAllFees.Label">費用：</string>
 </resources>

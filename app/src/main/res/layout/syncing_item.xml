@@ -39,7 +39,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/SyncingView.header"
             android:textColor="@color/almost_black"
             android:textSize="@dimen/sub_header"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -763,4 +763,12 @@
   <string name="radio_anonymous">Anonim (~77 dakika)</string>
   <string name="release_notes">ÖNEMLİ: Senkronizasyon için ~1 saat bekleyin!</string>
 
+  <!-- Announce Updates View -->
+  <string name="Announce.title">Hiçbir şeyi kaçırmayın!</string>
+  <string name="Announce.close">Kapat</string>
+  <string name="Announce.description">Litewallet ekibinden güncellemeler ve yarışmalar hakkında bilgi almak için kaydolun! Canlı haberler, fiyat ve piyasa bilgileri almak için bildirimleri kabul edin!</string>
+  <string name="Announce.no_thanks">Hayır, sağ ol!</string>
+    <string name="Fees.Service">Hizmet</string>
+    <string name="Network.feeLabel">Ağ</string>
+    <string name="ConfirmationAllFees.Label">Ücretler:</string>
 </resources>

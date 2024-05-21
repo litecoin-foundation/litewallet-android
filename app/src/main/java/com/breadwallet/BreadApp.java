@@ -3,14 +3,12 @@ package com.breadwallet;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-
 import com.breadwallet.di.component.DaggerAppComponent;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.entities.PartnerNames;
@@ -24,17 +22,9 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -71,7 +61,14 @@ public class BreadApp extends Application {
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
         AnalyticsManager.init(this);
         AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
-        loadAdvertisingAndPush(this);
+
+        new Thread(() -> {
+            //fetch instance ID
+            String instanceID = Utils.fetchPartnerKey(this,
+                    PartnerNames.PUSHERSTAGING);
+            // setup Push Notifications
+            loadAdvertisingAndPush(instanceID, this);
+        }).start();
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -80,12 +77,9 @@ public class BreadApp extends Application {
         DISPLAY_HEIGHT_PX = size.y;
         mFingerprintManager = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
     }
-
-
     public static Context getBreadContext() {
         return currentActivity == null ? SyncReceiver.app : currentActivity;
     }
-
     public static void setBreadContext(Activity app) {
         currentActivity = app;
     }
@@ -94,16 +88,13 @@ public class BreadApp extends Application {
         if (listeners == null) return;
         for (OnAppBackgrounded lis : listeners) lis.onBackgrounded();
     }
-
     public static void addOnBackgroundedListener(OnAppBackgrounded listener) {
         if (listeners == null) listeners = new ArrayList<>();
         if (!listeners.contains(listener)) listeners.add(listener);
     }
-
     public static boolean isAppInBackground(final Context context) {
         return context == null || activityCounter.get() <= 0;
     }
-
     //call onStop on evert activity so
     public static void onStop(final BRActivity app) {
         if (isBackgroundChecker != null) isBackgroundChecker.cancel();
@@ -123,23 +114,21 @@ public class BreadApp extends Application {
 
         isBackgroundChecker.schedule(backgroundCheck, 500, 500);
     }
-
     @Override
     protected void attachBaseContext(Context base) {
         LocaleHelper.Companion.init(base);
         super.attachBaseContext(LocaleHelper.Companion.getInstance().setLocale(base));
     }
-
     public interface OnAppBackgrounded {
         void onBackgrounded();
     }
-    private void loadAdvertisingAndPush(Context app) {
-        Thread thr = new Thread(new Runnable() {
+    private void loadAdvertisingAndPush(String instanceID, Context app) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     AdvertisingIdClient.Info adInfo = AdvertisingIdClient.getAdvertisingIdInfo(app);
-                    finished(adInfo);
+                    finishedLoadingPushService( instanceID, adInfo);
                 } catch (IllegalStateException e) {
                     e.printStackTrace();
                 } catch (GooglePlayServicesRepairableException e) {
@@ -149,35 +138,29 @@ public class BreadApp extends Application {
                 } catch (GooglePlayServicesNotAvailableException e) {
                     e.printStackTrace();
                 }
-                finished(null);
+                String emptyID = "";
+                finishedLoadingPushService(emptyID,null);
+                Bundle params = new Bundle();
+                params.putString("pusher_instanceid_not_found",emptyID);
+                AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR, params);
             }
-        });
-        thr.start();
+        }).start();
     }
-
-    private void finished(final AdvertisingIdClient.Info adInfo) {
-        if(adInfo!=null) {
-
+    private void finishedLoadingPushService(final String instanceID, AdvertisingIdClient.Info adInfo) {
+        if(adInfo!=null && instanceID != "") {
+            // setup Pusher Interests
             String adInfoString = adInfo.getId();
             String generalAndroidInterest = "general-android";
             String debugGeneralAndroidInterest = "debug-general-android";
-            String pusherInstanceID = Utils.fetchPartnerKey(this, PartnerNames.PUSHERSTAGING);
 
-            // setup Push Notifications
-            //This worked had to add the iid dep https://github.com/mixpanel/mixpanel-android/issues/744
-            PushNotifications.start(getApplicationContext(), pusherInstanceID);
+            PushNotifications.start(getApplicationContext(), instanceID);
             PushNotifications.addDeviceInterest(generalAndroidInterest);
             PushNotifications.addDeviceInterest(debugGeneralAndroidInterest);
 
             //Send params for pusher setup
-            Bundle params = new Bundle();
-            params.putString("general-interest",generalAndroidInterest);
-            params.putString("debug-general-interest",debugGeneralAndroidInterest);
-            params.putString("device-ad-info",adInfoString);
-            AnalyticsManager.logCustomEventWithParams(BRConstants._20240123_RAGI, params);
+            AnalyticsManager.logCustomEvent(BRConstants._20240123_RAGI);
         }
     }
-
     private static class CrashReportingTree extends Timber.Tree {
         private static final String CRASHLYTICS_KEY_PRIORITY = "priority";
         private static final String CRASHLYTICS_KEY_TAG = "tag";

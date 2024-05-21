@@ -368,17 +368,17 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(() -> {
             Thread.currentThread().setName(Thread.currentThread().getName() + ":updateUI");
             //sleep a little in order to make sure all the commits are finished (like SharePreferences commits)
-            String iso = BRSharedPrefs.getIso(BreadActivity.this);
+            String iso = BRSharedPrefs.getIsoSymbol(BreadActivity.this);
 
             //current amount in litoshis
             final BigDecimal amount = new BigDecimal(BRSharedPrefs.getCatchedBalance(BreadActivity.this));
 
             //amount in LTC units
-            BigDecimal btcAmount = BRExchange.getBitcoinForSatoshis(BreadActivity.this, amount);
+            BigDecimal btcAmount = BRExchange.getLitecoinForLitoshis(BreadActivity.this, amount);
             final String formattedBTCAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, "LTC", btcAmount);
 
             //amount in currency units
-            final BigDecimal curAmount = BRExchange.getAmountFromSatoshis(BreadActivity.this, iso, amount);
+            final BigDecimal curAmount = BRExchange.getAmountFromLitoshis(BreadActivity.this, iso, amount);
             final String formattedCurAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, iso, curAmount);
             runOnUiThread(() -> {
                 primaryPrice.setText(formattedBTCAmount);

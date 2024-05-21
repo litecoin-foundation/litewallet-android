@@ -738,4 +738,13 @@
   <string name="radio_semi_private">Semi-privato (~42 minuti)</string>
   <string name="radio_anonymous">Anonimo (~77 minuti)</string>
   <string name="release_notes">IMPORTANTE: Attendi ~1 ora per la sincronizzazione!</string>
+
+  <!-- Announce Updates View -->
+  <string name="Announce.title">Non perdetevi nulla!</string>
+  <string name="Announce.close">Chiudere</string>
+  <string name="Announce.description">Iscriviti per ricevere aggiornamenti e concorsi dal team Litewallet! Accettate le notifiche per ricevere notizie in tempo reale, prezzi e informazioni sul mercato!</string>
+  <string name="Announce.no_thanks">No, grazie!</string>
+    <string name="Fees.Service">Servizio</string>
+    <string name="Network.feeLabel">Rete</string>
+  <string name="ConfirmationAllFees.Label">Commissioni:</string>
 </resources>

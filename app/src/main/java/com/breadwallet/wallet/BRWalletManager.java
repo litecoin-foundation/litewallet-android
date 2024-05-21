@@ -165,12 +165,6 @@ public class BRWalletManager {
         BRKeyStore.putWalletCreationTime(walletCreationTime, ctx);
         final WalletInfo info = new WalletInfo();
         info.creationDate = walletCreationTime;
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
-            @Override
-            public void run() {
-                //Removed the push to the KeyStore / Server that is refactored out of the Litewallet code
-            }
-        });
 
         byte[] strBytes = TypesConverter.getNullTerminatedPhrase(strPhrase);
         byte[] pubKey = BRWalletManager.getInstance().getMasterPubKey(strBytes);
@@ -383,8 +377,8 @@ public class BRWalletManager {
             BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                 @Override
                 public void run() {
-                    String am = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getBitcoinForSatoshis(ctx, new BigDecimal(amount)));
-                    String amCur = BRCurrency.getFormattedCurrencyString(ctx, BRSharedPrefs.getIso(ctx), BRExchange.getAmountFromSatoshis(ctx, BRSharedPrefs.getIso(ctx), new BigDecimal(amount)));
+                    String am = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getLitecoinForLitoshis(ctx, new BigDecimal(amount)));
+                    String amCur = BRCurrency.getFormattedCurrencyString(ctx, BRSharedPrefs.getIsoSymbol(ctx), BRExchange.getAmountFromLitoshis(ctx, BRSharedPrefs.getIsoSymbol(ctx), new BigDecimal(amount)));
                     String formatted = String.format("%s (%s)", am, amCur);
                     String strToShow = String.format(ctx.getString(R.string.TransactionDetails_received), formatted);
                     showToastWithMessage(ctx, strToShow);
@@ -500,6 +494,8 @@ public class BRWalletManager {
 
                 if (!m.isCreated()) {
                     List<BRTransactionEntity> transactions = TransactionDataSource.getInstance(ctx).getAllTransactions();
+                    Timber.d("timber: All transactions : %d",transactions.size());
+
                     int transactionsCount = transactions.size();
                     if (transactionsCount > 0) {
                         m.createTxArrayWithCount(transactionsCount);
@@ -519,8 +515,8 @@ public class BRWalletManager {
                     BRSharedPrefs.putFirstAddress(ctx, firstAddress);
                     FeeManager feeManager = FeeManager.getInstance();
                     if (feeManager.isRegularFee()) {
-                        Fee fees = feeManager.getFees();
-                        BRWalletManager.getInstance().setFeePerKb(fees.regular);
+                        feeManager.updateFeePerKb(ctx);
+                        BRWalletManager.getInstance().setFeePerKb(feeManager.currentFees.regular);
                     }
                 }
 
@@ -626,6 +622,8 @@ public class BRWalletManager {
 
     public native byte[] tryTransaction(String addressHolder, long amountHolder);
 
+    public native byte[] tryTransactionWithOps(String sendAddress, long sendAmount, String opsAddress, long opsFeeAmount);
+
     // returns the given amount (amount is in satoshis) in local currency units (i.e. pennies, pence)
     // price is local currency units per bitcoin
     public native long localAmount(long amount, double price);
@@ -665,9 +663,7 @@ public class BRWalletManager {
     public native String reverseTxHash(String txHash);
 
     public native String txHashToHex(byte[] txHash);
-
-//    public native String txHashSha256Hex(String txHash);
-
+    
     public native long nativeBalance();
 
     public native long defaultFee();

@@ -74,12 +74,30 @@ crash.txt
 /projectFilesBackup/
 /publishTODO.txt
 .idea/copyright/
-/app/google-services.json
-/app/partner-keys.json
-/app/src/main/assets/partner-keys.json
 /.idea/markdown-navigator/
 /app/src/main/java/com/breadwallet/presenter/fragments/FragmentBreadSignal.java
 /fastlane/
 fastlane/
-partner-keys.json
+
 /.idea/appInsightsSettings.xml
+
+ ## Partner
+/app/partner-keys.json
+/app/src/main/assets/partner-keys.json
+partner-keys.json
+
+## Google Services
+app/src/litewallet/release/google-services.json 
+app/src/release/litewallet/google-services.json
+app/src/litewallet/google-services.json
+app/src/release/google-services.json 
+app/src/litewalletRelease/google-services.json 
+app/google-services.json
+
+app/src/litewallet/debug/google-services.json
+app/src/debug/litewallet/google-services.json
+app/src/litewallet/google-services.json
+app/src/debug/google-services.json
+app/src/litewalletDebug/google-services.json
+/app/release/google-services.json
+/app/debug/google-services.json

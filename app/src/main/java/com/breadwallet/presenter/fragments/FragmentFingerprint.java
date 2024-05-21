@@ -110,7 +110,6 @@ public class FragmentFingerprint extends Fragment
             public void onClick(View view) {
                 if (!BRAnimator.isClickAllowed()) return;
                 closeMe();
-                goToBackup();
             }
         });
 
@@ -137,8 +136,6 @@ public class FragmentFingerprint extends Fragment
     @Override
     public void onStop() {
         super.onStop();
-//        animateBackgroundDim(true);
-//        animateSignalSlide(true);
         if (!authSucceeded)
             completion.onCancel();
     }
@@ -154,25 +151,6 @@ public class FragmentFingerprint extends Fragment
     public void onPause() {
         super.onPause();
         mFingerprintUiHelper.stopListening();
-    }
-
-    /**
-     * Switches to backup (password) screen. This either can happen when fingerprint is not
-     * available or the user chooses to use the password authentication method by pressing the
-     * button. This can also happen when the user had too many fingerprint attempts.
-     */
-    private void goToBackup() {
-        final Context app = getContext();
-        closeMe();
-
-        if (mFingerprintUiHelper != null)
-            mFingerprintUiHelper.stopListening();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                AuthManager.getInstance().authPrompt(app, customTitle, customMessage, true, false, completion);
-            }
-        }, ANIMATION_DURATION + 100);
     }
 
     @Override
@@ -194,7 +172,10 @@ public class FragmentFingerprint extends Fragment
 
     @Override
     public void onError() {
-        goToBackup();
+        String authError = "auth_prompt_failed";
+        Bundle params = new Bundle();
+        params.putString("error_message",authError);
+        AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR, params);
     }
 
     private void animateBackgroundDim(boolean reverse) {

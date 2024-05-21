@@ -116,10 +116,10 @@ public class DisplayCurrencyActivity extends BRActivity {
 
     private void updateExchangeRate() {
         //set the rate from the last saved
-        String iso = BRSharedPrefs.getIso(this);
+        String iso = BRSharedPrefs.getIsoSymbol(this);
         CurrencyEntity entity = CurrencyDataSource.getInstance(this).getCurrencyByIso(iso);
         if (entity != null) {
-            String finalExchangeRate = BRCurrency.getFormattedCurrencyString(DisplayCurrencyActivity.this, BRSharedPrefs.getIso(this), new BigDecimal(entity.rate));
+            String finalExchangeRate = BRCurrency.getFormattedCurrencyString(DisplayCurrencyActivity.this, BRSharedPrefs.getIsoSymbol(this), new BigDecimal(entity.rate));
             boolean bits = BRSharedPrefs.getCurrencyUnit(this) == BRConstants.CURRENT_UNIT_LITES;
             exchangeText.setText(BRCurrency.getFormattedCurrencyString(this, "LTC", new BigDecimal(bits ? 1000 : 1)) + " = " + finalExchangeRate);
         }

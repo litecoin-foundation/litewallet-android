@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.breadwallet.R
 import com.breadwallet.entities.IntroLanguage
 
-class CountryLanguageAdapter(context: Context, val languages: Array<IntroLanguage>) : RecyclerView.Adapter<CountryLanguageAdapter.ViewHolder>() {
+class CountryLanguageAdapter(context: Context,val languages: Array<IntroLanguage>) : RecyclerView.Adapter<CountryLanguageAdapter.ViewHolder>() {
     private var mCountryLang: Array<IntroLanguage>? = null
     private var mInflater: LayoutInflater? = null
-    private var mSelectedItem = -1
-    private var barlowFont: Typeface? = null
+    private var mSelectedItem = -1;
+    private var barlowFont : Typeface? = null
     private var mContext: Context? = null
     private var mediaPlayer: MediaPlayer? = null
 
@@ -40,7 +40,7 @@ class CountryLanguageAdapter(context: Context, val languages: Array<IntroLanguag
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int,
+        viewType: Int
     ): CountryLanguageAdapter.ViewHolder {
         val context = parent.context
         val layoutInflater = LayoutInflater.from(context)
@@ -49,17 +49,15 @@ class CountryLanguageAdapter(context: Context, val languages: Array<IntroLanguag
         return ViewHolder(languageView)
     }
 
-    override fun onBindViewHolder(
-        holder: ViewHolder,
-        position: Int,
-    ) {
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val langQuestion = languages[position]
         val textLanguage = holder.txtLang
-        textLanguage.text = langQuestion.lang
+        textLanguage.text = langQuestion.name
 
         // Make text bold if it's in the center
         if (position == mSelectedItem) {
-            if (barlowFont == null) {
+            if(barlowFont == null) {
                 Log.e("FONT", "FAILED TO LOAD")
             }
             mediaPlayer?.reset()
@@ -81,11 +79,21 @@ class CountryLanguageAdapter(context: Context, val languages: Array<IntroLanguag
         notifyDataSetChanged() // Refresh the list to update the bold text
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
     fun selectedMessage() = languages[mSelectedItem].message
 
     fun selectedDesc() = languages[mSelectedItem].desc
 
     fun selectedAudio() = languages[mSelectedItem].audio
+
+    fun selectedLang() = languages[mSelectedItem].lang
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)

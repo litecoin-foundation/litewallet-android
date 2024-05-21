@@ -4,13 +4,15 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRDialogView;
-import com.breadwallet.presenter.entities.PaymentItem;
+import com.breadwallet.presenter.entities.PartnerNames;
+import com.breadwallet.presenter.entities.TransactionItem;
 import com.breadwallet.presenter.entities.PaymentRequestWrapper;
 import com.breadwallet.presenter.entities.RequestObject;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BREventManager;
 import com.breadwallet.tools.threads.PaymentProtocolTask;
+import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 
 import java.io.UnsupportedEncodingException;
@@ -18,6 +20,7 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -161,8 +164,6 @@ public class BitcoinUrlHandler {
         RequestObject requestObject = getRequestFromString(url);
         if (requestObject == null || requestObject.address == null || requestObject.address.isEmpty())
             return false;
-        final String[] addresses = new String[1];
-        addresses[0] = requestObject.address;
 
         String amount = requestObject.amount;
 
@@ -176,7 +177,15 @@ public class BitcoinUrlHandler {
         } else {
             if (app != null) {
                 BRAnimator.killAllFragments(app);
-                BRSender.getInstance().sendTransaction(app, new PaymentItem(addresses, null, new BigDecimal(amount).longValue(), null, true));
+                BRSender.getInstance()
+                        .sendTransaction(app,
+                                new TransactionItem(requestObject.address,
+                                Utils.fetchPartnerKey(app, PartnerNames.LITEWALLETOPS),
+                                null,
+                                new BigDecimal(amount).longValue(),
+                                Utils.tieredOpsFee(app,  new BigDecimal(amount).longValue()),
+                                null,
+                                true));
             } else {
                 Timber.e(new NullPointerException("tryLitecoinURL, app is null!"));
             }
