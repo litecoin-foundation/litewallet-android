@@ -14,7 +14,7 @@ import com.breadwallet.presenter.activities.SetPinActivity;
 import com.breadwallet.presenter.activities.intro.WriteDownActivity;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
 import com.breadwallet.presenter.customviews.BRDialogView;
-import com.breadwallet.presenter.entities.PaymentItem;
+import com.breadwallet.presenter.entities.TransactionItem;
 import com.breadwallet.presenter.entities.PaymentRequestWrapper;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BRSharedPrefs;
@@ -39,7 +39,7 @@ import timber.log.Timber;
 
 public class PostAuth {
     private String phraseForKeyStore;
-    public PaymentItem paymentItem;
+    public TransactionItem transactionItem;
     private PaymentRequestWrapper paymentRequest;
     public static boolean isStuckWithAuthLoop;
 
@@ -184,17 +184,17 @@ public class PostAuth {
         final byte[] seed = TypesConverter.getNullTerminatedPhrase(rawSeed);
         try {
             if (seed.length != 0) {
-                if (paymentItem != null && paymentItem.serializedTx != null) {
-                    byte[] txHash = walletManager.publishSerializedTransaction(paymentItem.serializedTx, seed);
+                if (transactionItem != null && transactionItem.serializedTx != null) {
+                    byte[] txHash = walletManager.publishSerializedTransaction(transactionItem.serializedTx, seed);
                     Timber.d("timber: onPublishTxAuth: txhash:" + Arrays.toString(txHash));
                     if (Utils.isNullOrEmpty(txHash)) {
                         Timber.d("timber: onPublishTxAuth: publishSerializedTransaction returned FALSE");
                       } else {
                         TxMetaData txMetaData = new TxMetaData();
-                        txMetaData.comment = paymentItem.comment;
+                        txMetaData.comment = transactionItem.comment;
                         KVStoreManager.getInstance().putTxMetaData(app, txMetaData, txHash);
                     }
-                    paymentItem = null;
+                    transactionItem = null;
                 } else {
                     throw new NullPointerException("payment item is null");
                 }
@@ -244,8 +244,8 @@ public class PostAuth {
         this.phraseForKeyStore = phraseForKeyStore;
     }
 
-    public void setPaymentItem(PaymentItem item) {
-        this.paymentItem = item;
+    public void setTransactionItem(TransactionItem item) {
+        this.transactionItem = item;
     }
 
     public void setTmpPaymentRequest(PaymentRequestWrapper paymentRequest) {

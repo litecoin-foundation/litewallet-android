@@ -49,7 +49,6 @@ public class TxItem {
     public long getFee() {
         return fee;
     }
-
     public int getTxSize() {
         return txSize;
     }

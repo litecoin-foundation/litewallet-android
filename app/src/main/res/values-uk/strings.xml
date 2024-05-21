@@ -745,4 +745,13 @@
   <string name="radio_semi_private">Напівприватний (~42 хвилини)</string>
   <string name="radio_anonymous">Анонімно (~77 хвилин)</string>
   <string name="release_notes">ВАЖЛИВО: зачекайте ~1 годину для синхронізації!</string>
+
+  <!-- Announce Updates View -->
+  <string name="Announce.title">Не проґавте нічого!</string>
+  <string name="Announce.close">Закрити</string>
+  <string name="Announce.description">Підпишіться, щоб дізнаватися про оновлення та конкурси від команди Litewallet! Підписуйтесь на сповіщення, щоб отримувати актуальні новини, ціни та інформацію про ринок!</string>
+  <string name="Announce.no_thanks">Ні, дякую!</string>
+    <string name="Fees.Service">Сервіс</string>
+    <string name="Network.feeLabel">Мережа</string>
+    <string name="ConfirmationAllFees.Label">Збори:</string>
 </resources>
