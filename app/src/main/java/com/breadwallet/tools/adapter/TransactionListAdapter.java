@@ -1,7 +1,4 @@
 package com.breadwallet.tools.adapter;
-
-import static java.util.function.Predicate.not;
-
 import android.app.Activity;
 import android.content.Context;
 import android.util.TypedValue;
@@ -50,7 +47,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private final int promptResId;
     private List<TxItem> backUpFeed;
     private List<TxItem> itemFeed;
-    //    private Map<String, TxMetaData> mds;
     private final int txType = 0;
     private final int promptType = 1;
     private final int syncingType = 2;

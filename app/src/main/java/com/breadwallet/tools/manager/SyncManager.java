@@ -80,8 +80,6 @@ public class SyncManager {
             Timber.e(ex);
         }
     }
-
-
     private class SyncProgressTask extends Thread {
         public double progressStatus = 0;
         private BreadActivity app;
