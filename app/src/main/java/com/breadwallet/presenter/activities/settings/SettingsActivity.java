@@ -128,14 +128,6 @@ public class SettingsActivity extends BRActivity {
         /*Wallet Title*/
         items.add(new BRSettingsItem(getString(R.string.Settings_wallet), "", null, true));
 
-        /*Import Title*/
-        items.add(new BRSettingsItem(getString(R.string.Settings_importTitle), "", v -> {
-            Intent intent = new Intent(SettingsActivity.this, ImportActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
-
-        }, false));
-
         /*Show Seed Phrase*/
         items.add(new BRSettingsItem(getString(R.string.settings_show_seed), "", v -> {
           BRAnimator.showBalanceSeedFragment(this);
