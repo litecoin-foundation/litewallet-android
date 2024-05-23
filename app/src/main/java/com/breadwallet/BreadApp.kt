@@ -13,6 +13,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.breadwallet.di.component.DaggerAppComponent
+import com.breadwallet.entities.SecureRepository
 import com.breadwallet.presenter.activities.util.BRActivity
 import com.breadwallet.presenter.entities.PartnerNames
 import com.breadwallet.tools.listeners.SyncReceiver
@@ -34,11 +35,7 @@ import java.util.concurrent.atomic.AtomicInteger
 import com.pusher.pushnotifications.PushNotifications
 import timber.log.Timber
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
-    name = "setting"
-)
 class BreadApp : Application() {
-
     override fun onCreate() {
         super.onCreate()
         DaggerAppComponent.builder().build().inject(this)
@@ -46,7 +43,7 @@ class BreadApp : Application() {
         if (Utils.isEmulatorOrDebug(this)) {
             enableCrashlytics = false
         }
-
+        SecureRepository.initialize(applicationContext)
         // setup Timber
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())

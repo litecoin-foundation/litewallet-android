@@ -40,14 +40,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.ViewModelProvider
 import com.breadwallet.R
 import com.breadwallet.entities.IntroLanguage
 import com.breadwallet.entities.IntroLanguageResource
+import com.breadwallet.entities.PreferencesKeys
 import com.breadwallet.presenter.activities.AuthPassCodeActivity
 import com.breadwallet.presenter.activities.AuthPassCodeAndBiometricsActivity
 import com.breadwallet.presenter.activities.ReEnterPinActivity
 import com.breadwallet.presenter.activities.SetPin
 import com.breadwallet.presenter.activities.SetPinActivity
+import com.breadwallet.tools.viewmodel.SecurityViewModel
 import com.breadwallet.ui.theme.LitewalletAndroidTheme
 import com.breadwallet.ui.theme.barlowSemiCondensed_bold
 import com.breadwallet.ui.theme.barlowSemiCondensed_light
@@ -55,16 +58,19 @@ import com.breadwallet.ui.theme.barlowSemiCondensed_normal
 import com.breadwallet.ui.theme.barlowSemiCondensed_semi_bold
 
 class SetSecurityActivity : ComponentActivity() {
+    private lateinit var viewModel: SecurityViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this)[SecurityViewModel::class.java]
         setContent {
-            LitewalletAndroidTheme {
+            LitewalletAndroidTheme(
+            ){
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SetSecurity()
+                    SetSecurity(viewModel = viewModel)
                 }
             }
         }
@@ -72,7 +78,7 @@ class SetSecurityActivity : ComponentActivity() {
 }
 
 @Composable
-fun SetSecurity(modifier: Modifier = Modifier){
+fun SetSecurity(modifier: Modifier = Modifier, viewModel: SecurityViewModel){
     val lazyListState = rememberLazyListState()
     val arrayLanguages = IntroLanguageResource().loadResources()
     Column (modifier= modifier
@@ -99,7 +105,13 @@ fun SetSecurity(modifier: Modifier = Modifier){
             modifier = Modifier
                 .size(20.dp)
             ,
-            onClick = { /*TODO*/ },
+            onClick = {
+                if(viewModel.getDataBoolean(PreferencesKeys.IS_DARK_MODE) == true){
+                    viewModel.saveBooleanData(PreferencesKeys.IS_DARK_MODE, false)
+                }else{
+                    viewModel.saveBooleanData(PreferencesKeys.IS_DARK_MODE, true)
+                }
+            },
         ) {
             Image(
                 painter = painterResource(id = R.drawable.icon_dark),
@@ -196,7 +208,10 @@ fun ButtonBiometrics(
         colors = ButtonDefaults.buttonColors(Color.White, Color.Black),
         border = BorderStroke(1.dp, Color.Black),
         onClick = {
-            context.startActivity(Intent(context, AuthPassCodeAndBiometricsActivity::class.java))
+            val intent = Intent(context, AuthPassCodeAndBiometricsActivity::class.java).apply {
+                putExtra("category", "0")
+            }
+            context.startActivity(intent)
         }
     ) {
         Text(
@@ -214,7 +229,10 @@ fun ButtonBiometrics(
         colors = ButtonDefaults.buttonColors(Color.White, Color.Black),
         border = BorderStroke(1.dp, Color.Black),
         onClick = {
-            context.startActivity(Intent(context, AuthPassCodeActivity::class.java))
+            val intent = Intent(context, AuthPassCodeActivity::class.java).apply {
+                putExtra("category", "1")
+            }
+            context.startActivity(intent)
         }
     ) {
         Text(
@@ -236,6 +254,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun SetSecurityPreview() {
     LitewalletAndroidTheme {
-        SetSecurity()
+//        SetSecurity(viewModel = vie)
     }
 }

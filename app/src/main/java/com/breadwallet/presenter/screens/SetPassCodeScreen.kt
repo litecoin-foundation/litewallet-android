@@ -2,6 +2,7 @@ package com.example.trypasscodeandbiometrics.screens
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.Image
@@ -34,6 +35,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.breadwallet.R
+import com.breadwallet.entities.PreferencesKeys
+import com.breadwallet.presenter.activities.ScreenPassCode
+import com.breadwallet.presenter.activities.ScreenPassCodeBio
 import com.breadwallet.presenter.activities.intro.SetSecurityActivity
 import com.breadwallet.tools.viewmodel.SecurityViewModel
 import com.breadwallet.ui.theme.barlowSemiCondensed_bold
@@ -41,25 +45,29 @@ import com.breadwallet.ui.theme.barlowSemiCondensed_semi_bold
 
 
 @Composable
-fun SetPassCode(modifier: Modifier = Modifier, navController: NavController, passCodeViewModel: SecurityViewModel, onBackPress: () -> Unit) {
+fun SetPassCode(modifier: Modifier = Modifier,
+                navController: NavController,
+                passCodeViewModel: SecurityViewModel,
+                categoryActivity: String?,
+                onBackPress: () -> Unit) {
     val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current
         ?.onBackPressedDispatcher
 
-    val backCallback = remember {
-        object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Call the provided lambda to handle back press
-                onBackPress()
-            }
-        }
-    }
-
-    DisposableEffect(key1 = onBackPressedDispatcher) {
-        onBackPressedDispatcher?.addCallback(backCallback)
-        onDispose {
-            backCallback.remove()
-        }
-    }
+//    val backCallback = remember {
+//        object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                // Call the provided lambda to handle back press
+//                onBackPress()
+//            }
+//        }
+//    }
+//
+//    DisposableEffect(key1 = onBackPressedDispatcher) {
+//        onBackPressedDispatcher?.addCallback(backCallback)
+//        onDispose {
+//            backCallback.remove()
+//        }
+//    }
 
     val context = LocalContext.current
     IconButton(
@@ -89,6 +97,7 @@ fun SetPassCode(modifier: Modifier = Modifier, navController: NavController, pas
             painter = painterResource(id = R.drawable.litewallet_logo_black_without_text),
             contentDescription = "Litewallet Logo",
         )
+        Text(text = passCodeViewModel.getData("pass_code").toString())
         Text(
             modifier = Modifier
                 .padding(top=20.dp),
@@ -106,20 +115,24 @@ fun SetPassCode(modifier: Modifier = Modifier, navController: NavController, pas
             lineHeight = 28.sp
         )
         Spacer(modifier = modifier.weight(0.3f))
-        Passcode(navController=navController, passCodeViewModel = passCodeViewModel)
+        Passcode(navController=navController, passCodeViewModel = passCodeViewModel, categoryActivity = categoryActivity)
         Spacer(modifier = modifier.weight(1/2f))
     }
 }
 
-@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun Passcode(modifier: Modifier = Modifier, navController: NavController, passCodeViewModel: SecurityViewModel) {
+fun Passcode(modifier: Modifier = Modifier, navController: NavController, passCodeViewModel: SecurityViewModel, categoryActivity: String?) {
     val pinState = remember { mutableStateListOf<Boolean>(false, false, false, false, false, false) }
     var enteredPassCode by remember { mutableStateOf("") }
     if(enteredPassCode.length == 6){
-        passCodeViewModel.saveBooleanData("is_authenticated_with_passcode", true)
-        passCodeViewModel.saveData("pass_code", enteredPassCode)
-        navController.navigate("reenter_pass_code")
+        passCodeViewModel.saveBooleanData(PreferencesKeys.IS_AUTHENTICATED_WITH_PASSCODE, true)
+        Log.e("True Save Pass COde", passCodeViewModel.getDataBoolean(PreferencesKeys.IS_AUTHENTICATED_WITH_PASSCODE).toString())
+        passCodeViewModel.saveData(PreferencesKeys.PASS_CODE, enteredPassCode)
+        if(categoryActivity == "0"){
+            navController.navigate(ScreenPassCodeBio.ReEnterPassCode.route)
+        }else if(categoryActivity == "1"){
+            navController.navigate(ScreenPassCode.ReEnterPassCode.route)
+        }
     }
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -139,12 +152,12 @@ fun Passcode(modifier: Modifier = Modifier, navController: NavController, passCo
                     ,
                     onClick = { /*TODO*/ }
                 ) {
-                    Image(
+                    Icon(
                         modifier = Modifier
                             .size(if(dotPainter == R.drawable.ellipse_outer_black)18.dp else 26.dp)
                         ,
                         painter = painterResource(dotPainter),
-                        contentDescription = ""
+                        contentDescription = "",
                     )
                 }
             }

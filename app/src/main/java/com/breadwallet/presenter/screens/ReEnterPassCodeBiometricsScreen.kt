@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.breadwallet.R
+import com.breadwallet.entities.PreferencesKeys
 import com.breadwallet.presenter.activities.ScreenPassCodeBio
 import com.breadwallet.tools.viewmodel.SecurityViewModel
 import com.breadwallet.ui.theme.barlowSemiCondensed_bold
@@ -119,12 +120,10 @@ fun PasscodeBioReEnter(modifier: Modifier = Modifier, navController: NavControll
     var match = false
     var passCode : String? = ""
     if (reEnteredPassCode.length >= 6){
-        passCode = passCodeViewModel.getData("pass_code")
+        passCode = passCodeViewModel.getData(PreferencesKeys.PASS_CODE)
         match = reEnteredPassCode == passCode
         if(match){
             navController.navigate("biometrics")
-        }else{
-            Log.e("Sowry not match: ", match.toString())
         }
     }
     Column(

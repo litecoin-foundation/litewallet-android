@@ -1,60 +1,23 @@
 package com.breadwallet.tools.viewmodel
 
-import android.app.Application
-import android.content.SharedPreferences
-import android.security.keystore.KeyGenParameterSpec
-import android.security.keystore.KeyProperties
-import androidx.lifecycle.AndroidViewModel
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKey
+import androidx.lifecycle.ViewModel
+import com.breadwallet.entities.SecureRepository
 
-class SecurityViewModel (application: Application) : AndroidViewModel(application) {
-
-    private lateinit var sharedPreferences: SharedPreferences
-
-    init {
-        setupEncryptedSharedPreferences("my_shared_preferences")
-    }
-
-    private fun setupEncryptedSharedPreferences(sharedPrefFile: String) {
-        val spec = KeyGenParameterSpec.Builder(
-            MasterKey.DEFAULT_MASTER_KEY_ALIAS,
-            KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
-        ).setBlockModes(KeyProperties.BLOCK_MODE_GCM)
-            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-            .setKeySize(MasterKey.DEFAULT_AES_GCM_MASTER_KEY_SIZE)
-            .build()
-
-        val masterKey = MasterKey.Builder(getApplication()).setKeyGenParameterSpec(spec).build()
-
-        sharedPreferences = EncryptedSharedPreferences.create(
-            getApplication(),
-            sharedPrefFile,
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-    }
-
+class SecurityViewModel () : ViewModel() {
     fun saveData(key: String, value: String) {
-        with (sharedPreferences.edit()) {
-            putString(key, value)
-            commit()
-        }
-    }
-
-    fun saveBooleanData(key: String, value: Boolean){
-        with (sharedPreferences.edit()) {
-            putBoolean(key, value)
-            commit()
-        }
+        SecureRepository.saveData(key, value)
     }
 
     fun getData(key: String): String? {
-        return sharedPreferences.getString(key, null)
+        return SecureRepository.getData(key)
     }
 
-    fun getDataBoolean(key: String) : Boolean? {
-        return sharedPreferences.getBoolean(key, false)
+    fun saveBooleanData(key: String, value: Boolean) {
+        SecureRepository.saveDataBoolean(key, value)
     }
+
+    fun getDataBoolean(key: String): Boolean {
+        return SecureRepository.getDataBoolean(key)
+    }
+
 }
