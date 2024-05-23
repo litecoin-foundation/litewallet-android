@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 
-import com.breadwallet.BreadApp;
 import com.breadwallet.presenter.entities.CurrencyEntity;
 import com.breadwallet.tools.sqlite.CurrencyDataSource;
 import com.breadwallet.tools.threads.BRExecutor;
 
-import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.platform.APIClient;
 

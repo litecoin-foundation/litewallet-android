@@ -21,6 +21,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.breadwallet.BreadApp;
+import com.breadwallet.BreadApp_java;
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRButton;
 import com.breadwallet.presenter.customviews.BRKeyboard;
@@ -203,7 +204,7 @@ public class FragmentReceive extends Fragment {
     }
 
     private void updateQr() {
-        final Context ctx = getContext() == null ? BreadApp.getBreadContext() : (Activity) getContext();
+        final Context ctx = getContext() == null ? BreadApp.Companion.getBreadContext() : (Activity) getContext();
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {

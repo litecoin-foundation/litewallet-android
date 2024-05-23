@@ -19,9 +19,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.WorkerThread;
-import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.BreadApp;
+import com.breadwallet.BreadApp_java;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
@@ -30,7 +30,6 @@ import com.breadwallet.presenter.customviews.BRToast;
 import com.breadwallet.presenter.entities.BRMerkleBlockEntity;
 import com.breadwallet.presenter.entities.BRPeerEntity;
 import com.breadwallet.presenter.entities.BRTransactionEntity;
-import com.breadwallet.presenter.entities.Fee;
 import com.breadwallet.presenter.entities.ImportPrivKeyEntity;
 import com.breadwallet.presenter.entities.TxItem;
 import com.breadwallet.presenter.interfaces.BROnSignalCompletion;
@@ -54,8 +53,6 @@ import com.breadwallet.tools.util.Bip39Reader;
 import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
 import com.platform.entities.WalletInfo;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
@@ -339,7 +336,7 @@ public class BRWalletManager {
      */
     public static void publishCallback(final String message, final int error, byte[] txHash) {
         Timber.d("timber: publishCallback: " + message + ", err:" + error + ", txHash: " + Arrays.toString(txHash));
-        final Context app = BreadApp.getBreadContext();
+        final Context app = BreadApp.Companion.getBreadContext();
         BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
             @Override
             public void run() {
@@ -364,7 +361,7 @@ public class BRWalletManager {
 
     public static void onBalanceChanged(final long balance) {
         Timber.d("timber: onBalanceChanged:  " + balance);
-        Context app = BreadApp.getBreadContext();
+        Context app = BreadApp.Companion.getBreadContext();
         BRWalletManager.getInstance().setBalance(app, balance);
 
     }
@@ -372,7 +369,7 @@ public class BRWalletManager {
     public static void onTxAdded(byte[] tx, int blockHeight, long timestamp, final long amount, String hash) {
         Timber.d("timber: onTxAdded: " + String.format("tx.length: %d, blockHeight: %d, timestamp: %d, amount: %d, hash: %s", tx.length, blockHeight, timestamp, amount, hash));
 
-        final Context ctx = BreadApp.getBreadContext();
+        final Context ctx = BreadApp.Companion.getBreadContext();
         if (amount > 0) {
             BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                 @Override
@@ -392,7 +389,7 @@ public class BRWalletManager {
     }
 
     private static void showToastWithMessage(Context ctx, final String message) {
-        if (ctx == null) ctx = BreadApp.getBreadContext();
+        if (ctx == null) ctx = BreadApp.Companion.getBreadContext();
         if (ctx != null) {
             final Context finalCtx = ctx;
             new Handler().postDelayed(new Runnable() {
@@ -400,7 +397,7 @@ public class BRWalletManager {
                 public void run() {
                     if (!BRToast.isToastShown()) {
                         BRToast.showCustomToast(finalCtx, message,
-                                BreadApp.DISPLAY_HEIGHT_PX / 2, Toast.LENGTH_LONG, R.drawable.toast_layout_black);
+                                BreadApp.Companion.getDISPLAY_HEIGHT_PX() / 2, Toast.LENGTH_LONG, R.drawable.toast_layout_black);
                         AudioManager audioManager = (AudioManager) finalCtx.getSystemService(Context.AUDIO_SERVICE);
                         if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
                             final MediaPlayer mp = MediaPlayer.create(finalCtx, R.raw.coinflip);
@@ -425,7 +422,7 @@ public class BRWalletManager {
 
     public static void onTxUpdated(String hash, int blockHeight, int timeStamp) {
         Timber.d("timber: onTxUpdated: " + String.format("hash: %s, blockHeight: %d, timestamp: %d", hash, blockHeight, timeStamp));
-        Context ctx = BreadApp.getBreadContext();
+        Context ctx = BreadApp.Companion.getBreadContext();
         if (ctx != null) {
             TransactionDataSource.getInstance(ctx).updateTxBlockHeight(hash, blockHeight, timeStamp);
 
@@ -436,7 +433,7 @@ public class BRWalletManager {
 
     public static void onTxDeleted(String hash, int notifyUser, final int recommendRescan) {
         Timber.d("timber: onTxDeleted: " + String.format("hash: %s, notifyUser: %d, recommendRescan: %d", hash, notifyUser, recommendRescan));
-        final Context ctx = BreadApp.getBreadContext();
+        final Context ctx = BreadApp.Companion.getBreadContext();
         if (ctx != null) {
             BRSharedPrefs.putScanRecommended(ctx, true);
         } else {

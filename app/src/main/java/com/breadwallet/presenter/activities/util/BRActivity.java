@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.BreadApp;
+import com.breadwallet.BreadApp_java;
 import com.breadwallet.presenter.activities.DisabledActivity;
 import com.breadwallet.presenter.activities.intro.IntroActivity;
 import com.breadwallet.presenter.activities.intro.RecoverActivity;
@@ -47,9 +48,9 @@ public class BRActivity extends FragmentActivity {
     @Override 
     protected void onStop() {
         super.onStop();
-        BreadApp.activityCounter.decrementAndGet();
-        BreadApp.onStop(this);
-        BreadApp.backgroundedTime = System.currentTimeMillis();
+        BreadApp.Companion.getActivityCounter().decrementAndGet();
+        BreadApp.Companion.onStop(this);
+        BreadApp.Companion.setBackgroundedTime(System.currentTimeMillis());
     }
 
     @Override
@@ -145,18 +146,18 @@ public class BRActivity extends FragmentActivity {
             if (AuthManager.getInstance().isWalletDisabled(app))
                 AuthManager.getInstance().setWalletDisabled(app);
 
-        BreadApp.activityCounter.incrementAndGet();
-        BreadApp.setBreadContext(app);
+        BreadApp.Companion.getActivityCounter().incrementAndGet();
+        BreadApp.Companion.setBreadContext(app);
         //lock wallet if 3 minutes passed (180 * 1000)
-        if (BreadApp.backgroundedTime != 0 && hasTimeElapsedSinceInBackground(180 * 1000) && !(app instanceof DisabledActivity)) {
+        if (BreadApp.Companion.getBackgroundedTime() != 0 && hasTimeElapsedSinceInBackground(180 * 1000) && !(app instanceof DisabledActivity)) {
             if (!BRKeyStore.getPinCode(app).isEmpty()) {
                 BRAnimator.startBreadActivity(app, true);
             }
         }
-        BreadApp.backgroundedTime = System.currentTimeMillis();
+        BreadApp.Companion.setBackgroundedTime(System.currentTimeMillis());
     }
 
     private static boolean hasTimeElapsedSinceInBackground(long timeInMillis) {
-        return System.currentTimeMillis() - BreadApp.backgroundedTime >= timeInMillis;
+        return System.currentTimeMillis() - BreadApp.Companion.getBackgroundedTime() >= timeInMillis;
     }
 }

@@ -5,14 +5,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import android.util.Log;
 
 import com.breadwallet.BreadApp;
+import com.breadwallet.BreadApp_java;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.tools.util.BRCompressor;
 import com.breadwallet.tools.util.BRConstants;
-import com.breadwallet.tools.util.Utils;
-import com.jniwrappers.BRKey;
 import com.platform.APIClient;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,7 +29,7 @@ public class PlatformTests {
     private static final String PROTO = "https";
     // host is the server(s) on which the API is hosted
     // convenience getter for the API endpoint
-    private static final String BASE_URL = PROTO + "://" + BreadApp.HOST;
+    private static final String BASE_URL = PROTO + "://" + BreadApp.Companion.getHOST();
     //feePerKb url
     private static final String FEE_PER_KB_URL = "/v1/fee-per-kb";
     //token
