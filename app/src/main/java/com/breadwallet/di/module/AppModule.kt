@@ -1,9 +1,12 @@
 package com.breadwallet.di.module
 
 import com.breadwallet.BreadApp
-import com.breadwallet.BreadApp_java
+import com.breadwallet.BreadApp_kt
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import dagger.hilt.migration.DisableInstallInCheck
 import javax.inject.Singleton
 
 /** Litewallet
@@ -12,7 +15,9 @@ import javax.inject.Singleton
  * Copyright © 2020 Litecoin Foundation. All rights reserved.
  */
 @Module
+@DisableInstallInCheck
 class AppModule(val app: BreadApp) {
+
     @Provides
     @Singleton
     fun provideApplication() = app

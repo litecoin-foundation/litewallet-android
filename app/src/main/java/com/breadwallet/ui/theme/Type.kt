@@ -11,19 +11,17 @@ import com.breadwallet.R
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
+        fontFamily = FontFamily(Font(R.font.barlowsemicondensed_light, FontWeight.Bold)),
+    ),
+
     titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        fontFamily = FontFamily(Font(R.font.barlowsemicondensed_semibold, FontWeight.SemiBold))
+    ),
+    titleMedium = TextStyle(
+        fontFamily = FontFamily(Font(R.font.barlowsemicondensed_bold, FontWeight.Normal))
+    ),
+    titleSmall = TextStyle(
+        fontFamily = FontFamily(Font(R.font.barlowsemicondensed_semibold))
     ),
     labelSmall = TextStyle(
         fontFamily = FontFamily.Default,
@@ -32,7 +30,7 @@ val Typography = Typography(
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
     )
-    */
+
 )
 
 val barlowSemiCondensed_light = FontFamily(Font(R.font.barlowsemicondensed_light, FontWeight.Light))

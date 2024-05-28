@@ -1,5 +1,6 @@
 package com.breadwallet
 
+
 import android.app.Activity
 import android.app.Application
 import android.content.Context
@@ -7,7 +8,6 @@ import android.graphics.Point
 import android.hardware.fingerprint.FingerprintManager
 import android.os.Bundle
 import android.util.Log
-import android.view.Display
 import android.view.WindowManager
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -33,8 +33,9 @@ import java.util.Timer
 import java.util.TimerTask
 import java.util.concurrent.atomic.AtomicInteger
 import com.pusher.pushnotifications.PushNotifications
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
-
+@HiltAndroidApp
 class BreadApp : Application() {
     override fun onCreate() {
         super.onCreate()

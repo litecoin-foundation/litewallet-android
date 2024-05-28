@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.breadwallet.BreadApp;
-import com.breadwallet.BreadApp_java;
 import com.breadwallet.R;
 
 public class BRToast {

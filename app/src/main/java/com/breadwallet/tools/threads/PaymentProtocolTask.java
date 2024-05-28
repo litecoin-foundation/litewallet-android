@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.breadwallet.BreadApp;
-import com.breadwallet.BreadApp_java;
 import com.breadwallet.R;
 import com.breadwallet.exceptions.CertificateChainNotFound;
 import com.breadwallet.presenter.customviews.BRDialogView;

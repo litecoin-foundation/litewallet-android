@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.breadwallet.di.component.DaggerAppComponent;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.tools.listeners.SyncReceiver;
@@ -97,7 +96,7 @@ public class BreadApp_java extends Application {
         TimerTask backgroundCheck = new TimerTask() {
             @Override
             public void run() {
-                if (BreadApp.Companion.isAppInBackground(app)) {
+                if (BreadApp_kt.Companion.isAppInBackground(app)) {
                     backgroundedTime = System.currentTimeMillis();
                     Timber.d("timber: App went in background!");
                     // APP in background, do something

@@ -7,7 +7,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.breadwallet.BreadApp;
-import com.breadwallet.BreadApp_java;
 import com.breadwallet.presenter.entities.BlockEntity;
 import com.breadwallet.presenter.entities.PeerEntity;
 import com.breadwallet.tools.manager.AnalyticsManager;

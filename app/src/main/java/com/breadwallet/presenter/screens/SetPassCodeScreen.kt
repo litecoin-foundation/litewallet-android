@@ -18,9 +18,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -39,6 +41,7 @@ import com.breadwallet.entities.PreferencesKeys
 import com.breadwallet.presenter.activities.ScreenPassCode
 import com.breadwallet.presenter.activities.ScreenPassCodeBio
 import com.breadwallet.presenter.activities.intro.SetSecurityActivity
+import com.breadwallet.tools.util.AppTheme
 import com.breadwallet.tools.viewmodel.SecurityViewModel
 import com.breadwallet.ui.theme.barlowSemiCondensed_bold
 import com.breadwallet.ui.theme.barlowSemiCondensed_semi_bold
@@ -49,6 +52,7 @@ fun SetPassCode(modifier: Modifier = Modifier,
                 navController: NavController,
                 passCodeViewModel: SecurityViewModel,
                 categoryActivity: String?,
+                theme: State<AppTheme>,
                 onBackPress: () -> Unit) {
     val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current
         ?.onBackPressedDispatcher
@@ -97,12 +101,11 @@ fun SetPassCode(modifier: Modifier = Modifier,
             painter = painterResource(id = R.drawable.litewallet_logo_black_without_text),
             contentDescription = "Litewallet Logo",
         )
-        Text(text = passCodeViewModel.getData("pass_code").toString())
         Text(
             modifier = Modifier
                 .padding(top=20.dp),
             text = "Create",
-            fontFamily = barlowSemiCondensed_bold,
+            style = MaterialTheme.typography.bodyLarge,
             fontSize = 36.sp,
         )
         Text(
@@ -110,7 +113,7 @@ fun SetPassCode(modifier: Modifier = Modifier,
                 .width(210.dp)
                 .padding(top = 20.dp, start = 8.dp),
             text = "Pick a 6-digit passcode to unlock your Litewallet",
-            fontFamily = barlowSemiCondensed_semi_bold,
+            style = MaterialTheme.typography.titleLarge,
             fontSize = 18.sp,
             lineHeight = 28.sp
         )
@@ -189,8 +192,7 @@ fun Passcode(modifier: Modifier = Modifier, navController: NavController, passCo
                     ) {
                         Text(
                             text = it.toString(),
-                            color = Color.Black,
-                            fontFamily = barlowSemiCondensed_semi_bold,
+                            style = MaterialTheme.typography.titleLarge,
                             fontSize = 32.sp
                         )
                     }
@@ -224,8 +226,7 @@ fun Passcode(modifier: Modifier = Modifier, navController: NavController, passCo
                     ) {
                         Text(
                             text = it.toString(),
-                            color = Color.Black,
-                            fontFamily = barlowSemiCondensed_semi_bold,
+                            style = MaterialTheme.typography.titleLarge,
                             fontSize = 32.sp
                         )
                     }
@@ -259,8 +260,7 @@ fun Passcode(modifier: Modifier = Modifier, navController: NavController, passCo
                     ) {
                         Text(
                             text = it.toString(),
-                            color = Color.Black,
-                            fontFamily = barlowSemiCondensed_semi_bold,
+                            style = MaterialTheme.typography.titleLarge,
                             fontSize = 32.sp
                         )
                     }
@@ -293,8 +293,7 @@ fun Passcode(modifier: Modifier = Modifier, navController: NavController, passCo
                     ) {
                         Text(
                             text = it.toString(),
-                            color = Color.Black,
-                            fontFamily = barlowSemiCondensed_semi_bold,
+                            style = MaterialTheme.typography.titleLarge,
                             fontSize = 32.sp
                         )
                     }

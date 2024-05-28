@@ -20,6 +20,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -35,13 +36,17 @@ import androidx.navigation.NavController
 import com.breadwallet.R
 import com.breadwallet.entities.PreferencesKeys
 import com.breadwallet.presenter.activities.ScreenPassCodeBio
+import com.breadwallet.tools.util.AppTheme
 import com.breadwallet.tools.viewmodel.SecurityViewModel
 import com.breadwallet.ui.theme.barlowSemiCondensed_bold
 import com.breadwallet.ui.theme.barlowSemiCondensed_semi_bold
 
 
 @Composable
-fun ReEnterPassCodeBio(modifier: Modifier = Modifier, navController: NavController, passCodeViewModel: SecurityViewModel) {
+fun ReEnterPassCodeBio(modifier: Modifier = Modifier, navController: NavController,
+                       passCodeViewModel: SecurityViewModel,
+                       theme: State<AppTheme>
+) {
     val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current
         ?.onBackPressedDispatcher
 
@@ -105,7 +110,7 @@ fun ReEnterPassCodeBio(modifier: Modifier = Modifier, navController: NavControll
             lineHeight = 28.sp
         )
         Spacer(modifier = modifier.weight(0.5f))
-        PasscodeBioReEnter(navController=navController, passCodeViewModel = passCodeViewModel)
+        PasscodeBioReEnter(navController=navController, passCodeViewModel = passCodeViewModel, theme = theme)
         Spacer(modifier = Modifier
             .weight(1/2f)
         )
@@ -114,7 +119,7 @@ fun ReEnterPassCodeBio(modifier: Modifier = Modifier, navController: NavControll
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun PasscodeBioReEnter(modifier: Modifier = Modifier, navController: NavController, passCodeViewModel: SecurityViewModel) {
+fun PasscodeBioReEnter(modifier: Modifier = Modifier, navController: NavController, passCodeViewModel: SecurityViewModel, theme: State<AppTheme>) {
     val pinState = remember { mutableStateListOf<Boolean>(false, false, false, false, false, false) }
     var reEnteredPassCode by remember { mutableStateOf("") }
     var match = false
@@ -136,7 +141,7 @@ fun PasscodeBioReEnter(modifier: Modifier = Modifier, navController: NavControll
                 modifier = Modifier
                     .padding(bottom=10.dp),
                 text = "Wrong Passcode",
-                color = Color.Red
+                color = if(theme.value == AppTheme.MODE_DAY) Color.Red else Color.White
             )
         }else{
             Text(text = "")
@@ -147,7 +152,11 @@ fun PasscodeBioReEnter(modifier: Modifier = Modifier, navController: NavControll
             ,
         ){
             repeat(6) {
-                val dotPainter = if (pinState[it]) R.drawable.ic_pin_dot_black else R.drawable.ellipse_outer_black
+                val dotPainter = if(theme.value == AppTheme.MODE_DAY){
+                    if (pinState[it]) R.drawable.ic_pin_dot_black else R.drawable.ellipse_outer_black
+                }else{
+                    if (pinState[it]) R.drawable.ic_pin_dot_white else R.drawable.outer_circle_white
+                }
                 IconButton(
                     modifier = Modifier
                         .width(35.dp)
@@ -156,7 +165,7 @@ fun PasscodeBioReEnter(modifier: Modifier = Modifier, navController: NavControll
                 ) {
                     Image(
                         modifier = Modifier
-                            .size(if(dotPainter == R.drawable.ellipse_outer_black)18.dp else 26.dp)
+                            .size(if(dotPainter == R.drawable.ellipse_outer_black || dotPainter == R.drawable.outer_circle_white)18.dp else 26.dp)
                         ,
                         painter = painterResource(dotPainter),
                         contentDescription = ""
@@ -190,7 +199,6 @@ fun PasscodeBioReEnter(modifier: Modifier = Modifier, navController: NavControll
                     ) {
                         Text(
                             text = it.toString(),
-                            color = Color.Black,
                             fontFamily = barlowSemiCondensed_semi_bold,
                             fontSize = 32.sp
                         )
@@ -223,7 +231,6 @@ fun PasscodeBioReEnter(modifier: Modifier = Modifier, navController: NavControll
                     ) {
                         Text(
                             text = it.toString(),
-                            color = Color.Black,
                             fontFamily = barlowSemiCondensed_semi_bold,
                             fontSize = 32.sp
                         )
@@ -256,7 +263,6 @@ fun PasscodeBioReEnter(modifier: Modifier = Modifier, navController: NavControll
                     ) {
                         Text(
                             text = it.toString(),
-                            color = Color.Black,
                             fontFamily = barlowSemiCondensed_semi_bold,
                             fontSize = 32.sp
                         )
@@ -288,7 +294,6 @@ fun PasscodeBioReEnter(modifier: Modifier = Modifier, navController: NavControll
                     ) {
                         Text(
                             text = it.toString(),
-                            color = Color.Black,
                             fontFamily = barlowSemiCondensed_semi_bold,
                             fontSize = 32.sp
                         )

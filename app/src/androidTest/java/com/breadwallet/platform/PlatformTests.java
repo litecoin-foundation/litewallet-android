@@ -5,7 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import android.util.Log;
 
 import com.breadwallet.BreadApp;
-import com.breadwallet.BreadApp_java;
+import com.breadwallet.BreadApp_kt;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.tools.util.BRCompressor;
 import com.breadwallet.tools.util.BRConstants;

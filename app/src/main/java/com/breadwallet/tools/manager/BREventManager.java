@@ -3,7 +3,6 @@ package com.breadwallet.tools.manager;
 import android.content.Context;
 
 import com.breadwallet.BreadApp;
-import com.breadwallet.BreadApp_java;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -17,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +32,7 @@ import androidx.navigation.NavHostController
 import com.breadwallet.R
 import com.breadwallet.entities.PreferencesKeys
 import com.breadwallet.presenter.activities.ScreenPassCodeBio
+import com.breadwallet.tools.util.AppTheme
 import com.breadwallet.tools.util.authenticateUser
 import com.breadwallet.tools.viewmodel.SecurityViewModel
 import com.breadwallet.ui.theme.barlowSemiCondensed_normal
@@ -40,7 +42,8 @@ import com.breadwallet.ui.theme.barlowSemiCondensed_semi_bold
 fun Biometrics(modifier: Modifier = Modifier,
                biometricPrompt: BiometricPrompt,
                securityViewModel: SecurityViewModel,
-               navController: NavHostController
+               navController: NavHostController,
+               theme: State<AppTheme>
 ){
     val context = LocalContext.current
     val biometricManager: BiometricManager =  BiometricManager.from(context)
@@ -53,7 +56,9 @@ fun Biometrics(modifier: Modifier = Modifier,
         Image(
             modifier = Modifier
                 .size(200.dp),
-            painter = painterResource(id = R.drawable.litewallet_logo_black_without_text),
+            painter = if(theme.value == AppTheme.MODE_DAY) painterResource(id = R.drawable.litewallet_logo_black_without_text) else painterResource(
+                id = R.drawable.litewallet_logotype_white_200
+            ),
             contentDescription = "Litewallet Logo"
         )
         Spacer(modifier = Modifier.height(50.dp))
@@ -70,7 +75,7 @@ fun Biometrics(modifier: Modifier = Modifier,
             textAlign = TextAlign.Center,
             text = "Adding PIN or biometric you are securing your wallet from unwanted access.",
             fontFamily = barlowSemiCondensed_normal,
-            color = Color.DarkGray,
+            color = if(theme.value == AppTheme.MODE_DAY) Color.DarkGray else Color.LightGray,
             fontSize = 16.sp
         )
 
@@ -139,7 +144,9 @@ fun Biometrics(modifier: Modifier = Modifier,
                 modifier = Modifier
                     .size(50.dp)
                 ,
-                painter = painterResource(R.drawable.fingerprints),
+                painter = if(theme.value == AppTheme.MODE_DAY) painterResource(R.drawable.fingerprint_black) else painterResource(
+                    id = R.drawable.fingerprint_white
+                ),
                 contentDescription = "Biometrics"
             )
         }

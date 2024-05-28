@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.NetworkOnMainThreadException;
 
 import com.breadwallet.BreadApp;
-import com.breadwallet.BreadApp_java;
 import com.breadwallet.BuildConfig;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
 import com.breadwallet.tools.util.BRConstants;

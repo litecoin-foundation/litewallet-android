@@ -1,12 +1,16 @@
 package com.breadwallet.presenter.activities.intro
 
 import android.content.Intent
+import android.content.res.Resources.Theme
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +31,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,6 +46,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.breadwallet.R
 import com.breadwallet.entities.IntroLanguage
@@ -50,27 +57,41 @@ import com.breadwallet.presenter.activities.AuthPassCodeAndBiometricsActivity
 import com.breadwallet.presenter.activities.ReEnterPinActivity
 import com.breadwallet.presenter.activities.SetPin
 import com.breadwallet.presenter.activities.SetPinActivity
+import com.breadwallet.tools.util.AppTheme
+import com.breadwallet.tools.util.ThemeSetting
 import com.breadwallet.tools.viewmodel.SecurityViewModel
 import com.breadwallet.ui.theme.LitewalletAndroidTheme
 import com.breadwallet.ui.theme.barlowSemiCondensed_bold
 import com.breadwallet.ui.theme.barlowSemiCondensed_light
 import com.breadwallet.ui.theme.barlowSemiCondensed_normal
 import com.breadwallet.ui.theme.barlowSemiCondensed_semi_bold
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SetSecurityActivity : ComponentActivity() {
+    @Inject
+    lateinit var themeSetting: ThemeSetting
     private lateinit var viewModel: SecurityViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[SecurityViewModel::class.java]
         setContent {
+            val theme = themeSetting.themeStream.collectAsState()
+            val useDarkColors = when (theme.value) {
+                AppTheme.MODE_AUTO -> isSystemInDarkTheme()
+                AppTheme.MODE_DAY -> false
+                AppTheme.MODE_NIGHT -> true
+            }
             LitewalletAndroidTheme(
+                darkTheme = useDarkColors
             ){
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SetSecurity(viewModel = viewModel)
+                    SetSecurity(viewModel = viewModel, theme =  theme, themeSetting = themeSetting)
                 }
             }
         }
@@ -78,7 +99,7 @@ class SetSecurityActivity : ComponentActivity() {
 }
 
 @Composable
-fun SetSecurity(modifier: Modifier = Modifier, viewModel: SecurityViewModel){
+fun SetSecurity(modifier: Modifier = Modifier, viewModel: SecurityViewModel, theme: State<AppTheme>, themeSetting: ThemeSetting){
     val lazyListState = rememberLazyListState()
     val arrayLanguages = IntroLanguageResource().loadResources()
     Column (modifier= modifier
@@ -88,7 +109,9 @@ fun SetSecurity(modifier: Modifier = Modifier, viewModel: SecurityViewModel){
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Image(
-            painter = painterResource(id = R.drawable.litewallet_black_logo),
+            painter = if(theme.value == AppTheme.MODE_DAY) painterResource(id = R.drawable.litewallet_black_logo) else painterResource(
+                id = R.drawable.litewallet_logotype_white
+            ),
             contentDescription = "Litewallet Logo",
             modifier = Modifier
                 .width(300.dp)
@@ -96,32 +119,34 @@ fun SetSecurity(modifier: Modifier = Modifier, viewModel: SecurityViewModel){
                 .padding(0.dp, 0.dp, 0.dp, 80.dp)
         )
         // Scroll Languages
-        Languages(languagesArray = arrayLanguages, lazyListState = lazyListState)
+        Languages(languagesArray = arrayLanguages, lazyListState = lazyListState, theme = theme)
         // Texts Information
         TextInformation()
         // Button dark mode
         Spacer(modifier = Modifier.height(10.dp))
         IconButton(
             modifier = Modifier
-                .size(20.dp)
+                .size(50.dp)
             ,
             onClick = {
-                if(viewModel.getDataBoolean(PreferencesKeys.IS_DARK_MODE) == true){
-                    viewModel.saveBooleanData(PreferencesKeys.IS_DARK_MODE, false)
-                }else{
-                    viewModel.saveBooleanData(PreferencesKeys.IS_DARK_MODE, true)
+                if(theme.value == AppTheme.MODE_DAY){
+                    themeSetting.theme = AppTheme.fromOrdinal(AppTheme.MODE_NIGHT.ordinal)
+                }else if(theme.value == AppTheme.MODE_NIGHT){
+                    themeSetting.theme = AppTheme.fromOrdinal(AppTheme.MODE_DAY.ordinal)
                 }
             },
         ) {
             Image(
-                painter = painterResource(id = R.drawable.icon_dark),
+                painter = if(theme.value == AppTheme.MODE_DAY) painterResource(id=R.drawable.dark_mode_moon)
+                            else painterResource(id=R.drawable.light_mode_moon)
+                ,
                 contentScale = ContentScale.Inside,
                 contentDescription = "Dark Mode",
             )
         }
         Spacer(modifier = Modifier.weight(0.5f))
         // Button biometrics and passcode
-        ButtonBiometrics()
+        ButtonBiometrics(theme = theme)
         Text(
             modifier = Modifier.padding(top=10.dp, bottom = 10.dp),
             fontSize = 12.sp,
@@ -133,7 +158,11 @@ fun SetSecurity(modifier: Modifier = Modifier, viewModel: SecurityViewModel){
 }
 
 @Composable
-fun Languages(modifier: Modifier = Modifier, languagesArray: Array<IntroLanguage>, lazyListState: LazyListState){
+fun Languages(modifier: Modifier = Modifier,
+              languagesArray: Array<IntroLanguage>,
+              lazyListState: LazyListState,
+              theme: State<AppTheme>
+){
     LazyColumn(
         state = lazyListState,
         modifier = modifier
@@ -153,7 +182,7 @@ fun Languages(modifier: Modifier = Modifier, languagesArray: Array<IntroLanguage
             val isSelected = it == lazyListState.firstVisibleItemIndex
             Text(
                 languagesArray[it].name,
-                modifier = modifier
+                modifier = Modifier
                     .padding(0.dp, paddingTop.dp, 0.dp, paddingBottom.dp)
                     .selectable(
                         selected = isSelected,
@@ -162,7 +191,8 @@ fun Languages(modifier: Modifier = Modifier, languagesArray: Array<IntroLanguage
                 ,
                 fontFamily = barlowSemiCondensed_light,
                 fontSize = 18.sp,
-                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Light
+                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Light,
+                color = Color.Black
             )
         }
     }
@@ -179,15 +209,13 @@ fun TextInformation(modifier: Modifier = Modifier){
             text = "Set Access",
             modifier = Modifier
                 .padding(12.dp),
-            fontFamily = barlowSemiCondensed_bold,
+            style = MaterialTheme.typography.bodyLarge,
             fontSize = 28.sp,
-            color = Color.Black
         )
         Text(
             text = "Pick a passcode or biometrics so that only you can use your Litewallet.",
             fontFamily = barlowSemiCondensed_semi_bold,
             fontSize = 16.sp,
-            color = Color.Black,
             modifier = Modifier
                 .width(220.dp)
         )
@@ -196,7 +224,8 @@ fun TextInformation(modifier: Modifier = Modifier){
 
 @Composable
 fun ButtonBiometrics(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    theme: State<AppTheme>
 ) {
     val context = LocalContext.current
     Button(
@@ -205,8 +234,8 @@ fun ButtonBiometrics(
             .height(45.dp)
         ,
         shape = RectangleShape,
-        colors = ButtonDefaults.buttonColors(Color.White, Color.Black),
-        border = BorderStroke(1.dp, Color.Black),
+        colors = if(theme.value == AppTheme.MODE_DAY) ButtonDefaults.buttonColors(Color.White, Color.Black) else ButtonDefaults.buttonColors(Color.Black, Color.White),
+        border = BorderStroke(1.dp, if(theme.value == AppTheme.MODE_DAY) Color.Black else Color.White),
         onClick = {
             val intent = Intent(context, AuthPassCodeAndBiometricsActivity::class.java).apply {
                 putExtra("category", "0")
@@ -226,8 +255,8 @@ fun ButtonBiometrics(
             .height(45.dp)
         ,
         shape = RectangleShape,
-        colors = ButtonDefaults.buttonColors(Color.White, Color.Black),
-        border = BorderStroke(1.dp, Color.Black),
+        colors = if(theme.value == AppTheme.MODE_DAY) ButtonDefaults.buttonColors(Color.White, Color.Black) else ButtonDefaults.buttonColors(Color.Black, Color.White),
+        border = BorderStroke(1.dp, if(theme.value == AppTheme.MODE_DAY) Color.Black else Color.White),
         onClick = {
             val intent = Intent(context, AuthPassCodeActivity::class.java).apply {
                 putExtra("category", "1")
