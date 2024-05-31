@@ -30,7 +30,7 @@
     <!-- Error alert title -->
     <string name="Alert.error">Error</string>
     <!-- Keystore error -->
-    <string name="Alert.keystore.generic.android">There is a problem with your Android OS keystore, please contact litewallet@litecoinfoundation.net</string>
+    <string name="Alert.keystore.generic.android">There is a problem with your Android OS keystore, please contact support.litewallet.io</string>
     <!-- KeyStore error, keys are invalidated -->
     <string name="Alert.keystore.invalidated.android">Your Litewallet encrypted data was recently invalidated because your Android lock screen was disabled.</string>
     <!-- Keystore error title -->
