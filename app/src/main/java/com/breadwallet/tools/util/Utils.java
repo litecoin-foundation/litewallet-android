@@ -285,7 +285,7 @@ public class Utils {
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR,params);
         return "";
     }
-    /// Description: 1713522152
+    /// Description: 1715876807
     public static long tieredOpsFee(Context app, long sendAmount) {
 
         double sendAmountDouble = new Double(String.valueOf(sendAmount));
@@ -293,13 +293,17 @@ public class Utils {
         CurrencyEntity currency = CurrencyDataSource.getInstance(app).getCurrencyByIso(usIso);
         double doubleRate = currency.rate;
         double usdInLTC = sendAmountDouble * doubleRate / 100_000_000.0;
+        usdInLTC = Math.floor(usdInLTC * 100) / 100;
 
-        if (isBetween(usdInLTC, 0.00, 20.00)) {
-            return (long) ((0.20 / doubleRate) * 100_000_000.0);
+        if (isBetween(usdInLTC, 0.00, 20.00))  {
+            double lowRate = usdInLTC * 0.01;
+            return (long) ((lowRate / doubleRate) * 100_000_000.0);
         }
         else if (isBetween(usdInLTC, 20.00, 50.00)) {
-            return (long) ((0.25 / doubleRate) * 100_000_000.0);
-         }
+            Timber.d("timber: usdInLTC 2: %s", usdInLTC);
+
+            return (long) ((0.30 / doubleRate) * 100_000_000.0);
+        }
         else if (isBetween(usdInLTC, 50.00, 100.00)) {
              return (long) ((1.00 / doubleRate) * 100_000_000.0);
          }
