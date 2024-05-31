@@ -33,7 +33,7 @@
   <!-- Error alert title -->
   <string name="Alert.error">エラー</string>
   <!-- Keystore error -->
-  <string name="Alert.keystore.generic.android">Android OSのKeystoreに問題があります。contact@loafwallet.org にお問い合わせください。</string>
+  <string name="Alert.keystore.generic.android">Android OSのKeystoreに問題があります。support.litewallet.io にお問い合わせください。</string>
   <!-- KeyStore error, keys are invalidated -->
   <string name="Alert.keystore.invalidated.android">お使いのAndroidロック画面が無効にされたため、暗号化されたブレッドのデータはつい最近無効になりました。</string>
   <!-- Keystore error title -->

@@ -33,7 +33,7 @@
   <!-- Error alert title -->
   <string name="Alert.error">Erreur</string>
   <!-- Keystore error -->
-  <string name="Alert.keystore.generic.android">Un problème est survenu avec votre keystore Android OS, veuillez contacter contact@loafwallet.org</string>
+  <string name="Alert.keystore.generic.android">Un problème est survenu avec votre keystore Android OS, veuillez contacter support.litewallet.io</string>
   <!-- KeyStore error, keys are invalidated -->
   <string name="Alert.keystore.invalidated.android">Vos données cryptées de Loaf ont été récemment invalidées, car le verrouillage de l\'écran de votre appareil Android a été désactivé.</string>
   <!-- Keystore error title -->

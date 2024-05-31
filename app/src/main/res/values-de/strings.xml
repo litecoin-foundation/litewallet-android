@@ -33,7 +33,7 @@
   <!-- Error alert title -->
   <string name="Alert.error">Fehler</string>
   <!-- Keystore error -->
-  <string name="Alert.keystore.generic.android">Es liegt ein Problem mit dem KeyStore Ihres Android-Betriebssystems vor, bitte wenden Sie sich an contact@loafwallet.org</string>
+  <string name="Alert.keystore.generic.android">Es liegt ein Problem mit dem KeyStore Ihres Android-Betriebssystems vor, bitte wenden Sie sich an support.litewallet.io</string>
   <!-- KeyStore error, keys are invalidated -->
   <string name="Alert.keystore.invalidated.android">Ihre mit Loaf verschlüsselten Daten wurden vor Kurzem für ungültig erklärt, da Ihre Android-Bildschirmsperre deaktiviert war.</string>
   <!-- Keystore error title -->
@@ -197,7 +197,7 @@
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Wallet verwalten</string>
   <!-- Buy bitcoin title -->
-  <string name="MenuButton.buy">Litecoin kaufen</string>
+  <string name="MenuButton.buy">Kaufen</string>
   <!-- Menu button title -->
   <string name="MenuButton.lock">Wallet sperren</string>
   <!-- Menu button title -->
