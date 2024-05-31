@@ -115,7 +115,7 @@ public class PaperKeyActivity extends BRActivity {
                             brDialogView.dismissWithAnimation();
                         }
                     }, null, null, 0);
-            IllegalArgumentException ex = new IllegalArgumentException("Paper Key error, please contact support at contact@loafwallet.org: " + wordArray.length);
+            IllegalArgumentException ex = new IllegalArgumentException("Paper Key error, please contact support at support.litewallet.io: " + wordArray.length);
             Timber.e(ex);
             throw ex;
         } else {

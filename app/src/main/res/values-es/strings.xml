@@ -33,7 +33,7 @@
   <!-- Error alert title -->
   <string name="Alert.error">Error</string>
   <!-- Keystore error -->
-  <string name="Alert.keystore.generic.android">Hay un problema con el almacén de claves de tu sistema operativo Android. Ponte en contacto con contact@loafwallet.org.</string>
+  <string name="Alert.keystore.generic.android">Hay un problema con el almacén de claves de tu sistema operativo Android. Ponte en contacto con support.litewallet.io.</string>
   <!-- KeyStore error, keys are invalidated -->
   <string name="Alert.keystore.invalidated.android">Tus datos codificados en Loaf fueron anulados recientemente debido a que no estaba habilitada tu pantalla de bloqueo de Android.</string>
   <!-- Keystore error title -->
@@ -196,7 +196,7 @@
   <!-- Manage wallet modal title -->
   <string name="ManageWallet.title">Gestionar cartera</string>
   <!-- Buy bitcoin title -->
-  <string name="MenuButton.buy">Comprar Litecoins</string>
+  <string name="MenuButton.buy">Comprar</string>
   <!-- Menu button title -->
   <string name="MenuButton.lock">Bloquear cartera</string>
   <!-- Menu button title -->
