@@ -90,7 +90,7 @@ fun Biometrics(modifier: Modifier = Modifier,
 
                 when (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG)) {
                     BiometricManager.BIOMETRIC_SUCCESS ->{
-                        if(securityViewModel.getDataBoolean(PreferencesKeys.IS_AUTHENTICATED_WITH_BIOMETRICS) == true){
+                        if(securityViewModel.getDataBoolean(PreferencesKeys.IS_AUTHENTICATED_WITH_BIOMETRICS)){
                             navController.navigate(ScreenPassCodeBio.Biometrics.route)
                         }
                     }

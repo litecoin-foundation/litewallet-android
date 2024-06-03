@@ -13,12 +13,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModelProvider
-import com.breadwallet.R
-import com.breadwallet.entities.PreferencesKeys
 import com.breadwallet.tools.util.AppTheme
 import com.breadwallet.tools.util.ThemeSetting
-import com.breadwallet.tools.viewmodel.SecurityViewModel
 import com.breadwallet.ui.theme.LitewalletAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

@@ -746,4 +746,23 @@
     <string name="Fees.Service">Servicio</string>
     <string name="Network.feeLabel">Red</string>
   <string name="ConfirmationAllFees.Label">Honorarios:</string>
+
+  <string name="litewallet_logo">Logo Litewallet</string>
+  <string name="set_access">Configurar acceso</string>
+  <string name="dark_mode">Modo oscuro</string>
+  <string name="intro_description">Elige un código de acceso o datos biométricos para que sólo tú puedas utilizar tu Litewallet.</string>
+  <string name="passcode_only">Sólo código</string>
+  <string name="biometrics_and_passcode">Utilizar biometría y código de acceso</string>
+  <string name="protect_your_wallet">Proteja su cartera</string>
+  <string name="add_pin_or_biometric">Añadiendo el PIN o la biometría estarás protegiendo tu cartera de accesos no deseados.</string>
+  <string name="failed_authentication_biometric">Fallo en la autenticación biométrica</string>
+  <string name="hardware_unavailable">El hardware no está disponible. Utilice sólo el PIN.</string>
+  <string name="no_biometrics">Sin datos biométricos</string>
+  <string name="no_biometrics_set_up">No has configurado la autenticación biométrica en tu dispositivo. Por favor, configúrala en los ajustes de tu dispositivo.</string>
+  <string name="hardware_not_compatible_with_biometric">Los datos biométricos son incompatibles con la versión actual. Utiliza solo el PIN.</string>
+  <string name="failed_to_authenticate_unknown">Ha fallado la autenticación biométrica, se desconoce la causa. Utilice solo el PIN.</string>
+  <string name="biometrics">Biometría</string>
+  <string name="reenter_description">El código de 6 dígitos debe ser diferente al de la cerradura del teléfono.</string>
+  <string name="wrong_passcode">Código incorrecto</string>
+  <string name="pick_passcode">Elige un código de 6 dígitos para desbloquear tu Litewallet</string>
 </resources>

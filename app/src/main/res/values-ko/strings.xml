@@ -747,4 +747,23 @@
     <string name="Fees.Service">서비스</string>
     <string name="Network.feeLabel">회로망</string>
     <string name="ConfirmationAllFees.Label">수수료:</string>
+
+  <string name="litewallet_logo">Litewallet Logo</string>
+  <string name="set_access">Set Access</string>
+  <string name="dark_mode">Dark Mode</string>
+  <string name="intro_description">Pick a passcode or biometrics so that only you can use your Litewallet.</string>
+  <string name="passcode_only">Passcode Only</string>
+  <string name="biometrics_and_passcode">Use Biometrics &gt; Passcode</string>
+  <string name="protect_your_wallet">Protect Your Wallet</string>
+  <string name="add_pin_or_biometric">Adding PIN or biometric you are securing your wallet from unwanted access.</string>
+  <string name="failed_authentication_biometric">Failed to Authenticate With Biometrics</string>
+  <string name="hardware_unavailable">The hardware is unavailable. Use PIN only.</string>
+  <string name="no_biometrics">No Biometrics</string>
+  <string name="no_biometrics_set_up">You haven\'t set up biometric authentication on your device. Please set it up in your device settings.</string>
+  <string name="hardware_not_compatible_with_biometric">Biometrics are incompatible with current version. Use PIN only.</string>
+  <string name="failed_to_authenticate_unknown">Failed to Authenticate with Biometrics, cause is unknown. Use PIN only.</string>
+  <string name="biometrics">Biometrics</string>
+  <string name="reenter_description">Your 6-digit passcode should be different than your phone lock</string>
+  <string name="wrong_passcode">Wrong Passcode</string>
+  <string name="pick_passcode">Pick a 6-digit passcode to unlock your Litewallet</string>
 </resources>

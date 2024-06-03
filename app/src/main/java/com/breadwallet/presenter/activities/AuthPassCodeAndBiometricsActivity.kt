@@ -184,7 +184,7 @@ fun PassCodeNav(
             Biometrics(biometricPrompt = biometricPrompt, securityViewModel = securityViewModel, navController = navController, theme = theme)
         }
         composable(ScreenPassCodeBio.ExampleProtectedScreen.route){
-            if(securityViewModel.getDataBoolean(PreferencesKeys.IS_AUTHENTICATED_WITH_BIOMETRICS) == true){
+            if(securityViewModel.getDataBoolean(PreferencesKeys.IS_AUTHENTICATED_WITH_BIOMETRICS)){
                 ExampleProtectedScreen()
             }else{
                 navController.navigate(ScreenPassCodeBio.Biometrics.route)
