@@ -771,4 +771,28 @@
     <string name="Fees.Service">Hizmet</string>
     <string name="Network.feeLabel">Ağ</string>
     <string name="ConfirmationAllFees.Label">Ücretler:</string>
+
+  <!-- Rearrange later after the redesign app created 100% -->
+  <string name="litewallet_logo">Litewallet Logo</string>
+  <string name="set_access">Erişim Ayarla</string>
+  <string name="dark_mode">Karanlık Mod</string>
+  <string name="intro_description">Litewallet\'ınızı yalnızca sizin kullanabilmeniz için bir şifre veya biyometri seçin.</string>
+  <string name="passcode_only">Yalnızca Şifre</string>
+  <string name="biometrics_and_passcode">Biyometri ve Parola Kullanın</string>
+  <string name="protect_your_wallet">Cüzdanınızı Koruyun</string>
+  <string name="add_pin_or_biometric">PIN veya biyometrik ekleyerek cüzdanınızı istenmeyen erişime karşı güvence altına alırsınız.</string>
+  <string name="failed_authentication_biometric">Biyometri ile Kimlik Doğrulaması Yapılamadı</string>
+  <string name="hardware_unavailable">Donanım kullanılamıyor. Yalnızca PIN kullanın.</string>
+  <string name="no_biometrics">Biyometri Yok</string>
+  <string name="no_biometrics_set_up">Cihazınızda biyometrik kimlik doğrulamayı ayarlamadınız. Lütfen cihaz ayarlarınızdan ayarlayın.</string>
+  <string name="hardware_not_compatible_with_biometric">Biyometri mevcut sürümle uyumlu değildir. Yalnızca PIN kullanın.</string>
+  <string name="failed_to_authenticate_unknown">Biyometri ile Kimlik Doğrulaması Yapılamadı, nedeni bilinmiyor. Yalnızca PIN kullanın.</string>
+  <string name="biometrics">Biyometri</string>
+  <string name="reenter_description">6 haneli parolanız telefon kilidinizden farklı olmalıdır</string>
+  <string name="wrong_passcode">Yanlış Şifre</string>
+  <string name="pick_passcode">Litewallet\'ınızın kilidini açmak için 6 haneli bir şifre seçin</string>
+  <string name="create">Oluştur</string>
+  <string name="confirm">Onaylayın</string>
+  <string name="welcome">Hoş geldiniz!</string>
+  <string name="authenticate_with_biometric">Biyometrik ile Kimlik Doğrulama</string>
 </resources>

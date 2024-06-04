@@ -747,4 +747,28 @@
     <string name="Fees.Service">服务</string>
     <string name="Network.feeLabel">网络</string>
     <string name="ConfirmationAllFees.Label">费用：</string>
+
+  <!-- Rearrange later after the redesign app created 100% -->
+  <string name="litewallet_logo">Litewallet 徽标</string>
+  <string name="set_access">设置访问</string>
+  <string name="dark_mode">黑暗模式</string>
+  <string name="intro_description">选择密码或生物识别技术，只有您才能使用您的 Litewallet。</string>
+  <string name="passcode_only">仅限密码</string>
+  <string name="biometrics_and_passcode">使用生物识别技术和密码</string>
+  <string name="protect_your_wallet">保护您的钱包</string>
+  <string name="add_pin_or_biometric">添加 PIN 码或生物识别技术可确保您的钱包安全，防止意外访问。</string>
+  <string name="failed_authentication_biometric">生物识别身份验证失败</string>
+  <string name="hardware_unavailable">硬件不可用。只能使用密码。</string>
+  <string name="no_biometrics">无生物识别</string>
+  <string name="no_biometrics_set_up">您尚未在设备上设置生物识别身份验证。请在设备设置中进行设置。</string>
+  <string name="hardware_not_compatible_with_biometric">生物识别技术与当前版本不兼容。只能使用密码。</string>
+  <string name="failed_to_authenticate_unknown">生物识别验证失败，原因不明。只能使用密码。</string>
+  <string name="biometrics">生物识别</string>
+  <string name="reenter_description">您的 6 位密码应与手机锁不同</string>
+  <string name="wrong_passcode">密码错误</string>
+  <string name="pick_passcode">选择 6 位数密码解锁您的 Litewallet</string>
+  <string name="create">创建</string>
+  <string name="confirm">确认</string>
+  <string name="welcome">Welcome!</string>
+  <string name="authenticate_with_biometric">使用生物识别技术进行身份验证</string>
 </resources>

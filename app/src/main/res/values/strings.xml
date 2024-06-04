@@ -636,7 +636,7 @@
     <string name="UnlockScreen.unlocked">Wallet Unlocked</string>
     <!-- Forget Seed Phrase or PIN -->
     <string name="UnlockScreen.forgetSeedPhraseOrPIN">Forget your seed Phrase or PIN?</string>
-  <!-- Update PIN caption text -->
+    <!-- Update PIN caption text -->
     <string name="UpdatePin.caption">Remember this PIN. If you forget it, you won\'t be able to access your Litecoin.</string>
     <!-- PIN creation info. -->
     <string name="UpdatePin.createInstruction">Your PIN will be used to unlock your Litewallet and send money.</string>
@@ -747,34 +747,58 @@
 
     <!-- Balance -->
     <string name="ManageWallet.balance">Balance</string>
-    
-  <string name="Login.ltcPrice" translatable="false">1 LTC = %1$s</string>
-  <string name="Login.currentLtcPrice">Current LTC value in %1$s</string>
-  <string name="Settings.languages">Languages</string>
-  <string name="Settings.ChangeLanguage.alertMessage">Are you sure you want to change the language to English?</string>
-  <string name="JailbreakWarnings.close">Close</string>
 
-  <!-- donation dialog -->
-  <string name="Donate.Dialog.title">Donate to the Litecoin Foundation</string>
-  <string name="Donate.Dialog.message">We appreciate your donation to the Litecoin Foundation. Donations are final and can not be refunded. Thanks for your continuing support.</string>
-  <string name="Donate.Dialog.Positive.text">Donate</string>
-  <string name="Donate.Dialog.Negative.text">Cancel</string>
-  <string name="Donate.toThe.LWTeam">Donate to: Litewallet Infrastructure</string>
-  <string name="About.Instagram" translatable="false">Instagram</string>
-  <string name="seed_phrase.label" translatable="false">1: %s 2: %s 3: %s 4: %s \\n5: %s 6: %s 7: %s 8: %s%s \\n9: %s 10: %s 11: %s 12: %s  %s</string>
-  <string name="show_seed_label">Show</string>
-  <string name="settings_show_seed">Show my seed phrase</string>
-  <string name="sync_preferences">Sync  Preference: %1$s false positives</string>
-  <string name="radio_low_privacy">Low privacy (~45 minutes)</string>
-  <string name="radio_semi_private">Semi-private (~60 minutes)</string>
-  <string name="radio_anonymous">Anonymous (~77 minutes)</string>
-  <string name="release_notes">IMPORTANT: App will sync to allow 1ltc addresses. Wait ~1 hour for syncing!</string>
+    <string name="Login.ltcPrice" translatable="false">1 LTC = %1$s</string>
+    <string name="Login.currentLtcPrice">Current LTC value in %1$s</string>
+    <string name="Settings.languages">Languages</string>
+    <string name="Settings.ChangeLanguage.alertMessage">Are you sure you want to change the language to English?</string>
+    <string name="JailbreakWarnings.close">Close</string>
 
-  <!-- Announce Updates View -->
-  <string name="Announce.title">Don\'t miss a thing!</string>
-  <string name="Announce.close">Close</string>
-  <string name="Announce.description">Signup to hear about updates and contests from the Litewallet team! Accept notifications to get live news, price, \u0026 market information!</string>
-  <string name="Announce.no_thanks">No, thanks!</string>
+    <!-- donation dialog -->
+    <string name="Donate.Dialog.title">Donate to the Litecoin Foundation</string>
+    <string name="Donate.Dialog.message">We appreciate your donation to the Litecoin Foundation. Donations are final and can not be refunded. Thanks for your continuing support.</string>
+    <string name="Donate.Dialog.Positive.text">Donate</string>
+    <string name="Donate.Dialog.Negative.text">Cancel</string>
+    <string name="Donate.toThe.LWTeam">Donate to: Litewallet Infrastructure</string>
+    <string name="About.Instagram" translatable="false">Instagram</string>
+    <string name="seed_phrase.label" translatable="false">1: %s 2: %s 3: %s 4: %s \\n5: %s 6: %s 7: %s 8: %s%s \\n9: %s 10: %s 11: %s 12: %s  %s</string>
+    <string name="show_seed_label">Show</string>
+    <string name="settings_show_seed">Show my seed phrase</string>
+    <string name="sync_preferences">Sync  Preference: %1$s false positives</string>
+    <string name="radio_low_privacy">Low privacy (~45 minutes)</string>
+    <string name="radio_semi_private">Semi-private (~60 minutes)</string>
+    <string name="radio_anonymous">Anonymous (~77 minutes)</string>
+    <string name="release_notes">IMPORTANT: App will sync to allow 1ltc addresses. Wait ~1 hour for syncing!</string>
+
+    <!-- Announce Updates View -->
+    <string name="Announce.title">Don\'t miss a thing!</string>
+    <string name="Announce.close">Close</string>
+    <string name="Announce.description">Signup to hear about updates and contests from the Litewallet team! Accept notifications to get live news, price, \u0026 market information!</string>
+    <string name="Announce.no_thanks">No, thanks!</string>
     <string name="Fees.Service">Service</string>
     <string name="ConfirmationAllFees.Label">Fees:</string>
+
+    <!-- Rearrange later after the redesign app created 100% -->
+    <string name="litewallet_logo">Litewallet Logo</string>
+    <string name="set_access">Set Access</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="intro_description">Pick a passcode or biometrics so that only you can use your Litewallet.</string>
+    <string name="passcode_only">Passcode Only</string>
+    <string name="biometrics_and_passcode">Use Biometrics &gt; Passcode</string>
+    <string name="protect_your_wallet">Protect Your Wallet</string>
+    <string name="add_pin_or_biometric">Adding PIN or biometric you are securing your wallet from unwanted access.</string>
+    <string name="failed_authentication_biometric">Failed to Authenticate With Biometrics</string>
+    <string name="hardware_unavailable">The hardware is unavailable. Use PIN only.</string>
+    <string name="no_biometrics">No Biometrics</string>
+    <string name="no_biometrics_set_up">You haven\'t set up biometric authentication on your device. Please set it up in your device settings.</string>
+    <string name="hardware_not_compatible_with_biometric">Biometrics are incompatible with current version. Use PIN only.</string>
+    <string name="failed_to_authenticate_unknown">Failed to Authenticate with Biometrics, cause is unknown. Use PIN only.</string>
+    <string name="biometrics">Biometrics</string>
+    <string name="reenter_description">Your 6-digit passcode should be different than your phone lock</string>
+    <string name="wrong_passcode">Wrong Passcode</string>
+    <string name="pick_passcode">Pick a 6-digit passcode to unlock your Litewallet</string>
+    <string name="create">Create</string>
+    <string name="confirm">Confirm</string>
+    <string name="welcome">Welcome!</string>
+    <string name="authenticate_with_biometric">Authenticate with Biometric</string>
 </resources>

@@ -747,4 +747,28 @@
     <string name="Fees.Service">Servizio</string>
     <string name="Network.feeLabel">Rete</string>
   <string name="ConfirmationAllFees.Label">Commissioni:</string>
+
+  <!-- Rearrange later after the redesign app created 100% -->
+  <string name="litewallet_logo">Logo Litewallet</string>
+  <string name="set_access">Impostare l\'accesso</string>
+  <string name="dark_mode">Modalità scura</string>
+  <string name="intro_description">Scegliete un codice di accesso o una biometria in modo che solo voi possiate utilizzare il vostro Litewallet.</string>
+  <string name="passcode_only">Solo codice di accesso</string>
+  <string name="biometrics_and_passcode">Utilizzare la biometria e il codice di accesso</string>
+  <string name="protect_your_wallet">Proteggere il portafoglio</string>
+  <string name="add_pin_or_biometric">Aggiungendo il PIN o la biometria, si protegge il portafoglio da accessi indesiderati.</string>
+  <string name="failed_authentication_biometric">Non è riuscita l\'autenticazione con la biometria</string>
+  <string name="hardware_unavailable">L\'hardware non è disponibile. Utilizzare solo il PIN.</string>
+  <string name="no_biometrics">Nessuna biometria</string>
+  <string name="no_biometrics_set_up">Non è stata impostata l\'autenticazione biometrica sul dispositivo. Si prega di impostarla nelle impostazioni del dispositivo.</string>
+  <string name="hardware_not_compatible_with_biometric">La biometria è incompatibile con la versione attuale. Utilizzare solo il PIN.</string>
+  <string name="failed_to_authenticate_unknown">Non è riuscita l\'autenticazione con la biometria, la causa è sconosciuta. Utilizzare solo il PIN.</string>
+  <string name="biometrics">Biometria</string>
+  <string name="reenter_description">Il codice di accesso a 6 cifre deve essere diverso dal blocco del telefono.</string>
+  <string name="wrong_passcode">Codice di accesso errato</string>
+  <string name="pick_passcode">Scegliete un codice di accesso di 6 cifre per sbloccare il vostro Litewallet</string>
+  <string name="create">Creare</string>
+  <string name="confirm">Confermare</string>
+  <string name="welcome">Benvenuti!</string>
+  <string name="authenticate_with_biometric">Autenticazione con la biometria</string>
 </resources>

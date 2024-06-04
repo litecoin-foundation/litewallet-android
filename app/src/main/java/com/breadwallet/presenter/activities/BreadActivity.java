@@ -102,7 +102,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         primaryPrice.setTextSize(PRIMARY_TEXT_SIZE);
         secondaryPrice.setTextSize(SECONDARY_TEXT_SIZE);
 
-        finishActivities(SetPinActivity.introSetPitActivity, IntroActivity.introActivity, ReEnterPinActivity.reEnterPinActivity);
+        finishActivities(SetPinActivity_java.introSetPitActivity, IntroActivity.introActivity, ReEnterPinActivity_java.reEnterPinActivityJava);
 
         if (!BRSharedPrefs.getGreetingsShown(BreadActivity.this)) {
             mHandler.postDelayed(() -> {

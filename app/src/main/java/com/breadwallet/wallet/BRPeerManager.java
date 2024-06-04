@@ -4,10 +4,7 @@ import static java.lang.Math.abs;
 
 import android.content.Context;
 
-import androidx.annotation.WorkerThread;
-
 import android.os.Bundle;
-import android.util.Log;
 
 import com.breadwallet.BreadApp;
 import com.breadwallet.presenter.entities.BlockEntity;
@@ -61,7 +58,7 @@ public class BRPeerManager {
         syncStartDate = new Date().getTime();
         long syncCompletedDate = new Date().getTime();
         Timber.d("timber: syncStarted (unix epoch ms): %s startDate: %s", Thread.currentThread().getName(), syncStartDate);
-        Context ctx = BreadApp.getBreadContext();
+        Context ctx = BreadApp.Companion.getBreadContext();
         int startHeight = BRSharedPrefs.getStartHeight(ctx);
         int lastHeight = BRSharedPrefs.getLastBlockHeight(ctx);
         if (startHeight > lastHeight) BRSharedPrefs.putStartHeight(ctx, lastHeight);
@@ -71,7 +68,7 @@ public class BRPeerManager {
     public static void syncSucceeded() {
         syncCompletedDate = new Date().getTime();
         Timber.d("timber: sync started(unix epoch ms): %s,  completed(unix epoch ms): %s", syncStartDate, syncCompletedDate);
-        final Context app = BreadApp.getBreadContext();
+        final Context app = BreadApp.Companion.getBreadContext();
         if (app == null) return;
         BRSharedPrefs.putLastSyncTime(app, System.currentTimeMillis());
         SyncManager.getInstance().updateAlarms(app);
@@ -104,7 +101,7 @@ public class BRPeerManager {
     public static void syncFailed() {
         Timber.d("timber: syncFailed");
         SyncManager.getInstance().stopSyncingProgressThread();
-        Context ctx = BreadApp.getBreadContext();
+        Context ctx = BreadApp.Companion.getBreadContext();
         if (ctx == null) return;
         Timber.d("timber: Network Not Available, showing not connected bar");
 
@@ -129,7 +126,7 @@ public class BRPeerManager {
     public static void saveBlocks(final BlockEntity[] blockEntities, final boolean replace) {
         Timber.d("timber: saveBlocks: %s", blockEntities.length);
 
-        final Context ctx = BreadApp.getBreadContext();
+        final Context ctx = BreadApp.Companion.getBreadContext();
         if (ctx == null) return;
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
@@ -143,7 +140,7 @@ public class BRPeerManager {
 
     public static void savePeers(final PeerEntity[] peerEntities, final boolean replace) {
         Timber.d("timber: savePeers: %s", peerEntities.length);
-        final Context ctx = BreadApp.getBreadContext();
+        final Context ctx = BreadApp.Companion.getBreadContext();
         if (ctx == null) return;
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
@@ -156,12 +153,12 @@ public class BRPeerManager {
 
     public static boolean networkIsReachable() {
         Timber.d("timber: networkIsReachable");
-        return BRWalletManager.getInstance().isNetworkAvailable(BreadApp.getBreadContext());
+        return BRWalletManager.getInstance().isNetworkAvailable(BreadApp.Companion.getBreadContext());
     }
 
     public static void deleteBlocks() {
         Timber.d("timber: deleteBlocks");
-        final Context ctx = BreadApp.getBreadContext();
+        final Context ctx = BreadApp.Companion.getBreadContext();
         if (ctx == null) return;
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
@@ -173,7 +170,7 @@ public class BRPeerManager {
 
     public static void deletePeers() {
         Timber.d("timber: deletePeers");
-        final Context ctx = BreadApp.getBreadContext();
+        final Context ctx = BreadApp.Companion.getBreadContext();
         if (ctx == null) return;
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
@@ -228,7 +225,7 @@ public class BRPeerManager {
     }
 
     public static void updateLastBlockHeight(int blockHeight) {
-        final Context ctx = BreadApp.getBreadContext();
+        final Context ctx = BreadApp.Companion.getBreadContext();
         if (ctx == null) return;
         BRSharedPrefs.putLastBlockHeight(ctx, blockHeight);
     }

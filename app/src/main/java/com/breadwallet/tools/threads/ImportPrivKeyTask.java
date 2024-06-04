@@ -3,13 +3,11 @@ package com.breadwallet.tools.threads;
 import android.app.Activity;
 import android.os.AsyncTask;
 
-import com.breadwallet.BreadApp;
 import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.ImportPrivKeyEntity;
 import com.breadwallet.tools.animation.BRDialog;
-import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
 import com.breadwallet.wallet.BRWalletManager;
