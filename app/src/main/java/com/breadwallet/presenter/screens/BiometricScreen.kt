@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,12 +60,12 @@ fun Biometrics(modifier: Modifier = Modifier,
             painter = if(theme.value == AppTheme.MODE_DAY) painterResource(id = R.drawable.litewallet_logo_black_without_text) else painterResource(
                 id = R.drawable.litewallet_logotype_white_200
             ),
-            contentDescription = "Litewallet Logo"
+            contentDescription = stringResource(id = R.string.litewallet_logo)
         )
         Spacer(modifier = Modifier.height(50.dp))
         Text(
             textAlign = TextAlign.Center,
-            text = "Protect Your Wallet",
+            text = stringResource(id = R.string.protect_your_wallet),
             fontFamily = barlowSemiCondensed_semi_bold,
             fontSize = 24.sp
         )
@@ -73,7 +74,7 @@ fun Biometrics(modifier: Modifier = Modifier,
                 .width(330.dp)
                 .padding(top = 18.dp),
             textAlign = TextAlign.Center,
-            text = "Adding PIN or biometric you are securing your wallet from unwanted access.",
+            text = stringResource(id = R.string.add_pin_or_biometric),
             fontFamily = barlowSemiCondensed_normal,
             color = if(theme.value == AppTheme.MODE_DAY) Color.DarkGray else Color.LightGray,
             fontSize = 16.sp
@@ -100,8 +101,8 @@ fun Biometrics(modifier: Modifier = Modifier,
                     BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
                         securityViewModel.saveBooleanData(PreferencesKeys.IS_AUTHENTICATED_WITH_BIOMETRICS, false)
                         AlertDialog.Builder(context)
-                            .setTitle("Failed to Authenticate With Biometrics")
-                            .setMessage("The hardware is unavailable. Use PIN only.")
+                            .setTitle(R.string.failed_authentication_biometric)
+                            .setMessage(R.string.hardware_unavailable)
                             .setPositiveButton("OK") { dialog, _ ->
                                 dialog.dismiss()
                             }
@@ -110,8 +111,8 @@ fun Biometrics(modifier: Modifier = Modifier,
                     BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED ->{
                         securityViewModel.saveBooleanData(PreferencesKeys.IS_AUTHENTICATED_WITH_BIOMETRICS, false)
                         AlertDialog.Builder(context)
-                            .setTitle("No Biometrics")
-                            .setMessage("You haven't set up biometric authentication on your device. Please set it up in your device settings.")
+                            .setTitle(R.string.no_biometrics)
+                            .setMessage(R.string.no_biometrics_set_up)
                             .setPositiveButton("OK") { dialog, _ ->
                                 dialog.dismiss()
                             }
@@ -120,8 +121,8 @@ fun Biometrics(modifier: Modifier = Modifier,
                     BiometricManager.BIOMETRIC_ERROR_UNSUPPORTED -> {
                         securityViewModel.saveBooleanData(PreferencesKeys.IS_AUTHENTICATED_WITH_BIOMETRICS, false)
                         AlertDialog.Builder(context)
-                            .setTitle("Failed to Authenticate With Biometrics")
-                            .setMessage("Biometrics are incompatible with current version. Use PIN only.")
+                            .setTitle(R.string.failed_authentication_biometric)
+                            .setMessage(R.string.hardware_not_compatible_with_biometric)
                             .setPositiveButton("OK") { dialog, _ ->
                                 dialog.dismiss()
                             }
@@ -130,8 +131,8 @@ fun Biometrics(modifier: Modifier = Modifier,
                     BiometricManager.BIOMETRIC_STATUS_UNKNOWN ->{
                         securityViewModel.saveBooleanData(PreferencesKeys.IS_AUTHENTICATED_WITH_BIOMETRICS, false)
                         AlertDialog.Builder(context)
-                            .setTitle("Failed to Authenticate With Biometrics")
-                            .setMessage("Failed to Authenticate with Biometrics, cause is unknown. Use PIN only.")
+                            .setTitle(R.string.failed_authentication_biometric)
+                            .setMessage(R.string.failed_to_authenticate_unknown)
                             .setPositiveButton("OK") { dialog, _ ->
                                 dialog.dismiss()
                             }
@@ -147,7 +148,7 @@ fun Biometrics(modifier: Modifier = Modifier,
                 painter = if(theme.value == AppTheme.MODE_DAY) painterResource(R.drawable.fingerprint_black) else painterResource(
                     id = R.drawable.fingerprint_white
                 ),
-                contentDescription = "Biometrics"
+                contentDescription = stringResource(id = R.string.biometrics)
             )
         }
     }

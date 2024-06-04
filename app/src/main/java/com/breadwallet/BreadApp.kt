@@ -112,10 +112,10 @@ class BreadApp : Application() {
     }
 
 
-    override fun attachBaseContext(base: Context?) {
-        init(base!!)
-        super.attachBaseContext(instance.setLocale(base))
-    }
+//    override fun attachBaseContext(base: Context?) {
+//        init(base!!)
+//        super.attachBaseContext(instance.setLocale(base))
+//    }
 
     interface OnAppBackgrounded {
         fun onBackgrounded()

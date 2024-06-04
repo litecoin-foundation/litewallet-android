@@ -1,14 +1,16 @@
 package com.breadwallet.tools.util
 import androidx.biometric.BiometricPrompt
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import com.breadwallet.R
 import com.breadwallet.tools.listeners.BiometricsListeners
 
 fun authenticateUser(biometricPrompt: BiometricPrompt) {
     val promptInfo = BiometricPrompt.PromptInfo.Builder()
-        .setTitle("Biometric")
-        .setDescription("Authenticate with Biometric")
+        .setTitle(R.string.biometrics.toString())
+        .setDescription(R.string.authenticate_with_biometric.toString())
         .setNegativeButtonText("Cancel")
         .build()
 

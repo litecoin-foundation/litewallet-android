@@ -747,6 +747,7 @@
     <string name="Network.feeLabel">Red</string>
   <string name="ConfirmationAllFees.Label">Honorarios:</string>
 
+  <!-- Rearrange later after the redesign app created 100% -->
   <string name="litewallet_logo">Logo Litewallet</string>
   <string name="set_access">Configurar acceso</string>
   <string name="dark_mode">Modo oscuro</string>
@@ -765,4 +766,8 @@
   <string name="reenter_description">El código de 6 dígitos debe ser diferente al de la cerradura del teléfono.</string>
   <string name="wrong_passcode">Código incorrecto</string>
   <string name="pick_passcode">Elige un código de 6 dígitos para desbloquear tu Litewallet</string>
+  <string name="create">Crear</string>
+  <string name="confirm">Confirmar</string>
+  <string name="welcome">¡Bienvenida!</string>
+  <string name="authenticate_with_biometric">Autenticación biométrica</string>
 </resources>

@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,10 +36,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -60,6 +64,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModelProvider
 import com.breadwallet.R
 import com.breadwallet.entities.IntroLanguage
@@ -67,8 +72,6 @@ import com.breadwallet.entities.IntroLanguageResource
 import com.breadwallet.presenter.activities.AuthPassCodeActivity
 import com.breadwallet.presenter.activities.AuthPassCodeAndBiometricsActivity
 import com.breadwallet.tools.util.AppTheme
-import com.breadwallet.tools.util.LocaleHelper
-import com.breadwallet.tools.util.LocaleHelper.Companion.instance
 import com.breadwallet.tools.util.ThemeSetting
 import com.breadwallet.tools.viewmodel.SecurityViewModel
 import com.breadwallet.ui.theme.LitewalletAndroidTheme
@@ -76,15 +79,17 @@ import com.breadwallet.ui.theme.barlowSemiCondensed_light
 import com.breadwallet.ui.theme.barlowSemiCondensed_normal
 import com.breadwallet.ui.theme.barlowSemiCondensed_semi_bold
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SetSecurityActivity : ComponentActivity() {
+class SetSecurityActivity : AppCompatActivity() {
     @Inject
     lateinit var themeSetting: ThemeSetting
     private lateinit var viewModel: SecurityViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val LocalAppLocale = compositionLocalOf<Locale> { Locale.getDefault() }
         viewModel = ViewModelProvider(this)[SecurityViewModel::class.java]
         setContent {
             val theme = themeSetting.themeStream.collectAsState()
@@ -177,7 +182,7 @@ fun LanguagePicker(modifier: Modifier = Modifier,
               languagesArray: Array<IntroLanguage>,
               lazyListState: LazyListState,
               audio: MediaPlayer,
-              theme: State<AppTheme>
+              theme: State<AppTheme>,
 ){
     var selectedIndex by remember { mutableIntStateOf(-1) }
     var showPopup by remember { mutableStateOf(false) }
@@ -244,8 +249,11 @@ fun LanguagePicker(modifier: Modifier = Modifier,
             text = { Text(languagesArray[centeredItemIndex].name) },
             confirmButton = {
                 Button(onClick = {
+                    AppCompatDelegate.setApplicationLocales(
+                        LocaleListCompat.forLanguageTags(languagesArray[centeredItemIndex].code)
+                    )
+//                    (context as Activity).recreate()
                     showPopup = false
-
                 }) {
                     Text("OK")
                 }

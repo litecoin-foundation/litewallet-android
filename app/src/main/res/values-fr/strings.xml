@@ -748,22 +748,27 @@
     <string name="Network.feeLabel">Réseau</string>
     <string name="ConfirmationAllFees.Label">Frais:</string>
 
-  <string name="litewallet_logo">Litewallet Logo</string>
-  <string name="set_access">Set Access</string>
-  <string name="dark_mode">Dark Mode</string>
-  <string name="intro_description">Pick a passcode or biometrics so that only you can use your Litewallet.</string>
-  <string name="passcode_only">Passcode Only</string>
-  <string name="biometrics_and_passcode">Use Biometrics &gt; Passcode</string>
-  <string name="protect_your_wallet">Protect Your Wallet</string>
-  <string name="add_pin_or_biometric">Adding PIN or biometric you are securing your wallet from unwanted access.</string>
-  <string name="failed_authentication_biometric">Failed to Authenticate With Biometrics</string>
-  <string name="hardware_unavailable">The hardware is unavailable. Use PIN only.</string>
-  <string name="no_biometrics">No Biometrics</string>
-  <string name="no_biometrics_set_up">You haven\'t set up biometric authentication on your device. Please set it up in your device settings.</string>
-  <string name="hardware_not_compatible_with_biometric">Biometrics are incompatible with current version. Use PIN only.</string>
-  <string name="failed_to_authenticate_unknown">Failed to Authenticate with Biometrics, cause is unknown. Use PIN only.</string>
-  <string name="biometrics">Biometrics</string>
-  <string name="reenter_description">Your 6-digit passcode should be different than your phone lock</string>
-  <string name="wrong_passcode">Wrong Passcode</string>
-  <string name="pick_passcode">Pick a 6-digit passcode to unlock your Litewallet</string>
+  <!-- Rearrange later after the redesign app created 100% -->
+  <string name="litewallet_logo">Logo Litewallet</string>
+  <string name="set_access">Définir l\'accès</string>
+  <string name="dark_mode">Mode sombre</string>
+  <string name="intro_description">Choisissez un code d\'accès ou des données biométriques pour que vous soyez le seul à pouvoir utiliser votre Litewallet.</string>
+  <string name="passcode_only">Code d\'accès uniquement</string>
+  <string name="biometrics_and_passcode">Utiliser la biométrie et le code d\'accès</string>
+  <string name="protect_your_wallet">Protégez votre portefeuille</string>
+  <string name="add_pin_or_biometric">En ajoutant un code PIN ou biométrique, vous protégez votre portefeuille d\'un accès non désiré.</string>
+  <string name="failed_authentication_biometric">Échec de l\'authentification biométrique</string>
+  <string name="hardware_unavailable">Le matériel n\'est pas disponible. Utiliser uniquement le code PIN.</string>
+  <string name="no_biometrics">Pas de données biométriques</string>
+  <string name="no_biometrics_set_up">Vous n\'avez pas configuré l\'authentification biométrique sur votre appareil. Veuillez la configurer dans les paramètres de votre appareil.</string>
+  <string name="hardware_not_compatible_with_biometric">Les données biométriques sont incompatibles avec la version actuelle. Utiliser uniquement le code PIN.</string>
+  <string name="failed_to_authenticate_unknown">Échec de l\'authentification biométrique, cause inconnue. Utiliser uniquement le code PIN.</string>
+  <string name="biometrics">Biométrie</string>
+  <string name="reenter_description">Votre code d\'accès à 6 chiffres doit être différent du verrouillage de votre téléphone.</string>
+  <string name="wrong_passcode">Mauvais code d\'accès</string>
+  <string name="pick_passcode">Choisissez un code à 6 chiffres pour déverrouiller votre Litewallet.</string>
+  <string name="create">Créer</string>
+  <string name="confirm">Confirmer</string>
+  <string name="welcome">Bienvenue!</string>
+  <string name="authenticate_with_biometric">Authentification par biométrie</string>
 </resources>

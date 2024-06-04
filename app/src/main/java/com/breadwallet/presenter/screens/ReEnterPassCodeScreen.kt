@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -83,15 +84,14 @@ fun ReEnterPassCode(modifier: Modifier = Modifier, navController: NavController,
         Spacer(modifier = Modifier.weight(1f))
         Image(
             modifier = Modifier
-                .size(45.dp)
-            ,
+                .size(45.dp),
             painter = painterResource(id = R.drawable.litewallet_logo_black_without_text),
-            contentDescription = "Litewallet Logo",
+            contentDescription = stringResource(id = R.string.litewallet_logo),
         )
         Text(
             modifier = Modifier
                 .padding(top=20.dp),
-            text = "Confirm",
+            text = stringResource(id = R.string.confirm),
             fontFamily = barlowSemiCondensed_bold,
             fontSize = 36.sp,
         )
@@ -99,7 +99,7 @@ fun ReEnterPassCode(modifier: Modifier = Modifier, navController: NavController,
             modifier = Modifier
                 .width(250.dp)
                 .padding(top = 20.dp, start = 8.dp),
-            text = "Your 6-digit passcode should be different than your phone lock",
+            text = stringResource(id = R.string.reenter_description),
             fontFamily = barlowSemiCondensed_semi_bold,
             fontSize = 18.sp,
             lineHeight = 28.sp
@@ -136,7 +136,7 @@ fun PasscodeReEnter(modifier: Modifier = Modifier, navController: NavController,
             Text(
                 modifier = Modifier
                     .padding(bottom=10.dp),
-                text = "Wrong Passcode",
+                text = stringResource(id = R.string.wrong_passcode),
                 color = if(theme.value == AppTheme.MODE_DAY) Color.Red else Color.White
             )
         }else{

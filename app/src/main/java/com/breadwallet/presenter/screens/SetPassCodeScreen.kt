@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -96,15 +97,14 @@ fun SetPassCode(modifier: Modifier = Modifier,
         Spacer(modifier = modifier.weight(2f))
         Image(
             modifier = Modifier
-                .size(45.dp)
-            ,
+                .size(45.dp),
             painter = painterResource(id = R.drawable.litewallet_logo_black_without_text),
-            contentDescription = "Litewallet Logo",
+            contentDescription = stringResource(id = R.string.litewallet_logo),
         )
         Text(
             modifier = Modifier
                 .padding(top=20.dp),
-            text = "Create",
+            text = stringResource(id = R.string.create),
             style = MaterialTheme.typography.bodyLarge,
             fontSize = 36.sp,
         )
@@ -112,7 +112,7 @@ fun SetPassCode(modifier: Modifier = Modifier,
             modifier = Modifier
                 .width(210.dp)
                 .padding(top = 20.dp, start = 8.dp),
-            text = "Pick a 6-digit passcode to unlock your Litewallet",
+            text = stringResource(id = R.string.pick_passcode),
             style = MaterialTheme.typography.titleLarge,
             fontSize = 18.sp,
             lineHeight = 28.sp
@@ -129,7 +129,7 @@ fun Passcode(modifier: Modifier = Modifier, navController: NavController, passCo
     var enteredPassCode by remember { mutableStateOf("") }
     if(enteredPassCode.length == 6){
         passCodeViewModel.saveBooleanData(PreferencesKeys.IS_AUTHENTICATED_WITH_PASSCODE, true)
-        Log.e("True Save Pass COde", passCodeViewModel.getDataBoolean(PreferencesKeys.IS_AUTHENTICATED_WITH_PASSCODE).toString())
+        //Log.e("True Save Pass Code", passCodeViewModel.getDataBoolean(PreferencesKeys.IS_AUTHENTICATED_WITH_PASSCODE).toString())
         passCodeViewModel.saveData(PreferencesKeys.PASS_CODE, enteredPassCode)
         if(categoryActivity == "0"){
             navController.navigate(ScreenPassCodeBio.ReEnterPassCode.route)

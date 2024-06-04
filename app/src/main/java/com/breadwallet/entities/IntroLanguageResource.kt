@@ -95,20 +95,20 @@ class IntroLanguageResource {
                 Language.JAPANESE
             ),
             IntroLanguage(
+                Language.RUSSIAN.code,
+                Language.RUSSIAN.title,
+                "Самый надежный и безопасный способ использования биткойна.",
+                R.raw.russian,
+                "Вы уверены, что хотите сменить язык на русский?",
+                Language.RUSSIAN
+            ),
+            IntroLanguage(
                 Language.PORTUGUESE.code,
                 Language.PORTUGUESE.title,
                 "A forma mais protegida e segura de utilizar a Litecoin.",
                 R.raw.portugues,
                 "Tem certeza de que deseja alterar o idioma para português?",
                 Language.PORTUGUESE
-            ),
-            IntroLanguage(
-                Language.PORTUGUESE.code,
-                Language.RUSSIAN.title,
-                "Самый надежный и безопасный способ использования биткойна.",
-                R.raw.russian,
-                "Вы уверены, что хотите сменить язык на русский?",
-                Language.RUSSIAN
             )
         )
     }
