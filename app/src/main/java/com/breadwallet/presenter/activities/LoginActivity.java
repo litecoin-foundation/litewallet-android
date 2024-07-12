@@ -4,7 +4,6 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.activities.util.BRActivity;
@@ -39,15 +37,11 @@ import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.wallet.BRWalletManager;
-import com.google.android.material.snackbar.Snackbar;
-import com.platform.APIClient;
 
 import java.math.BigDecimal;
-import java.util.Locale;
 
 import timber.log.Timber;
 
-import static com.breadwallet.tools.util.BRConstants.PLATFORM_ON;
 import static com.breadwallet.tools.util.BRConstants.SCANNER_REQUEST;
 
 public class LoginActivity extends BRActivity {
@@ -87,7 +81,7 @@ public class LoginActivity extends BRActivity {
         View parentLayout = findViewById(android.R.id.content);
         String pin = BRKeyStore.getPinCode(this);
         if (pin.isEmpty() || (pin.length() != 6 && pin.length() != 4)) {
-            Intent intent = new Intent(this, SetPinActivity.class);
+            Intent intent = new Intent(this, SetPinActivity_java.class);
             intent.putExtra("noPin", true);
             startActivity(intent);
             if (!LoginActivity.this.isDestroyed()) finish();
