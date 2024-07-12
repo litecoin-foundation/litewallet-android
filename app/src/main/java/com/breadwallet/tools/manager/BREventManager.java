@@ -1,34 +1,21 @@
 package com.breadwallet.tools.manager;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 
 import com.breadwallet.BreadApp;
-import com.breadwallet.tools.util.BRConstants;
-import com.breadwallet.tools.util.Utils;
-import com.platform.APIClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import okhttp3.MediaType;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import timber.log.Timber;
-
-import static com.platform.APIClient.BASE_URL;
 
 public class BREventManager implements BreadApp.OnAppBackgrounded {
     private static BREventManager instance;
@@ -37,7 +24,7 @@ public class BREventManager implements BreadApp.OnAppBackgrounded {
 
     private BREventManager() {
         sessionId = UUID.randomUUID().toString();
-        BreadApp.addOnBackgroundedListener(this);
+        BreadApp.Companion.addOnBackgroundedListener(this::onBackgrounded);
     }
 
     public static BREventManager getInstance() {

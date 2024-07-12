@@ -803,7 +803,7 @@ public class ReplicatedKVStore {
             Timber.i("timber: encrypt: data is null");
             return null;
         }
-        if (app == null) app = BreadApp.getBreadContext();
+        if (app == null) app = BreadApp.Companion.getBreadContext();
         if (app == null) {
             Timber.i("timber: encrypt: app is null");
             return null;
@@ -839,7 +839,7 @@ public class ReplicatedKVStore {
             Timber.i("timber: decrypt: failed to decrypt: %s", data == null ? null : data.length);
             return null;
         }
-        if (app == null) app = BreadApp.getBreadContext();
+        if (app == null) app = BreadApp.Companion.getBreadContext();
         if (app == null) return null;
         if (tempAuthKey == null)
             retrieveAuthKey(app);

@@ -44,7 +44,7 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
     //params[0] = uri, params[1] = label
     @Override
     protected String doInBackground(String... params) {
-        app = (Activity) BreadApp.getBreadContext();
+        app = (Activity) BreadApp.Companion.getBreadContext();
         InputStream in;
         try {
             Timber.d("timber: the uri: %s", params[0]);

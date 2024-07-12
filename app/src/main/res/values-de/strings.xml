@@ -747,4 +747,28 @@
     <string name="Fees.Service">Service</string>
     <string name="Network.feeLabel">Netzwerk</string>
   <string name="ConfirmationAllFees.Label">Gebühren:</string>
+
+  <!-- Rearrange later after the redesign app created 100% -->
+  <string name="litewallet_logo">Litewallet Logo</string>
+  <string name="set_access">Zugang einstellen</string>
+  <string name="dark_mode">Dunkler Modus</string>
+  <string name="intro_description">Wählen Sie einen Passcode oder biometrische Daten, damit nur Sie Ihre Litewallet nutzen können.</string>
+  <string name="passcode_only">Nur Passcode</string>
+  <string name="biometrics_and_passcode">Biometrische Daten und Passcode verwenden</string>
+  <string name="protect_your_wallet">Schützen Sie Ihr Portemonnaie</string>
+  <string name="add_pin_or_biometric">Durch Hinzufügen einer PIN oder biometrischer Daten sichern Sie Ihre Brieftasche vor unerwünschtem Zugriff.</string>
+  <string name="failed_authentication_biometric">Authentifizierung mit biometrischen Merkmalen fehlgeschlagen</string>
+  <string name="hardware_unavailable">Die Hardware ist nicht verfügbar. Verwenden Sie nur die PIN.</string>
+  <string name="no_biometrics">Keine biometrischen Daten</string>
+  <string name="no_biometrics_set_up">Sie haben die biometrische Authentifizierung auf Ihrem Gerät nicht eingerichtet. Bitte richten Sie sie in den Einstellungen Ihres Geräts ein.</string>
+  <string name="hardware_not_compatible_with_biometric">Die biometrischen Daten sind mit der aktuellen Version nicht kompatibel. Verwenden Sie nur PIN.</string>
+  <string name="failed_to_authenticate_unknown">Authentifizierung mit biometrischen Daten fehlgeschlagen, Ursache unbekannt. Nur PIN verwenden.</string>
+  <string name="biometrics">Biometrische Daten</string>
+  <string name="reenter_description">Ihr 6-stelliger Passcode sollte sich von der Telefonsperre unterscheiden</string>
+  <string name="wrong_passcode">Falscher Passcode</string>
+  <string name="pick_passcode">Wählen Sie einen 6-stelligen Passcode, um Ihr Litewallet zu entsperren</string>
+  <string name="create">Erstellen.</string>
+  <string name="confirm">Bestätigen Sie</string>
+  <string name="welcome">Herzlich willkommen!</string>
+  <string name="authenticate_with_biometric">Authentifizierung mit biometrischen Daten</string>
 </resources>

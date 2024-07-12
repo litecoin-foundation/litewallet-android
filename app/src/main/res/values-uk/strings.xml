@@ -754,4 +754,28 @@
     <string name="Fees.Service">Сервіс</string>
     <string name="Network.feeLabel">Мережа</string>
     <string name="ConfirmationAllFees.Label">Збори:</string>
+
+  <!-- Rearrange later after the redesign app created 100% -->
+  <string name="litewallet_logo">Логотип гаманця Litewallet</string>
+  <string name="set_access">Встановити доступ</string>
+  <string name="dark_mode">Темний режим</string>
+  <string name="intro_description">Виберіть пароль або біометричні дані, щоб тільки ви могли користуватися своїм гаманцем.</string>
+  <string name="passcode_only">Тільки за допомогою пароля</string>
+  <string name="biometrics_and_passcode">Використовуйте біометричні дані та пароль</string>
+  <string name="protect_your_wallet">Захистіть свій гаманець</string>
+  <string name="add_pin_or_biometric">Додаючи PIN-код або біометричні дані, ви захищаєте свій гаманець від небажаного доступу.</string>
+  <string name="failed_authentication_biometric">Не вдалося пройти автентифікацію за допомогою біометрії</string>
+  <string name="hardware_unavailable">Обладнання недоступне. Використовуйте тільки PIN-код.</string>
+  <string name="no_biometrics">Без біометрії</string>
+  <string name="no_biometrics_set_up">Ви не налаштували біометричну автентифікацію на своєму пристрої. Будь ласка, налаштуйте її в налаштуваннях вашого пристрою.</string>
+  <string name="hardware_not_compatible_with_biometric">Біометрія несумісна з поточною версією. Використовуйте тільки PIN-код.</string>
+  <string name="failed_to_authenticate_unknown">Не вдалося пройти автентифікацію за допомогою біометричних даних, причина невідома. Використовуйте лише PIN-код.</string>
+  <string name="biometrics">Біометрія</string>
+  <string name="reenter_description">Ваш 6-значний пароль повинен відрізнятися від пароля блокування телефону</string>
+  <string name="wrong_passcode">Неправильний пароль</string>
+  <string name="pick_passcode">Введіть 6-значний пароль, щоб розблокувати свій Litewallet</string>
+  <string name="create">Створити</string>
+  <string name="confirm">Підтвердити</string>
+  <string name="welcome">Ласкаво просимо!</string>
+  <string name="authenticate_with_biometric">Автентифікація за допомогою біометрії</string>
 </resources>

@@ -40,7 +40,7 @@ class AnnounceUpdatesViewActivity : AppCompatActivity() {
 
     fun nextActivity(isNewWallet : Boolean) {
         if (isNewWallet) {
-            val intent = Intent(this, SetPinActivity::class.java)
+            val intent = Intent(this, SetPinActivity_java::class.java)
             startActivity(intent)
         }else {
             val intent = Intent(this, RecoverActivity::class.java)

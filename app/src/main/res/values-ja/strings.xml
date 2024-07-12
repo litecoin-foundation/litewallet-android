@@ -747,4 +747,28 @@
     <string name="Fees.Service">サービス</string>
     <string name="Network.feeLabel">通信網</string>
   <string name="ConfirmationAllFees.Label">料金:</string>
+
+  <!-- Rearrange later after the redesign app created 100% -->
+  <string name="litewallet_logo">ライトワレットロゴ</string>
+  <string name="set_access">アクセスを設定する</string>
+  <string name="dark_mode">ダークモード</string>
+  <string name="intro_description">パスコードまたは生体認証を選択し、自分だけがLitewalletを使用できるようにする。</string>
+  <string name="passcode_only">パスコードのみ</string>
+  <string name="biometrics_and_passcode">バイオメトリクスとパスコードの使用</string>
+  <string name="protect_your_wallet">財布を守る</string>
+  <string name="add_pin_or_biometric">暗証番号や生体認証を追加することで、財布を不要なアクセスから守ることができます。</string>
+  <string name="failed_authentication_biometric">生体認証に失敗しました</string>
+  <string name="hardware_unavailable">ハードウェアは使用できません。暗証番号のみを使用してください。</string>
+  <string name="no_biometrics">バイオメトリクスなし</string>
+  <string name="no_biometrics_set_up">生体認証を設定していません。端末の設定で設定してください。</string>
+  <string name="hardware_not_compatible_with_biometric">生体認証は現在のバージョンと互換性がありません。PINのみを使用してください。</string>
+  <string name="failed_to_authenticate_unknown">生体認証に失敗しました。原因は不明です。PINのみを使用してください。</string>
+  <string name="biometrics">バイオメトリクス</string>
+  <string name="reenter_description">6桁のパスコードは、電話ロックとは異なるものにしてください。</string>
+  <string name="wrong_passcode">パスコードの間違い</string>
+  <string name="pick_passcode">6桁のパスコードを選んで、Litewalletのロックを解除する。</string>
+  <string name="create">作成</string>
+  <string name="confirm">確認</string>
+  <string name="welcome">ようこそ！</string>
+  <string name="authenticate_with_biometric">バイオメトリック認証</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.breadwallet.di.component
 
 import com.breadwallet.BreadApp
+import com.breadwallet.BreadApp_kt
 import com.breadwallet.di.module.AppModule
 import dagger.Component
 

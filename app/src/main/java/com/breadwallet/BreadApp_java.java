@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-import com.breadwallet.di.component.DaggerAppComponent;
+
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.tools.listeners.SyncReceiver;
@@ -32,7 +32,8 @@ import com.pusher.pushnotifications.PushNotifications;
 
 import timber.log.Timber;
 
-public class BreadApp extends Application {
+
+public class BreadApp_java extends Application {
     public static int DISPLAY_HEIGHT_PX;
     FingerprintManager mFingerprintManager;
     public static String HOST = "api.loafwallet.org";
@@ -46,7 +47,7 @@ public class BreadApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        DaggerAppComponent.builder().build().inject(this);
+//        DaggerAppComponent.builder().build().inject(this);
 
         boolean enableCrashlytics = true;
         if (Utils.isEmulatorOrDebug(this)) {
@@ -95,7 +96,7 @@ public class BreadApp extends Application {
         TimerTask backgroundCheck = new TimerTask() {
             @Override
             public void run() {
-                if (isAppInBackground(app)) {
+                if (BreadApp_kt.Companion.isAppInBackground(app)) {
                     backgroundedTime = System.currentTimeMillis();
                     Timber.d("timber: App went in background!");
                     // APP in background, do something
@@ -181,4 +182,5 @@ public class BreadApp extends Application {
             crashlytics.recordException(t);
         }
     }
+
 }

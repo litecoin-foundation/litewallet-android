@@ -2,7 +2,6 @@ package com.platform;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.NetworkOnMainThreadException;
@@ -30,7 +29,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import timber.log.Timber;
 import com.breadwallet.tools.manager.AnalyticsManager;
-import com.breadwallet.tools.util.BRConstants;
 
 import static com.breadwallet.tools.util.BRCompressor.gZipExtract;
 
@@ -40,7 +38,7 @@ public class APIClient {
     private static final String PROTO = "https";
 
     // convenience getter for the API endpoint
-    public static String BASE_URL = PROTO + "://" + BreadApp.HOST;
+    public static String BASE_URL = PROTO + "://" + BreadApp.Companion.getHOST();
     //feePerKb url
     private static final String FEE_PER_KB_URL = "/v1/fee-per-kb";
     //singleton instance
@@ -129,7 +127,7 @@ public class APIClient {
                 Uri newUri = Uri.parse(newLocation);
                 if (newUri == null) {
                     Timber.d("timber: sendRequest: redirect uri is null");
-                } else if (!newUri.getHost().equalsIgnoreCase(BreadApp.HOST) || !newUri.getScheme().equalsIgnoreCase(PROTO)) {
+                } else if (!newUri.getHost().equalsIgnoreCase(BreadApp.Companion.getHOST()) || !newUri.getScheme().equalsIgnoreCase(PROTO)) {
                     Timber.d("timber: sendRequest: WARNING: redirect is NOT safe: %s", newLocation);
                 } else {
                     Timber.d("timber: redirecting: %s >>> %s", request.url(), newLocation);

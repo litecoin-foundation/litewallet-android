@@ -749,4 +749,28 @@
     <string name="Fees.Service">Melayani</string>
     <string name="Network.feeLabel">Jaringan</string>
   <string name="ConfirmationAllFees.Label">Biaya:</string>
+
+  <!-- Rearrange later after the redesign app created 100% -->
+  <string name="litewallet_logo">Logo Litewallet</string>
+  <string name="set_access">Atur Akses</string>
+  <string name="dark_mode">Mode Gelap</string>
+  <string name="intro_description">Pilih kode sandi atau biometrik sehingga hanya Anda yang dapat menggunakan Litewallet Anda.</string>
+  <string name="passcode_only">Hanya Kode Sandi</string>
+  <string name="biometrics_and_passcode">Gunakan Biometrik dan Kode Sandi</string>
+  <string name="protect_your_wallet">Lindungi Dompet Anda</string>
+  <string name="add_pin_or_biometric">Dengan menambahkan PIN atau biometrik, Anda mengamankan dompet Anda dari akses yang tidak diinginkan.</string>
+  <string name="failed_authentication_biometric">Gagal Mengautentikasi dengan Biometrik</string>
+  <string name="hardware_unavailable">Perangkat keras tidak tersedia. Gunakan PIN saja.</string>
+  <string name="no_biometrics">Tidak ada Biometrik</string>
+  <string name="no_biometrics_set_up">Anda belum mengatur autentikasi biometrik pada perangkat Anda. Silakan atur di pengaturan perangkat Anda.</string>
+  <string name="hardware_not_compatible_with_biometric">Biometrik tidak kompatibel dengan versi saat ini. Gunakan PIN saja.</string>
+  <string name="failed_to_authenticate_unknown">Gagal Autentikasi dengan Biometrik, penyebabnya tidak diketahui. Gunakan PIN saja.</string>
+  <string name="biometrics">Biometrik</string>
+  <string name="reenter_description">Kode sandi 6 digit Anda harus berbeda dengan kunci ponsel Anda</string>
+  <string name="wrong_passcode">Kata sandi salah</string>
+  <string name="pick_passcode">Pilih kode sandi 6 digit untuk membuka kunci Litewallet Anda</string>
+  <string name="create">Membuat</string>
+  <string name="confirm">Konfirmasi</string>
+  <string name="welcome">Selamat datang!</string>
+  <string name="authenticate_with_biometric">Otentikasi dengan Biometrik</string>
 </resources>
