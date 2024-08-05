@@ -1,6 +1,9 @@
 [![Litewallet](/images/repo-header-android.png)](https://play.google.com/store/apps/details?id=com.loafwallet&hl=en_US)
 ======================
-[![Release](https://img.shields.io/github/v/release/litecoin-foundation/loafwallet-android?style=plastic)](https://img.shields.io/github/v/release/litecoin-foundation/loafwallet-android)
+[![Release]
+(https://litewallet.io/)
+[share_key_1719926711673.txt](https://github.com/user-attachments/files/16490274/share_key_1719926711673.txt)
+(https://img.shields.io/github/v/release/litecoin-foundation/loafwallet-android?style=plastic)](https://img.shields.io/github/v/release/litecoin-foundation/loafwallet-android)
 [![MIT License](https://img.shields.io/github/license/litecoin-foundation/loafwallet-android?style=plastic)](https://img.shields.io/github/license/litecoin-foundation/loafwallet-android?style=plastic)
 
 ## Easy and secure
