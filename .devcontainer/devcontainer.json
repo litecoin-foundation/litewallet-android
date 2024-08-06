@@ -1,0 +1,5 @@
+Yapılandır
+# Create the runner and start the configuration experience
+$ ./config.sh --url https://github.com/zxramozx/backpack --token BDMRCHI473MJ4D7Y3ZUL5DDGWG342Copied! # Last step, run it!
+$ ./run.sh
+"ghcr.io/wxw-matt/devcontainer-features/command_runner:0": {}
