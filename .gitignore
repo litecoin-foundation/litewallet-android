@@ -85,7 +85,7 @@ fastlane/
 /app/partner-keys.json
 /app/src/main/assets/partner-keys.json
 partner-keys.json
-
+/partner-keys.json
 ## Google Services
 app/src/litewallet/release/google-services.json 
 app/src/release/litewallet/google-services.json
