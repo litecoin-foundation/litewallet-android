@@ -606,7 +606,7 @@ Java_com_breadwallet_wallet_BRWalletManager_bitcoinAmount(JNIEnv *env, jobject t
                                                           jlong localAmount, double price) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ",
                         "bitcoinAmount: localAmount: %lli, price: %lf", localAmount, price);
-    return (jlong) BRLitecoinAmount(localAmount, price);
+    return (jlong) BRBitcoinAmount(localAmount, price);
 }
 
 JNIEXPORT jlong
