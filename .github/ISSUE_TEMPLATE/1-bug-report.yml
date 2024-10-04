@@ -2,9 +2,10 @@ name: 🐛[Bug Report]
 description: An issue for when Litewallet Android is not operating as expected.
 title: "🐛[Bug Report]: "
 labels: ["🐛 bug"]
-projects: ["litecoin-foundation/5"]
+projects: ["litecoin-foundation/3"]
 assignees: 
   - josikie
+  - kcw-grunt
 body:
   - type: markdown
     attributes:
@@ -53,7 +54,7 @@ body:
     id: describe-what-happened
     attributes:
       label: Describe what happened.
-      description: Steps to reproduce the behavior
+      description: Write down the steps to reproduce the behavior
       placeholder: Tell us step by step
       value: |
         1. Go to ...
