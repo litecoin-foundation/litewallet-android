@@ -1,10 +1,9 @@
-name: 🐛[fwewaR]
+name: 🥳[Feature]
 description: An issue for when Litewallet Android is not operating as expected.
-title: "🐛[fwewaR]: "
-labels: ["🐛 bug"]
+title: "🥳[Feature]: "
+labels: ["🥳 feature"]
 projects: ["litecoin-foundation/3"]
 assignees: 
-  - josikie
   - kcw-grunt
 body:
   - type: markdown
@@ -19,9 +18,7 @@ body:
       placeholder: Android model
       value: "Do you have a Samsung Galaxy S23 Ultra or Google Pixel 7A or something else?"
     validations:
-      required: true      
-  - type: dropdown
-    id: os-version# ---
+      required: true    
 # name: 🥳[Feature] 
 # about: An issue that improves Litewallet Android
 # title: '🥳[Feature]'
