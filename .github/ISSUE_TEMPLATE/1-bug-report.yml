@@ -2,7 +2,7 @@ name: 🐛[Bug Report]
 description: An issue for when Litewallet Android is not operating as expected.
 title: "🐛[Bug Report]: "
 labels: ["🐛 bug"]
-projects: ["litecoin-foundation/3"]
+projects: ["litecoin-foundation/5"]
 assignees: 
   - josikie
 body:
@@ -38,7 +38,7 @@ body:
   - type: dropdown
     id: app-version
     attributes:
-      label: Which version of Litewallet (Android) are you running?
+      label: Which version of Litewallet are you running?
       multiple: false
       options:
         - v2.10.0 (Default)
@@ -54,13 +54,11 @@ body:
     attributes:
       label: Describe what happened.
       description: Steps to reproduce the behavior
-      placeholder: Tell us what actually happened
+      placeholder: Tell us step by step
       value: |
-        Steps to reproduce:
-        |
         1. Go to ...
-        2. Click on '....'
-        3. See error
+        2. Tap on ...
+        3. Error, error! 🦑🔥
     validations:
       required: true
   - type: textarea
