@@ -17,7 +17,7 @@ body:
       label: Device model
       description: Which is your Android device?
       placeholder: Android model
-      value: "Samsung Galaxy S23 Ultra or Google Pixel 7A"
+      value: "Do you have a Samsung Galaxy S23 Ultra or Google Pixel 7A or something else?"
     validations:
       required: true      
   - type: dropdown
