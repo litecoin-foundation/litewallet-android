@@ -1,0 +1,36 @@
+name: 🦺[Tech Debt]
+description:  An issue that maintains/strengthens the Litewallet Android code or system and **not** necessarily visible in the UI
+title: "🦺[Tech Debt]: "
+labels: ["🦺 tech debt"]
+projects: ["litecoin-foundation/3"]
+assignees: 
+  - josikie
+  - kcw-grunt
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Overview
+        Work needed to maintain the codebase. This is usually something because the\
+        supporting libraries or the user behavior has evolved.
+
+  - type: textarea
+    id: long-description
+    attributes:
+      label: Describe the work to be done
+      placeholder: e.g; The current SDK is at EOL and we need to migrate soon...
+    validations:
+      required: true
+      
+  - type: textarea
+    id: goal
+    attributes:
+      label: Steps to complete
+      placeholder: e.g; Update a library or update some business logic, Test, Review
+      value: |
+        - [ ] Action 1
+        - [ ] Action 2
+        - [ ] Action ...
+        - [ ] Action n
+    validations:
+      required: true

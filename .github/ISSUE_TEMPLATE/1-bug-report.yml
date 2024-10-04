@@ -1,0 +1,73 @@
+name: 🐛[Bug Report]
+description: An issue for when Litewallet Android is not operating as expected.
+title: "🐛[Bug Report]: "
+labels: ["🐛 bug"]
+projects: ["litecoin-foundation/3"]
+assignees: 
+  - josikie
+  - kcw-grunt
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bug reports are extremely valuable. Thanks for this report! 
+  - type: textarea
+    id: device-model
+    attributes:
+      label: Device model
+      description: Which is your Android device?
+      placeholder: Android model
+      value: "Do you have a Samsung Galaxy S23 Ultra or Google Pixel 7A or something else?"
+    validations:
+      required: true      
+  - type: dropdown
+    id: os-version
+    attributes:
+      label: OS version
+      description: What version of Android OS is running on your device?
+      multiple: false
+      options:
+        - Android 14 | Level 34 (Default)
+        - Android 13 | Level 33 
+        - Android 12 | Level 32 
+        - Android 11 | Level 30 
+        - Android 10 | Level 29 
+        - Other
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: app-version
+    attributes:
+      label: Which version of Litewallet are you running?
+      multiple: false
+      options:
+        - v2.10.0 (Default)
+        - v2.9.1
+        - v2.9.0
+        - v2.8.4
+        - Other
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: describe-what-happened
+    attributes:
+      label: Describe what happened.
+      description: Write down the steps to reproduce the behavior
+      placeholder: Tell us step by step
+      value: |
+        1. Go to ...
+        2. Tap on ...
+        3. Error, error! 🦑🔥
+    validations:
+      required: true
+  - type: textarea
+    id: other-notes
+    attributes:
+      label: Add any notes you would like to add.
+      description: Is there any more information for us?
+      placeholder: Optional notes.
+      value: "🤔 💡"
+    validations:
+      required: false
