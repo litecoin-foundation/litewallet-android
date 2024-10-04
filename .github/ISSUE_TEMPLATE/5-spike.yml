@@ -1,0 +1,29 @@
+name: ⛏️[Spike]
+description: An issue where code may or not be written but some research and planning is done for Litewallet Android.
+title: "⛏️[Spike]: "
+labels: ["⛏️ spike"]
+projects: ["litecoin-foundation/3"]
+assignees: 
+  - kcw-grunt
+  - josikie
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please fill out the strategy for the plan. The more verbose, the better.
+  - type: textarea
+    id: essay
+    attributes:
+      label: Spike details
+      value: | 
+        ## Research getting really rich.
+        
+        Lorem ipsum odor amet, consectetuer adipiscing elit. Euismod commodo accumsan congue eros hendrerit netus netus viverra. Pulvinar donec venenatis nam risus ultricies facilisis. Praesent magnis maximus magnis a nostra class tortor aliquet. Orci venenatis consequat finibus, inceptos imperdiet aenean. Bibendum elit venenatis potenti lectus auctor.
+        Auctor morbi luctus est; massa sollicitudin elit. Fringilla taciti finibus tortor molestie ultrices nullam rutrum. Nam viverra nibh condimentum dictum sit. Tristique odio velit venenatis, nec viverra condimentum. Risus sociosqu conubia hendrerit mus libero montes. Orci placerat phasellus libero varius dis felis? Dapibus massa donec mi donec sociosqu potenti. 
+        ---
+        - [ ] Collect underpants.
+        - [ ] 🧙🏽‍♀️
+        - [ ] I'm rich!
+        
+    validations:
+      required: true   
