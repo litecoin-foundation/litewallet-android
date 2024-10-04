@@ -9,11 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.breadwallet.presenter.activities.AnnounceUpdatesViewActivity;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.breadwallet.entities.IntroLanguageResource;
+import com.breadwallet.presenter.activities.SetPinActivity;
 import com.breadwallet.tools.adapter.CountryLanguageAdapter;
 import com.breadwallet.tools.util.LocaleHelper;
 import com.google.android.material.snackbar.Snackbar;
@@ -44,7 +44,6 @@ public class IntroActivity extends BRActivity implements Serializable {
     public CountryLanguageAdapter countryLanguageAdapter;
     public RecyclerView listLangRecyclerView;
     public IntroLanguageResource introLanguageResource = new IntroLanguageResource();
-    public static boolean isNewWallet = false;
     public static IntroActivity getApp() {
         return app;
     }
@@ -184,10 +183,8 @@ public class IntroActivity extends BRActivity implements Serializable {
                 if (!BRAnimator.isClickAllowed()) return;
                 BreadActivity bApp = BreadActivity.getApp();
                 if (bApp != null) bApp.finish();
-                isNewWallet = true;
-                Intent intentEmailNewWallet = new Intent(IntroActivity.this, AnnounceUpdatesViewActivity.class);
-                intentEmailNewWallet.putExtra("isNewWallet", true);
-                startActivity(intentEmailNewWallet);
+                Intent intent = new Intent(IntroActivity.this, SetPinActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -197,10 +194,8 @@ public class IntroActivity extends BRActivity implements Serializable {
                 if (!BRAnimator.isClickAllowed()) return;
                 BreadActivity bApp = BreadActivity.getApp();
                 if (bApp != null) bApp.finish();
-                isNewWallet = false;
-                Intent intentEmailRecover = new Intent(IntroActivity.this, AnnounceUpdatesViewActivity.class);
-                intentEmailRecover.putExtra("isNewWallet", false);
-                startActivity(intentEmailRecover);
+                Intent intent = new Intent(IntroActivity.this, RecoverActivity.class);
+                startActivity(intent);
             }
         });
     }
