@@ -2,18 +2,27 @@ name: 🐛[Bug Report]
 description: An issue for when Litewallet Android is not operating as expected.
 title: "🐛[Bug Report]: "
 labels: ["🐛 bug"]
-projects: ["litewallet-android/1"]
+projects: ["Litewallet: Android"]
 assignees: 
   - josikie
 body:
   - type: markdown
     attributes:
       value: |
-        Bug reports are extremely valuable. Thanks for this report!
+        Bug reports are extremely valuable. Thanks for this report! 
+  - type: textarea
+    id: device-model
+    attributes:
+      label: Device model
+      description: Which is your Android device?
+      placeholder: Android model
+      value: "Samsung Galaxy S23 Ultra or Google Pixel 7A"
+    validations:
+      required: true      
   - type: dropdown
     id: os-version
     attributes:
-      label: OS Version
+      label: OS version
       description: What version of Android OS is running on your device?
       multiple: false
       options:
