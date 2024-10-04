@@ -1,0 +1,34 @@
+name: 💡[User feature request]
+description: A request to change Litewallet Android
+title: "💡[User feature request]: "
+labels: ["🥳 feature","🏡 moderate-priority"]
+projects: ["litecoin-foundation/3"]
+assignees: 
+  - kcw-grunt
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please explain what you would like and why you think it is important for Litewallet.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why?
+      description: Why should this change be undertaken?
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What?
+      description: What do you think should be changed?
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: User notes
+      value: |
+        I like sparkles! 🦄🦄🌈🌈. Please add!
+    validations:
+      required: false

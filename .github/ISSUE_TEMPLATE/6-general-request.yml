@@ -1,0 +1,23 @@
+name: 🙏🏽 [General request]
+description: A request regarding Litewallet Android
+title: "🙏🏽 [General request]: "
+projects: ["litecoin-foundation/3"]
+assignees: 
+  - kcw-grunt
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please explain what you would like to know about Litewallet.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why do you ask?
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What do you need to know?
+    validations:
+      required: true
