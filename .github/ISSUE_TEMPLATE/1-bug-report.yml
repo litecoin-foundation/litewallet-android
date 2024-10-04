@@ -1,14 +1,13 @@
 name: Bug Report
 description: File a bug report.
-title: "[Bug]: "
+title: "🐛[Bug Report]: "
 labels: ["bug"]
 projects: ["litewallet-android/1"]
 assignees: ["joskie", "kcw-grunt"]
 body:
   - type: markdown
     attributes:
-      value: |
-        We feel bug reports are extremely valuable. Thanks for this report!
+      value: Bug reports are extremely valuable. Thanks for this report!
   - type: dropdown
     id: os-version
     attributes:
@@ -28,7 +27,7 @@ body:
   - type: dropdown
     id: app-version
     attributes:
-      label: Which version of Litewallet are you running?
+      label: Which version of Litewallet (Android) are you running?
       multiple: false
       options:
         - v2.10.0 (Default)
@@ -37,6 +36,8 @@ body:
         - v2.8.4
         - Other
       default: 0
+    validations:
+      required: true
   - type: textarea
     id: describe-what-happened
     attributes:
