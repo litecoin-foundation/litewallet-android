@@ -1,4 +1,45 @@
-# ---
+name: 🥳[Feature]
+description: Some change that improves Litewallet Android
+title: "🥳[Feature]: "
+labels: ["🥳 feature","🏡 moderate-priority"]
+projects: ["litecoin-foundation/3"]
+assignees: 
+  - kcw-grunt
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Work needed to maintain the codebase.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why?
+      description: Why should this change be undertaken?
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What?
+      description: What do you think should be changed?
+    validations:
+      required: true
+  - type: image
+    id: before-after
+    attributes:
+      label: UI Changes
+      description: Show the before and after
+    validations:
+      required: false
+      # ---
+
+# ## UI Changes
+
+# |**Before**|**After**|
+# |----------|---------|
+# |<!-- Insert _before_ screenshot or gif-->|<!-- Insert _after_ screenshot or gif if you can-->|
+
+
 # name: 🥳[Feature] 
 # about: An issue that improves Litewallet Android
 # title: '🥳[Feature]'
@@ -7,7 +48,7 @@
 
 # ---
 
-# ## Overview
+# ## Overview"🥳 feature"
 
 # ### Why?
 # **Is your request related to a problem? Or, do you have an idea to improve the app? Please describe.**
