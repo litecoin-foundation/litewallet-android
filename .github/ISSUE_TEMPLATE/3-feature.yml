@@ -1,4 +1,27 @@
-# ---
+name: 🐛[fwewaR]
+description: An issue for when Litewallet Android is not operating as expected.
+title: "🐛[fwewaR]: "
+labels: ["🐛 bug"]
+projects: ["litecoin-foundation/3"]
+assignees: 
+  - josikie
+  - kcw-grunt
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bug reports are extremely valuable. Thanks for this report! 
+  - type: textarea
+    id: device-model
+    attributes:
+      label: Device model
+      description: Which is your Android device?
+      placeholder: Android model
+      value: "Do you have a Samsung Galaxy S23 Ultra or Google Pixel 7A or something else?"
+    validations:
+      required: true      
+  - type: dropdown
+    id: os-version# ---
 # name: 🥳[Feature] 
 # about: An issue that improves Litewallet Android
 # title: '🥳[Feature]'
