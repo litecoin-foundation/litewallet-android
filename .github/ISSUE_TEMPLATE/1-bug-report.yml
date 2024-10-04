@@ -1,4 +1,4 @@
-name: Bug Report
+name: 🐛[Bug Report]
 description: File a bug report.
 title: "🐛[Bug Report]: "
 labels: ["bug"]
@@ -7,7 +7,8 @@ assignees: ["joskie", "kcw-grunt"]
 body:
   - type: markdown
     attributes:
-      value: Bug reports are extremely valuable. Thanks for this report!
+      value: |
+        Bug reports are extremely valuable. Thanks for this report!
   - type: dropdown
     id: os-version
     attributes:
