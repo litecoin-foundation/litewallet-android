@@ -1,9 +1,10 @@
 name: 🐛[Bug Report]
-description: File a bug report.
+description: An issue for when Litewallet Android is not operating as expected.
 title: "🐛[Bug Report]: "
 labels: ["bug"]
 projects: ["litewallet-android/1"]
-assignees: ["joskie", "kcw-grunt"]
+assignees: 
+  - joskie
 body:
   - type: markdown
     attributes:
