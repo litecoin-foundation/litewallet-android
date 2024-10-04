@@ -2,7 +2,8 @@ name: 🐛[Bug Report]
 description: An issue for when Litewallet Android is not operating as expected.
 title: "🐛[Bug Report]: "
 labels: ["🐛 bug"]
-projects: ["Litewallet: Android"]
+projects: 
+  - "Litewallet: Android"
 assignees: 
   - josikie
 body:
@@ -53,12 +54,9 @@ body:
     id: describe-what-happened
     attributes:
       label: Describe what happened.
-      description: What did you expect to happen?
+      description: Steps to reproduce the behavior:
       placeholder: Tell us what actually happened.
       value: |
-        Steps to reproduce the behavior:
-        |
-        ### Steps to reproduce the behavior:
         1. Go to ...
         2. Click on '....'
         3. See error
