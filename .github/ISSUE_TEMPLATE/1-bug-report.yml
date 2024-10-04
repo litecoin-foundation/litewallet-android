@@ -2,8 +2,7 @@ name: 🐛[Bug Report]
 description: An issue for when Litewallet Android is not operating as expected.
 title: "🐛[Bug Report]: "
 labels: ["🐛 bug"]
-projects: 
-  - "Litewallet: Android"
+projects: ["litecoin-foundation/3"]
 assignees: 
   - josikie
 body:
