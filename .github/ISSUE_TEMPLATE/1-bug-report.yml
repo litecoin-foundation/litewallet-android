@@ -53,10 +53,11 @@ body:
     id: describe-what-happened
     attributes:
       label: Describe what happened.
-      description: Steps to reproduce the behavior:
-      placeholder: Tell us what actually happened.
+      description: Steps to reproduce the behavior
+      placeholder: Tell us what actually happened
       value: |
         Steps to reproduce:
+        |
         1. Go to ...
         2. Click on '....'
         3. See error
