@@ -55,7 +55,13 @@ body:
       label: Describe what happened.
       description: What did you expect to happen?
       placeholder: Tell us what actually happened.
-      value: "Drat! A bug."
+      value: |
+        Steps to reproduce the behavior:
+        |
+        ### Steps to reproduce the behavior:
+        1. Go to ...
+        2. Click on '....'
+        3. See error
     validations:
       required: true
   - type: textarea
