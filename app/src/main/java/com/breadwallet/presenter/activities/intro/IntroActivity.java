@@ -29,7 +29,6 @@ import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
-import com.google.android.play.core.ktx.BuildConfig;
 import com.platform.APIClient;
 import java.io.Serializable;
 import java.util.Objects;
@@ -92,7 +91,7 @@ public class IntroActivity extends BRActivity implements Serializable {
 
         setListeners();
         updateBundles();
-        if (!BuildConfig.DEBUG && BRKeyStore.AUTH_DURATION_SEC != 300) {
+        if (BRKeyStore.AUTH_DURATION_SEC != 300) {
             RuntimeException ex = new RuntimeException("onCreate: AUTH_DURATION_SEC should be 300");
             Timber.e(ex);
             throw ex;
@@ -115,19 +114,6 @@ public class IntroActivity extends BRActivity implements Serializable {
         if (!isFirstAddressCorrect) {
             Timber.d("timber: Calling wipeWalletButKeyStore");
             BRWalletManager.getInstance().wipeWalletButKeystore(this);
-        }
-
-        if (BuildConfig.VERSION_NAME == "v2.8.4") {
-            Snackbar.make(parentLayout,
-                            R.string.release_notes,
-                            Snackbar.LENGTH_INDEFINITE).setAction(R.string.Webview_dismiss, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-                        }
-                    })
-                    .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
-                    .show();
         }
 
         PostAuth.getInstance().onCanaryCheck(this, false);
