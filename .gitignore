@@ -100,3 +100,4 @@ app/src/debug/google-services.json
 app/src/litewalletDebug/google-services.json
 /app/release/google-services.json
 /app/debug/google-services.json
+/.idea/dictionaries/grunt.xml
