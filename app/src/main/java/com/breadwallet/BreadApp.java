@@ -20,14 +20,12 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
-import com.pusher.pushnotifications.PushNotifications;
 
 import timber.log.Timber;
 import com.appsflyer.AppsFlyerLib;
@@ -58,7 +56,7 @@ public class BreadApp extends Application {
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
         AnalyticsManager.init(this);
         AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
-        AppsFlyerLib.getInstance().init("CTv3A2tRPgtv8AAWnfpFbD", null, this);
+        AppsFlyerLib.getInstance().init("XXXX", null, this);
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
