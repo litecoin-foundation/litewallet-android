@@ -1,7 +1,7 @@
 package com.breadwallet.analytics;
-import androidx.test.rule.ActivityTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import android.util.Log;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.breadwallet.presenter.activities.intro.IntroActivity;
 import com.breadwallet.tools.manager.AnalyticsManager;
@@ -17,9 +17,8 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class AnalyticsTests {
     public static final String TAG = AnalyticsTests.class.getName();
-    @Rule
-    public ActivityTestRule<IntroActivity> mActivityRule = new ActivityTestRule<>(IntroActivity.class);
-
+   @Rule
+   public ActivityScenarioRule<IntroActivity> mActivityRule = new ActivityScenarioRule<>(IntroActivity.class);
     @Before
     public void setUp() {
         Log.e(TAG, "setUp: ");
@@ -60,12 +59,14 @@ public class AnalyticsTests {
         Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20201121_DRIA));
         Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20201121_FRIA));
         Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20200207_DTHB));
-        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20210405_TAWDF));
-        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20210804_TAA2FAC));
-        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20210804_TAWDS));
-        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20210804_TAULI));
-        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20210804_TAULO));
         Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20210427_HCIEEH));
         Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20220822_UTOU));
+        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20230131_NENR));
+        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20230407_DCS));
+        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20240123_RAGI));
+        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20231225_UAP));
+        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20240101_US));
+        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20241006_DRR));
+        Assert.assertNotNull(AnalyticsManager.logCustomEvent(BRConstants._20241006_UCR));
     }
 }

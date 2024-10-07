@@ -33,6 +33,7 @@ import com.breadwallet.presenter.fragments.BuyTabFragment;
 import com.breadwallet.presenter.history.HistoryFragment;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.TextSizeTransition;
+import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.InternetManager;
 import com.breadwallet.tools.manager.SyncManager;
@@ -50,7 +51,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.play.core.tasks.Task;
+import com.google.android.gms.tasks.Task;
 
 import java.math.BigDecimal;
 
@@ -126,10 +127,11 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     private void showInAppReviewDialogIfNeeded() {
-        if (!BRSharedPrefs.isInAppReviewDone(this) && BRSharedPrefs.getSendTransactionCount(this) > 4) {
+        if (!BRSharedPrefs.isInAppReviewDone(this) && BRSharedPrefs.getSendTransactionCount(this) > 2) {
             ReviewManager manager = ReviewManagerFactory.create(this);
             Task<ReviewInfo> request = manager.requestReviewFlow();
             request.addOnCompleteListener(task -> {
+                AnalyticsManager.logCustomEvent(BRConstants._20241006_DRR);
                 if (task.isSuccessful()) {
                     ReviewInfo reviewInfo = task.getResult();
                     Task<Void> flow = manager.launchReviewFlow(BreadActivity.this, reviewInfo);
@@ -140,6 +142,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                         Timber.i("timber: In-app LaunchReviewFlow completed successful (%s)", task1.isSuccessful());
                         if (task1.isSuccessful()) {
                             BRSharedPrefs.inAppReviewDone(BreadActivity.this);
+                            AnalyticsManager.logCustomEvent(BRConstants._20241006_UCR);
                         }
                     });
                 } else {

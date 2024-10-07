@@ -1,0 +1,78 @@
+name: 🥳[Feature]
+description: Some change that improves Litewallet Android
+title: "🥳[Feature]: "
+labels: ["🥳 feature","🏡 moderate-priority"]
+projects: ["litecoin-foundation/3"]
+assignees: 
+  - kcw-grunt
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please explain what feature that needs to be added to Litewallet.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why?
+      description: Why should this change be undertaken?
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What?
+      description: What do you think should be changed?
+    validations:
+      required: true
+  - type: textarea
+    id: before-after
+    attributes:
+      label: UI Changes
+      description: Show the before and after
+      value: |
+        ### UI Changes
+        # |**Before**|**After**|
+        # |----------|---------|
+        # |<!-- Insert _before_ screenshot or gif-->|<!-- Insert _after_ screenshot or gif if you can-->|
+    validations:
+      required: false
+      # ---
+
+
+
+
+# name: 🥳[Feature] 
+# about: An issue that improves Litewallet Android
+# title: '🥳[Feature]'
+# labels: 'enhancement'
+# assignees: 'mosadialiou'
+
+# ---
+
+# ## Overview"🥳 feature"
+
+# ### Why?
+# **Is your request related to a problem? Or, do you have an idea to improve the app? Please describe.**
+# <!-- A clear and concise description of your idea. --> 
+
+
+# ### What?
+# **Describe the solution you'd like**
+# <!-- A clear and concise description of what you want to happen. -->
+
+# **Describe alternatives you've considered**
+# <!-- A clear and concise description of any alternative solutions or features you've considered. -->
+
+# **Additional context**
+# <!-- Add any other context or screenshots about the feature request here. --> 
+
+# ### Definition of Done
+# - [ ] Action 1
+# - [ ] Action 2
+# - [ ] Action N
+
+# ## UI Changes
+
+# |**Before**|**After**|
+# |----------|---------|
+# |<!-- Insert _before_ screenshot or gif-->|<!-- Insert _after_ screenshot or gif if you can-->|

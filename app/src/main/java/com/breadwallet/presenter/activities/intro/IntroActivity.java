@@ -9,11 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.breadwallet.presenter.activities.AnnounceUpdatesViewActivity;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.breadwallet.entities.IntroLanguageResource;
+import com.breadwallet.presenter.activities.SetPinActivity;
 import com.breadwallet.tools.adapter.CountryLanguageAdapter;
 import com.breadwallet.tools.util.LocaleHelper;
 import com.google.android.material.snackbar.Snackbar;
@@ -29,7 +29,6 @@ import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
-import com.google.android.play.core.ktx.BuildConfig;
 import com.platform.APIClient;
 import java.io.Serializable;
 import java.util.Objects;
@@ -44,7 +43,6 @@ public class IntroActivity extends BRActivity implements Serializable {
     public CountryLanguageAdapter countryLanguageAdapter;
     public RecyclerView listLangRecyclerView;
     public IntroLanguageResource introLanguageResource = new IntroLanguageResource();
-    public static boolean isNewWallet = false;
     public static IntroActivity getApp() {
         return app;
     }
@@ -93,7 +91,7 @@ public class IntroActivity extends BRActivity implements Serializable {
 
         setListeners();
         updateBundles();
-        if (!BuildConfig.DEBUG && BRKeyStore.AUTH_DURATION_SEC != 300) {
+        if (BRKeyStore.AUTH_DURATION_SEC != 300) {
             RuntimeException ex = new RuntimeException("onCreate: AUTH_DURATION_SEC should be 300");
             Timber.e(ex);
             throw ex;
@@ -116,19 +114,6 @@ public class IntroActivity extends BRActivity implements Serializable {
         if (!isFirstAddressCorrect) {
             Timber.d("timber: Calling wipeWalletButKeyStore");
             BRWalletManager.getInstance().wipeWalletButKeystore(this);
-        }
-
-        if (BuildConfig.VERSION_NAME == "v2.8.4") {
-            Snackbar.make(parentLayout,
-                            R.string.release_notes,
-                            Snackbar.LENGTH_INDEFINITE).setAction(R.string.Webview_dismiss, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-                        }
-                    })
-                    .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
-                    .show();
         }
 
         PostAuth.getInstance().onCanaryCheck(this, false);
@@ -184,10 +169,8 @@ public class IntroActivity extends BRActivity implements Serializable {
                 if (!BRAnimator.isClickAllowed()) return;
                 BreadActivity bApp = BreadActivity.getApp();
                 if (bApp != null) bApp.finish();
-                isNewWallet = true;
-                Intent intentEmailNewWallet = new Intent(IntroActivity.this, AnnounceUpdatesViewActivity.class);
-                intentEmailNewWallet.putExtra("isNewWallet", true);
-                startActivity(intentEmailNewWallet);
+                Intent intent = new Intent(IntroActivity.this, SetPinActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -197,10 +180,8 @@ public class IntroActivity extends BRActivity implements Serializable {
                 if (!BRAnimator.isClickAllowed()) return;
                 BreadActivity bApp = BreadActivity.getApp();
                 if (bApp != null) bApp.finish();
-                isNewWallet = false;
-                Intent intentEmailRecover = new Intent(IntroActivity.this, AnnounceUpdatesViewActivity.class);
-                intentEmailRecover.putExtra("isNewWallet", false);
-                startActivity(intentEmailRecover);
+                Intent intent = new Intent(IntroActivity.this, RecoverActivity.class);
+                startActivity(intent);
             }
         });
     }
