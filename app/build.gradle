@@ -356,6 +356,9 @@ dependencies {
     def lifecycle_version = "2.4.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    // Get the latest version from https://mvnrepository.com/artifact/com.appsflyer/af-android-sdk
+    implementation 'com.appsflyer:af-android-sdk:6.15.1'
 }
 
 

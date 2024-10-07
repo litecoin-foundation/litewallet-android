@@ -9,20 +9,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-import com.breadwallet.di.component.DaggerAppComponent;
 import com.breadwallet.presenter.activities.util.BRActivity;
-import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.tools.listeners.SyncReceiver;
 import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.LocaleHelper;
 import com.breadwallet.tools.util.Utils;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -31,7 +30,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.pusher.pushnotifications.PushNotifications;
 
 import timber.log.Timber;
-
+import com.appsflyer.AppsFlyerLib;
 public class BreadApp extends Application {
     public static int DISPLAY_HEIGHT_PX;
     FingerprintManager mFingerprintManager;
@@ -46,8 +45,6 @@ public class BreadApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        DaggerAppComponent.builder().build().inject(this);
-
         boolean enableCrashlytics = true;
         if (Utils.isEmulatorOrDebug(this)) {
             enableCrashlytics = false;
@@ -61,14 +58,7 @@ public class BreadApp extends Application {
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
         AnalyticsManager.init(this);
         AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
-
-        new Thread(() -> {
-            //fetch instance ID
-            String instanceID = Utils.fetchPartnerKey(this,
-                    PartnerNames.PUSHERSTAGING);
-            // setup Push Notifications
-            loadAdvertisingAndPush(instanceID, this);
-        }).start();
+        AppsFlyerLib.getInstance().init("CTv3A2tRPgtv8AAWnfpFbD", null, this);
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
