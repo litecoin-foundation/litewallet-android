@@ -255,7 +255,7 @@ public class Utils {
                 else if (name == PartnerNames.OPSALL) {
                     JSONArray opsArray = new JSONArray(keyObject.get(name.getKey()).toString());
 
-                    if (opsArray != null) {
+                    if (opsArray.length() > 0) {
                         for (int i=0;i<opsArray.length();i++){
                             opsString = (new StringBuilder())
                                  .append(opsString)
@@ -268,7 +268,18 @@ public class Utils {
                     }
                     return opsString.replaceAll("\\s+","");
                 }
-                
+                else if (name == PartnerNames.AFDEVID) {
+                    JSONObject jsonObj = new JSONObject(keyObject.get(name.getKey()).toString());
+                    return jsonObj.toString();
+                }
+                else if (name == PartnerNames.PUSHER) {
+                    JSONObject jsonObj = new JSONObject(keyObject.get(name.getKey()).toString());
+                    return jsonObj.toString();
+                }
+                else if (name == PartnerNames.PUSHERSTAGING) {
+                    JSONObject jsonObj = new JSONObject(keyObject.get(name.getKey()).toString());
+                    return jsonObj.toString();
+                }
 
                 return keyObject.get(name.getKey()).toString();
             } catch (IOException e) {
