@@ -137,21 +137,17 @@ public class BRConstants {
     public static final String _20201121_DRIA = "did_resolve_IPFS_address";
     public static final String _20201121_FRIA = "failed_resolve_IPFS_address";
     public static final String _20230113_BAC = "backup_apiserver_called";
-
     public static final String _20230407_DCS = "did_complete_sync";
     ///Dev: These events not yet used
     public static final String _20200207_DTHB = "did_tap_header_balance";
-    public static final String _20210405_TAWDF = "ternio_api_wallet_details_failure";
-    public static final String _20210804_TAA2FAC = "ternio_API_auth_2FA_change";
-    public static final String _20210804_TAWDS = "ternio_API_wallet_details_success";
-    public static final String _20210804_TAULI = "ternio_API_user_log_in";
-    public static final String _20210804_TAULO = "ternio_API_user_log_out";
     public static final String _20210427_HCIEEH = "heartbeat_check_if_event_even_happens";
     public static final String _20220822_UTOU = "user_tapped_on_ud";
     public static final String _20230131_NENR = "no_error_nominal_response";
     public static final String _20240123_RAGI = "registered_android_general_interest";
     public static final String _20231225_UAP = "user_accepted_push";
     public static final String _20240101_US = "user_signup";
+    public static final String _20241006_DRR = "did_request_rating";
+    public static final String _20241006_UCR = "user_completed_rating";
 
     @Retention(RetentionPolicy.SOURCE)
     @StringDef({
@@ -180,18 +176,15 @@ public class BRConstants {
             _20201121_FRIA,
             _20230113_BAC,
             _20200207_DTHB,
-            _20210405_TAWDF,
-            _20210804_TAA2FAC,
-            _20210804_TAWDS,
-            _20210804_TAULI,
-            _20210804_TAULO,
             _20210427_HCIEEH,
             _20220822_UTOU,
             _20230131_NENR,
             _20230407_DCS,
             _20240123_RAGI,
             _20231225_UAP,
-            _20240101_US
+            _20240101_US,
+            _20241006_DRR,
+            _20241006_UCR
     })
     public @interface Event {
     }
