@@ -20,10 +20,8 @@ import static com.breadwallet.tools.util.BRConstants.GEO_PERMISSIONS_REQUESTED;
 public class BRSharedPrefs {
 
     private static final List<OnIsoChangedListener> isoChangedListeners = new ArrayList<>();
-    public static final String TERNIO_USER_ID = "ternio_user_id";
     public static final String SEND_TRANSACTION_COUNT = "send_transaction_count";
     public static final String IN_APP_REVIEW_DONE = "in_app_review_done";
-
     public static final String PREFERRED_FPRATE = "preferredFalsePositiveRate";
 
     public interface OnIsoChangedListener {

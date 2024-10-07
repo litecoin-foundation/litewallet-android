@@ -8,7 +8,7 @@ configurations {
     ktlint
 }
 
-configurations.all {
+configurations.configureEach {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
         if (requested.group == 'org.jetbrains.kotlin' && requested.name == 'kotlin-reflect') {
@@ -56,17 +56,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-
-    compileSdkVersion 34
-
+    compileSdk 34
     defaultConfig {
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
         minSdkVersion 31
-        targetSdkVersion 33
-        versionCode 20240521
-        versionName "v2.10.0"
+        targetSdkVersion 34
+        versionCode 20241007
+        versionName "v2.11.1"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
 
@@ -105,7 +102,7 @@ android {
         }
     }
     // Specifies two flavor dimensions.
-    flavorDimensions "mode"
+    flavorDimensions += "mode"
     productFlavors {
         litewallet {
             applicationId "com.loafwallet"
@@ -246,10 +243,9 @@ android {
 
     }
     namespace 'com.breadwallet'
-    buildToolsVersion '34.0.0'
 }
 
-task copyResDirectoryToClasses(type: Copy) {
+tasks.register('copyResDirectoryToClasses', Copy) {
     from "${projectDir}/src/test/res"
     into "${buildDir}/intermediates/classes/test/debug/res"
 }
@@ -332,9 +328,19 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.50'
     kapt 'com.google.dagger:dagger-compiler:2.50'
 
-    // Play Core
-    implementation 'com.google.android.play:core:1.10.3'
-    implementation 'com.google.android.play:core-ktx:1.8.1'
+    // Play Asset Delivery:
+    implementation 'com.google.android.play:asset-delivery:2.2.2'
+    implementation 'com.google.android.play:asset-delivery-ktx:2.2.2'
+
+
+    // Play Feature Delivery:
+    implementation 'com.google.android.play:feature-delivery:2.1.0'
+    implementation 'com.google.android.play:feature-delivery-ktx:2.1.0'
+
+    // Play In-App Review:
+    implementation 'com.google.android.play:review:2.0.1'
+    implementation 'com.google.android.play:review-ktx:2.0.1'
+
 
     // Ktlint
     ktlint("com.pinterest.ktlint:ktlint-cli:1.2.1") {
@@ -350,6 +356,9 @@ dependencies {
     def lifecycle_version = "2.4.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    // Get the latest version from https://mvnrepository.com/artifact/com.appsflyer/af-android-sdk
+    implementation 'com.appsflyer:af-android-sdk:6.15.1'
 }
 
 
