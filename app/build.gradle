@@ -1,0 +1,378 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'kotlin-parcelize'
+
+configurations {
+    ktlint
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'org.jetbrains.kotlin' && requested.name == 'kotlin-reflect') {
+            details.useVersion kotlin_version
+        }
+    }
+}
+
+android {
+
+    buildFeatures {
+        dataBinding true
+        buildConfig true
+        viewBinding true
+    }
+    assetPacks = [":install_time_asset_pack",":fast_follow_asset_pack_01"]
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
+    Properties props = new Properties()
+    def propFile = file('../release.properties')
+    if (propFile.canRead()) {
+        props.load(new FileInputStream(propFile))
+
+        if (props != null && props.containsKey('storeFile') && props.containsKey('storePassword') &&
+                props.containsKey('keyAlias') && props.containsKey('keyPassword')) {
+
+            android.signingConfigs.release.storeFile = file(props['storeFile'])
+            android.signingConfigs.release.storePassword = props['storePassword']
+            android.signingConfigs.release.keyAlias = props['keyAlias']
+            android.signingConfigs.release.keyPassword = props['keyPassword']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+
+    compileSdkVersion 34
+
+    defaultConfig {
+        testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
+        applicationId = 'com.loafwallet'
+        minSdkVersion 31
+        targetSdkVersion 33
+        versionCode 20240521
+        versionName "v2.10.0"
+        multiDexEnabled true
+        archivesBaseName = "${versionName}(${versionCode})"
+
+        buildConfigField "String", "INFURA_KEY", "\"set the infura key here\""
+
+        // Similar to other properties in the defaultConfig block,
+        // you can configure the ndk block for each product flavor
+        // in your build configuration.
+        ndk {
+            // Specifies the ABI configurations of your native
+            // libraries Gradle should build and package with your APK.
+            abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
+        }
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_TOOLCHAIN=clang"
+            }
+        }
+
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    packagingOptions {
+        resources {
+            pickFirsts += ['protobuf.meta']
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            // When you specify a version of CMake, as shown below,
+            // the Android plugin searches for its binary within your
+            // PATH environmental variable.
+            path "CMakeLists.txt"  //path can only be set outside (in android block)
+
+        }
+    }
+    // Specifies two flavor dimensions.
+    flavorDimensions "mode"
+    productFlavors {
+        litewallet {
+            applicationId "com.loafwallet"
+            dimension "mode"
+            resValue "string", "app_name", "Litewallet"
+            buildConfigField "boolean", "LITECOIN_TESTNET", "false"
+
+            externalNativeBuild {
+                cmake {
+                    // When you specify a version of CMake, as shown below,
+                    // the Android plugin searches for its binary within your
+                    // PATH environmental variable.
+                    cFlags "-DLITECOIN_TESTNET=0"
+                    targets "core-lib"
+                }
+            }
+        }
+
+        litewalletTestnet {
+            applicationId "com.loafwallet.testnet"
+            dimension "mode"
+            resValue "string", "app_name", "Litewallet-testnet"
+            buildConfigField "boolean", "LITECOIN_TESTNET", "true"
+
+            externalNativeBuild {
+                cmake {
+                    // When you specify a version of CMake, as shown below,
+                    // the Android plugin searches for its binary within your
+                    // PATH environmental variable.
+                    cFlags "-DLITECOIN_TESTNET=1"
+                    targets "core-lib"
+                }
+            }
+        }
+    }
+    android {
+        lintOptions {
+            // set to true to turn off analysis progress reporting by lint
+            quiet true
+            // if true, stop the gradle build if errors are found
+            abortOnError false
+            // set to true to have all release builds run lint on issues with severity=fatal
+            // and abort the build (controlled by abortOnError above) if fatal issues are found
+            ignoreWarnings true
+            // if true, emit full/absolute paths to files with errors (true by default)
+            //absolutePaths true
+            // if true, check all issues, including those that are off by default
+            warningsAsErrors true
+            // turn off checking the given issue id's
+            disable 'TypographyFractions','TypographyQuotes'
+            // turn on the given issue id's
+            enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+            // check *only* the given issue id's
+            noLines true
+            // if true, show all locations for an error, do not truncate lists, etc.
+            showAll true
+            // whether lint should include full issue explanations in the text error output
+            explainIssues false
+            // Fallback lint configuration (default severities, etc.)
+            lintConfig file("default-lint.xml")
+            // if true, generate a text report of issues (false by default)
+            textReport true
+            // location to write the output; can be a file or 'stdout' or 'stderr'
+            //textOutput 'stdout'
+            textOutput file("lint-results.txt")
+            // if true, generate an XML report for use by for example Jenkins
+            xmlReport true
+            // file to write report to (if not specified, defaults to lint-results.xml)
+            xmlOutput file("lint-report.xml")
+            // if true, generate an HTML report (with issue explanations, sourcecode, etc)
+            htmlReport true
+            // optional path to report (default will be lint-results.html in the builddir)
+            htmlOutput file("lint-report.html")
+            // Set the severity of the given issues to fatal (which means they will be
+            // checked during release builds (even if the lint target is not included)
+            fatal 'NewApi', 'InlineApi'
+            // Set the severity of the given issues to error
+            error 'Wakelock', 'TextViewEdits'
+            // Set the severity of the given issues to warning
+            warning 'ResourceAsColor'
+            // Set the severity of the given issues to ignore (same as disabling the check)
+            ignore 'TypographyQuotes'
+            // Set the severity of the given issues to informational
+            informational 'StopShip'
+            // Use (or create) a baseline file for issues that should not be reported
+            baseline file("lint-baseline.xml")
+            // Normally most lint checks are not run on test sources (except the checks
+            // dedicated to looking for mistakes in unit or instrumentation tests, unless
+            // ignoreTestSources is true). You can turn on normal lint checking in all
+            // sources with the following flag, false by default:
+            checkTestSources true
+            // Like checkTestSources, but always skips analyzing tests -- meaning that it
+            // also ignores checks that have explicitly asked to look at test sources, such
+            // as the unused resource check.
+            ignoreTestSources true
+            // Normally lint will skip generated sources, but you can turn it on with this flag
+            checkGeneratedSources true
+            // Normally lint will analyze all dependencies along with each module; this ensures
+            // that lint can correctly (for example) determine if a resource declared in a library
+            // is unused; checking only the library in isolation would not be able to identify this
+            // problem. However, this leads to quite a bit of extra computation; a library is
+            // analyzed repeatedly, for each module that it is used in.
+            checkDependencies false
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled = true
+            debuggable = false
+            //DEV: Mothballing gitUpdateModules() until time to resolve:
+            //gitUpdateModules()
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            ndk {
+                minifyEnabled = false
+                debuggable = false
+            }
+
+            firebaseCrashlytics {
+                // Enable processing and uploading of native symbols to Crashlytics
+                // servers. By default, this is disabled to improve build speeds.
+                // This flag must be enabled to see properly-symbolicated native
+                // stack traces in the Crashlytics dashboard.
+                nativeSymbolUploadEnabled true
+            }
+        }
+        debug {
+            debuggable = true
+            minifyEnabled = false
+
+            ndk {
+                minifyEnabled = false
+                debuggable = true
+            }
+        }
+
+    }
+    namespace 'com.breadwallet'
+    buildToolsVersion '34.0.0'
+}
+
+task copyResDirectoryToClasses(type: Copy) {
+    from "${projectDir}/src/test/res"
+    into "${buildDir}/intermediates/classes/test/debug/res"
+}
+
+gradle.projectsEvaluated {
+    assembleDebug.dependsOn(copyResDirectoryToClasses)
+}
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+
+    implementation 'org.json:json:20231013'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.5.1')
+    androidTestImplementation('androidx.test:runner:1.5.2')
+    androidTestImplementation('androidx.test:rules:1.5.0')
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.9.22'
+
+    // commons
+    implementation 'commons-io:commons-io:2.4'
+    implementation 'org.eclipse.jetty:jetty-webapp:9.2.19.v20160908'
+    implementation 'org.eclipse.jetty.websocket:websocket-server:9.2.19.v20160908'
+    implementation 'org.eclipse.jetty:jetty-continuation:9.2.19.v20160908'
+    implementation 'org.slf4j:slf4j-api:1.7.22'
+
+    // androidx
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.legacy:legacy-support-v13:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    // preferences
+    implementation 'androidx.preference:preference-ktx:1.2.1'
+    // ChromeCustomTabs
+    implementation 'androidx.browser:browser:1.7.0'
+    // material design
+    implementation 'com.google.android.material:material:1.11.0'
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+
+    implementation 'com.google.zxing:core:3.5.2'
+
+    implementation 'io.sigpipe:jbsdiff:1.0'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:32.7.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-crashlytics-ndk'
+    implementation('com.google.firebase:firebase-iid:21.1.0')
+
+    // push notifications
+    implementation 'com.google.firebase:firebase-messaging:23.4.0'
+    implementation 'com.pusher:push-notifications-android:1.9.0'
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // Unstoppable domain
+    implementation 'com.unstoppabledomains:resolution:5.0.0'
+
+    // Progress Button
+    implementation 'com.github.razir.progressbutton:progressbutton:2.1.0'
+
+    // Dagger
+    implementation 'com.google.dagger:dagger:2.50'
+    kapt 'com.google.dagger:dagger-compiler:2.50'
+
+    // Play Core
+    implementation 'com.google.android.play:core:1.10.3'
+    implementation 'com.google.android.play:core-ktx:1.8.1'
+
+    // Ktlint
+    ktlint("com.pinterest.ktlint:ktlint-cli:1.2.1") {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, getObjects().named(Bundling, Bundling.EXTERNAL))
+        }
+    }
+    // additional 3rd party ruleset(s) can be specified here
+    // just add them to the classpath (e.g. ktlint 'groupId:artifactId:version') and
+    // ktlint will pick them up
+
+    //kotlin https://stackoverflow.com/questions/69817925/problem-duplicate-class-androidx-lifecycle-viewmodel-found-in-modules
+    def lifecycle_version = "2.4.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+}
+
+
+tasks.register("ktlintCheck", JavaExec) {
+    group = "verification"
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    mainClass = "com.pinterest.ktlint.Main"
+    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
+    args "src/**/*.kt", "**.kts", "!**/build/**"
+}
+
+tasks.named("check") {
+    dependsOn tasks.named("ktlintCheck")
+}
+
+tasks.register("ktlintFormat", JavaExec) {
+    group = "formatting"
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    mainClass = "com.pinterest.ktlint.Main"
+    jvmArgs "--add-opens=java.base/java.lang=ALL-UNNAMED"
+    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
+    args "-F", "src/**/*.kt", "**.kts", "!**/build/**"
+}
+apply plugin: 'com.google.gms.google-services'

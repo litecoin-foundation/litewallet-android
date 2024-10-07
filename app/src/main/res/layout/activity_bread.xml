@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/extra_light_blue_background"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:descendantFocusability="beforeDescendants"
+    android:filterTouchesWhenObscured="true"
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true"
+    tools:context="com.breadwallet.presenter.activities.BreadActivity">
+
+    <LinearLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:elevation="8dp"
+        android:orientation="vertical">
+
+        <ViewFlipper
+            android:id="@+id/tool_bar_flipper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/bread_bar"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:background="@color/litecoin_litewallet_blue"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:contentInsetEnd="0dp"
+                app:contentInsetStart="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/bread_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:animateLayoutChanges="true"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:layoutDirection="ltr">
+
+                    <TextView
+                        android:id="@+id/balanceTxtV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/barlowsemicondensed_medium"
+                        android:text="@string/ManageWallet.balance"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toTopOf="@+id/primary_price"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <Button
+                        android:id="@+id/primary_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:fontFamily="@font/barlowsemicondensed_medium"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        tools:ignore="MissingConstraints"
+                        tools:text="$1000.00" />
+
+                    <TextView
+                        android:id="@+id/equals"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlowsemicondensed_medium"
+                        android:text="="
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <Button
+                        android:id="@+id/secondary_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:fontFamily="@font/barlowsemicondensed_medium"
+                        android:gravity="left"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:ignore="MissingConstraints"
+                        tools:text="L100" />
+
+                    <ImageButton
+                        android:id="@+id/menuBut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_menu"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </ViewFlipper>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNav"
+        android:layout_below="@+id/toolbar_layout" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:theme="@style/BottomNavTheme"
+        app:backgroundTint="@color/litecoin_litewallet_blue"
+        app:itemIconTint="@color/bottom_nav_icon_tint_selector"
+        app:labelVisibilityMode="labeled"
+        tools:menu="@menu/bottom_nav_menu_us" />
+
+</RelativeLayout>

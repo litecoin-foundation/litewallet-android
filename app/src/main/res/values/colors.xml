@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#345d9d</color>
+    <color name="colorPrimaryDark">#00346e</color>
+    <color name="colorPrimaryLight">#688ace</color>
+    <color name="colorAccent">#345d9d</color>
+
+    <item name="white" type="color">#ffffff</item>
+    <item name="blue" type="color">#FF33B5E5</item>
+    <item name="red" type="color">#FFFF4444</item>
+    <item name="black" type="color">#ff000000</item>
+    <item name="gray" type="color">#ff787878</item>
+    <item name="light_gray" type="color">#ff9d9d9d</item>
+    <item name="separator_gray" type="color">#c6c6c6</item>
+    <item name="gray_shadow" type="color">#41484848</item>
+    <item name="page_indicator_gray" type="color">#ff9d9d9d</item>
+    <item name="extra_light_gray" type="color">#D6DAE1</item>
+    <item name="dark_gray" type="color">#65696e</item>
+    <item name="almost_black" type="color">#303030</item>
+    <item name="dark_blue" type="color">#4C98FD</item>
+    <item name="notification_gradient_start" type="color">#63BCFF</item>
+    <item name="notification_gradient_end" type="color">#378DFD</item>
+    <item name="wallet_orange" type="color">#ff8000</item>
+    <item name="white_trans" type="color">#32ffffff</item>
+    <item name="black_trans" type="color">#b5000000</item>
+    <item name="red_text" type="color">#FF5454</item>
+    <item name="green_text" type="color">#00BF00</item>
+    <item name="pink" type="color">#68ffc0c1</item>
+    <item name="status_bar" type="color">#000000</item>
+    <item name="intro_status_bar" type="color">#ffbf7f</item>
+    <item name="warning_status_bar" type="color">#7f5225</item>
+    <item name="camera_guideline" type="color">#50636363</item>
+
+    <item name="logo_gradient_start" type="color">#83afe0</item>
+    <item name="logo_gradient_end" type="color">#767ee3</item>
+
+    <item name="finger_gradient_start" type="color">#9c7ee2</item>
+    <item name="finger_gradient_end" type="color">#7F52E6</item>
+
+    <item name="recover_gradient_start" type="color">#e5affc</item>
+    <item name="recover_gradient_end" type="color">#d17df5</item>
+
+    <item name="restore_gradient_start" type="color">#83afe0</item>
+    <item name="restore_gradient_end" type="color">#767ee3</item>
+
+    <item name="import_gradient_start" type="color">#76b0fd</item>
+    <item name="import_gradient_end" type="color">#4C98FD</item>
+
+    <item name="write_phrase_gradient_start" type="color">#D9FD5394</item>
+    <item name="write_phrase_gradient_end" type="color">#FD5394</item>
+
+    <item name="pin_pad_text" type="color">#A3A8AE</item>
+    <item name="extra_light_blue_background" type="color">#F5F8FA</item>
+
+    <item name="button_primary_normal" type="color">#4C98FD</item>
+    <item name="button_secondary" type="color">#F5F8FA</item>
+    <item name="button_secondary_text" type="color">#232426</item>
+
+    //fingerprint
+    <color name="warning_color">#f04a5d</color>
+    <color name="hint_color">#42000000</color>
+    <color name="success_color">#009688</color>
+
+    //the QR
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="viewfinder_laser">#ffcc0000</color>
+    <color name="viewfinder_border">#ffafed44</color>
+
+    //Litewallet brand color palette
+    <item name="litecoin_gray" type="color">#F1F1F1</item>
+    <item name="litecoin_silver" type="color">#A6A9AA</item>
+    <item name="litecoin_dark_silver" type="color">#4D4D4E</item>
+    <item name="litecoin_litewallet_blue" type="color">#345D9D</item>
+    <item name="litecoin_litewallet_orange" type="color">#FE5F55</item>
+    <item name="litecoin_litewallet_dark_blue" type="color">#0C3475</item>
+    <item name="litecoin_litewallet_green" type="color">#179E27</item>
+    <color name="white_30_alpha">#b3ffffff</color>
+
+    <color name="blue_grey">#7c98c7</color>
+    <color name="white_two">#f5f5f5</color>
+    <color name="jade_green">#27ae60</color>
+    <color name="very_light_pink">#bdbdbd</color>
+    <color name="very_light_pink_two">#f2f2f2</color>
+    <color name="litecoin_litewallet_blue_darker">#25518b</color> 
+</resources>

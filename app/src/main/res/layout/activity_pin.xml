@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.breadwallet.presenter.customviews.BRLockScreenConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_pit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/litecoin_litewallet_dark_blue"
+    tools:context="com.breadwallet.presenter.activities.LoginActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ltcPriceConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/litecoin_litewallet_dark_blue">
+
+        <TextView
+            android:id="@+id/ltcPriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/barlowsemicondensed_medium"
+            tools:text="@string/Login.ltcPrice"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toTopOf="@+id/ltcPriceDescTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/ltcPriceDescTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/barlowsemicondensed_light"
+            tools:text="@string/Login.currentLtcPrice"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ltcPriceTextView" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#8DD6DAE1"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ltcPriceDescTextView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="186dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/litewallet_logotype_white"
+        app:layout_constraintBottom_toTopOf="@+id/brkeyboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ltcPriceConstraintLayout"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <ImageButton
+        android:id="@+id/scanQRCodeImgBut"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:adjustViewBounds="true"
+        android:background="?attr/selectableItemBackground"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_qr_code_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/ltcPriceConstraintLayout" />
+
+    <LinearLayout
+        android:id="@+id/pinLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/brkeyboard"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_bias="0.75">
+
+        <View
+            android:id="@+id/dot1"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:alpha="0.5"
+            android:background="@drawable/ic_pin_dot_white" />
+
+        <View
+            android:id="@+id/dot2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:alpha="0.5"
+            android:background="@drawable/ic_pin_dot_white" />
+
+        <View
+            android:id="@+id/dot3"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:alpha="0.5"
+            android:background="@drawable/ic_pin_dot_white" />
+
+        <View
+            android:id="@+id/dot4"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:alpha="0.5"
+            android:background="@drawable/ic_pin_dot_white" />
+
+        <View
+            android:id="@+id/dot5"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:alpha="0.5"
+            android:background="@drawable/ic_pin_dot_white" />
+
+        <View
+            android:id="@+id/dot6"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:alpha="0.5"
+            android:background="@drawable/ic_pin_dot_white" />
+    </LinearLayout>
+
+    <com.breadwallet.presenter.customviews.BRKeyboard
+        android:id="@+id/brkeyboard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/forgot_seed_phrase_or_pin_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:showAlphabet="true" />
+
+    <TextView
+        android:id="@+id/enter_pin_label"
+        style="@style/BRTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/UnlockScreen.subheader"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sub_header"
+        app:layout_constraintBottom_toTopOf="@+id/pinLayout"
+        app:layout_constraintLeft_toLeftOf="@+id/pinLayout"
+        app:layout_constraintRight_toRightOf="@+id/pinLayout" />
+
+    <ImageView
+        android:id="@+id/unlocked_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:alpha="0"
+        android:src="@drawable/ic_unlocked"
+        app:layout_constraintBottom_toBottomOf="@+id/brkeyboard"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <TextView
+        android:id="@+id/unlocked_text"
+        style="@style/BRTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:alpha="0"
+        android:text="@string/UnlockScreen.unlocked"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/unlocked_image"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintLeft_toLeftOf="@+id/unlocked_image"
+        app:layout_constraintRight_toRightOf="@+id/unlocked_image" />
+
+    <ImageButton
+        android:id="@+id/fingerprint_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/fingerprint_icon"
+        app:layout_constraintBottom_toTopOf="@+id/brkeyboard"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/forgot_seed_phrase_or_pin_text"
+        style="@style/BRTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:text="@string/UnlockScreen.forgetSeedPhraseOrPIN"
+        android:textColor="#85FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/version_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/version_text"
+        style="@style/BRTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/About.appVersion"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</com.breadwallet.presenter.customviews.BRLockScreenConstraintLayout>
