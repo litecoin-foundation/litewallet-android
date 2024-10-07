@@ -110,39 +110,6 @@ public class BreadApp extends Application {
     public interface OnAppBackgrounded {
         void onBackgrounded();
     }
-    private void loadAdvertisingAndPush(String instanceID, Context app) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    AdvertisingIdClient.Info adInfo = AdvertisingIdClient.getAdvertisingIdInfo(app);
-                    finishedLoadingPushService( instanceID, adInfo);
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-                String emptyID = "";
-                finishedLoadingPushService(emptyID,null);
-                Bundle params = new Bundle();
-                params.putString("pusher_instanceid_not_found",emptyID);
-                AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR, params);
-            }
-        }).start();
-    }
-    private void finishedLoadingPushService(final String instanceID, AdvertisingIdClient.Info adInfo) {
-        if(adInfo!=null && instanceID != "") {
-            // setup Pusher Interests
-            String adInfoString = adInfo.getId();
-            String generalAndroidInterest = "general-android";
-            String debugGeneralAndroidInterest = "debug-general-android";
-
-            //Send params for pusher setup
-            AnalyticsManager.logCustomEvent(BRConstants._20240123_RAGI);
-        }
-    }
     private static class CrashReportingTree extends Timber.Tree {
         private static final String CRASHLYTICS_KEY_PRIORITY = "priority";
         private static final String CRASHLYTICS_KEY_TAG = "tag";
