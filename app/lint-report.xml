@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.2.1">
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onBackPressed`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/presenter/activities/DisabledActivity.java"
+            line="119"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onRequestPermissionsResult`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/presenter/activities/camera/ScanQRActivity.java"
+            line="122"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingInflatedId"
+        severity="Error"
+        message="`@layout/activity_display_currency` does not contain a declaration with id `faq_button`"
+        category="Correctness"
+        priority="5"
+        summary="ID not found in inflated resource"
+        explanation="Checks calls to layout inflation and makes sure that the referenced ids are found in the corresponding layout (or at least one of them, if the layout has multiple configurations.)">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/presenter/activities/settings/DisplayCurrencyActivity.java"
+            line="62"
+            column="40"/>
+    </issue>
+
+    <issue
+        id="MissingInflatedId"
+        severity="Error"
+        message="`@layout/fragment_transaction_details` does not contain a declaration with id `title`"
+        category="Correctness"
+        priority="5"
+        summary="ID not found in inflated resource"
+        explanation="Checks calls to layout inflation and makes sure that the referenced ids are found in the corresponding layout (or at least one of them, if the layout has multiple configurations.)">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/presenter/fragments/FragmentTransactionDetails.java"
+            line="39"
+            column="51"/>
+    </issue>
+
+    <issue
+        id="MissingInflatedId"
+        severity="Error"
+        message="`@layout/activity_sync_blockchain` does not contain a declaration with id `close_button`"
+        category="Correctness"
+        priority="5"
+        summary="ID not found in inflated resource"
+        explanation="Checks calls to layout inflation and makes sure that the referenced ids are found in the corresponding layout (or at least one of them, if the layout has multiple configurations.)">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/presenter/activities/settings/SyncBlockchainActivity.java"
+            line="143"
+            column="50"/>
+    </issue>
+
+    <issue
+        id="ProtectedPermissions"
+        severity="Error"
+        message="Permission is only granted to system apps"
+        category="Correctness"
+        priority="5"
+        summary="Using system app permission"
+        explanation="Permissions with the protection level `signature`, `privileged` or `signatureOrSystem` are only granted to system apps. If an app is a regular non-system app, it will never be able to use these permissions.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/AndroidManifest.xml"
+            line="21"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ProtectedPermissions"
+        severity="Error"
+        message="Permission is only granted to system apps"
+        category="Correctness"
+        priority="5"
+        summary="Using system app permission"
+        explanation="Permissions with the protection level `signature`, `privileged` or `signatureOrSystem` are only granted to system apps. If an app is a regular non-system app, it will never be able to use these permissions.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/AndroidManifest.xml"
+            line="24"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="ViewDataBinding.inflateInternal can only be called from within the same library group (referenced groupId=`androidx.databinding` from groupId=`litewallet-android`)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/data_binding_base_class_source_out/litewalletDebug/out/com/breadwallet/databinding/ChangeLanguageBottomSheetBinding.java"
+            line="53"
+            column="62"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="ViewDataBinding.inflateInternal can only be called from within the same library group (referenced groupId=`androidx.databinding` from groupId=`litewallet-android`)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/data_binding_base_class_source_out/litewalletDebug/out/com/breadwallet/databinding/ChangeLanguageBottomSheetBinding.java"
+            line="72"
+            column="62"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="MergedDataBinderMapper can only be accessed from within the same library (androidx.databinding:databinding-runtime)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/source/kapt/litewalletDebug/androidx/databinding/DataBinderMapperImpl.java"
+            line="3"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="MergedDataBinderMapper.addMapper can only be called from within the same library (androidx.databinding:databinding-runtime)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/source/kapt/litewalletDebug/androidx/databinding/DataBinderMapperImpl.java"
+            line="5"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="DataBinderMapper can only be accessed from within the same library (androidx.databinding:databinding-runtime)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/source/kapt/litewalletDebug/com/breadwallet/DataBinderMapperImpl.java"
+            line="21"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="DataBinderMapper.getDataBinder can only be called from within the same library (androidx.databinding:databinding-runtime)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/source/kapt/litewalletDebug/com/breadwallet/DataBinderMapperImpl.java"
+            line="34"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="DataBinderMapper.getDataBinder can only be called from within the same library (androidx.databinding:databinding-runtime)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/source/kapt/litewalletDebug/com/breadwallet/DataBinderMapperImpl.java"
+            line="60"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="DataBinderMapper.getLayoutId can only be called from within the same library (androidx.databinding:databinding-runtime)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/source/kapt/litewalletDebug/com/breadwallet/DataBinderMapperImpl.java"
+            line="77"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="DataBinderMapper.convertBrIdToString can only be called from within the same library (androidx.databinding:databinding-runtime)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/source/kapt/litewalletDebug/com/breadwallet/DataBinderMapperImpl.java"
+            line="86"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="DataBinderMapper.collectDependencies can only be called from within the same library (androidx.databinding:databinding-runtime)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/source/kapt/litewalletDebug/com/breadwallet/DataBinderMapperImpl.java"
+            line="92"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="ViewDataBinding.inflateInternal can only be called from within the same library group (referenced groupId=`androidx.databinding` from groupId=`litewallet-android`)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/data_binding_base_class_source_out/litewalletDebug/out/com/breadwallet/databinding/FragmentHistoryBinding.java"
+            line="48"
+            column="52"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="ViewDataBinding.inflateInternal can only be called from within the same library group (referenced groupId=`androidx.databinding` from groupId=`litewallet-android`)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by the Gradle library group id)&#xA;* Method can only be accessed from tests.&#xA;&#xA;You can add your own API restrictions with the `@RestrictTo` annotation.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/build/generated/data_binding_base_class_source_out/litewalletDebug/out/com/breadwallet/databinding/FragmentHistoryBinding.java"
+            line="67"
+            column="52"/>
+    </issue>
+
+    <issue
+        id="TimberArgCount"
+        severity="Error"
+        message="Wrong argument count, format string `timber: onTxAdded: tx.length: %d, blockHeight: %d, timestamp: %d, amount: %d, hash: %s` requires `5` but format call supplies `0`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Formatting argument types incomplete or inconsistent"
+        explanation="When a formatted string takes arguments, you need to pass at least that amount of arguments to the formatting call.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/wallet/BRWalletManager.java"
+            line="379"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="TimberArgCount"
+        severity="Error"
+        message="Wrong argument count, format string `timber: onTxAdded: tx.length: %d, blockHeight: %d, timestamp: %d, amount: %d, hash: %s` requires `5` but format call supplies `0`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Formatting argument types incomplete or inconsistent"
+        explanation="When a formatted string takes arguments, you need to pass at least that amount of arguments to the formatting call.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/wallet/BRWalletManager.java"
+            line="379"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="TimberArgCount"
+        severity="Error"
+        message="Wrong argument count, format string `timber: onTxAdded: tx.length: %d, blockHeight: %d, timestamp: %d, amount: %d, hash: %s` requires `5` but format call supplies `0`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Formatting argument types incomplete or inconsistent"
+        explanation="When a formatted string takes arguments, you need to pass at least that amount of arguments to the formatting call.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/wallet/BRWalletManager.java"
+            line="379"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="TimberArgCount"
+        severity="Error"
+        message="Wrong argument count, format string `timber: onTxAdded: tx.length: %d, blockHeight: %d, timestamp: %d, amount: %d, hash: %s` requires `5` but format call supplies `0`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Formatting argument types incomplete or inconsistent"
+        explanation="When a formatted string takes arguments, you need to pass at least that amount of arguments to the formatting call.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/wallet/BRWalletManager.java"
+            line="379"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="TimberArgCount"
+        severity="Error"
+        message="Wrong argument count, format string `timber: onTxAdded: tx.length: %d, blockHeight: %d, timestamp: %d, amount: %d, hash: %s` requires `5` but format call supplies `0`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Formatting argument types incomplete or inconsistent"
+        explanation="When a formatted string takes arguments, you need to pass at least that amount of arguments to the formatting call.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/wallet/BRWalletManager.java"
+            line="379"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="TimberArgCount"
+        severity="Error"
+        message="Wrong argument count, format string `timber: onTxUpdated: hash: %s, blockHeight: %d, timestamp: %d` requires `3` but format call supplies `0`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Formatting argument types incomplete or inconsistent"
+        explanation="When a formatted string takes arguments, you need to pass at least that amount of arguments to the formatting call.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/wallet/BRWalletManager.java"
+            line="433"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="TimberArgCount"
+        severity="Error"
+        message="Wrong argument count, format string `timber: onTxUpdated: hash: %s, blockHeight: %d, timestamp: %d` requires `3` but format call supplies `0`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Formatting argument types incomplete or inconsistent"
+        explanation="When a formatted string takes arguments, you need to pass at least that amount of arguments to the formatting call.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/wallet/BRWalletManager.java"
+            line="433"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="TimberArgCount"
+        severity="Error"
+        message="Wrong argument count, format string `timber: onTxUpdated: hash: %s, blockHeight: %d, timestamp: %d` requires `3` but format call supplies `0`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Formatting argument types incomplete or inconsistent"
+        explanation="When a formatted string takes arguments, you need to pass at least that amount of arguments to the formatting call.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/wallet/BRWalletManager.java"
+            line="433"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="TimberArgCount"
+        severity="Error"
+        message="Wrong argument count, format string `timber: onTxDeleted: hash: %s, notifyUser: %d, recommendRescan: %d` requires `3` but format call supplies `0`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Formatting argument types incomplete or inconsistent"
+        explanation="When a formatted string takes arguments, you need to pass at least that amount of arguments to the formatting call.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/wallet/BRWalletManager.java"
+            line="444"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="TimberArgCount"
+        severity="Error"
+        message="Wrong argument count, format string `timber: onTxDeleted: hash: %s, notifyUser: %d, recommendRescan: %d` requires `3` but format call supplies `0`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Formatting argument types incomplete or inconsistent"
+        explanation="When a formatted string takes arguments, you need to pass at least that amount of arguments to the formatting call.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/wallet/BRWalletManager.java"
+            line="444"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="TimberArgCount"
+        severity="Error"
+        message="Wrong argument count, format string `timber: onTxDeleted: hash: %s, notifyUser: %d, recommendRescan: %d` requires `3` but format call supplies `0`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Formatting argument types incomplete or inconsistent"
+        explanation="When a formatted string takes arguments, you need to pass at least that amount of arguments to the formatting call.">
+        <location
+            file="/Users/grunt/crypto_projects/lf-projects/litewallet-android/app/src/main/java/com/breadwallet/wallet/BRWalletManager.java"
+            line="444"
+            column="9"/>
+    </issue>
+
+</issues>
