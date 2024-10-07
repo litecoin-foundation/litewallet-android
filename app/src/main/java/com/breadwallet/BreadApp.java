@@ -121,8 +121,6 @@ public class BreadApp extends Application {
                     e.printStackTrace();
                 } catch (GooglePlayServicesRepairableException e) {
                     e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 } catch (GooglePlayServicesNotAvailableException e) {
                     e.printStackTrace();
                 }
@@ -140,10 +138,6 @@ public class BreadApp extends Application {
             String adInfoString = adInfo.getId();
             String generalAndroidInterest = "general-android";
             String debugGeneralAndroidInterest = "debug-general-android";
-
-            PushNotifications.start(getApplicationContext(), instanceID);
-            PushNotifications.addDeviceInterest(generalAndroidInterest);
-            PushNotifications.addDeviceInterest(debugGeneralAndroidInterest);
 
             //Send params for pusher setup
             AnalyticsManager.logCustomEvent(BRConstants._20240123_RAGI);
