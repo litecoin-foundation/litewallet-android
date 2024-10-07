@@ -268,6 +268,8 @@ public class Utils {
                     }
                     return opsString.replaceAll("\\s+","");
                 }
+                
+
                 return keyObject.get(name.getKey()).toString();
             } catch (IOException e) {
                 e.printStackTrace();
