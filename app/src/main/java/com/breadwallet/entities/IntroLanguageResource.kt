@@ -3,7 +3,10 @@ package com.breadwallet.entities
 import com.breadwallet.R
 
 class IntroLanguageResource {
-
+    private val USD: String = "USD"
+    private val EUR: String = "EUR"
+    private val RMB: String = "RMB"
+    private val JPY: String = "JPY"
     fun loadResources() : Array<IntroLanguage>{
         return arrayOf<IntroLanguage> (
             IntroLanguage(
@@ -20,7 +23,7 @@ class IntroLanguageResource {
                 "La forma más segura de usar Litecoin.",
                 R.raw.spanish,
                 "¿Estás seguro de que quieres cambiar el idioma a español?",
-                Language.SPANISH
+                Language.SPANISH,
             ),
             IntroLanguage(
                 Language.INDONESIAN.code,

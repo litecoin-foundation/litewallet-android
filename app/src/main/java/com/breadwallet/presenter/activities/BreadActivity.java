@@ -14,6 +14,7 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -26,11 +27,13 @@ import androidx.transition.TransitionManager;
 import androidx.transition.TransitionSet;
 
 import com.breadwallet.R;
+import com.breadwallet.entities.Language;
 import com.breadwallet.presenter.activities.intro.IntroActivity;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRNotificationBar;
 import com.breadwallet.presenter.fragments.BuyTabFragment;
 import com.breadwallet.presenter.history.HistoryFragment;
+import com.breadwallet.presenter.language.LanguageAdapter;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.TextSizeTransition;
 import com.breadwallet.tools.manager.AnalyticsManager;
@@ -44,6 +47,7 @@ import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
 import com.breadwallet.tools.util.ExtensionKt;
+import com.breadwallet.tools.util.LocaleHelper;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRPeerManager;
 import com.breadwallet.wallet.BRWalletManager;
@@ -54,6 +58,8 @@ import com.google.android.play.core.review.ReviewManagerFactory;
 import com.google.android.gms.tasks.Task;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 import timber.log.Timber;
 
@@ -367,6 +373,25 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         updateUI();
     }
 
+    private static final Map<Language, String> fiat = new HashMap<>();
+
+    static {
+        fiat.put(Language.ENGLISH, "USD");
+        fiat.put(Language.SPANISH, "EUR");
+        fiat.put(Language.GERMAN, "EUR");
+        fiat.put(Language.FRENCH, "EUR");
+        fiat.put(Language.JAPANESE, "JPY");
+        fiat.put(Language.INDONESIAN, "USD");
+        fiat.put(Language.ITALIAN, "EUR");
+        fiat.put(Language.PORTUGUESE, "EUR");
+        fiat.put(Language.TURKISH, "EUR");
+        fiat.put(Language.UKRAINIAN, "EUR");
+        fiat.put(Language.RUSSIAN, "EUR");
+        fiat.put(Language.KOREAN, "EUR");
+        fiat.put(Language.CHINESE_TRADITIONAL, "USD");
+        fiat.put(Language.CHINESE_SIMPLIFIED, "RMB");
+    }
+
     public void updateUI() {
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(() -> {
             Thread.currentThread().setName(Thread.currentThread().getName() + ":updateUI");
@@ -381,8 +406,12 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             final String formattedBTCAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, "LTC", btcAmount);
 
             //amount in currency units
-            final BigDecimal curAmount = BRExchange.getAmountFromLitoshis(BreadActivity.this, iso, amount);
-            final String formattedCurAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, iso, curAmount);
+            Language currentLanguage = LocaleHelper.Companion.getInstance().getCurrentLocale();
+            String correspondingFiat = fiat.getOrDefault(currentLanguage, "USD");
+
+            assert correspondingFiat != null;
+            final BigDecimal curAmount = BRExchange.getAmountFromLitoshis(BreadActivity.this, correspondingFiat, amount);
+            final String formattedCurAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, correspondingFiat, curAmount);
             runOnUiThread(() -> {
                 primaryPrice.setText(formattedBTCAmount);
                 secondaryPrice.setText(String.format("%s", formattedCurAmount));
