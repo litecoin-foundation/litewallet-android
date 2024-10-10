@@ -3,13 +3,9 @@ package com.breadwallet;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Point;
-import android.hardware.fingerprint.FingerprintManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
-import android.view.WindowManager;
+import android.content.res.Resources;
 import com.breadwallet.presenter.activities.util.BRActivity;
+import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.tools.listeners.SyncReceiver;
 import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.BRConstants;
@@ -35,7 +31,6 @@ import timber.log.Timber;
 import com.appsflyer.AppsFlyerLib;
 public class BreadApp extends Application {
     public static int DISPLAY_HEIGHT_PX;
-    FingerprintManager mFingerprintManager;
     public static String HOST = "api.loafwallet.org";
     private static List<OnAppBackgrounded> listeners;
     private static Timer isBackgroundChecker;
@@ -47,27 +42,19 @@ public class BreadApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        boolean enableCrashlytics = true;
-        if (Utils.isEmulatorOrDebug(this)) {
-            enableCrashlytics = false;
-        }
-
-        // setup Timber
-        if(BuildConfig.DEBUG){
-            Timber.plant(new Timber.DebugTree());
-        }
-
+        /// DEV:  Top placement req.
+        boolean enableCrashlytics = !Utils.isEmulatorOrDebug(this);
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
         AnalyticsManager.init(this);
         AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
-        AppsFlyerLib.getInstance().init("XXXX", null, this);
 
-        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        DISPLAY_HEIGHT_PX = size.y;
-        mFingerprintManager = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
+        if(BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
+
+        String afID = Utils.fetchPartnerKey(this, PartnerNames.AFDEVID);
+        AppsFlyerLib.getInstance().init(afID, null, this);
+        AppsFlyerLib.getInstance().start(this);
+      
+        DISPLAY_HEIGHT_PX = Resources.getSystem().getDisplayMetrics().heightPixels;
     }
     public static Context getBreadContext() {
         return currentActivity == null ? SyncReceiver.app : currentActivity;
@@ -113,27 +100,5 @@ public class BreadApp extends Application {
     }
     public interface OnAppBackgrounded {
         void onBackgrounded();
-    }
-    private static class CrashReportingTree extends Timber.Tree {
-        private static final String CRASHLYTICS_KEY_PRIORITY = "priority";
-        private static final String CRASHLYTICS_KEY_TAG = "tag";
-        private static final String CRASHLYTICS_KEY_MESSAGE = "message";
-
-        @Override
-        protected void log(int priority, String tag, String message, Throwable throwable) {
-            if (priority == Log.VERBOSE || priority == Log.DEBUG) {
-                return;
-            }
-
-            Throwable t = throwable != null ? throwable : new Exception(message);
-
-            // Firebase Crash Reporting
-            FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
-            crashlytics.setCustomKey(CRASHLYTICS_KEY_PRIORITY, priority);
-            crashlytics.setCustomKey(CRASHLYTICS_KEY_TAG, tag);
-            crashlytics.setCustomKey(CRASHLYTICS_KEY_MESSAGE, message);
-
-            crashlytics.recordException(t);
-        }
     }
 }
