@@ -11,6 +11,7 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +29,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.activities.LoginActivity;
-import com.breadwallet.presenter.activities.camera.CameraActivity;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.TxItem;
@@ -43,6 +42,7 @@ import com.breadwallet.presenter.fragments.FragmentRequestAmount;
 import com.breadwallet.presenter.fragments.FragmentSend;
 import com.breadwallet.presenter.fragments.FragmentSignal;
 import com.breadwallet.presenter.fragments.FragmentTransactionDetails;
+
 import com.breadwallet.presenter.interfaces.BROnSignalCompletion;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
@@ -325,6 +325,7 @@ public class BRAnimator {
     }
 
     public static void killAllFragments(Activity app) {
+        //DEV: Needs refactor
         if (app != null && !app.isDestroyed())
             app.getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }

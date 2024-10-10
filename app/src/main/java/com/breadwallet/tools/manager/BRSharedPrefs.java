@@ -288,7 +288,7 @@ public class BRSharedPrefs {
 
     public static int getStartHeight(Context context) {
         SharedPreferences settingsToGet = context.getSharedPreferences(BRConstants.PREFS_NAME, 0);
-        return settingsToGet.getInt(BRConstants.START_HEIGHT, 0);
+        return  settingsToGet.getInt(BRConstants.START_HEIGHT, 0);
     }
 
     public static void putStartHeight(Context context, int startHeight) {
