@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'com.google.gms.google-services'
 
 configurations {
     ktlint
@@ -313,7 +314,8 @@ dependencies {
 
     // push notifications
     implementation 'com.google.firebase:firebase-messaging:23.4.0'
-    implementation 'com.pusher:push-notifications-android:1.9.0'
+    implementation("com.google.firebase:firebase-inappmessaging-display")
+
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'

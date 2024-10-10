@@ -224,6 +224,18 @@
             android:enabled="true"
             android:exported="false"
             android:label="SyncReceiver" />
+
+        <service
+            android:name=".tools.util.PushNotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/litewallet_logotype_white_notifications" />
     </application>
 
 </manifest>
