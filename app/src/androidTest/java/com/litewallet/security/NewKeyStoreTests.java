@@ -1,4 +1,4 @@
-package com.breadwallet.security;
+package com.litewallet.security;
 
 import android.app.Activity;
 import android.security.keystore.UserNotAuthenticatedException;
