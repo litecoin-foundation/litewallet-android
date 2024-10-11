@@ -4,7 +4,6 @@ import android.util.Log;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.breadwallet.presenter.activities.intro.IntroActivity;
-import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.BRConstants;
 
 import org.junit.After;
@@ -14,9 +13,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.net.URI;
+
 @RunWith(AndroidJUnit4.class)
-public class AnalyticsTests {
-    public static final String TAG = AnalyticsTests.class.getName();
+public class ConstantsTests {
+    public static final String TAG = ConstantsTests.class.getName();
    @Rule
    public ActivityScenarioRule<IntroActivity> mActivityRule = new ActivityScenarioRule<>(IntroActivity.class);
     @Before
@@ -27,7 +28,20 @@ public class AnalyticsTests {
     @After
     public void tearDown() {
     }
-
+    @Test
+    public void testLitecoinSymbolConstants() {
+        Assert.assertSame(BRConstants.litecoinLowercase,"ł");
+        Assert.assertSame(BRConstants.litecoinUppercase,"Ł");
+    }
+    @Test
+    public void testAppExternalURLConstants() {
+        Assert.assertSame(BRConstants.TWITTER_LINK,"https://twitter.com/Litewallet_App");
+        Assert.assertSame(BRConstants.INSTAGRAM_LINK,"https://www.instagram.com/litewallet.app");
+        Assert.assertSame(BRConstants.WEB_LINK,"https://litewallet.io");
+        Assert.assertSame(BRConstants.TOS_LINK,"https://litewallet.io/privacy");
+        Assert.assertSame(BRConstants.CUSTOMER_SUPPORT_LINK,"https://support.litewallet.io/hc/en-us/requests/new");
+        Assert.assertSame(BRConstants.BITREFILL_AFFILIATE_LINK,"https://www.bitrefill.com/");
+    }
     @Test
     public void testFirebaseAnalyticsConstants() {
         Assert.assertSame(BRConstants._20191105_AL,"app_launched");
