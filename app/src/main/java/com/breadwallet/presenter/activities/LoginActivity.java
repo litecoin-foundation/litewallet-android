@@ -153,6 +153,7 @@ public class LoginActivity extends BRActivity {
         fingerPrint.setVisibility(useFingerprint ? View.VISIBLE : View.GONE);
 
         if (useFingerprint) {
+            /// DEV NOTES: Remove this call to auth Prompt
             fingerPrint.setOnClickListener(v -> AuthManager.getInstance().authPrompt(LoginActivity.this, "", "", false, true, new BRAuthCompletion() {
                 @Override
                 public void onComplete() {

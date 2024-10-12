@@ -320,6 +320,8 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
                 app.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        /// DEV NOTES: Remove this call to auth Prompt
+
                         AuthManager.getInstance().authPrompt(app, "Confirmation", message, false, false, new BRAuthCompletion() {
                             @Override
                             public void onComplete() {

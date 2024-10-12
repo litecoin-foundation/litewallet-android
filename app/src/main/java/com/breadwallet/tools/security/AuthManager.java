@@ -173,6 +173,8 @@ public class AuthManager {
         }
     }
 
+
+    /// DEV NOTES: Ultimately want to remove this method
     public void authPrompt(final Context context, String title, String message, boolean forcePin, boolean forceFingerprint, BRAuthCompletion completion) {
         if (context == null || !(context instanceof Activity)) {
             Timber.i("timber: authPrompt: context is null or not Activity: %s", context);

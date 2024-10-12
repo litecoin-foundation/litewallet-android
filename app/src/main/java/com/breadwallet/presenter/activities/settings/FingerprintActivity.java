@@ -91,6 +91,7 @@ public class FingerprintActivity extends BRActivity {
             @Override
             public void onClick(View textView) {
 
+                /// DEV NOTES: Remove this call to auth Prompt
                 AuthManager.getInstance().authPrompt(FingerprintActivity.this, null, getString(R.string.VerifyPin_continueBody), true, false, new BRAuthCompletion() {
                     @Override
                     public void onComplete() {
