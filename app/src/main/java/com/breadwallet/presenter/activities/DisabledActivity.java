@@ -1,5 +1,6 @@
 package com.breadwallet.presenter.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -127,9 +128,11 @@ public class DisabledActivity extends BRActivity {
         overridePendingTransition(R.anim.fade_up, R.anim.fade_down);
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        // Following: https://stackoverflow.com/questions/7575921/illegalstateexception-can-not-perform-this-action-after-onsaveinstancestate-with No call for super(). Bug on API Level > 11.
+        // Removed super.onSaveInstanceState(outState);
     }
 
     }
