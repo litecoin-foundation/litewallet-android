@@ -35,6 +35,7 @@ import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 
 import java.math.BigDecimal;
+import java.util.concurrent.Callable;
 
 import timber.log.Timber;
 
@@ -112,7 +113,6 @@ public class FragmentRequestAmount extends Fragment {
         selectedIso = BRSharedPrefs.getPreferredLTC(getContext()) ? "LTC" : BRSharedPrefs.getIsoSymbol(getContext());
 
         signalLayout.setOnClickListener(v -> {
-//                removeCurrencySelector();
         });
         updateText();
 
@@ -155,20 +155,7 @@ public class FragmentRequestAmount extends Fragment {
             QRUtils.share("mailto:", getActivity(), bitcoinUri);
 
         });
-//        shareTextMessage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                removeCurrencySelector();
-//                if (!BRAnimator.isClickAllowed()) return;
-//                showKeyboard(false);
-//                String iso = selectedIso;
-//                String strAmount = amountEdit.getText().toString();
-//                BigDecimal bigAmount = new BigDecimal((Utils.isNullOrEmpty(strAmount) || strAmount.equalsIgnoreCase(".")) ? "0" : strAmount);
-//                long amount = BRExchange.getLitoshisFromAmount(getActivity(), iso, bigAmount).longValue();
-//                String bitcoinUri = Utils.createBitcoinUrl(receiveAddress, amount, null, null, null);
-//                QRUtils.share("sms:", getActivity(), bitcoinUri);
-//            }
-//        });
+
         shareButton.setOnClickListener(v -> {
             if (!BRAnimator.isClickAllowed()) return;
             shareButtonsShown = !shareButtonsShown;
@@ -232,21 +219,25 @@ public class FragmentRequestAmount extends Fragment {
             }
         });
 
+
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
-                boolean success = BRWalletManager.refreshAddress(getActivity());
+                boolean success = BRWalletManager.refreshAddress(getContext());
                 if (!success) throw new RuntimeException("failed to retrieve address");
 
-                receiveAddress = BRSharedPrefs.getReceiveAddress(getActivity());
+                receiveAddress = BRSharedPrefs.getReceiveAddress(getContext());
+                Timber.i("timber: lightweight Background: address (%s)",receiveAddress);
 
                 BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {
-                        mAddress.setText(receiveAddress);
-                        boolean generated = generateQrImage(receiveAddress, "0", "LTC");
+                       String  tempReceiveAddress = BRSharedPrefs.getReceiveAddress(getContext());
+                        mAddress.setText(tempReceiveAddress);
+                        boolean generated = QRUtils.generateQR(getContext(), "litecoin:" + tempReceiveAddress, mQrImage);
                         if (!generated)
                             throw new RuntimeException("failed to generate qr image for address");
+                        receiveAddress = tempReceiveAddress;
                     }
                 });
             }
