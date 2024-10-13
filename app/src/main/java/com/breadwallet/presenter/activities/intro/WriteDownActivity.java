@@ -1,5 +1,6 @@
 package com.breadwallet.presenter.activities.intro;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -106,9 +107,12 @@ public class WriteDownActivity extends BRActivity {
         if (!isDestroyed()) finish();
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        // https://stackoverflow.com/questions/7575921/illegalstateexception-can-not-perform-this-action-after-onsaveinstancestate-wit
+        // No call for super(). Bug on API Level > 11. 
+        // Removed super.onSaveInstanceState(outState);
     }
 
 }

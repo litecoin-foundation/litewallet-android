@@ -1,5 +1,6 @@
 package com.breadwallet.presenter.activities.settings;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -211,9 +212,12 @@ public class SettingsActivity extends BRActivity {
         items.add(new BRSettingsItem("", "", null, true));
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        // https://stackoverflow.com/questions/7575921/illegalstateexception-can-not-perform-this-action-after-onsaveinstancestate-wit
+        // No call for super(). Bug on API Level > 11. 
+        // Removed super.onSaveInstanceState(outState);
     }
 
     @Override

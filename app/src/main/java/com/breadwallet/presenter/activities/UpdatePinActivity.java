@@ -1,5 +1,6 @@
 package com.breadwallet.presenter.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -199,8 +200,11 @@ public class UpdatePinActivity extends BRActivity {
         SpringAnimator.springView(description);
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        // https://stackoverflow.com/questions/7575921/illegalstateexception-can-not-perform-this-action-after-onsaveinstancestate-wit
+        // No call for super(). Bug on API Level > 11. 
+        // Removed super.onSaveInstanceState(outState);
     }
 }

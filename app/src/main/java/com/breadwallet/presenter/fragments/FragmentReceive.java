@@ -2,6 +2,7 @@ package com.breadwallet.presenter.fragments;
 
 import static com.breadwallet.tools.animation.BRAnimator.animateBackgroundDim;
 import static com.breadwallet.tools.animation.BRAnimator.animateSignalSlide;
+import static com.breadwallet.tools.animation.BRAnimator.getDefaultTransition;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -36,6 +37,8 @@ import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 
+import timber.log.Timber;
+
 public class FragmentReceive extends Fragment {
     private static final String TAG = FragmentReceive.class.getName();
 
@@ -48,7 +51,6 @@ public class FragmentReceive extends Fragment {
     private View separator;
     private BRButton shareButton;
     private Button shareEmail;
-    //    private Button shareTextMessage;
     private Button requestButton;
     private BRLinearLayoutWithCaret shareButtonsLayout;
     private BRLinearLayoutWithCaret copiedLayout;
@@ -72,7 +74,6 @@ public class FragmentReceive extends Fragment {
         signalLayout = (LinearLayout) rootView.findViewById(R.id.signal_layout);
         shareButton = (BRButton) rootView.findViewById(R.id.share_button);
         shareEmail = (Button) rootView.findViewById(R.id.share_email);
-//        shareTextMessage = (Button) rootView.findViewById(R.id.share_text);
         shareButtonsLayout = (BRLinearLayoutWithCaret) rootView.findViewById(R.id.share_buttons_layout);
         copiedLayout = (BRLinearLayoutWithCaret) rootView.findViewById(R.id.copied_layout);
         requestButton = (Button) rootView.findViewById(R.id.request_button);
@@ -105,14 +106,6 @@ public class FragmentReceive extends Fragment {
             String bitcoinUri = Utils.createBitcoinUrl(receiveAddress, 0, null, null, null);
             QRUtils.share("mailto:", getActivity(), bitcoinUri);
         });
-//        shareTextMessage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!BRAnimator.isClickAllowed()) return;
-//                String bitcoinUri = Utils.createBitcoinUrl(receiveAddress, 0, null, null, null);
-//                QRUtils.share("sms:", getActivity(), bitcoinUri);
-//            }
-//        });
         shareButton.setOnClickListener(v -> {
             if (!BRAnimator.isClickAllowed()) return;
             shareButtonsShown = !shareButtonsShown;
@@ -203,7 +196,7 @@ public class FragmentReceive extends Fragment {
     }
 
     private void updateQr() {
-        final Context ctx = getContext() == null ? BreadApp.getBreadContext() : (Activity) getContext();
+        final Context ctx = this == null ? BreadApp.getBreadContext() : (Activity) getContext();
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
@@ -254,6 +247,8 @@ public class FragmentReceive extends Fragment {
         animateBackgroundDim(backgroundLayout, true);
         animateSignalSlide(signalLayout, true, () -> {
             close();
+            Timber.i("timber: showRequestFragment: address (%s)",receiveAddress);
+
             BRAnimator.showRequestFragment(getActivity(), receiveAddress);
         });
 
