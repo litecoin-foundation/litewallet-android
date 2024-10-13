@@ -45,9 +45,11 @@ public class SyncBlockchainActivity extends BRActivity {
     public static SyncBlockchainActivity getApp() {
         return app;
     }
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        // Following: https://stackoverflow.com/questions/7575921/illegalstateexception-can-not-perform-this-action-after-onsaveinstancestate-witNo call for super(). Bug on API Level > 11.
+        // Removed super.onSaveInstanceState(outState);
     }
 
     private void updateSyncPreference() {
