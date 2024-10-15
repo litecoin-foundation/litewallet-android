@@ -74,7 +74,7 @@ class HistoryFragment :
 
     override fun onStatusUpdate() {
         BRExecutor.getInstance().forBackgroundTasks().execute {
-            TxManager.getInstance().updateTxList(requireActivity() as BreadActivity)
+            TxManager.getInstance().updateTxList(this.activity)
         }
     }
 
@@ -91,7 +91,7 @@ class HistoryFragment :
     private fun updateUI() {
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute {
             Thread.currentThread().name = Thread.currentThread().name + "HistoryFragment:updateUI"
-            TxManager.getInstance().updateTxList(requireActivity() as BreadActivity)
+            TxManager.getInstance().updateTxList(this.activity)
         }
     }
 
