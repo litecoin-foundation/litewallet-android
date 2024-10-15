@@ -7,15 +7,18 @@ import android.view.ViewGroup
 import com.breadwallet.databinding.FragmentHistoryBinding
 import com.breadwallet.presenter.activities.BreadActivity
 import com.breadwallet.presenter.base.BaseFragment
+import com.breadwallet.tools.manager.AnalyticsManager
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.manager.BRSharedPrefs.OnIsoChangedListener
 import com.breadwallet.tools.manager.TxManager
 import com.breadwallet.tools.sqlite.TransactionDataSource.OnTxAddedListener
 import com.breadwallet.tools.threads.BRExecutor
+import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.wallet.BRPeerManager
 import com.breadwallet.wallet.BRPeerManager.OnTxStatusUpdate
 import com.breadwallet.wallet.BRWalletManager
 import com.breadwallet.wallet.BRWalletManager.OnBalanceChanged
+import timber.log.Timber
 
 /** Litewallet
  * Created by Mohamed Barry on 6/1/20
@@ -56,11 +59,22 @@ class HistoryFragment :
         BRPeerManager.getInstance().removeListener(this)
         BRSharedPrefs.removeListener(this)
     }
-
+    private fun registerAnalyticsError(errorString: String) {
+        val params = Bundle()
+        params.putString("error_message", errorString);
+        AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR, params)
+        Timber.d("History Fragment: RegisterError : %s", errorString)
+    }
     override fun onResume() {
         super.onResume()
         addObservers()
-        TxManager.getInstance().onResume(requireActivity() as BreadActivity)
+
+        if (this.activity == null) {
+            registerAnalyticsError("null_in_history_fragment_on_resume")
+        }
+        else {
+            TxManager.getInstance().onResume(this.activity)
+        }
     }
 
     override fun onPause() {
@@ -74,7 +88,12 @@ class HistoryFragment :
 
     override fun onStatusUpdate() {
         BRExecutor.getInstance().forBackgroundTasks().execute {
-            TxManager.getInstance().updateTxList(this.activity)
+            if (this.activity == null) {
+                registerAnalyticsError("null_in_history_fragment_on_status_update")
+            }
+            else {
+                TxManager.getInstance().updateTxList(this.activity)
+            }
         }
     }
 
@@ -84,14 +103,23 @@ class HistoryFragment :
 
     override fun onTxAdded() {
         BRExecutor.getInstance().forBackgroundTasks().execute {
-            TxManager.getInstance().updateTxList(requireActivity() as BreadActivity)
+            if (this.activity == null) {
+                registerAnalyticsError("null_in_history_fragment_on_tx_added")
+            }
+            else {
+                TxManager.getInstance().updateTxList(this.activity)
+            }
         }
     }
-
     private fun updateUI() {
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute {
-            Thread.currentThread().name = Thread.currentThread().name + "HistoryFragment:updateUI"
-            TxManager.getInstance().updateTxList(this.activity)
+            if (this.activity == null) {
+                registerAnalyticsError("null_in_history_fragment_update_ui")
+            }
+            else {
+                Thread.currentThread().name = Thread.currentThread().name + "HistoryFragment:updateUI"
+                TxManager.getInstance().updateTxList(this.activity)
+            }
         }
     }
 
