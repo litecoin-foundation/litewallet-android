@@ -34,7 +34,6 @@ public class InternetManager extends BroadcastReceiver {
         if (!connectionReceiverListeners.contains(listener))
             connectionReceiverListeners.add(listener);
     }
-
     @Override
     public void onReceive(final Context context, final Intent intent) {
         boolean connected = false;
