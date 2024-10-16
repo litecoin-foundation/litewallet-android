@@ -35,18 +35,6 @@ public class BitcoinUrlHandler {
             return false;
         }
 
-        Map<String, String> attr = new HashMap<>();
-        URI uri = null;
-        try {
-            uri = new URI(url);
-        } catch (URISyntaxException e) {
-            Timber.e(e);
-        }
-        attr.put("scheme", uri == null ? "null" : uri.getScheme());
-        attr.put("host", uri == null ? "null" : uri.getHost());
-        attr.put("path", uri == null ? "null" : uri.getPath());
-        BREventManager.getInstance().pushEvent("send.handleURL", attr);
-
         RequestObject requestObject = getRequestFromString(url);
         if (BRWalletManager.getInstance().confirmSweep(app, url)) {
             return true;
