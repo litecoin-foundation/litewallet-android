@@ -125,7 +125,7 @@ public class BRConstants {
     public static final String _20200111_WNI = "wallet_not_initialized";
     public static final String _20200111_PNI = "phrase_not_initialized";
     public static final String _20200111_UTST = "unable_to_sign_transaction";
-    public static final String _20200112_ERR = "error";
+    public static final String _20200112_ERR = "lwa_error";
     public static final String _20200112_DSR = "did_start_resync";
     public static final String _20200125_DSRR = "did_show_review_request";
     public static final String _20201118_DTGS = "did_tap_get_support";
@@ -145,8 +145,8 @@ public class BRConstants {
     public static final String _20220822_UTOU = "user_tapped_on_ud";
     public static final String _20230131_NENR = "no_error_nominal_response";
     public static final String _20240123_RAGI = "registered_android_general_interest";
-    public static final String _20231225_UAP = "lw_user_accepted_push";
-    public static final String _20240101_US = "lw_user_signup";
+    public static final String _20231225_UAP = "user_accepted_push";
+    public static final String _20240101_US = "user_signup";
     public static final String _20241006_DRR = "did_request_rating";
     public static final String _20241006_UCR = "user_completed_rating";
 
