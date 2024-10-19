@@ -61,7 +61,7 @@ class HistoryFragment :
     }
     private fun registerAnalyticsError(errorString: String) {
         val params = Bundle()
-        params.putString("error_message", errorString);
+        params.putString("lwa_error_message", errorString);
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR, params)
         Timber.d("History Fragment: RegisterError : %s", errorString)
     }
