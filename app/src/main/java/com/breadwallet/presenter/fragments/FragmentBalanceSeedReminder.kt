@@ -71,10 +71,10 @@ class FragmentBalanceSeedReminder : Fragment() {
         fetchSeedPhrase()
     }
     private fun registerAnalyticsError(errorString: String) {
-        val params = Bundle()
-        params.putString("error_message", errorString);
-        AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR, params)
         Timber.d("Fragment Balance Seed: RegisterError : %s", errorString)
+        val params = Bundle()
+        params.putString("lwa_error_message", errorString);
+        AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR, params)
     }
     fun fetchSeedPhrase() {
         seedPhraseTextView.text = "NO_PHRASE"
