@@ -75,6 +75,40 @@ public class BRSharedPrefs {
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////// Active Shared Preferences ///////////////////////////////
+    public static void putLastSyncTimestamp(Context activity, long time) {
+        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong("lastSyncTime", time);
+        editor.apply();
+    }
+    public static long getLastSyncTimestamp(Context activity) {
+        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getLong("lastSyncTime", 0L);
+    }
+    public static void putStartSyncTimestamp(Context activity, long time) {
+        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong("startSyncTime", time);
+        editor.apply();
+    }
+    public static long getStartSyncTimestamp(Context activity) {
+        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getLong("startSyncTime", 0L);
+    }
+
+    public static void putSyncTimeElapsed(Context activity, long time) {
+        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong("syncTimeElapsed", time);
+        editor.apply();
+    }
+    public static long getSyncTimeElapsed(Context activity) {
+        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getLong("syncTimeElapsed", 0L);
+    }
+
     public static boolean getPhraseWroteDown(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(BRConstants.PHRASE_WRITTEN, false);
@@ -156,13 +190,6 @@ public class BRSharedPrefs {
         SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putLong(BRConstants.SECURE_TIME_PREFS, date);
-        editor.apply();
-    }
-
-    public static void putLastSyncTime(Context activity, long time) {
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putLong("lastSyncTime", time);
         editor.apply();
     }
 

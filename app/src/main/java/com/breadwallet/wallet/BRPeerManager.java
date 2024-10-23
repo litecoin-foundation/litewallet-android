@@ -73,7 +73,7 @@ public class BRPeerManager {
         Timber.d("timber: sync started(unix epoch ms): %s,  completed(unix epoch ms): %s", syncStartDate, syncCompletedDate);
         final Context app = BreadApp.getBreadContext();
         if (app == null) return;
-        BRSharedPrefs.putLastSyncTime(app, System.currentTimeMillis());
+        BRSharedPrefs.putLastSyncTimestamp(app, System.currentTimeMillis());
         SyncManager.getInstance().updateAlarms(app);
         BRSharedPrefs.putAllowSpend(app, true);
         SyncManager.getInstance().stopSyncingProgressThread();
