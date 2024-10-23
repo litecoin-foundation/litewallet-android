@@ -1,6 +1,7 @@
 package com.breadwallet.presenter.activities;
 
 import android.animation.LayoutTransition;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -14,7 +15,6 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -26,6 +26,7 @@ import androidx.transition.Fade;
 import androidx.transition.TransitionManager;
 import androidx.transition.TransitionSet;
 
+import com.breadwallet.BreadApp;
 import com.breadwallet.R;
 import com.breadwallet.entities.Language;
 import com.breadwallet.presenter.activities.intro.IntroActivity;
@@ -33,7 +34,6 @@ import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRNotificationBar;
 import com.breadwallet.presenter.fragments.BuyTabFragment;
 import com.breadwallet.presenter.history.HistoryFragment;
-import com.breadwallet.presenter.language.LanguageAdapter;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.TextSizeTransition;
 import com.breadwallet.tools.manager.AnalyticsManager;
@@ -51,11 +51,11 @@ import com.breadwallet.tools.util.LocaleHelper;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRPeerManager;
 import com.breadwallet.wallet.BRWalletManager;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.gms.tasks.Task;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -454,6 +454,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
     @Override
     public void onConnectionChanged(boolean isConnected) {
+
+        Context thisContext = BreadActivity.this;
+        Context app = BreadApp.getBreadContext();
         if (isConnected) {
             if (barFlipper != null) {
                 if (barFlipper.getDisplayedChild() == 1) {
@@ -461,17 +464,44 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 }
             }
             BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(() -> {
-                final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(BreadActivity.this));
+                final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(thisContext));
                 Timber.d("timber: Sync Progress: %s", progress);
+
                 if (progress < 1 && progress > 0) {
-                    SyncManager.getInstance().startSyncingProgressThread();
+                    Timber.d("timber: || Sync progressing: %s", String.valueOf(System.currentTimeMillis()));
+                    long lastSyncTimestamp = BRSharedPrefs.getLastSyncTimestamp(app);
+                    long elapsedTime = (System.currentTimeMillis() - lastSyncTimestamp) + BRSharedPrefs.getSyncTimeElapsed(app);
+                    BRSharedPrefs.putSyncTimeElapsed(app, elapsedTime);//Incrementing elapsed time
+                    String minutes = String.valueOf((double) elapsedTime / 1_000.0  / 60.0);
+                    Timber.d("timber: || last sync Time: %s elapsed (msecs|mins): %s | %s", String.valueOf(lastSyncTimestamp), String.valueOf(elapsedTime),minutes);
+                    BRSharedPrefs.putLastSyncTimestamp(app, System.currentTimeMillis());
+
+                    SyncManager.getInstance().startSyncingProgressThread(app);
+                }
+                else { ///Set values at the beginning of the sync
+                    BRSharedPrefs.putSyncTimeElapsed(app, 1L);//Adding 1 millisecond to start the elapsed time
+                    BRSharedPrefs.putStartSyncTimestamp(app, System.currentTimeMillis());
+                    Timber.d("timber: || start syncing time %s",String.valueOf(System.currentTimeMillis()));
                 }
             });
-        } else {
+        }
+        else {
             if (barFlipper != null) {
                 addNotificationBar();
             }
-            SyncManager.getInstance().stopSyncingProgressThread();
+
+            SyncManager.getInstance().stopSyncingProgressThread(app);
+            long currentTimestamp = System.currentTimeMillis();
+            long elapsedTime = BRSharedPrefs.getSyncTimeElapsed(app);
+            long startTimestamp = BRSharedPrefs.getStartSyncTimestamp(app);
+            BRSharedPrefs.putLastSyncTimestamp(app, currentTimestamp);
+            String minutes = String.valueOf((double) elapsedTime / 1_000.0  / 60.0);
+
+            Timber.d("timber: || stopped syncing startTime: %s lastTime: %s elapsed (msecs|mins): %s | %s", String.valueOf(startTimestamp), currentTimestamp,
+                    String.valueOf(elapsedTime), minutes);
+
+            Timber.d("timber: || Sync Stopped: %s", String.valueOf(System.currentTimeMillis()));
+
         }
     }
 
