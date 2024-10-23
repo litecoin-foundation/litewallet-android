@@ -294,7 +294,7 @@ public class Utils {
             e.printStackTrace();
         }
         Bundle   params = new Bundle();
-        params.putString("error_message: %s Key not found", name.toString());
+        params.putString("lwa_error_message: %s Key not found", name.toString());
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR,params);
         return "";
     }

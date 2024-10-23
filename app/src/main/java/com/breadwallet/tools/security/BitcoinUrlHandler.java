@@ -10,7 +10,6 @@ import com.breadwallet.presenter.entities.PaymentRequestWrapper;
 import com.breadwallet.presenter.entities.RequestObject;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
-import com.breadwallet.tools.manager.BREventManager;
 import com.breadwallet.tools.threads.PaymentProtocolTask;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
@@ -34,18 +33,6 @@ public class BitcoinUrlHandler {
             Timber.d("timber: processRequest: url is null");
             return false;
         }
-
-        Map<String, String> attr = new HashMap<>();
-        URI uri = null;
-        try {
-            uri = new URI(url);
-        } catch (URISyntaxException e) {
-            Timber.e(e);
-        }
-        attr.put("scheme", uri == null ? "null" : uri.getScheme());
-        attr.put("host", uri == null ? "null" : uri.getHost());
-        attr.put("path", uri == null ? "null" : uri.getPath());
-        BREventManager.getInstance().pushEvent("send.handleURL", attr);
 
         RequestObject requestObject = getRequestFromString(url);
         if (BRWalletManager.getInstance().confirmSweep(app, url)) {
