@@ -10,7 +10,11 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.breadwallet.R
 import com.breadwallet.tools.animation.BRAnimator
+import com.breadwallet.tools.manager.AnalyticsManager
+import com.breadwallet.tools.manager.TxManager
 import com.breadwallet.tools.security.BRKeyStore
+import com.breadwallet.tools.util.BRConstants
+import timber.log.Timber
 import java.util.*
 
 class FragmentBalanceSeedReminder : Fragment() {
@@ -66,14 +70,21 @@ class FragmentBalanceSeedReminder : Fragment() {
         setListeners()
         fetchSeedPhrase()
     }
-
+    private fun registerAnalyticsError(errorString: String) {
+        Timber.d("Fragment Balance Seed: RegisterError : %s", errorString)
+        val params = Bundle()
+        params.putString("lwa_error_message", errorString);
+        AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR, params)
+    }
     fun fetchSeedPhrase() {
-        try {
-            seedPhraseTextView.text = String(BRKeyStore.getPhrase(context, 0))
-        } catch (_: UserNotAuthenticatedException) {
+        seedPhraseTextView.text = "NO_PHRASE"
+        if (this.activity == null) {
+            registerAnalyticsError("null_in_fragment_balance_fetch_seed")
+        }
+        else {
+            seedPhraseTextView.text =  String(BRKeyStore.getPhrase(this.activity, 0)) ?: "NO_PHRASE"
         }
     }
-
     private fun animateClose() {
         BRAnimator.animateBackgroundDim(backgroundLayout, true)
         BRAnimator.animateSignalSlide(signalLayout, true) { close() }

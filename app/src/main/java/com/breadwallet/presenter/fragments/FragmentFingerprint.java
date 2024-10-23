@@ -174,7 +174,7 @@ public class FragmentFingerprint extends Fragment
     public void onError() {
         String authError = "auth_prompt_failed";
         Bundle params = new Bundle();
-        params.putString("error_message",authError);
+        params.putString("lwa_error_message",authError);
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR, params);
     }
 

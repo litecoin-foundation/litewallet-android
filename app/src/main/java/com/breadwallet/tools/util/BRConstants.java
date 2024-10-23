@@ -125,7 +125,7 @@ public class BRConstants {
     public static final String _20200111_WNI = "wallet_not_initialized";
     public static final String _20200111_PNI = "phrase_not_initialized";
     public static final String _20200111_UTST = "unable_to_sign_transaction";
-    public static final String _20200112_ERR = "error";
+    public static final String _20200112_ERR = "lwa_error";
     public static final String _20200112_DSR = "did_start_resync";
     public static final String _20200125_DSRR = "did_show_review_request";
     public static final String _20201118_DTGS = "did_tap_get_support";
