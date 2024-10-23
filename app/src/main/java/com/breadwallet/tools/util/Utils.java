@@ -313,8 +313,6 @@ public class Utils {
             return (long) ((lowRate / doubleRate) * 100_000_000.0);
         }
         else if (isBetween(usdInLTC, 20.00, 50.00)) {
-            Timber.d("timber: usdInLTC 2: %s", usdInLTC);
-
             return (long) ((0.30 / doubleRate) * 100_000_000.0);
         }
         else if (isBetween(usdInLTC, 50.00, 100.00)) {
