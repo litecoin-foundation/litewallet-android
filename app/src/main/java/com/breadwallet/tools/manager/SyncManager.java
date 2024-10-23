@@ -45,7 +45,11 @@ public class SyncManager {
         createAlarm(app, System.currentTimeMillis() + SYNC_PERIOD);
     }
 
-    public synchronized void startSyncingProgressThread() {
+    public synchronized void startSyncingProgressThread(Context app) {
+        long start = System.currentTimeMillis();
+        long last = BRSharedPrefs.getLastSyncTimestamp(app) == 0L  ? start : BRSharedPrefs.getLastSyncTimestamp(app);
+        long elapsed = BRSharedPrefs.getSyncTimeElapsed(app);
+
         Timber.d("timber: startSyncingProgressThread:%s", Thread.currentThread().getName());
 
         try {
@@ -64,10 +68,9 @@ public class SyncManager {
         }
     }
 
-    public synchronized void stopSyncingProgressThread() {
+    public synchronized void stopSyncingProgressThread(Context app) {
         Timber.d("timber: stopSyncingProgressThread");
-        final BreadActivity ctx = BreadActivity.getApp();
-        if (ctx == null) {
+        if (app == null) {
             Timber.i("timber: stopSyncingProgressThread: ctx is null");
             return;
         }
