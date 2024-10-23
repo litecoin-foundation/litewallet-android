@@ -134,30 +134,6 @@ public class BRSharedPrefs {
         editor.apply();
     }
 
-    public static long getFeePerKb(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        return prefs.getLong(BRConstants.FEE_KB_PREFS, 0);
-    }
-
-    public static void putFeePerKb(Context context, long fee) {
-        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putLong(BRConstants.FEE_KB_PREFS, fee);
-        editor.apply();
-    }
-
-    public static long getEconomyFeePerKb(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        return prefs.getLong(BRConstants.ECONOMY_FEE_KB_PREFS, 0);
-    }
-
-    public static void putEconomyFeePerKb(Context context, long fee) {
-        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putLong(BRConstants.ECONOMY_FEE_KB_PREFS, fee);
-        editor.apply();
-    }
-
     public static long getCatchedBalance(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getLong("balance", 0);
@@ -202,32 +178,6 @@ public class BRSharedPrefs {
         editor.apply();
     }
 
-    public static List<Integer> getBitIdNonces(Context activity, String key) {
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        String result = prefs.getString(key, null);
-        List<Integer> list = new ArrayList<>();
-        try {
-            JSONArray arr = new JSONArray(result);
-            for (int i = 0; i < arr.length(); i++) {
-                int a = arr.getInt(i);
-                Timber.d("timber: found a nonce: %s", a);
-                list.add(a);
-            }
-        } catch (Exception e) {
-            Timber.e(e);
-        }
-        return list;
-    }
-
-    public static void putBitIdNonces(Context activity, List<Integer> nonces, String key) {
-        JSONArray arr = new JSONArray();
-        arr.put(nonces);
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(key, arr.toString());
-        editor.apply();
-    }
-
     public static boolean getAllowSpend(Context activity) {
         SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(BRConstants.ALLOW_SPEND, true);
@@ -268,24 +218,6 @@ public class BRSharedPrefs {
         editor.putBoolean("useFingerprint", use);
         editor.apply();
     }
-
-    public static boolean getFeatureEnabled(Context activity, String feature) {
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        return prefs.getBoolean(feature, false);
-    }
-
-    public static boolean getGeoPermissionsRequested(Context activity) {
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        return prefs.getBoolean(GEO_PERMISSIONS_REQUESTED, false);
-    }
-
-    public static void putGeoPermissionsRequested(Context activity, boolean requested) {
-        SharedPreferences prefs = activity.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean(GEO_PERMISSIONS_REQUESTED, requested);
-        editor.apply();
-    }
-
     public static int getStartHeight(Context context) {
         SharedPreferences settingsToGet = context.getSharedPreferences(BRConstants.PREFS_NAME, 0);
         return  settingsToGet.getInt(BRConstants.START_HEIGHT, 0);
@@ -336,13 +268,6 @@ public class BRSharedPrefs {
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt(BRConstants.CURRENT_UNIT, unit);
         editor.apply();
-    }
-
-    public static String getDeviceId(Context context) {
-        SharedPreferences settingsToGet = context.getSharedPreferences(BRConstants.PREFS_NAME, 0);
-        String deviceId = settingsToGet.getString(BRConstants.USER_ID, "");
-        if (deviceId.isEmpty()) setDeviceId(context, UUID.randomUUID().toString());
-        return (settingsToGet.getString(BRConstants.USER_ID, ""));
     }
 
     private static void setDeviceId(Context context, String uuid) {
