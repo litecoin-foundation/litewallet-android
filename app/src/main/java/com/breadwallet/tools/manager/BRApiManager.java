@@ -138,8 +138,9 @@ public class BRApiManager {
         if (jsonString == null) return null;
         try {
             jsonArray = new JSONArray(jsonString);
+            // DEV Uncomment to view values
+            // Timber.d("timber: JSON %s",jsonArray.toString());
 
-            Timber.d("timber: JSON %s",jsonArray.toString());
         } catch (JSONException ex) {
             Timber.e(ex);
         }
