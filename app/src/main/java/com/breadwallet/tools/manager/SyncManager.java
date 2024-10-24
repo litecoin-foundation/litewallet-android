@@ -67,8 +67,9 @@ public class SyncManager {
         }
         BRSharedPrefs.putLastSyncTimestamp(app, System.currentTimeMillis());
         BRSharedPrefs.putSyncTimeElapsed(app, elapsed);
-        String minutes = String.valueOf((double) elapsed / 1_000.0  / 60.0);
-        Timber.d("timber: ||\nrunning lastSyncingTime: %s\nelapsed (msecs|mins): %s | %s", String.valueOf(BRSharedPrefs.getLastSyncTimestamp(app)), String.valueOf(elapsed), minutes);
+        double minutesValue = ((double) elapsed / 1_000.0  / 60.0);
+        String minutesString = String.format( "%.3f", minutesValue);
+        Timber.d("timber: ||\nrunning lastSyncingTime: %s\nelapsed: %s | %s", String.valueOf(BRSharedPrefs.getLastSyncTimestamp(app)), String.format( "%6d", elapsed), minutesString);
 
     }
 
