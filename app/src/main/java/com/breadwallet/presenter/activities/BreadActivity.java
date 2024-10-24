@@ -58,6 +58,8 @@ import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -465,43 +467,21 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             }
             BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(() -> {
                 final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(thisContext));
-                Timber.d("timber: Sync Progress: %s", progress);
+                Timber.d("timber: || Sync progress: %s (percent)", String.format( "%.2f", progress * 100.00));
 
-                if (progress < 1 && progress > 0) {
-                    Timber.d("timber: || Sync progressing: %s", String.valueOf(System.currentTimeMillis()));
-                    long lastSyncTimestamp = BRSharedPrefs.getLastSyncTimestamp(app);
-                    long elapsedTime = (System.currentTimeMillis() - lastSyncTimestamp) + BRSharedPrefs.getSyncTimeElapsed(app);
-                    BRSharedPrefs.putSyncTimeElapsed(app, elapsedTime);//Incrementing elapsed time
-                    String minutes = String.valueOf((double) elapsedTime / 1_000.0  / 60.0);
-                    Timber.d("timber: || last sync Time: %s elapsed (msecs|mins): %s | %s", String.valueOf(lastSyncTimestamp), String.valueOf(elapsedTime),minutes);
-                    BRSharedPrefs.putLastSyncTimestamp(app, System.currentTimeMillis());
-
+                if (progress > 0 && progress < 1) { /// In the middle of a sync
+                    /// Start syncing
                     SyncManager.getInstance().startSyncingProgressThread(app);
-                }
-                else { ///Set values at the beginning of the sync
-                    BRSharedPrefs.putSyncTimeElapsed(app, 1L);//Adding 1 millisecond to start the elapsed time
-                    BRSharedPrefs.putStartSyncTimestamp(app, System.currentTimeMillis());
-                    Timber.d("timber: || start syncing time %s",String.valueOf(System.currentTimeMillis()));
                 }
             });
         }
-        else {
+        else { /// App is not connected to a peer. Syncing is stopped
             if (barFlipper != null) {
                 addNotificationBar();
             }
 
+            /// Stop syncing
             SyncManager.getInstance().stopSyncingProgressThread(app);
-            long currentTimestamp = System.currentTimeMillis();
-            long elapsedTime = BRSharedPrefs.getSyncTimeElapsed(app);
-            long startTimestamp = BRSharedPrefs.getStartSyncTimestamp(app);
-            BRSharedPrefs.putLastSyncTimestamp(app, currentTimestamp);
-            String minutes = String.valueOf((double) elapsedTime / 1_000.0  / 60.0);
-
-            Timber.d("timber: || stopped syncing startTime: %s lastTime: %s elapsed (msecs|mins): %s | %s", String.valueOf(startTimestamp), currentTimestamp,
-                    String.valueOf(elapsedTime), minutes);
-
-            Timber.d("timber: || Sync Stopped: %s", String.valueOf(System.currentTimeMillis()));
-
         }
     }
 
