@@ -467,20 +467,15 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             }
             BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(() -> {
                 final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(thisContext));
-                Timber.d("timber: || Sync progress: %s (percent)", String.format( "%.2f", progress * 100.00));
-
-                if (progress > 0 && progress < 1) { /// In the middle of a sync
-                    /// Start syncing
+                if (progress > 0 && progress < 1) {
                     SyncManager.getInstance().startSyncingProgressThread(app);
                 }
             });
         }
-        else { /// App is not connected to a peer. Syncing is stopped
+        else {
             if (barFlipper != null) {
                 addNotificationBar();
             }
-
-            /// Stop syncing
             SyncManager.getInstance().stopSyncingProgressThread(app);
         }
     }

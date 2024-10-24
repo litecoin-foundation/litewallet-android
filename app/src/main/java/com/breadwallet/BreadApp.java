@@ -21,14 +21,21 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import timber.log.Timber;
 import com.appsflyer.AppsFlyerLib;
+
+import org.json.JSONException;
+
 public class BreadApp extends Application {
     public static int DISPLAY_HEIGHT_PX;
     public static String HOST = "api.loafwallet.org";
@@ -42,18 +49,13 @@ public class BreadApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        /// DEV:  Top placement req.
+        /// DEV:  Top placement requirement.
         boolean enableCrashlytics = !Utils.isEmulatorOrDebug(this);
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
         AnalyticsManager.init(this);
         AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
 
         if(BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
-
-        String afID = Utils.fetchPartnerKey(this, PartnerNames.AFDEVID);
-        AppsFlyerLib.getInstance().init(afID, null, this);
-        AppsFlyerLib.getInstance().start(this);
-      
         DISPLAY_HEIGHT_PX = Resources.getSystem().getDisplayMetrics().heightPixels;
     }
     public static Context getBreadContext() {
