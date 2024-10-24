@@ -38,7 +38,7 @@ public class TxManager {
     public TransactionListAdapter adapter;
     public PromptManager.PromptItem currentPrompt;
     public PromptManager.PromptInfo promptInfo;
-    public TransactionListAdapter.SyncingHolder syncingHolder;
+    public TransactionListAdapter.SyncingProgressViewHolder syncingProgressViewHolder;
 
     public static TxManager getInstance() {
         if (instance == null) instance = new TxManager();

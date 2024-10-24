@@ -112,7 +112,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         else if (viewType == promptType)
             return new PromptHolder(inflater.inflate(promptResId, parent, false));
         else if (viewType == syncingType)
-            return new SyncingHolder(inflater.inflate(syncingResId, parent, false));
+            return new SyncingProgressViewHolder(inflater.inflate(syncingResId, parent, false));
         return null;
     }
     @Override
@@ -125,7 +125,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 setPrompt((PromptHolder) holder);
                 break;
             case syncingType:
-                setSyncing((SyncingHolder) holder);
+                setSyncing((SyncingProgressViewHolder) holder);
                 break;
         }
     }
@@ -304,8 +304,8 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         prompt.description.setText(TxManager.getInstance().promptInfo.description);
     }
 
-    private void setSyncing(final SyncingHolder syncing) {
-        TxManager.getInstance().syncingHolder = syncing;
+    private void setSyncing(final SyncingProgressViewHolder syncing) {
+        TxManager.getInstance().syncingProgressViewHolder = syncing;
         syncing.mainLayout.setBackgroundResource(R.drawable.tx_rounded);
     }
 
@@ -430,14 +430,15 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    public class SyncingHolder extends RecyclerView.ViewHolder {
+    public class SyncingProgressViewHolder extends RecyclerView.ViewHolder {
         public RelativeLayout mainLayout;
         public ConstraintLayout constraintLayout;
         public TextView date;
         public TextView label;
         public ProgressBar progress;
+        public TextView blockheightView;
 
-        public SyncingHolder(View view) {
+        public SyncingProgressViewHolder(View view) {
             super(view);
             mainLayout = (RelativeLayout) view.findViewById(R.id.main_layout);
             constraintLayout = (ConstraintLayout) view.findViewById(R.id.syncing_layout);
