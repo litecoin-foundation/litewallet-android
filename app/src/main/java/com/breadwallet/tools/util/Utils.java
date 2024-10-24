@@ -280,22 +280,24 @@ public class Utils {
                     JSONObject jsonObj = new JSONObject(keyObject.get(name.getKey()).toString());
                     return jsonObj.toString();
                 }
+                Timber.d("timber: fetchPartnerKey name key found %s",name.getKey());
 
                 return keyObject.get(name.getKey()).toString();
             } catch (IOException e) {
                 e.printStackTrace();
-                Timber.d("timber: IOEXception");
+                Timber.d("timber: fetchPartnerKey IOEXception");
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                Timber.d("timber: JSONException");
+                Timber.d("timber: fetchPartnerKey JSONException");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         Bundle   params = new Bundle();
-        params.putString("lwa_error_message: %s Key not found", name.toString());
+        params.putString("lwa_error_message: %s Key not found", name.getKey());
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR,params);
+        Timber.d("timber: fetchPartnerKey lwa_error_message");
         return "";
     }
     /// Description: 1715876807
