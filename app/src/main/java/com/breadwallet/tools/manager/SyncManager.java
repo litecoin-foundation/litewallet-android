@@ -31,16 +31,10 @@ public class SyncManager {
     }
 
     public synchronized void startSyncingProgressThread(Context app) {
-        long start = System.currentTimeMillis();
-        long last = BRSharedPrefs.getLastSyncTimestamp(app) == 0L  ? start : BRSharedPrefs.getLastSyncTimestamp(app);
-        long elapsed = BRSharedPrefs.getSyncTimeElapsed(app);
-
-        Timber.d("timber: startSyncingProgressThread:%s", Thread.currentThread().getName());
-
         try {
             if (syncTask != null) {
                 if (running) {
-                    Timber.d("timber: startSyncingProgressThread: syncTask.running == true, returning");
+                    updateStartSyncData(app);
                     return;
                 }
                 syncTask.interrupt();
@@ -48,21 +42,53 @@ public class SyncManager {
             }
             syncTask = new SyncProgressTask();
             syncTask.start();
+            BRSharedPrefs.putStartSyncTimestamp(app, System.currentTimeMillis());
+            BRSharedPrefs.putSyncTimeElapsed(app, 0L);
+            updateStartSyncData(app);
         } catch (IllegalThreadStateException ex) {
             Timber.e(ex);
         }
     }
 
+    private synchronized void updateStartSyncData(Context app) {
+        final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(app));
+        Timber.d("timber: || progress: %s syncingProgressThread: %s, running",String.format( "%.2f", progress * 100.00),Thread.currentThread().getName());
+
+
+        long startSync = BRSharedPrefs.getStartSyncTimestamp(app);
+        long lastSync = BRSharedPrefs.getLastSyncTimestamp(app);
+        long elapsed = BRSharedPrefs.getSyncTimeElapsed(app);
+
+        if (elapsed > 0L) {
+            elapsed = (System.currentTimeMillis() - lastSync) + elapsed;
+        }
+        else {
+            elapsed = 1L;
+        }
+        BRSharedPrefs.putLastSyncTimestamp(app, System.currentTimeMillis());
+        BRSharedPrefs.putSyncTimeElapsed(app, elapsed);
+        String minutes = String.valueOf((double) elapsed / 1_000.0  / 60.0);
+        Timber.d("timber: ||\nrunning lastSyncingTime: %s\nelapsed (msecs|mins): %s | %s", String.valueOf(BRSharedPrefs.getLastSyncTimestamp(app)), String.valueOf(elapsed), minutes);
+
+    }
+
+    private synchronized void markFinishedSyncData(Context app) {
+
+    }
+
     public synchronized void stopSyncingProgressThread(Context app) {
-        Timber.d("timber: stopSyncingProgressThread");
+        Timber.d("timber: || stopSyncingProgressThread:%s", Thread.currentThread().getName());
+
         if (app == null) {
-            Timber.i("timber: stopSyncingProgressThread: ctx is null");
+            Timber.i("timber: || stopSyncingProgressThread: ctx is null");
+            markFinishedSyncData(app);
             return;
         }
         try {
             if (syncTask != null) {
                 syncTask.interrupt();
                 syncTask = null;
+                markFinishedSyncData(app);
             }
         } catch (Exception ex) {
             Timber.e(ex);
