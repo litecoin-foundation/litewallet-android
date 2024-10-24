@@ -30,21 +30,6 @@ public class SyncManager {
     private SyncManager() {
     }
 
-    private void createAlarm(Context app, long time) {
-        //Add another flag
-        AlarmManager alarmManager = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(app, SyncReceiver.class);
-        intent.setAction(SyncReceiver.SYNC_RECEIVER);//my custom string action name
-        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ?
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
-        PendingIntent pendingIntent = PendingIntent.getService(app, 1001, intent, flags);
-        alarmManager.setWindow(AlarmManager.RTC_WAKEUP, time, time + TimeUnit.MINUTES.toMillis(1), pendingIntent);//first start will start asap
-    }
-
-    public synchronized void updateAlarms(Context app) {
-        createAlarm(app, System.currentTimeMillis() + SYNC_PERIOD);
-    }
-
     public synchronized void startSyncingProgressThread(Context app) {
         long start = System.currentTimeMillis();
         long last = BRSharedPrefs.getLastSyncTimestamp(app) == 0L  ? start : BRSharedPrefs.getLastSyncTimestamp(app);
@@ -83,6 +68,23 @@ public class SyncManager {
             Timber.e(ex);
         }
     }
+
+    private void createAlarm(Context app, long time) {
+        //Add another flag
+        AlarmManager alarmManager = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(app, SyncReceiver.class);
+        intent.setAction(SyncReceiver.SYNC_RECEIVER);//my custom string action name
+        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ?
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
+        PendingIntent pendingIntent = PendingIntent.getService(app, 1001, intent, flags);
+        alarmManager.setWindow(AlarmManager.RTC_WAKEUP, time, time + TimeUnit.MINUTES.toMillis(1), pendingIntent);//first start will start asap
+    }
+
+    public synchronized void updateAlarms(Context app) {
+        createAlarm(app, System.currentTimeMillis() + SYNC_PERIOD);
+    }
+
+
     private class SyncProgressTask extends Thread {
         public double progressStatus = 0;
         private BreadActivity app;
