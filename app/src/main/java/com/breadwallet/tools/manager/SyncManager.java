@@ -52,9 +52,6 @@ public class SyncManager {
 
     private synchronized void updateStartSyncData(Context app) {
         final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(app));
-        Timber.d("timber: || progress: %s syncingProgressThread: %s, running",String.format( "%.2f", progress * 100.00),Thread.currentThread().getName());
-
-
         long startSync = BRSharedPrefs.getStartSyncTimestamp(app);
         long lastSync = BRSharedPrefs.getLastSyncTimestamp(app);
         long elapsed = BRSharedPrefs.getSyncTimeElapsed(app);
@@ -68,21 +65,29 @@ public class SyncManager {
         BRSharedPrefs.putLastSyncTimestamp(app, System.currentTimeMillis());
         BRSharedPrefs.putSyncTimeElapsed(app, elapsed);
         double minutesValue = ((double) elapsed / 1_000.0  / 60.0);
-        String minutesString = String.format( "%.3f", minutesValue);
-        Timber.d("timber: ||\nrunning lastSyncingTime: %s\nelapsed: %s | %s", String.valueOf(BRSharedPrefs.getLastSyncTimestamp(app)), String.format( "%6d", elapsed), minutesString);
+        String minutesString = String.format( "%3.2f mins", minutesValue);
+        String millisecString = String.format( "%5d msec", elapsed);
+        Timber.d("timber: ||\nprogress: %s\nThread: %s\nrunning lastSyncingTime: %s\nelapsed: %s | %s", String.format( "%.2f", progress * 100.00),Thread.currentThread().getName(),String.valueOf(BRSharedPrefs.getLastSyncTimestamp(app)), millisecString, minutesString);
 
     }
 
     private synchronized void markFinishedSyncData(Context app) {
-
+        Timber.d("timber: || markFinish threadname:%s", Thread.currentThread().getName());
+        final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(app));
+        long startSync = BRSharedPrefs.getStartSyncTimestamp(app);
+        long lastSync = BRSharedPrefs.getLastSyncTimestamp(app);
+        long elapsed = BRSharedPrefs.getSyncTimeElapsed(app);
+        double minutesValue = ((double) elapsed / 1_000.0  / 60.0);
+        String minutesString = String.format( "%3.2f mins", minutesValue);
+        String millisecString = String.format( "%5d msec", elapsed);
+        Timber.d("timber: ||\ncompletedprogress: %s\nstartSyncTime: %s\nlastSyncingTime: %s\ntotalTimeelapsed: %s | %s", String.format( "%.2f", progress * 100.00),String.valueOf(startSync),String.valueOf(lastSync), millisecString, minutesString);
+    
     }
 
     public synchronized void stopSyncingProgressThread(Context app) {
-        Timber.d("timber: || stopSyncingProgressThread:%s", Thread.currentThread().getName());
 
         if (app == null) {
             Timber.i("timber: || stopSyncingProgressThread: ctx is null");
-            markFinishedSyncData(app);
             return;
         }
         try {
