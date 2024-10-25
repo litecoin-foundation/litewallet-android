@@ -5,10 +5,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.tools.listeners.SyncReceiver;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRPeerManager;
 
@@ -81,7 +83,12 @@ public class SyncManager {
         String minutesString = String.format( "%3.2f mins", minutesValue);
         String millisecString = String.format( "%5d msec", elapsed);
         Timber.d("timber: ||\ncompletedprogress: %s\nstartSyncTime: %s\nlastSyncingTime: %s\ntotalTimeelapsed: %s | %s", String.format( "%.2f", progress * 100.00),String.valueOf(startSync),String.valueOf(lastSync), millisecString, minutesString);
-    
+
+        Bundle params = new Bundle();
+        params.putDouble("sync_time_elapsed", minutesValue);
+        params.putLong("sync_start_timestamp", startSync);
+        params.putLong("sync_last_timestamp", lastSync);
+        AnalyticsManager.logCustomEventWithParams(BRConstants._20230407_DCS, params);
     }
 
     public synchronized void stopSyncingProgressThread(Context app) {
