@@ -57,6 +57,10 @@ public class BreadApp extends Application {
 
         if(BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
         DISPLAY_HEIGHT_PX = Resources.getSystem().getDisplayMetrics().heightPixels;
+
+        String afID = Utils.fetchPartnerKey(this, PartnerNames.AFDEVID);
+        AppsFlyerLib.getInstance().init(afID, null, this);
+        AppsFlyerLib.getInstance().start(this);
     }
     public static Context getBreadContext() {
         return currentActivity == null ? SyncReceiver.app : currentActivity;
