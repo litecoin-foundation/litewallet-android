@@ -61,6 +61,7 @@ public class WriteDownActivity extends BRActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
+<<<<<<< HEAD
                 AuthManager.getInstance().authPrompt(WriteDownActivity.this, null, getString(R.string.VerifyPin_continueBody), true, false, new BRAuthCompletion() {
                     @Override
                     public void onComplete() {
@@ -72,6 +73,9 @@ public class WriteDownActivity extends BRActivity {
 
                     }
                 });
+=======
+                /// DEV NOTES: Remove this call to auth Prompt
+>>>>>>> efdea2cd (Check reenter pin freeze after the auth prompt deleted.)
 
             }
         });

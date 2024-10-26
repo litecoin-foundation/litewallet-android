@@ -91,20 +91,8 @@ public class FingerprintActivity extends BRActivity {
             @Override
             public void onClick(View textView) {
 
-                AuthManager.getInstance().authPrompt(FingerprintActivity.this, null, getString(R.string.VerifyPin_continueBody), true, false, new BRAuthCompletion() {
-                    @Override
-                    public void onComplete() {
-                        Intent intent = new Intent(FingerprintActivity.this, SpendLimitActivity.class);
-                        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                        startActivity(intent);
-                        finish();
-                    }
+                /// DEV NOTES: Remove this call to auth Prompt
 
-                    @Override
-                    public void onCancel() {
-
-                    }
-                });
             }
 
             @Override
