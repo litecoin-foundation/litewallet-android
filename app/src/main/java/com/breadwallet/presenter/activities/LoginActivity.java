@@ -152,19 +152,6 @@ public class LoginActivity extends BRActivity {
         final boolean useFingerprint = AuthManager.isFingerPrintAvailableAndSetup(this) && BRSharedPrefs.getUseFingerprint(this);
         fingerPrint.setVisibility(useFingerprint ? View.VISIBLE : View.GONE);
 
-        if (useFingerprint) {
-            fingerPrint.setOnClickListener(v -> AuthManager.getInstance().authPrompt(LoginActivity.this, "", "", false, true, new BRAuthCompletion() {
-                @Override
-                public void onComplete() {
-                    unlockWallet();
-                    AnalyticsManager.logCustomEvent(BRConstants._20200217_DUWB);
-                }
-
-                @Override
-                public void onCancel() {
-                }
-            }));
-        }
 
         new Handler().postDelayed(() -> {
             if (fingerPrint != null && useFingerprint)
