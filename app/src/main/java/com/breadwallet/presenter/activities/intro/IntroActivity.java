@@ -169,12 +169,12 @@ public class IntroActivity extends BRActivity implements Serializable {
                 Timber.d("timber: updateBundle DONE in %sms",endTime - startTime);
 
 
-                //DEV Moved this until after the bundle is loaded
+                //DEV Moved this back until after the bundle is loaded
                 //STILL NOT WORKING
-                String afID = Utils.fetchPartnerKey(IntroActivity.this, PartnerNames.AFDEVID);
-                AppsFlyerLib.getInstance().init(afID, null, IntroActivity.this);
-                AppsFlyerLib.getInstance().start(IntroActivity.this);
-                boolean didVerify = verifyInstallAssets(IntroActivity.this);
+                // String afID = Utils.fetchPartnerKey(IntroActivity.this, PartnerNames.AFDEVID)
+                // AppsFlyerLib.getInstance().init(afID, null, IntroActivity.this);
+                // AppsFlyerLib.getInstance().start(IntroActivity.this);
+                // boolean didVerify = verifyInstallAssets(IntroActivity.this);
             }
         });
     }
