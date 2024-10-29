@@ -58,9 +58,6 @@ public class BRPeerManager {
      */
 
     public static void syncStarted() {
-        syncStartDate = new Date().getTime();
-        long syncCompletedDate = new Date().getTime();
-        Timber.d("timber: syncStarted (unix epoch ms): %s startDate: %s", Thread.currentThread().getName(), syncStartDate);
         Context ctx = BreadApp.getBreadContext();
         int startHeight = BRSharedPrefs.getStartHeight(ctx);
         int lastHeight = BRSharedPrefs.getLastBlockHeight(ctx);
@@ -69,29 +66,12 @@ public class BRPeerManager {
     }
 
     public static void syncSucceeded() {
-        syncCompletedDate = new Date().getTime();
-        Timber.d("timber: sync started(unix epoch ms): %s,  completed(unix epoch ms): %s", syncStartDate, syncCompletedDate);
         Context ctx = BreadApp.getBreadContext();
         if (ctx == null) return;
         BRSharedPrefs.putLastSyncTimestamp(ctx, System.currentTimeMillis());
         SyncManager.getInstance().updateAlarms(ctx);
         BRSharedPrefs.putAllowSpend(ctx, true);
         SyncManager.getInstance().stopSyncingProgressThread(ctx);
-
-        long syncTimeElapsed = abs(syncCompletedDate - syncStartDate) / 1000;
-        float userFalsePositiveRate = BRSharedPrefs.getFalsePositivesRate(ctx);
-        Timber.d("timber: syncTimeElapsed duration (seconds): %s", syncTimeElapsed);
-
-        /// Need to filter partial syncs to properly track averages
-        /// this will filter out any syncs from 19 minutes to 120 minutes
-        /// The assumption is daily normal syncs are not problematic and quick
-        /// and any syncs past 120 minutes are errorneous in terms of data collection and testing
-        if (syncTimeElapsed > 19 * 60  && syncTimeElapsed > 120 * 60 ) {
-            Bundle params = new Bundle();
-            params.putLong("sync_time_elapsed", syncTimeElapsed);
-            params.putFloat("user_preferred_fprate", userFalsePositiveRate);
-            AnalyticsManager.logCustomEventWithParams(BRConstants._20230407_DCS, params);
-        }
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
@@ -102,7 +82,6 @@ public class BRPeerManager {
     }
 
     public static void syncFailed() {
-        Timber.d("timber: syncFailed");
         Context ctx = BreadApp.getBreadContext();
         SyncManager.getInstance().stopSyncingProgressThread(ctx);
 
