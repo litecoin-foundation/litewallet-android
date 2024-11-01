@@ -32,7 +32,6 @@ import com.breadwallet.presenter.activities.LoginActivity;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.TxItem;
-import com.breadwallet.presenter.fragments.DynamicDonationFragment;
 import com.breadwallet.presenter.fragments.FragmentBalanceSeedReminder;
 import com.breadwallet.presenter.fragments.FragmentBuy;
 import com.breadwallet.presenter.fragments.FragmentGreetings;
@@ -271,14 +270,6 @@ public class BRAnimator {
                 .setCustomAnimations(0, 0, 0, R.animator.plain_300)
                 .add(android.R.id.content, FragmentBuy.newInstance(currency, partner), FragmentBuy.class.getName())
                 .addToBackStack(FragmentBuy.class.getName())
-                .commit();
-    }
-
-    public static void showDynamicDonationFragment(@NonNull FragmentActivity app) {
-        app.getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(0, 0, 0, R.animator.plain_300)
-                .add(android.R.id.content, new DynamicDonationFragment(), DynamicDonationFragment.class.getName())
-                .addToBackStack(DynamicDonationFragment.class.getName())
                 .commit();
     }
 
