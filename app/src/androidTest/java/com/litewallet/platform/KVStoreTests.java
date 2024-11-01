@@ -1,4 +1,4 @@
-package com.breadwallet.platform;
+package com.litewallet.platform;
 
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;

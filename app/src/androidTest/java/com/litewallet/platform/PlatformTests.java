@@ -1,4 +1,4 @@
-package com.breadwallet.platform;
+package com.litewallet.platform;
 
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -8,11 +8,8 @@ import com.breadwallet.BreadApp;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.tools.util.BRCompressor;
 import com.breadwallet.tools.util.BRConstants;
-import com.breadwallet.tools.util.Utils;
-import com.jniwrappers.BRKey;
 import com.platform.APIClient;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

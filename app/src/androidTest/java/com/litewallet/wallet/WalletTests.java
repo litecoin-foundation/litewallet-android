@@ -1,12 +1,10 @@
-package com.breadwallet.wallet;
+package com.litewallet.wallet;
 
 import com.breadwallet.presenter.entities.RequestObject;
 import com.breadwallet.tools.security.BitcoinUrlHandler;
 import com.breadwallet.tools.util.BRConstants;
-import com.breadwallet.tools.util.Utils;
 
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;

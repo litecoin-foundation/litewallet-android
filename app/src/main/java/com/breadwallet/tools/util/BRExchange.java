@@ -76,18 +76,18 @@ public class BRExchange {
     }
 
     public static String getLitecoinSymbol(Context app) {
-        String currencySymbolString = BRConstants.bitcoinLowercase;
+        String currencySymbolString = BRConstants.litecoinLowercase;
         if (app != null) {
             int unit = BRSharedPrefs.getCurrencyUnit(app);
             switch (unit) {
                 case CURRENT_UNIT_PHOTONS:
-                    currencySymbolString = "m" + BRConstants.bitcoinLowercase;
+                    currencySymbolString = "m" + BRConstants.litecoinLowercase;
                     break;
                 case BRConstants.CURRENT_UNIT_LITES:
-                    currencySymbolString = BRConstants.bitcoinLowercase;
+                    currencySymbolString = BRConstants.litecoinLowercase;
                     break;
                 case BRConstants.CURRENT_UNIT_LITECOINS:
-                    currencySymbolString = BRConstants.bitcoinUppercase;
+                    currencySymbolString = BRConstants.litecoinUppercase;
                     break;
             }
         }
