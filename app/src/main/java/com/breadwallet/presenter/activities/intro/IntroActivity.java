@@ -2,6 +2,7 @@
 package com.breadwallet.presenter.activities.intro;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -12,8 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.appsflyer.AppsFlyerLib;
 import com.breadwallet.entities.IntroLanguageResource;
 import com.breadwallet.presenter.activities.SetPinActivity;
+import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.tools.adapter.CountryLanguageAdapter;
 import com.breadwallet.tools.util.LocaleHelper;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,8 +34,13 @@ import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 import com.platform.APIClient;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Scanner;
+
 import timber.log.Timber;
 
 public class IntroActivity extends BRActivity implements Serializable {
@@ -158,8 +167,34 @@ public class IntroActivity extends BRActivity implements Serializable {
                 APIClient apiClient = APIClient.getInstance(IntroActivity.this);
                 long endTime = System.currentTimeMillis();
                 Timber.d("timber: updateBundle DONE in %sms",endTime - startTime);
+
+
+                //DEV Moved this back until after the bundle is loaded
+                //STILL NOT WORKING
+                // String afID = Utils.fetchPartnerKey(IntroActivity.this, PartnerNames.AFDEVID)
+                // AppsFlyerLib.getInstance().init(afID, null, IntroActivity.this);
+                // AppsFlyerLib.getInstance().start(IntroActivity.this);
+                // boolean didVerify = verifyInstallAssets(IntroActivity.this);
             }
         });
+    }
+
+    public static boolean verifyInstallAssets(final Context context) {
+        Timber.d("timber: verify");
+
+        String pusherStagingKey = Utils.fetchPartnerKey(context, PartnerNames.PUSHERSTAGING);
+        boolean isCanaryFilePresent = false;
+        try (Scanner scanner = new Scanner(new File("canary-file.json"))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Timber.d("timber: canary file : %s", line);
+                isCanaryFilePresent = line.length() > 5;
+            }
+        } catch (RuntimeException | FileNotFoundException e) {
+            Timber.e(e);
+        }
+
+        return ( pusherStagingKey.contains("4cc2-94df") && isCanaryFilePresent );
     }
 
     private void setListeners() {
