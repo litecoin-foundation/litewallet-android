@@ -61,8 +61,6 @@ public class ConstantsTests {
         Assert.assertSame(BRConstants._20201118_DTGS,"did_tap_get_support");
         Assert.assertSame(BRConstants._20200217_DUWP,"did_unlock_with_pin");
         Assert.assertSame(BRConstants._20200217_DUWB,"did_unlock_with_biometrics");
-        Assert.assertSame(BRConstants._20200223_DD,"did_donate");
-        Assert.assertSame(BRConstants._20200225_DCD,"did_cancel_donate");
         Assert.assertSame(BRConstants._20200301_DUDFPK,"did_use_default_fee_per_kb");
         Assert.assertSame(BRConstants._20201121_SIL,"started_IFPS_lookup");
         Assert.assertSame(BRConstants._20201121_DRIA,"did_resolve_IPFS_address");
