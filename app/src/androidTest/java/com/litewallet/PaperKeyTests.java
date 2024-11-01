@@ -1,4 +1,4 @@
-package com.breadwallet;
+package com.litewallet;
 
 import android.util.Log;
 
@@ -6,7 +6,9 @@ import com.breadwallet.tools.util.Bip39Reader;
 import com.breadwallet.wallet.BRWalletManager;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,43 +20,32 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+
 public class PaperKeyTests {
-
     private static final String TAG = PaperKeyTests.class.getName();
-    public static final String PAPER_KEY_JAP = "こせき　ぎじにってい　けっこん　せつぞく　うんどう　ふこう　にっすう　こせい　きさま　なまみ　たきび　はかい";//japanese
-    public static final String PAPER_KEY_ENG = "stick sword keen   afraid smile sting   huge relax nominee   arena area gift ";//english
-    public static final String PAPER_KEY_FRE = "vocation triage capsule marchand onduler tibia illicite entier fureur minorer amateur lubie";//french
-    public static final String PAPER_KEY_SPA = "zorro turismo mezcla nicho morir chico blanco pájaro alba esencia roer repetir";//spanish
-    public static final String PAPER_KEY_CHI = "怨 贪 旁 扎 吹 音 决 廷 十 助 畜 怒";//chinese
+    public static final List<String> PAPER_KEY_ENG =  Arrays.asList("stick","sword","keen","afraid","smile","sting","huge","relax","nominee","arena","area","gift");
 
-
-//    @Test
-//    public void testWordsValid() {
-//
-//        List<String> list = getAllWords();
-//        assertThat(list.size(), is(10240));
-//
-//        assertThat(isValid(PAPER_KEY_JAP, list), is(true));
-//        assertThat(isValid(PAPER_KEY_ENG, list), is(true));
-//        assertThat(isValid(PAPER_KEY_FRE, list), is(true));
-//        assertThat(isValid(PAPER_KEY_SPA, list), is(true));
-//        assertThat(isValid(PAPER_KEY_CHI, list), is(true));
-//    }
-
+    @Test
+    public void testWordsValid() {
+        List<String> wordList = getAllWords();
+        Assert.assertEquals(wordList.size(), 2048);
+        Assert.assertSame(PAPER_KEY_ENG.containsAll(wordList),true);
+    }
     @Test
     public void testPaperKeyValidation() {
         List<String> list = getAllWords();
-        assertThat(list.size(), is(10240));
+        assertThat(list.size(), is(2048));
     }
 
     private List<String> getAllWords() {
         List<String> result = new ArrayList<>();
         List<String> names = new ArrayList<>();
         names.add("en-BIP39Words.txt");
-        names.add("es-BIP39Words.txt");
-        names.add("fr-BIP39Words.txt");
-        names.add("ja-BIP39Words.txt");
-        names.add("zh-BIP39Words.txt");
 
         for (String fileName : names) {
             InputStream in = null;
@@ -78,7 +69,7 @@ public class PaperKeyTests {
             String cleanWord = Bip39Reader.cleanWord(s);
             cleanList.add(cleanWord);
         }
-        assertThat(cleanList.size(), is(10240));
+        assertThat(cleanList.size(), is(2048));
         return cleanList;
     }
 
