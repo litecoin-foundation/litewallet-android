@@ -195,17 +195,6 @@
         app:layout_constraintLeft_toLeftOf="@+id/unlocked_image"
         app:layout_constraintRight_toRightOf="@+id/unlocked_image" />
 
-    <ImageButton
-        android:id="@+id/fingerprint_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="16dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/fingerprint_icon"
-        app:layout_constraintBottom_toTopOf="@+id/brkeyboard"
-        app:layout_constraintRight_toRightOf="parent" />
-
     <TextView
         android:id="@+id/forgot_seed_phrase_or_pin_text"
         style="@style/BRTextStyle"

@@ -72,7 +72,6 @@ public class LoginActivity extends BRActivity {
     private TextView ltcPriceTextView;
     private TextView ltcPriceDescTextView; 
 
-    private ImageButton fingerPrint;
     public static boolean appVisible = false;
     private boolean inputAllowed = true;
 
@@ -97,7 +96,6 @@ public class LoginActivity extends BRActivity {
 
         keyboard = findViewById(R.id.brkeyboard);
         pinLayout = findViewById(R.id.pinLayout);
-        fingerPrint = findViewById(R.id.fingerprint_icon);
         versionText = findViewById(R.id.version_text);
 
         ltcPriceTextView = findViewById(R.id.ltcPriceTextView);
