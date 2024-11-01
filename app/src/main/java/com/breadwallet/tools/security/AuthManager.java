@@ -1,28 +1,16 @@
 package com.breadwallet.tools.security;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
-import android.app.KeyguardManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.DisabledActivity;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
-import com.breadwallet.presenter.customviews.BRDialogView;
-import com.breadwallet.presenter.fragments.FragmentFingerprint;
-import com.breadwallet.presenter.fragments.FragmentPin;
-import com.breadwallet.presenter.interfaces.BRAuthCompletion;
-import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.threads.BRExecutor;
-import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
-
-import java.util.concurrent.TimeUnit;
 
 import timber.log.Timber;
 
@@ -171,11 +159,6 @@ public class AuthManager {
                 }
             }, 100);
         }
-    }
-
-
-    public static boolean isFingerPrintAvailableAndSetup(Context context) {
-        return Utils.isFingerprintAvailable(context) && Utils.isFingerprintEnrolled(context);
     }
 
     public interface OnPinSuccess {

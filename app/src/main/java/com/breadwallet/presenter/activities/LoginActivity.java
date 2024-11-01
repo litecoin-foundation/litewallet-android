@@ -149,15 +149,6 @@ public class LoginActivity extends BRActivity {
             }
         });
 
-        final boolean useFingerprint = AuthManager.isFingerPrintAvailableAndSetup(this) && BRSharedPrefs.getUseFingerprint(this);
-        fingerPrint.setVisibility(useFingerprint ? View.VISIBLE : View.GONE);
-
-
-        new Handler().postDelayed(() -> {
-            if (fingerPrint != null && useFingerprint)
-                fingerPrint.performClick();
-        }, 500);
-
         setCurrentLtcPrice();
     }
 

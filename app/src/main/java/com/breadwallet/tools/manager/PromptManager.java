@@ -8,14 +8,11 @@ import android.view.View;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.UpdatePinActivity;
 import com.breadwallet.presenter.activities.intro.WriteDownActivity;
-import com.breadwallet.presenter.activities.settings.FingerprintActivity;
 import com.breadwallet.presenter.activities.settings.ShareDataActivity;
 import com.breadwallet.tools.security.BRKeyStore;
 import com.breadwallet.tools.threads.BRExecutor;
-import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRPeerManager;
 
-import static com.breadwallet.tools.manager.PromptManager.PromptItem.FINGER_PRINT;
 import static com.breadwallet.tools.manager.PromptManager.PromptItem.PAPER_KEY;
 import static com.breadwallet.tools.manager.PromptManager.PromptItem.RECOMMEND_RESCAN;
 import static com.breadwallet.tools.manager.PromptManager.PromptItem.SHARE_DATA;
@@ -61,8 +58,6 @@ public class PromptManager {
     public boolean shouldPrompt(Context app, PromptItem item) {
         assert (app != null);
         switch (item) {
-            case FINGER_PRINT:
-                return !BRSharedPrefs.getUseFingerprint(app) && Utils.isFingerprintAvailable(app);
             case PAPER_KEY:
                 return !BRSharedPrefs.getPhraseWroteDown(app);
             case UPGRADE_PIN:
@@ -80,22 +75,12 @@ public class PromptManager {
         if (shouldPrompt(app, RECOMMEND_RESCAN)) return RECOMMEND_RESCAN;
         if (shouldPrompt(app, UPGRADE_PIN)) return UPGRADE_PIN;
         if (shouldPrompt(app, PAPER_KEY)) return PAPER_KEY;
-        if (shouldPrompt(app, FINGER_PRINT)) return FINGER_PRINT;
         if (shouldPrompt(app, SHARE_DATA)) return SHARE_DATA;
         return null;
     }
 
     public PromptInfo promptInfo(final Activity app, PromptItem item) {
         switch (item) {
-            case FINGER_PRINT:
-                return new PromptInfo(app.getString(R.string.Prompts_TouchId_title_android), app.getString(R.string.Prompts_TouchId_body_android), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(app, FingerprintActivity.class);
-                        app.startActivity(intent);
-                        app.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                    }
-                });
             case PAPER_KEY:
                 return new PromptInfo(app.getString(R.string.Prompts_PaperKey_title), app.getString(R.string.Prompts_PaperKey_body), new View.OnClickListener() {
                     @Override
@@ -157,8 +142,6 @@ public class PromptManager {
      */
     public String getPromptName(PromptItem prompt) {
         switch (prompt) {
-            case FINGER_PRINT:
-                return "touchIdPrompt";
             case PAPER_KEY:
                 return "paperKeyPrompt";
             case UPGRADE_PIN:

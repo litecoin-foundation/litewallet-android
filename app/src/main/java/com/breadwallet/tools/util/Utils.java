@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.hardware.fingerprint.FingerprintManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -166,24 +165,6 @@ public class Utils {
 
         return builder.build().toString().replaceFirst("/", "");
 
-    }
-
-    public static boolean isFingerprintEnrolled(Context app) {
-        FingerprintManager fingerprintManager = (FingerprintManager) app.getSystemService(FINGERPRINT_SERVICE);
-        if (fingerprintManager == null) return false;
-        // Device doesn't support fingerprint authentication
-        return ActivityCompat.checkSelfPermission(app, Manifest.permission.USE_FINGERPRINT) == PackageManager.PERMISSION_GRANTED && fingerprintManager.isHardwareDetected() && fingerprintManager.hasEnrolledFingerprints();
-    }
-
-    public static boolean isFingerprintAvailable(Context app) {
-        FingerprintManager fingerprintManager = (FingerprintManager) app.getSystemService(FINGERPRINT_SERVICE);
-        if (fingerprintManager == null) return false;
-        // Device doesn't support fingerprint authentication
-        if (ActivityCompat.checkSelfPermission(app, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(app, "Fingerprint authentication permission not enabled", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return fingerprintManager.isHardwareDetected();
     }
 
     public static void hideKeyboard(Context app) {
