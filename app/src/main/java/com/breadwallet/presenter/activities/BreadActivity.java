@@ -1,6 +1,7 @@
 package com.breadwallet.presenter.activities;
 
 import android.animation.LayoutTransition;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -14,7 +15,6 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -26,6 +26,7 @@ import androidx.transition.Fade;
 import androidx.transition.TransitionManager;
 import androidx.transition.TransitionSet;
 
+import com.breadwallet.BreadApp;
 import com.breadwallet.R;
 import com.breadwallet.entities.Language;
 import com.breadwallet.presenter.activities.intro.IntroActivity;
@@ -33,7 +34,6 @@ import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRNotificationBar;
 import com.breadwallet.presenter.fragments.BuyTabFragment;
 import com.breadwallet.presenter.history.HistoryFragment;
-import com.breadwallet.presenter.language.LanguageAdapter;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.TextSizeTransition;
 import com.breadwallet.tools.manager.AnalyticsManager;
@@ -51,13 +51,15 @@ import com.breadwallet.tools.util.LocaleHelper;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRPeerManager;
 import com.breadwallet.wallet.BRWalletManager;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.gms.tasks.Task;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -454,6 +456,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
     @Override
     public void onConnectionChanged(boolean isConnected) {
+
+        Context thisContext = BreadActivity.this;
+        Context app = BreadApp.getBreadContext();
         if (isConnected) {
             if (barFlipper != null) {
                 if (barFlipper.getDisplayedChild() == 1) {
@@ -461,17 +466,17 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 }
             }
             BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(() -> {
-                final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(BreadActivity.this));
-                Timber.d("timber: Sync Progress: %s", progress);
-                if (progress < 1 && progress > 0) {
-                    SyncManager.getInstance().startSyncingProgressThread();
+                final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(thisContext));
+                if (progress > 0 && progress < 1) {
+                    SyncManager.getInstance().startSyncingProgressThread(app);
                 }
             });
-        } else {
+        }
+        else {
             if (barFlipper != null) {
                 addNotificationBar();
             }
-            SyncManager.getInstance().stopSyncingProgressThread();
+            SyncManager.getInstance().stopSyncingProgressThread(app);
         }
     }
 
