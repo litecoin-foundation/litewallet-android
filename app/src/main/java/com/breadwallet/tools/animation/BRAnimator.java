@@ -324,10 +324,11 @@ public class BRAnimator {
         } else return false;
     }
 
-    public static void killAllFragments(Activity app) {
+    public static void killAllFragments(FragmentActivity app) {
         //DEV: Needs refactor
-        if (app != null && !app.isDestroyed())
-            app.getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        if (app != null && !app.isDestroyed() && !app.getSupportFragmentManager().isStateSaved()) {
+            app.getSupportFragmentManager().popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
     }
 
     public static void startBreadIfNotStarted(Activity app) {
