@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
@@ -22,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
@@ -155,7 +156,7 @@ public class FragmentFingerprint extends Fragment
 
     @Override
     public void onAuthenticated() {
-        final Activity app = getActivity();
+        final FragmentActivity app = getActivity();
         authSucceeded = true;
 
         if (completion != null) completion.onComplete();
