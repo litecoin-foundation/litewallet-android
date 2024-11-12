@@ -82,7 +82,8 @@ class FragmentBalanceSeedReminder : Fragment() {
             registerAnalyticsError("null_in_fragment_balance_fetch_seed")
         }
         else {
-            seedPhraseTextView.text =  String(BRKeyStore.getPhrase(this.activity, 0)) ?: "NO_PHRASE"
+            seedPhraseTextView.text = runCatching { BRKeyStore.getPhrase(this.activity, 0) }
+                .getOrNull()?.decodeToString() ?: "NO_PHRASE"
         }
     }
     private fun animateClose() {
