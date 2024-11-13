@@ -1,7 +1,5 @@
 package com.breadwallet.presenter.fragments;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -12,7 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.entities.TxItem;
@@ -27,7 +27,7 @@ public class FragmentTransactionDetails extends Fragment {
 
     public TextView mTitle;
     public LinearLayout backgroundLayout;
-    private ViewPager txViewPager;
+    private ViewPager2 txViewPager;
     private TransactionPagerAdapter txPagerAdapter;
     private List<TxItem> items;
 
@@ -38,23 +38,25 @@ public class FragmentTransactionDetails extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_transaction_details, container, false);
         mTitle = (TextView) rootView.findViewById(R.id.title);
         backgroundLayout = (LinearLayout) rootView.findViewById(R.id.background_layout);
-        txViewPager = (ViewPager) rootView.findViewById(R.id.tx_list_pager);
-        txViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrollStateChanged(int state) {
-            }
-
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            public void onPageSelected(int position) {
-                // Check if this is the page you want.
-            }
-        });
-        txPagerAdapter = new TransactionPagerAdapter(getChildFragmentManager(), items);
+        txViewPager = (ViewPager2) rootView.findViewById(R.id.tx_list_pager);
+        //TODO: yuana, WIP here
+//        txViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            public void onPageScrollStateChanged(int state) {
+//            }
+//
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//            }
+//
+//            public void onPageSelected(int position) {
+//                // Check if this is the page you want.
+//            }
+//        });
+//        txPagerAdapter = new TransactionPagerAdapter(getChildFragmentManager(), items);
+        txPagerAdapter = new TransactionPagerAdapter(requireActivity(), items);
         txViewPager.setAdapter(txPagerAdapter);
         txViewPager.setOffscreenPageLimit(5);
         int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16 * 2, getResources().getDisplayMetrics());
-        txViewPager.setPageMargin(-margin);
+//        txViewPager.setPageMargin(-margin);
         int pos = getArguments().getInt("pos");
         txViewPager.setCurrentItem(pos, false);
 
@@ -79,11 +81,11 @@ public class FragmentTransactionDetails extends Fragment {
     }
 
     public void close() {
-        final Activity app = getActivity();
+        final FragmentActivity app = getActivity();
         BRAnimator.animateBackgroundDim(backgroundLayout, true);
         BRAnimator.animateSignalSlide(txViewPager, true, () -> {
             if (app != null && !app.isFinishing())
-                app.getFragmentManager().popBackStack();
+                app.getSupportFragmentManager().popBackStack();
             else
                 Timber.d("timber: onAnimationEnd: app is null");
         });
