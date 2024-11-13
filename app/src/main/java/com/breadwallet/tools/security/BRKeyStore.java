@@ -20,11 +20,9 @@ import android.view.View;
 import com.breadwallet.R;
 import com.breadwallet.exceptions.BRKeystoreErrorException;
 import com.breadwallet.presenter.customviews.BRDialogView;
-import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.threads.BRExecutor;
-import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BytesUtil;
 import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
@@ -333,7 +331,8 @@ public class BRKeyStore {
                 Timber.e(e);
                 throw new RuntimeException(e.getMessage());
             }
-        } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException e) {
+        } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException |
+                 InvalidAlgorithmParameterException e) {
             /** if for any other reason the keystore fails, crash! */
             Timber.e(e, "timber:getData: error");
             throw new RuntimeException(e.getMessage());
@@ -715,8 +714,15 @@ public class BRKeyStore {
     public synchronized static void removeAliasAndFiles(KeyStore keyStore, String alias, Context context) {
         try {
             keyStore.deleteEntry(alias);
-            boolean b1 = new File(getFilePath(aliasObjectMap.get(alias).datafileName, context)).delete();
-            boolean b2 = new File(getFilePath(aliasObjectMap.get(alias).ivFileName, context)).delete();
+
+            AliasObject aliasObject = aliasObjectMap.get(alias);
+            if (aliasObject == null) {
+                Timber.w("aliasObject for alias: %s is null, skipping deletion", alias);
+                return;
+            }
+
+            boolean b1 = new File(getFilePath(aliasObject.datafileName, context)).delete();
+            boolean b2 = new File(getFilePath(aliasObject.ivFileName, context)).delete();
         } catch (KeyStoreException e) {
             Timber.e(e);
         }
@@ -930,7 +936,8 @@ public class BRKeyStore {
             /** keyStore.load(null) threw the Exception, meaning the keystore is unavailable */
             Timber.e(e, "timber:_getOldData: keyStore.load(null) threw the Exception, meaning the keystore is unavailable");
             return null;
-        } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException e) {
+        } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException |
+                 InvalidAlgorithmParameterException e) {
             /** if for any other reason the keystore fails, crash! */
             Timber.e(e, "timber:getData: error");
             return null;
