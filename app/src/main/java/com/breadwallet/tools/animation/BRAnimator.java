@@ -318,7 +318,7 @@ public class BRAnimator {
     public static void killAllFragments(FragmentActivity app) {
         //DEV: Needs refactor
         if (app != null && !app.isDestroyed() && !app.getSupportFragmentManager().isStateSaved()) {
-            app.getSupportFragmentManager().popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            app.getSupportFragmentManager().popBackStack();
         }
     }
 
