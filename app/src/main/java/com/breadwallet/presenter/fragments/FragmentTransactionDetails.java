@@ -1,7 +1,6 @@
 package com.breadwallet.presenter.fragments;
 
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -39,32 +39,18 @@ public class FragmentTransactionDetails extends Fragment {
         mTitle = (TextView) rootView.findViewById(R.id.title);
         backgroundLayout = (LinearLayout) rootView.findViewById(R.id.background_layout);
         txViewPager = (ViewPager2) rootView.findViewById(R.id.tx_list_pager);
-        //TODO: yuana, WIP here
-//        txViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            public void onPageScrollStateChanged(int state) {
-//            }
-//
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//            }
-//
-//            public void onPageSelected(int position) {
-//                // Check if this is the page you want.
-//            }
-//        });
-//        txPagerAdapter = new TransactionPagerAdapter(getChildFragmentManager(), items);
-        txPagerAdapter = new TransactionPagerAdapter(requireActivity(), items);
+        txPagerAdapter = new TransactionPagerAdapter(getChildFragmentManager(), getLifecycle(), items);
         txViewPager.setAdapter(txPagerAdapter);
         txViewPager.setOffscreenPageLimit(5);
-        int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16 * 2, getResources().getDisplayMetrics());
-//        txViewPager.setPageMargin(-margin);
-        int pos = getArguments().getInt("pos");
+
+        int pos = getArguments().getInt("pos", 0);
         txViewPager.setCurrentItem(pos, false);
 
         return rootView;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         final ViewTreeObserver observer = txViewPager.getViewTreeObserver();

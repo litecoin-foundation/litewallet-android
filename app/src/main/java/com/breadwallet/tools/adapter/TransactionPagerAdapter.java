@@ -2,7 +2,8 @@ package com.breadwallet.tools.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.breadwallet.presenter.entities.TxItem;
@@ -13,10 +14,10 @@ import java.util.List;
 public class TransactionPagerAdapter extends FragmentStateAdapter {
 
     private static final String TAG = TransactionPagerAdapter.class.getName();
-    private List<TxItem> items;
+    private final List<TxItem> items;
 
-    public TransactionPagerAdapter(@NonNull FragmentActivity fragmentActivity, List<TxItem> items) {
-        super(fragmentActivity);
+    public TransactionPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<TxItem> items) {
+        super(fragmentManager, lifecycle);
         this.items = items;
     }
 

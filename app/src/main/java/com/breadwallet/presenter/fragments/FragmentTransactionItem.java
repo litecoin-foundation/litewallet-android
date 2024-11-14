@@ -51,6 +51,9 @@ import java.util.stream.Collectors;
 import timber.log.Timber;
 
 public class FragmentTransactionItem extends Fragment {
+
+    private static final String ARG_ITEM = "arg_item";
+
     public TextView mTitle;
     private TextView mLargeDescriptionText;
     private TextView mSubHeader;
@@ -102,10 +105,22 @@ public class FragmentTransactionItem extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (getArguments() == null) {
+            requireActivity().getSupportFragmentManager().popBackStack();
+            return;
+        }
+
+        item = (TxItem) getArguments().getSerializable(ARG_ITEM);
+
         fillTexts();
     }
 
     private void fillTexts() {
+        if (item == null) {
+            requireActivity().getSupportFragmentManager().popBackStack();
+            return;
+        }
+
         //get the current iso
         String iso = BRSharedPrefs.getPreferredLTC(getActivity()) ? "LTC" : BRSharedPrefs.getIsoSymbol(getContext());
 
@@ -212,18 +227,19 @@ public class FragmentTransactionItem extends Fragment {
     }
 
     private long getOpsAmount() {
-        long opsAmount = Long.MAX_VALUE;
+        long opsAmount = 0;
 
         if (item == null || item.getOutAmounts() == null || item.getOutAmounts().length != 3) {
-            opsAmount = 0L;
-        } else {
-            long[] outAmounts = item != null ? item.getOutAmounts() : new long[0];
-            for (long value : outAmounts) {
-                if (value < opsAmount && value != 0L) {
-                    opsAmount = value;
-                }
+            return opsAmount;
+        }
+
+        long[] outAmounts = item != null ? item.getOutAmounts() : new long[0];
+        for (long value : outAmounts) {
+            if (value < opsAmount) {
+                opsAmount = value;
             }
         }
+
         return opsAmount;
     }
 
@@ -285,12 +301,12 @@ public class FragmentTransactionItem extends Fragment {
 
     public static FragmentTransactionItem newInstance(TxItem item) {
         FragmentTransactionItem f = new FragmentTransactionItem();
-        f.setItem(item);
-        return f;
-    }
 
-    public void setItem(TxItem item) {
-        this.item = item;
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_ITEM, item);
+        f.setArguments(args);
+
+        return f;
     }
 
     private String getFormattedDate(long timeStamp) {
