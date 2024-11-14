@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -23,13 +23,19 @@ import java.util.List;
 
 import timber.log.Timber;
 
-public class FragmentTransactionDetails extends Fragment {
+public class FragmentTransactionDetails extends DialogFragment {
 
     public TextView mTitle;
     public LinearLayout backgroundLayout;
     private ViewPager2 txViewPager;
     private TransactionPagerAdapter txPagerAdapter;
     private List<TxItem> items;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(STYLE_NO_TITLE, android.R.style.Theme_DeviceDefault_Light_NoActionBar);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
