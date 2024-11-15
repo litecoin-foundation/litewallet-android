@@ -137,12 +137,14 @@ public class BRAnimator {
         }
     }
 
-    public static void showTransactionPager(Activity app, List<TxItem> items, int position) {
+    public static void showTransactionPager(FragmentActivity app, List<TxItem> items, int position) {
         if (app == null) {
             Timber.i("timber: showSendFragment: app is null");
             return;
         }
-        FragmentTransactionDetails fragmentTransactionDetails = (FragmentTransactionDetails) app.getFragmentManager().findFragmentByTag(FragmentTransactionDetails.class.getName());
+        FragmentTransactionDetails fragmentTransactionDetails = (FragmentTransactionDetails) app
+                .getSupportFragmentManager()
+                .findFragmentByTag(FragmentTransactionDetails.class.getName());
         if (fragmentTransactionDetails != null && fragmentTransactionDetails.isAdded()) {
             fragmentTransactionDetails.setItems(items);
             Timber.i("timber: showTransactionPager: Already showing");
@@ -154,7 +156,8 @@ public class BRAnimator {
         bundle.putInt("pos", position);
         fragmentTransactionDetails.setArguments(bundle);
 
-        app.getFragmentManager().beginTransaction()
+        app.getSupportFragmentManager()
+                .beginTransaction()
                 .setCustomAnimations(0, 0, 0, R.animator.plain_300)
                 .add(android.R.id.content, fragmentTransactionDetails, FragmentTransactionDetails.class.getName())
                 .addToBackStack(FragmentTransactionDetails.class.getName()).commit();
