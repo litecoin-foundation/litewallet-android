@@ -1,36 +1,34 @@
 package com.breadwallet.tools.adapter;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import androidx.legacy.app.FragmentPagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.breadwallet.presenter.entities.TxItem;
 import com.breadwallet.presenter.fragments.FragmentTransactionItem;
 
 import java.util.List;
 
-public class TransactionPagerAdapter extends FragmentPagerAdapter {
+public class TransactionPagerAdapter extends FragmentStateAdapter {
+
     private static final String TAG = TransactionPagerAdapter.class.getName();
-    private List<TxItem> items;
+    private final List<TxItem> items;
 
-    public TransactionPagerAdapter(FragmentManager fm, List<TxItem> items) {
-        super(fm);
+    public TransactionPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<TxItem> items) {
+        super(fragmentManager, lifecycle);
         this.items = items;
-
     }
 
-    public TransactionPagerAdapter(FragmentManager fm){
-        super(fm);
+    @NonNull
+    @Override
+    public Fragment createFragment(int position) {
+        return FragmentTransactionItem.newInstance(items.get(position));
     }
 
     @Override
-    public Fragment getItem(int pos) {
-        return FragmentTransactionItem.newInstance(items.get(pos));
-    }
-
-    @Override
-    public int getCount() {
+    public int getItemCount() {
         return items == null ? 0 : items.size();
     }
-
 }
