@@ -240,6 +240,10 @@ android {
                 minifyEnabled = false
                 debuggable = true
             }
+
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+            }
         }
 
     }
