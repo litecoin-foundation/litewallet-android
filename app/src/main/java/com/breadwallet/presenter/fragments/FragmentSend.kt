@@ -43,7 +43,7 @@ import java.util.regex.Pattern
 
 class FragmentSend : Fragment() {
     private lateinit var signalLayout: LinearLayout; private lateinit var keyboardLayout: LinearLayout
-    private lateinit var scanButton: Button; private lateinit var pasteButton: Button; private lateinit var sendButton: Button; private lateinit var donateButton: Button; private lateinit var isoCurrencySymbolButton: Button
+    private lateinit var scanButton: Button; private lateinit var pasteButton: Button; private lateinit var sendButton: Button; private lateinit var isoCurrencySymbolButton: Button
     private lateinit var commentEdit: EditText; private lateinit var addressEdit: EditText;private lateinit var amountEdit: EditText
     private lateinit var isoCurrencySymbolText: TextView; private lateinit var balanceText: TextView; private lateinit var feeText: TextView; private lateinit var feeDescription: TextView; private lateinit var warningText: TextView
     private var amountLabelOn = true; private var ignoreCleanup = false; private var feeButtonsShown = false
@@ -74,7 +74,6 @@ class FragmentSend : Fragment() {
         pasteButton = rootView.findViewById<View>(R.id.paste_button) as Button
 
         sendButton = rootView.findViewById<View>(R.id.send_button) as Button
-        donateButton = rootView.findViewById<View>(R.id.donate_button) as Button
         commentEdit = rootView.findViewById<View>(R.id.comment_edit) as EditText
         amountEdit = rootView.findViewById<View>(R.id.amount_edit) as EditText
         balanceText = rootView.findViewById<View>(R.id.balance_text) as TextView
@@ -389,14 +388,6 @@ class FragmentSend : Fragment() {
                 }
             },
         )
-        donateButton.setOnClickListener(
-            View.OnClickListener {
-                if (!BRAnimator.isClickAllowed()) {
-                    return@OnClickListener
-                }
-                BRAnimator.showDynamicDonationFragment(requireActivity())
-            },
-        )
         backgroundLayout.setOnClickListener(
             View.OnClickListener {
                 if (!BRAnimator.isClickAllowed()) return@OnClickListener
@@ -615,11 +606,6 @@ class FragmentSend : Fragment() {
             formattedNetworkFee,
             formattedServiceFee,
             formattedTotalFees)
-        //(Network + Service): $0.01 + $1.37 = $1.38
-        donateButton.text = getString(R.string.Donate_title, currencySymbol)
-
-        ///Added another check. User must have sent once already before donating
-        donateButton.isEnabled = currentBalance >= BRConstants.DONATION_AMOUNT * 2 && (TxManager.getInstance().adapter.items.size > 1)
         amountLayout.requestLayout()
     }
 
