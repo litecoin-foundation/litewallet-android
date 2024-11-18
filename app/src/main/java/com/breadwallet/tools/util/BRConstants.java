@@ -88,12 +88,6 @@ public class BRConstants {
     public static final String loopBug = "android-loop-bug";
 
     /**
-     * Donation
-     */
-    public static final String DONATION_ADDRESS =  "MJ4W7NZya4SzE7R6xpEVdamGCimaQYPiWu";
-    public static final long DONATION_AMOUNT = 1_400_000;
-
-    /**
      * App External URLs
      */
 
@@ -129,8 +123,6 @@ public class BRConstants {
     public static final String _20201118_DTGS = "did_tap_get_support";
     public static final String _20200217_DUWP = "did_unlock_with_pin";
     public static final String _20200217_DUWB = "did_unlock_with_biometrics";
-    public static final String _20200223_DD = "did_donate";
-    public static final String _20200225_DCD = "did_cancel_donate";
     public static final String _20200301_DUDFPK = "did_use_default_fee_per_kb";
     public static final String _20201121_SIL = "started_IFPS_lookup";
     public static final String _20201121_DRIA = "did_resolve_IPFS_address";
@@ -167,8 +159,6 @@ public class BRConstants {
             _20201118_DTGS,
             _20200217_DUWP,
             _20200217_DUWB,
-            _20200223_DD,
-            _20200225_DCD,
             _20200301_DUDFPK,
             _20201121_SIL,
             _20201121_DRIA,

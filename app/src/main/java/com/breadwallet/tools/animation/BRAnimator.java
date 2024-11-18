@@ -32,7 +32,6 @@ import com.breadwallet.presenter.activities.LoginActivity;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.TxItem;
-import com.breadwallet.presenter.fragments.DynamicDonationFragment;
 import com.breadwallet.presenter.fragments.FragmentBalanceSeedReminder;
 import com.breadwallet.presenter.fragments.FragmentBuy;
 import com.breadwallet.presenter.fragments.FragmentGreetings;
@@ -277,14 +276,6 @@ public class BRAnimator {
                 .commit();
     }
 
-    public static void showDynamicDonationFragment(@NonNull FragmentActivity app) {
-        app.getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(0, 0, 0, R.animator.plain_300)
-                .add(android.R.id.content, new DynamicDonationFragment(), DynamicDonationFragment.class.getName())
-                .addToBackStack(DynamicDonationFragment.class.getName())
-                .commit();
-    }
-
     public static void showMenuFragment(Activity app) {
         if (app == null) {
             Timber.i("timber: showReceiveFragment: app is null");
@@ -330,7 +321,7 @@ public class BRAnimator {
     public static void killAllFragments(FragmentActivity app) {
         //DEV: Needs refactor
         if (app != null && !app.isDestroyed() && !app.getSupportFragmentManager().isStateSaved()) {
-            app.getSupportFragmentManager().popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            app.getSupportFragmentManager().popBackStack();
         }
     }
 

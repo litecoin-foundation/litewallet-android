@@ -63,8 +63,8 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 31
         targetSdkVersion 34
-        versionCode 20241029
-        versionName "v2.12.0"
+        versionCode 20241118
+        versionName "v2.12.2"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
 
@@ -239,6 +239,10 @@ android {
             ndk {
                 minifyEnabled = false
                 debuggable = true
+            }
+
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
             }
         }
 
