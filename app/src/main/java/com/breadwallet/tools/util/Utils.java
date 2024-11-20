@@ -303,10 +303,17 @@ public class Utils {
     /// Description: 1715876807
     public static long tieredOpsFee(Context app, long sendAmount) {
 
+        /**
+         * current solution, add default rate based on iOS: https://github.com/litecoin-foundation/litewallet-ios/blob/9ef6ba8f9cf8ef57f3c6056c31304c6197cafa7a/litewallet/Constants/Functions.swift#L44
+         * and add null checking after `CurrencyDataSource.getInstance(app).getCurrencyByIso(usIso);`
+         */
+        double doubleRate = 83.000;
         double sendAmountDouble = new Double(String.valueOf(sendAmount));
         String usIso = Currency.getInstance(new Locale("en", "US")).getCurrencyCode();
         CurrencyEntity currency = CurrencyDataSource.getInstance(app).getCurrencyByIso(usIso);
-        double doubleRate = currency.rate;
+        if (currency != null) {
+            doubleRate = currency.rate;
+        }
         double usdInLTC = sendAmountDouble * doubleRate / 100_000_000.0;
         usdInLTC = Math.floor(usdInLTC * 100) / 100;
 
