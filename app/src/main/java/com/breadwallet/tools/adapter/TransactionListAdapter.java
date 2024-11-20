@@ -1,4 +1,5 @@
 package com.breadwallet.tools.adapter;
+
 import android.app.Activity;
 import android.content.Context;
 import android.util.TypedValue;
@@ -45,6 +46,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private final int txResId;
     private final int syncingResId;
     private final int promptResId;
+    private final String cachedOpsAll;
     private List<TxItem> backUpFeed;
     private List<TxItem> itemFeed;
     private final int txType = 0;
@@ -58,6 +60,13 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.syncingResId = R.layout.syncing_item;
         this.promptResId = R.layout.prompt_item;
         this.mContext = mContext;
+
+        /**
+         * current solution, just cached the result to [cachedOpsAll]
+         * previously, called multiple times inside `onBindViewHolder` and caused OOM
+         */
+        cachedOpsAll = Utils.fetchPartnerKey(mContext, PartnerNames.OPSALL);
+
         items = new ArrayList<>();
         init(items);
     }
@@ -179,8 +188,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         Set<String> outputAddressSet = new HashSet<String>(Arrays.asList(item.getTo()));
 
-        final String opsString = Utils.fetchPartnerKey(mContext, PartnerNames.OPSALL);
-        List<String> opsList = new ArrayList<String>(Arrays.asList(opsString.split(",")));
+        List<String> opsList = new ArrayList<String>(Arrays.asList(cachedOpsAll.split(",")));
         Set<String> opsSet = new HashSet<>();
         opsSet.addAll(opsList);
         List<String> outputAddresses = outputAddressSet.stream().filter(element -> !opsSet.contains(element)).collect(Collectors.toList());
