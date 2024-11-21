@@ -61,10 +61,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.promptResId = R.layout.prompt_item;
         this.mContext = mContext;
 
-        /**
-         * current solution, just cached the result to [cachedOpsAll]
-         * previously, called multiple times inside `onBindViewHolder` and caused OOM
-         */
         cachedOpsAll = Utils.fetchPartnerKey(mContext, PartnerNames.OPSALL);
 
         items = new ArrayList<>();
