@@ -370,7 +370,9 @@ public class BRWalletManager {
     }
 
     public static void onTxAdded(byte[] tx, int blockHeight, long timestamp, final long amount, String hash) {
-        Timber.d("timber: onTxAdded: " + String.format("tx.length: %d, blockHeight: %d, timestamp: %d, amount: %d, hash: %s", tx.length, blockHeight, timestamp, amount, hash));
+
+       // DEV Uncomment to see values
+       // Timber.d("timber: onTxAdded: tx.length: %d, blockHeight: %d, timestamp: %d, amount: %d, hash: %s", tx.length, blockHeight, timestamp, amount, hash));
 
         final Context ctx = BreadApp.getBreadContext();
         if (amount > 0) {
@@ -424,8 +426,10 @@ public class BRWalletManager {
     }
 
     public static void onTxUpdated(String hash, int blockHeight, int timeStamp) {
-        Timber.d("timber: onTxUpdated: " + String.format("hash: %s, blockHeight: %d, timestamp: %d", hash, blockHeight, timeStamp));
-        Context ctx = BreadApp.getBreadContext();
+        // DEV Uncomment to see values
+        // Timber.d("timber: onTxUpdated: " + String.format("hash: %s, blockHeight: %d, timestamp: %d", hash, blockHeight, timeStamp));
+        Context ctx;
+        ctx = BreadApp.getBreadContext();
         if (ctx != null) {
             TransactionDataSource.getInstance(ctx).updateTxBlockHeight(hash, blockHeight, timeStamp);
 
@@ -435,7 +439,8 @@ public class BRWalletManager {
     }
 
     public static void onTxDeleted(String hash, int notifyUser, final int recommendRescan) {
-        Timber.d("timber: onTxDeleted: " + String.format("hash: %s, notifyUser: %d, recommendRescan: %d", hash, notifyUser, recommendRescan));
+        // DEV Uncomment to see values
+        // Timber.d("timber: onTxDeleted: " + String.format("hash: %s, notifyUser: %d, recommendRescan: %d", hash, notifyUser, recommendRescan));
         final Context ctx = BreadApp.getBreadContext();
         if (ctx != null) {
             BRSharedPrefs.putScanRecommended(ctx, true);
@@ -443,7 +448,6 @@ public class BRWalletManager {
             Timber.i("timber: onTxDeleted: Failed! ctx is null");
         }
     }
-
 
     public void startTheWalletIfExists(final Activity app) {
         final BRWalletManager m = BRWalletManager.getInstance();

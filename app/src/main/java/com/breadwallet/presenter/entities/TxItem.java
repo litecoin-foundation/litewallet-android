@@ -1,10 +1,11 @@
 package com.breadwallet.presenter.entities;
 
 
-import com.breadwallet.tools.util.Utils;
 import com.platform.entities.TxMetaData;
 
-public class TxItem {
+import java.io.Serializable;
+
+public class TxItem implements Serializable {
     public static final String TAG = TxItem.class.getName();
     private long timeStamp;
     private int blockHeight;

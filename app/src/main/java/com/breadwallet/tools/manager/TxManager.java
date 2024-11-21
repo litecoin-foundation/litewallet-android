@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.breadwallet.tools.adapter.TransactionListAdapter;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.listeners.RecyclerItemClickListener;
 import com.breadwallet.tools.threads.BRExecutor;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.wallet.BRPeerManager;
 import com.breadwallet.wallet.BRWalletManager;
 
@@ -36,7 +38,7 @@ public class TxManager {
     public TransactionListAdapter adapter;
     public PromptManager.PromptItem currentPrompt;
     public PromptManager.PromptInfo promptInfo;
-    public TransactionListAdapter.SyncingHolder syncingHolder;
+    public TransactionListAdapter.SyncingProgressViewHolder syncingProgressViewHolder;
 
     public static TxManager getInstance() {
         if (instance == null) instance = new TxManager();
@@ -64,7 +66,6 @@ public class TxManager {
                         });
 
                     } else { //clicked on the prompt
-                        BREventManager.getInstance().pushEvent("prompt." + PromptManager.getInstance().getPromptName(currentPrompt) + ".trigger");
                         if (currentPrompt != PromptManager.PromptItem.SYNCING) {
                             PromptManager.PromptInfo info = PromptManager.getInstance().promptInfo(app, currentPrompt);
                             if (info != null)
@@ -114,7 +115,6 @@ public class TxManager {
     void showPrompt(Activity app, PromptManager.PromptItem item) {
         crashIfNotMain();
         if (item == null) throw new RuntimeException("can't be null");
-        BREventManager.getInstance().pushEvent("prompt." + PromptManager.getInstance().getPromptName(item) + ".displayed");
         if (currentPrompt != PromptManager.PromptItem.SYNCING) {
             currentPrompt = item;
         }
@@ -132,9 +132,6 @@ public class TxManager {
         if (item == PromptManager.PromptItem.SYNCING) {
             showNextPrompt(app);
             updateCard(app);
-        } else {
-            if (item != null)
-                BREventManager.getInstance().pushEvent("prompt." + PromptManager.getInstance().getPromptName(item) + ".dismissed");
         }
     }
 

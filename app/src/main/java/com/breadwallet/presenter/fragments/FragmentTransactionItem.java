@@ -1,7 +1,6 @@
 package com.breadwallet.presenter.fragments;
 
-import android.app.Activity;
-import android.app.Fragment;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +15,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.entities.PartnerNames;
@@ -49,6 +51,9 @@ import java.util.stream.Collectors;
 import timber.log.Timber;
 
 public class FragmentTransactionItem extends Fragment {
+
+    private static final String ARG_ITEM = "arg_item";
+
     public TextView mTitle;
     private TextView mLargeDescriptionText;
     private TextView mSubHeader;
@@ -98,28 +103,28 @@ public class FragmentTransactionItem extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (getArguments() == null) {
+            requireActivity().getSupportFragmentManager().popBackStack();
+            return;
+        }
+
+        item = (TxItem) getArguments().getSerializable(ARG_ITEM);
+
         fillTexts();
     }
 
     private void fillTexts() {
+        if (item == null) {
+            requireActivity().getSupportFragmentManager().popBackStack();
+            return;
+        }
+
         //get the current iso
         String iso = BRSharedPrefs.getPreferredLTC(getActivity()) ? "LTC" : BRSharedPrefs.getIsoSymbol(getContext());
 
-        long opsAmount = Long.MAX_VALUE;
-        long[] outAmounts = item.getOutAmounts();
-        if (outAmounts.length == 3) {
-            for (int i = 0; i < outAmounts.length; i++) {
-                long value = outAmounts[i];
-                if (value < opsAmount && value != 0L) {
-                    opsAmount = value;
-                }
-            }
-        }
-        else {
-            opsAmount = 0L;
-        }
+        long opsAmount = getOpsAmount();
 
         //get the tx amount
         BigDecimal txAmount = new BigDecimal(item.getReceived() - item.getSent()).abs();
@@ -149,7 +154,7 @@ public class FragmentTransactionItem extends Fragment {
 
         //Filter method
         if (filteredAddress.stream().findFirst().isPresent()) {
-            sendAddress =  filteredAddress.stream().findFirst().get();
+            sendAddress = filteredAddress.stream().findFirst().get();
         } else {
             sendAddress = "ERROR-ADDRESS";
         }
@@ -221,6 +226,23 @@ public class FragmentTransactionItem extends Fragment {
         mAddressText.setText(sendAddress);
     }
 
+    private long getOpsAmount() {
+        long opsAmount = 0;
+
+        if (item == null || item.getOutAmounts() == null || item.getOutAmounts().length != 3) {
+            return opsAmount;
+        }
+
+        long[] outAmounts = item != null ? item.getOutAmounts() : new long[0];
+        for (long value : outAmounts) {
+            if (value < opsAmount) {
+                opsAmount = value;
+            }
+        }
+
+        return opsAmount;
+    }
+
     private int getLevel(TxItem item) {
         int blockHeight = item.getBlockHeight();
         int confirms = blockHeight == Integer.MAX_VALUE ? 0 : BRSharedPrefs.getLastBlockHeight(getContext()) - blockHeight + 1;
@@ -260,7 +282,7 @@ public class FragmentTransactionItem extends Fragment {
     @Override
     public void onPause() {
         String comment = mCommentText.getText().toString();
-        final Activity app = getActivity();
+        final FragmentActivity app = getActivity();
         if (!comment.equals(oldComment)) {
             final TxMetaData md = new TxMetaData();
             md.comment = comment;
@@ -279,12 +301,12 @@ public class FragmentTransactionItem extends Fragment {
 
     public static FragmentTransactionItem newInstance(TxItem item) {
         FragmentTransactionItem f = new FragmentTransactionItem();
-        f.setItem(item);
-        return f;
-    }
 
-    public void setItem(TxItem item) {
-        this.item = item;
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_ITEM, item);
+        f.setArguments(args);
+
+        return f;
     }
 
     private String getFormattedDate(long timeStamp) {

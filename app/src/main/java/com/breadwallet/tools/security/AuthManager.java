@@ -1,13 +1,15 @@
 package com.breadwallet.tools.security;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.DisabledActivity;
@@ -197,7 +199,7 @@ public class AuthManager {
         if (forcePin)
             useFingerPrint = false;
 
-        final Activity app = (Activity) context;
+        final FragmentActivity app = (FragmentActivity) context;
 
         FragmentFingerprint fingerprintFragment;
         FragmentPin breadPin;
@@ -210,7 +212,7 @@ public class AuthManager {
                 args.putString("message", message);
                 fingerprintFragment.setArguments(args);
                 fingerprintFragment.setCompletion(completion);
-                FragmentTransaction transaction = app.getFragmentManager().beginTransaction();
+                androidx.fragment.app.FragmentTransaction transaction = app.getSupportFragmentManager().beginTransaction();
                 transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
                 transaction.add(android.R.id.content, fingerprintFragment, FragmentFingerprint.class.getName());
                 transaction.addToBackStack(null);
@@ -223,7 +225,7 @@ public class AuthManager {
                 args.putString("message", message);
                 breadPin.setArguments(args);
                 breadPin.setCompletion(completion);
-                FragmentTransaction transaction = app.getFragmentManager().beginTransaction();
+                FragmentTransaction transaction = app.getSupportFragmentManager().beginTransaction();
                 transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
                 transaction.add(android.R.id.content, breadPin, breadPin.getClass().getName());
                 transaction.addToBackStack(null);

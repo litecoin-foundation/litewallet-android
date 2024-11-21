@@ -78,8 +78,8 @@ public class BRConstants {
     public static final int CURRENT_UNIT_LITES = 1; // formerly CURRENT_UNIT_MBITS
     public static final int CURRENT_UNIT_LITECOINS = 2;
 
-    public static final String bitcoinLowercase = "\u0142";
-    public static final String bitcoinUppercase = "\u0141";
+    public static final String litecoinLowercase = "\u0142";
+    public static final String litecoinUppercase = "\u0141";
 
     public static boolean PLATFORM_ON = true;
     public static final RoundingMode ROUNDING_MODE = RoundingMode.HALF_EVEN;
@@ -88,19 +88,11 @@ public class BRConstants {
     public static final String loopBug = "android-loop-bug";
 
     /**
-     * Donation
-     */
-    public static final String DONATION_ADDRESS =  "MJ4W7NZya4SzE7R6xpEVdamGCimaQYPiWu";
-    public static final long DONATION_AMOUNT = 1_400_000;
-
-    /**
      * App External URLs
      */
 
     public static final String TWITTER_LINK = "https://twitter.com/Litewallet_App";
-
     public static final String INSTAGRAM_LINK = "https://www.instagram.com/litewallet.app";
-
     public static final String WEB_LINK = "https://litewallet.io";
     public static final String TOS_LINK = "https://litewallet.io/privacy";
     public static String CUSTOMER_SUPPORT_LINK = "https://support.litewallet.io/hc/en-us/requests/new";
@@ -125,14 +117,12 @@ public class BRConstants {
     public static final String _20200111_WNI = "wallet_not_initialized";
     public static final String _20200111_PNI = "phrase_not_initialized";
     public static final String _20200111_UTST = "unable_to_sign_transaction";
-    public static final String _20200112_ERR = "error";
+    public static final String _20200112_ERR = "lwa_error";
     public static final String _20200112_DSR = "did_start_resync";
     public static final String _20200125_DSRR = "did_show_review_request";
     public static final String _20201118_DTGS = "did_tap_get_support";
     public static final String _20200217_DUWP = "did_unlock_with_pin";
     public static final String _20200217_DUWB = "did_unlock_with_biometrics";
-    public static final String _20200223_DD = "did_donate";
-    public static final String _20200225_DCD = "did_cancel_donate";
     public static final String _20200301_DUDFPK = "did_use_default_fee_per_kb";
     public static final String _20201121_SIL = "started_IFPS_lookup";
     public static final String _20201121_DRIA = "did_resolve_IPFS_address";
@@ -169,8 +159,6 @@ public class BRConstants {
             _20201118_DTGS,
             _20200217_DUWP,
             _20200217_DUWB,
-            _20200223_DD,
-            _20200225_DCD,
             _20200301_DUDFPK,
             _20201121_SIL,
             _20201121_DRIA,

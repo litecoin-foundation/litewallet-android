@@ -341,32 +341,6 @@
                 android:background="@color/extra_light_gray" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.breadwallet.presenter.customviews.BRButton
-                android:id="@+id/donate_button"
-                style="@style/BRButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/barlowsemicondensed_regular"
-                android:minHeight="80dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:textColor="@color/light_gray"
-                android:textSize="18sp"
-                app:buttonType="2"
-                app:isBreadButton="true"
-                tools:text="@string/Donate.title" />
-        </LinearLayout>
-
         <View
             android:id="@+id/separator4"
             android:layout_width="match_parent"

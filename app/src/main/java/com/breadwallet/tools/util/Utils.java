@@ -255,7 +255,7 @@ public class Utils {
                 else if (name == PartnerNames.OPSALL) {
                     JSONArray opsArray = new JSONArray(keyObject.get(name.getKey()).toString());
 
-                    if (opsArray != null) {
+                    if (opsArray.length() > 0) {
                         for (int i=0;i<opsArray.length();i++){
                             opsString = (new StringBuilder())
                                  .append(opsString)
@@ -268,21 +268,36 @@ public class Utils {
                     }
                     return opsString.replaceAll("\\s+","");
                 }
+                else if (name == PartnerNames.AFDEVID) {
+                    JSONObject jsonObj = new JSONObject(keyObject.get(name.getKey()).toString());
+                    return jsonObj.toString();
+                }
+                else if (name == PartnerNames.PUSHER) {
+                    JSONObject jsonObj = new JSONObject(keyObject.get(name.getKey()).toString());
+                    return jsonObj.toString();
+                }
+                else if (name == PartnerNames.PUSHERSTAGING) {
+                    JSONObject jsonObj = new JSONObject(keyObject.get(name.getKey()).toString());
+                    return jsonObj.toString();
+                }
+                Timber.d("timber: fetchPartnerKey name key found %s",name.getKey());
+
                 return keyObject.get(name.getKey()).toString();
             } catch (IOException e) {
                 e.printStackTrace();
-                Timber.d("timber: IOEXception");
+                Timber.d("timber: fetchPartnerKey IOEXception");
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                Timber.d("timber: JSONException");
+                Timber.d("timber: fetchPartnerKey JSONException");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         Bundle   params = new Bundle();
-        params.putString("error_message: %s Key not found", name.toString());
+        params.putString("lwa_error_message: %s Key not found", name.getKey());
         AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR,params);
+        Timber.d("timber: fetchPartnerKey lwa_error_message");
         return "";
     }
     /// Description: 1715876807
@@ -300,8 +315,6 @@ public class Utils {
             return (long) ((lowRate / doubleRate) * 100_000_000.0);
         }
         else if (isBetween(usdInLTC, 20.00, 50.00)) {
-            Timber.d("timber: usdInLTC 2: %s", usdInLTC);
-
             return (long) ((0.30 / doubleRate) * 100_000_000.0);
         }
         else if (isBetween(usdInLTC, 50.00, 100.00)) {

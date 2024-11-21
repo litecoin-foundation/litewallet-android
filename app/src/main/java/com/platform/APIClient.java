@@ -114,7 +114,10 @@ public class APIClient {
         byte[] data = new byte[0];
         try {
             OkHttpClient client = new OkHttpClient.Builder().followRedirects(false).connectTimeout(60, TimeUnit.SECONDS)/*.addInterceptor(new LoggingInterceptor())*/.build();
-            Timber.d("timber: sendRequest: headers for : %s \n %s", request.url(), request.headers());
+
+            // DEV Uncomment to see values
+            // Timber.d("timber: sendRequest: headers for : %s \n %s", request.url(), request.headers());
+
             String agent = Utils.getAgentString(ctx, "OkHttp/3.4.1");
             request = request.newBuilder().header("User-agent", agent).build();
             response = client.newCall(request).execute();
@@ -148,16 +151,20 @@ public class APIClient {
             byte[] decompressed = gZipExtract(data);
             postReqBody = ResponseBody.create(null, decompressed);
             try {
-                Timber.d("timber: sendRequest: (%s)%s, code (%d), mess (%s), body (%s)", request.method(),
-                        request.url(), response.code(), response.message(), new String(decompressed, "utf-8"));
+                if (response.code() != 200) {
+                    Timber.d("timber: sendRequest: (%s)%s, code (%d), mess (%s), body (%s)", request.method(),
+                            request.url(), response.code(), response.message(), new String(decompressed, "utf-8"));
+                }
             } catch (UnsupportedEncodingException e) {
                 Timber.e(e);
             }
             return response.newBuilder().body(postReqBody).build();
         } else {
             try {
-                Timber.d("timber: sendRequest: (%s)%s, code (%d), mess (%s), body (%s)", request.method(),
-                        request.url(), response.code(), response.message(), new String(data, "utf-8"));
+                if (response.code() != 200) {
+                    Timber.d("timber: sendRequest: (%s)%s, code (%d), mess (%s), body (%s)", request.method(),
+                            request.url(), response.code(), response.message(), new String(data, "utf-8"));
+                }
             } catch (UnsupportedEncodingException e) {
                 Timber.e(e);
             }

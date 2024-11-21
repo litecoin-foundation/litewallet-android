@@ -6,11 +6,11 @@
     android:background="@color/black_trans"
     android:filterTouchesWhenObscured="true">
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/tx_list_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:focusable="false"
         android:orientation="horizontal" />
 

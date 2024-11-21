@@ -1,9 +1,6 @@
 package com.breadwallet.presenter.fragments;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +8,11 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.entities.TxItem;
@@ -23,13 +23,19 @@ import java.util.List;
 
 import timber.log.Timber;
 
-public class FragmentTransactionDetails extends Fragment {
+public class FragmentTransactionDetails extends DialogFragment {
 
     public TextView mTitle;
     public LinearLayout backgroundLayout;
-    private ViewPager txViewPager;
+    private ViewPager2 txViewPager;
     private TransactionPagerAdapter txPagerAdapter;
     private List<TxItem> items;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(STYLE_NO_TITLE, android.R.style.Theme_DeviceDefault_Light_NoActionBar);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,31 +44,19 @@ public class FragmentTransactionDetails extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_transaction_details, container, false);
         mTitle = (TextView) rootView.findViewById(R.id.title);
         backgroundLayout = (LinearLayout) rootView.findViewById(R.id.background_layout);
-        txViewPager = (ViewPager) rootView.findViewById(R.id.tx_list_pager);
-        txViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrollStateChanged(int state) {
-            }
-
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            public void onPageSelected(int position) {
-                // Check if this is the page you want.
-            }
-        });
-        txPagerAdapter = new TransactionPagerAdapter(getChildFragmentManager(), items);
+        txViewPager = (ViewPager2) rootView.findViewById(R.id.tx_list_pager);
+        txPagerAdapter = new TransactionPagerAdapter(getChildFragmentManager(), getLifecycle(), items);
         txViewPager.setAdapter(txPagerAdapter);
         txViewPager.setOffscreenPageLimit(5);
-        int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16 * 2, getResources().getDisplayMetrics());
-        txViewPager.setPageMargin(-margin);
-        int pos = getArguments().getInt("pos");
+
+        int pos = getArguments().getInt("pos", 0);
         txViewPager.setCurrentItem(pos, false);
 
         return rootView;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         final ViewTreeObserver observer = txViewPager.getViewTreeObserver();
@@ -79,11 +73,11 @@ public class FragmentTransactionDetails extends Fragment {
     }
 
     public void close() {
-        final Activity app = getActivity();
+        final FragmentActivity app = getActivity();
         BRAnimator.animateBackgroundDim(backgroundLayout, true);
         BRAnimator.animateSignalSlide(txViewPager, true, () -> {
             if (app != null && !app.isFinishing())
-                app.getFragmentManager().popBackStack();
+                app.getSupportFragmentManager().popBackStack();
             else
                 Timber.d("timber: onAnimationEnd: app is null");
         });

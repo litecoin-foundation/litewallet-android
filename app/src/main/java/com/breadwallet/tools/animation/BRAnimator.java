@@ -11,6 +11,7 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,11 +29,9 @@ import androidx.fragment.app.FragmentActivity;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.activities.LoginActivity;
-import com.breadwallet.presenter.activities.camera.CameraActivity;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.TxItem;
-import com.breadwallet.presenter.fragments.DynamicDonationFragment;
 import com.breadwallet.presenter.fragments.FragmentBalanceSeedReminder;
 import com.breadwallet.presenter.fragments.FragmentBuy;
 import com.breadwallet.presenter.fragments.FragmentGreetings;
@@ -43,6 +41,7 @@ import com.breadwallet.presenter.fragments.FragmentRequestAmount;
 import com.breadwallet.presenter.fragments.FragmentSend;
 import com.breadwallet.presenter.fragments.FragmentSignal;
 import com.breadwallet.presenter.fragments.FragmentTransactionDetails;
+
 import com.breadwallet.presenter.interfaces.BROnSignalCompletion;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
@@ -137,12 +136,14 @@ public class BRAnimator {
         }
     }
 
-    public static void showTransactionPager(Activity app, List<TxItem> items, int position) {
+    public static void showTransactionPager(FragmentActivity app, List<TxItem> items, int position) {
         if (app == null) {
             Timber.i("timber: showSendFragment: app is null");
             return;
         }
-        FragmentTransactionDetails fragmentTransactionDetails = (FragmentTransactionDetails) app.getFragmentManager().findFragmentByTag(FragmentTransactionDetails.class.getName());
+        FragmentTransactionDetails fragmentTransactionDetails = (FragmentTransactionDetails) app
+                .getSupportFragmentManager()
+                .findFragmentByTag(FragmentTransactionDetails.class.getName());
         if (fragmentTransactionDetails != null && fragmentTransactionDetails.isAdded()) {
             fragmentTransactionDetails.setItems(items);
             Timber.i("timber: showTransactionPager: Already showing");
@@ -154,7 +155,8 @@ public class BRAnimator {
         bundle.putInt("pos", position);
         fragmentTransactionDetails.setArguments(bundle);
 
-        app.getFragmentManager().beginTransaction()
+        app.getSupportFragmentManager()
+                .beginTransaction()
                 .setCustomAnimations(0, 0, 0, R.animator.plain_300)
                 .add(android.R.id.content, fragmentTransactionDetails, FragmentTransactionDetails.class.getName())
                 .addToBackStack(FragmentTransactionDetails.class.getName()).commit();
@@ -274,14 +276,6 @@ public class BRAnimator {
                 .commit();
     }
 
-    public static void showDynamicDonationFragment(@NonNull FragmentActivity app) {
-        app.getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(0, 0, 0, R.animator.plain_300)
-                .add(android.R.id.content, new DynamicDonationFragment(), DynamicDonationFragment.class.getName())
-                .addToBackStack(DynamicDonationFragment.class.getName())
-                .commit();
-    }
-
     public static void showMenuFragment(Activity app) {
         if (app == null) {
             Timber.i("timber: showReceiveFragment: app is null");
@@ -324,9 +318,11 @@ public class BRAnimator {
         } else return false;
     }
 
-    public static void killAllFragments(Activity app) {
-        if (app != null && !app.isDestroyed())
-            app.getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    public static void killAllFragments(FragmentActivity app) {
+        //DEV: Needs refactor
+        if (app != null && !app.isDestroyed() && !app.getSupportFragmentManager().isStateSaved()) {
+            app.getSupportFragmentManager().popBackStack();
+        }
     }
 
     public static void startBreadIfNotStarted(Activity app) {
