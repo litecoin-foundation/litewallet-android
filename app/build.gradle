@@ -25,6 +25,11 @@ android {
         buildConfig true
         viewBinding true
     }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
     assetPacks = [":install_time_asset_pack",":fast_follow_asset_pack_01"]
     signingConfigs {
         release {
