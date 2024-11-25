@@ -3,6 +3,8 @@ package com.breadwallet.tools.util
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.preference.PreferenceManager
 import com.breadwallet.entities.Language
 import java.util.*
@@ -34,6 +36,8 @@ class LocaleHelper private constructor() {
         Locale.setDefault(locale)
         val config = context.resources.configuration
         config.setLocale(locale)
+        val localeList = LocaleListCompat.forLanguageTags(language.code)
+        AppCompatDelegate.setApplicationLocales(localeList)
         return context.createConfigurationContext(config)
     }
 

@@ -115,4 +115,8 @@ class IntroLanguageResource {
             )
         )
     }
+
+    fun findIndex(language: Language): Int {
+        return loadResources().map { it.lang }.indexOf(language)
+    }
 }
