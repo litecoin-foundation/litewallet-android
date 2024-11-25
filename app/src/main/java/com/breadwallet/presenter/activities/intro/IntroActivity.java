@@ -15,14 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appsflyer.AppsFlyerLib;
 import com.breadwallet.entities.IntroLanguageResource;
 import com.breadwallet.entities.Language;
 import com.breadwallet.presenter.activities.SetPinActivity;
 import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.tools.adapter.CountryLanguageAdapter;
 import com.breadwallet.tools.util.LocaleHelper;
-import com.google.android.material.snackbar.Snackbar;
 //import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
@@ -81,7 +79,7 @@ public class IntroActivity extends BRActivity implements Serializable {
         listLangRecyclerView.setAdapter(countryLanguageAdapter);
 
         Language currentLanguage = LocaleHelper.Companion.getInstance().getCurrentLocale();
-        int currentIndex = introLanguageResource.findIndex(currentLanguage);
+        int currentIndex = introLanguageResource.findLanguageIndex(currentLanguage);
         countryLanguageAdapter.updateCenterPosition(currentIndex);
         new Handler().post(() -> listLangRecyclerView.scrollToPosition(currentIndex));
 

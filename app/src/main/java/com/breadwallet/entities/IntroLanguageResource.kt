@@ -7,8 +7,8 @@ class IntroLanguageResource {
     private val EUR: String = "EUR"
     private val RMB: String = "RMB"
     private val JPY: String = "JPY"
-    fun loadResources() : Array<IntroLanguage>{
-        return arrayOf<IntroLanguage> (
+    fun loadResources(): Array<IntroLanguage> {
+        return arrayOf<IntroLanguage>(
             IntroLanguage(
                 Language.ENGLISH.code,
                 Language.ENGLISH.title,
@@ -116,7 +116,7 @@ class IntroLanguageResource {
         )
     }
 
-    fun findIndex(language: Language): Int {
-        return loadResources().map { it.lang }.indexOf(language)
+    fun findLanguageIndex(language: Language): Int {
+        return loadResources().map { intro -> intro.lang }.indexOf(language)
     }
 }
