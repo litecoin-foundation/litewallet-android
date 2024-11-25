@@ -25,6 +25,11 @@ android {
         buildConfig true
         viewBinding true
     }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
     assetPacks = [":install_time_asset_pack",":fast_follow_asset_pack_01"]
     signingConfigs {
         release {
@@ -365,6 +370,10 @@ dependencies {
 
     // Get the latest version from https://mvnrepository.com/artifact/com.appsflyer/af-android-sdk
     implementation 'com.appsflyer:af-android-sdk:6.15.1'
+
+    //test
+    testImplementation "io.mockk:mockk:1.13.13"
+    testImplementation 'junit:junit:4.13.2'
 }
 
 
