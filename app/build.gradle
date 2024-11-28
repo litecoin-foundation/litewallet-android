@@ -83,8 +83,10 @@ android {
             // libraries Gradle should build and package with your APK.
             abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
         }
+        ndkVersion "25.1.8937393"
         externalNativeBuild {
             cmake {
+                version "3.22.1"
                 arguments "-DANDROID_TOOLCHAIN=clang"
             }
         }
