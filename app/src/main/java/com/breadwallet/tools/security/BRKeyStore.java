@@ -27,6 +27,7 @@ import com.breadwallet.tools.util.BytesUtil;
 import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.platform.entities.WalletInfo;
 import com.platform.tools.KVStoreManager;
 
@@ -36,6 +37,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyStore;
@@ -239,8 +241,11 @@ public class BRKeyStore {
             if (encryptedData != null) {
                 //new format data is present, good
                 byte[] iv = retrieveEncryptedData(context, alias_iv);
-                if (iv == null)
-                    throw new NullPointerException("iv is missing when data isn't: " + alias);
+                if (iv == null) {
+                    NullPointerException exception = new NullPointerException("iv is missing when data isn't: " + alias);
+                    FirebaseCrashlytics.getInstance().recordException(exception);
+                    return null;
+                }
                 Cipher outCipher;
 
                 outCipher = Cipher.getInstance(NEW_CIPHER_ALGORITHM);
@@ -251,8 +256,9 @@ public class BRKeyStore {
                         return decryptedData;
                     }
                 } catch (IllegalBlockSizeException | BadPaddingException e) {
-                    Timber.e(e);
-                    throw new RuntimeException("failed to decrypt data: " + e.getMessage());
+                    Timber.e(e, "failed to decrypt data: " + alias);
+                    FirebaseCrashlytics.getInstance().recordException(e);
+                    return null;
                 }
             }
             //no new format data, get the old one and migrate it to the new format
@@ -264,7 +270,9 @@ public class BRKeyStore {
                 if (!fileExists) {
                     return null;/* file also not there, fine then */
                 }
-                Timber.e(new BRKeystoreErrorException("file is present but the key is gone: " + alias));
+                BRKeystoreErrorException exception = new BRKeystoreErrorException("file is present but the key is gone: " + alias);
+                Timber.e(exception);
+                FirebaseCrashlytics.getInstance().recordException(exception);
                 return null;
             }
 
@@ -275,12 +283,15 @@ public class BRKeyStore {
                 removeAliasAndFiles(keyStore, alias, context);
                 //report it if one exists and not the other.
                 if (ivExists != aliasExists) {
-                    Timber.e(new BRKeystoreErrorException("alias or iv isn't on the disk: " + alias + ", aliasExists:" + aliasExists));
-                    return null;
+                    BRKeystoreErrorException exception = new BRKeystoreErrorException("alias or iv isn't on the disk: " + alias + ", aliasExists:" + aliasExists);
+                    Timber.e(exception);
+                    FirebaseCrashlytics.getInstance().recordException(exception);
                 } else {
-                    Timber.e(new BRKeystoreErrorException("!ivExists && !aliasExists: " + alias));
-                    return null;
+                    BRKeystoreErrorException exception = new BRKeystoreErrorException("!ivExists && !aliasExists: " + alias);
+                    Timber.e(exception);
+                    FirebaseCrashlytics.getInstance().recordException(exception);
                 }
+                return null;
             }
 
             byte[] iv = readBytesFromFile(getFilePath(alias_iv, context));
@@ -309,36 +320,14 @@ public class BRKeyStore {
             storeEncryptedData(context, encryptedData, alias);
             return result;
 
-        } catch (InvalidKeyException e) {
-            if (e instanceof UserNotAuthenticatedException) {
-                /** user not authenticated, ask the system for authentication */
-                Timber.e(e, "timber:_getData: showAuthenticationScreen: %s", alias);
-                showAuthenticationScreen(context, request_code, alias);
-                throw (UserNotAuthenticatedException) e;
-            } else {
-                Timber.e(e, "timber:_getData: InvalidKeyException");
-                if (e instanceof KeyPermanentlyInvalidatedException)
-                    showKeyInvalidated(context);
-                throw new UserNotAuthenticatedException(); //just to not go any further
-            }
-        } catch (IOException | CertificateException | KeyStoreException e) {
-            /** keyStore.load(null) threw the Exception, meaning the keystore is unavailable */
-            Timber.d(e, "_getData: keyStore.load(null) threw the Exception, meaning the keystore is unavailable");
-            if (e instanceof FileNotFoundException) {
-                Timber.e(new RuntimeException("the key is present but the phrase on the disk no", e), "_getData: File not found exception");
-                throw new RuntimeException(e.getMessage());
-            } else {
-                Timber.e(e);
-                throw new RuntimeException(e.getMessage());
-            }
-        } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException |
-                 InvalidAlgorithmParameterException e) {
-            /** if for any other reason the keystore fails, crash! */
-            Timber.e(e, "timber:getData: error");
-            throw new RuntimeException(e.getMessage());
-        } catch (BadPaddingException | IllegalBlockSizeException | NoSuchProviderException e) {
-            Timber.e(e);
-            throw new RuntimeException(e.getMessage());
+        } catch (UserNotAuthenticatedException e) {
+            Timber.e(e, "timber:_getData: showAuthenticationScreen: %s", alias);
+            showAuthenticationScreen(context, request_code, alias);
+            throw e;
+        } catch (GeneralSecurityException | IOException e) {
+            Timber.e(e, "timber:getData: error retrieving");
+            FirebaseCrashlytics.getInstance().recordException(e);
+            throw new IllegalStateException(e);
         } finally {
             lock.unlock();
         }
