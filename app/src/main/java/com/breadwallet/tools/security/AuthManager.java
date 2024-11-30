@@ -1,10 +1,7 @@
 package com.breadwallet.tools.security;
 
 import android.app.Activity;
-import android.app.KeyguardManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
@@ -14,17 +11,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.DisabledActivity;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
-import com.breadwallet.presenter.customviews.BRDialogView;
-import com.breadwallet.presenter.fragments.FragmentFingerprint;
-import com.breadwallet.presenter.fragments.FragmentPin;
-import com.breadwallet.presenter.interfaces.BRAuthCompletion;
-import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.threads.BRExecutor;
-import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
-
-import java.util.concurrent.TimeUnit;
 
 import timber.log.Timber;
 
@@ -173,89 +162,6 @@ public class AuthManager {
                 }
             }, 100);
         }
-    }
-
-    public void authPrompt(final Context context, String title, String message, boolean forcePin, boolean forceFingerprint, BRAuthCompletion completion) {
-        if (context == null || !(context instanceof Activity)) {
-            Timber.i("timber: authPrompt: context is null or not Activity: %s", context);
-            return;
-        }
-        KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Activity.KEYGUARD_SERVICE);
-
-        boolean useFingerPrint = isFingerPrintAvailableAndSetup(context);
-
-        if (BRKeyStore.getFailCount(context) != 0) {
-            useFingerPrint = false;
-        }
-        long passTime = BRKeyStore.getLastPinUsedTime(context);
-
-        if (passTime + TimeUnit.MILLISECONDS.convert(2, TimeUnit.DAYS) <= System.currentTimeMillis()) {
-            useFingerPrint = false;
-        }
-
-        if (forceFingerprint)
-            useFingerPrint = true;
-
-        if (forcePin)
-            useFingerPrint = false;
-
-        final FragmentActivity app = (FragmentActivity) context;
-
-        FragmentFingerprint fingerprintFragment;
-        FragmentPin breadPin;
-
-        if (keyguardManager.isKeyguardSecure()) {
-            if (useFingerPrint) {
-                fingerprintFragment = new FragmentFingerprint();
-                Bundle args = new Bundle();
-                args.putString("title", title);
-                args.putString("message", message);
-                fingerprintFragment.setArguments(args);
-                fingerprintFragment.setCompletion(completion);
-                androidx.fragment.app.FragmentTransaction transaction = app.getSupportFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
-                transaction.add(android.R.id.content, fingerprintFragment, FragmentFingerprint.class.getName());
-                transaction.addToBackStack(null);
-                if (!app.isDestroyed() && !app.isFinishing())
-                    transaction.commit();
-            } else {
-                breadPin = new FragmentPin();
-                Bundle args = new Bundle();
-                args.putString("title", title);
-                args.putString("message", message);
-                breadPin.setArguments(args);
-                breadPin.setCompletion(completion);
-                FragmentTransaction transaction = app.getSupportFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
-                transaction.add(android.R.id.content, breadPin, breadPin.getClass().getName());
-                transaction.addToBackStack(null);
-                if (!app.isDestroyed() && !app.isFinishing()) {
-                    transaction.commit();
-                }
-            }
-        } else {
-            BRDialog.showCustomDialog(app,
-                    "",
-                    app.getString(R.string.Prompts_NoScreenLock_body_android),
-                    app.getString(R.string.AccessibilityLabels_close),
-                    null,
-                    new BRDialogView.BROnClickListener() {
-                        @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            app.finish();
-                        }
-                    }, null, new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            app.finish();
-                        }
-                    }, 0);
-        }
-
-    }
-
-    public static boolean isFingerPrintAvailableAndSetup(Context context) {
-        return Utils.isFingerprintAvailable(context) && Utils.isFingerprintEnrolled(context);
     }
 
     public interface OnPinSuccess {

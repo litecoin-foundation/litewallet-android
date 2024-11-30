@@ -157,23 +157,6 @@ public class SecurityCenterActivity extends BRActivity {
             }
         }));
 
-        int resId = Utils.isFingerprintEnrolled(SecurityCenterActivity.this)
-                && BRSharedPrefs.getUseFingerprint(SecurityCenterActivity.this)
-                ? R.drawable.ic_check_mark_blue
-                : R.drawable.ic_check_mark_grey;
-
-        if (Utils.isFingerprintAvailable(this)) {
-            itemList.add(new BRSecurityCenterItem(getString(R.string.SecurityCenter_touchIdTitle_android), getString(R.string.SecurityCenter_touchIdDescription),
-                    resId, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(SecurityCenterActivity.this, FingerprintActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                }
-            }));
-        }
-
         boolean isPaperKeySet = BRSharedPrefs.getPhraseWroteDown(this);
         itemList.add(new BRSecurityCenterItem(getString(R.string.SecurityCenter_paperKeyTitle), getString(R.string.SecurityCenter_paperKeyDescription),
                 isPaperKeySet ? R.drawable.ic_check_mark_blue : R.drawable.ic_check_mark_grey, new View.OnClickListener() {

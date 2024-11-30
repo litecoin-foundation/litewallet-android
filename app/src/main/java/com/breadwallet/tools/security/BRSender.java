@@ -281,10 +281,11 @@ public class BRSender {
         }
 
         //successfully created the transaction, authenticate user
-        AuthManager.getInstance().authPrompt(ctx, "", message, forcePin, false, new BRAuthCompletion() {
+        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
-            public void onComplete() {
-                BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+            public void run() {
+                PostAuth.getInstance().onPublishTxAuth(ctx, false);
+                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {
                         PostAuth.getInstance().onPublishTxAuth(ctx, false);
@@ -298,13 +299,10 @@ public class BRSender {
 
                     }
                 });
-            }
 
-            @Override
-            public void onCancel() {
-                //nothing
             }
         });
+
     }
 
     private String createConfirmation(Context ctx, TransactionItem transactionItem) {
