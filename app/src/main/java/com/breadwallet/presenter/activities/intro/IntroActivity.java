@@ -82,8 +82,6 @@ public class IntroActivity extends BRActivity implements Serializable {
         int currentIndex = introLanguageResource.findLanguageIndex(currentLanguage);
         countryLanguageAdapter.updateCenterPosition(currentIndex);
         new Handler().post(() -> listLangRecyclerView.scrollToPosition(currentIndex));
-
-
         listLangRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -96,12 +94,12 @@ public class IntroActivity extends BRActivity implements Serializable {
                         countryLanguageAdapter.updateCenterPosition(centerPosition);
                         description.setText(countryLanguageAdapter.selectedDesc());
                         showDialogForItem(countryLanguageAdapter.selectedMessage());
+                        listLangRecyclerView.smoothScrollToPosition(centerPosition);
                     }
                 }
             }
 
         });
-
         listLangRecyclerView.setLayoutManager(layoutManager);
 
         setListeners();

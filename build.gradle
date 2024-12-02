@@ -10,7 +10,7 @@ buildscript {
         // in below line we are adding configurations to our project.
         configurations.all {
             // in below line we are adding strategy for each dependency and requesting the details
-            resolutionStrategy.eachDependency {DependencyResolveDetails details ->
+            resolutionStrategy.eachDependency {details ->
                 // on below line we are getting to see the details using requested.
                 def requested = details.requested
                 // in below line we are requesting a group.
@@ -29,7 +29,7 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        classpath 'com.google.gms:google-services:4.4.0'
+        classpath 'com.google.gms:google-services:4.4.2'
 
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
 
