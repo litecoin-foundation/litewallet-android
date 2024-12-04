@@ -14,10 +14,10 @@ jobs:
       tag: 2022.08.1
     steps:
       - checkout
-      - android/restore-gradle-cache
+      - android/restore_gradle_cache
       - android/run-tests:
           test-command: ./gradlew testLitewalletDebugUnitTest
-      - android/save-gradle-cache
+      - android/save_gradle_cache
       - run:
           name: Save test results
           command: |
