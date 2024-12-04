@@ -16,7 +16,7 @@ jobs:
       - checkout
       - android/restore_gradle_cache
       - android/run_tests:
-          test-command: ./gradlew testLitewalletDebugUnitTest
+          test_command: ./gradlew testLitewalletDebugUnitTest
       - android/save_gradle_cache
       - run:
           name: Save test results
