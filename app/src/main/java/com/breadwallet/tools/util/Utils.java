@@ -303,10 +303,13 @@ public class Utils {
     /// Description: 1715876807
     public static long tieredOpsFee(Context app, long sendAmount) {
 
+        double doubleRate = 83.000;
         double sendAmountDouble = new Double(String.valueOf(sendAmount));
         String usIso = Currency.getInstance(new Locale("en", "US")).getCurrencyCode();
         CurrencyEntity currency = CurrencyDataSource.getInstance(app).getCurrencyByIso(usIso);
-        double doubleRate = currency.rate;
+        if (currency != null) {
+            doubleRate = currency.rate;
+        }
         double usdInLTC = sendAmountDouble * doubleRate / 100_000_000.0;
         usdInLTC = Math.floor(usdInLTC * 100) / 100;
 
