@@ -15,7 +15,7 @@ jobs:
     steps:
       - checkout
       - android/restore_gradle_cache
-      - android/run-tests:
+      - android/run_tests:
           test-command: ./gradlew testLitewalletDebugUnitTest
       - android/save_gradle_cache
       - run:
