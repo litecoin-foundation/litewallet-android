@@ -10,8 +10,9 @@ orbs:
 jobs:
   unit-test:
     executor:
-      name: android/android-docker
-      tag: 2022.08.1
+      name: android/android_machine
+      resource_class: large
+      tag: default
     steps:
       - checkout
       - android/restore_gradle_cache
