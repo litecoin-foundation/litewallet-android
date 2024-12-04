@@ -25,8 +25,9 @@ jobs:
           name: "Initialize submodule"
           command: "git submodule init && git submodule update --init --recursive"
       - android/restore_gradle_cache
-      - android/run_tests:
-          test_command: ./gradlew testLitewalletDebugUnitTest
+      - run:
+          name: "Execute Unit Test"
+          command: ./gradlew testLitewalletDebugUnitTest
       - android/save_gradle_cache
       - run:
           name: Save test results
