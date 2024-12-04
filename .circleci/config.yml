@@ -20,7 +20,7 @@ jobs:
           command: "echo Hello, World! && ls"
       - run:
           name: "Default for gradle.properties"
-          command: "echo \"RELEASE_STORE_FILE=/\nRELEASE_STORE_PASSWORD=\nRELEASE_KEY_ALIAS=\nRELEASE_KEY_PASSWORD=\" >> gradle.properties"
+          command: "echo \"RELEASE_STORE_FILE=/\nRELEASE_STORE_PASSWORD=\nRELEASE_KEY_ALIAS=\nRELEASE_KEY_PASSWORD=\nandroid.useAndroidX=true\nandroid.enableJetifier=true\" >> gradle.properties && ls && cat gradle.properties"
       - android/restore_gradle_cache
       - android/run_tests:
           test_command: ./gradlew testLitewalletDebugUnitTest
