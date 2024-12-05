@@ -1,30 +1,7 @@
-package com.litewallet.tools.util
+package com.litewallet.tools.database
 
-import com.breadwallet.tools.util.BRConstants
-import org.junit.Assert
-import org.junit.Assert.assertSame
-
-import io.mockk.coVerify
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.spyk
-import io.mockk.verify
-import io.mockk.verifyOrder
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Test
-
-//TODO: migrate from [com.litewallet.analytics.ConstantsTests]
-class BRConstantsTest {
-
-    @Test
-    fun `validate Litecoin symbol constant`() {
-        assertSame(BRConstants.litecoinLowercase,"ł")
-        assertSame(BRConstants.litecoinUppercase,"Ł")
-    }
+class DatabaseTests {
 }
-
 
 //package com.litewallet.analytics;
 //import androidx.test.ext.junit.runners.AndroidJUnit4;

@@ -14,7 +14,7 @@ import org.junit.Test
 class ExampleTest {
 
     @Test
-    fun `add invoked with valid mocked values, should return correct value as expected`() {
+    fun `add invoked with valid mocked values , should return correct value as expected`() {
         val dependencyOne = mockk<DependencyOne>()
         val dependencyTwo = mockk<DependencyTwo>()
 
