@@ -327,7 +327,7 @@ public class BRKeyStore {
         } catch (GeneralSecurityException | IOException e) {
             Timber.e(e, "timber:getData: error retrieving");
             FirebaseCrashlytics.getInstance().recordException(e);
-            throw new IllegalStateException(e);
+            return null;
         } finally {
             lock.unlock();
         }
