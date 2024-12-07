@@ -31,29 +31,30 @@ android {
         }
     }
     assetPacks = [":install_time_asset_pack",":fast_follow_asset_pack_01"]
-    signingConfigs {
-        release {
-            storeFile file(RELEASE_STORE_FILE)
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
-        }
-    }
 
-    Properties props = new Properties()
-    def propFile = file('../release.properties')
-    if (propFile.canRead()) {
-        props.load(new FileInputStream(propFile))
+   signingConfigs {
+       release {
+           storeFile file(RELEASE_STORE_FILE)
+           storePassword RELEASE_STORE_PASSWORD
+           keyAlias RELEASE_KEY_ALIAS
+           keyPassword RELEASE_KEY_PASSWORD
+       }
+   }
 
-        if (props != null && props.containsKey('storeFile') && props.containsKey('storePassword') &&
-                props.containsKey('keyAlias') && props.containsKey('keyPassword')) {
+   Properties props = new Properties()
+   def propFile = file('../release.properties')
+   if (propFile.canRead()) {
+       props.load(new FileInputStream(propFile))
 
-            android.signingConfigs.release.storeFile = file(props['storeFile'])
-            android.signingConfigs.release.storePassword = props['storePassword']
-            android.signingConfigs.release.keyAlias = props['keyAlias']
-            android.signingConfigs.release.keyPassword = props['keyPassword']
-        }
-    }
+       if (props != null && props.containsKey('storeFile') && props.containsKey('storePassword') &&
+               props.containsKey('keyAlias') && props.containsKey('keyPassword')) {
+
+           android.signingConfigs.release.storeFile = file(props['storeFile'])
+           android.signingConfigs.release.storePassword = props['storePassword']
+           android.signingConfigs.release.keyAlias = props['keyAlias']
+           android.signingConfigs.release.keyPassword = props['keyPassword']
+       }
+   }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
