@@ -1,7 +1,8 @@
-package com.breadwallet.tools.util
+package com.litewallet.tools.util
 
 import android.content.Context
 import com.breadwallet.entities.Language
+import com.breadwallet.tools.util.LocaleHelper
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 
 import java.net.URI;
 
+@Deprecated
 @RunWith(AndroidJUnit4.class)
 public class ConstantsTests {
     public static final String TAG = ConstantsTests.class.getName();
