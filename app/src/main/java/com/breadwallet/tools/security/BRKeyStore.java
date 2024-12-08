@@ -17,6 +17,7 @@ import android.text.style.ClickableSpan;
 import android.util.Base64;
 import android.view.View;
 
+import com.breadwallet.BreadApp;
 import com.breadwallet.R;
 import com.breadwallet.exceptions.BRKeystoreErrorException;
 import com.breadwallet.presenter.customviews.BRDialogView;
@@ -65,7 +66,7 @@ import timber.log.Timber;
 
 public class BRKeyStore {
 
-    private static final String KEY_STORE_PREFS_NAME = "keyStorePrefs";
+    public static final String KEY_STORE_PREFS_NAME = "keyStorePrefs";
     public static final String ANDROID_KEY_STORE = "AndroidKeyStore";
 
     public static final String CIPHER_ALGORITHM = "AES/CBC/PKCS7Padding";
@@ -228,6 +229,27 @@ public class BRKeyStore {
     private synchronized static byte[] _getData(final Context context, String alias, String alias_file, String alias_iv, int request_code)
             throws UserNotAuthenticatedException {
         validateGet(alias, alias_file, alias_iv);//validate entries
+
+        try {
+            lock.lock();
+            return BreadApp.keyStoreManager.getDataBlocking(new AliasObject(alias, alias_file, alias_iv));
+        } catch (UserNotAuthenticatedException e) {
+            Timber.e(e, "timber:_getData: showAuthenticationScreen: %s", alias);
+            showAuthenticationScreen(context, request_code, alias);
+            throw e;
+        } catch (Exception e) {
+            Timber.e(e, "timber:getData: error retrieving");
+            FirebaseCrashlytics.getInstance().recordException(e);
+            return null;
+        } finally {
+            lock.unlock();
+        }
+
+
+//        return _getDataLegacy(context, alias, alias_file, alias_iv, request_code);
+    }
+
+    private static byte[] _getDataLegacy(Context context, String alias, String alias_file, String alias_iv, int request_code) throws UserNotAuthenticatedException {
         KeyStore keyStore;
 
         try {
@@ -268,7 +290,7 @@ public class BRKeyStore {
                 /* no such key, the key is just simply not there */
                 boolean fileExists = new File(encryptedDataFilePath).exists();
                 if (!fileExists) {
-                    return null;/* file also not there, fine then */
+                    return null;
                 }
                 BRKeystoreErrorException exception = new BRKeystoreErrorException("file is present but the key is gone: " + alias);
                 Timber.e(exception);
