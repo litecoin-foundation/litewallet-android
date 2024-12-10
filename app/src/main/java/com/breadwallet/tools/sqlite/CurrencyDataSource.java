@@ -16,7 +16,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import timber.log.Timber;
 
 public class CurrencyDataSource implements BRDataSourceInterface {
-    private static final String TAG = CurrencyDataSource.class.getName();
     private SQLiteDatabase database;
     private final BRSQLiteHelper dbHelper;
 
