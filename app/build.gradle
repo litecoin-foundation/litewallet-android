@@ -323,6 +323,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-crashlytics-ndk'
     implementation('com.google.firebase:firebase-iid:21.1.0')
+    implementation("com.google.firebase:firebase-config-ktx")
 
     // push notifications
     implementation 'com.google.firebase:firebase-messaging:23.4.0'
