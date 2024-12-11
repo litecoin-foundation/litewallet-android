@@ -14,6 +14,9 @@ interface RemoteConfigSource {
 
     companion object {
         const val KEY_FEATURE_MENU_HIDDEN_EXAMPLE = "feature_menu_hidden_example"
+        const val KEY_API_BASEURL_PROD_NEW_ENABLED = "key_api_baseurl_prod_new_enabled"
+        const val KEY_API_BASEURL_DEV_NEW_ENABLED = "key_api_baseurl_dev_new_enabled"
+        const val KEY_KEYSTORE_MANAGER_ENABLED = "key_keystore_manager_enabled"
     }
 
     fun initialize()

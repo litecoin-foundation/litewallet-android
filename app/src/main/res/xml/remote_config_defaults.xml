@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <defaults>
   <entry>
+    <key>key_api_baseurl_prod_new_enabled</key>
+    <value>false</value>
+  </entry>
+  <entry>
+    <key>key_api_baseurl_dev_new_enabled</key>
+    <value>false</value>
+  </entry>
+  <entry>
+    <key>key_keystore_manager_enabled</key>
+    <value>false</value>
+  </entry>
+  <entry>
     <key>update_debounce_interval</key>
     <value>3.0</value>
   </entry>
@@ -10,6 +22,6 @@
   </entry>
   <entry>
     <key>feature_menu_hidden_example</key>
-    <value>{"enabled":false,"title":"litewallet-android repository","url":"https://github.com/litecoin-foundation/litewallet-android"}</value>
+    <value>{"enabled":true,"title":"litewallet-android repository","url":"https://github.com/litecoin-foundation/litewallet-android"}</value>
   </entry>
 </defaults>
