@@ -163,7 +163,7 @@ public class BRApiManager {
 
     // createGETRequestURL
     // Creates the params and headers to make a GET Request
-    private static String createGETRequestURL(Context app, String myURL) {
+    private String createGETRequestURL(Context app, String myURL) {
         Request request = new Request.Builder()
                 .url(myURL)
                 .header("Content-Type", "application/json")
