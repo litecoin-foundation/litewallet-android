@@ -101,4 +101,22 @@ class BRApiManagerTest {
         assertEquals("AED", jsonAED.optString("code"))
         assertEquals("United Arab Emirates Dirham", jsonAED.optString("name"))
     }
+
+    @Test
+    fun `invoke getBaseUrlProd with KEY_API_BASEURL_PROD_NEW_ENABLED true, then should return new baseUrlProd`() {
+        every { remoteConfigSource.getBoolean(RemoteConfigSource.KEY_API_BASEURL_PROD_NEW_ENABLED) } returns true
+
+        val actual = apiManager.baseUrlProd
+
+        assertEquals(BRConstants.LW_API_HOST_NEW, actual)
+    }
+
+    @Test
+    fun `invoke getBaseUrlProd with KEY_API_BASEURL_PROD_NEW_ENABLED false, then should return old baseUrlProd`() {
+        every { remoteConfigSource.getBoolean(RemoteConfigSource.KEY_API_BASEURL_PROD_NEW_ENABLED) } returns false
+
+        val actual = apiManager.baseUrlProd
+
+        assertEquals(BRConstants.LW_API_HOST, actual)
+    }
 }

@@ -195,4 +195,8 @@ public class BRApiManager {
         }
         return response;
     }
+
+    public String getBaseUrlProd() {
+        return remoteConfigSource.getBoolean(RemoteConfigSource.KEY_API_BASEURL_PROD_NEW_ENABLED) ? LW_API_HOST_NEW : LW_API_HOST;
+    }
 }
