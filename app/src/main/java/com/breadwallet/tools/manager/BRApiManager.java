@@ -128,14 +128,13 @@ public class BRApiManager {
     }
 
     public JSONArray fetchRates(Activity activity) {
-        String baseUrlProd = remoteConfigSource.getBoolean(RemoteConfigSource.KEY_API_BASEURL_PROD_NEW_ENABLED) ? LW_API_HOST_NEW : LW_API_HOST;
-        String jsonString = createGETRequestURL(activity, baseUrlProd + "/api/v1/rates");
+        String jsonString = createGETRequestURL(activity, getBaseUrlProd() + "/api/v1/rates");
         JSONArray jsonArray = null;
         if (jsonString == null) return null;
         try {
             jsonArray = new JSONArray(jsonString);
             // DEV Uncomment to view values
-//            Timber.d("timber: baseUrlProd: %s", baseUrlProd);
+//            Timber.d("timber: baseUrlProd: %s", getBaseUrlProd());
 //            Timber.d("timber: JSON %s",jsonArray.toString());
 
         } catch (JSONException ex) {
