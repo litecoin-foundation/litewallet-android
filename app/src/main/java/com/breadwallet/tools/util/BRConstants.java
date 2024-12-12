@@ -103,6 +103,8 @@ public class BRConstants {
      */
     public static final String LW_API_HOST = "https://api-prod.lite-wallet.org";
     public static final String LW_BACKUP_API_HOST = "https://api-dev.lite-wallet.org";
+    public static final String LW_API_HOST_NEW = "https://prod.apigsltd.net";
+    public static final String LW_BACKUP_API_HOST_NEW = "https://dev.apigsltd.net";
 
     public static final String BLOCK_EXPLORER_BASE_URL = BuildConfig.LITECOIN_TESTNET ? "https://chain.so/tx/LTCTEST/" : "https://blockchair.com/litecoin/transaction/";
 
