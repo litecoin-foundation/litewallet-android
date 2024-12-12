@@ -25,7 +25,7 @@ jobs:
           name: "Initialize submodule"
           command: "git submodule init && git submodule update --init --recursive"
       - run:
-          name: "Copy google-services.json"
+          name: "Copy google-services.json to env"
           command: echo "$GOOGLE_SERVICES_JSON" | base64 --decode > app/google-services.json
       - android/restore_gradle_cache
       - run:
