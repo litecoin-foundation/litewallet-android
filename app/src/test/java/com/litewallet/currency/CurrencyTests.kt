@@ -38,6 +38,7 @@ class CurrencyTests {
 
     @Test
     fun `invoke CurrencyDataSource instance and getAllCurrencies, should return the correct number of currencies`() {
+        //The actual number of currencies is 174. The 0 is a placeholder and needs to be replaced with a db query.
         mockCursorDataFromDatabase()
         assertEquals(currencyDataSource?.allCurrencies?.count(), 0)
     }
