@@ -1,11 +1,22 @@
-package com.breadwallet.tools.util
+package com.litewallet.tools.util
 
 import android.content.Context
 import com.breadwallet.entities.Language
+import com.breadwallet.tools.util.LocaleHelper
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+
+import io.mockk.coVerify
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.spyk
+import io.mockk.verify
+import io.mockk.verifyOrder
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class LocaleHelperTest {

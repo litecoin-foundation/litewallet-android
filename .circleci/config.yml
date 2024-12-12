@@ -2,25 +2,51 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  android: circleci/android@3.0.2
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  unit-test:
+    executor:
+      name: android/android_machine
+      resource_class: large
+      tag: default
     steps:
       - checkout
       - run:
           name: "Say hello"
-          command: "echo Hello, World!"
+          command: "echo Hello, World! && ls"
+      - run:
+          name: "Default for gradle.properties"
+          command: "echo \"RELEASE_STORE_FILE=/\nRELEASE_STORE_PASSWORD=\nRELEASE_KEY_ALIAS=\nRELEASE_KEY_PASSWORD=\nandroid.useAndroidX=true\nandroid.enableJetifier=true\" >> gradle.properties && ls && cat gradle.properties"
+      - run:
+          name: "Initialize submodule"
+          command: "git submodule init && git submodule update --init --recursive"
+      - run:
+          name: "Copy google-services.json"
+          command: echo "$GOOGLE_SERVICES_JSON" | base64 --decode > app/google-services.json
+      - android/restore_gradle_cache
+      - run:
+          name: "Execute Unit Test"
+          command: ./gradlew testLitewalletDebugUnitTest
+      - android/save_gradle_cache
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/test-results
+      - store_artifacts:
+          path: ~/test-results/junit
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  test-and-build:
     jobs:
-      - say-hello
+      - unit-test
