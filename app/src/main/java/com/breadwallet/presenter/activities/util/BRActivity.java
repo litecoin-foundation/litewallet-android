@@ -139,7 +139,7 @@ public class BRActivity extends FragmentActivity {
     public static void init(Activity app) {
         InternetManager.getInstance();
         if (!(app instanceof IntroActivity || app instanceof RecoverActivity || app instanceof WriteDownActivity))
-            BRApiManager.getInstance().startTimer(app);
+            BreadApp.module.getApiManager().startTimer(app);
         //show wallet locked if it is
         if (!ActivityUTILS.isAppSafe(app))
             if (AuthManager.getInstance().isWalletDisabled(app))

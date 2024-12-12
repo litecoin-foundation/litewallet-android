@@ -33,6 +33,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import timber.log.Timber;
 import com.appsflyer.AppsFlyerLib;
+import com.litewallet.di.Module;
 
 import org.json.JSONException;
 
@@ -45,6 +46,8 @@ public class BreadApp extends Application {
     public static long backgroundedTime;
     private static Activity currentActivity;
 
+    public static Module module;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -52,10 +55,14 @@ public class BreadApp extends Application {
         /// DEV:  Top placement requirement.
         boolean enableCrashlytics = !Utils.isEmulatorOrDebug(this);
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
+
+        module = new Module();
+        module.getRemoteConfigSource().initialize();
+
         AnalyticsManager.init(this);
         AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
 
-        if(BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
+        if (BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
         DISPLAY_HEIGHT_PX = Resources.getSystem().getDisplayMetrics().heightPixels;
 
         String afID = Utils.fetchPartnerKey(this, PartnerNames.AFDEVID);

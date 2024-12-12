@@ -1,5 +1,7 @@
 package com.breadwallet.presenter.fragments;
 
+import static com.litewallet.data.source.RemoteConfigSource.KEY_FEATURE_MENU_HIDDEN_EXAMPLE;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -22,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.breadwallet.BreadApp;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.settings.SecurityCenterActivity;
 import com.breadwallet.presenter.activities.settings.SettingsActivity;
@@ -30,10 +33,15 @@ import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.SlideDetector;
 import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.BRConstants;
-import com.platform.APIClient;
+import com.litewallet.data.source.RemoteConfigSource;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import timber.log.Timber;
 
 public class FragmentMenu extends Fragment {
 
@@ -83,6 +91,26 @@ public class FragmentMenu extends Fragment {
             final Activity from = getActivity();
             BRAnimator.startBreadActivity(from, true);
         }));
+
+        /**
+         * remote config example here
+         */
+        try {
+            RemoteConfigSource remoteConfigSource = BreadApp.module.getRemoteConfigSource();
+            String string = remoteConfigSource.getString(KEY_FEATURE_MENU_HIDDEN_EXAMPLE);
+            Timber.d("timber: [RemoteConfig] -> " + string);
+            JSONObject configValue = new JSONObject(string);
+            if (configValue.optBoolean("enabled", false)) {
+                itemList.add(new BRMenuItem(configValue.optString("title"), R.drawable.litewalletlogo, V -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(configValue.optString("url")));
+                    startActivity(intent);
+                }));
+            }
+        } catch (Exception e) {
+            Timber.d("timber: [RemoteConfig] -> "+e.getLocalizedMessage());
+            Timber.d(e);
+        }
 
         /* Close button*/
         rootView.findViewById(R.id.close_button).setOnClickListener(v -> {
@@ -149,7 +177,8 @@ public class FragmentMenu extends Fragment {
 
     private void closeMenu() {
         BRAnimator.animateBackgroundDim(background, true);
-        BRAnimator.animateSignalSlide(signalLayout, true, () -> {});
+        BRAnimator.animateSignalSlide(signalLayout, true, () -> {
+        });
         if (getActivity() != null && !getActivity().isDestroyed() && !getActivity().isFinishing()) {
             getActivity().getFragmentManager().popBackStack();
         }

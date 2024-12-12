@@ -30,6 +30,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.breadwallet.BreadApp;
 import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.tools.animation.BRAnimator;
@@ -135,12 +136,13 @@ public class FragmentBuy extends Fragment {
         return rootView;
     }
 
-        public static String url(Context context, Partner partner, String currency) {
+    public static String url(Context context, Partner partner, String currency) {
         String walletAddress = BRSharedPrefs.getReceiveAddress(context);
         Long timestamp = new Date().getTime();
         String uuid = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         String prefix = partner == Partner.MOONPAY ? "/moonpay/buy" : "";
-        return String.format(LW_API_HOST + prefix + "?address=%s&code=%s&idate=%s&uid=%s", walletAddress, currency, timestamp, uuid);
+        String baseUrl = BreadApp.module.getApiManager().getBaseUrlProd();
+        return String.format(baseUrl + prefix + "?address=%s&code=%s&idate=%s&uid=%s", walletAddress, currency, timestamp, uuid);
     }
 
     private void closePayment() {

@@ -1,16 +1,20 @@
 package com.breadwallet.tools.manager;
 
+import static com.breadwallet.tools.util.BRConstants.LW_API_HOST;
+import static com.breadwallet.tools.util.BRConstants.LW_API_HOST_NEW;
+import static com.breadwallet.tools.util.BRConstants.LW_BACKUP_API_HOST;
+import static com.breadwallet.tools.util.BRConstants.LW_BACKUP_API_HOST_NEW;
+import static com.breadwallet.tools.util.BRConstants._20230113_BAC;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 
-import com.breadwallet.BreadApp;
 import com.breadwallet.presenter.entities.CurrencyEntity;
 import com.breadwallet.tools.sqlite.CurrencyDataSource;
 import com.breadwallet.tools.threads.BRExecutor;
-
-import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
+import com.litewallet.data.source.RemoteConfigSource;
 import com.platform.APIClient;
 
 import org.json.JSONArray;
@@ -34,27 +38,18 @@ import okhttp3.Request;
 import okhttp3.Response;
 import timber.log.Timber;
 
-import static com.breadwallet.tools.util.BRConstants.*;
-import static com.breadwallet.tools.util.BRConstants.LW_API_HOST;
-import static com.breadwallet.tools.util.BRConstants.LW_BACKUP_API_HOST;
-
 public class BRApiManager {
-    private static BRApiManager instance;
     private Timer timer;
 
     private TimerTask timerTask;
 
     private Handler handler;
 
-    private BRApiManager() {
-        handler = new Handler();
-    }
+    private RemoteConfigSource remoteConfigSource;
 
-    public static BRApiManager getInstance() {
-        if (instance == null) {
-            instance = new BRApiManager();
-        }
-        return instance;
+    public BRApiManager(RemoteConfigSource remoteConfigSource) {
+        this.remoteConfigSource = remoteConfigSource;
+        this.handler = new Handler();
     }
 
     private Set<CurrencyEntity> getCurrencies(Activity context) {
@@ -132,14 +127,15 @@ public class BRApiManager {
         }
     }
 
-    public static JSONArray fetchRates(Activity activity) {
-        String jsonString = createGETRequestURL(activity,  LW_API_HOST + "/api/v1/rates");
+    public JSONArray fetchRates(Activity activity) {
+        String jsonString = createGETRequestURL(activity, getBaseUrlProd() + "/api/v1/rates");
         JSONArray jsonArray = null;
         if (jsonString == null) return null;
         try {
             jsonArray = new JSONArray(jsonString);
             // DEV Uncomment to view values
-            // Timber.d("timber: JSON %s",jsonArray.toString());
+//            Timber.d("timber: baseUrlProd: %s", getBaseUrlProd());
+//            Timber.d("timber: JSON %s",jsonArray.toString());
 
         } catch (JSONException ex) {
             Timber.e(ex);
@@ -147,8 +143,9 @@ public class BRApiManager {
         return jsonArray == null ? backupFetchRates(activity) : jsonArray;
     }
 
-    public static JSONArray backupFetchRates(Activity activity) {
-        String jsonString = createGETRequestURL(activity, LW_BACKUP_API_HOST + "/api/v1/rates");
+    public JSONArray backupFetchRates(Activity activity) {
+        String baseUrlDev = remoteConfigSource.getBoolean(RemoteConfigSource.KEY_API_BASEURL_DEV_NEW_ENABLED) ? LW_BACKUP_API_HOST_NEW : LW_BACKUP_API_HOST;
+        String jsonString = createGETRequestURL(activity, baseUrlDev + "/api/v1/rates");
 
         AnalyticsManager.logCustomEvent(_20230113_BAC);
 
@@ -165,7 +162,7 @@ public class BRApiManager {
 
     // createGETRequestURL
     // Creates the params and headers to make a GET Request
-    private static String createGETRequestURL(Context app, String myURL) {
+    private String createGETRequestURL(Context app, String myURL) {
         Request request = new Request.Builder()
                 .url(myURL)
                 .header("Content-Type", "application/json")
@@ -196,5 +193,9 @@ public class BRApiManager {
             if (resp != null) resp.close();
         }
         return response;
+    }
+
+    public String getBaseUrlProd() {
+        return remoteConfigSource.getBoolean(RemoteConfigSource.KEY_API_BASEURL_PROD_NEW_ENABLED) ? LW_API_HOST_NEW : LW_API_HOST;
     }
 }
