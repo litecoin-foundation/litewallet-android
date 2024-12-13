@@ -34,6 +34,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import timber.log.Timber;
 import com.appsflyer.AppsFlyerLib;
 import com.litewallet.di.Module;
+import com.litewallet.notification.NotificationHandlerKt;
 
 import org.json.JSONException;
 
@@ -58,6 +59,8 @@ public class BreadApp extends Application {
 
         module = new Module();
         module.getRemoteConfigSource().initialize();
+
+        NotificationHandlerKt.setupNotificationChannels(this);
 
         AnalyticsManager.init(this);
         AnalyticsManager.logCustomEvent(BRConstants._20191105_AL);
