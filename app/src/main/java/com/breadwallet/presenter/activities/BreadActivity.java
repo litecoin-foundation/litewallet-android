@@ -1,5 +1,6 @@
 package com.breadwallet.presenter.activities;
 
+import android.Manifest;
 import android.animation.LayoutTransition;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.TelephonyManager;
@@ -16,11 +18,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.app.ActivityCompat;
 import androidx.transition.ChangeBounds;
 import androidx.transition.Fade;
 import androidx.transition.TransitionManager;
@@ -56,10 +63,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
+import com.litewallet.util.PermissionUtil;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -94,6 +100,13 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         return app;
     }
 
+    private final ActivityResultLauncher<String> requestNotificationPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    Toast.makeText(app, R.string.permission_notification_granted, Toast.LENGTH_SHORT).show();
+                }
+            });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +138,32 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         updateUI();
         bottomNav.setSelectedItemId(R.id.nav_history);
 
+        setupNotificationPermission();
         showInAppReviewDialogIfNeeded();
+    }
+
+    private void setupNotificationPermission() {
+        //https://developer.android.com/develop/ui/views/notifications/notification-permission
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            return;
+        }
+
+        if (!PermissionUtil.hasPermission(this, Manifest.permission.POST_NOTIFICATIONS)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.POST_NOTIFICATIONS)) {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.permission_info)
+                        .setMessage(R.string.please_grant_notification_permission)
+                        .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                            dialog.dismiss();
+                        })
+                        .setPositiveButton(R.string.ok, (dialog, which) -> {
+                            PermissionUtil.requestPermission(requestNotificationPermissionLauncher, Manifest.permission.POST_NOTIFICATIONS);
+                        })
+                        .show();
+            } else {
+                PermissionUtil.requestPermission(requestNotificationPermissionLauncher, Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
 
     private void finishActivities(BRActivity... activities) {
@@ -216,7 +254,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         } else if (menuItemId == R.id.nav_buy) {
             ExtensionKt.replaceFragment(BreadActivity.this, new BuyTabFragment(), false, R.id.fragment_container);
         }
-            return true;
+        return true;
     }
 
     private void swap() {
@@ -471,8 +509,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                     SyncManager.getInstance().startSyncingProgressThread(app);
                 }
             });
-        }
-        else {
+        } else {
             if (barFlipper != null) {
                 addNotificationBar();
             }
