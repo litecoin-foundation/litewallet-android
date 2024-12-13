@@ -111,6 +111,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bread);
+        AnalyticsManager.logCustomEvent(BRConstants._HOME_OPEN);
 
         app = this;
         getWindowManager().getDefaultDisplay().getSize(screenParametersPoint);

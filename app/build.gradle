@@ -327,7 +327,7 @@ dependencies {
     implementation("com.google.firebase:firebase-config-ktx")
 
     // push notifications
-    implementation 'com.google.firebase:firebase-messaging:23.4.0'
+    implementation("com.google.firebase:firebase-messaging")
     implementation("com.google.firebase:firebase-inappmessaging-display")
 
 
