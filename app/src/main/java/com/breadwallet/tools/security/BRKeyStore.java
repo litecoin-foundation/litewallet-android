@@ -29,6 +29,7 @@ import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.litewallet.data.source.RemoteConfigSource;
 import com.platform.entities.WalletInfo;
 import com.platform.tools.KVStoreManager;
 
@@ -230,23 +231,25 @@ public class BRKeyStore {
             throws UserNotAuthenticatedException {
         validateGet(alias, alias_file, alias_iv);//validate entries
 
-        try {
-            lock.lock();
-            return BreadApp.keyStoreManager.getDataBlocking(new AliasObject(alias, alias_file, alias_iv));
-        } catch (UserNotAuthenticatedException e) {
-            Timber.e(e, "timber:_getData: showAuthenticationScreen: %s", alias);
-            showAuthenticationScreen(context, request_code, alias);
-            throw e;
-        } catch (Exception e) {
-            Timber.e(e, "timber:getData: error retrieving");
-            FirebaseCrashlytics.getInstance().recordException(e);
-            return null;
-        } finally {
-            lock.unlock();
+        boolean newKeyStoreManagerEnabled = BreadApp.module.getRemoteConfigSource().getBoolean(RemoteConfigSource.KEY_KEYSTORE_MANAGER_ENABLED);
+        if (newKeyStoreManagerEnabled) {
+            try {
+                lock.lock();
+                return BreadApp.keyStoreManager.getDataBlocking(new AliasObject(alias, alias_file, alias_iv));
+            } catch (UserNotAuthenticatedException e) {
+                Timber.e(e, "timber:_getData: showAuthenticationScreen: %s", alias);
+                showAuthenticationScreen(context, request_code, alias);
+                throw e;
+            } catch (Exception e) {
+                Timber.e(e, "timber:getData: error retrieving");
+                FirebaseCrashlytics.getInstance().recordException(e);
+                return null;
+            } finally {
+                lock.unlock();
+            }
+        } else {
+            return _getDataLegacy(context, alias, alias_file, alias_iv, request_code);
         }
-
-
-//        return _getDataLegacy(context, alias, alias_file, alias_iv, request_code);
     }
 
     private static byte[] _getDataLegacy(Context context, String alias, String alias_file, String alias_iv, int request_code) throws UserNotAuthenticatedException {
