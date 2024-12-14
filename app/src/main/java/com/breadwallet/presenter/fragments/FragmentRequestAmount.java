@@ -236,7 +236,7 @@ public class FragmentRequestAmount extends Fragment {
             @Override
             public void run() {
                 boolean success = BRWalletManager.refreshAddress(getActivity());
-                if (!success) throw new RuntimeException("failed to retrieve address");
+                if (!success) close();
 
                 receiveAddress = BRSharedPrefs.getReceiveAddress(getActivity());
 
