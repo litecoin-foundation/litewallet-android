@@ -374,7 +374,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     // Get the latest version from https://mvnrepository.com/artifact/com.appsflyer/af-android-sdk
-    implementation 'com.appsflyer:af-android-sdk:6.15.1'
+    implementation("com.appsflyer:af-android-sdk:6.15.2")
+    implementation("com.android.installreferrer:installreferrer:2.2")
 
     //test
     testImplementation "io.mockk:mockk:1.13.13"

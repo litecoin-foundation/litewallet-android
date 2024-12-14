@@ -66,8 +66,11 @@ public class BreadApp extends Application {
         DISPLAY_HEIGHT_PX = Resources.getSystem().getDisplayMetrics().heightPixels;
 
         String afID = Utils.fetchPartnerKey(this, PartnerNames.AFDEVID);
-        AppsFlyerLib.getInstance().init(afID, null, this);
-        AppsFlyerLib.getInstance().start(this);
+        AppsFlyerLib appsFlyerLib = AppsFlyerLib.getInstance();
+        appsFlyerLib.init(afID, null, this);
+        appsFlyerLib.setDebugLog(BuildConfig.DEBUG);
+        appsFlyerLib.setCollectAndroidID(true);
+        appsFlyerLib.start(this);
     }
     public static Context getBreadContext() {
         return currentActivity == null ? SyncReceiver.app : currentActivity;
