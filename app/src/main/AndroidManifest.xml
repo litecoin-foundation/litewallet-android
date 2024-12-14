@@ -219,7 +219,7 @@
             android:label="SyncReceiver" />
 
         <service
-            android:name=".tools.util.PushNotificationService"
+            android:name="com.litewallet.notification.LitewalletMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
