@@ -26,6 +26,7 @@ import com.breadwallet.tools.util.BRCurrency;
 
 import java.math.BigDecimal;
 import java.util.Currency;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -181,7 +182,7 @@ public class DisplayCurrencyActivity extends BRActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            final int tmp = BRSharedPrefs.getCurrencyListPosition(mContext);
+//            final int tmp = BRSharedPrefs.getCurrencyListPosition(mContext);
 
             if (convertView == null) {
                 // inflate the layout
@@ -190,6 +191,7 @@ public class DisplayCurrencyActivity extends BRActivity {
             }
             // get the TextView and then set the text (item name) and tag (item ID) values
             textViewItem = convertView.findViewById(R.id.currency_item_text);
+            String isoCached = BRSharedPrefs.getIsoSymbol(mContext);
             String iso = getItem(position).code;
             Currency c = null;
             try {
@@ -198,9 +200,11 @@ public class DisplayCurrencyActivity extends BRActivity {
             }
             textViewItem.setText(c == null ? iso : String.format("%s (%s)", iso, c.getSymbol()));
             ImageView checkMark = convertView.findViewById(R.id.currency_checkmark);
-            Timber.d( "Value of TMP %s", tmp);
-            Timber.d( "Value of position %s", position);
-            if (position == tmp) {
+
+            Timber.d("timber: isoCached: %s", isoCached);
+            Timber.d("timber: item iso: %s", iso);
+
+            if (Objects.equals(iso, isoCached)) {
                 checkMark.setVisibility(View.VISIBLE);
             } else {
                 checkMark.setVisibility(View.GONE);
