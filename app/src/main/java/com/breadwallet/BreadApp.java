@@ -5,6 +5,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.appsflyer.AppsFlyerLib;
+
 import androidx.annotation.NonNull;
 
 import com.appsflyer.AppsFlyerLib;
@@ -18,6 +20,10 @@ import com.breadwallet.tools.util.Utils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.litewallet.di.Module;
+import com.loafwallet.util.cryptography.KeyStoreKeyGenerator;
+import com.loafwallet.util.cryptography.KeyStoreManager;
+
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.litewallet.di.Module;
 import com.litewallet.notification.NotificationHandlerKt;
@@ -40,6 +46,7 @@ public class BreadApp extends Application {
     private static Activity currentActivity;
 
     public static Module module;
+    public static KeyStoreManager keyStoreManager;
 
     @Override
     public void onCreate() {
@@ -51,6 +58,7 @@ public class BreadApp extends Application {
 
         module = new Module();
         module.getRemoteConfigSource().initialize();
+        keyStoreManager = new KeyStoreManager(this, new KeyStoreKeyGenerator.Impl());
 
         NotificationHandlerKt.setupNotificationChannels(this);
 
