@@ -776,4 +776,13 @@
   <string name="Announce.no_thanks">No, thanks!</string>
     <string name="Fees.Service">Service</string>
     <string name="ConfirmationAllFees.Label">Fees:</string>
+
+  <string name="notification_channel_name_general" translatable="false">General</string>
+  <string name="notification_channel_name_litecoin_news" translatable="false">Litecoin News</string>
+  <string name="notification_channel_name_litewallet_update" translatable="false">Litewallet Update</string>
+  <string name="cancel">Cancel</string>
+  <string name="ok">Ok</string>
+  <string name="please_grant_notification_permission">Please grant notification permission</string>
+  <string name="permission_info">Permission Info</string>
+  <string name="permission_notification_granted">Notification Permission Granted</string>
 </resources>

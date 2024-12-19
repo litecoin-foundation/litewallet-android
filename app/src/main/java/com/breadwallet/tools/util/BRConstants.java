@@ -141,6 +141,7 @@ public class BRConstants {
     public static final String _20240101_US = "user_signup";
     public static final String _20241006_DRR = "did_request_rating";
     public static final String _20241006_UCR = "user_completed_rating";
+    public static final String _HOME_OPEN = "home_open";
 
     @Retention(RetentionPolicy.SOURCE)
     @StringDef({
@@ -175,7 +176,8 @@ public class BRConstants {
             _20231225_UAP,
             _20240101_US,
             _20241006_DRR,
-            _20241006_UCR
+            _20241006_UCR,
+            _HOME_OPEN
     })
     public @interface Event {
     }
