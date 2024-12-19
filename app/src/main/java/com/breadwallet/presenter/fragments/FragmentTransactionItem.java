@@ -1,6 +1,11 @@
 package com.breadwallet.presenter.fragments;
 
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -162,6 +168,22 @@ public class FragmentTransactionItem extends Fragment {
         String toFrom = sent ? String.format(getString(R.string.TransactionDetails_to), sendAddress) : String.format(getString(R.string.TransactionDetails_from), sendAddress);
 
         mTxHash.setText(item.getTxHashHexReversed());
+        mTxHash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mTxtHashCopy = mTxHash.getText().toString();
+
+                // Get the ClipboardManager
+                ClipboardManager clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+
+                // Create a ClipData object with the text
+                ClipData clip = ClipData.newPlainText("Copied Text", mTxtHashCopy);
+
+                // Set the ClipData to the clipboard
+                clipboard.setPrimaryClip(clip);
+            }
+        });
+
         mTxHashLink.setOnClickListener(view -> {
             close();
             String txUrl = BRConstants.BLOCK_EXPLORER_BASE_URL + item.getTxHashHexReversed();

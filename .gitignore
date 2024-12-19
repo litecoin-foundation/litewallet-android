@@ -103,3 +103,5 @@ app/src/litewalletDebug/google-services.json
 /.idea/dictionaries/grunt.xml
 androidTestResultsUserPreferences.xml
 .idea/deploymentTargetSelector.xml
+.idea/inspectionProfiles/Project_Default.xml
+app/.idea/gradle.xml

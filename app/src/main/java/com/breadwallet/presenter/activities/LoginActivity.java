@@ -72,7 +72,6 @@ public class LoginActivity extends BRActivity {
     private TextView ltcPriceTextView;
     private TextView ltcPriceDescTextView; 
 
-    private ImageButton fingerPrint;
     public static boolean appVisible = false;
     private boolean inputAllowed = true;
 
@@ -97,7 +96,6 @@ public class LoginActivity extends BRActivity {
 
         keyboard = findViewById(R.id.brkeyboard);
         pinLayout = findViewById(R.id.pinLayout);
-        fingerPrint = findViewById(R.id.fingerprint_icon);
         versionText = findViewById(R.id.version_text);
 
         ltcPriceTextView = findViewById(R.id.ltcPriceTextView);
@@ -148,28 +146,6 @@ public class LoginActivity extends BRActivity {
                 Timber.e(e);
             }
         });
-
-        final boolean useFingerprint = AuthManager.isFingerPrintAvailableAndSetup(this) && BRSharedPrefs.getUseFingerprint(this);
-        fingerPrint.setVisibility(useFingerprint ? View.VISIBLE : View.GONE);
-
-        if (useFingerprint) {
-            fingerPrint.setOnClickListener(v -> AuthManager.getInstance().authPrompt(LoginActivity.this, "", "", false, true, new BRAuthCompletion() {
-                @Override
-                public void onComplete() {
-                    unlockWallet();
-                    AnalyticsManager.logCustomEvent(BRConstants._20200217_DUWB);
-                }
-
-                @Override
-                public void onCancel() {
-                }
-            }));
-        }
-
-        new Handler().postDelayed(() -> {
-            if (fingerPrint != null && useFingerprint)
-                fingerPrint.performClick();
-        }, 500);
 
         setCurrentLtcPrice();
     }

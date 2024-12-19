@@ -143,23 +143,6 @@ public class SettingsActivity extends BRActivity {
         /*Manage Title*/
         items.add(new BRSettingsItem(getString(R.string.Settings_manage), "", null, true));
 
-        /*Fingerprint Limits*/
-        if (AuthManager.isFingerPrintAvailableAndSetup(this)) {
-            items.add(new BRSettingsItem(getString(R.string.Settings_touchIdLimit_android), "", v -> AuthManager.getInstance().authPrompt(SettingsActivity.this, null, getString(R.string.VerifyPin_continueBody), true, false, new BRAuthCompletion() {
-                @Override
-                public void onComplete() {
-                    Intent intent = new Intent(SettingsActivity.this, SpendLimitActivity.class);
-                    overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                    startActivity(intent);
-                }
-
-                @Override
-                public void onCancel() {
-
-                }
-            }), false));
-        }
-
         /*Languages*/
         items.add(new BRSettingsItem(getString(R.string.Settings_languages), null, v -> {
             ChangeLanguageBottomSheet fragment = new ChangeLanguageBottomSheet();
