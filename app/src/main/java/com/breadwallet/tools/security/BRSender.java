@@ -288,18 +288,10 @@ public class BRSender {
                 BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {
-                        PostAuth.getInstance().onPublishTxAuth(ctx, false);
-                        BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                BRAnimator.killAllFragments((FragmentActivity) ctx);
-                                BRAnimator.startBreadIfNotStarted((Activity) ctx);
-                            }
-                        });
-
+                        BRAnimator.killAllFragments((FragmentActivity) ctx);
+                        BRAnimator.startBreadIfNotStarted((Activity) ctx);
                     }
                 });
-
             }
         });
 
