@@ -414,25 +414,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         updateUI();
     }
 
-    private static final Map<Language, String> fiat = new HashMap<>();
-
-    static {
-        fiat.put(Language.ENGLISH, "USD");
-        fiat.put(Language.SPANISH, "EUR");
-        fiat.put(Language.GERMAN, "EUR");
-        fiat.put(Language.FRENCH, "EUR");
-        fiat.put(Language.JAPANESE, "JPY");
-        fiat.put(Language.INDONESIAN, "USD");
-        fiat.put(Language.ITALIAN, "EUR");
-        fiat.put(Language.PORTUGUESE, "EUR");
-        fiat.put(Language.TURKISH, "EUR");
-        fiat.put(Language.UKRAINIAN, "EUR");
-        fiat.put(Language.RUSSIAN, "EUR");
-        fiat.put(Language.KOREAN, "EUR");
-        fiat.put(Language.CHINESE_TRADITIONAL, "USD");
-        fiat.put(Language.CHINESE_SIMPLIFIED, "RMB");
-    }
-
     public void updateUI() {
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(() -> {
             Thread.currentThread().setName(Thread.currentThread().getName() + ":updateUI");
@@ -446,13 +427,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             BigDecimal btcAmount = BRExchange.getLitecoinForLitoshis(BreadActivity.this, amount);
             final String formattedBTCAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, "LTC", btcAmount);
 
-            //amount in currency units
-            Language currentLanguage = LocaleHelper.Companion.getInstance().getCurrentLocale();
-            String correspondingFiat = fiat.getOrDefault(currentLanguage, "USD");
-
-            assert correspondingFiat != null;
-            final BigDecimal curAmount = BRExchange.getAmountFromLitoshis(BreadActivity.this, correspondingFiat, amount);
-            final String formattedCurAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, correspondingFiat, curAmount);
+            final BigDecimal curAmount = BRExchange.getAmountFromLitoshis(BreadActivity.this, iso, amount);
+            final String formattedCurAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, iso, curAmount);
             runOnUiThread(() -> {
                 primaryPrice.setText(formattedBTCAmount);
                 secondaryPrice.setText(String.format("%s", formattedCurAmount));
