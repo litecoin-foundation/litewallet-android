@@ -16,8 +16,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title">
 
         <ImageView
@@ -40,7 +40,7 @@
         android:text="@string/About.title"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/header"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -51,8 +51,8 @@
         android:layout_marginRight="16dp"
         android:background="@color/extra_light_gray"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
@@ -68,8 +68,8 @@
         android:background="@color/extra_light_gray"
         app:layout_constraintBottom_toTopOf="@+id/textView21"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp" />
 
@@ -83,9 +83,9 @@
         android:background="@color/extra_light_gray"
         app:layout_constraintBottom_toTopOf="@+id/textView22"
         android:layout_marginRight="16dp"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginLeft="16dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         style="@style/BRTextStyle"
@@ -96,7 +96,7 @@
         android:text="@string/About.twitter"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/view4"
-        app:layout_constraintLeft_toLeftOf="@+id/divider1" />
+        app:layout_constraintStart_toStartOf="@+id/divider1" />
 
     <TextView
         style="@style/BRTextStyle"
@@ -108,14 +108,14 @@
         android:text="@string/About.blog"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/view5"
-        app:layout_constraintLeft_toLeftOf="@+id/divider1" />
+        app:layout_constraintStart_toStartOf="@+id/divider1" />
 
     <ImageView
         android:id="@+id/twitter_share_button"
         android:layout_width="16dp"
         android:layout_height="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView22"
-        app:layout_constraintRight_toRightOf="@+id/view4"
+        app:layout_constraintEnd_toEndOf="@+id/view4"
         app:layout_constraintTop_toTopOf="@+id/textView22"
         android:src="@drawable/ic_share" />
 
@@ -127,7 +127,7 @@
         android:layout_marginEnd="0dp"
         android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView24"
-        app:layout_constraintRight_toRightOf="@+id/view5"
+        app:layout_constraintEnd_toEndOf="@+id/view5"
         app:layout_constraintTop_toTopOf="@+id/textView24"
         android:src="@drawable/ic_share" />
 
@@ -142,9 +142,9 @@
         android:textSize="16sp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.525"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/info_text" />
@@ -160,8 +160,8 @@
         android:text="@string/About.footer"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         style="@style/BRTextStyle"
@@ -172,14 +172,14 @@
         android:text="@string/About.instagram"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/divider1"
-        app:layout_constraintLeft_toLeftOf="@+id/divider1" />
+        app:layout_constraintStart_toStartOf="@+id/divider1" />
 
     <ImageView
         android:id="@+id/instagram_share_button"
         android:layout_width="16dp"
         android:layout_height="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView21"
-        app:layout_constraintRight_toRightOf="@+id/divider1"
+        app:layout_constraintEnd_toEndOf="@+id/divider1"
         app:layout_constraintTop_toTopOf="@+id/textView21"
         android:src="@drawable/ic_share" />
 

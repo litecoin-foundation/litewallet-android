@@ -15,8 +15,8 @@
         android:animateLayoutChanges="true"
         android:elevation="8dp"
         android:visibility="visible"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintStart_creator="1"
+        tools:layout_constraintEnd_creator="1"
         tools:layout_constraintTop_creator="1">
 
 
@@ -29,7 +29,7 @@
             android:layout_marginTop="16dp"
             android:textColor="@color/almost_black"
             android:textSize="@dimen/sub_header"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -43,11 +43,11 @@
             android:textColor="@color/almost_black"
             android:textSize="@dimen/paragraph"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_title"
             app:layout_constraintVertical_bias="0.0"
             android:layout_marginEnd="16dp"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0" />
 
         <ImageButton
@@ -57,7 +57,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/ic_close_black_24dp"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 

@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
                         android:fontFamily="@font/barlowsemicondensed_medium"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
                         android:textColor="@color/white"

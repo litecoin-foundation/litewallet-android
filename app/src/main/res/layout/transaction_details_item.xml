@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:filterTouchesWhenObscured="true"
-    android:paddingLeft="12dp"
-    android:paddingRight="12dp"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
     android:scrollY="0dp">
 
     <LinearLayout
@@ -32,8 +32,8 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/bread_margin"
-                android:layout_marginRight="@dimen/bread_margin"
+                android:layout_marginStart="@dimen/bread_margin"
+                android:layout_marginEnd="@dimen/bread_margin"
                 android:background="@drawable/ic_close_black_24dp" />
 
             <TextView
@@ -54,9 +54,8 @@
                 android:layout_height="@dimen/faq_dimen"
                 android:layout_alignBottom="@+id/title"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="@dimen/bread_margin"
+                android:layout_marginStart="@dimen/bread_margin"
                 android:layout_marginEnd="@dimen/bread_margin"
-                android:layout_marginRight="@dimen/bread_margin"
                 android:visibility="invisible" />
 
             <View
