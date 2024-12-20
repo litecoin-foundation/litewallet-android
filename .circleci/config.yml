@@ -16,8 +16,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World! && ls"
+          name: "litewallet-android unit test setup..."
+          command: "echo Building tests for litewallet-android! && ls"
       - run:
           name: "Default for gradle.properties"
           command: "echo \"RELEASE_STORE_FILE=/\nRELEASE_STORE_PASSWORD=\nRELEASE_KEY_ALIAS=\nRELEASE_KEY_PASSWORD=\nandroid.useAndroidX=true\nandroid.enableJetifier=true\" >> gradle.properties && ls && cat gradle.properties"
