@@ -14,6 +14,7 @@ enum class Language(
     GERMAN("de", "Deutsch", "Sprache auswählen"),
     SPANISH("es", "Español", "Seleccione el idioma"),
     FRENCH("fr", "Français", "Sélectionner la langue"),
+    ARABIC("ar", "عربي", "اختر اللغة"),
     INDONESIAN("in", "Indonesia", "Pilih bahasa"),
     ITALIAN("it", "Italiano", "Seleziona la lingua"),
     PORTUGUESE("pt", "Português", "Selecione o idioma"),
@@ -23,8 +24,7 @@ enum class Language(
     KOREAN("ko", "한국어", "언어 선택"),
     JAPANESE("ja", "日本語", "言語を選択する"),
     CHINESE_SIMPLIFIED("zh-CN", "简化字", "选择语言"),
-    CHINESE_TRADITIONAL("zh-TW", "繁體字", "選擇語言"),
-    ARABIC("ar", "عربي", "اختر اللغة")
+    CHINESE_TRADITIONAL("zh-TW", "繁體字", "選擇語言")
     ;
 
     companion object {

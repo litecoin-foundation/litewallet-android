@@ -78,6 +78,7 @@ class LocaleHelperTest {
                         "de",
                         "es",
                         "fr",
+                        "ar",
                         "in",
                         "it",
                         "pt",
@@ -88,7 +89,6 @@ class LocaleHelperTest {
                         "ja",
                         "zh-CN",
                         "zh-TW",
-                        "ar"
                     ),
                     langCodes
                 )
