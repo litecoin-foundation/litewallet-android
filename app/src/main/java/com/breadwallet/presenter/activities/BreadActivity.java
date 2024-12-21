@@ -64,7 +64,6 @@ import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
 import com.litewallet.util.PermissionUtil;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -414,6 +413,25 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         updateUI();
     }
 
+    private static final Map<Language, String> fiat = new HashMap<>();
+
+    static {
+        fiat.put(Language.ENGLISH, "USD");
+        fiat.put(Language.SPANISH, "EUR");
+        fiat.put(Language.GERMAN, "EUR");
+        fiat.put(Language.FRENCH, "EUR");
+        fiat.put(Language.JAPANESE, "JPY");
+        fiat.put(Language.INDONESIAN, "USD");
+        fiat.put(Language.ITALIAN, "EUR");
+        fiat.put(Language.PORTUGUESE, "EUR");
+        fiat.put(Language.TURKISH, "EUR");
+        fiat.put(Language.UKRAINIAN, "EUR");
+        fiat.put(Language.RUSSIAN, "EUR");
+        fiat.put(Language.KOREAN, "EUR");
+        fiat.put(Language.CHINESE_TRADITIONAL, "USD");
+        fiat.put(Language.CHINESE_SIMPLIFIED, "RMB");
+    }
+
     public void updateUI() {
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(() -> {
             Thread.currentThread().setName(Thread.currentThread().getName() + ":updateUI");
@@ -486,7 +504,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                     SyncManager.getInstance().startSyncingProgressThread(app);
                 }
             });
-        } else {
+        }
+        else {
             if (barFlipper != null) {
                 addNotificationBar();
             }

@@ -24,6 +24,7 @@ class IntroLanguageResource {
                 R.raw.spanish,
                 "¿Estás seguro de que quieres cambiar el idioma a español?",
                 Language.SPANISH,
+<<<<<<< HEAD
             ),
             IntroLanguage(
                 Language.ARABIC.code,
@@ -40,6 +41,8 @@ class IntroLanguageResource {
                 R.raw.french,
                 "Êtes-vous sûr de vouloir changer la langue en français ?",
                 Language.FRENCH
+=======
+>>>>>>> main
             ),
             IntroLanguage(
                 Language.INDONESIAN.code,

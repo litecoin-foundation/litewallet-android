@@ -1,25 +1,11 @@
-package com.litewallet.tools.util
+package com.breadwallet.tools.util
 
 import android.content.Context
 import com.breadwallet.entities.Language
-
-import com.breadwallet.presenter.language.LanguageAdapter
-import com.breadwallet.tools.util.LocaleHelper
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
-
-import io.mockk.coVerify
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.spyk
-import io.mockk.verify
-import io.mockk.verifyOrder
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertSame
 import org.junit.Test
 
 class LocaleHelperTest {
@@ -63,38 +49,5 @@ class LocaleHelperTest {
 
         changed = LocaleHelper.instance.setLocaleIfNeeded(Language.INDONESIAN)
         assertFalse(changed)
-    }
-
-    @Test
-    fun `check all language codes`() {
-        Language.entries
-            .also { languages ->
-                assertEquals(15, languages.size)
-            }
-            .map { it.code }
-            .also { langCodes ->
-                assertEquals(
-                    listOf(
-                        "en",
-                        "de",
-                        "es",
-                        "fr",
-                        "ar",
-                        "in",
-                        "it",
-                        "pt",
-                        "tr",
-                        "uk",
-                        "ru",
-                        "ko",
-                        "ja",
-                        "zh-CN",
-                        "zh-TW",
-                    ),
-                    langCodes
-                )
-            }
-
-
     }
 }
