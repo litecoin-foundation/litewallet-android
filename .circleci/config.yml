@@ -50,6 +50,6 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  test-and-build:
+  build-and-test:
     jobs:
-      - unit-test
+      - all-unit-tests
