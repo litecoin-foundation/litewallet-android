@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_toRightOf="@+id/check_mark"
+        android:layout_toEndOf="@+id/check_mark"
+        android:layout_centerVertical="true"
         android:text="Test"
         android:textSize="@dimen/sub_header"
         android:textColor="@color/almost_black" />
