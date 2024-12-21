@@ -18,8 +18,8 @@
         android:text="Sync Preferences:"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <TextView
@@ -32,7 +32,7 @@
         android:text="@string/Settings.sync"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/header"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -46,8 +46,8 @@
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/title"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"/>
 
     <TextView
@@ -62,8 +62,8 @@
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/textView13"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
@@ -76,8 +76,8 @@
         android:text="@string/ReScan.body3"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
-        app:layout_constraintLeft_toLeftOf="@+id/textView15"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <TextView
@@ -92,8 +92,8 @@
         android:text="@string/ReScan.footer"
         android:textSize="@dimen/sub_header"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.breadwallet.presenter.customviews.BRButton
         android:id="@+id/button_scan"
@@ -111,20 +111,20 @@
         app:buttonType="1"
         app:isBreadButton="true"
         app:layout_constraintBottom_toTopOf="@+id/textView17"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/close_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="#F6F8FA"
         android:src="@drawable/ic_close_black_24dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/title"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title" />
 
     <RadioGroup

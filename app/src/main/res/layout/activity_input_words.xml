@@ -18,7 +18,7 @@
         android:text="@string/RecoverWallet.header"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/header"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -29,7 +29,7 @@
         android:layout_marginTop="@dimen/bread_margin"
         android:layout_marginEnd="@dimen/bread_margin"
         android:visibility="invisible"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -43,8 +43,8 @@
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/title"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
@@ -56,7 +56,7 @@
         android:text="@string/RecoverWallet.instruction"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
-        app:layout_constraintLeft_toLeftOf="@+id/description"
+        app:layout_constraintStart_toStartOf="@+id/description"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <com.breadwallet.presenter.customviews.BRButton
@@ -76,14 +76,14 @@
         app:buttonType="1"
         app:isBreadButton="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <GridLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/phrase_field"
         android:columnCount="1"
         android:padding="6dp"
@@ -91,8 +91,8 @@
         android:rowCount="4"
         app:layout_constraintBottom_toTopOf="@+id/send_button"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9">
 
         <LinearLayout

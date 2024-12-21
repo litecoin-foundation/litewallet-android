@@ -18,7 +18,7 @@
         android:text="@string/PushNotifications.title"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/header"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -31,8 +31,8 @@
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/title"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <View
@@ -44,8 +44,8 @@
         android:layout_marginTop="32dp"
         android:background="@color/extra_light_gray"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
@@ -58,7 +58,7 @@
         android:text="@string/PushNotifications.label"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header"
-        app:layout_constraintLeft_toLeftOf="@+id/description"
+        app:layout_constraintStart_toStartOf="@+id/description"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <ToggleButton
@@ -71,7 +71,7 @@
         android:background="@drawable/bread_toggle"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

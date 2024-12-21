@@ -81,8 +81,7 @@ public class TxManager {
 
             }
         }));
-        if (adapter == null)
-            adapter = new TransactionListAdapter(app, null);
+        adapter = new TransactionListAdapter(app, null);
         txList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         setupSwipe(app);

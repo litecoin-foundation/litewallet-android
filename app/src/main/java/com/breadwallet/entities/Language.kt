@@ -24,6 +24,7 @@ enum class Language(
     JAPANESE("ja", "日本語", "言語を選択する"),
     CHINESE_SIMPLIFIED("zh-CN", "简化字", "选择语言"),
     CHINESE_TRADITIONAL("zh-TW", "繁體字", "選擇語言"),
+    ARABIC("ar", "عربي", "اختر اللغة")
     ;
 
     companion object {
