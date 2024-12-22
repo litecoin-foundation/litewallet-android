@@ -18,7 +18,7 @@ jobs:
       - run:
           name: "litewallet-android unit test setup..."
           command: "echo Building tests for litewallet-android! && ls"
-	fetch_submodules: &fetch_submodules
+    fetch_submodules: &fetch_submodules
       - run:
           name: "Initialize submodules"
           command: "git submodule init && git submodule update --init --recursive"
