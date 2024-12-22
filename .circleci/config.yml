@@ -18,12 +18,17 @@ jobs:
       - run:
           name: "litewallet-android unit test setup..."
           command: "echo Building tests for litewallet-android! && ls"
+	fetch_submodules: &fetch_submodules
+	  - run:
+	      name: "Initialize submodules"
+	      command: "git submodule init && git submodule update --init --recursive"
+    fetch_keystore: &fetch_keystore
+      - run:
+    	  name: Fetch keystore
+    	  command: source .circleci/circle_env.sh && fetchKeystore
       - run:
           name: "Default for gradle.properties"
           command: "echo \"RELEASE_STORE_FILE=/\nRELEASE_STORE_PASSWORD=\nRELEASE_KEY_ALIAS=\nRELEASE_KEY_PASSWORD=\nandroid.useAndroidX=true\nandroid.enableJetifier=true\" >> gradle.properties && ls && cat gradle.properties"
-      - run:
-          name: "Initialize submodule"
-          command: "git submodule init && git submodule update --init --recursive"
       - run:
           name: "Export google-services.json to env"
           command: echo 'export $GOOGLE_SERVICES_JSON="$GOOGLE_SERVICES_JSON"' >> $BASH_ENV
@@ -45,7 +50,10 @@ jobs:
           path: ~/test-results
       - store_artifacts:
           path: ~/test-results/junit
-
+	create_release_credits: &create_release_credits
+	  - run:
+		  name: Create fake credits
+		  command: source .circleci/circle_env.sh && copyEnvironmentVariablesToGradleProperties
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
