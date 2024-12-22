@@ -1,35 +1,35 @@
 jobs:
   build_and_sign:
-     android_docker: &android_docker
-       docker:
-         - image: circleci/android:api-27-node8-alpha
-  fetch_submodules: &fetch_submodules
-     run:
+    android_docker: &android_docker
+      docker:
+        - image: circleci/android:api-27-node8-alpha
+    fetch_submodules: &fetch_submodules
+      run:
         name: Update submodules
         command: git submodule sync && git submodule update --init
-  create_release_credits: &create_release_credits
-     run:
+    create_release_credits: &create_release_credits
+      run:
         name: Create fake credits
         command: source .circleci/circle_env.sh && copyEnvironmentVariablesToGradleProperties
-  gradle_execution_rights: &gradle_execution_rights
-     run:
+    gradle_execution_rights: &gradle_execution_rights
+      run:
         name: Setup gradlew execution rights
         command: chmod +x gradlew
-  fetch_keystore: &fetch_keystore
-     run:
+    fetch_keystore: &fetch_keystore
+      run:
         name: Fetch keystore
         command: source .circleci/circle_env.sh && fetchKeystore
-  build_and_sign:
-     <<: *android_docker
-     steps:
+    build_and_sign:
+      <<: *android_docker
+      steps:
         - checkout
         - *fetch_submodules
         - *fetch_keystore
         - *create_release_credits
         - *gradle_execution_rights
         - run:
-           name: Assemble beta release
-           command: ./gradlew assembleRelease
+          name: Assemble beta release
+          command: ./gradlew assembleRelease
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
