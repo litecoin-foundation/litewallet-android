@@ -1,105 +1,55 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+orbs:
+  android: circleci/android@3.0.2
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build_and_sign:
-    android_docker: &android_docker
-      docker:
-        - image: circleci/android:api-27-node8-alpha
-    fetch_submodules: &fetch_submodules
-      run:
-        name: Update submodules
-        command: git submodule sync && git submodule update --init
-    create_release_credits: &create_release_credits
-      run:
-        name: Create fake credits
-        command: source .circleci/circle_env.sh && copyEnvironmentVariablesToGradleProperties
-    gradle_execution_rights: &gradle_execution_rights
-      run:
-        name: Setup gradlew execution rights
-        command: chmod +x gradlew
-    fetch_keystore: &fetch_keystore
-      run:
-        name: Fetch keystore
-        command: source .circleci/circle_env.sh && fetchKeystore
-    build_and_sign:
-      <<: *android_docker
-      steps:
-        - checkout
-        - *fetch_submodules
-        - *fetch_keystore
-        - *create_release_credits
-        - *gradle_execution_rights
-        - run:
-          name: Assemble beta release
-          command: ./gradlew assembleRelease
+  unit-test:
+    executor:
+      name: android/android_docker
+      resource_class: large
+      tag: 2024.07.1-ndk
+    steps:
+      - checkout
+      - run:
+          name: "litewallet-android unit test setup..."
+          command: "echo Building tests for litewallet-android! && ls"
+      - run:
+          name: "Default for gradle.properties"
+          command: "echo \"RELEASE_STORE_FILE=/\nRELEASE_STORE_PASSWORD=\nRELEASE_KEY_ALIAS=\nRELEASE_KEY_PASSWORD=\nandroid.useAndroidX=true\nandroid.enableJetifier=true\" >> gradle.properties && ls && cat gradle.properties"
+      - run:
+          name: "Initialize submodule"
+          command: "git submodule init && git submodule update --init --recursive"
+      - run:
+          name: "Export google-services.json to env"
+          command: echo 'export $GOOGLE_SERVICES_JSON="$GOOGLE_SERVICES_JSON"' >> $BASH_ENV
+      - run:
+          name: "decode $GOOGLE_SERVICES_JSON to google-services.json"
+          command: echo "$GOOGLE_SERVICES_JSON" | base64 --decode > app/google-services.json
+      - android/restore_gradle_cache
+      - run:
+          name: "Execute Unit Test"
+          command: ./gradlew testLitewalletDebugUnitTest
+      - android/save_gradle_cache
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/test-results
+      - store_artifacts:
+          path: ~/test-results/junit
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  version: 2
-  build-and-sign:
+  test-and-build:
     jobs:
-      - build_and_sign
-
-#
-# # Use the latest 2.1 version of CircleCI pipeline process engine.
-# # See: https://circleci.com/docs/2.0/configuration-reference
-# version: 2.1
-#
-# orbs:
-#   android: circleci/android@3.0.2
-#
-# # Define a job to be invoked later in a workflow.
-# # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-# jobs:
-#   all-unit-tests:
-#     executor:
-#       name: android/android_docker
-#       resource_class: large
-#       tag: 2024.07.1-ndk
-#     steps:
-#       - checkout
-#       - run:
-#           name: "litewallet-android unit test setup..."
-#           command: "echo Building tests for litewallet-android! && ls"
-#     fetch_submodules: &fetch_submodules
-#       - run:
-#           name: "Initialize submodules"
-#           command: "git submodule init && git submodule update --init --recursive"
-#     fetch_keystore: &fetch_keystore
-#       - run:
-#           name: Fetch keystore
-#           command: source .circleci/circle_env.sh && fetchKeystore
-#       - run:
-#           name: "Default for gradle.properties"
-#           command: "echo \"RELEASE_STORE_FILE=/\nRELEASE_STORE_PASSWORD=\nRELEASE_KEY_ALIAS=\nRELEASE_KEY_PASSWORD=\nandroid.useAndroidX=true\nandroid.enableJetifier=true\" >> gradle.properties && ls && cat gradle.properties"
-#       - run:
-#           name: "Export google-services.json to env"
-#           command: echo 'export $GOOGLE_SERVICES_JSON="$GOOGLE_SERVICES_JSON"' >> $BASH_ENV
-#       - run:
-#           name: "decode $GOOGLE_SERVICES_JSON to google-services.json"
-#           command: echo "$GOOGLE_SERVICES_JSON" | base64 --decode > app/google-services.json
-#       - android/restore_gradle_cache
-#       - run:
-#           name: "Execute Unit Test"
-#           command: ./gradlew testLitewalletDebugUnitTest
-#       - android/save_gradle_cache
-#       - run:
-#           name: Saving test results
-#           command: |
-#             mkdir -p ~/test-results/junit/
-#             find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
-#           when: always
-#       - store_test_results:
-#           path: ~/test-results
-#       - store_artifacts:
-#           path: ~/test-results/junit
-#     create_release_credits: &create_release_credits
-#       - run:
-#           name: Create fake credits
-#           command: source .circleci/circle_env.sh && copyEnvironmentVariablesToGradleProperties
-#
-# # Invoke jobs via workflows
-# # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-# workflows:
-#   build-and-test:
-#     jobs:
-#       - all-unit-tests
+      - unit-test
