@@ -74,8 +74,6 @@ android {
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
 
-        buildConfigField "String", "INFURA_KEY", "\"set the infura key here\""
-
         // Similar to other properties in the defaultConfig block,
         // you can configure the ndk block for each product flavor
         // in your build configuration.
