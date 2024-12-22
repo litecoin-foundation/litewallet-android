@@ -41,7 +41,7 @@ jobs:
           command: ./gradlew testLitewalletDebugUnitTest
       - android/save_gradle_cache
       - run:
-          name: Save test results
+          name: Saving test results
           command: |
             mkdir -p ~/test-results/junit/
             find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
