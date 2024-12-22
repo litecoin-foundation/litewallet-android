@@ -29,11 +29,13 @@ build_and_sign:
         name: Assemble beta release
         command: ./gradlew assembleRelease
 
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   version: 2
-  build_and_sign:
+  build-and-sign:
     jobs:
-      - build_and_sign
+	  - build_and_sign
 
 #
 # # Use the latest 2.1 version of CircleCI pipeline process engine.
