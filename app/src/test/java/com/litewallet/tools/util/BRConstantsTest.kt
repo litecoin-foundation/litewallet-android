@@ -23,7 +23,7 @@ class BRConstantsTest {
         assertSame(BRConstants.litecoinLowercase,"ł")
         assertSame(BRConstants.litecoinUppercase,"Ł")
     }
-
+    
     @Test
     fun `validate App external URL constant`(){
         assertSame(BRConstants.TWITTER_LINK,"https://twitter.com/Litewallet_App");

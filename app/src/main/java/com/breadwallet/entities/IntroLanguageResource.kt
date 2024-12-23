@@ -26,6 +26,22 @@ class IntroLanguageResource {
                 Language.SPANISH,
             ),
             IntroLanguage(
+                Language.ARABIC.code,
+                Language.ARABIC.title,
+                "حدد مناقشة الطريقة الأكثر أمانًا وأمانًا لاستخدام Litecoin.",
+                R.raw.arabic,
+                "هل أنت متأكد أنك تريد تغيير اللغة إلى الإندونيسية؟",
+                Language.ARABIC
+            ),
+            IntroLanguage(
+                Language.FRENCH.code,
+                Language.FRENCH.title,
+                "La façon la plus sécurisée et sûre d'utiliser Litecoin.",
+                R.raw.french,
+                "Êtes-vous sûr de vouloir changer la langue en français ?",
+                Language.FRENCH
+            ),
+            IntroLanguage(
                 Language.INDONESIAN.code,
                 Language.INDONESIAN.title,
                 "Cara paling aman dan teraman untuk menggunakan Litecoin.",
@@ -74,14 +90,6 @@ class IntroLanguageResource {
                 Language.KOREAN
             ),
             IntroLanguage(
-                Language.FRENCH.code,
-                Language.FRENCH.title,
-                "La façon la plus sécurisée et sûre d'utiliser Litecoin.",
-                R.raw.french,
-                "Êtes-vous sûr de vouloir changer la langue en français ?",
-                Language.FRENCH
-            ),
-            IntroLanguage(
                 Language.TURKISH.code,
                 Language.TURKISH.title,
                 "Litecoin'i kullanmanın en güvenli ve en güvenli yolu.",
@@ -112,14 +120,6 @@ class IntroLanguageResource {
                 R.raw.russian,
                 "Вы уверены, что хотите сменить язык на русский?",
                 Language.RUSSIAN
-            ),
-            IntroLanguage(
-                Language.ARABIC.code,
-                Language.ARABIC.title,
-                "حدد مناقشة الطريقة الأكثر أمانًا وأمانًا لاستخدام Litecoin.",
-                R.raw.arabic,
-                "هل أنت متأكد أنك تريد تغيير اللغة إلى الإندونيسية؟",
-                Language.ARABIC
             )
         )
     }

@@ -4,12 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
-
 import com.appsflyer.AppsFlyerLib;
-
 import androidx.annotation.NonNull;
-
-import com.appsflyer.AppsFlyerLib;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.tools.listeners.SyncReceiver;
@@ -28,8 +24,16 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.litewallet.di.Module;
 import com.litewallet.notification.NotificationHandlerKt;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
