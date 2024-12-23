@@ -8,28 +8,31 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  unit-test:
+  all-unit-tests:
     executor:
-      name: android/android_machine
+      name: android/android_docker
       resource_class: large
-      tag: default
+      tag: 2024.07.1-ndk
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World! && ls"
+          name: "litewallet-android unit test setup..."
+          command: "echo Building tests for litewallet-android! && ls"
+      - run:
+          name: "Initialize submodules"
+          command: "git submodule init && git submodule update --init --recursive"
       - run:
           name: "Default for gradle.properties"
           command: "echo \"RELEASE_STORE_FILE=/\nRELEASE_STORE_PASSWORD=\nRELEASE_KEY_ALIAS=\nRELEASE_KEY_PASSWORD=\nandroid.useAndroidX=true\nandroid.enableJetifier=true\" >> gradle.properties && ls && cat gradle.properties"
       - run:
-          name: "Initialize submodule"
-          command: "git submodule init && git submodule update --init --recursive"
+          name: "Export google-services.json to env"
+          command: echo 'export $GOOGLE_SERVICES_JSON="$GOOGLE_SERVICES_JSON"' >> $BASH_ENV
       - run:
-          name: "Copy google-services.json"
+          name: "decode $GOOGLE_SERVICES_JSON to google-services.json"
           command: echo "$GOOGLE_SERVICES_JSON" | base64 --decode > app/google-services.json
       - android/restore_gradle_cache
       - run:
-          name: "Execute Unit Test"
+          name: "Execute Unit Test" 
           command: ./gradlew testLitewalletDebugUnitTest
       - android/save_gradle_cache
       - run:
@@ -43,10 +46,9 @@ jobs:
       - store_artifacts:
           path: ~/test-results/junit
 
-
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   test-and-build:
     jobs:
-      - unit-test
+      - all-unit-tests

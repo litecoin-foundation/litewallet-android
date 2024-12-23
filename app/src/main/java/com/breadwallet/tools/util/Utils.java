@@ -250,8 +250,7 @@ public class Utils {
                     return opsString.replaceAll("\\s+","");
                 }
                 else if (name == PartnerNames.AFDEVID) {
-                    JSONObject jsonObj = new JSONObject(keyObject.get(name.getKey()).toString());
-                    return jsonObj.toString();
+                    return keyObject.optString(name.getKey());
                 }
                 else if (name == PartnerNames.PUSHER) {
                     JSONObject jsonObj = new JSONObject(keyObject.get(name.getKey()).toString());

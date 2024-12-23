@@ -4,3 +4,6 @@
 [submodule "app/src/main/jni/loafwallet-core"]
 	path = app/src/main/jni/loafwallet-core
 	url = https://github.com/litecoin-foundation/loafwallet-core.git
+[submodule "litewallet-data"]
+	path = litewallet-data
+	url = https://github.com/gruntsoftware/litewallet-data.git

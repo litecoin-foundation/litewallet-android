@@ -104,4 +104,4 @@ app/src/litewalletDebug/google-services.json
 androidTestResultsUserPreferences.xml
 .idea/deploymentTargetSelector.xml
 .idea/inspectionProfiles/Project_Default.xml
-app/.idea/gradle.xml
+/app/upload-binary/*

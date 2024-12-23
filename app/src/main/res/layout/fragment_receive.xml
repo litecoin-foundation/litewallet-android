@@ -30,16 +30,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
                     android:text="@string/Receive.title"
                     android:textColor="@color/almost_black"
                     android:textSize="@dimen/header"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
@@ -49,8 +47,8 @@
                     android:layout_marginTop="16dp"
                     android:background="@color/separator_gray"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title" />
 
                 <ImageButton
@@ -60,7 +58,7 @@
                     android:layout_marginEnd="16dp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/title"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/title" />
 
                 <ImageButton
@@ -68,7 +66,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:background="@drawable/ic_close_black_24dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/title"
@@ -196,8 +194,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:text="----------------------------------"
                 android:textColor="@color/light_gray"
@@ -235,8 +231,8 @@
                 android:layout_marginStart="72dp"
                 android:drawableStart="@drawable/ic_share_vertical_gray"
                 android:paddingBottom="12dp"
-                android:paddingLeft="48dp"
-                android:paddingRight="48dp"
+                android:paddingStart="48dp"
+                android:paddingEnd="48dp"
                 android:paddingTop="12dp"
                 android:text="@string/Receive.share"
                 android:textColor="@color/light_gray"
@@ -287,8 +283,6 @@
                 android:layout_height="@dimen/big_button_height"
                 android:layout_marginBottom="0dp"
                 android:layout_marginEnd="24dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:padding="10dp"
