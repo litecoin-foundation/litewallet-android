@@ -1,9 +1,7 @@
 package com.platform.tools;
 
 import android.content.Context;
-
 import com.breadwallet.tools.crypto.CryptoHelper;
-import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.BRCompressor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
@@ -14,23 +12,20 @@ import com.platform.kvstore.CompletionObject;
 import com.platform.kvstore.RemoteKVStore;
 import com.platform.kvstore.ReplicatedKVStore;
 import com.platform.sqlite.KVItem;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import org.json.JSONException;
+import org.json.JSONObject;
 import timber.log.Timber;
 
 public class KVStoreManager {
+
     private static KVStoreManager instance;
     String walletInfoKey = "wallet-info";
 
-    private KVStoreManager() {
-    }
+    private KVStoreManager() {}
 
     public static KVStoreManager getInstance() {
         if (instance == null) instance = new KVStoreManager();
@@ -38,15 +33,22 @@ public class KVStoreManager {
     }
 
     public WalletInfo getWalletInfo(Context app) {
-        Timber.i("timber: Never initialized always null until WalletInfo struct to be removed");
+        Timber.i(
+            "timber: Never initialized always null until WalletInfo struct to be removed"
+        );
         return null;
     }
 
     public TxMetaData getTxMetaData(Context app, byte[] txHash) {
         String key = txKey(txHash);
 
-        RemoteKVStore remoteKVStore = RemoteKVStore.getInstance(APIClient.getInstance(app));
-        ReplicatedKVStore kvStore = ReplicatedKVStore.getInstance(app, remoteKVStore);
+        RemoteKVStore remoteKVStore = RemoteKVStore.getInstance(
+            APIClient.getInstance(app)
+        );
+        ReplicatedKVStore kvStore = ReplicatedKVStore.getInstance(
+            app,
+            remoteKVStore
+        );
         long ver = kvStore.localVersion(key).version;
         // DEV Uncomment to see values
         // Timber.d("timber: remoteKVStore: %s",remoteKVStore.toString());
@@ -64,8 +66,13 @@ public class KVStoreManager {
 
     public Map<String, TxMetaData> getAllTxMD(Context app) {
         Map<String, TxMetaData> mds = new HashMap<>();
-        RemoteKVStore remoteKVStore = RemoteKVStore.getInstance(APIClient.getInstance(app));
-        ReplicatedKVStore kvStore = ReplicatedKVStore.getInstance(app, remoteKVStore);
+        RemoteKVStore remoteKVStore = RemoteKVStore.getInstance(
+            APIClient.getInstance(app)
+        );
+        ReplicatedKVStore kvStore = ReplicatedKVStore.getInstance(
+            app,
+            remoteKVStore
+        );
         List<KVItem> list = kvStore.getAllTxMdKv();
         for (int i = 0; i < list.size(); i++) {
             TxMetaData md = valueToMetaData(list.get(i).value);
@@ -80,7 +87,6 @@ public class KVStoreManager {
         JSONObject json;
         if (value == null) {
             Timber.d("timber: valueToMetaData: value is null!");
-            AnalyticsManager.logCustomEvent(BRConstants._20200111_TNI);
             return null;
         }
         try {
@@ -123,15 +129,24 @@ public class KVStoreManager {
             needsUpdate = true;
             old = data;
         } else if (data != null) {
-            String finalExchangeCurrency = getFinalValue(data.exchangeCurrency, old.exchangeCurrency);
+            String finalExchangeCurrency = getFinalValue(
+                data.exchangeCurrency,
+                old.exchangeCurrency
+            );
             if (finalExchangeCurrency != null) {
-                Timber.d("timber: putTxMetaData: finalExchangeCurrency:%s", finalExchangeCurrency);
+                Timber.d(
+                    "timber: putTxMetaData: finalExchangeCurrency:%s",
+                    finalExchangeCurrency
+                );
                 old.exchangeCurrency = finalExchangeCurrency;
                 needsUpdate = true;
             }
             String finalDeviceId = getFinalValue(data.deviceId, old.deviceId);
             if (finalDeviceId != null) {
-                Timber.d("timber: putTxMetaData: finalDeviceId:%s", finalDeviceId);
+                Timber.d(
+                    "timber: putTxMetaData: finalDeviceId:%s",
+                    finalDeviceId
+                );
                 old.deviceId = finalDeviceId;
                 needsUpdate = true;
             }
@@ -141,22 +156,34 @@ public class KVStoreManager {
                 old.comment = finalComment;
                 needsUpdate = true;
             }
-            int finalClassVersion = getFinalValue(data.classVersion, old.classVersion);
+            int finalClassVersion = getFinalValue(
+                data.classVersion,
+                old.classVersion
+            );
             if (finalClassVersion != -1) {
                 old.classVersion = finalClassVersion;
                 needsUpdate = true;
             }
-            int finalCreationTime = getFinalValue(data.creationTime, old.creationTime);
+            int finalCreationTime = getFinalValue(
+                data.creationTime,
+                old.creationTime
+            );
             if (finalCreationTime != -1) {
                 old.creationTime = finalCreationTime;
                 needsUpdate = true;
             }
-            double finalExchangeRate = getFinalValue(data.exchangeRate, old.exchangeRate);
+            double finalExchangeRate = getFinalValue(
+                data.exchangeRate,
+                old.exchangeRate
+            );
             if (finalExchangeRate != -1) {
                 old.exchangeRate = finalExchangeRate;
                 needsUpdate = true;
             }
-            int finalBlockHeight = getFinalValue(data.blockHeight, old.blockHeight);
+            int finalBlockHeight = getFinalValue(
+                data.blockHeight,
+                old.blockHeight
+            );
             if (finalBlockHeight != -1) {
                 old.blockHeight = finalBlockHeight;
                 needsUpdate = true;
@@ -183,7 +210,10 @@ public class KVStoreManager {
             obj.put("classVersion", old.classVersion);
             obj.put("bh", old.blockHeight);
             obj.put("er", old.exchangeRate);
-            obj.put("erc", old.exchangeCurrency == null ? "" : old.exchangeCurrency);
+            obj.put(
+                "erc",
+                old.exchangeCurrency == null ? "" : old.exchangeCurrency
+            );
             obj.put("fr", old.fee);
             obj.put("s", old.txSize);
             obj.put("c", old.creationTime);
@@ -206,13 +236,30 @@ public class KVStoreManager {
             Timber.e(e);
             return;
         }
-        RemoteKVStore remoteKVStore = RemoteKVStore.getInstance(APIClient.getInstance(app));
-        ReplicatedKVStore kvStore = ReplicatedKVStore.getInstance(app, remoteKVStore);
+        RemoteKVStore remoteKVStore = RemoteKVStore.getInstance(
+            APIClient.getInstance(app)
+        );
+        ReplicatedKVStore kvStore = ReplicatedKVStore.getInstance(
+            app,
+            remoteKVStore
+        );
         long localVer = kvStore.localVersion(key).version;
         long removeVer = kvStore.remoteVersion(key);
-        CompletionObject compObj = kvStore.set(localVer, removeVer, key, compressed, System.currentTimeMillis(), 0);
+        CompletionObject compObj = kvStore.set(
+            localVer,
+            removeVer,
+            key,
+            compressed,
+            System.currentTimeMillis(),
+            0
+        );
         if (compObj.err != null) {
-            Timber.d("timber: putTxMetaData: Error setting value for key: " + key + ", err: " + compObj.err);
+            Timber.d(
+                "timber: putTxMetaData: Error setting value for key: " +
+                key +
+                ", err: " +
+                compObj.err
+            );
         }
     }
 

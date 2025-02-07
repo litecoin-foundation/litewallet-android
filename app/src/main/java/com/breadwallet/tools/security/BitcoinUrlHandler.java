@@ -1,19 +1,16 @@
 package com.breadwallet.tools.security;
 
 import androidx.fragment.app.FragmentActivity;
-
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRDialogView;
-import com.breadwallet.presenter.entities.PartnerNames;
-import com.breadwallet.presenter.entities.TransactionItem;
 import com.breadwallet.presenter.entities.PaymentRequestWrapper;
 import com.breadwallet.presenter.entities.RequestObject;
+import com.breadwallet.presenter.entities.TransactionItem;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.threads.PaymentProtocolTask;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
-
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URI;
@@ -22,13 +19,16 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
 import timber.log.Timber;
 
 public class BitcoinUrlHandler {
+
     private static final Object lockObject = new Object();
 
-    public static synchronized boolean processRequest(FragmentActivity app, String url) {
+    public static synchronized boolean processRequest(
+        FragmentActivity app,
+        String url
+    ) {
         if (url == null) {
             Timber.d("timber: processRequest: url is null");
             return false;
@@ -40,13 +40,22 @@ public class BitcoinUrlHandler {
         }
         if (requestObject == null) {
             if (app != null) {
-                BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title),
-                        app.getString(R.string.Send_invalidAddressTitle), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
-                            @Override
-                            public void onClick(BRDialogView brDialogView) {
-                                brDialogView.dismissWithAnimation();
-                            }
-                        }, null, null, 0);
+                BRDialog.showCustomDialog(
+                    app,
+                    app.getString(R.string.JailbreakWarnings_title),
+                    app.getString(R.string.Send_invalidAddressTitle),
+                    app.getString(R.string.Button_ok),
+                    null,
+                    new BRDialogView.BROnClickListener() {
+                        @Override
+                        public void onClick(BRDialogView brDialogView) {
+                            brDialogView.dismissWithAnimation();
+                        }
+                    },
+                    null,
+                    null,
+                    0
+                );
             }
             return false;
         }
@@ -56,13 +65,22 @@ public class BitcoinUrlHandler {
             return tryLitecoinURL(url, app);
         } else {
             if (app != null) {
-                BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title),
-                        app.getString(R.string.Send_remoteRequestError), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
-                            @Override
-                            public void onClick(BRDialogView brDialogView) {
-                                brDialogView.dismissWithAnimation();
-                            }
-                        }, null, null, 0);
+                BRDialog.showCustomDialog(
+                    app,
+                    app.getString(R.string.JailbreakWarnings_title),
+                    app.getString(R.string.Send_remoteRequestError),
+                    app.getString(R.string.Button_ok),
+                    null,
+                    new BRDialogView.BROnClickListener() {
+                        @Override
+                        public void onClick(BRDialogView brDialogView) {
+                            brDialogView.dismissWithAnimation();
+                        }
+                    },
+                    null,
+                    null,
+                    0
+                );
             }
             return false;
         }
@@ -72,11 +90,13 @@ public class BitcoinUrlHandler {
         RequestObject requestObject = getRequestFromString(url);
         // return true if the request is valid url and has param: r or param: address
         // return true if it is a valid bitcoinPrivKey
-        return (requestObject != null && (requestObject.r != null || requestObject.address != null)
-                || BRWalletManager.getInstance().isValidBitcoinBIP38Key(url)
-                || BRWalletManager.getInstance().isValidBitcoinPrivateKey(url));
+        return (
+            (requestObject != null &&
+                (requestObject.r != null || requestObject.address != null)) ||
+            BRWalletManager.getInstance().isValidBitcoinBIP38Key(url) ||
+            BRWalletManager.getInstance().isValidBitcoinPrivateKey(url)
+        );
     }
-
 
     public static RequestObject getRequestFromString(String str) {
         if (str == null || str.isEmpty()) return null;
@@ -85,10 +105,8 @@ public class BitcoinUrlHandler {
         String tmp = str.trim().replaceAll("\n", "").replaceAll(" ", "%20");
 
         if (!tmp.startsWith("litecoin://")) {
-            if (!tmp.startsWith("litecoin:"))
-                tmp = "litecoin://".concat(tmp);
-            else
-                tmp = tmp.replace("litecoin:", "litecoin://");
+            if (!tmp.startsWith("litecoin:")) tmp = "litecoin://".concat(tmp);
+            else tmp = tmp.replace("litecoin:", "litecoin://");
         }
         URI uri;
         try {
@@ -110,12 +128,13 @@ public class BitcoinUrlHandler {
         String[] params = query.split("&");
         for (String s : params) {
             String[] keyValue = s.split("=", 2);
-            if (keyValue.length != 2)
-                continue;
+            if (keyValue.length != 2) continue;
             if (keyValue[0].trim().equals("amount")) {
                 try {
                     BigDecimal bigDecimal = new BigDecimal(keyValue[1].trim());
-                    obj.amount = bigDecimal.multiply(new BigDecimal("100000000")).toString();
+                    obj.amount = bigDecimal
+                        .multiply(new BigDecimal("100000000"))
+                        .toString();
                 } catch (NumberFormatException e) {
                     Timber.e(e);
                 }
@@ -147,34 +166,50 @@ public class BitcoinUrlHandler {
         return true;
     }
 
-    private static boolean tryLitecoinURL(final String url, final FragmentActivity app) {
+    private static boolean tryLitecoinURL(
+        final String url,
+        final FragmentActivity app
+    ) {
         RequestObject requestObject = getRequestFromString(url);
-        if (requestObject == null || requestObject.address == null || requestObject.address.isEmpty())
-            return false;
+        if (
+            requestObject == null ||
+            requestObject.address == null ||
+            requestObject.address.isEmpty()
+        ) return false;
 
         String amount = requestObject.amount;
 
-        if (amount == null || amount.isEmpty() || new BigDecimal(amount).doubleValue() == 0) {
-            app.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    BRAnimator.showSendFragment(app, url);
+        if (
+            amount == null ||
+            amount.isEmpty() ||
+            new BigDecimal(amount).doubleValue() == 0
+        ) {
+            app.runOnUiThread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        BRAnimator.showSendFragment(app, url);
+                    }
                 }
-            });
+            );
         } else {
             if (app != null) {
                 BRAnimator.killAllFragments(app);
                 BRSender.getInstance()
-                        .sendTransaction(app,
-                                new TransactionItem(requestObject.address,
-                                Utils.fetchPartnerKey(app, PartnerNames.LITEWALLETOPS),
-                                null,
-                                new BigDecimal(amount).longValue(),
-                                Utils.tieredOpsFee(app,  new BigDecimal(amount).longValue()),
-                                null,
-                                true));
+                    .sendTransaction(
+                        app,
+                        new TransactionItem(
+                            requestObject.address,
+                            null,
+                            new BigDecimal(amount).longValue(),
+                            null,
+                            true
+                        )
+                    );
             } else {
-                Timber.e(new NullPointerException("tryLitecoinURL, app is null!"));
+                Timber.e(
+                    new NullPointerException("tryLitecoinURL, app is null!")
+                );
             }
         }
 
@@ -185,6 +220,8 @@ public class BitcoinUrlHandler {
 
     public static native String parsePaymentACK(byte[] req);
 
-    public static native byte[] getCertificatesFromPaymentRequest(byte[] req, int index);
-
+    public static native byte[] getCertificatesFromPaymentRequest(
+        byte[] req,
+        int index
+    );
 }

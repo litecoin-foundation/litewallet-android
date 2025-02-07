@@ -20,7 +20,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -32,7 +31,6 @@ import androidx.transition.ChangeBounds;
 import androidx.transition.Fade;
 import androidx.transition.TransitionManager;
 import androidx.transition.TransitionSet;
-
 import com.breadwallet.BreadApp;
 import com.breadwallet.R;
 import com.breadwallet.entities.Language;
@@ -43,7 +41,6 @@ import com.breadwallet.presenter.fragments.BuyTabFragment;
 import com.breadwallet.presenter.history.HistoryFragment;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.TextSizeTransition;
-import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.InternetManager;
 import com.breadwallet.tools.manager.SyncManager;
@@ -64,15 +61,18 @@ import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
 import com.litewallet.util.PermissionUtil;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-
 import timber.log.Timber;
 
-public class BreadActivity extends BRActivity implements BRWalletManager.OnBalanceChanged, BRSharedPrefs.OnIsoChangedListener,
-        TransactionDataSource.OnTxAddedListener, InternetManager.ConnectionReceiverListener {
+public class BreadActivity
+    extends BRActivity
+    implements
+        BRWalletManager.OnBalanceChanged,
+        BRSharedPrefs.OnIsoChangedListener,
+        TransactionDataSource.OnTxAddedListener,
+        InternetManager.ConnectionReceiverListener {
 
     public static final Point screenParametersPoint = new Point();
     private static final float PRIMARY_TEXT_SIZE = 24f;
@@ -100,18 +100,25 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         return app;
     }
 
-    private final ActivityResultLauncher<String> requestNotificationPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    Toast.makeText(app, R.string.permission_notification_granted, Toast.LENGTH_SHORT).show();
-                }
-            });
+    private final ActivityResultLauncher<
+        String
+    > requestNotificationPermissionLauncher = registerForActivityResult(
+        new ActivityResultContracts.RequestPermission(),
+        isGranted -> {
+            if (isGranted) {
+                Toast.makeText(
+                    app,
+                    R.string.permission_notification_granted,
+                    Toast.LENGTH_SHORT
+                ).show();
+            }
+        }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bread);
-        AnalyticsManager.logCustomEvent(BRConstants._HOME_OPEN);
 
         app = this;
         getWindowManager().getDefaultDisplay().getSize(screenParametersPoint);
@@ -125,13 +132,20 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         primaryPrice.setTextSize(PRIMARY_TEXT_SIZE);
         secondaryPrice.setTextSize(SECONDARY_TEXT_SIZE);
 
-        finishActivities(SetPinActivity.introSetPitActivity, IntroActivity.introActivity, ReEnterPinActivity.reEnterPinActivity);
+        finishActivities(
+            SetPinActivity.introSetPitActivity,
+            IntroActivity.introActivity,
+            ReEnterPinActivity.reEnterPinActivity
+        );
 
         if (!BRSharedPrefs.getGreetingsShown(BreadActivity.this)) {
-            mHandler.postDelayed(() -> {
-                BRAnimator.showGreetingsMessage(BreadActivity.this);
-                BRSharedPrefs.putGreetingsShown(BreadActivity.this, true);
-            }, 1000);
+            mHandler.postDelayed(
+                () -> {
+                    BRAnimator.showGreetingsMessage(BreadActivity.this);
+                    BRSharedPrefs.putGreetingsShown(BreadActivity.this, true);
+                },
+                1000
+            );
         }
 
         onConnectionChanged(InternetManager.getInstance().isConnected(this));
@@ -149,20 +163,36 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             return;
         }
 
-        if (!PermissionUtil.hasPermission(this, Manifest.permission.POST_NOTIFICATIONS)) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.POST_NOTIFICATIONS)) {
+        if (
+            !PermissionUtil.hasPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            )
+        ) {
+            if (
+                ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                )
+            ) {
                 new AlertDialog.Builder(this)
-                        .setTitle(R.string.permission_info)
-                        .setMessage(R.string.please_grant_notification_permission)
-                        .setNegativeButton(R.string.cancel, (dialog, which) -> {
-                            dialog.dismiss();
-                        })
-                        .setPositiveButton(R.string.ok, (dialog, which) -> {
-                            PermissionUtil.requestPermission(requestNotificationPermissionLauncher, Manifest.permission.POST_NOTIFICATIONS);
-                        })
-                        .show();
+                    .setTitle(R.string.permission_info)
+                    .setMessage(R.string.please_grant_notification_permission)
+                    .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                        dialog.dismiss();
+                    })
+                    .setPositiveButton(R.string.ok, (dialog, which) -> {
+                        PermissionUtil.requestPermission(
+                            requestNotificationPermissionLauncher,
+                            Manifest.permission.POST_NOTIFICATIONS
+                        );
+                    })
+                    .show();
             } else {
-                PermissionUtil.requestPermission(requestNotificationPermissionLauncher, Manifest.permission.POST_NOTIFICATIONS);
+                PermissionUtil.requestPermission(
+                    requestNotificationPermissionLauncher,
+                    Manifest.permission.POST_NOTIFICATIONS
+                );
             }
         }
     }
@@ -174,26 +204,36 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     private void showInAppReviewDialogIfNeeded() {
-        if (!BRSharedPrefs.isInAppReviewDone(this) && BRSharedPrefs.getSendTransactionCount(this) > 2) {
+        if (
+            !BRSharedPrefs.isInAppReviewDone(this) &&
+            BRSharedPrefs.getSendTransactionCount(this) > 2
+        ) {
             ReviewManager manager = ReviewManagerFactory.create(this);
             Task<ReviewInfo> request = manager.requestReviewFlow();
             request.addOnCompleteListener(task -> {
-                AnalyticsManager.logCustomEvent(BRConstants._20241006_DRR);
                 if (task.isSuccessful()) {
                     ReviewInfo reviewInfo = task.getResult();
-                    Task<Void> flow = manager.launchReviewFlow(BreadActivity.this, reviewInfo);
+                    Task<Void> flow = manager.launchReviewFlow(
+                        BreadActivity.this,
+                        reviewInfo
+                    );
                     flow.addOnCompleteListener(task1 -> {
                         // The flow has finished. The API does not indicate whether the user
                         // reviewed or not, or even whether the review dialog was shown. Thus, no
                         // matter the result, we continue our app flow.
-                        Timber.i("timber: In-app LaunchReviewFlow completed successful (%s)", task1.isSuccessful());
+                        Timber.i(
+                            "timber: In-app LaunchReviewFlow completed successful (%s)",
+                            task1.isSuccessful()
+                        );
                         if (task1.isSuccessful()) {
                             BRSharedPrefs.inAppReviewDone(BreadActivity.this);
-                            AnalyticsManager.logCustomEvent(BRConstants._20241006_UCR);
                         }
                     });
                 } else {
-                    Timber.e(task.getException(), "In-app request review flow failed");
+                    Timber.e(
+                        task.getException(),
+                        "In-app request review flow failed"
+                    );
                 }
             });
         }
@@ -226,7 +266,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     private void setListeners() {
-        bottomNav.setOnNavigationItemSelectedListener(item -> handleNavigationItemSelected(item.getItemId()));
+        bottomNav.setOnNavigationItemSelectedListener(item ->
+            handleNavigationItemSelected(item.getItemId())
+        );
 
         primaryPrice.setOnClickListener(v -> swap());
         secondaryPrice.setOnClickListener(v -> swap());
@@ -241,7 +283,12 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         if (mSelectedBottomNavItem == menuItemId) return true;
         mSelectedBottomNavItem = menuItemId;
         if (menuItemId == R.id.nav_history) {
-            ExtensionKt.replaceFragment(BreadActivity.this, new HistoryFragment(), false, R.id.fragment_container);
+            ExtensionKt.replaceFragment(
+                BreadActivity.this,
+                new HistoryFragment(),
+                false,
+                R.id.fragment_container
+            );
         } else if (menuItemId == R.id.nav_send) {
             if (BRAnimator.isClickAllowed()) {
                 BRAnimator.showSendFragment(BreadActivity.this, null);
@@ -253,7 +300,12 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             }
             mSelectedBottomNavItem = 0;
         } else if (menuItemId == R.id.nav_buy) {
-            ExtensionKt.replaceFragment(BreadActivity.this, new BuyTabFragment(), false, R.id.fragment_container);
+            ExtensionKt.replaceFragment(
+                BreadActivity.this,
+                new BuyTabFragment(),
+                false,
+                R.id.fragment_container
+            );
         }
         return true;
     }
@@ -272,22 +324,33 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
         if (animate) {
             TransitionSet textSizeTransition = new TransitionSet()
-                    .setOrdering(TransitionSet.ORDERING_TOGETHER)
-                    .addTransition(new TextSizeTransition())
-                    .addTransition(new ChangeBounds());
+                .setOrdering(TransitionSet.ORDERING_TOGETHER)
+                .addTransition(new TextSizeTransition())
+                .addTransition(new ChangeBounds());
 
             TransitionSet transition = new TransitionSet()
-                    .setOrdering(TransitionSet.ORDERING_SEQUENTIAL)
-                    .addTransition(new Fade(Fade.OUT))
-                    .addTransition(textSizeTransition)
-                    .addTransition(new Fade(Fade.IN));
-            TransitionManager.beginDelayedTransition(toolBarConstraintLayout, transition);
+                .setOrdering(TransitionSet.ORDERING_SEQUENTIAL)
+                .addTransition(new Fade(Fade.OUT))
+                .addTransition(textSizeTransition)
+                .addTransition(new Fade(Fade.IN));
+            TransitionManager.beginDelayedTransition(
+                toolBarConstraintLayout,
+                transition
+            );
         }
 
-        primaryPrice.setTextSize(ltcPreferred ? PRIMARY_TEXT_SIZE : SECONDARY_TEXT_SIZE);
-        secondaryPrice.setTextSize(ltcPreferred ? SECONDARY_TEXT_SIZE : PRIMARY_TEXT_SIZE);
+        primaryPrice.setTextSize(
+            ltcPreferred ? PRIMARY_TEXT_SIZE : SECONDARY_TEXT_SIZE
+        );
+        secondaryPrice.setTextSize(
+            ltcPreferred ? SECONDARY_TEXT_SIZE : PRIMARY_TEXT_SIZE
+        );
 
-        int[] ids = {primaryPrice.getId(), secondaryPrice.getId(), equals.getId()};
+        int[] ids = {
+            primaryPrice.getId(),
+            secondaryPrice.getId(),
+            equals.getId(),
+        };
         // Clear views constraints
         for (int id : ids) {
             set.clear(id);
@@ -298,37 +361,95 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         int dp16 = Utils.getPixelsFromDps(this, 16);
         int dp8 = Utils.getPixelsFromDps(this, 4);
 
-        int leftId = ltcPreferred ? primaryPrice.getId() : secondaryPrice.getId();
-        int rightId = ltcPreferred ? secondaryPrice.getId() : primaryPrice.getId();
+        int leftId = ltcPreferred
+            ? primaryPrice.getId()
+            : secondaryPrice.getId();
+        int rightId = ltcPreferred
+            ? secondaryPrice.getId()
+            : primaryPrice.getId();
 
-        int[] chainViews = {leftId, equals.getId(), rightId};
+        int[] chainViews = { leftId, equals.getId(), rightId };
 
-        set.connect(leftId, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp16);
-        set.connect(leftId, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
-        set.connect(leftId, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, dp16);
+        set.connect(
+            leftId,
+            ConstraintSet.START,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.START,
+            dp16
+        );
+        set.connect(
+            leftId,
+            ConstraintSet.TOP,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.TOP
+        );
+        set.connect(
+            leftId,
+            ConstraintSet.BOTTOM,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.BOTTOM,
+            dp16
+        );
         set.setVerticalBias(leftId, 1.0f);
 
-        set.connect(rightId, ConstraintSet.BASELINE, leftId, ConstraintSet.BASELINE);
-        set.connect(equals.getId(), ConstraintSet.BASELINE, leftId, ConstraintSet.BASELINE);
+        set.connect(
+            rightId,
+            ConstraintSet.BASELINE,
+            leftId,
+            ConstraintSet.BASELINE
+        );
+        set.connect(
+            equals.getId(),
+            ConstraintSet.BASELINE,
+            leftId,
+            ConstraintSet.BASELINE
+        );
 
-        set.connect(equals.getId(), ConstraintSet.START, leftId, ConstraintSet.END, dp8);
-        set.connect(equals.getId(), ConstraintSet.END, rightId, ConstraintSet.START, dp8);
+        set.connect(
+            equals.getId(),
+            ConstraintSet.START,
+            leftId,
+            ConstraintSet.END,
+            dp8
+        );
+        set.connect(
+            equals.getId(),
+            ConstraintSet.END,
+            rightId,
+            ConstraintSet.START,
+            dp8
+        );
 
-        set.createHorizontalChain(leftId, ConstraintSet.LEFT, equals.getId(), ConstraintSet.RIGHT, chainViews, null, ConstraintSet.CHAIN_PACKED);
+        set.createHorizontalChain(
+            leftId,
+            ConstraintSet.LEFT,
+            equals.getId(),
+            ConstraintSet.RIGHT,
+            chainViews,
+            null,
+            ConstraintSet.CHAIN_PACKED
+        );
 
         // Apply the changes
         set.applyTo(toolBarConstraintLayout);
 
-        mHandler.postDelayed(() -> updateUI(), toolBarConstraintLayout.getLayoutTransition().getDuration(LayoutTransition.CHANGING));
+        mHandler.postDelayed(
+            () -> updateUI(),
+            toolBarConstraintLayout
+                .getLayoutTransition()
+                .getDuration(LayoutTransition.CHANGING)
+        );
     }
 
-    private void checkTransactionDatabase() {
-
-    }
+    private void checkTransactionDatabase() {}
 
     private void setUpBarFlipper() {
-        barFlipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.flipper_enter));
-        barFlipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.flipper_exit));
+        barFlipper.setInAnimation(
+            AnimationUtils.loadAnimation(this, R.anim.flipper_enter)
+        );
+        barFlipper.setOutAnimation(
+            AnimationUtils.loadAnimation(this, R.anim.flipper_exit)
+        );
     }
 
     @Override
@@ -347,7 +468,11 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         setupNetworking();
 
         if (!BRWalletManager.getInstance().isCreated()) {
-            BRExecutor.getInstance().forBackgroundTasks().execute(() -> BRWalletManager.getInstance().initWallet(BreadActivity.this));
+            BRExecutor.getInstance()
+                .forBackgroundTasks()
+                .execute(() ->
+                    BRWalletManager.getInstance().initWallet(BreadActivity.this)
+                );
         }
         mHandler.postDelayed(() -> updateUI(), 1000);
 
@@ -355,8 +480,11 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     private void setupNetworking() {
-        if (mConnectionReceiver == null) mConnectionReceiver = InternetManager.getInstance();
-        IntentFilter mNetworkStateFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        if (mConnectionReceiver == null) mConnectionReceiver =
+            InternetManager.getInstance();
+        IntentFilter mNetworkStateFilter = new IntentFilter(
+            ConnectivityManager.CONNECTIVITY_ACTION
+        );
         registerReceiver(mConnectionReceiver, mNetworkStateFilter);
         InternetManager.addConnectionListener(this);
     }
@@ -378,7 +506,9 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         menuBut = findViewById(R.id.menuBut);
         bottomNav = findViewById(R.id.bottomNav);
         bottomNav.getMenu().clear();
-        bottomNav.inflateMenu(isInUsa() ? R.menu.bottom_nav_menu_us : R.menu.bottom_nav_menu);
+        bottomNav.inflateMenu(
+            isInUsa() ? R.menu.bottom_nav_menu_us : R.menu.bottom_nav_menu
+        );
         balanceTxtV = findViewById(R.id.balanceTxtV);
 
         primaryPrice = findViewById(R.id.primary_price);
@@ -389,23 +519,30 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         barFlipper = findViewById(R.id.tool_bar_flipper);
 
         final ViewTreeObserver observer = primaryPrice.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (observer.isAlive()) {
-                    observer.removeOnGlobalLayoutListener(this);
+        observer.addOnGlobalLayoutListener(
+            new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (observer.isAlive()) {
+                        observer.removeOnGlobalLayoutListener(this);
+                    }
+                    if (uiIsDone) return;
+                    uiIsDone = true;
+                    setPriceTags(
+                        BRSharedPrefs.getPreferredLTC(BreadActivity.this),
+                        false
+                    );
                 }
-                if (uiIsDone) return;
-                uiIsDone = true;
-                setPriceTags(BRSharedPrefs.getPreferredLTC(BreadActivity.this), false);
             }
-        });
+        );
 
         balanceTxtV.append(":");
     }
 
     private boolean isInUsa() {
-        TelephonyManager telManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        TelephonyManager telManager = (TelephonyManager) getSystemService(
+            TELEPHONY_SERVICE
+        );
         return "us".equals(telManager.getSimCountryIso());
     }
 
@@ -415,25 +552,49 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     public void updateUI() {
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(() -> {
-            Thread.currentThread().setName(Thread.currentThread().getName() + ":updateUI");
-            //sleep a little in order to make sure all the commits are finished (like SharePreferences commits)
-            String iso = BRSharedPrefs.getIsoSymbol(BreadActivity.this);
+        BRExecutor.getInstance()
+            .forLightWeightBackgroundTasks()
+            .execute(() -> {
+                Thread.currentThread()
+                    .setName(Thread.currentThread().getName() + ":updateUI");
+                //sleep a little in order to make sure all the commits are finished (like SharePreferences commits)
+                String iso = BRSharedPrefs.getIsoSymbol(BreadActivity.this);
 
-            //current amount in litoshis
-            final BigDecimal amount = new BigDecimal(BRSharedPrefs.getCatchedBalance(BreadActivity.this));
+                //current amount in litoshis
+                final BigDecimal amount = new BigDecimal(
+                    BRSharedPrefs.getCatchedBalance(BreadActivity.this)
+                );
 
-            //amount in LTC units
-            BigDecimal btcAmount = BRExchange.getLitecoinForLitoshis(BreadActivity.this, amount);
-            final String formattedBTCAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, "LTC", btcAmount);
+                //amount in LTC units
+                BigDecimal btcAmount = BRExchange.getLitecoinForLitoshis(
+                    BreadActivity.this,
+                    amount
+                );
+                final String formattedBTCAmount =
+                    BRCurrency.getFormattedCurrencyString(
+                        BreadActivity.this,
+                        "LTC",
+                        btcAmount
+                    );
 
-            final BigDecimal curAmount = BRExchange.getAmountFromLitoshis(BreadActivity.this, iso, amount);
-            final String formattedCurAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, iso, curAmount);
-            runOnUiThread(() -> {
-                primaryPrice.setText(formattedBTCAmount);
-                secondaryPrice.setText(String.format("%s", formattedCurAmount));
+                final BigDecimal curAmount = BRExchange.getAmountFromLitoshis(
+                    BreadActivity.this,
+                    iso,
+                    amount
+                );
+                final String formattedCurAmount =
+                    BRCurrency.getFormattedCurrencyString(
+                        BreadActivity.this,
+                        iso,
+                        curAmount
+                    );
+                runOnUiThread(() -> {
+                    primaryPrice.setText(formattedBTCAmount);
+                    secondaryPrice.setText(
+                        String.format("%s", formattedCurAmount)
+                    );
+                });
             });
-        });
     }
 
     @Override
@@ -447,14 +608,24 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    public void onRequestPermissionsResult(
+        int requestCode,
+        @NonNull String[] permissions,
+        @NonNull int[] grantResults
+    ) {
+        super.onRequestPermissionsResult(
+            requestCode,
+            permissions,
+            grantResults
+        );
 
         switch (requestCode) {
             case BRConstants.CAMERA_REQUEST_ID: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (
+                    grantResults.length > 0 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED
+                ) {
                     BRAnimator.openScanner(this, BRConstants.SCANNER_REQUEST);
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
@@ -471,7 +642,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
     @Override
     public void onConnectionChanged(boolean isConnected) {
-
         Context thisContext = BreadActivity.this;
         Context app = BreadApp.getBreadContext();
         if (isConnected) {
@@ -480,12 +650,17 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                     removeNotificationBar();
                 }
             }
-            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(() -> {
-                final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(thisContext));
-                if (progress > 0 && progress < 1) {
-                    SyncManager.getInstance().startSyncingProgressThread(app);
-                }
-            });
+            BRExecutor.getInstance()
+                .forLightWeightBackgroundTasks()
+                .execute(() -> {
+                    final double progress = BRPeerManager.syncProgress(
+                        BRSharedPrefs.getStartHeight(thisContext)
+                    );
+                    if (progress > 0 && progress < 1) {
+                        SyncManager.getInstance()
+                            .startSyncingProgressThread(app);
+                    }
+                });
         } else {
             if (barFlipper != null) {
                 addNotificationBar();

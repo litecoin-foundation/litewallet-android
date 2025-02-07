@@ -1,26 +1,19 @@
 package com.breadwallet.tools.manager;
 
+import static com.breadwallet.tools.util.BRConstants.*;
 import static com.breadwallet.tools.util.BRConstants.LW_API_HOST;
-import static com.breadwallet.tools.util.BRConstants.LW_API_HOST_NEW;
 import static com.breadwallet.tools.util.BRConstants.LW_BACKUP_API_HOST;
-import static com.breadwallet.tools.util.BRConstants.LW_BACKUP_API_HOST_NEW;
-import static com.breadwallet.tools.util.BRConstants._20230113_BAC;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
-
+import com.breadwallet.BreadApp;
 import com.breadwallet.presenter.entities.CurrencyEntity;
 import com.breadwallet.tools.sqlite.CurrencyDataSource;
 import com.breadwallet.tools.threads.BRExecutor;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
-import com.litewallet.data.source.RemoteConfigSource;
 import com.platform.APIClient;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,23 +26,31 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import timber.log.Timber;
 
 public class BRApiManager {
+
+    private static BRApiManager instance;
     private Timer timer;
 
     private TimerTask timerTask;
 
     private Handler handler;
 
-    private RemoteConfigSource remoteConfigSource;
+    private BRApiManager() {
+        handler = new Handler();
+    }
 
-    public BRApiManager(RemoteConfigSource remoteConfigSource) {
-        this.remoteConfigSource = remoteConfigSource;
-        this.handler = new Handler();
+    public static BRApiManager getInstance() {
+        if (instance == null) {
+            instance = new BRApiManager();
+        }
+        return instance;
     }
 
     private Set<CurrencyEntity> getCurrencies(Activity context) {
@@ -69,7 +70,10 @@ public class BRApiManager {
                         tmp.rate = (float) tmpObj.getDouble("n");
                         if (tmp.code.equalsIgnoreCase(selectedISO)) {
                             BRSharedPrefs.putIso(context, tmp.code);
-                            BRSharedPrefs.putCurrencyListPosition(context, i - 1);
+                            BRSharedPrefs.putCurrencyListPosition(
+                                context,
+                                i - 1
+                            );
                         }
                     } catch (JSONException e) {
                         Timber.e(e);
@@ -87,22 +91,32 @@ public class BRApiManager {
         return new LinkedHashSet<>(set);
     }
 
-
     private void initializeTimerTask(final Context context) {
         timerTask = new TimerTask() {
             public void run() {
                 //use a handler to run a toast that shows the current timestamp
-                handler.post(new Runnable() {
-                    public void run() {
-                        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                Set<CurrencyEntity> tmp = getCurrencies((Activity) context);
-                                CurrencyDataSource.getInstance(context).putCurrencies(tmp);
-                            }
-                        });
+                handler.post(
+                    new Runnable() {
+                        public void run() {
+                            BRExecutor.getInstance()
+                                .forLightWeightBackgroundTasks()
+                                .execute(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Set<CurrencyEntity> tmp =
+                                                getCurrencies(
+                                                    (Activity) context
+                                                );
+                                            CurrencyDataSource.getInstance(
+                                                context
+                                            ).putCurrencies(tmp);
+                                        }
+                                    }
+                                );
+                        }
                     }
-                });
+                );
             }
         };
     }
@@ -127,15 +141,17 @@ public class BRApiManager {
         }
     }
 
-    public JSONArray fetchRates(Activity activity) {
-        String jsonString = createGETRequestURL(activity, getBaseUrlProd() + "/api/v1/rates");
+    public static JSONArray fetchRates(Activity activity) {
+        String jsonString = createGETRequestURL(
+            activity,
+            LW_API_HOST + "/api/v1/rates"
+        );
         JSONArray jsonArray = null;
         if (jsonString == null) return null;
         try {
             jsonArray = new JSONArray(jsonString);
             // DEV Uncomment to view values
-//            Timber.d("timber: baseUrlProd: %s", getBaseUrlProd());
-//            Timber.d("timber: JSON %s",jsonArray.toString());
+            // Timber.d("timber: JSON %s",jsonArray.toString());
 
         } catch (JSONException ex) {
             Timber.e(ex);
@@ -143,17 +159,16 @@ public class BRApiManager {
         return jsonArray == null ? backupFetchRates(activity) : jsonArray;
     }
 
-    public JSONArray backupFetchRates(Activity activity) {
-        String baseUrlDev = remoteConfigSource.getBoolean(RemoteConfigSource.KEY_API_BASEURL_DEV_NEW_ENABLED) ? LW_BACKUP_API_HOST_NEW : LW_BACKUP_API_HOST;
-        String jsonString = createGETRequestURL(activity, baseUrlDev + "/api/v1/rates");
-
-        AnalyticsManager.logCustomEvent(_20230113_BAC);
+    public static JSONArray backupFetchRates(Activity activity) {
+        String jsonString = createGETRequestURL(
+            activity,
+            LW_BACKUP_API_HOST + "/api/v1/rates"
+        );
 
         JSONArray jsonArray = null;
         if (jsonString == null) return null;
         try {
             jsonArray = new JSONArray(jsonString);
-
         } catch (JSONException e) {
             Timber.e(e);
         }
@@ -162,15 +177,23 @@ public class BRApiManager {
 
     // createGETRequestURL
     // Creates the params and headers to make a GET Request
-    private String createGETRequestURL(Context app, String myURL) {
+    private static String createGETRequestURL(Context app, String myURL) {
         Request request = new Request.Builder()
-                .url(myURL)
-                .header("Content-Type", "application/json")
-                .header("Accept", "application/json")
-                .header("User-agent", Utils.getAgentString(app, "android/HttpURLConnection"))
-                .get().build();
+            .url(myURL)
+            .header("Content-Type", "application/json")
+            .header("Accept", "application/json")
+            .header(
+                "User-agent",
+                Utils.getAgentString(app, "android/HttpURLConnection")
+            )
+            .get()
+            .build();
         String response = null;
-        Response resp = APIClient.getInstance(app).sendRequest(request, false, 0);
+        Response resp = APIClient.getInstance(app).sendRequest(
+            request,
+            false,
+            0
+        );
 
         try {
             if (resp == null) {
@@ -183,7 +206,10 @@ public class BRApiManager {
                 Timber.i("timber: urlGET: strDate is null!");
                 return response;
             }
-            SimpleDateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
+            SimpleDateFormat formatter = new SimpleDateFormat(
+                "EEE, dd MMM yyyy HH:mm:ss z",
+                Locale.US
+            );
             Date date = formatter.parse(strDate);
             long timeStamp = date.getTime();
             BRSharedPrefs.putSecureTime(app, timeStamp);
@@ -193,9 +219,5 @@ public class BRApiManager {
             if (resp != null) resp.close();
         }
         return response;
-    }
-
-    public String getBaseUrlProd() {
-        return remoteConfigSource.getBoolean(RemoteConfigSource.KEY_API_BASEURL_PROD_NEW_ENABLED) ? LW_API_HOST_NEW : LW_API_HOST;
     }
 }

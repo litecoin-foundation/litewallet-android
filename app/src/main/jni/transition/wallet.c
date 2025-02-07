@@ -548,34 +548,6 @@ Java_com_breadwallet_wallet_BRWalletManager_tryTransaction(JNIEnv *env, jobject 
     return result;
 }
 
-JNIEXPORT jbyteArray JNICALL
-Java_com_breadwallet_wallet_BRWalletManager_tryTransactionWithOps(JNIEnv *env, jobject obj,
-                                                                  jstring jSendAddress, jlong jSendAmount,
-                                                                  jstring jOpsAddress, jlong jOpsFeeAmount) {
-    __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "tryTransactionWithOps");
-    if (!_wallet) return 0;
-
-    const char *rawSendAddress = (*env)->GetStringUTFChars(env, jSendAddress, NULL);
-    const char *rawOpsAddress = (*env)->GetStringUTFChars(env, jOpsAddress, NULL);
-
-    BRTransaction *tx = BRWalletCreateOpsTransaction(_wallet, (uint64_t) jSendAmount,
-                                                     rawSendAddress,
-                                                     (uint64_t) jOpsFeeAmount,
-                                                     rawOpsAddress);
-    if (!tx) return NULL;
-
-    size_t len = BRTransactionSerialize(tx, NULL, 0);
-    uint8_t *buf = malloc(len);
-
-    len = BRTransactionSerialize(tx, buf, len);
-
-    jbyteArray result = (*env)->NewByteArray(env, (jsize) len);
-
-    (*env)->SetByteArrayRegion(env, result, 0, (jsize) len, (jbyte *) buf);
-    free(buf);
-    return result;
-}
-
 JNIEXPORT jboolean JNICALL Java_com_breadwallet_wallet_BRWalletManager_isCreated(JNIEnv *env,
                                                                                  jobject obj) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "wallet isCreated %s",
@@ -829,7 +801,6 @@ JNIEXPORT jobject JNICALL Java_com_breadwallet_wallet_BRWalletManager_getPrivKey
     BRTransactionAddOutput(_privKeyTx, 0, script, scriptLen);
 
     uint64_t fee = BRWalletFeeForTxSize(_wallet, BRTransactionSize(_privKeyTx));
-    uint64_t oPSFee = 0L;
 
     _privKeyTx->outputs[0].amount = _privKeyBalance - fee;
 
@@ -1101,4 +1072,3 @@ JNIEXPORT jbyteArray JNICALL Java_com_breadwallet_wallet_BRWalletManager_sweepBC
     return result;
 
 }
-

@@ -7,37 +7,34 @@ import android.view.ViewGroup
 import com.breadwallet.databinding.FragmentHistoryBinding
 import com.breadwallet.presenter.activities.BreadActivity
 import com.breadwallet.presenter.base.BaseFragment
-import com.breadwallet.tools.manager.AnalyticsManager
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.manager.BRSharedPrefs.OnIsoChangedListener
 import com.breadwallet.tools.manager.TxManager
 import com.breadwallet.tools.sqlite.TransactionDataSource.OnTxAddedListener
 import com.breadwallet.tools.threads.BRExecutor
-import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.wallet.BRPeerManager
 import com.breadwallet.wallet.BRPeerManager.OnTxStatusUpdate
 import com.breadwallet.wallet.BRWalletManager
 import com.breadwallet.wallet.BRWalletManager.OnBalanceChanged
 import timber.log.Timber
 
-/** Litewallet
- * Created by Mohamed Barry on 6/1/20
- * email: mosadialiou@gmail.com
- * Copyright © 2020 Litecoin Foundation. All rights reserved.
+/**
+ * Litewallet Created by Mohamed Barry on 6/1/20 email: mosadialiou@gmail.com Copyright © 2020
+ * Litecoin Foundation. All rights reserved.
  */
 class HistoryFragment :
-    BaseFragment<HistoryPresenter>(),
-    OnBalanceChanged,
-    OnTxStatusUpdate,
-    OnIsoChangedListener,
-    OnTxAddedListener,
-    HistoryView {
+        BaseFragment<HistoryPresenter>(),
+        OnBalanceChanged,
+        OnTxStatusUpdate,
+        OnIsoChangedListener,
+        OnTxAddedListener,
+        HistoryView {
     lateinit var binding: FragmentHistoryBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?,
     ): View {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
@@ -61,8 +58,7 @@ class HistoryFragment :
     }
     private fun registerAnalyticsError(errorString: String) {
         val params = Bundle()
-        params.putString("lwa_error_message", errorString);
-        AnalyticsManager.logCustomEventWithParams(BRConstants._20200112_ERR, params)
+        params.putString("lwa_error_message", errorString)
         Timber.d("History Fragment: RegisterError : %s", errorString)
     }
     override fun onResume() {
@@ -71,8 +67,7 @@ class HistoryFragment :
 
         if (this.activity == null) {
             registerAnalyticsError("null_in_history_fragment_on_resume")
-        }
-        else {
+        } else {
             TxManager.getInstance().onResume(this.activity)
         }
     }
@@ -90,8 +85,7 @@ class HistoryFragment :
         BRExecutor.getInstance().forBackgroundTasks().execute {
             if (this.activity == null) {
                 registerAnalyticsError("null_in_history_fragment_on_status_update")
-            }
-            else {
+            } else {
                 TxManager.getInstance().updateTxList(this.activity)
             }
         }
@@ -105,8 +99,7 @@ class HistoryFragment :
         BRExecutor.getInstance().forBackgroundTasks().execute {
             if (this.activity == null) {
                 registerAnalyticsError("null_in_history_fragment_on_tx_added")
-            }
-            else {
+            } else {
                 TxManager.getInstance().updateTxList(this.activity)
             }
         }
@@ -115,9 +108,9 @@ class HistoryFragment :
         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute {
             if (this.activity == null) {
                 registerAnalyticsError("null_in_history_fragment_update_ui")
-            }
-            else {
-                Thread.currentThread().name = Thread.currentThread().name + "HistoryFragment:updateUI"
+            } else {
+                Thread.currentThread().name =
+                        Thread.currentThread().name + "HistoryFragment:updateUI"
                 TxManager.getInstance().updateTxList(this.activity)
             }
         }

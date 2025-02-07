@@ -1,8 +1,7 @@
 package com.breadwallet.tools.util;
+
 import androidx.annotation.StringDef;
-
 import com.breadwallet.BuildConfig;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.math.RoundingMode;
@@ -10,16 +9,18 @@ import java.util.Locale;
 
 public class BRConstants {
 
-    private BRConstants() {
-    }
+    private BRConstants() {}
 
     /**
      * App Version and Version Code
      */
 
-    public static final String APP_VERSION_NAME_CODE = String.format(Locale.US, "%1$s (%2$s)",
-            BuildConfig.VERSION_NAME,
-            BuildConfig.VERSION_CODE);
+    public static final String APP_VERSION_NAME_CODE = String.format(
+        Locale.US,
+        "%1$s (%2$s)",
+        BuildConfig.VERSION_NAME,
+        BuildConfig.VERSION_CODE
+    );
 
     /**
      * Native library name
@@ -69,7 +70,8 @@ public class BRConstants {
     public static final String PHRASE_WRITTEN = "phraseWritten";
     public static final String ALLOW_SPEND = "allowSpend";
     public static final String USER_ID = "userId";
-    public static final String GEO_PERMISSIONS_REQUESTED = "geoPermissionsRequested";
+    public static final String GEO_PERMISSIONS_REQUESTED =
+        "geoPermissionsRequested";
 
     /**
      * Currency units
@@ -91,97 +93,31 @@ public class BRConstants {
      * App External URLs
      */
 
-    public static final String TWITTER_LINK = "https://twitter.com/Litewallet_App";
-    public static final String INSTAGRAM_LINK = "https://www.instagram.com/litewallet.app";
-    public static final String WEB_LINK = "https://litewallet.io";
+    public static final String TWITTER_LINK =
+        "https://twitter.com/ltcfoundation";
+    public static final String INSTAGRAM_LINK =
+        "https://www.instagram.com/ltcfoundation";
+    public static final String WEB_LINK = "https://litecoin.com";
     public static final String TOS_LINK = "https://litewallet.io/privacy";
-    public static String CUSTOMER_SUPPORT_LINK = "https://support.litewallet.io/hc/en-us/requests/new";
-    public static String BITREFILL_AFFILIATE_LINK = "https://www.bitrefill.com/";
+    public static String CUSTOMER_SUPPORT_LINK =
+        "https://chat-mobile.litecoin.com/widget?website_token=1kCbkQay5t4CyvyP9JsrkJWh";
+    public static String BITREFILL_AFFILIATE_LINK =
+        "https://www.bitrefill.com/";
 
     /**
      * API Hosts
      */
-    public static final String LW_API_HOST = "https://api-prod.lite-wallet.org";
-    public static final String LW_BACKUP_API_HOST = "https://api-dev.lite-wallet.org";
-    public static final String LW_API_HOST_NEW = "https://prod.apigsltd.net";
-    public static final String LW_BACKUP_API_HOST_NEW = "https://dev.apigsltd.net";
+    public static final String LW_API_HOST = "https://api.loafwallet.org";
+    public static final String LW_BACKUP_API_HOST =
+        "https://api.loafwallet.org";
 
-    public static final String BLOCK_EXPLORER_BASE_URL = BuildConfig.LITECOIN_TESTNET ? "https://chain.so/tx/LTCTEST/" : "https://blockchair.com/litecoin/transaction/";
+    public static final String BLOCK_EXPLORER_BASE_URL =
+        BuildConfig.LITECOIN_TESTNET
+            ? "https://chain.so/tx/LTCTEST/"
+            : "https://blockchair.com/litecoin/transaction/";
 
-    public static final String _20191105_AL = "app_launched";
-    public static final String _20191105_VSC = "visit_send_controller";
-    public static final String _20202116_VRC = "visit_receive_controller";
-    public static final String _20191105_DSL = "did_send_ltc";
-    public static final String _20191105_DTBT = "did_tap_buy_tab";
-    public static final String _20200111_RNI = "rate_not_initialized";
-    public static final String _20200111_FNI = "feeperkb_not_initialized";
-    public static final String _20200111_TNI = "transaction_not_initialized";
-    public static final String _20200111_WNI = "wallet_not_initialized";
-    public static final String _20200111_PNI = "phrase_not_initialized";
-    public static final String _20200111_UTST = "unable_to_sign_transaction";
-    public static final String _20200112_ERR = "lwa_error";
-    public static final String _20200112_DSR = "did_start_resync";
-    public static final String _20200125_DSRR = "did_show_review_request";
-    public static final String _20201118_DTGS = "did_tap_get_support";
-    public static final String _20200217_DUWP = "did_unlock_with_pin";
-    public static final String _20200217_DUWB = "did_unlock_with_biometrics";
-    public static final String _20200301_DUDFPK = "did_use_default_fee_per_kb";
-    public static final String _20201121_SIL = "started_IFPS_lookup";
-    public static final String _20201121_DRIA = "did_resolve_IPFS_address";
-    public static final String _20201121_FRIA = "failed_resolve_IPFS_address";
-    public static final String _20230113_BAC = "backup_apiserver_called";
-    public static final String _20230407_DCS = "did_complete_sync";
-    ///Dev: These events not yet used
-    public static final String _20200207_DTHB = "did_tap_header_balance";
-    public static final String _20210427_HCIEEH = "heartbeat_check_if_event_even_happens";
-    public static final String _20220822_UTOU = "user_tapped_on_ud";
-    public static final String _20230131_NENR = "no_error_nominal_response";
-    public static final String _20240123_RAGI = "registered_android_general_interest";
-    public static final String _20231225_UAP = "user_accepted_push";
-    public static final String _20240101_US = "user_signup";
-    public static final String _20241006_DRR = "did_request_rating";
-    public static final String _20241006_UCR = "user_completed_rating";
-    public static final String _HOME_OPEN = "home_open";
-
-    @Retention(RetentionPolicy.SOURCE)
-    @StringDef({
-            _20191105_AL,
-            _20191105_VSC,
-            _20202116_VRC,
-            _20191105_DSL,
-            _20191105_DTBT,
-            _20200111_RNI,
-            _20200111_FNI,
-            _20200111_TNI,
-            _20200111_WNI,
-            _20200111_PNI,
-            _20200111_UTST,
-            _20200112_ERR,
-            _20200112_DSR,
-            _20200125_DSRR,
-            _20201118_DTGS,
-            _20200217_DUWP,
-            _20200217_DUWB,
-            _20200301_DUDFPK,
-            _20201121_SIL,
-            _20201121_DRIA,
-            _20201121_FRIA,
-            _20230113_BAC,
-            _20200207_DTHB,
-            _20210427_HCIEEH,
-            _20220822_UTOU,
-            _20230131_NENR,
-            _20230407_DCS,
-            _20240123_RAGI,
-            _20231225_UAP,
-            _20240101_US,
-            _20241006_DRR,
-            _20241006_UCR,
-            _HOME_OPEN
-    })
     public @interface Event {
     }
-
 
     /**
      * Analytics keys
@@ -193,8 +129,8 @@ public class BRConstants {
     public static final String ERROR = "error";
 
     /**
-    * False Positive rate keys
-    */
+     * False Positive rate keys
+     */
     public static final float FALSE_POS_RATE_LOW_PRIVACY = 0.00005F;
     public static final float FALSE_POS_RATE_SEMI_PRIVACY = 0.00008F;
     public static final float FALSE_POS_RATE_ANONYMOUS = 0.0005F;

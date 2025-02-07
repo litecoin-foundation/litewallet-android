@@ -91,10 +91,6 @@ public class BRSender {
                                         "timber: sendTransaction: fee out of date even after fetching..."
                                     );
 
-                                    AnalyticsManager.logCustomEvent(
-                                        BRConstants._20200111_FNI
-                                    );
-
                                     throw new FeeOutOfDate(time, now);
                                 }
                             }
@@ -228,7 +224,7 @@ public class BRSender {
             throw ex;
         }
 
-        long sendAmount = transactionItem.sendAmount + transactionItem.opsFee;
+        long sendAmount = transactionItem.sendAmount;
         long balance = BRWalletManager.getInstance().getBalance(app);
         final BRWalletManager m = BRWalletManager.getInstance();
         long minOutputAmount = BRWalletManager.getInstance()
@@ -268,7 +264,7 @@ public class BRSender {
 
             long feeForTx = m.feeForTransaction(
                 transactionItem.sendAddress,
-                transactionItem.sendAmount + transactionItem.opsFee
+                transactionItem.sendAmount
             );
             throw new FeeNeedsAdjust(sendAmount, balance, feeForTx);
         }
@@ -279,11 +275,9 @@ public class BRSender {
                 new Runnable() {
                     @Override
                     public void run() {
-                        byte[] tmpTx = m.tryTransactionWithOps(
+                        byte[] tmpTx = m.tryTransaction(
                             transactionItem.sendAddress,
-                            transactionItem.sendAmount,
-                            transactionItem.opsAddress,
-                            transactionItem.opsFee
+                            transactionItem.sendAmount
                         );
                         if (tmpTx == null) {
                             //something went wrong, failed to create tx
@@ -468,12 +462,23 @@ public class BRSender {
                                 new Runnable() {
                                     @Override
                                     public void run() {
-                                        BRAnimator.killAllFragments(
-                                            (FragmentActivity) ctx
-                                        );
-                                        BRAnimator.startBreadIfNotStarted(
-                                            (Activity) ctx
-                                        );
+                                        PostAuth.getInstance()
+                                            .onPublishTxAuth(ctx, false);
+                                        BRExecutor.getInstance()
+                                            .forMainThreadTasks()
+                                            .execute(
+                                                new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        BRAnimator.killAllFragments(
+                                                            (FragmentActivity) ctx
+                                                        );
+                                                        BRAnimator.startBreadIfNotStarted(
+                                                            (Activity) ctx
+                                                        );
+                                                    }
+                                                }
+                                            );
                                     }
                                 }
                             );
@@ -499,7 +504,7 @@ public class BRSender {
             transactionItem.sendAddress,
             transactionItem.sendAmount
         );
-        long opsFee = Utils.tieredOpsFee(ctx, transactionItem.sendAmount);
+
         if (feesForTx == 0) {
             long maxAmount = m.getMaxOutputAmount();
             if (maxAmount == -1) {
@@ -537,9 +542,8 @@ public class BRSender {
                 (BRWalletManager.getInstance().getBalance(ctx) -
                     transactionItem.sendAmount) %
                 100;
-            feesForTx += opsFee;
         }
-        final long total = transactionItem.sendAmount + feesForTx + opsFee;
+        final long total = transactionItem.sendAmount + feesForTx;
         String formattedAmountLTC = BRCurrency.getFormattedCurrencyString(
             ctx,
             "LTC",

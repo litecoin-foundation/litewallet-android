@@ -5,10 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
- 
-import androidx.annotation.Nullable; 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
-
 import com.breadwallet.BreadApp;
 import com.breadwallet.presenter.activities.DisabledActivity;
 import com.breadwallet.presenter.activities.intro.IntroActivity;
@@ -28,12 +26,11 @@ import com.breadwallet.wallet.BRWalletManager;
 import timber.log.Timber;
 
 public class BRActivity extends FragmentActivity {
-
     static {
         System.loadLibrary(BRConstants.NATIVE_LIB_NAME);
     }
 
-    @Override 
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         LocaleHelper.Companion.getInstance().setLocale(this);
         super.onCreate(savedInstanceState);
@@ -41,10 +38,12 @@ public class BRActivity extends FragmentActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(LocaleHelper.Companion.getInstance().setLocale(newBase));
+        super.attachBaseContext(
+            LocaleHelper.Companion.getInstance().setLocale(newBase)
+        );
     }
 
-    @Override 
+    @Override
     protected void onStop() {
         super.onStop();
         BreadApp.activityCounter.decrementAndGet();
@@ -59,17 +58,26 @@ public class BRActivity extends FragmentActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+    protected void onActivityResult(
+        int requestCode,
+        int resultCode,
+        final Intent data
+    ) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case BRConstants.PAY_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            PostAuth.getInstance().onPublishTxAuth(BRActivity.this, true);
-                        }
-                    });
+                    BRExecutor.getInstance()
+                        .forLightWeightBackgroundTasks()
+                        .execute(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    PostAuth.getInstance()
+                                        .onPublishTxAuth(BRActivity.this, true);
+                                }
+                            }
+                        );
                 }
                 break;
             case BRConstants.PAYMENT_PROTOCOL_REQUEST_CODE:
@@ -77,7 +85,6 @@ public class BRActivity extends FragmentActivity {
                     PostAuth.getInstance().onPaymentProtocolRequest(this, true);
                 }
                 break;
-
             case BRConstants.CANARY_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
                     PostAuth.getInstance().onCanaryCheck(this, true);
@@ -85,7 +92,6 @@ public class BRActivity extends FragmentActivity {
                     finish();
                 }
                 break;
-
             case BRConstants.SHOW_PHRASE_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
                     PostAuth.getInstance().onPhraseCheckAuth(this, true);
@@ -103,23 +109,31 @@ public class BRActivity extends FragmentActivity {
                     finish();
                 }
                 break;
-
             case BRConstants.SCANNER_REQUEST:
                 if (resultCode == Activity.RESULT_OK) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            String result = data.getStringExtra("result");
-                            if (BitcoinUrlHandler.isBitcoinUrl(result))
-                                BitcoinUrlHandler.processRequest(BRActivity.this, result);
-                            else
-                                Timber.i("timber: onActivityResult: not litecoin address NOR bitID");
-                        }
-                    }, 500);
-
+                    new Handler()
+                        .postDelayed(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    String result = data.getStringExtra(
+                                        "result"
+                                    );
+                                    if (
+                                        BitcoinUrlHandler.isBitcoinUrl(result)
+                                    ) BitcoinUrlHandler.processRequest(
+                                        BRActivity.this,
+                                        result
+                                    );
+                                    else Timber.i(
+                                        "timber: onActivityResult: not litecoin address NOR bitID"
+                                    );
+                                }
+                            },
+                            500
+                        );
                 }
                 break;
-
             case BRConstants.PUT_PHRASE_NEW_WALLET_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
                     PostAuth.getInstance().onCreateWalletAuth(this, true);
@@ -130,7 +144,6 @@ public class BRActivity extends FragmentActivity {
                     finish();
                 }
                 break;
-
             default:
                 super.onActivityResult(requestCode, resultCode, data);
         }
@@ -138,17 +151,24 @@ public class BRActivity extends FragmentActivity {
 
     public static void init(Activity app) {
         InternetManager.getInstance();
-        if (!(app instanceof IntroActivity || app instanceof RecoverActivity || app instanceof WriteDownActivity))
-            BreadApp.module.getApiManager().startTimer(app);
+        if (
+            !(app instanceof IntroActivity ||
+                app instanceof RecoverActivity ||
+                app instanceof WriteDownActivity)
+        ) BRApiManager.getInstance().startTimer(app);
         //show wallet locked if it is
-        if (!ActivityUTILS.isAppSafe(app))
-            if (AuthManager.getInstance().isWalletDisabled(app))
-                AuthManager.getInstance().setWalletDisabled(app);
+        if (!ActivityUTILS.isAppSafe(app)) if (
+            AuthManager.getInstance().isWalletDisabled(app)
+        ) AuthManager.getInstance().setWalletDisabled(app);
 
         BreadApp.activityCounter.incrementAndGet();
         BreadApp.setBreadContext(app);
         //lock wallet if 3 minutes passed (180 * 1000)
-        if (BreadApp.backgroundedTime != 0 && hasTimeElapsedSinceInBackground(180 * 1000) && !(app instanceof DisabledActivity)) {
+        if (
+            BreadApp.backgroundedTime != 0 &&
+            hasTimeElapsedSinceInBackground(180 * 1000) &&
+            !(app instanceof DisabledActivity)
+        ) {
             if (!BRKeyStore.getPinCode(app).isEmpty()) {
                 BRAnimator.startBreadActivity(app, true);
             }
@@ -157,6 +177,9 @@ public class BRActivity extends FragmentActivity {
     }
 
     private static boolean hasTimeElapsedSinceInBackground(long timeInMillis) {
-        return System.currentTimeMillis() - BreadApp.backgroundedTime >= timeInMillis;
+        return (
+            System.currentTimeMillis() - BreadApp.backgroundedTime >=
+            timeInMillis
+        );
     }
 }

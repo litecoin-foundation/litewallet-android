@@ -1,6 +1,5 @@
 package com.breadwallet.presenter.fragments;
 
-
 import static androidx.core.content.ContextCompat.getSystemService;
 
 import android.content.ClipData;
@@ -20,14 +19,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-
 import com.breadwallet.R;
-import com.breadwallet.presenter.entities.PartnerNames;
 import com.breadwallet.presenter.entities.TxItem;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.SlideDetector;
@@ -41,7 +37,6 @@ import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRPeerManager;
 import com.platform.entities.TxMetaData;
 import com.platform.tools.KVStoreManager;
-
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,7 +48,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import timber.log.Timber;
 
 public class FragmentTransactionItem extends Fragment {
@@ -77,18 +71,32 @@ public class FragmentTransactionItem extends Fragment {
     private TextView mTxHashLink;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.transaction_details_item, container, false);
+    public View onCreateView(
+        LayoutInflater inflater,
+        ViewGroup container,
+        Bundle savedInstanceState
+    ) {
+        final View rootView = inflater.inflate(
+            R.layout.transaction_details_item,
+            container,
+            false
+        );
         signalLayout = (LinearLayout) rootView.findViewById(R.id.signal_layout);
         mTitle = (TextView) rootView.findViewById(R.id.title);
-        mLargeDescriptionText = (TextView) rootView.findViewById(R.id.large_description_text);
+        mLargeDescriptionText = (TextView) rootView.findViewById(
+            R.id.large_description_text
+        );
         mSubHeader = (TextView) rootView.findViewById(R.id.sub_header);
         mCommentText = (EditText) rootView.findViewById(R.id.comment_text);
         mAddressText = (TextView) rootView.findViewById(R.id.address_text);
         mDateText = (TextView) rootView.findViewById(R.id.date_text);
         mToFromBottom = (TextView) rootView.findViewById(R.id.to_from);
-        mConfirmationText = (TextView) rootView.findViewById(R.id.confirmation_text);
-        mAvailableSpend = (TextView) rootView.findViewById(R.id.available_spend);
+        mConfirmationText = (TextView) rootView.findViewById(
+            R.id.confirmation_text
+        );
+        mAvailableSpend = (TextView) rootView.findViewById(
+            R.id.available_spend
+        );
         mTxHash = (TextView) rootView.findViewById(R.id.tx_hash);
         mTxHashLink = (TextView) rootView.findViewById(R.id.tx_hash_link);
         close = (ImageButton) rootView.findViewById(R.id.close_button);
@@ -97,7 +105,9 @@ public class FragmentTransactionItem extends Fragment {
         // Hiding until layouts are built.
         ImageButton faq = (ImageButton) rootView.findViewById(R.id.faq_button);
 
-        signalLayout.setOnTouchListener(new SlideDetector(signalLayout, this::close));
+        signalLayout.setOnTouchListener(
+            new SlideDetector(signalLayout, this::close)
+        );
 
         rootView.setOnClickListener(v -> {
             if (!BRAnimator.isClickAllowed()) return;
@@ -109,7 +119,10 @@ public class FragmentTransactionItem extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(
+        @NonNull View view,
+        @Nullable Bundle savedInstanceState
+    ) {
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() == null) {
             requireActivity().getSupportFragmentManager().popBackStack();
@@ -128,69 +141,147 @@ public class FragmentTransactionItem extends Fragment {
         }
 
         //get the current iso
-        String iso = BRSharedPrefs.getPreferredLTC(getActivity()) ? "LTC" : BRSharedPrefs.getIsoSymbol(getContext());
-
-        long opsAmount = getOpsAmount();
+        String iso = BRSharedPrefs.getPreferredLTC(getActivity())
+            ? "LTC"
+            : BRSharedPrefs.getIsoSymbol(getContext());
 
         //get the tx amount
-        BigDecimal txAmount = new BigDecimal(item.getReceived() - item.getSent()).abs();
+        BigDecimal txAmount = new BigDecimal(
+            item.getReceived() - item.getSent()
+        ).abs();
         //see if it was sent
         boolean sent = item.getReceived() - item.getSent() < 0;
 
-        //calculated and formatted amount for isoSymbol
-        String amountWithFee = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromLitoshis(getActivity(), iso, txAmount.subtract(new BigDecimal(opsAmount))));
-        String amount = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromLitoshis(getActivity(), iso, item.getFee() == -1 ? txAmount.subtract(new BigDecimal(opsAmount)) : txAmount.subtract(new BigDecimal(item.getFee())).subtract(new BigDecimal(opsAmount))));
-        //large sent (Sent $24.32 ....)
-        Spannable largeDescriptionString = sent ? new SpannableString(String.format(getString(R.string.TransactionDetails_sent), amountWithFee)) : new SpannableString(String.format(getString(R.string.TransactionDetails_received), amount));
-        String startingBalance = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromLitoshis(getActivity(), iso, new BigDecimal(sent ? item.getBalanceAfterTx() + txAmount.longValue() : item.getBalanceAfterTx() - txAmount.longValue())));
-        String endingBalance = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromLitoshis(getActivity(), iso, new BigDecimal(item.getBalanceAfterTx())));
-        String commentString = item.metaData == null || item.metaData.comment == null ? "" : item.metaData.comment;
-        String sb = String.format(getString(R.string.Transaction_starting), startingBalance);
-        String eb = String.format(getString(R.string.Transaction_ending), endingBalance);
+        String amountWithFee = BRCurrency.getFormattedCurrencyString(
+            getActivity(),
+            iso,
+            BRExchange.getAmountFromLitoshis(getActivity(), iso, txAmount)
+        );
+        String amount = BRCurrency.getFormattedCurrencyString(
+            getActivity(),
+            iso,
+            BRExchange.getAmountFromLitoshis(
+                getActivity(),
+                iso,
+                item.getFee() == -1
+                    ? txAmount
+                    : txAmount.subtract(new BigDecimal(item.getFee()))
+            )
+        );
+        //calculated and formatted fee for iso
+        String fee = BRCurrency.getFormattedCurrencyString(
+            getActivity(),
+            iso,
+            BRExchange.getAmountFromLitoshis(
+                getActivity(),
+                iso,
+                new BigDecimal(item.getFee())
+            )
+        );
+        //description (Sent $24.32 ....)
+        Spannable descriptionString = sent
+            ? new SpannableString(
+                String.format(
+                    getString(R.string.TransactionDetails_sent),
+                    amountWithFee
+                )
+            )
+            : new SpannableString(
+                String.format(
+                    getString(R.string.TransactionDetails_received),
+                    amount
+                )
+            );
 
-        //Target sent address
-        String sendAddress;
-        Set<String> outputAddressSet = new HashSet<String>(Arrays.asList(item.getTo()));
-        final String opsString = Utils.fetchPartnerKey(getActivity(), PartnerNames.OPSALL);
-        List<String> opsList = new ArrayList<String>(Arrays.asList(opsString.split(",")));
-        Set<String> opsSet = new HashSet<>();
-        opsSet.addAll(opsList);
-        List<String> outputAddresses = outputAddressSet.stream().filter(element -> !opsSet.contains(element)).collect(Collectors.toList());
-        List<String> filteredAddress = outputAddresses.stream().filter(Objects::nonNull).collect(Collectors.toList());
-
-        //Filter method
-        if (filteredAddress.stream().findFirst().isPresent()) {
-            sendAddress = filteredAddress.stream().findFirst().get();
-        } else {
-            sendAddress = "ERROR-ADDRESS";
-        }
-
-        String toFrom = sent ? String.format(getString(R.string.TransactionDetails_to), sendAddress) : String.format(getString(R.string.TransactionDetails_from), sendAddress);
+        String startingBalance = BRCurrency.getFormattedCurrencyString(
+            getActivity(),
+            iso,
+            BRExchange.getAmountFromLitoshis(
+                getActivity(),
+                iso,
+                new BigDecimal(
+                    sent
+                        ? item.getBalanceAfterTx() + txAmount.longValue()
+                        : item.getBalanceAfterTx() - txAmount.longValue()
+                )
+            )
+        );
+        String endingBalance = BRCurrency.getFormattedCurrencyString(
+            getActivity(),
+            iso,
+            BRExchange.getAmountFromLitoshis(
+                getActivity(),
+                iso,
+                new BigDecimal(item.getBalanceAfterTx())
+            )
+        );
+        String commentString = item.metaData == null ||
+            item.metaData.comment == null
+            ? ""
+            : item.metaData.comment;
+        String sb = String.format(
+            getString(R.string.Transaction_starting),
+            startingBalance
+        );
+        String eb = String.format(
+            getString(R.string.Transaction_ending),
+            endingBalance
+        );
+        String amountString = String.format(
+            "%s %s\n\n%s\n%s",
+            amount,
+            item.getFee() == -1
+                ? ""
+                : String.format(getString(R.string.Transaction_fee), fee),
+            sb,
+            eb
+        );
+        if (sent) amountString = "-" + amountString;
+        String addr = item.getTo()[0];
+        String toFrom = sent
+            ? String.format(getString(R.string.TransactionDetails_to), addr)
+            : String.format(getString(R.string.TransactionDetails_from), addr);
 
         mTxHash.setText(item.getTxHashHexReversed());
-        mTxHash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String mTxtHashCopy = mTxHash.getText().toString();
+        mTxHash.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String mTxtHashCopy = mTxHash.getText().toString();
 
-                // Get the ClipboardManager
-                ClipboardManager clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                    // Get the ClipboardManager
+                    ClipboardManager clipboard =
+                        (ClipboardManager) requireActivity()
+                            .getSystemService(Context.CLIPBOARD_SERVICE);
 
-                // Create a ClipData object with the text
-                ClipData clip = ClipData.newPlainText("Copied Text", mTxtHashCopy);
+                    // Create a ClipData object with the text
+                    ClipData clip = ClipData.newPlainText(
+                        "Copied Text",
+                        mTxtHashCopy
+                    );
 
-                // Set the ClipData to the clipboard
-                clipboard.setPrimaryClip(clip);
+                    // Set the ClipData to the clipboard
+                    clipboard.setPrimaryClip(clip);
+                }
             }
-        });
+        );
 
         mTxHashLink.setOnClickListener(view -> {
             close();
-            String txUrl = BRConstants.BLOCK_EXPLORER_BASE_URL + item.getTxHashHexReversed();
+            String txUrl =
+                BRConstants.BLOCK_EXPLORER_BASE_URL +
+                item.getTxHashHexReversed();
             Timber.d("timber: txUrl = %s", txUrl);
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(txUrl));
+            Intent browserIntent = new Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(txUrl)
+            );
             startActivity(browserIntent);
-            getActivity().overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
+            getActivity()
+                .overridePendingTransition(
+                    R.anim.enter_from_bottom,
+                    R.anim.empty_300
+                );
         });
 
         int level = getLevel(item);
@@ -237,55 +328,38 @@ public class FragmentTransactionItem extends Fragment {
             mConfirmationText.setText(String.format("%s", percentage));
         }
 
-        if (!item.isValid())
-            mConfirmationText.setText(getString(R.string.Transaction_invalid));
+        if (!item.isValid()) mConfirmationText.setText(
+            getString(R.string.Transaction_invalid)
+        );
 
-        mToFromBottom.setText(sent ? getString(R.string.TransactionDirection_to) : getString(R.string.TransactionDirection_address));
+        mToFromBottom.setText(
+            sent
+                ? getString(R.string.TransactionDirection_to)
+                : getString(R.string.TransactionDirection_address)
+        );
         mDateText.setText(getFormattedDate(item.getTimeStamp()));
-        mLargeDescriptionText.setText(TextUtils.concat(largeDescriptionString));
+        mLargeDescriptionText.setText(TextUtils.concat(descriptionString));
         mSubHeader.setText(toFrom);
         mCommentText.setText(commentString);
-        mAddressText.setText(sendAddress);
-    }
-
-    private long getOpsAmount() {
-        long opsAmount = 0;
-
-        if (item == null || item.getOutAmounts() == null || item.getOutAmounts().length != 3) {
-            return opsAmount;
-        }
-
-        long[] outAmounts = item != null ? item.getOutAmounts() : new long[0];
-        for (long value : outAmounts) {
-            if (value < opsAmount) {
-                opsAmount = value;
-            }
-        }
-
-        return opsAmount;
+        mAddressText.setText(addr);
     }
 
     private int getLevel(TxItem item) {
         int blockHeight = item.getBlockHeight();
-        int confirms = blockHeight == Integer.MAX_VALUE ? 0 : BRSharedPrefs.getLastBlockHeight(getContext()) - blockHeight + 1;
+        int confirms = blockHeight == Integer.MAX_VALUE
+            ? 0
+            : BRSharedPrefs.getLastBlockHeight(getContext()) - blockHeight + 1;
         int level;
         if (confirms <= 0) {
             int relayCount = BRPeerManager.getRelayCount(item.getTxHash());
-            if (relayCount <= 0)
-                level = 0;
-            else if (relayCount == 1)
-                level = 1;
-            else
-                level = 2;
+            if (relayCount <= 0) level = 0;
+            else if (relayCount == 1) level = 1;
+            else level = 2;
         } else {
-            if (confirms == 1)
-                level = 3;
-            else if (confirms == 2)
-                level = 4;
-            else if (confirms == 3)
-                level = 5;
-            else
-                level = 6;
+            if (confirms == 1) level = 3;
+            else if (confirms == 2) level = 4;
+            else if (confirms == 3) level = 5;
+            else level = 6;
         }
         return level;
     }
@@ -308,13 +382,18 @@ public class FragmentTransactionItem extends Fragment {
         if (!comment.equals(oldComment)) {
             final TxMetaData md = new TxMetaData();
             md.comment = comment;
-            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
-                @Override
-                public void run() {
-                    KVStoreManager.getInstance().putTxMetaData(app, md, item.getTxHash());
-                    TxManager.getInstance().updateTxList(app);
-                }
-            });
+            BRExecutor.getInstance()
+                .forLightWeightBackgroundTasks()
+                .execute(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            KVStoreManager.getInstance()
+                                .putTxMetaData(app, md, item.getTxHash());
+                            TxManager.getInstance().updateTxList(app);
+                        }
+                    }
+                );
         }
         oldComment = null;
         Utils.hideKeyboard(app);
@@ -332,21 +411,35 @@ public class FragmentTransactionItem extends Fragment {
     }
 
     private String getFormattedDate(long timeStamp) {
+        Date currentLocalTime = new Date(
+            timeStamp == 0 ? System.currentTimeMillis() : timeStamp * 1000
+        );
 
-        Date currentLocalTime = new Date(timeStamp == 0 ? System.currentTimeMillis() : timeStamp * 1000);
-
-        SimpleDateFormat date1 = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault());
-        SimpleDateFormat date2 = new SimpleDateFormat("HH:mm a", Locale.getDefault());
+        SimpleDateFormat date1 = new SimpleDateFormat(
+            "MMMM dd, yyyy",
+            Locale.getDefault()
+        );
+        SimpleDateFormat date2 = new SimpleDateFormat(
+            "HH:mm a",
+            Locale.getDefault()
+        );
 
         String str1 = date1.format(currentLocalTime);
         String str2 = date2.format(currentLocalTime);
 
-        return str1 + " " + String.format(getString(R.string.TransactionDetails_from), str2);
+        return (
+            str1 +
+            " " +
+            String.format(getString(R.string.TransactionDetails_from), str2)
+        );
     }
 
     private String getShortAddress(String sendAddress) {
         String p1 = sendAddress.substring(0, 5);
-        String p2 = sendAddress.substring(sendAddress.length() - 5, sendAddress.length());
+        String p2 = sendAddress.substring(
+            sendAddress.length() - 5,
+            sendAddress.length()
+        );
         return p1 + "..." + p2;
     }
 

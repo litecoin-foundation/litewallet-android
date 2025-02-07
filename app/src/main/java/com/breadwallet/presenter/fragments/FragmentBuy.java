@@ -21,28 +21,23 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-
-import com.breadwallet.BreadApp;
 import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
-
 import java.util.Date;
-
 import timber.log.Timber;
 
 public class FragmentBuy extends Fragment {
+
     private static final int FILE_CHOOSER_REQUEST_CODE = 15423;
     public LinearLayout backgroundLayout;
     private ProgressBar progress;
@@ -65,21 +60,34 @@ public class FragmentBuy extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                if (webView.canGoBack()) {
-                    webView.goBack();
-                } else {
-                    closePayment();
+        requireActivity()
+            .getOnBackPressedDispatcher()
+            .addCallback(
+                getViewLifecycleOwner(),
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        if (webView.canGoBack()) {
+                            webView.goBack();
+                        } else {
+                            closePayment();
+                        }
+                    }
                 }
-            }
-        });
+            );
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_buy, container, false);
+    public View onCreateView(
+        LayoutInflater inflater,
+        ViewGroup container,
+        Bundle savedInstanceState
+    ) {
+        View rootView = inflater.inflate(
+            R.layout.fragment_buy,
+            container,
+            false
+        );
         Toolbar toolbar = rootView.findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> closePayment());
         backgroundLayout = rootView.findViewById(R.id.background_layout);
@@ -94,55 +102,74 @@ public class FragmentBuy extends Fragment {
         }
         webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
-//
-//        // App (in Java)
-//        WebMessageListener bitrefillListener = new WebMessageListener() {
-//            @Override
-//            public void onPostMessage(WebView view, WebMessageCompat message, Uri sourceOrigin,
-//                                      boolean isMainFrame, JavaScriptReplyProxy replyProxy) {
-//                // do something about view, message, sourceOrigin and isMainFrame.
-//                replyProxy.postMessage("Got it!");
-//            }
-//        };
-//        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
-//            WebViewCompat.addWebMessageListener(webView, "bitrefillPostObj", rules, bitrefillListener);
-//        }
+        //
+        //        // App (in Java)
+        //        WebMessageListener bitrefillListener = new WebMessageListener() {
+        //            @Override
+        //            public void onPostMessage(WebView view, WebMessageCompat message, Uri sourceOrigin,
+        //                                      boolean isMainFrame, JavaScriptReplyProxy replyProxy) {
+        //                // do something about view, message, sourceOrigin and isMainFrame.
+        //                replyProxy.postMessage("Got it!");
+        //            }
+        //        };
+        //        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
+        //            WebViewCompat.addWebMessageListener(webView, "bitrefillPostObj", rules, bitrefillListener);
+        //        }
 
-//        // App (in Java)
-//        WebMessageListener bitrefillListener = new WebMessageListener() {
-//            @Override
-//            public void onPostMessage(WebView view, WebMessageCompat message, Uri sourceOrigin,
-//                                      boolean isMainFrame, JavaScriptReplyProxy replyProxy) {
-//                // do something about view, message, sourceOrigin and isMainFrame.
-//                replyProxy.postMessage("Got it!");
-//            }
-//        };
-//
-//        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
-//            WebViewCompat.addWebMessageListener(webView, "bitrefillPostObj", rules, bitrefillListener);
-//        }
+        //        // App (in Java)
+        //        WebMessageListener bitrefillListener = new WebMessageListener() {
+        //            @Override
+        //            public void onPostMessage(WebView view, WebMessageCompat message, Uri sourceOrigin,
+        //                                      boolean isMainFrame, JavaScriptReplyProxy replyProxy) {
+        //                // do something about view, message, sourceOrigin and isMainFrame.
+        //                replyProxy.postMessage("Got it!");
+        //            }
+        //        };
+        //
+        //        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
+        //            WebViewCompat.addWebMessageListener(webView, "bitrefillPostObj", rules, bitrefillListener);
+        //        }
 
         String currency = getArguments().getString(CURRENCY_KEY);
         Partner partner = (Partner) getArguments().getSerializable(PARTNER_KEY);
 
         String bitrefillRef = "bAshL935";
         String utmSource = "LitewalletAndroid";
-        String bitrefillUrl = String.format( BRConstants.BITREFILL_AFFILIATE_LINK + "/embed/?paymentMethod=litecoin&ref=%s&utm_source=%s", bitrefillRef,utmSource);
+        String bitrefillUrl = String.format(
+            BRConstants.BITREFILL_AFFILIATE_LINK +
+            "/embed/?paymentMethod=litecoin&ref=%s&utm_source=%s",
+            bitrefillRef,
+            utmSource
+        );
 
-        String buyUrl = partner == Partner.BITREFILL ? bitrefillUrl : url(getContext(), partner, currency);
+        String buyUrl = partner == Partner.BITREFILL
+            ? bitrefillUrl
+            : url(getContext(), partner, currency);
         Timber.d("timber: URL %s", buyUrl);
         webView.loadUrl(buyUrl);
 
         return rootView;
     }
 
-    public static String url(Context context, Partner partner, String currency) {
+    public static String url(
+        Context context,
+        Partner partner,
+        String currency
+    ) {
         String walletAddress = BRSharedPrefs.getReceiveAddress(context);
         Long timestamp = new Date().getTime();
-        String uuid = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        String uuid = Settings.Secure.getString(
+            context.getContentResolver(),
+            Settings.Secure.ANDROID_ID
+        );
         String prefix = partner == Partner.MOONPAY ? "/moonpay/buy" : "";
-        String baseUrl = BreadApp.module.getApiManager().getBaseUrlProd();
-        return String.format(baseUrl + prefix + "?address=%s&code=%s&idate=%s&uid=%s", walletAddress, currency, timestamp, uuid);
+        return String.format(
+            LW_API_HOST + prefix + "?address=%s&code=%s&idate=%s&uid=%s",
+            walletAddress,
+            currency,
+            timestamp,
+            uuid
+        );
     }
 
     private void closePayment() {
@@ -163,14 +190,22 @@ public class FragmentBuy extends Fragment {
         }
 
         // For Android API >= 11 (3.0 OS)
-        public void openFileChooser(ValueCallback<Uri> valueCallback, String acceptType, String capture) {
+        public void openFileChooser(
+            ValueCallback<Uri> valueCallback,
+            String acceptType,
+            String capture
+        ) {
             uploadMessage = valueCallback;
             openImageChooserActivity();
         }
 
         // For Android API >= 21 (5.0 OS)
         @Override
-        public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
+        public boolean onShowFileChooser(
+            WebView webView,
+            ValueCallback<Uri[]> filePathCallback,
+            WebChromeClient.FileChooserParams fileChooserParams
+        ) {
             uploadMessageAboveL = filePathCallback;
             openImageChooserActivity();
             return true;
@@ -187,9 +222,16 @@ public class FragmentBuy extends Fragment {
 
     private WebViewClient mWebViewClient = new WebViewClient() {
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+        public boolean shouldOverrideUrlLoading(
+            WebView view,
+            WebResourceRequest request
+        ) {
             String url = request.getUrl().toString();
-            Timber.d("timber: shouldOverrideUrlLoading: URL=%s\nMethod=%s", url, request.getMethod());
+            Timber.d(
+                "timber: shouldOverrideUrlLoading: URL=%s\nMethod=%s",
+                url,
+                request.getMethod()
+            );
             if (url.equalsIgnoreCase(onCloseUrl)) {
                 closePayment();
                 onCloseUrl = null;
@@ -221,7 +263,10 @@ public class FragmentBuy extends Fragment {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Image Chooser"), FILE_CHOOSER_REQUEST_CODE);
+        startActivityForResult(
+            Intent.createChooser(intent, "Image Chooser"),
+            FILE_CHOOSER_REQUEST_CODE
+        );
     }
 
     @Override
@@ -232,7 +277,9 @@ public class FragmentBuy extends Fragment {
                 Uri[] results = getResultAboveL(resultCode, data);
                 uploadMessageAboveL.onReceiveValue(results);
             } else if (uploadMessage != null) {
-                Uri result = data != null && resultCode == Activity.RESULT_OK ? data.getData() : null;
+                Uri result = data != null && resultCode == Activity.RESULT_OK
+                    ? data.getData()
+                    : null;
                 uploadMessage.onReceiveValue(result);
             }
             uploadMessageAboveL = null;
@@ -253,7 +300,7 @@ public class FragmentBuy extends Fragment {
                     results[i] = item.getUri();
                 }
             } else if (dataString != null) {
-                results = new Uri[]{Uri.parse(dataString)};
+                results = new Uri[] { Uri.parse(dataString) };
             }
         }
         return results;
@@ -266,6 +313,7 @@ public class FragmentBuy extends Fragment {
     }
 
     public enum Partner {
-        MOONPAY, BITREFILL
+        MOONPAY,
+        BITREFILL,
     }
 }

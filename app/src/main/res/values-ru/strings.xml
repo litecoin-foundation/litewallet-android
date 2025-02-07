@@ -33,7 +33,7 @@
   <!-- Error alert title -->
   <string name="Alert.error">Ошибка</string>
   <!-- Keystore error -->
-  <string name="Alert.keystore.generic.android">Имеется проблема с хранилищем ключей в вашей ОС Android, обратитесь по адресу: support.litewallet.io</string>
+  <string name="Alert.keystore.generic.android">Имеется проблема с хранилищем ключей в вашей ОС Android, обратитесь по адресу: contact@litecoin.net</string>
   <!-- KeyStore error, keys are invalidated -->
   <string name="Alert.keystore.invalidated.android">Ваши зашифрованные данные приложения Loaf были недавно аннулированы, так как была отключена блокировка экрана вашего устройства Android.</string>
   <!-- Keystore error title -->

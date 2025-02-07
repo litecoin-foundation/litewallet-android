@@ -1,9 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'kotlin-parcelize'
-apply plugin: 'com.google.gms.google-services'
 
 configurations {
     ktlint
@@ -34,10 +32,10 @@ android {
 
    signingConfigs {
        release {
-           storeFile file(RELEASE_STORE_FILE)
-           storePassword RELEASE_STORE_PASSWORD
-           keyAlias RELEASE_KEY_ALIAS
-           keyPassword RELEASE_KEY_PASSWORD
+           storeFile file('/Users/loshan/Desktop/litewallet_keystore')
+           storePassword ""
+           keyAlias "litewallet_keystore"
+           keyPassword ""
        }
    }
 
@@ -69,8 +67,8 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 29
         targetSdkVersion 34
-        versionCode 20241220
-        versionName "v2.13.0"
+        versionCode 20250111
+        versionName "v2.13.1"
         multiDexEnabled true
         archivesBaseName = "${versionName}(${versionCode})"
 
@@ -232,13 +230,6 @@ android {
                 debuggable = false
             }
 
-            firebaseCrashlytics {
-                // Enable processing and uploading of native symbols to Crashlytics
-                // servers. By default, this is disabled to improve build speeds.
-                // This flag must be enabled to see properly-symbolicated native
-                // stack traces in the Crashlytics dashboard.
-                nativeSymbolUploadEnabled true
-            }
         }
         debug {
             debuggable = true
@@ -247,10 +238,6 @@ android {
             ndk {
                 minifyEnabled = false
                 debuggable = true
-            }
-
-            firebaseCrashlytics {
-                nativeSymbolUploadEnabled true
             }
         }
 
@@ -286,7 +273,7 @@ dependencies {
     androidTestImplementation('androidx.test:rules:1.5.0')
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.9.22'
-    
+
     // commons
     implementation 'commons-io:commons-io:2.4'
     implementation 'org.eclipse.jetty:jetty-webapp:9.2.19.v20160908'
@@ -318,20 +305,6 @@ dependencies {
     implementation 'io.sigpipe:jbsdiff:1.0'
 
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
-
-    // Firebase
-    implementation platform('com.google.firebase:firebase-bom:32.7.1')
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-crashlytics'
-    implementation 'com.google.firebase:firebase-crashlytics-ndk'
-    implementation('com.google.firebase:firebase-iid:21.1.0')
-    implementation("com.google.firebase:firebase-config-ktx")
-
-    // push notifications
-    implementation("com.google.firebase:firebase-messaging")
-    implementation("com.google.firebase:firebase-inappmessaging-display")
-
-
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
@@ -406,4 +379,3 @@ tasks.register("ktlintFormat", JavaExec) {
     // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
     args "-F", "src/**/*.kt", "**.kts", "!**/build/**"
 }
-apply plugin: 'com.google.gms.google-services'

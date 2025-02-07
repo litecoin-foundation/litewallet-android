@@ -30,7 +30,7 @@
     <!-- Error alert title -->
     <string name="Alert.error">Error</string>
     <!-- Keystore error -->
-    <string name="Alert.keystore.generic.android">There is a problem with your Android OS keystore, please contact support.litewallet.io</string>
+    <string name="Alert.keystore.generic.android">There is a problem with your Android OS keystore, please contact contact@litecoin.net</string>
     <!-- KeyStore error, keys are invalidated -->
     <string name="Alert.keystore.invalidated.android">Your Litewallet encrypted data was recently invalidated because your Android lock screen was disabled.</string>
     <!-- Keystore error title -->
@@ -746,7 +746,7 @@
 
     <!-- Balance -->
     <string name="ManageWallet.balance">Balance</string>
-    
+
   <string name="Login.ltcPrice" translatable="false">1 LTC = %1$s</string>
   <string name="Login.currentLtcPrice">Current LTC value in %1$s</string>
   <string name="Settings.languages">Languages</string>

@@ -12,7 +12,7 @@
     <string name="AccountHeader.defaultWalletName">محفظتي لايت</string>
     <string name="Alert.customKeyboard.android">يبدو أنك تستخدم لوحة مفاتيح تابعة لجهة خارجية، والتي يمكنها تسجيل ما تكتبه وسرقة مفتاحك الورقي. يرجى التبديل إلى لوحة مفاتيح Android الافتراضية لمزيد من الحماية.</string>
     <string name="Alert.error">خطأ</string>
-    <string name="Alert.keystore.generic.android">هناك مشكلة في ملف تخزين المفاتيح الخاص بنظام التشغيل Android، يرجى الاتصال بـ support.litewallet.io</string>
+    <string name="Alert.keystore.generic.android">هناك مشكلة في ملف تخزين المفاتيح الخاص بنظام التشغيل Android، يرجى الاتصال بـ contact@litecoin.net</string>
     <string name="Alert.keystore.invalidated.android">تم إبطال صلاحية بيانات Litewallet المشفرة الخاصة بك مؤخرًا بسبب تعطيل شاشة قفل Android.</string>
     <string name="Alert.keystore.title.android">خطأ في متجر مفاتيح Android</string>
     <string name="Alert.noInternet">لم يتم العثور على اتصال بالإنترنت. تحقق من اتصالك وحاول مرة أخرى.</string>

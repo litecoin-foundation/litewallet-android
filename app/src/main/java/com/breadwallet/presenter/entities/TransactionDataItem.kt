@@ -2,13 +2,18 @@ package com.breadwallet.presenter.entities
 
 import com.platform.entities.TxMetaData
 
-///Refactored Transaction data item. Replaces TxItem
+/// Refactored Transaction data item. Replaces TxItem
 class TransactionDataItem {
 
-    private var timeStamp = 0L; private var sentAmount = 0L; private var receivedAmount = 0L;
-    private var networkFee = 0L; private var opsFee = 0L; private var balanceAfterTransaction = 0L
-    private var toAddresses = arrayOf<String>(); private var fromAddresses = arrayOf<String>()
-    private var blockHeight = 0;  private var transactionSize = 0
+    private var timeStamp = 0L
+    private var sentAmount = 0L
+    private var receivedAmount = 0L
+    private var networkFee = 0L
+    private var balanceAfterTransaction = 0L
+    private var toAddresses = arrayOf<String>()
+    private var fromAddresses = arrayOf<String>()
+    private var blockHeight = 0
+    private var transactionSize = 0
     private var isValidTransaction = false
     private var transactionHash = ByteArray(0)
     private var outputAmounts = LongArray(0)
@@ -21,7 +26,6 @@ class TransactionDataItem {
         this.sentAmount = sentAmount
         this.receivedAmount = receivedAmount
         this.networkFee = networkFee
-        this.opsFee = opsFee
         this.balanceAfterTransaction = balanceAfterTransaction
         this.toAddresses = toAddresses
         this.fromAddresses = fromAddresses

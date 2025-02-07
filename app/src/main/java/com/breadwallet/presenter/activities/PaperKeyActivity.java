@@ -4,8 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Resources;
 import android.os.Bundle;
-import androidx.legacy.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.View;
@@ -14,7 +12,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import androidx.legacy.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRDialogView;
@@ -23,13 +22,11 @@ import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.security.PostAuth;
 import com.breadwallet.tools.util.Utils;
-
 import java.util.Locale;
-
 import timber.log.Timber;
 
-
 public class PaperKeyActivity extends BRActivity {
+
     private static final String TAG = PaperKeyActivity.class.getName();
     private ViewPager wordViewPager;
     private Button nextButton;
@@ -49,26 +46,30 @@ public class PaperKeyActivity extends BRActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paper_key);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        getWindow()
+            .setFlags(
+                WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE
+            );
 
         wordViewPager = (ViewPager) findViewById(R.id.phrase_words_pager);
-        wordViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrollStateChanged(int state) {
+        wordViewPager.setOnPageChangeListener(
+            new ViewPager.OnPageChangeListener() {
+                public void onPageScrollStateChanged(int state) {}
 
+                public void onPageScrolled(
+                    int position,
+                    float positionOffset,
+                    int positionOffsetPixels
+                ) {}
+
+                public void onPageSelected(int position) {
+                    if (position == 0) setButtonEnabled(false);
+                    else setButtonEnabled(true);
+                    updateItemIndexText();
+                }
             }
-
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            public void onPageSelected(int position) {
-                if (position == 0)
-                    setButtonEnabled(false);
-                else
-                    setButtonEnabled(true);
-                updateItemIndexText();
-            }
-        });
+        );
 
         nextButton = (Button) findViewById(R.id.send_button);
         previousButton = (Button) findViewById(R.id.button_previous);
@@ -76,29 +77,36 @@ public class PaperKeyActivity extends BRActivity {
         itemIndexText = (TextView) findViewById(R.id.item_index_text);
         buttonsLayout = (LinearLayout) findViewById(R.id.buttons_layout);
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateWordView(true);
+        nextButton.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    updateWordView(true);
+                }
             }
-        });
+        );
 
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.startBreadActivity(PaperKeyActivity.this, false);
-                if (!isDestroyed()) finish();
+        close.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!BRAnimator.isClickAllowed()) return;
+                    BRAnimator.startBreadActivity(PaperKeyActivity.this, false);
+                    if (!isDestroyed()) finish();
+                }
             }
-        });
-        previousButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateWordView(false);
-
+        );
+        previousButton.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    updateWordView(false);
+                }
             }
-        });
-        String cleanPhrase = getIntent().getExtras() == null ? null : getIntent().getStringExtra("phrase");
+        );
+        String cleanPhrase = getIntent().getExtras() == null
+            ? null
+            : getIntent().getStringExtra("phrase");
         wordMap = new SparseArray<>();
 
         if (Utils.isNullOrEmpty(cleanPhrase)) {
@@ -108,23 +116,42 @@ public class PaperKeyActivity extends BRActivity {
         String wordArray[] = cleanPhrase.split(" ");
 
         if (cleanPhrase.charAt(cleanPhrase.length() - 1) == '\0') {
-            BRDialog.showCustomDialog(this, getString(R.string.JailbreakWarnings_title),
-                    getString(R.string.Alert_keystore_generic_android), getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
-                        @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            brDialogView.dismissWithAnimation();
-                        }
-                    }, null, null, 0);
-            IllegalArgumentException ex = new IllegalArgumentException("Paper Key error, please contact support at support.litewallet.io: " + wordArray.length);
+            BRDialog.showCustomDialog(
+                this,
+                getString(R.string.JailbreakWarnings_title),
+                getString(R.string.Alert_keystore_generic_android),
+                getString(R.string.Button_ok),
+                null,
+                new BRDialogView.BROnClickListener() {
+                    @Override
+                    public void onClick(BRDialogView brDialogView) {
+                        brDialogView.dismissWithAnimation();
+                    }
+                },
+                null,
+                null,
+                0
+            );
+            IllegalArgumentException ex = new IllegalArgumentException(
+                "Paper Key error, please contact support at contact@litecoin.net: " +
+                wordArray.length
+            );
             Timber.e(ex);
             throw ex;
         } else {
             if (wordArray.length != 12) {
-                IllegalArgumentException ex = new IllegalArgumentException("Wrong number of paper keys: " + wordArray.length + ", lang: " + Locale.getDefault().getLanguage());
+                IllegalArgumentException ex = new IllegalArgumentException(
+                    "Wrong number of paper keys: " +
+                    wordArray.length +
+                    ", lang: " +
+                    Locale.getDefault().getLanguage()
+                );
                 Timber.e(ex);
                 throw ex;
             }
-            WordPagerAdapter adapter = new WordPagerAdapter(getFragmentManager());
+            WordPagerAdapter adapter = new WordPagerAdapter(
+                getFragmentManager()
+            );
             adapter.setWords(wordArray);
             wordViewPager.setAdapter(adapter);
             for (int i = 0; i < wordArray.length; i++) {
@@ -154,9 +181,15 @@ public class PaperKeyActivity extends BRActivity {
     }
 
     private void setButtonEnabled(boolean b) {
-        previousButton.setTextColor(getColor(b ? R.color.light_gray : R.color.extra_light_gray));
+        previousButton.setTextColor(
+            getColor(b ? R.color.light_gray : R.color.extra_light_gray)
+        );
         Resources r = getResources();
-        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, b ? 8 : 0, r.getDisplayMetrics());
+        float px = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            b ? 8 : 0,
+            r.getDisplayMetrics()
+        );
         previousButton.setElevation(px);
         previousButton.setEnabled(b);
     }
@@ -175,10 +208,14 @@ public class PaperKeyActivity extends BRActivity {
     }
 
     private void updateItemIndexText() {
-        String text = String.format(Locale.getDefault(), getString(R.string.WritePaperPhrase_step), wordViewPager.getCurrentItem() + 1, wordMap.size());
+        String text = String.format(
+            Locale.getDefault(),
+            getString(R.string.WritePaperPhrase_step),
+            wordViewPager.getCurrentItem() + 1,
+            wordMap.size()
+        );
         itemIndexText.setText(text);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -207,7 +244,6 @@ public class PaperKeyActivity extends BRActivity {
         public int getCount() {
             return words == null ? 0 : words.length;
         }
-
     }
 
     @Override
