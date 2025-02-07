@@ -113,8 +113,8 @@ public class BRConstants {
 
     public static final String BLOCK_EXPLORER_BASE_URL =
         BuildConfig.LITECOIN_TESTNET
-            ? "https://chain.so/tx/LTCTEST/"
-            : "https://blockchair.com/litecoin/transaction/";
+            ? "https://litecoinspace.org/testnet/tx/"
+            : "https://litecoinspace.org/tx/";
 
     public @interface Event {
     }
