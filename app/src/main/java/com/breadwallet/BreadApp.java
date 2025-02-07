@@ -5,8 +5,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import androidx.annotation.NonNull;
-import com.appsflyer.AppsFlyerLib;
-import com.appsflyer.AppsFlyerLib;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.tools.listeners.SyncReceiver;
 import com.breadwallet.tools.util.BRConstants;
@@ -14,8 +12,6 @@ import com.breadwallet.tools.util.LocaleHelper;
 import com.breadwallet.tools.util.Utils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.loafwallet.util.cryptography.KeyStoreKeyGenerator;
-import com.loafwallet.util.cryptography.KeyStoreManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -32,8 +28,6 @@ public class BreadApp extends Application {
     public static AtomicInteger activityCounter = new AtomicInteger();
     public static long backgroundedTime;
     private static Activity currentActivity;
-
-    public static KeyStoreManager keyStoreManager;
 
     @Override
     public void onCreate() {

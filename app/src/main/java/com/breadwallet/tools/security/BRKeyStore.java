@@ -16,7 +16,6 @@ import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.util.Base64;
 import android.view.View;
-import com.breadwallet.BreadApp;
 import com.breadwallet.R;
 import com.breadwallet.exceptions.BRKeystoreErrorException;
 import com.breadwallet.presenter.customviews.BRDialogView;
@@ -61,7 +60,7 @@ import timber.log.Timber;
 
 public class BRKeyStore {
 
-    public static final String KEY_STORE_PREFS_NAME = "keyStorePrefs";
+    private static final String KEY_STORE_PREFS_NAME = "keyStorePrefs";
     public static final String ANDROID_KEY_STORE = "AndroidKeyStore";
 
     public static final String CIPHER_ALGORITHM = "AES/CBC/PKCS7Padding";
