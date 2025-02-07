@@ -9,7 +9,6 @@ import com.breadwallet.presenter.entities.TransactionItem;
 import com.breadwallet.presenter.interfaces.BRAuthCompletion;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
-import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRApiManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.FeeManager;

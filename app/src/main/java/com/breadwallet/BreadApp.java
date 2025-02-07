@@ -33,11 +33,6 @@ public class BreadApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        keyStoreManager = new KeyStoreManager(
-            this,
-            new KeyStoreKeyGenerator.Impl()
-        );
-
         if (BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
 
         if (BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
