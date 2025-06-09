@@ -62,12 +62,32 @@
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:src="@drawable/litewallet_logotype_white"
-        app:layout_constraintBottom_toTopOf="@+id/brkeyboard"
+        app:layout_constraintBottom_toTopOf="@+id/deprecation_warning"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ltcPriceConstraintLayout"
         app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/deprecation_warning"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/deprecation_warning_bg"
+        android:fontFamily="@font/barlowsemicondensed_semibold"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="⚠️ Litewallet is no longer being maintained, please upgrade to Nexus Wallet for Litecoin"
+        android:textColor="#FFCC00"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/enter_pin_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ImageButton
         android:id="@+id/scanQRCodeImgBut"
