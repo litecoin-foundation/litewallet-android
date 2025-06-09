@@ -99,12 +99,9 @@ public class TxManager {
                 BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {
-                        if (progress > 0 && progress < 1) {
-                            currentPrompt = PromptManager.PromptItem.SYNCING;
-                            updateCard(app);
-                        } else {
-                            showNextPrompt(app);
-                        }
+                        // Disable all prompts including syncing - using fragment layout deprecation warning
+                        currentPrompt = null;
+                        updateCard(app);
                     }
                 });
             }
@@ -113,10 +110,8 @@ public class TxManager {
 
     void showPrompt(Activity app, PromptManager.PromptItem item) {
         crashIfNotMain();
-        if (item == null) throw new RuntimeException("can't be null");
-        if (currentPrompt != PromptManager.PromptItem.SYNCING) {
-            currentPrompt = item;
-        }
+        // Disable all prompts - using fragment layout deprecation warning instead
+        currentPrompt = null;
         updateCard(app);
     }
 
@@ -136,15 +131,10 @@ public class TxManager {
 
     private void showNextPrompt(Activity app) {
         crashIfNotMain();
-        PromptManager.PromptItem toShow = PromptManager.getInstance().nextPrompt(app);
-        if (toShow != null) {
-            Timber.d("timber: showNextPrompt: %s", toShow);
-            currentPrompt = toShow;
-            promptInfo = PromptManager.getInstance().promptInfo(app, currentPrompt);
-            updateCard(app);
-        } else {
-            Timber.d("timber: showNextPrompt: nothing to show");
-        }
+        // Disable all prompts since we show deprecation warning directly in fragment layout
+        currentPrompt = null;
+        promptInfo = null;
+        Timber.d("timber: showNextPrompt: prompts disabled - using fragment layout deprecation warning");
     }
 
     @WorkerThread

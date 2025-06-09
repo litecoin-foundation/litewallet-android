@@ -12,54 +12,73 @@
         android:id="@+id/prompt_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:elevation="8dp"
-        android:visibility="visible"
-        tools:layout_constraintStart_creator="1"
-        tools:layout_constraintEnd_creator="1"
-        tools:layout_constraintTop_creator="1">
-
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/deprecation_warning_bg"
+        android:padding="16dp">
 
         <TextView
-            style="@style/BRBoldTextStyle"
-            android:id="@+id/info_title"
-            android:layout_width="wrap_content"
+            android:id="@+id/deprecation_warning_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/almost_black"
-            android:textSize="@dimen/sub_header"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/barlowsemicondensed_semibold"
+            android:gravity="center"
+            android:text="⚠️ Litewallet is no longer being maintained, please upgrade to Nexus Wallet for Litecoin"
+            android:textColor="#FFCC00"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/info_close_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            style="@style/BRTextStyle"
-            android:id="@+id/info_description"
+        <LinearLayout
+            android:id="@+id/button_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/almost_black"
-            android:textSize="@dimen/paragraph"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_title"
-            app:layout_constraintVertical_bias="0.0"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deprecation_warning_text">
+
+            <Button
+                android:id="@+id/get_nexus_wallet_button"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/nexus_primary_button_bg"
+                android:fontFamily="@font/barlowsemicondensed_semibold"
+                android:text="Get Nexus Wallet"
+                android:textAllCaps="false"
+                android:textColor="#FFCC00"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/learn_more_button"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/nexus_secondary_button_bg"
+                android:fontFamily="@font/barlowsemicondensed_medium"
+                android:text="Learn more"
+                android:textAllCaps="false"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+        </LinearLayout>
 
         <ImageButton
             android:id="@+id/info_close_button"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/ic_close_black_24dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_close_white_24dp"
+            android:tint="#FFCC00"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

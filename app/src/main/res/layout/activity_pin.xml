@@ -69,25 +69,50 @@
         app:layout_constraintTop_toBottomOf="@+id/ltcPriceConstraintLayout"
         app:layout_constraintVertical_bias="0.25" />
 
-    <TextView
-        android:id="@+id/deprecation_warning"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/deprecation_warning_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/deprecation_warning_bg"
-        android:fontFamily="@font/barlowsemicondensed_semibold"
-        android:gravity="center"
-        android:padding="12dp"
-        android:text="⚠️ Litewallet is no longer being maintained, please upgrade to Nexus Wallet for Litecoin"
-        android:textColor="#FFCC00"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/enter_pin_label"
+        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintBottom_toTopOf="@+id/enter_pin_label">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/deprecation_warning_bg"
+            android:minHeight="60dp"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="top"
+                android:src="@drawable/ic_error_outline_black_24dp"
+                android:tint="#FFCC00" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/barlowsemicondensed_semibold"
+                android:lineSpacingExtra="3dp"
+                android:text="Litewallet is no longer being maintained, please upgrade to Nexus Wallet for Litecoin"
+                android:textColor="#FFCC00"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <ImageButton
         android:id="@+id/scanQRCodeImgBut"
@@ -114,8 +139,8 @@
         app:layout_constraintBottom_toTopOf="@+id/brkeyboard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_bias="0.75">
+        app:layout_constraintTop_toBottomOf="@+id/deprecation_warning_card"
+        app:layout_constraintVertical_bias="0.5">
 
         <View
             android:id="@+id/dot1"

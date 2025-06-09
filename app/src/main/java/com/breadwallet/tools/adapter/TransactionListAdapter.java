@@ -2,10 +2,12 @@ package com.breadwallet.tools.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -369,23 +371,49 @@ public class TransactionListAdapter
 
     private void setPrompt(final PromptHolder prompt) {
         Timber.d(
-            "timber: setPrompt: %s",
-            TxManager.getInstance().promptInfo.title
+            "timber: setPrompt: deprecation warning"
         );
-        if (TxManager.getInstance().promptInfo == null) {
-            throw new RuntimeException(
-                "can't happen, showing prompt with null PromptInfo"
-            );
-        }
 
-        prompt.mainLayout.setOnClickListener(
-            TxManager.getInstance().promptInfo.listener
-        );
-        prompt.mainLayout.setBackgroundResource(R.drawable.tx_rounded);
-        prompt.title.setText(TxManager.getInstance().promptInfo.title);
-        prompt.description.setText(
-            TxManager.getInstance().promptInfo.description
-        );
+        // Remove the background since we're using our custom styled background
+        prompt.mainLayout.setBackgroundResource(0);
+
+        // Set up button click listeners
+        prompt.getNexusWalletButton.setOnClickListener(view -> {
+            // Open Nexus Wallet in Play Store
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(android.net.Uri.parse("market://details?id=io.horizontalsystems.bankwallet"));
+                view.getContext().startActivity(intent);
+            } catch (Exception e) {
+                // Fallback to web browser if Play Store is not available
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(android.net.Uri.parse("https://play.google.com/store/apps/details?id=com.litecoin.nexus"));
+                view.getContext().startActivity(intent);
+            }
+        });
+
+        prompt.learnMoreButton.setOnClickListener(view -> {
+            // Open Nexus HC in default browser
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(android.net.Uri.parse("https://support.nexuswallet.com/hc/nexus-help-center/articles/1749345713-start-using-nexus-wallet-a-simple-guide-for-litewallet-users"));
+                view.getContext().startActivity(intent);
+            } catch (Exception e) {
+                // Handle error gracefully
+                Timber.e("Failed to open Nexus Help Center: %s", e.getMessage());
+            }
+        });
+
+        // Keep the close functionality if there's a close listener
+        prompt.close.setOnClickListener(view -> {
+            // Clear the current prompt and remove it from the list
+            TxManager.getInstance().currentPrompt = null;
+            if (view.getContext() instanceof Activity) {
+                ((Activity) view.getContext()).runOnUiThread(() -> {
+                    notifyItemRemoved(0);
+                });
+            }
+        });
     }
 
     private void setSyncing(final SyncingProgressViewHolder syncing) {
@@ -526,8 +554,9 @@ public class TransactionListAdapter
 
         public RelativeLayout mainLayout;
         public ConstraintLayout constraintLayout;
-        public TextView title;
-        public TextView description;
+        public TextView deprecationWarningText;
+        public Button getNexusWalletButton;
+        public Button learnMoreButton;
         public ImageButton close;
 
         public PromptHolder(View view) {
@@ -536,8 +565,9 @@ public class TransactionListAdapter
             constraintLayout = (ConstraintLayout) view.findViewById(
                 R.id.prompt_layout
             );
-            title = view.findViewById(R.id.info_title);
-            description = view.findViewById(R.id.info_description);
+            deprecationWarningText = view.findViewById(R.id.deprecation_warning_text);
+            getNexusWalletButton = view.findViewById(R.id.get_nexus_wallet_button);
+            learnMoreButton = view.findViewById(R.id.learn_more_button);
             close = (ImageButton) view.findViewById(R.id.info_close_button);
         }
     }

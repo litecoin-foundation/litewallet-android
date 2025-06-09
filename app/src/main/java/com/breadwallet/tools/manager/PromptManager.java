@@ -64,7 +64,8 @@ public class PromptManager {
             case FINGER_PRINT:
                 return !BRSharedPrefs.getUseFingerprint(app) && Utils.isFingerprintAvailable(app);
             case PAPER_KEY:
-                return !BRSharedPrefs.getPhraseWroteDown(app);
+                // Disable PAPER_KEY prompts since we show deprecation warning directly in layout
+                return false;
             case UPGRADE_PIN:
                 return BRKeyStore.getPinCode(app).length() != 6;
             case RECOMMEND_RESCAN:
