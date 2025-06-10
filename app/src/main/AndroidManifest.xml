@@ -222,6 +222,10 @@
             android:name=".presenter.activities.WebViewActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".presenter.activities.NexusWalletInfoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".tools.listeners.SyncReceiver"

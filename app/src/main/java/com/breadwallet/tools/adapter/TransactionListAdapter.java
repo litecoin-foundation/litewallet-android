@@ -382,7 +382,7 @@ public class TransactionListAdapter
             // Open Nexus Wallet in Play Store
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(android.net.Uri.parse("market://details?id=io.horizontalsystems.bankwallet"));
+                intent.setData(android.net.Uri.parse("market://details?id=com.litecoin.nexus"));
                 view.getContext().startActivity(intent);
             } catch (Exception e) {
                 // Fallback to web browser if Play Store is not available

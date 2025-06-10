@@ -228,11 +228,10 @@ public class IntroActivity extends BRActivity implements Serializable {
                 @Override
                 public void onClick(View v) {
                     if (!BRAnimator.isClickAllowed()) return;
-                    BreadActivity bApp = BreadActivity.getApp();
-                    if (bApp != null) bApp.finish();
+                    // Redirect to Nexus Wallet info screen instead of creating new wallet
                     Intent intent = new Intent(
                         IntroActivity.this,
-                        SetPinActivity.class
+                        com.breadwallet.presenter.activities.NexusWalletInfoActivity.class
                     );
                     startActivity(intent);
                 }

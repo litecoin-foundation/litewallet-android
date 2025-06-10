@@ -51,7 +51,7 @@ class HistoryFragment :
         binding.getNexusWalletButton.setOnClickListener {
             try {
                 val intent = android.content.Intent(android.content.Intent.ACTION_VIEW)
-                intent.data = android.net.Uri.parse("market://details?id=io.horizontalsystems.bankwallet")
+                intent.data = android.net.Uri.parse("market://details?id=com.litecoin.nexus")
                 startActivity(intent)
             } catch (e: Exception) {
                 // Fallback to web browser if Play Store is not available
